@@ -1,0 +1,10 @@
+node_modules/
+
+# Built artifacts and scraped input — rebuilt by `npm run refresh`.
+data/raw/
+server/data/catalog.json
+
+# Account store: password hashes and customer profiles. Never commit this.
+server/data/users.json
+server/data/db.json
+server/data/*.corrupt-*

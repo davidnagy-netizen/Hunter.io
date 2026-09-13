@@ -1,0 +1,544 @@
+[
+  {
+    "apiVersion": "2.154",
+    "reference": "365ed700-c573-4c7e-91fc-14fe77eff6cc-CN",
+    "url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/365ed700-c573-4c7e-91fc-14fe77eff6cc-CN",
+    "contentType": "text/plain",
+    "language": "en",
+    "databaseLabel": "SEDIA",
+    "database": "SEDIA",
+    "summary": "Post-Earthquake Transport Recovery Action (PETRA) in Kahramanmaraş",
+    "weight": 0.0,
+    "groupById": "1",
+    "content": "Post-Earthquake Transport Recovery Action (PETRA) in Kahramanmaraş",
+    "accessRestriction": false,
+    "checksum": "D18A0FF9CFC2F0536D7CD2680A1EEB18ED3DC4B51B13D6E71E35154E881A64CD",
+    "metadata": {
+      "es_SortDate": [
+        "2024-09-02T00:00:00.000+0000"
+      ],
+      "cftPartyLegalEntityId": [
+        "47352506"
+      ],
+      "cftMaxNumberOfLots": [],
+      "contractType": [
+        "31095499"
+      ],
+      "awardMethod": [],
+      "cftContractingSystems": [],
+      "language": [
+        "en"
+      ],
+      "type": [
+        "0"
+      ],
+      "cftDocuments": [
+        "{\"cftDocuments\":[{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e513bef79e\",\"sortKey\":\"00022\",\"documentType\":\"Information for candidates and tenderers\",\"changedNotificationText\":\"New \",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"Changes to TD No.1_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e513bf0004\",\"attachmentID\":\"090166e513bef79e\",\"publicationDate\":\"2024-10-25T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NEW\",\"languageCode\":\"EN\",\"documentTitle\":\"Changes to TD No.1\"},{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e513bef59f\",\"sortKey\":\"00021\",\"documentType\":\"Information for candidates and tenderers\",\"changedNotificationText\":\"New \",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"Clarifications No.1_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e513bf0004\",\"attachmentID\":\"090166e513bef59f\",\"publicationDate\":\"2024-10-25T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NEW\",\"languageCode\":\"EN\",\"documentTitle\":\"Clarifications No.1\"},{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e5114da4e5\",\"sortKey\":\"00001\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 02/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4b_itt_eForms_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5114d9fde\",\"attachmentID\":\"090166e5114da4e5\",\"publicationDate\":\"2024-09-02T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4b itt eForms en\"},{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e5114d9747\",\"sortKey\":\"00020\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 02/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4d_specialconditions_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5114d9fde\",\"attachmentID\":\"090166e5114d9747\",\"publicationDate\":\"2024-09-02T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4d specialconditions en\"},{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e5114da971\",\"sortKey\":\"00002\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 02/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"annexv_Warranty Proposal_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5114d9fde\",\"attachmentID\":\"090166e5114da971\",\"publicationDate\":\"2024-09-02T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"annexv Warranty Proposal\"},{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e5114da976\",\"sortKey\":\"00003\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 02/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4i_prefinanceguarantee_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5114d9fde\",\"attachmentID\":\"090166e5114da976\",\"publicationDate\":\"2024-09-02T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4i prefinanceguarantee en\"},{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e5114daa58\",\"sortKey\":\"00004\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 02/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4n_tenderguarantee_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5114d9fde\",\"attachmentID\":\"090166e5114daa58\",\"publicationDate\":\"2024-09-02T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4n tenderguarantee en\"},{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e5114dac28\",\"sortKey\":\"00005\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 02/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4f_annexiitechspeciiitechoffer_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5114d9fde\",\"attachmentID\":\"090166e5114dac28\",\"publicationDate\":\"2024-09-02T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4f annexiitechspeciiitechoffer en\"},{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e5114dac29\",\"sortKey\":\"00006\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 02/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4g_annexivfinoffer_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5114d9fde\",\"attachmentID\":\"090166e5114dac29\",\"publicationDate\":\"2024-09-02T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4g annexivfinoffer en\"},{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e5114dacfe\",\"sortKey\":\"00009\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 02/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4h_perfguarantee_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5114d9fde\",\"attachmentID\":\"090166e5114dacfe\",\"publicationDate\":\"2024-09-02T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4h perfguarantee en\"},{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e5114dac8b\",\"sortKey\":\"00007\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 02/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4a_invit_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5114d9fde\",\"attachmentID\":\"090166e5114dac8b\",\"publicationDate\":\"2024-09-02T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4a invit en\"},{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e5114dacb6\",\"sortKey\":\"00008\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 02/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4l_tenderform_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5114d9fde\",\"attachmentID\":\"090166e5114dacb6\",\"publicationDate\":\"2024-09-02T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4l tenderform en\"},{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e5114dacff\",\"sortKey\":\"00010\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 02/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4j_admingrid_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5114d9fde\",\"attachmentID\":\"090166e5114dacff\",\"publicationDate\":\"2024-09-02T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4j admingrid en\"},{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e5114dad00\",\"sortKey\":\"00011\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 02/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4o1_fif_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5114d9fde\",\"attachmentID\":\"090166e5114dad00\",\"publicationDate\":\"2024-09-02T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4o1 fif en\"},{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e5114db061\",\"sortKey\":\"00013\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 02/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"annexv_tax+customs agreement_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5114d9fde\",\"attachmentID\":\"090166e5114db061\",\"publicationDate\":\"2024-09-02T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"annexv tax+customs agreement\"},{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e5114db063\",\"sortKey\":\"00014\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 02/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4c_contract_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5114d9fde\",\"attachmentID\":\"090166e5114db063\",\"publicationDate\":\"2024-09-02T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4c contract en\"},{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e5114db066\",\"sortKey\":\"00015\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 02/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4e_annexigc_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5114d9fde\",\"attachmentID\":\"090166e5114db066\",\"publicationDate\":\"2024-09-02T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4e annexigc en\"},{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e5114db0f2\",\"sortKey\":\"00016\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 02/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4o2_lefind_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5114d9fde\",\"attachmentID\":\"090166e5114db0f2\",\"publicationDate\":\"2024-09-02T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4o2 lefind en\"},{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e5114db0f4\",\"sortKey\":\"00017\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 02/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4o3_lefcompany_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5114d9fde\",\"attachmentID\":\"090166e5114db0f4\",\"publicationDate\":\"2024-09-02T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4o3 lefcompany en\"},{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e5114db11a\",\"sortKey\":\"00018\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 02/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4o4_lefpublic_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5114d9fde\",\"attachmentID\":\"090166e5114db11a\",\"publicationDate\":\"2024-09-02T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4o4 lefpublic en\"},{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e5114db445\",\"sortKey\":\"00019\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 02/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4k_evalgrid_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5114d9fde\",\"attachmentID\":\"090166e5114db445\",\"publicationDate\":\"2024-09-02T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4k evalgrid en\"},{\"considerChangedUntilDate\":\"2024-11-08T00:00:00\",\"documentPublicationID\":\"090166e5114db060\",\"sortKey\":\"00012\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 02/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"a5f_additional_information_contract_notice_eForms_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5114d9fde\",\"attachmentID\":\"090166e5114db060\",\"publicationDate\":\"2024-09-02T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"},{\"procurementProjectLotID\":\"LOT-0002\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"a5f additional information contract notice eForms en\"}]}"
+      ],
+      "callIdentifier": [
+        "EC-NEAR/ANK/2024/EA-OP/0142"
+      ],
+      "cftSubmissionsAllowed": [
+        "true"
+      ],
+      "DATASOURCE": [
+        "SEDIA"
+      ],
+      "frameworkProgramme": [],
+      "cftPublicationDisplayStatus": [],
+      "identifier": [
+        "365ed700-c573-4c7e-91fc-14fe77eff6cc-CN"
+      ],
+      "es_ContentType": [
+        "text/plain"
+      ],
+      "geographicalZones": [
+        "20001026",
+        "31085459",
+        "31085117"
+      ],
+      "programmePeriod": [
+        "2014 - 2020",
+        "2021 - 2027"
+      ],
+      "cftSubscriptionsAllowed": [
+        "true"
+      ],
+      "deadlineDate": [
+        "2024-11-05T16:00:59.000+0000"
+      ],
+      "cftCorrigendaList": [],
+      "closingDate": [
+        "2024-11-05T16:00:59Z"
+      ],
+      "es_Combine": [
+        "1"
+      ],
+      "esST_URL": [
+        "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/365ed700-c573-4c7e-91fc-14fe77eff6cc-CN"
+      ],
+      "esDA_QueueDate": [
+        "2024-10-25T06:11:57.246+0200"
+      ],
+      "programmeDivisionProspect": [
+        "42921266",
+        "42921266"
+      ],
+      "mainCpv": [
+        "34430000",
+        "34000000",
+        "31158000",
+        "34144910",
+        "34432000"
+      ],
+      "mainCpvCode": [
+        "{\"mainCode\":\"34000000\"}"
+      ],
+      "startDate": [
+        "2024-09-02T00:00:00.000+0000"
+      ],
+      "status": [
+        "31094502"
+      ],
+      "procedureType": [
+        "47396220"
+      ],
+      "updateDate": [
+        "2024-11-12T14:30:00.000+0000"
+      ],
+      "sortStatus": [
+        "1"
+      ],
+      "conditionOfParticipation": [],
+      "description": [
+        "The subject of this contract is supply, design, delivery, siting, installation, commissioning, maintenance, after sale services and technical support of 16 electric buses, 8 charging stations, 50 electric bicycles, 50 bicycle batteries and 50 bicycle battery chargers organised in two lots to support Kahramanmaraş city’s urban mobility in addition to delivery of related trainings."
+      ],
+      "title": [
+        "Post-Earthquake Transport Recovery Action (PETRA) in Kahramanmaraş"
+      ],
+      "esST_checksum": [
+        "D18A0FF9CFC2F0536D7CD2680A1EEB18ED3DC4B51B13D6E71E35154E881A64CD"
+      ],
+      "cftId": [
+        "365ed700-c573-4c7e-91fc-14fe77eff6cc-CN"
+      ],
+      "esST_FileName": [
+        "file.txt"
+      ],
+      "REFERENCE": [
+        "365ed700-c573-4c7e-91fc-14fe77eff6cc-CN"
+      ],
+      "cftTendersMayBeSubmitted": [],
+      "cftTimezone": [
+        "Asia/Istanbul"
+      ],
+      "cftEstimatedTotalProcedureValue": [],
+      "cftContractNoticeLink": [
+        "[\"525672-2024\",\"170/2024\",\"2024-09-02T00:00:00\"]"
+      ],
+      "cftRepublish": [
+        "true"
+      ],
+      "cftSubmissionMethodCode": [
+        "PAPER_COPY"
+      ],
+      "cftProcurementType": [
+        "31095499"
+      ],
+      "caName": [
+        "Post-Earthquake Transport Recovery Action (PETRA) in Kahramanmaraş"
+      ],
+      "cftPlannedDate": [],
+      "esDA_FirstIngestDate": [
+        "2024-10-25T06:11:57.363+0200"
+      ],
+      "esDA_IngestDate": [
+        "2024-10-25T06:11:57.363+0200"
+      ],
+      "cftInterinstitutional": [],
+      "cftQuestionsAnswersAllowed": [
+        "true"
+      ],
+      "url": [
+        "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/365ed700-c573-4c7e-91fc-14fe77eff6cc-CN"
+      ],
+      "lots": [
+        "{\"procurementProjectLots\":[{\"tenderingTerms\":{\"tendererQualificationRequest\":{\"specificTendererRequirement\":{\"tendererRequirementTypeCode\":\"none\",\"tendererRequirementTypeCodeListName\":\"reserved-procurement\"}},\"tenderValidityPeriod\":{\"durationMeasureUnitCode\":\"DAY\",\"durationMeasure\":\"90\"},\"languages\":[{}],\"callForTendersDocumentReference\":{\"documentType\":\"non-restricted-document\",\"attachmentExternalReferenceURI\":\"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/3\",\"documentStatusCode\":\"official\",\"languageID\":\"ENG\",\"documentStatusCodelistName\":\"document-status\",\"id\":\"default-text\"},\"fundingProgramCode\":\"eu-funds\",\"postAwardProcess\":{\"electronicOrderUsageIndicator\":\"false\",\"electronicPaymentUsageIndicator\":\"true\"},\"contractExecutionRequirement\":[{},{},{}],\"fundingProgramCodelistName\":\"eu-funded\",\"eformsExtensions\":[{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"sui-act\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}},{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"ef-stand\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}},{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"tp-abil\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}}],\"awardingTerms\":{\"awardingCriterion\":{\"subordinateAwardingCriterion\":[{\"awardingCriterionTypeCodeListName\":\"award-criterion-type\",\"descriptionLanguageID\":\"ENG\",\"description\":\"Please consult the procurement documents.\",\"awardCriterionParameter\":[{\"parameterNumeric\":\"100\",\"parameterCodeListName\":\"number-weight\",\"parameterCode\":\"per-exa\"}],\"awardingCriterionTypeCode\":\"price\"}]}},\"appealTerms\":{\"appealReceiverPartyID\":\"ORG-0002\"}},\"programmes\":[{\"ccmCode\":\"A50PCNMS\",\"ccmTaxonomyTree\":\"45091438.42921224.42921266\",\"ccmType\":\"Program\",\"description\":\"PreAccession Countries / New Member States\",\"ccmInternalId\":\"42921266\",\"ccmContext\":\"RELEX\"}],\"procurementProject\":{\"procurementProjectID\":\"EC-NEAR/ANK/2024/EA-OP/0142-LOT-1\",\"procurementTypeCodeListName\":\"contract-nature\",\"mainCommodityClassification\":{\"itemClassificationCode\":\"34000000\",\"itemClassificationCodeListName\":\"cpv\"},\"plannedPeriod\":{\"durationMeasureUnitCode\":\"DAY\",\"durationMeasure\":300},\"requestedTenderTotal\":{},\"procurementTypeCode\":\"supplies\",\"name\":\"Electric bus and charging station\",\"description\":\"The subject of this contract is supply, design, delivery, siting, installation, commissioning, maintenance, after sale services and technical support of 16 electric buses, 8 charging stations, 50 electric bicycles, 50 bicycle batteries and 50 bicycle battery chargers organised in two lots to support Kahramanmaraş city\\u2019s urban mobility in addition to delivery of related trainings.\",\"contractExtension\":{\"renewal\":{\"period\":{}}},\"smeSuitableIndicator\":false,\"additionalCommodityClassifications\":[{\"itemClassificationCode\":\"31158000\",\"itemClassificationCodeListName\":\"cpv\"},{\"itemClassificationCode\":\"34144910\",\"itemClassificationCodeListName\":\"cpv\"}]},\"tenderingProcess\":{\"accessToolsURI\":\"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/3\",\"governmentAgreementConstraintIndicator\":false,\"eformsExtension\":{\"accessToolName\":\"Funding and Tenders Portal\"},\"submissionMethodCodeListName\":\"esubmission\",\"auctionTerms\":{\"auctionConstraintIndicator\":\"false\"},\"contractingSystems\":[{\"contractingSystemTypeCode\":\"none\",\"contractingSystemTypeCodeListName\":\"framework-agreement\"},{\"contractingSystemTypeCode\":\"none\",\"contractingSystemTypeCodeListName\":\"dps-usage\"}],\"openTenderEvent\":{\"occurrenceDate\":\"2024-11-12+03:00\",\"occurrenceTime\":\"14:30:00+03:00\"},\"tenderSubmissionDeadlinePeriod\":{\"endDate\":\"2024-11-05+03:00\",\"endTime\":\"16:00:59+03:00\"},\"submissionMethodCode\":\"not-allowed\",\"additionalInformationRequestPeriod\":{\"endDate\":\"2024-10-15+03:00\",\"endTime\":\"2024-10-15+03:00\"},\"participationRequestReceptionPeriod\":{}},\"benefittingZones\":[{\"ccmCode\":\"TR\",\"ccmTaxonomyTree\":\"31085117.31085459.20001026\",\"ccmType\":\"Country\",\"description\":\"Türkiye\",\"ccmInternalId\":\"20001026\",\"ccmContext\":\"GEN\"}],\"procurementProjectLotID\":\"LOT-0001\"},{\"tenderingTerms\":{\"tendererQualificationRequest\":{\"specificTendererRequirement\":{\"tendererRequirementTypeCode\":\"none\",\"tendererRequirementTypeCodeListName\":\"reserved-procurement\"}},\"tenderValidityPeriod\":{\"durationMeasureUnitCode\":\"DAY\",\"durationMeasure\":\"90\"},\"languages\":[{}],\"callForTendersDocumentReference\":{\"documentType\":\"non-restricted-document\",\"attachmentExternalReferenceURI\":\"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/3\",\"documentStatusCode\":\"official\",\"languageID\":\"ENG\",\"documentStatusCodelistName\":\"document-status\",\"id\":\"default-text\"},\"fundingProgramCode\":\"eu-funds\",\"postAwardProcess\":{\"electronicOrderUsageIndicator\":\"false\",\"electronicPaymentUsageIndicator\":\"true\"},\"contractExecutionRequirement\":[{},{},{}],\"fundingProgramCodelistName\":\"eu-funded\",\"eformsExtensions\":[{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"sui-act\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}},{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"ef-stand\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}},{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"tp-abil\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}}],\"awardingTerms\":{\"awardingCriterion\":{\"subordinateAwardingCriterion\":[{\"awardingCriterionTypeCodeListName\":\"award-criterion-type\",\"descriptionLanguageID\":\"ENG\",\"description\":\"Please consult the procurement documents.\",\"awardCriterionParameter\":[{\"parameterNumeric\":\"100\",\"parameterCodeListName\":\"number-weight\",\"parameterCode\":\"per-exa\"}],\"awardingCriterionTypeCode\":\"price\"}]}},\"appealTerms\":{\"appealReceiverPartyID\":\"ORG-0002\"}},\"programmes\":[{\"ccmCode\":\"A50PCNMS\",\"ccmTaxonomyTree\":\"45091438.42921224.42921266\",\"ccmType\":\"Program\",\"description\":\"PreAccession Countries / New Member States\",\"ccmInternalId\":\"42921266\",\"ccmContext\":\"RELEX\"}],\"procurementProject\":{\"procurementProjectID\":\"EC-NEAR/ANK/2024/EA-OP/0142-LOT-2\",\"procurementTypeCodeListName\":\"contract-nature\",\"mainCommodityClassification\":{\"itemClassificationCode\":\"34000000\",\"itemClassificationCodeListName\":\"cpv\"},\"plannedPeriod\":{\"durationMeasureUnitCode\":\"DAY\",\"durationMeasure\":180},\"requestedTenderTotal\":{},\"procurementTypeCode\":\"supplies\",\"name\":\"Electric bicycle and auxiliary equipment\",\"description\":\"The subject of this contract is supply, design, delivery, siting, installation, commissioning, maintenance, after sale services and technical support of 16 electric buses, 8 charging stations, 50 electric bicycles, 50 bicycle batteries and 50 bicycle battery chargers organised in two lots to support Kahramanmaraş city\\u2019s urban mobility in addition to delivery of related trainings.\",\"contractExtension\":{\"renewal\":{\"period\":{}}},\"smeSuitableIndicator\":false,\"additionalCommodityClassifications\":[{\"itemClassificationCode\":\"34430000\",\"itemClassificationCodeListName\":\"cpv\"},{\"itemClassificationCode\":\"34432000\",\"itemClassificationCodeListName\":\"cpv\"}]},\"tenderingProcess\":{\"accessToolsURI\":\"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/3\",\"governmentAgreementConstraintIndicator\":false,\"eformsExtension\":{\"accessToolName\":\"Funding and Tenders Portal\"},\"submissionMethodCodeListName\":\"esubmission\",\"auctionTerms\":{\"auctionConstraintIndicator\":\"false\"},\"contractingSystems\":[{\"contractingSystemTypeCode\":\"none\",\"contractingSystemTypeCodeListName\":\"framework-agreement\"},{\"contractingSystemTypeCode\":\"none\",\"contractingSystemTypeCodeListName\":\"dps-usage\"}],\"openTenderEvent\":{\"occurrenceDate\":\"2024-11-12+03:00\",\"occurrenceTime\":\"14:30:00+03:00\"},\"tenderSubmissionDeadlinePeriod\":{\"endDate\":\"2024-11-05+03:00\",\"endTime\":\"16:00:59+03:00\"},\"submissionMethodCode\":\"not-allowed\",\"additionalInformationRequestPeriod\":{\"endDate\":\"2024-10-15+03:00\",\"endTime\":\"2024-10-15+03:00\"},\"participationRequestReceptionPeriod\":{}},\"benefittingZones\":[{\"ccmCode\":\"TR\",\"ccmTaxonomyTree\":\"31085117.31085459.20001026\",\"ccmType\":\"Country\",\"description\":\"Türkiye\",\"ccmInternalId\":\"20001026\",\"ccmContext\":\"GEN\"}],\"procurementProjectLotID\":\"LOT-0002\"}]}"
+      ],
+      "cftEXARegistrationDeadline": [],
+      "indicativeLaunch": [],
+      "geographicalZone": [
+        "20001026"
+      ],
+      "cftLeadContractingAuthorityCode": [
+        "[{\"name\":\"Ministry of Transport and Infrastructure, Directorate General for European Union Affairs and Foreign\",\"link\":\"https://ipa.uab.gov.tr\",\"isLeadAuthority\":true}]"
+      ],
+      "cftBuyerProfileUrl": [],
+      "cftPublicationDateEForm": [
+        "2024-09-02T00:00:00"
+      ],
+      "cftEstimatedOverallContractCurrency": []
+    },
+    "enrichedMetadata": {},
+    "children": [],
+    "highlightedFragments": [],
+    "citation": "Post-Earthquake Transport Recovery Action (PETRA) in Kahramanmaraş. Available at: https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/365ed700-c573-4c7e-91fc-14fe77eff6cc-CN"
+  },
+  {
+    "apiVersion": "2.154",
+    "reference": "ae3ade32-5fcd-410d-8b7d-52a6ae023da1-CN",
+    "url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/ae3ade32-5fcd-410d-8b7d-52a6ae023da1-CN",
+    "contentType": "text/plain",
+    "language": "en",
+    "databaseLabel": "SEDIA",
+    "database": "SEDIA",
+    "summary": "Supply2 of Equipment for DTECH4ENT - Deep Technology Incubator for Entrepreneurs",
+    "weight": 0.0,
+    "groupById": "1",
+    "content": "Supply2 of Equipment for DTECH4ENT - Deep Technology Incubator for Entrepreneurs",
+    "accessRestriction": false,
+    "checksum": "C717B1C69F1BEECE115135E42EADD34B84EAD7B7A6AAE2F550BC48317ACE3466",
+    "metadata": {
+      "es_SortDate": [
+        "2024-09-26T00:00:00.000+0000"
+      ],
+      "cftPartyLegalEntityId": [
+        "47352506"
+      ],
+      "cftMaxNumberOfLots": [],
+      "contractType": [
+        "31095499"
+      ],
+      "awardMethod": [],
+      "cftContractingSystems": [],
+      "language": [
+        "en"
+      ],
+      "type": [
+        "0"
+      ],
+      "cftDocuments": [
+        "{\"cftDocuments\":[{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e514873f87\",\"sortKey\":\"00021\",\"documentType\":\"Information for candidates and tenderers\",\"changedNotificationText\":\"New \",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"Minutes of the Site Visit_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e514873f7d\",\"attachmentID\":\"090166e514873f87\",\"publicationDate\":\"2024-11-12T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NEW\",\"languageCode\":\"EN\",\"documentTitle\":\"Minutes of the Site Visit\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5149054bd\",\"sortKey\":\"00023\",\"documentType\":\"Information for candidates and tenderers\",\"changedNotificationText\":\"New \",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"Clarifications No 1 to TD_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e514905c1a\",\"attachmentID\":\"090166e5149054bd\",\"publicationDate\":\"2024-11-12T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NEW\",\"languageCode\":\"EN\",\"documentTitle\":\"Clarifications No 1 to TD\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5122ac31d\",\"sortKey\":\"00022\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 26/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"5f_additional_information_contract_notice_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5122ac290\",\"attachmentID\":\"090166e5122ac31d\",\"publicationDate\":\"2024-09-26T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"5f additional information contract notice en\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5122ad0eb\",\"sortKey\":\"00020\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 26/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"Lot-1_5_c4f_annexiitechspeciiitechoffer_en_clean_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5122ac290\",\"attachmentID\":\"090166e5122ad0eb\",\"publicationDate\":\"2024-09-26T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"Lot-1 5 c4f annexiitechspeciiitechoffer en clean en\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5122abf5f\",\"sortKey\":\"00001\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 26/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4i_prefinanceguarantee_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5122ac290\",\"attachmentID\":\"090166e5122abf5f\",\"publicationDate\":\"2024-09-26T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4i prefinanceguarantee en\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5122abf62\",\"sortKey\":\"00002\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 26/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4l_tenderform_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5122ac290\",\"attachmentID\":\"090166e5122abf62\",\"publicationDate\":\"2024-09-26T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4l tenderform en\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5122abf63\",\"sortKey\":\"00003\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 26/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4o2_lefind_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5122ac290\",\"attachmentID\":\"090166e5122abf63\",\"publicationDate\":\"2024-09-26T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4o2 lefind en\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5122abf64\",\"sortKey\":\"00004\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 26/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4o3_lefcompany_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5122ac290\",\"attachmentID\":\"090166e5122abf64\",\"publicationDate\":\"2024-09-26T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4o3 lefcompany en\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5122abf65\",\"sortKey\":\"00005\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 26/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4o4_lefpublic_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5122ac290\",\"attachmentID\":\"090166e5122abf65\",\"publicationDate\":\"2024-09-26T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4o4 lefpublic en\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5122ac246\",\"sortKey\":\"00006\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 26/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4c_contract_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5122ac290\",\"attachmentID\":\"090166e5122ac246\",\"publicationDate\":\"2024-09-26T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4c contract en\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5122ac247\",\"sortKey\":\"00007\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 26/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4d_specialconditions_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5122ac290\",\"attachmentID\":\"090166e5122ac247\",\"publicationDate\":\"2024-09-26T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4d specialconditions en\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5122ac248\",\"sortKey\":\"00008\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 26/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4k_evalgrid_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5122ac290\",\"attachmentID\":\"090166e5122ac248\",\"publicationDate\":\"2024-09-26T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4k evalgrid en\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5122ac3ac\",\"sortKey\":\"00009\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 26/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4o1_fif_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5122ac290\",\"attachmentID\":\"090166e5122ac3ac\",\"publicationDate\":\"2024-09-26T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4o1 fif en\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5122ac58f\",\"sortKey\":\"00010\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 26/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4a_invit_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5122ac290\",\"attachmentID\":\"090166e5122ac58f\",\"publicationDate\":\"2024-09-26T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4a invit en\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5122ac590\",\"sortKey\":\"00011\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 26/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4e_annexigc_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5122ac290\",\"attachmentID\":\"090166e5122ac590\",\"publicationDate\":\"2024-09-26T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4e annexigc en\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5122ac591\",\"sortKey\":\"00012\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 26/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4g_annexivfinoffer_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5122ac290\",\"attachmentID\":\"090166e5122ac591\",\"publicationDate\":\"2024-09-26T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4g annexivfinoffer en\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5122ac592\",\"sortKey\":\"00013\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 26/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4h_perfguarantee_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5122ac290\",\"attachmentID\":\"090166e5122ac592\",\"publicationDate\":\"2024-09-26T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4h perfguarantee en\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5122ac5da\",\"sortKey\":\"00014\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 26/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4b_itt_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5122ac290\",\"attachmentID\":\"090166e5122ac5da\",\"publicationDate\":\"2024-09-26T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4b itt en\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5122ac5dd\",\"sortKey\":\"00015\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 26/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"drawing of the factory build and draft layouting_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5122ac290\",\"attachmentID\":\"090166e5122ac5dd\",\"publicationDate\":\"2024-09-26T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"drawing of the factory build and draft layouting\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5122ac995\",\"sortKey\":\"00016\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 26/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4n_tenderguarantee_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5122ac290\",\"attachmentID\":\"090166e5122ac995\",\"publicationDate\":\"2024-09-26T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4n tenderguarantee en\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5122ace74\",\"sortKey\":\"00017\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 26/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"IPA II-Tax and Customs Arrangements_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5122ac290\",\"attachmentID\":\"090166e5122ace74\",\"publicationDate\":\"2024-09-26T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"IPA II-Tax and Customs Arrangements\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5122ad053\",\"sortKey\":\"00018\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 26/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"c4j_admingrid_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5122ac290\",\"attachmentID\":\"090166e5122ad053\",\"publicationDate\":\"2024-09-26T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"c4j admingrid en\"},{\"considerChangedUntilDate\":\"2024-11-26T00:00:00\",\"documentPublicationID\":\"090166e5122ad057\",\"sortKey\":\"00019\",\"documentType\":\"Invitation letter\",\"changedNotificationText\":\"Published as of 26/09/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"EN-c11_provfinalaccept_en_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e5122ac290\",\"attachmentID\":\"090166e5122ad057\",\"publicationDate\":\"2024-09-26T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0003\"},{\"procurementProjectLotID\":\"LOT-0004\"},{\"procurementProjectLotID\":\"LOT-0002\"},{\"procurementProjectLotID\":\"LOT-0005\"},{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"EN-c11 provfinalaccept en\"}]}"
+      ],
+      "callIdentifier": [
+        "EC-NEAR/ANK/2024/EA-OP/0124"
+      ],
+      "cftSubmissionsAllowed": [
+        "true"
+      ],
+      "DATASOURCE": [
+        "SEDIA"
+      ],
+      "frameworkProgramme": [],
+      "cftPublicationDisplayStatus": [],
+      "identifier": [
+        "ae3ade32-5fcd-410d-8b7d-52a6ae023da1-CN"
+      ],
+      "es_ContentType": [
+        "text/plain"
+      ],
+      "geographicalZones": [
+        "20001026",
+        "31085459",
+        "31085117"
+      ],
+      "programmePeriod": [
+        "2014 - 2020",
+        "2021 - 2027"
+      ],
+      "cftSubscriptionsAllowed": [
+        "true"
+      ],
+      "deadlineDate": [
+        "2024-11-26T16:00:59.000+0000"
+      ],
+      "cftCorrigendaList": [],
+      "closingDate": [
+        "2024-11-26T16:00:59Z"
+      ],
+      "es_Combine": [
+        "1"
+      ],
+      "esST_URL": [
+        "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/ae3ade32-5fcd-410d-8b7d-52a6ae023da1-CN"
+      ],
+      "esDA_QueueDate": [
+        "2024-11-12T17:55:21.195+0100"
+      ],
+      "programmeDivisionProspect": [
+        "42921320",
+        "42921320",
+        "42921320",
+        "42921320",
+        "42921320",
+        "42921320",
+        "42921320",
+        "42921320",
+        "42921320",
+        "42921320"
+      ],
+      "mainCpv": [
+        "42000000",
+        "38000000"
+      ],
+      "mainCpvCode": [
+        "{\"mainCode\":\"38000000\"}"
+      ],
+      "startDate": [
+        "2024-09-26T00:00:00.000+0000"
+      ],
+      "status": [
+        "31094502"
+      ],
+      "procedureType": [
+        "47396220"
+      ],
+      "updateDate": [
+        "2024-12-02T14:00:00.000+0000"
+      ],
+      "sortStatus": [
+        "1"
+      ],
+      "conditionOfParticipation": [],
+      "description": [
+        "The subject of this contract is the supply, delivery, unloading, installation, putting into operation, commissioning, inspection, testing, training, warranty and after-sales services of additional equipment  for the project in order to enhance efficiency of the services provided and to offer more comprehensive services to entrepreneurs."
+      ],
+      "title": [
+        "Supply2 of Equipment for DTECH4ENT - Deep Technology Incubator for Entrepreneurs"
+      ],
+      "esST_checksum": [
+        "C717B1C69F1BEECE115135E42EADD34B84EAD7B7A6AAE2F550BC48317ACE3466"
+      ],
+      "cftId": [
+        "ae3ade32-5fcd-410d-8b7d-52a6ae023da1-CN"
+      ],
+      "esST_FileName": [
+        "file.txt"
+      ],
+      "REFERENCE": [
+        "ae3ade32-5fcd-410d-8b7d-52a6ae023da1-CN"
+      ],
+      "cftTendersMayBeSubmitted": [],
+      "cftTimezone": [
+        "Asia/Istanbul"
+      ],
+      "cftEstimatedTotalProcedureValue": [],
+      "cftContractNoticeLink": [
+        "[\"579130-2024\",\"188/2024\",\"2024-09-26T00:00:00\"]"
+      ],
+      "cftRepublish": [
+        "true"
+      ],
+      "cftSubmissionMethodCode": [
+        "PAPER_COPY"
+      ],
+      "cftProcurementType": [
+        "31095499"
+      ],
+      "caName": [
+        "Supply2 of Equipment for DTECH4ENT - Deep Technology Incubator for Entrepreneurs"
+      ],
+      "cftPlannedDate": [],
+      "esDA_FirstIngestDate": [
+        "2024-11-12T17:55:21.327+0100"
+      ],
+      "esDA_IngestDate": [
+        "2024-11-12T17:55:21.327+0100"
+      ],
+      "cftInterinstitutional": [],
+      "cftQuestionsAnswersAllowed": [
+        "true"
+      ],
+      "url": [
+        "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/ae3ade32-5fcd-410d-8b7d-52a6ae023da1-CN"
+      ],
+      "lots": [
+        "{\"procurementProjectLots\":[{\"tenderingTerms\":{\"tendererQualificationRequest\":{\"specificTendererRequirement\":{\"tendererRequirementTypeCode\":\"none\",\"tendererRequirementTypeCodeListName\":\"reserved-procurement\"}},\"tenderValidityPeriod\":{\"durationMeasureUnitCode\":\"DAY\",\"durationMeasure\":\"90\"},\"languages\":[{}],\"callForTendersDocumentReference\":{\"documentType\":\"non-restricted-document\",\"attachmentExternalReferenceURI\":\"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/a\",\"documentStatusCode\":\"official\",\"languageID\":\"ENG\",\"documentStatusCodelistName\":\"document-status\",\"id\":\"default-text\"},\"fundingProgramCode\":\"eu-funds\",\"postAwardProcess\":{\"electronicOrderUsageIndicator\":\"false\",\"electronicPaymentUsageIndicator\":\"true\"},\"contractExecutionRequirement\":[{},{},{}],\"fundingProgramCodelistName\":\"eu-funded\",\"eformsExtensions\":[{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"sui-act\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}},{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"ef-stand\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}},{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"tp-abil\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}}],\"awardingTerms\":{\"awardingCriterion\":{\"subordinateAwardingCriterion\":[{\"awardingCriterionTypeCodeListName\":\"award-criterion-type\",\"descriptionLanguageID\":\"ENG\",\"description\":\"Please consult the procurement documents.\",\"awardCriterionParameter\":[{\"parameterNumeric\":\"100\",\"parameterCodeListName\":\"number-weight\",\"parameterCode\":\"per-exa\"}],\"awardingCriterionTypeCode\":\"price\"}]}},\"appealTerms\":{\"appealReceiverPartyID\":\"ORG-0002\"}},\"programmes\":[{\"ccmCode\":\"IPARD\",\"ccmTaxonomyTree\":\"45091444.45091456.42921320\",\"ccmType\":\"Program\",\"description\":\"Instrument for Pre-accession Assistance\",\"ccmInternalId\":\"42921320\",\"ccmContext\":\"RELEX\"},{\"ccmCode\":\"IPARD\",\"ccmTaxonomyTree\":\"45091444.45091456.42921320\",\"ccmType\":\"Program\",\"description\":\"Instrument for Pre-accession Assistance\",\"ccmInternalId\":\"42921320\",\"ccmContext\":\"RELEX\"}],\"procurementProject\":{\"procurementProjectID\":\"EC-NEAR/ANK/2024/EA-OP/0124-LOT-1\",\"procurementTypeCodeListName\":\"contract-nature\",\"mainCommodityClassification\":{\"itemClassificationCode\":\"38000000\",\"itemClassificationCodeListName\":\"cpv\"},\"requestedTenderTotal\":{},\"plannedPeriod\":{\"durationMeasureUnitCode\":\"DAY\",\"durationMeasure\":180},\"procurementTypeCode\":\"supplies\",\"name\":\"Supply2 of Equipment for DTECH4ENT - Deep Technology Incubator for Entrepreneurs\",\"description\":\"The subject of this contract is the supply, delivery, unloading, installation, putting into operation, commissioning, inspection, testing, training, warranty and after-sales services of additional equipment  for the project in order to enhance efficiency of the services provided and to offer more comprehensive services to entrepreneurs.\",\"contractExtension\":{\"renewal\":{\"period\":{}}},\"smeSuitableIndicator\":false,\"additionalCommodityClassifications\":[{\"itemClassificationCode\":\"42000000\",\"itemClassificationCodeListName\":\"cpv\"}]},\"tenderingProcess\":{\"accessToolsURI\":\"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/a\",\"governmentAgreementConstraintIndicator\":false,\"eformsExtension\":{\"accessToolName\":\"Funding and Tenders Portal\"},\"submissionMethodCodeListName\":\"esubmission\",\"auctionTerms\":{\"auctionConstraintIndicator\":\"false\"},\"contractingSystems\":[{\"contractingSystemTypeCode\":\"none\",\"contractingSystemTypeCodeListName\":\"framework-agreement\"},{\"contractingSystemTypeCode\":\"none\",\"contractingSystemTypeCodeListName\":\"dps-usage\"}],\"openTenderEvent\":{\"occurrenceDate\":\"2024-12-02+03:00\",\"occurrenceTime\":\"14:00:00+03:00\"},\"tenderSubmissionDeadlinePeriod\":{\"endDate\":\"2024-11-26+03:00\",\"endTime\":\"16:00:59+03:00\"},\"submissionMethodCode\":\"not-allowed\",\"additionalInformationRequestPeriod\":{\"endDate\":\"2024-11-05+03:00\",\"endTime\":\"2024-11-05+03:00\"},\"participationRequestReceptionPeriod\":{}},\"benefittingZones\":[{\"ccmCode\":\"REE\",\"ccmTaxonomyTree\":\"31085117\",\"ccmType\":\"OEBenefittingZone\",\"description\":\"Europe apart from EU\",\"ccmInternalId\":\"31085117\",\"ccmContext\":\"RELEX\"},{\"ccmCode\":\"IPA\",\"ccmTaxonomyTree\":\"31085117.31085459\",\"ccmType\":\"OEBenefittingZone\",\"description\":\"Region IPA instrument\",\"ccmInternalId\":\"31085459\",\"ccmContext\":\"RELEX\"},{\"ccmCode\":\"TR\",\"ccmTaxonomyTree\":\"31085117.31085459.20001026\",\"ccmType\":\"Country\",\"description\":\"Türkiye\",\"ccmInternalId\":\"20001026\",\"ccmContext\":\"GEN\"}],\"procurementProjectLotID\":\"LOT-0001\"},{\"tenderingTerms\":{\"tendererQualificationRequest\":{\"specificTendererRequirement\":{\"tendererRequirementTypeCode\":\"none\",\"tendererRequirementTypeCodeListName\":\"reserved-procurement\"}},\"tenderValidityPeriod\":{\"durationMeasureUnitCode\":\"DAY\",\"durationMeasure\":\"90\"},\"languages\":[{}],\"callForTendersDocumentReference\":{\"documentType\":\"non-restricted-document\",\"attachmentExternalReferenceURI\":\"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/a\",\"documentStatusCode\":\"official\",\"languageID\":\"ENG\",\"documentStatusCodelistName\":\"document-status\",\"id\":\"default-text\"},\"fundingProgramCode\":\"eu-funds\",\"postAwardProcess\":{\"electronicOrderUsageIndicator\":\"false\",\"electronicPaymentUsageIndicator\":\"true\"},\"contractExecutionRequirement\":[{},{},{}],\"fundingProgramCodelistName\":\"eu-funded\",\"eformsExtensions\":[{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"sui-act\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}},{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"ef-stand\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}},{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"tp-abil\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}}],\"awardingTerms\":{\"awardingCriterion\":{\"subordinateAwardingCriterion\":[{\"awardingCriterionTypeCodeListName\":\"award-criterion-type\",\"descriptionLanguageID\":\"ENG\",\"description\":\"Please consult the procurement documents.\",\"awardCriterionParameter\":[{\"parameterNumeric\":\"100\",\"parameterCodeListName\":\"number-weight\",\"parameterCode\":\"per-exa\"}],\"awardingCriterionTypeCode\":\"price\"}]}},\"appealTerms\":{\"appealReceiverPartyID\":\"ORG-0002\"}},\"programmes\":[{\"ccmCode\":\"IPARD\",\"ccmTaxonomyTree\":\"45091444.45091456.42921320\",\"ccmType\":\"Program\",\"description\":\"Instrument for Pre-accession Assistance\",\"ccmInternalId\":\"42921320\",\"ccmContext\":\"RELEX\"},{\"ccmCode\":\"IPARD\",\"ccmTaxonomyTree\":\"45091444.45091456.42921320\",\"ccmType\":\"Program\",\"description\":\"Instrument for Pre-accession Assistance\",\"ccmInternalId\":\"42921320\",\"ccmContext\":\"RELEX\"}],\"procurementProject\":{\"procurementProjectID\":\"EC-NEAR/ANK/2024/EA-OP/0124-LOT-2\",\"procurementTypeCodeListName\":\"contract-nature\",\"mainCommodityClassification\":{\"itemClassificationCode\":\"38000000\",\"itemClassificationCodeListName\":\"cpv\"},\"requestedTenderTotal\":{},\"plannedPeriod\":{\"durationMeasureUnitCode\":\"DAY\",\"durationMeasure\":180},\"procurementTypeCode\":\"supplies\",\"name\":\"Supply2 of Equipment for DTECH4ENT - Deep Technology Incubator for Entrepreneurs\",\"description\":\"The subject of this contract is the supply, delivery, unloading, installation, putting into operation, commissioning, inspection, testing, training, warranty and after-sales services of additional equipment  for the project in order to enhance efficiency of the services provided and to offer more comprehensive services to entrepreneurs.\",\"contractExtension\":{\"renewal\":{\"period\":{}}},\"smeSuitableIndicator\":false,\"additionalCommodityClassifications\":[{\"itemClassificationCode\":\"42000000\",\"itemClassificationCodeListName\":\"cpv\"}]},\"tenderingProcess\":{\"accessToolsURI\":\"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/a\",\"governmentAgreementConstraintIndicator\":false,\"eformsExtension\":{\"accessToolName\":\"Funding and Tenders Portal\"},\"submissionMethodCodeListName\":\"esubmission\",\"auctionTerms\":{\"auctionConstraintIndicator\":\"false\"},\"contractingSystems\":[{\"contractingSystemTypeCode\":\"none\",\"contractingSystemTypeCodeListName\":\"framework-agreement\"},{\"contractingSystemTypeCode\":\"none\",\"contractingSystemTypeCodeListName\":\"dps-usage\"}],\"openTenderEvent\":{\"occurrenceDate\":\"2024-12-02+03:00\",\"occurrenceTime\":\"14:00:00+03:00\"},\"tenderSubmissionDeadlinePeriod\":{\"endDate\":\"2024-11-26+03:00\",\"endTime\":\"16:00:59+03:00\"},\"submissionMethodCode\":\"not-allowed\",\"additionalInformationRequestPeriod\":{\"endDate\":\"2024-11-05+03:00\",\"endTime\":\"2024-11-05+03:00\"},\"participationRequestReceptionPeriod\":{}},\"benefittingZones\":[{\"ccmCode\":\"REE\",\"ccmTaxonomyTree\":\"31085117\",\"ccmType\":\"OEBenefittingZone\",\"description\":\"Europe apart from EU\",\"ccmInternalId\":\"31085117\",\"ccmContext\":\"RELEX\"},{\"ccmCode\":\"IPA\",\"ccmTaxonomyTree\":\"31085117.31085459\",\"ccmType\":\"OEBenefittingZone\",\"description\":\"Region IPA instrument\",\"ccmInternalId\":\"31085459\",\"ccmContext\":\"RELEX\"},{\"ccmCode\":\"TR\",\"ccmTaxonomyTree\":\"31085117.31085459.20001026\",\"ccmType\":\"Country\",\"description\":\"Türkiye\",\"ccmInternalId\":\"20001026\",\"ccmContext\":\"GEN\"}],\"procurementProjectLotID\":\"LOT-0002\"},{\"tenderingTerms\":{\"tendererQualificationRequest\":{\"specificTendererRequirement\":{\"tendererRequirementTypeCode\":\"none\",\"tendererRequirementTypeCodeListName\":\"reserved-procurement\"}},\"tenderValidityPeriod\":{\"durationMeasureUnitCode\":\"DAY\",\"durationMeasure\":\"90\"},\"languages\":[{}],\"callForTendersDocumentReference\":{\"documentType\":\"non-restricted-document\",\"attachmentExternalReferenceURI\":\"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/a\",\"documentStatusCode\":\"official\",\"languageID\":\"ENG\",\"documentStatusCodelistName\":\"document-status\",\"id\":\"default-text\"},\"fundingProgramCode\":\"eu-funds\",\"postAwardProcess\":{\"electronicOrderUsageIndicator\":\"false\",\"electronicPaymentUsageIndicator\":\"true\"},\"contractExecutionRequirement\":[{},{},{}],\"fundingProgramCodelistName\":\"eu-funded\",\"eformsExtensions\":[{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"sui-act\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}},{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"ef-stand\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}},{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"tp-abil\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}}],\"awardingTerms\":{\"awardingCriterion\":{\"subordinateAwardingCriterion\":[{\"awardingCriterionTypeCodeListName\":\"award-criterion-type\",\"descriptionLanguageID\":\"ENG\",\"description\":\"Please consult the procurement documents.\",\"awardCriterionParameter\":[{\"parameterNumeric\":\"100\",\"parameterCodeListName\":\"number-weight\",\"parameterCode\":\"per-exa\"}],\"awardingCriterionTypeCode\":\"price\"}]}},\"appealTerms\":{\"appealReceiverPartyID\":\"ORG-0002\"}},\"programmes\":[{\"ccmCode\":\"IPARD\",\"ccmTaxonomyTree\":\"45091444.45091456.42921320\",\"ccmType\":\"Program\",\"description\":\"Instrument for Pre-accession Assistance\",\"ccmInternalId\":\"42921320\",\"ccmContext\":\"RELEX\"},{\"ccmCode\":\"IPARD\",\"ccmTaxonomyTree\":\"45091444.45091456.42921320\",\"ccmType\":\"Program\",\"description\":\"Instrument for Pre-accession Assistance\",\"ccmInternalId\":\"42921320\",\"ccmContext\":\"RELEX\"}],\"procurementProject\":{\"procurementProjectID\":\"EC-NEAR/ANK/2024/EA-OP/0124-LOT-3\",\"procurementTypeCodeListName\":\"contract-nature\",\"mainCommodityClassification\":{\"itemClassificationCode\":\"38000000\",\"itemClassificationCodeListName\":\"cpv\"},\"requestedTenderTotal\":{},\"plannedPeriod\":{\"durationMeasureUnitCode\":\"DAY\",\"durationMeasure\":180},\"procurementTypeCode\":\"supplies\",\"name\":\"Supply2 of Equipment for DTECH4ENT - Deep Technology Incubator for Entrepreneurs\",\"description\":\"The subject of this contract is the supply, delivery, unloading, installation, putting into operation, commissioning, inspection, testing, training, warranty and after-sales services of additional equipment  for the project in order to enhance efficiency of the services provided and to offer more comprehensive services to entrepreneurs.\",\"contractExtension\":{\"renewal\":{\"period\":{}}},\"smeSuitableIndicator\":false,\"additionalCommodityClassifications\":[{\"itemClassificationCode\":\"42000000\",\"itemClassificationCodeListName\":\"cpv\"}]},\"tenderingProcess\":{\"accessToolsURI\":\"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/a\",\"governmentAgreementConstraintIndicator\":false,\"eformsExtension\":{\"accessToolName\":\"Funding and Tenders Portal\"},\"submissionMethodCodeListName\":\"esubmission\",\"auctionTerms\":{\"auctionConstraintIndicator\":\"false\"},\"contractingSystems\":[{\"contractingSystemTypeCode\":\"none\",\"contractingSystemTypeCodeListName\":\"framework-agreement\"},{\"contractingSystemTypeCode\":\"none\",\"contractingSystemTypeCodeListName\":\"dps-usage\"}],\"openTenderEvent\":{\"occurrenceDate\":\"2024-12-02+03:00\",\"occurrenceTime\":\"14:00:00+03:00\"},\"tenderSubmissionDeadlinePeriod\":{\"endDate\":\"2024-11-26+03:00\",\"endTime\":\"16:00:59+03:00\"},\"submissionMethodCode\":\"not-allowed\",\"additionalInformationRequestPeriod\":{\"endDate\":\"2024-11-05+03:00\",\"endTime\":\"2024-11-05+03:00\"},\"participationRequestReceptionPeriod\":{}},\"benefittingZones\":[{\"ccmCode\":\"REE\",\"ccmTaxonomyTree\":\"31085117\",\"ccmType\":\"OEBenefittingZone\",\"description\":\"Europe apart from EU\",\"ccmInternalId\":\"31085117\",\"ccmContext\":\"RELEX\"},{\"ccmCode\":\"IPA\",\"ccmTaxonomyTree\":\"31085117.31085459\",\"ccmType\":\"OEBenefittingZone\",\"description\":\"Region IPA instrument\",\"ccmInternalId\":\"31085459\",\"ccmContext\":\"RELEX\"},{\"ccmCode\":\"TR\",\"ccmTaxonomyTree\":\"31085117.31085459.20001026\",\"ccmType\":\"Country\",\"description\":\"Türkiye\",\"ccmInternalId\":\"20001026\",\"ccmContext\":\"GEN\"}],\"procurementProjectLotID\":\"LOT-0003\"},{\"tenderingTerms\":{\"tendererQualificationRequest\":{\"specificTendererRequirement\":{\"tendererRequirementTypeCode\":\"none\",\"tendererRequirementTypeCodeListName\":\"reserved-procurement\"}},\"tenderValidityPeriod\":{\"durationMeasureUnitCode\":\"DAY\",\"durationMeasure\":\"90\"},\"languages\":[{}],\"callForTendersDocumentReference\":{\"documentType\":\"non-restricted-document\",\"attachmentExternalReferenceURI\":\"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/a\",\"documentStatusCode\":\"official\",\"languageID\":\"ENG\",\"documentStatusCodelistName\":\"document-status\",\"id\":\"default-text\"},\"fundingProgramCode\":\"eu-funds\",\"postAwardProcess\":{\"electronicOrderUsageIndicator\":\"false\",\"electronicPaymentUsageIndicator\":\"true\"},\"contractExecutionRequirement\":[{},{},{}],\"fundingProgramCodelistName\":\"eu-funded\",\"eformsExtensions\":[{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"sui-act\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}},{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"ef-stand\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}},{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"tp-abil\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}}],\"awardingTerms\":{\"awardingCriterion\":{\"subordinateAwardingCriterion\":[{\"awardingCriterionTypeCodeListName\":\"award-criterion-type\",\"descriptionLanguageID\":\"ENG\",\"description\":\"Please consult the procurement documents.\",\"awardCriterionParameter\":[{\"parameterNumeric\":\"100\",\"parameterCodeListName\":\"number-weight\",\"parameterCode\":\"per-exa\"}],\"awardingCriterionTypeCode\":\"price\"}]}},\"appealTerms\":{\"appealReceiverPartyID\":\"ORG-0002\"}},\"programmes\":[{\"ccmCode\":\"IPARD\",\"ccmTaxonomyTree\":\"45091444.45091456.42921320\",\"ccmType\":\"Program\",\"description\":\"Instrument for Pre-accession Assistance\",\"ccmInternalId\":\"42921320\",\"ccmContext\":\"RELEX\"},{\"ccmCode\":\"IPARD\",\"ccmTaxonomyTree\":\"45091444.45091456.42921320\",\"ccmType\":\"Program\",\"description\":\"Instrument for Pre-accession Assistance\",\"ccmInternalId\":\"42921320\",\"ccmContext\":\"RELEX\"}],\"procurementProject\":{\"procurementProjectID\":\"EC-NEAR/ANK/2024/EA-OP/0124-LOT-4\",\"procurementTypeCodeListName\":\"contract-nature\",\"mainCommodityClassification\":{\"itemClassificationCode\":\"38000000\",\"itemClassificationCodeListName\":\"cpv\"},\"requestedTenderTotal\":{},\"plannedPeriod\":{\"durationMeasureUnitCode\":\"DAY\",\"durationMeasure\":180},\"procurementTypeCode\":\"supplies\",\"name\":\"Supply2 of Equipment for DTECH4ENT - Deep Technology Incubator for Entrepreneurs\",\"description\":\"The subject of this contract is the supply, delivery, unloading, installation, putting into operation, commissioning, inspection, testing, training, warranty and after-sales services of additional equipment  for the project in order to enhance efficiency of the services provided and to offer more comprehensive services to entrepreneurs.\",\"contractExtension\":{\"renewal\":{\"period\":{}}},\"smeSuitableIndicator\":false,\"additionalCommodityClassifications\":[{\"itemClassificationCode\":\"42000000\",\"itemClassificationCodeListName\":\"cpv\"}]},\"tenderingProcess\":{\"accessToolsURI\":\"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/a\",\"governmentAgreementConstraintIndicator\":false,\"eformsExtension\":{\"accessToolName\":\"Funding and Tenders Portal\"},\"submissionMethodCodeListName\":\"esubmission\",\"auctionTerms\":{\"auctionConstraintIndicator\":\"false\"},\"contractingSystems\":[{\"contractingSystemTypeCode\":\"none\",\"contractingSystemTypeCodeListName\":\"framework-agreement\"},{\"contractingSystemTypeCode\":\"none\",\"contractingSystemTypeCodeListName\":\"dps-usage\"}],\"openTenderEvent\":{\"occurrenceDate\":\"2024-12-02+03:00\",\"occurrenceTime\":\"14:00:00+03:00\"},\"tenderSubmissionDeadlinePeriod\":{\"endDate\":\"2024-11-26+03:00\",\"endTime\":\"16:00:59+03:00\"},\"submissionMethodCode\":\"not-allowed\",\"additionalInformationRequestPeriod\":{\"endDate\":\"2024-11-05+03:00\",\"endTime\":\"2024-11-05+03:00\"},\"participationRequestReceptionPeriod\":{}},\"benefittingZones\":[{\"ccmCode\":\"REE\",\"ccmTaxonomyTree\":\"31085117\",\"ccmType\":\"OEBenefittingZone\",\"description\":\"Europe apart from EU\",\"ccmInternalId\":\"31085117\",\"ccmContext\":\"RELEX\"},{\"ccmCode\":\"IPA\",\"ccmTaxonomyTree\":\"31085117.31085459\",\"ccmType\":\"OEBenefittingZone\",\"description\":\"Region IPA instrument\",\"ccmInternalId\":\"31085459\",\"ccmContext\":\"RELEX\"},{\"ccmCode\":\"TR\",\"ccmTaxonomyTree\":\"31085117.31085459.20001026\",\"ccmType\":\"Country\",\"description\":\"Türkiye\",\"ccmInternalId\":\"20001026\",\"ccmContext\":\"GEN\"}],\"procurementProjectLotID\":\"LOT-0004\"},{\"tenderingTerms\":{\"tendererQualificationRequest\":{\"specificTendererRequirement\":{\"tendererRequirementTypeCode\":\"none\",\"tendererRequirementTypeCodeListName\":\"reserved-procurement\"}},\"tenderValidityPeriod\":{\"durationMeasureUnitCode\":\"DAY\",\"durationMeasure\":\"90\"},\"languages\":[{}],\"callForTendersDocumentReference\":{\"documentType\":\"non-restricted-document\",\"attachmentExternalReferenceURI\":\"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/a\",\"documentStatusCode\":\"official\",\"languageID\":\"ENG\",\"documentStatusCodelistName\":\"document-status\",\"id\":\"default-text\"},\"fundingProgramCode\":\"eu-funds\",\"postAwardProcess\":{\"electronicOrderUsageIndicator\":\"false\",\"electronicPaymentUsageIndicator\":\"true\"},\"contractExecutionRequirement\":[{},{},{}],\"fundingProgramCodelistName\":\"eu-funded\",\"eformsExtensions\":[{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"sui-act\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}},{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"ef-stand\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}},{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"tp-abil\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}}],\"awardingTerms\":{\"awardingCriterion\":{\"subordinateAwardingCriterion\":[{\"awardingCriterionTypeCodeListName\":\"award-criterion-type\",\"descriptionLanguageID\":\"ENG\",\"description\":\"Please consult the procurement documents.\",\"awardCriterionParameter\":[{\"parameterNumeric\":\"100\",\"parameterCodeListName\":\"number-weight\",\"parameterCode\":\"per-exa\"}],\"awardingCriterionTypeCode\":\"price\"}]}},\"appealTerms\":{\"appealReceiverPartyID\":\"ORG-0002\"}},\"programmes\":[{\"ccmCode\":\"IPARD\",\"ccmTaxonomyTree\":\"45091444.45091456.42921320\",\"ccmType\":\"Program\",\"description\":\"Instrument for Pre-accession Assistance\",\"ccmInternalId\":\"42921320\",\"ccmContext\":\"RELEX\"},{\"ccmCode\":\"IPARD\",\"ccmTaxonomyTree\":\"45091444.45091456.42921320\",\"ccmType\":\"Program\",\"description\":\"Instrument for Pre-accession Assistance\",\"ccmInternalId\":\"42921320\",\"ccmContext\":\"RELEX\"}],\"procurementProject\":{\"procurementProjectID\":\"EC-NEAR/ANK/2024/EA-OP/0124-LOT-5\",\"procurementTypeCodeListName\":\"contract-nature\",\"mainCommodityClassification\":{\"itemClassificationCode\":\"38000000\",\"itemClassificationCodeListName\":\"cpv\"},\"requestedTenderTotal\":{},\"plannedPeriod\":{\"durationMeasureUnitCode\":\"DAY\",\"durationMeasure\":180},\"procurementTypeCode\":\"supplies\",\"name\":\"Supply2 of Equipment for DTECH4ENT - Deep Technology Incubator for Entrepreneurs\",\"description\":\"The subject of this contract is the supply, delivery, unloading, installation, putting into operation, commissioning, inspection, testing, training, warranty and after-sales services of additional equipment  for the project in order to enhance efficiency of the services provided and to offer more comprehensive services to entrepreneurs.\",\"contractExtension\":{\"renewal\":{\"period\":{}}},\"smeSuitableIndicator\":false,\"additionalCommodityClassifications\":[{\"itemClassificationCode\":\"42000000\",\"itemClassificationCodeListName\":\"cpv\"}]},\"tenderingProcess\":{\"accessToolsURI\":\"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/a\",\"governmentAgreementConstraintIndicator\":false,\"eformsExtension\":{\"accessToolName\":\"Funding and Tenders Portal\"},\"submissionMethodCodeListName\":\"esubmission\",\"auctionTerms\":{\"auctionConstraintIndicator\":\"false\"},\"contractingSystems\":[{\"contractingSystemTypeCode\":\"none\",\"contractingSystemTypeCodeListName\":\"framework-agreement\"},{\"contractingSystemTypeCode\":\"none\",\"contractingSystemTypeCodeListName\":\"dps-usage\"}],\"openTenderEvent\":{\"occurrenceDate\":\"2024-12-02+03:00\",\"occurrenceTime\":\"14:00:00+03:00\"},\"tenderSubmissionDeadlinePeriod\":{\"endDate\":\"2024-11-26+03:00\",\"endTime\":\"16:00:59+03:00\"},\"submissionMethodCode\":\"not-allowed\",\"additionalInformationRequestPeriod\":{\"endDate\":\"2024-11-05+03:00\",\"endTime\":\"2024-11-05+03:00\"},\"participationRequestReceptionPeriod\":{}},\"benefittingZones\":[{\"ccmCode\":\"REE\",\"ccmTaxonomyTree\":\"31085117\",\"ccmType\":\"OEBenefittingZone\",\"description\":\"Europe apart from EU\",\"ccmInternalId\":\"31085117\",\"ccmContext\":\"RELEX\"},{\"ccmCode\":\"IPA\",\"ccmTaxonomyTree\":\"31085117.31085459\",\"ccmType\":\"OEBenefittingZone\",\"description\":\"Region IPA instrument\",\"ccmInternalId\":\"31085459\",\"ccmContext\":\"RELEX\"},{\"ccmCode\":\"TR\",\"ccmTaxonomyTree\":\"31085117.31085459.20001026\",\"ccmType\":\"Country\",\"description\":\"Türkiye\",\"ccmInternalId\":\"20001026\",\"ccmContext\":\"GEN\"}],\"procurementProjectLotID\":\"LOT-0005\"}]}"
+      ],
+      "cftEXARegistrationDeadline": [],
+      "indicativeLaunch": [],
+      "geographicalZone": [
+        "20001026",
+        "31085459",
+        "31085117"
+      ],
+      "cftLeadContractingAuthorityCode": [
+        "[{\"name\":\"Ministry of Industry and Technology DG for  DG for EU and Foreign Affairs - Directorate of Project M\",\"link\":\"https://rekabetcisektorler.sanayi.gov.tr/tr/\",\"isLeadAuthority\":true}]"
+      ],
+      "cftBuyerProfileUrl": [],
+      "cftPublicationDateEForm": [
+        "2024-09-26T00:00:00"
+      ],
+      "cftEstimatedOverallContractCurrency": []
+    },
+    "enrichedMetadata": {},
+    "children": [],
+    "highlightedFragments": [],
+    "citation": "Supply2 of Equipment for DTECH4ENT - Deep Technology Incubator for Entrepreneurs. Available at: https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/ae3ade32-5fcd-410d-8b7d-52a6ae023da1-CN"
+  },
+  {
+    "apiVersion": "2.154",
+    "reference": "0bbe6d09-e8ba-43c8-b8a2-921b203b7250-CN",
+    "url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/0bbe6d09-e8ba-43c8-b8a2-921b203b7250-CN",
+    "contentType": "text/plain",
+    "language": "en",
+    "databaseLabel": "SEDIA",
+    "database": "SEDIA",
+    "summary": "Call for Expression of Interest for the Establishment of a Database of Independent Individual External Experts to Provide Expertise to the European Union Aviation Safety Agency",
+    "weight": 0.0,
+    "groupById": "1",
+    "content": "Call for Expression of Interest for the Establishment of a Database of Independent Individual External Experts to Provide Expertise to the European Union Aviation Safety Agency",
+    "accessRestriction": false,
+    "checksum": "C6BDBFEE885E61F07FBEA2CA292FFD779335D7F567C3A6C2C6462DF5CF0BE11B",
+    "metadata": {
+      "es_SortDate": [
+        "2024-04-29T00:00:00.000+0000"
+      ],
+      "cftPartyLegalEntityId": [
+        "47352376"
+      ],
+      "cftMaxNumberOfLots": [],
+      "contractType": [
+        "31095498"
+      ],
+      "awardMethod": [],
+      "cftContractingSystems": [],
+      "language": [
+        "en"
+      ],
+      "type": [
+        "0"
+      ],
+      "cftDocuments": [
+        "{\"cftDocuments\":[{\"considerChangedUntilDate\":\"2024-06-05T00:00:00\",\"documentPublicationID\":\"090166e50bc9b236\",\"sortKey\":\"00001\",\"documentType\":\"Tender specifications\",\"changedNotificationText\":\"New document version \",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"Call specs_EASA_2024_CEI_0002_Database of Experts_updated_V2.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e50ccd5ff6\",\"attachmentID\":\"090166e50ccd53aa\",\"publicationDate\":\"2024-05-22T00:00:00\",\"versionNR\":\"2\"},{\"documentFileName\":\"Call specs_EASA_2024_CEI_0002_Database of Experts_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"N\",\"documentID\":\"080166e50bc9aae9\",\"attachmentID\":\"090166e50bc9b236\",\"publicationDate\":\"2024-04-29T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NEW\",\"languageCode\":\"EN\",\"documentTitle\":\"Call specs EASA 2024 CEI 0002 Database of Experts\"},{\"considerChangedUntilDate\":\"2024-06-05T00:00:00\",\"documentPublicationID\":\"090166e50bc9ba6c\",\"sortKey\":\"00006\",\"documentType\":\"Technical specifications\",\"changedNotificationText\":\"New document version \",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"APPENDIX IV - ECQB updated_V2.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e50ccd7198\",\"attachmentID\":\"090166e50ccd632c\",\"publicationDate\":\"2024-05-22T00:00:00\",\"versionNR\":\"2\"},{\"documentFileName\":\"APPENDIX IV - ECQB_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"N\",\"documentID\":\"080166e50bc9aae9\",\"attachmentID\":\"090166e50bc9ba6c\",\"publicationDate\":\"2024-04-29T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NEW\",\"languageCode\":\"EN\",\"documentTitle\":\"APPENDIX IV - ECQB\"},{\"considerChangedUntilDate\":\"2024-06-05T00:00:00\",\"documentPublicationID\":\"090166e50bc9b6f6\",\"sortKey\":\"00005\",\"documentType\":\"Draft contract annex\",\"changedNotificationText\":\"Published as of 29/04/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"Appendix III - Declaration - Acceptance of T&Cs for the Reimbursement of Expenses_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e50bc9aae9\",\"attachmentID\":\"090166e50bc9b6f6\",\"publicationDate\":\"2024-04-29T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"Appendix III - Declaration - Acceptance of T&Cs for the Reimbursement of Expenses\"},{\"considerChangedUntilDate\":\"2024-06-05T00:00:00\",\"documentPublicationID\":\"090166e50bc9bc09\",\"sortKey\":\"00002\",\"documentType\":\"Draft contract\",\"changedNotificationText\":\"Published as of 29/04/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"Appendix Ia- Draft Expert contract_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e50bc9aae9\",\"attachmentID\":\"090166e50bc9bc09\",\"publicationDate\":\"2024-04-29T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"Appendix Ia- Draft Expert contract\"},{\"considerChangedUntilDate\":\"2024-06-05T00:00:00\",\"documentPublicationID\":\"090166e50bc9c08b\",\"sortKey\":\"00004\",\"documentType\":\"Technical specifications\",\"changedNotificationText\":\"Published as of 29/04/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"Appendix II - Areas of Expertise_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e50bc9aae9\",\"attachmentID\":\"090166e50bc9c08b\",\"publicationDate\":\"2024-04-29T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"Appendix II - Areas of Expertise\"},{\"considerChangedUntilDate\":\"2024-06-05T00:00:00\",\"documentPublicationID\":\"090166e50bc9c088\",\"sortKey\":\"00003\",\"documentType\":\"Draft contract\",\"changedNotificationText\":\"Published as of 29/04/2024\",\"obsolete\":false,\"hermesDocumentReferences\":[{\"documentFileName\":\"Appendix Ib- Draft ECQB contract_V1.pdf\",\"publicationFormat\":\"PDF\",\"isCurrentVersion\":\"Y\",\"documentID\":\"080166e50bc9aae9\",\"attachmentID\":\"090166e50bc9c088\",\"publicationDate\":\"2024-04-29T00:00:00\",\"versionNR\":\"1\"}],\"applicableProcurementProjectLots\":[{\"procurementProjectLotID\":\"LOT-0001\"}],\"documentChangeCode\":\"NONE\",\"languageCode\":\"EN\",\"documentTitle\":\"Appendix Ib- Draft ECQB contract\"}]}"
+      ],
+      "callIdentifier": [
+        "EASA/2024/CEI/0002"
+      ],
+      "cftSubmissionsAllowed": [
+        "true"
+      ],
+      "DATASOURCE": [
+        "SEDIA"
+      ],
+      "frameworkProgramme": [],
+      "cftPublicationDisplayStatus": [],
+      "identifier": [
+        "0bbe6d09-e8ba-43c8-b8a2-921b203b7250-CN"
+      ],
+      "es_ContentType": [
+        "text/plain"
+      ],
+      "geographicalZones": [],
+      "programmePeriod": [
+        "2014 - 2020",
+        "2021 - 2027"
+      ],
+      "cftSubscriptionsAllowed": [
+        "true"
+      ],
+      "cftCorrigendaList": [
+        "{\"cftCorrigendaList\":[{\"notice\":{\"versionID\":\"01\",\"publicationID\":\"00306847-2024\",\"publicationDate\":\"2024-05-24T00:00:00\",\"noticeTypeCode\":\"CONTRACT_NOTICE\",\"gazetteID\":\"100/2024\",\"noticeID\":\"9912d94f-f41d-4da8-80f6-70e39011c6e2\",\"noticeTypeLongCode\":\"CHANGE_CONTRACT_NOTICE\"}}]}"
+      ],
+      "es_Combine": [
+        "1"
+      ],
+      "esST_URL": [
+        "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/0bbe6d09-e8ba-43c8-b8a2-921b203b7250-CN"
+      ],
+      "esDA_QueueDate": [
+        "2024-11-04T10:00:16.849+0100"
+      ],
+      "programmeDivisionProspect": [],
+      "mainCpv": [
+        "73200000"
+      ],
+      "mainCpvCode": [
+        "{\"mainCode\":\"73200000\"}"
+      ],
+      "startDate": [
+        "2024-04-29T00:00:00.000+0000"
+      ],
+      "status": [
+        "31094502"
+      ],
+      "procedureType": [
+        "47396202"
+      ],
+      "sortStatus": [
+        "1"
+      ],
+      "conditionOfParticipation": [],
+      "description": [
+        "The aim of this call is to establish a database of independent individual external experts to provide expertise to\nthe European Union Aviation Safety Agency. For more information please refer to the specifications available on\nthe “Procurement” page of the EASA website:\nhttps://www.easa.europa.eu/the-agency/procurement/independent-external-experts"
+      ],
+      "title": [
+        "Call for Expression of Interest for the Establishment of a Database of Independent Individual External Experts to Provide Expertise to the European Union Aviation Safety Agency"
+      ],
+      "esST_checksum": [
+        "C6BDBFEE885E61F07FBEA2CA292FFD779335D7F567C3A6C2C6462DF5CF0BE11B"
+      ],
+      "cftId": [
+        "0bbe6d09-e8ba-43c8-b8a2-921b203b7250-CN"
+      ],
+      "esST_FileName": [
+        "file.txt"
+      ],
+      "REFERENCE": [
+        "0bbe6d09-e8ba-43c8-b8a2-921b203b7250-CN"
+      ],
+      "cftTendersMayBeSubmitted": [],
+      "cftTimezone": [
+        "Europe/Berlin"
+      ],
+      "cftEstimatedTotalProcedureValue": [],
+      "cftContractNoticeLink": [
+        "[\"253106-2024\",\"84/2024\",\"2024-04-29\"]"
+      ],
+      "cftRepublish": [
+        "true"
+      ],
+      "cftSubmissionMethodCode": [
+        "PAPER_COPY"
+      ],
+      "cftProcurementType": [
+        "31095498"
+      ],
+      "caName": [
+        "Call for Expression of Interest for the Establishment of a Database of Independent Individual External Experts to Provide Expertise to the European Union Aviation Safety Agency"
+      ],
+      "cftPlannedDate": [],
+      "esDA_FirstIngestDate": [
+        "2024-11-04T10:00:16.939+0100"
+      ],
+      "esDA_IngestDate": [
+        "2024-11-04T10:00:16.939+0100"
+      ],
+      "cftInterinstitutional": [],
+      "cftQuestionsAnswersAllowed": [
+        "true"
+      ],
+      "url": [
+        "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/0bbe6d09-e8ba-43c8-b8a2-921b203b7250-CN"
+      ],
+      "lots": [
+        "{\"procurementProjectLots\":[{\"tenderingTerms\":{\"tenderValidityPeriod\":{},\"tendererQualificationRequest\":{\"specificTendererRequirement\":{}},\"languages\":[{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}],\"callForTendersDocumentReference\":{\"documentType\":\"non-restricted-document\",\"attachmentExternalReferenceURI\":\"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/0\",\"documentStatusCode\":\"official\",\"documentStatusCodelistName\":\"document-status\",\"languageID\":\"ENG\",\"id\":\"default-text\"},\"fundingProgramCode\":\"eu-funds\",\"postAwardProcess\":{},\"contractExecutionRequirement\":[{},{}],\"fundingProgramCodelistName\":\"eu-funded\",\"eformsExtensions\":[{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"sui-act\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}},{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"ef-stand\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}},{\"selectionCriteria\":{\"descriptionLanguageID\":\"ENG\",\"criterionTypeCode\":\"tp-abil\",\"description\":\"Please consult the procurement documents.\",\"criterionTypeCodeListName\":\"selection-criterion\"}}],\"awardingTerms\":{\"awardingCriterion\":{}},\"appealTerms\":{\"appealReceiverPartyID\":\"ORG-0002\"}},\"programmes\":[],\"tenderingProcess\":{\"accessToolsURI\":\"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/0\",\"governmentAgreementConstraintIndicator\":false,\"eformsExtension\":{},\"submissionMethodCodeListName\":\"esubmission\",\"auctionTerms\":{},\"openTenderEvent\":{},\"tenderSubmissionDeadlinePeriod\":{},\"submissionMethodCode\":\"not-allowed\",\"additionalInformationRequestPeriod\":{},\"participationRequestReceptionPeriod\":{}},\"procurementProject\":{\"procurementTypeCodeListName\":\"contract-nature\",\"mainCommodityClassification\":{\"itemClassificationCode\":\"73200000\",\"itemClassificationCodeListName\":\"cpv\"},\"requestedTenderTotal\":{},\"plannedPeriod\":{\"durationMeasureUnitCode\":\"MONTH\",\"durationMeasure\":60},\"procurementTypeCode\":\"services\",\"name\":\"Call for Expression of Interest for the Establishment of a Database of Independent Individual External Experts to Provide Expertise to the European Union Aviation Safety Agency\",\"description\":\"The aim of this call is to establish a database of independent individual external experts to provide expertise to\\nthe European Union Aviation Safety Agency. For more information please refer to the specifications available on\\nthe \\u201cProcurement\\u201d page of the EASA website:\\nhttps://www.easa.europa.eu/the-agency/procurement/independent-external-experts\",\"contractExtension\":{\"renewal\":{\"period\":{}}},\"smeSuitableIndicator\":false},\"benefittingZones\":[],\"procurementProjectLotID\":\"LOT-0001\"}]}"
+      ],
+      "cftEXARegistrationDeadline": [],
+      "indicativeLaunch": [],
+      "geographicalZone": [],
+      "cftLeadContractingAuthorityCode": [
+        "[{\"name\":\"European Union Aviation Safety Agency\",\"link\":\"https://www.easa.europa.eu\",\"isLeadAuthority\":true}]"
+      ],
+      "cftBuyerProfileUrl": [],
+      "cftPublicationDateEForm": [
+        "2024-04-29"
+      ],
+      "cftEstimatedOverallContractCurrency": []
+    },
+    "enrichedMetadata": {},
+    "children": [],
+    "highlightedFragments": [],
+    "citation": "Call for Expression of Interest for the Establishment of a Database of Independent Individual External Experts to Provide Expertise to the European Union Aviation Safety Agency. Available at: https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/tender-details/0bbe6d09-e8ba-43c8-b8a2-921b203b7250-CN"
+  }
+]
