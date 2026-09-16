@@ -654,6 +654,29 @@ test("an administrator can reach the other workspace on a phone", () => {
   assert.ok(!fromConsole.includes("setTab('calendar')"), "without leaking the client's tabs");
 });
 
+test("the client view holds up for an account that has no company profile", () => {
+  const app = loadApp();
+  app.state.profile = null;   // an administrator signs in without ever filling one in
+  app.state.auth.user = { username: "admin", role: "admin", company: "Hunter", subscription: { status: "active", active: true, daysLeft: null }, entitlements: { tier: "admin" } };
+  app.state.auth.entitlements = { tier: "admin", maxResults: Infinity, explanations: true };
+  app.state.workspace = "admin";
+  app.state.appTab = "adminOverview";
+
+  app.setWorkspace("user");
+  assert.equal(app.state.appTab, "dashboard");
+
+  // render() calls viewApp(); if this throws, every later render() throws too and
+  // the whole interface stops responding until the page is reloaded.
+  const html = app.viewApp();
+  assert.ok(html.includes("mnav"), "the shell still renders");
+
+  // Every client screen has to survive the same state.
+  for (const tab of ["dashboard", "search", "opportunities", "calendar", "saved", "plus", "account"]) {
+    app.state.appTab = tab;
+    assert.doesNotThrow(() => app.viewApp(), `${tab} throws without a profile`);
+  }
+});
+
 test("the admin overview surfaces what needs acting on", () => {
   const app = loadApp();
   app.state.profile = { ...app.DEMO_PROFILE };

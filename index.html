@@ -1895,12 +1895,21 @@ function finishOnboard(){
 }
 
 /* ---------------- APP SHELL ---------------- */
-function viewApp(){
-  const p = state.profile || {
+/* Egy fiók profil nélkül is eljuthat az ügyfélnézetbe — az adminé például sosem
+   kap cégprofilt, mégis átválthat ide. A nézetek ilyenkor egy üres helyettesítőt
+   kapnak: ha bármelyikük kivételt dob, a render() megáll, és onnantól a felület
+   minden gombja némán elhal, amíg a látogató újra nem tölti az oldalt. Azért egy
+   közös helyettesítő, hogy a fejléc és a rangsor ugyanarról a cégről szóljon. */
+function activeProfile(){
+  return state.profile || {
     company: state.auth.user?.company || LX("Nincs cégprofil","No company profile"),
     initials: (state.auth.user?.username || "H").slice(0,2).toUpperCase(),
-    employees: 0, region: null, goals: [],
+    employees: 0, region: null, goals: [], investment_value: 0,
   };
+}
+
+function viewApp(){
+  const p = activeProfile();
   const railItem=(tab,ic,label,tag,lock)=>`<button class="rail-item ${state.appTab===tab?"active":""}" onclick="setTab('${tab}')">
     <span class="ic">${ic}</span>${label}${tag?`<span class="tag">${tag}</span>`:""}${lock?`<span class="rail-lock">${IC.lock}</span>`:""}</button>`;
   const mItem=(tab,ic,label)=>`<button class="${state.appTab===tab&&!state.detailId?"active":""}" onclick="setTab('${tab}')">
@@ -1996,7 +2005,7 @@ function setTab(t){ state.appTab=t; state.detailId=null; render(); }
 
 /* ---------------- DASHBOARD ---------------- */
 function viewDashboard(ranked){
-  const p=state.profile;
+  const p=activeProfile();
   const visible=ranked.filter(x=>!x.res.blocked);
   // Zárolt állapotban a kliens csak a keretnek megfelelő felhívásokat kapta meg,
   // ezért az összesítőket a szerver valós számaiból mutatjuk — különben úgy
@@ -4160,7 +4169,7 @@ function viewDetail(){
       <div class="search-empty"><b>${L("Ez a felhívás már nem elérhető")}</b>
         ${L("Lehet, hogy lejárt a határideje, vagy lekerült a portálról.")}</div>`;
   }
-  const p=state.profile;
+  const p=activeProfile();
   const res=hunterScore(opp,p);
   const elig=res.elig;
   const s=res.score||0; const band=scoreBand(s);
@@ -4330,7 +4339,7 @@ function whyBlocks(opp,elig){
   }
   if(cond.length){
     html+=`<div class="why-block"><div class="wt">${L("Mire figyelj")}</div><div class="why-list">
-      ${cond.map(c=>line("cond",L(condText(c)),c.type==="own"?"~"+fmtHUF(state.profile.investment_value*(1-opp.intensity)):"")).join("")}</div></div>`;
+      ${cond.map(c=>line("cond",L(condText(c)),c.type==="own"?"~"+fmtHUF(activeProfile().investment_value*(1-opp.intensity)):"")).join("")}</div></div>`;
   }
   if(unknown.length){
     html+=`<div class="why-block"><div class="wt">${L("Mit nem tudunk még")}</div><div class="why-list">
