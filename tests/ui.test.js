@@ -628,6 +628,32 @@ test("an administrator can switch between the client view and the console", () =
   assert.equal(app.state.appTab, "adminOverview", "an out-of-workspace tab falls back to the overview");
 });
 
+test("an administrator can reach the other workspace on a phone", () => {
+  const app = loadApp();
+  app.state.profile = { ...app.DEMO_PROFILE };
+
+  // The rail is hidden below 900px, so the floating control is the only way
+  // across on a phone. A client never sees it.
+  app.state.auth.user = { username: "alfa", role: "user", company: "Alfa Kft.", subscription: { status: "none", active: false }, entitlements: { tier: "registered" } };
+  assert.equal(app.workspaceSwitchMobile(), "", "only an administrator gets it");
+  assert.ok(!app.viewApp().includes("mobile-ws"), "and it is absent from their shell");
+
+  app.state.auth.user = { username: "admin", role: "admin", company: "Hunter", subscription: { status: "active", active: true, daysLeft: null }, entitlements: { tier: "admin" } };
+  app.state.auth.entitlements = { tier: "admin", maxResults: Infinity, explanations: true };
+
+  // It always offers the workspace the admin is not in.
+  app.state.workspace = "user";
+  const fromClient = app.viewApp();
+  assert.ok(fromClient.includes("mobile-ws"), "the control is in the client shell");
+  assert.ok(fromClient.includes("setWorkspace('admin')"), "and it points at the console");
+  assert.ok(!fromClient.includes("setTab('adminOverview')"), "without leaking the console's tabs");
+
+  app.setWorkspace("admin");
+  const fromConsole = app.viewApp();
+  assert.ok(fromConsole.includes("setWorkspace('user')"), "from the console it points back");
+  assert.ok(!fromConsole.includes("setTab('calendar')"), "without leaking the client's tabs");
+});
+
 test("the admin overview surfaces what needs acting on", () => {
   const app = loadApp();
   app.state.profile = { ...app.DEMO_PROFILE };

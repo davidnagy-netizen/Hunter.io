@@ -763,10 +763,16 @@
   /* mobile nav */
   .mnav{display:none}
   .mobile-app-lang{display:none}
+  .mobile-ws{display:none}
   @media(max-width:900px){
     .mobile-app-lang{display:block;position:fixed;top:12px;right:12px;z-index:90;
       background:rgba(255,255,255,.94);border-radius:100px;padding:2px;backdrop-filter:blur(6px);
       box-shadow:0 2px 10px rgba(16,23,38,.12)}
+    .mobile-ws{display:inline-flex;align-items:center;gap:7px;position:fixed;top:12px;left:12px;z-index:90;
+      background:rgba(255,255,255,.94);border:0;border-radius:100px;padding:7px 14px 7px 11px;
+      font:inherit;font-size:12.5px;font-weight:600;color:var(--ink);cursor:pointer;
+      backdrop-filter:blur(6px);box-shadow:0 2px 10px rgba(16,23,38,.12)}
+    .mobile-ws .ic{width:15px;height:15px;display:inline-flex;color:var(--gold-deep)}
   }
 
   @media(max-width:900px){
@@ -1897,6 +1903,8 @@ function viewApp(){
   };
   const railItem=(tab,ic,label,tag,lock)=>`<button class="rail-item ${state.appTab===tab?"active":""}" onclick="setTab('${tab}')">
     <span class="ic">${ic}</span>${label}${tag?`<span class="tag">${tag}</span>`:""}${lock?`<span class="rail-lock">${IC.lock}</span>`:""}</button>`;
+  const mItem=(tab,ic,label)=>`<button class="${state.appTab===tab&&!state.detailId?"active":""}" onclick="setTab('${tab}')">
+    <span class="ic">${ic}</span>${label}</button>`;
   const ranked=rankedOpps(p);
   const newCount=ranked.filter(x=>x.opp.isNew && !x.res.blocked).length;
   // Az admin munkaterületén a felhívás-nézetek nem elérhetők, ezért a nem oda
@@ -1943,15 +1951,19 @@ function viewApp(){
     </aside>
     <main class="main">${main}</main>
   </div>
+  ${workspaceSwitchMobile()}
   <div class="mobile-app-lang">${langToggle(false)}</div>
   <nav class="mnav">
-    <button class="${state.appTab==="dashboard"&&!state.detailId?"active":""}" onclick="setTab('dashboard')"><span class="ic">${IC.grid}</span>${L("Kezdő")}</button>
-    <button class="${state.appTab==="search"?"active":""}" onclick="setTab('search')"><span class="ic">${IC.search}</span>${L("Keresés")}</button>
-    <button class="${state.appTab==="opportunities"?"active":""}" onclick="setTab('opportunities')"><span class="ic">${IC.list}</span>${L("Pályázatok")}</button>
-    <button class="${state.appTab==="saved"?"active":""}" onclick="setTab('saved')"><span class="ic">${IC.star}</span>${L("Mentett")}</button>
     ${adminWs
-      ? `<button class="${state.appTab==="crm"?"active":""}" onclick="setTab('crm')"><span class="ic">${IC.target}</span>CRM</button>`
-      : `<button class="${state.appTab==="account"?"active":""}" onclick="${state.auth.user?"setTab('account')":"goAuth('login')"}"><span class="ic">${IC.user}</span>${state.auth.user?L("Fiók"):L("Belépés")}</button>`}
+      ? `${mItem("adminOverview",IC.grid,LX("Áttekintés","Overview"))}
+         ${mItem("crm",IC.target,"CRM")}
+         ${mItem("admin",IC.user,L("Felhasználó"))}
+         ${mItem("adminSystem",IC.shield,LX("Rendszer","System"))}`
+      : `${mItem("dashboard",IC.grid,L("Kezdő"))}
+         ${mItem("search",IC.search,L("Keresés"))}
+         ${mItem("opportunities",IC.list,L("Pályázatok"))}
+         ${mItem("saved",IC.star,L("Mentett"))}
+         <button class="${state.appTab==="account"?"active":""}" onclick="${state.auth.user?"setTab('account')":"goAuth('login')"}"><span class="ic">${IC.user}</span>${state.auth.user?L("Fiók"):L("Belépés")}</button>`}
   </nav>`;
 }
 /* A fiókblokk a sáv alján: ki vagy, milyen hozzáféréssel, és a kilépés gombja
@@ -2341,6 +2353,18 @@ function workspaceSwitch(){
     <div class="ws-note">${state.workspace==="admin"
       ? LX("Fiókok és előfizetések kezelése.","Managing accounts and subscriptions.")
       : LX("Azt látod, amit az ügyfél lát.","You are seeing what a client sees.")}</div>`;
+}
+
+/* A bal sáv 900px alatt eltűnik, és vele a munkaterület-váltó is — telefonon így
+   nem volt mivel átlépni az ügyfélnézetbe. Ez ugyanaz a váltás egyetlen lebegő
+   gombban, ami mindig a másik munkaterületet kínálja. */
+function workspaceSwitchMobile(){
+  if(!isAdmin()) return "";
+  const toAdmin = state.workspace !== "admin";
+  return `<button class="mobile-ws" onclick="setWorkspace('${toAdmin?"admin":"user"}')">
+    <span class="ic">${toAdmin?IC.shield:IC.user}</span>${toAdmin
+      ? LX("Admin","Admin")
+      : LX("Ügyfélnézet","Client view")}</button>`;
 }
 
 /* ---------------- ADMIN ÁTTEKINTŐ ---------------- */
