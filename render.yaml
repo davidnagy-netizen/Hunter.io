@@ -1,0 +1,38 @@
+# Render deployment for the HUNTER API.
+#
+# The server is dependency-free Node, so there is nothing to install — the build
+# step only verifies the runtime. The catalog ships in the repo (server/data/
+# catalog.json) because building it live means scraping the EU portal, which is
+# too slow and too fragile to sit in front of a deploy.
+#
+# Free plan: the filesystem is ephemeral and the instance sleeps after 15 minutes
+# of inactivity, so server/data/users.json resets on every restart. To keep
+# accounts, move to the starter plan and uncomment the disk block below.
+services:
+  - type: web
+    name: hunter-io
+    runtime: node
+    plan: free
+    region: frankfurt
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      # Sessions travel over HTTPS on Render, so the cookie must be marked secure.
+      - key: HUNTER_SECURE_COOKIE
+        value: "1"
+      # Set in the dashboard — never commit the administrator password.
+      - key: HUNTER_ADMIN_USER
+        sync: false
+      - key: HUNTER_ADMIN_PASSWORD
+        sync: false
+    # Paid plans only. With a disk the account store survives restarts.
+    # disk:
+    #   name: hunter-data
+    #   mountPath: /var/data
+    #   sizeGB: 1
+    # ...and add:  - key: HUNTER_DATA_DIR
+    #                value: /var/data

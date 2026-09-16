@@ -1,10 +1,15 @@
 node_modules/
 
-# Built artifacts and scraped input — rebuilt by `npm run refresh`.
+# Scraped input — rebuilt by `npm run refresh`. Large and reproducible.
 data/raw/
-server/data/catalog.json
+
+# server/data/catalog.json is deliberately NOT ignored: the host builds from this
+# repo and has no way to scrape the EU portal at deploy time, so the built
+# catalog has to ship with the code. Refresh it with `npm run build:catalog`.
 
 # Account store: password hashes and customer profiles. Never commit this.
 server/data/users.json
 server/data/db.json
 server/data/*.corrupt-*
+server/data/*.tmp
+server/data/users.json.*
