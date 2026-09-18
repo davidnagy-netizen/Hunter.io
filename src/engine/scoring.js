@@ -20,6 +20,7 @@ import {
   DEFAULT_REFERENCE_DATE,
 } from "./eligibility.js";
 
+/** @param {{checks: Array<{status: string}>}} elig @returns {number} */
 export function factorEligibility(elig) {
   const c = elig.checks;
   if (!c.length) return 1;
@@ -28,6 +29,7 @@ export function factorEligibility(elig) {
   return s / c.length;
 }
 
+/** @param {object} opp @param {object|null} profile @param {object} adHocAnswers @returns {number} */
 export function factorProjectFit(opp, profile, adHocAnswers = {}) {
   const goals = profile?.goals || [];
   const overlap = (opp.goals || []).filter((g) => goals.includes(g)).length;
@@ -67,6 +69,7 @@ export function factorProjectFit(opp, profile, adHocAnswers = {}) {
   return base * (0.75 + 0.25 * instrumentFit);
 }
 
+/** @param {object} opp @param {object|null} profile @returns {number} */
 export function factorFundingSize(opp, profile) {
   const v = profile?.investment_value || 0;
 
@@ -104,6 +107,7 @@ export function factorFundingSize(opp, profile) {
   return Math.min(1, 0.7 * band + 0.3 * meaningful * (0.6 + (opp.intensity || 0.5) * 0.4));
 }
 
+/** @param {object} opp @param {Date} referenceDate @returns {number} */
 export function factorTiming(opp, referenceDate = DEFAULT_REFERENCE_DATE) {
   const d = daysToDeadline(opp, referenceDate);
   if (d <= 0) return 0;
@@ -114,6 +118,7 @@ export function factorTiming(opp, referenceDate = DEFAULT_REFERENCE_DATE) {
   return 0.84;
 }
 
+/** @param {object} opp @param {object|null} profile @returns {number} */
 export function factorFeasibility(opp, profile) {
   let f = 1;
   f -= (1 - (opp.intensity || 0.5)) * 0.4;
@@ -137,6 +142,7 @@ export function factorFeasibility(opp, profile) {
   return Math.max(0.2, f);
 }
 
+/** @param {object} opp @param {object|null} profile @param {object} adHocAnswers @param {Date} referenceDate @returns {object} */
 export function hunterScore(opp, profile, adHocAnswers = {}, referenceDate = DEFAULT_REFERENCE_DATE) {
   const elig = evaluateEligibility(opp, profile, adHocAnswers, referenceDate);
   if (elig.status === "NOT_ELIGIBLE") {
@@ -163,6 +169,7 @@ export function hunterScore(opp, profile, adHocAnswers = {}, referenceDate = DEF
   };
 }
 
+/** @param {number|null} score @returns {string} */
 export function scoreBand(score) {
   if (score >= 85) return { key: "strong", lbl_hu: "Nagyon erős lehetőség", lbl_en: "Very strong opportunity", color: "var(--green)" };
   if (score >= 70) return { key: "relevant", lbl_hu: "Releváns lehetőség", lbl_en: "Relevant opportunity", color: "var(--gold-deep)" };
@@ -170,6 +177,7 @@ export function scoreBand(score) {
   return { key: "low", lbl_hu: "Alacsony relevancia", lbl_en: "Low relevance", color: "var(--slate)" };
 }
 
+/** @param {object|null} profile @param {object[]} grantList @param {object} adHocAnswers @param {Date} referenceDate @returns {object[]} */
 export function rankedOpps(profile, grantList, adHocAnswers = {}, referenceDate = DEFAULT_REFERENCE_DATE) {
   return grantList
     .map((o) => ({ opp: o, res: hunterScore(o, profile, adHocAnswers, referenceDate) }))
@@ -212,6 +220,7 @@ function fundingSizeDetail(opp, profile, en) {
  * Per-factor explanation for the opportunity detail view: what each factor
  * scored, and the concrete reason it landed there.
  */
+/** @param {object} opp @param {object|null} profile @param {object} res @param {"hu"|"en"} lang @returns {object} */
 export function explainScore(opp, profile, res, lang = "hu") {
   if (!res.factors) return [];
   const pct = (x) => Math.round(x * 100);

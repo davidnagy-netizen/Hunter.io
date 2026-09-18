@@ -294,6 +294,7 @@ function estimatePartnerShare(opp, rules) {
  * @param {{eurHuf?:number}} [opts]
  * @returns {object|null} null when the record carries no usable identifier
  */
+/** @param {object} raw @param {{eurHuf?: number, today?: string|Date}} opts @returns {object} */
 export function normalizeEuRecord(raw, opts = {}) {
   const eurHuf = opts.eurHuf || DEFAULT_EUR_HUF;
   const m = raw?.metadata;
@@ -429,6 +430,7 @@ export function normalizeEuRecord(raw, opts = {}) {
  * years ago; showing those to a user would be worse than showing nothing, so
  * they are filtered out here and counted in the report.
  */
+/** @param {object[]} rawRecords @param {object} opts @returns {{opportunities: object[], report: object}} */
 export function normalizeEuBatch(rawRecords, opts = {}) {
   const today = opts.today ? new Date(opts.today) : new Date();
   const todayIso = today.toISOString().slice(0, 10);

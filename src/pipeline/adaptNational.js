@@ -6,6 +6,7 @@
  * function and nothing else.
  */
 
+/** @param {object} call @returns {object} */
 export function adaptNationalCall(call) {
   return {
     ...call,

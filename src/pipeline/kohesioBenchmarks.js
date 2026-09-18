@@ -48,6 +48,7 @@ function stripHtml(html) {
 }
 
 /** One raw Kohesio project -> the fields a benchmark needs. */
+/** @param {object} raw @returns {object|null} */
 export function normalizeProject(raw) {
   if (!raw) return null;
   const label = raw.label || (raw.labels || [])[0];
@@ -94,6 +95,7 @@ export function normalizeProject(raw) {
  * Only Hungarian projects are kept — a Romanian motorway is not a comparable
  * for a Hungarian applicant.
  */
+/** @param {object[]} rawProjects @returns {object} */
 export function buildBenchmarks(rawProjects = []) {
   const projects = rawProjects
     .map(normalizeProject)
@@ -178,6 +180,7 @@ export function buildBenchmarks(rawProjects = []) {
  * Returns null when there is nothing comparable rather than a misleading
  * all-sector average.
  */
+/** @param {object|null} benchmarks @param {object} opp @returns {object|null} */
 export function benchmarksFor(benchmarks, opp) {
   if (!benchmarks || !benchmarks.projectCount) return null;
   const goals = opp?.goals || [];
