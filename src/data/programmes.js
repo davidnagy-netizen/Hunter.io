@@ -75,7 +75,7 @@ const ALL_ORGS = ["sme", "large", "research", "university", "ngo", "public"];
  *   funding       false when the action awards no money (prizes, quality labels)
  */
 export const ACTION_RULES = {
-  // ---- Horizon Europe -----------------------------------------------------
+  // Horizon Europe
   "HORIZON-RIA": { label: "Research and Innovation Action", rate: 1.0, minPartners: 3, minCountries: 3, orgs: ALL_ORGS, smeFit: 0.55, admin: 0.9 },
   "HORIZON-IA": { label: "Innovation Action", rate: 0.7, rateNonProfit: 1.0, minPartners: 3, minCountries: 3, orgs: ALL_ORGS, smeFit: 0.85, admin: 0.9 },
   "HORIZON-CSA": { label: "Coordination and Support Action", rate: 1.0, minPartners: 1, minCountries: 1, orgs: ALL_ORGS, smeFit: 0.4, admin: 0.75 },
@@ -95,18 +95,18 @@ export const ACTION_RULES = {
   "HORIZON-ERC": { label: "ERC Grant", rate: 1.0, minPartners: 1, minCountries: 1, orgs: ["university", "research"], smeFit: 0.05, admin: 0.9 },
   "HORIZON-AG": { label: "Horizon Action Grant", rate: 0.7, minPartners: 3, minCountries: 3, orgs: ALL_ORGS, smeFit: 0.6, admin: 0.9 },
 
-  // ---- Euratom ------------------------------------------------------------
+  // Euratom
   "EURATOM-RIA": { label: "Euratom Research and Innovation Action", rate: 1.0, minPartners: 3, minCountries: 3, orgs: ALL_ORGS, smeFit: 0.4, admin: 0.9 },
   "EURATOM-IA": { label: "Euratom Innovation Action", rate: 0.7, minPartners: 3, minCountries: 3, orgs: ALL_ORGS, smeFit: 0.5, admin: 0.9 },
   "EURATOM-CSA": { label: "Euratom Coordination and Support Action", rate: 1.0, minPartners: 1, minCountries: 1, orgs: ALL_ORGS, smeFit: 0.3, admin: 0.8 },
   "EURATOM-COFUND": { label: "Euratom Co-fund Action", rate: 0.5, minPartners: 3, minCountries: 3, orgs: ["research", "university", "public"], smeFit: 0.1, admin: 0.95 },
 
-  // ---- LIFE ---------------------------------------------------------------
+  // LIFE
   "LIFE-PJG": { label: "LIFE Project Grant", rate: 0.6, minPartners: 1, minCountries: 1, orgs: ALL_ORGS, smeFit: 0.65, admin: 0.7 },
   "LIFE-FPA-OG": { label: "LIFE Operating Grant", rate: 0.7, minPartners: 1, minCountries: 1, orgs: ["ngo"], smeFit: 0.05, admin: 0.7 },
   "LIFE-SAP": { label: "LIFE Standard Action Project", rate: 0.6, minPartners: 1, minCountries: 1, orgs: ALL_ORGS, smeFit: 0.65, admin: 0.7 },
 
-  // ---- Digital Europe -----------------------------------------------------
+  // Digital Europe
   "DIGITAL-SIMPLE": { label: "Digital Europe Simple Grant", rate: 0.5, minPartners: 1, minCountries: 1, orgs: ALL_ORGS, smeFit: 0.9, admin: 0.6 },
   "DIGITAL-JU-SIMPLE": { label: "Digital Europe JU Simple Grant", rate: 0.5, minPartners: 1, minCountries: 1, orgs: ALL_ORGS, smeFit: 0.9, admin: 0.65 },
   "DIGITAL-LS": { label: "Digital Europe Lump Sum Grant", rate: 0.5, minPartners: 1, minCountries: 1, orgs: ALL_ORGS, smeFit: 0.9, admin: 0.55 },
@@ -116,23 +116,23 @@ export const ACTION_RULES = {
   "DIGITAL-SME": { label: "Digital Europe SME Support Action", rate: 0.5, minPartners: 1, minCountries: 1, orgs: ["sme"], smeFit: 1.0, admin: 0.5 },
   "DIGITAL-JU-SME": { label: "Digital Europe JU SME Support Action", rate: 0.5, minPartners: 1, minCountries: 1, orgs: ["sme"], smeFit: 1.0, admin: 0.5 },
 
-  // ---- Connecting Europe Facility -----------------------------------------
+  // Connecting Europe Facility
   "CEF-INFRA": { label: "CEF Infrastructure Project", rate: 0.5, minPartners: 1, minCountries: 1, orgs: ["large", "public", "sme"], smeFit: 0.3, admin: 0.95 },
   "CEF-PJG": { label: "CEF Project Grant", rate: 0.5, minPartners: 1, minCountries: 1, orgs: ["large", "public", "sme"], smeFit: 0.35, admin: 0.9 },
 
-  // ---- Research Fund for Coal & Steel -------------------------------------
+  // Research Fund for Coal & Steel
   "RFCS-PJG": { label: "RFCS Project Grant", rate: 0.6, minPartners: 1, minCountries: 1, orgs: ALL_ORGS, smeFit: 0.7, admin: 0.7 },
 
-  // ---- European Defence Fund ----------------------------------------------
+  // European Defence Fund
   "EDF-RA": { label: "EDF Research Action", rate: 1.0, minPartners: 3, minCountries: 3, orgs: ALL_ORGS, smeFit: 0.5, admin: 0.95, sector: "defence" },
   "EDF-DA": { label: "EDF Development Action", rate: 0.65, minPartners: 3, minCountries: 3, orgs: ALL_ORGS, smeFit: 0.5, admin: 0.95, sector: "defence" },
   "EDF-LS": { label: "EDF Lump Sum Grant", rate: 1.0, minPartners: 3, minCountries: 3, orgs: ALL_ORGS, smeFit: 0.5, admin: 0.95, sector: "defence" },
   "EDF-SME": { label: "EDF SME Action", rate: 0.8, minPartners: 3, minCountries: 3, orgs: ["sme"], smeFit: 0.8, admin: 0.9, sector: "defence" },
 
-  // ---- Interregional Innovation Investments --------------------------------
+  // Interregional Innovation Investments
   "I3-PJG": { label: "I3 Project Grant", rate: 0.7, minPartners: 3, minCountries: 2, orgs: ALL_ORGS, smeFit: 0.9, admin: 0.8 },
 
-  // ---- Social / civic / cultural programmes --------------------------------
+  // Social / civic / cultural programmes
   "ESF-PJG": { label: "ESF+ Project Grant", rate: 0.8, minPartners: 1, minCountries: 1, orgs: ["ngo", "public", "research", "university", "sme"], smeFit: 0.35, admin: 0.7 },
   "CERV-LS": { label: "CERV Lump Sum Grant", rate: 0.9, minPartners: 1, minCountries: 1, orgs: ["ngo", "public", "university", "research"], smeFit: 0.1, admin: 0.6 },
   "CERV-PJG": { label: "CERV Project Grant", rate: 0.9, minPartners: 1, minCountries: 1, orgs: ["ngo", "public", "university", "research"], smeFit: 0.1, admin: 0.6 },

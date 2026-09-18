@@ -53,9 +53,7 @@ const STORE_FILE = config.storeFile;
 
 fs.mkdirSync(DATA_DIR, { recursive: true });
 
-// ---------------------------------------------------------------------------
 // Catalog
-// ---------------------------------------------------------------------------
 
 /** In-memory catalog plus its search index, rebuilt whenever data changes. */
 const catalogState = { meta: null, opportunities: [], benchmarks: null, index: null, byId: new Map() };
@@ -85,9 +83,7 @@ function referenceDate() {
   return config.today ? new Date(config.today) : new Date();
 }
 
-// ---------------------------------------------------------------------------
 // User state
-// ---------------------------------------------------------------------------
 //
 // There are no accounts, by design. That makes server-side storage of a company
 // profile actively wrong once the app is hosted: a single db.json is shared by
@@ -122,9 +118,7 @@ function activeProfile(db, override) {
   return normalizeProfile(override || db.profile || DEMO_PROFILE);
 }
 
-// ---------------------------------------------------------------------------
 // Accounts
-// ---------------------------------------------------------------------------
 
 const store = new Store(STORE_FILE);
 const adminSeed = ensureAdmin(store);
@@ -288,9 +282,7 @@ function gateDetail(detail, entitlements) {
   };
 }
 
-// ---------------------------------------------------------------------------
 // Presentation helpers
-// ---------------------------------------------------------------------------
 
 /**
  * Trims an opportunity to what a result card needs. The full description is
@@ -395,9 +387,7 @@ function fundingCalculator(opp, profile) {
   };
 }
 
-// ---------------------------------------------------------------------------
 // Request plumbing
-// ---------------------------------------------------------------------------
 
 const MIME_TYPES = {
   ".html": "text/html; charset=utf-8",
@@ -493,9 +483,7 @@ function parseFilters(params) {
   return filters;
 }
 
-// ---------------------------------------------------------------------------
 // Static files
-// ---------------------------------------------------------------------------
 
 const PUBLIC_DIR = config.publicDir;
 const INDEX_FILE = path.join(PUBLIC_DIR, "index.html");
@@ -544,7 +532,6 @@ function serveStatic(req, res, pathname) {
   return sendFile(INDEX_FILE);
 }
 
-// ---------------------------------------------------------------------------
 
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host || "localhost"}`);

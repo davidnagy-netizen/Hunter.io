@@ -166,7 +166,7 @@ export class Store {
     }
   }
 
-  // -- users ---------------------------------------------------------------
+// Users
 
   listUsers() {
     return Object.values(this.#data.users).sort((a, b) => String(a.createdAt).localeCompare(String(b.createdAt)));
@@ -237,7 +237,7 @@ export class Store {
     return true;
   }
 
-  // -- sessions ------------------------------------------------------------
+// Sessions
 
   createSession(userId, ttlMs, meta = {}) {
     const token = crypto.randomBytes(32).toString("base64url");
@@ -303,7 +303,7 @@ export class Store {
     return n;
   }
 
-  // -- profile history -----------------------------------------------------
+// Profile history
 
   /**
    * Records a profile version. The diff against the previous version is stored
@@ -335,7 +335,7 @@ export class Store {
     return [...(this.#data.profileHistory[userId] || [])].reverse();
   }
 
-  // -- subscription log ----------------------------------------------------
+// Subscription log
 
   recordSubscription(userId, entry) {
     const list = (this.#data.subscriptionLog[userId] = this.#data.subscriptionLog[userId] || []);
@@ -348,7 +348,7 @@ export class Store {
     return [...(this.#data.subscriptionLog[userId] || [])].reverse();
   }
 
-  // -- activity ------------------------------------------------------------
+// Activity
 
   recordActivity(userId, type, detail = {}) {
     if (!userId) return;
@@ -377,7 +377,7 @@ export class Store {
     return out.sort((a, b) => String(b.at).localeCompare(String(a.at))).slice(0, limit);
   }
 
-  // -- CRM: relationship records ------------------------------------------
+// CRM: relationship records
   //
   // One record per subject, where a subject is an account or a captured lead.
   // Everything an operator writes lands here: the pipeline stage they put it in,
@@ -503,7 +503,7 @@ export class Store {
     });
   }
 
-  // -- CRM: captured leads -------------------------------------------------
+// CRM: captured leads
   //
   // The free assessment is the top of the funnel, and until now it produced
   // nothing an operator could follow up. A lead is what it produces: the

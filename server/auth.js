@@ -60,9 +60,7 @@ export function clearCookie() {
   return `${SESSION_COOKIE}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0`;
 }
 
-// ---------------------------------------------------------------------------
 // Validation
-// ---------------------------------------------------------------------------
 
 export const USERNAME_RE = /^[a-zA-Z0-9._-]{3,32}$/;
 export const MIN_PASSWORD = 4;
@@ -85,9 +83,7 @@ export function validateCredentials(username, password) {
   return null;
 }
 
-// ---------------------------------------------------------------------------
 // Subscription plans and entitlements
-// ---------------------------------------------------------------------------
 
 /**
  * Plans an admin can grant. There is no payment gateway yet — a Hungarian

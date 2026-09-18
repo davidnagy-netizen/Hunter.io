@@ -30,9 +30,7 @@ import { isSubscriptionActive, subscriptionDaysLeft } from "./store.js";
 
 const DAY = 86400000;
 
-// ---------------------------------------------------------------------------
 // Vocabulary
-// ---------------------------------------------------------------------------
 
 /**
  * Sales pipeline stages. Ordered — the board renders them left to right and
@@ -69,9 +67,7 @@ export function stageById(id) {
   return STAGES.find((s) => s.id === id) || null;
 }
 
-// ---------------------------------------------------------------------------
 // Lifecycle — derived from the subscription and its log
-// ---------------------------------------------------------------------------
 
 /**
  * @param {object} user     the stored account
@@ -99,9 +95,7 @@ export function defaultStageFor(lifecycle) {
   }
 }
 
-// ---------------------------------------------------------------------------
 // Engagement — counted from the activity log, with its own breakdown
-// ---------------------------------------------------------------------------
 
 /**
  * Activity types worth counting, and what each is worth.
@@ -171,9 +165,7 @@ export function engagementBand(score) {
   return { key: "none", label_hu: "Nincs aktivitás", label_en: "No activity" };
 }
 
-// ---------------------------------------------------------------------------
 // Revenue — from the real price list, against subscriptions active right now
-// ---------------------------------------------------------------------------
 
 /**
  * What one grant of this plan is worth per 30 days.
@@ -197,9 +189,7 @@ export function priceList() {
   }));
 }
 
-// ---------------------------------------------------------------------------
 // Contact assembly
-// ---------------------------------------------------------------------------
 
 /**
  * Builds the CRM view of one account from what is actually recorded about it.
@@ -342,9 +332,7 @@ function daysBetween(iso, now) {
   return Math.max(0, Math.floor((now.getTime() - t) / DAY));
 }
 
-// ---------------------------------------------------------------------------
 // Portfolio metrics
-// ---------------------------------------------------------------------------
 
 /**
  * The numbers the console reports, all of them counted from the contacts above.
@@ -477,9 +465,7 @@ export function signupTrend(contacts, months = 6, now = new Date()) {
   return buckets;
 }
 
-// ---------------------------------------------------------------------------
 // Filtering, sorting and export
-// ---------------------------------------------------------------------------
 
 const SORTS = {
   recent: (a, b) => String(b.createdAt).localeCompare(String(a.createdAt)),
@@ -562,9 +548,7 @@ export function contactsToCsv(contacts) {
   return `﻿${[header, ...rows].join("\r\n")}\r\n`;
 }
 
-// ---------------------------------------------------------------------------
 // Timeline
-// ---------------------------------------------------------------------------
 
 /**
  * One chronological story per contact, merging the four things that actually
@@ -597,9 +581,7 @@ export function buildTimeline({ activity = [], subscriptions = [], versions = []
     .sort((a, b) => String(b.at).localeCompare(String(a.at)));
 }
 
-// ---------------------------------------------------------------------------
 // Lead validation
-// ---------------------------------------------------------------------------
 
 /** Deliberately permissive: enough to catch a typo, not enough to reject a real address. */
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
