@@ -11,9 +11,16 @@ what survives. The engine filters; it never guesses — when a required fact is
 unknown it asks rather than assumes.
 
 ```bash
-npm run refresh     # scrape the portals and build the catalog  (~2 min)
 npm start           # http://localhost:3000
+npm run dev         # restart the server when source files change
+npm test            # run the regression suite
 ```
+
+Requires Node.js 20 or newer. The checked-in catalog is sufficient for a local
+preview; no npm installation, Python scraper run, or frontend build is required.
+Open **http://localhost:3000** after starting the server. For the seeded local
+demo account, use `admin` / `admin` unless environment settings override it.
+Stop the server with **Ctrl+C**.
 
 ---
 
@@ -21,8 +28,8 @@ npm start           # http://localhost:3000
 
 | | |
 |---|---|
-| **Catalog** | ~590 real calls — 321 open, 267 forthcoming — refreshed from the live portal every 6 h |
-| **Sources** | EU Funding & Tenders Portal (SEDIA) and Kohesio — the two scrapers in `scraping data/` |
+| **Catalog** | Open and forthcoming calls from the live portal; current counts are available at `/api/health`, with refresh every 6 h by default |
+| **Sources** | EU Funding & Tenders Portal (SEDIA) and Kohesio — the two scrapers in `scrapers/` |
 | **Search** | Full-text BM25 over the whole catalog, with facets, filters and pagination |
 | **Screening** | Deterministic rule engine, four verdicts, every exclusion explained |
 | **Ranking** | Hunter Score — five weighted factors, each with a written justification |
@@ -31,6 +38,8 @@ npm start           # http://localhost:3000
 | **History** | Every profile save versioned with a diff, plus a per-account activity log |
 | **CRM** | Sales pipeline, contact records, notes and follow-ups, captured assessment leads, MRR/ARR and conversion — all derived from recorded facts |
 | **Languages** | Hungarian and English, switchable at runtime |
+| **Responsive UI** | Layouts reflow for Windows display scaling and narrow windows; the desktop sidebar stays fixed while page content scrolls |
+| **Hunter Plus preview** | Labelled `(demó)` / `(demo)`; static draft templates and a browser-local preview toggle, without payment or server entitlements |
 
 Everything runs on Node's standard library and Python's `requests`. There is no
 build step, no framework and no database — see [§6.4](#64-does-this-need-a-database)
@@ -61,7 +70,7 @@ into a shortlist a company can act on.
 
 ### Where the data comes from, exactly
 
-Both scrapers in `scraping data/` are used in full, and they target:
+Both scrapers in `scrapers/` are used in full, and they target:
 
 - `api.tech.ec.europa.eu` — the Commission's SEDIA search API behind the EU
   Funding & Tenders Portal
@@ -110,7 +119,7 @@ Worth doing, but a separate piece of work.
                                        server/server.js
                                          ├── BM25 index (in memory)
                                          ├── rule engine + scoring
-                                         └── REST API ──► index.html
+                                         └── REST API ──► public/index.html
                                                               │
                               anonymous → localStorage · signed in → server/store.js
 ```
@@ -138,8 +147,28 @@ request from memory.
 | [server/auth.js](server/auth.js) | scrypt passwords, sessions, plans and subscription entitlements |
 | [server/store.js](server/store.js) | Accounts, profile versions, subscription log, activity, CRM records and leads |
 | [server/crm.js](server/crm.js) | Lifecycle, engagement, revenue and pipeline metrics — all computed, none stored |
-| [server/server.js](server/server.js) | REST API and static hosting |
-| [index.html](index.html) | The whole front end, one self-contained file |
+| [server/server.js](server/server.js) | Server boot, middleware, dependency injection, and static hosting |
+| [server/config.js](server/config.js) | Server paths, port, date override and persistence/cookie settings |
+| [server/router.js](server/router.js) | Method/path dispatcher with exact and parameterized route matching |
+| [server/routes/](server/routes/) | Modular route definitions: health, authentication, catalog/search, CRM, and administration |
+| [server/shutdown.js](server/shutdown.js) | Drains active API requests and flushes storage before shutdown; resumes service if persistence fails |
+| [public/index.html](public/index.html) | Served application shell, still containing most existing styles and client logic |
+| [public/css/main.css](public/css/main.css) | Responsive overrides, fixed desktop sidebar and mobile toolbar |
+| [public/js/](public/js/) | Native ES module entry point and helpers; extraction of the existing inline app is still partial |
+| [scrapers/sedia/](scrapers/sedia/) | Funding & Tenders scraper and sample data |
+| [scrapers/kohesio/](scrapers/kohesio/) | Funded-project scraper and sample data |
+
+Only `public/` is exposed as static content. Unknown non-API paths fall back to
+`public/index.html`; API requests retain their own routing. Route definitions
+are cleanly partitioned into dedicated modules under `server/routes/` with
+dependency injection, replacing the monolithic handler with declarative router dispatch.
+
+Store mutations remain synchronous to callers. Persistence coalesces revisions
+into asynchronous snapshots, syncs and closes a unique temporary file in the
+destination directory, then atomically renames it. Windows lock errors (`EPERM`,
+`EACCES`, `EBUSY`) retry after 25, 50, 100, 200 and 400 ms. Failed attempts retain
+pending state for a subsequent mutation or `flush()`; the destination is never
+deleted or overwritten in place. `flush()` rejects on persistence failure.
 
 ---
 
@@ -263,7 +292,10 @@ filter combination leads to a dead end.
 
 ### Prerequisites
 
-Node 20+ and Python 3.8+ (`pip install -r "scraping data/scrapping data from ec.europa.eu funding-tenders/requirements.txt"`).
+Node 20+ is required to run the app and tests. There are no npm dependencies.
+Python 3.8+ is only needed to run the optional scrapers. Install their Python
+requirements with `pip install -r scrapers/sedia/requirements.txt` and
+`pip install -r scrapers/kohesio/requirements.txt`.
 
 ### Commands
 
@@ -271,8 +303,8 @@ Node 20+ and Python 3.8+ (`pip install -r "scraping data/scrapping data from ec.
 |---|---|
 | `npm start` | Serve the app on `:3000`, refreshing itself every 6 h |
 | `npm run dev` | Same, restarting on change |
-| `npm test` | Full suite — 106 tests |
-| `npm run refresh` | Scrape both portals and rebuild the catalog |
+| `npm test` | Full suite — 130 tests, including the original 108, persistence/demo regressions, and route modularization tests |
+| `npm run refresh` | Scrape open and forthcoming SEDIA calls, then rebuild the catalog; run `scrape:benchmarks` separately for Kohesio |
 | `npm run build:catalog` | Rebuild from existing `data/raw/`, with a live EUR/HUF rate (add `--curated` for the demo entries) |
 | `npm run scrape:open` | Open EU calls only |
 | `npm run scrape:forthcoming` | Forthcoming EU calls |
@@ -280,6 +312,33 @@ Node 20+ and Python 3.8+ (`pip install -r "scraping data/scrapping data from ec.
 
 Environment variables: `PORT`, `HUNTER_TODAY` (pins the reference date for
 deadline arithmetic), `HUNTER_DATA_DIR` (isolates the profile and catalog).
+
+[.env.example](.env.example) provides sample settings. The server reads the
+process environment; `npm start` does not load `.env` automatically. The sample
+disables automatic refresh, uses a 24-hour interval, and enables curated data;
+the defaults when variables are unset are listed in §6.1.
+
+For a local PowerShell preview with automatic refresh disabled:
+
+```powershell
+cd C:\projects\Hunter.io
+$env:PORT = "3000"
+$env:HUNTER_AUTO_REFRESH = "false"
+npm start
+```
+
+### Display scaling and navigation
+
+The layout uses CSS viewport width, so Windows scaling and browser zoom both
+trigger the responsive breakpoints. On desktop, the sidebar stays fixed as the
+page scrolls and scrolls independently when its contents exceed the window
+height. Below 901px, a bottom navigation bar replaces it and language/workspace
+controls sit in a toolbar above the content. Panels and Hunter Plus columns
+stack on narrower screens; tables and CRM boards scroll within their containers.
+
+Keep your preferred Windows scale setting. After a UI update, use **Ctrl+F5** to
+reload cached styles. Responsive checks covered widths from 320px to 1280px in
+both languages, including 1.5× device scaling.
 
 ### Data hygiene
 
@@ -590,7 +649,7 @@ to 112 KB.
 ## 8. Tests
 
 ```
-npm test     # 106 tests
+npm test     # 130 tests
 ```
 
 | File | Covers |
@@ -600,7 +659,13 @@ npm test     # 106 tests
 | [tests/server.test.js](tests/server.test.js) | Every endpoint against a live server on a scratch data directory |
 | [tests/refresh.test.js](tests/refresh.test.js) | Refresh success, failure, empty-result rejection, backoff, atomic write; and that two visitors stay isolated |
 | [tests/crm.test.js](tests/crm.test.js) | Lifecycle and engagement arithmetic, MRR/conversion/churn, CSV, lead validation, the store, and every CRM endpoint against a live server |
-| [tests/ui.test.js](tests/ui.test.js) | `index.html`'s script in a DOM shim — every screen, including sign-in, account, admin, empty catalog, missing budget and unknown id; plus that every UI string has an English rendering |
+| [tests/ui.test.js](tests/ui.test.js) | `public/index.html`'s script in a DOM shim — screen rendering, HU/EN translation, honest demo labels, clipboard and print output |
+| [test/store.test.js](test/store.test.js) | Windows rename retries, write ordering, coalescing, flush/recovery, cleanup, unhandled rejections and graceful shutdown |
+| [test/routes.test.js](test/routes.test.js) | Route dispatcher matching, path parameter decoding, and auth/admin/CRM route guard isolation |
+The test command runs both `test/*.test.js` and `tests/*.test.js`. API integration
+tests also verify that the public stylesheet and JavaScript module are served
+with the expected content types. Browser layout checks are separate from these
+DOM-shim tests; the shim does not measure CSS geometry.
 
 Three defects these caught, all fixed:
 
@@ -626,17 +691,16 @@ subscriptions are granted by an administrator — and the Hunter Plus AI draftin
 workspace, whose screen assembles a template draft from live catalog data rather
 than calling a model.
 
-Two things about that Hunter Plus screen are worth stating plainly, because the
-interface does not currently say them where the user can see them: its
-*"Generate AI Draft"* button runs no model — it fills a fixed three-chapter
-template with the company's real numbers — and its *"Activate (5 990 HUF/mo)"*
-button takes no payment and creates no subscription; it sets a flag in the
-visitor's own browser and reports success. The original prototype labelled both
-of these *"(demo)"*. Restoring that labelling is the first thing to do before
-this screen is shown to a paying customer.
+The Hunter Plus preview explicitly labels its triggers, draft results and
+activation button `(demó)` in Hungarian or `(demo)` in English. Drafts use a
+fixed three-chapter template populated with profile and call fields. Copying or
+printing retains the demo notice. Preview activation changes browser-local
+state only; it does not collect payment, start an automatic trial, or grant
+server-side subscription access. Scoring is deterministic and rule-based.
 
-`hunter-mvp.html` is a byte-identical copy of `index.html`, kept because the
-original deliverable was described as a single portable file.
+`hunter-mvp.html` and `original/` are historical snapshots, not the served app.
+The active entry point is `public/index.html`. The root archive `hunter.io.7z`
+has been removed; scraper files now live under `scrapers/`.
 
 The original product specification is in
 [HUNTER-PROJECT-OVERVIEW.md](HUNTER-PROJECT-OVERVIEW.md).
