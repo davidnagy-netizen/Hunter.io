@@ -77,9 +77,9 @@ const RAW_EU_RECORD = {
  * Returns the sandbox so tests can poke at its globals.
  */
 function loadApp({ opportunities, meta } = {}) {
-  const html = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
+  const html = fs.readFileSync(path.join(ROOT, "public", "index.html"), "utf8");
   const open = html.indexOf("<script>");
-  const close = html.lastIndexOf("</script>");
+  const close = html.indexOf("</script>", open);
   assert.ok(open > -1 && close > open, "index.html must contain an inline script");
   const source = html.slice(open + "<script>".length, close);
 
@@ -95,11 +95,15 @@ function loadApp({ opportunities, meta } = {}) {
     value: "",
   });
 
+  const elements = new Map();
   const sandbox = {
     console,
     document: {
       documentElement: { lang: "hu" },
-      getElementById: () => noopElement(),
+      getElementById: (id) => {
+        if (!elements.has(id)) elements.set(id, noopElement());
+        return elements.get(id);
+      },
       querySelector: () => noopElement(),
       querySelectorAll: () => [],
       createElement: () => noopElement(),
@@ -514,8 +518,9 @@ test("every string the UI shows has an English rendering", () => {
   // A single-file bilingual UI makes it very easy to add a Hungarian string and
   // forget the dictionary entry — the interface then silently stays Hungarian
   // for an English reader, with nothing failing. This catches that.
-  const html = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
-  const source = html.slice(html.indexOf("<script>") + 8, html.lastIndexOf("</script>"));
+  const html = fs.readFileSync(path.join(ROOT, "public", "index.html"), "utf8");
+  const open = html.indexOf("<script>");
+  const source = html.slice(open + 8, html.indexOf("</script>", open));
   const app = loadApp();
   const TR = app.TR;
 
@@ -744,9 +749,11 @@ test("signing out is reachable from the shell, and the shell survives a missing 
 test("every endpoint the client calls exists on the server", () => {
   // A single-file front end makes it easy to leave a fetch pointing at a route
   // that was renamed or removed; the call fails silently in the browser.
-  const html = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
-  const server = fs.readFileSync(path.join(ROOT, "server", "server.js"), "utf8");
-
+  const html = fs.readFileSync(path.join(ROOT, "public", "index.html"), "utf8");
+  const routeFiles = fs.readdirSync(path.join(ROOT, "server", "routes")).map((f) => path.join(ROOT, "server", "routes", f));
+  const server = [path.join(ROOT, "server", "server.js"), ...routeFiles]
+    .map((file) => fs.readFileSync(file, "utf8"))
+    .join("\n");
   const called = new Set();
   for (const m of html.matchAll(/["'`](\/api\/[^"'`?\s]*)/g)) {
     // Template placeholders stand in for ids; compare the static prefix.
@@ -765,7 +772,7 @@ test("every endpoint the client calls exists on the server", () => {
 });
 
 test("an anonymous visitor's data stays in their browser", () => {
-  const html = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
+  const html = fs.readFileSync(path.join(ROOT, "public", "index.html"), "utf8");
   assert.ok(html.includes('localStorage.setItem("hunter_state"'), "the profile is kept in the browser");
 
   // Anonymous scoring requests carry the profile rather than relying on shared
@@ -1007,6 +1014,75 @@ test("the CRM is an administrator screen, reachable only from their workspace", 
   assert.ok(!app.viewApp().includes("setTab('crm')"), "a client never sees the CRM tab");
   assert.ok(app.viewCrm().includes("Nincs jogosultságod"), "and the view itself refuses to render for them");
 });
+
+for (const lang of ["hu", "en"]) {
+  test(`Hunter Plus labels and exported drafts remain honest in ${lang}`, async () => {
+    const opp = normalizeEuRecord(RAW_EU_RECORD, { eurHuf: 364.45 });
+    const app = loadApp({ opportunities: [opp] });
+    app.state.lang = lang;
+    app.state.screen = "app";
+    app.state.appTab = "plus";
+    app.state.profile = { ...app.DEMO_PROFILE };
+    app.state.subscription = { active: false };
+    const marker = lang === "hu" ? "(demó)" : "(demo)";
+    const checkButtons = (html, handler) => {
+      const buttons = [...html.matchAll(/<button\b[^>]*>[\s\S]*?<\/button>/g)]
+        .map(match => match[0]).filter(button => button.includes(handler));
+      assert.ok(buttons.length, `missing control: ${handler}`);
+      for (const button of buttons) assert.ok(button.includes(marker), button);
+    };
+    checkButtons(app.viewApp(), "setTab('plus')");
+    checkButtons(app.viewPlus(), "openUpgrade()");
+    app.openUpgrade();
+    const modal = app.document.getElementById("modal").innerHTML;
+    checkButtons(modal, "activateSubscription()");
+    assert.match(modal, lang === "hu" ? /Nem indít fizetést, és nem ad szerveroldali hozzáférést/ : /does not initiate payment or grant server entitlements/);
+    assert.doesNotMatch(modal, /5 nap ingyen|5 days free|5[ ,]990/);
+
+    const entitlements = JSON.stringify(app.state.auth.entitlements);
+    const unexpectedRequest = async () => assert.fail("preview activation must not call a server");
+    app.fetch = unexpectedRequest;
+    app.api.post = unexpectedRequest;
+    app.activateSubscription();
+    assert.equal(app.state.subscription.active, true);
+    assert.equal(JSON.stringify(app.state.auth.entitlements), entitlements);
+    assert.equal(app.isSubscriber(), false);
+    assert.equal(JSON.parse(app.localStorage.getItem("hunter_state")).subscription.active, true);
+    checkButtons(app.viewPlus(), "generateAiDraft(");
+    await app.generateAiDraft(opp.id);
+    const rendered = app.document.getElementById("app").innerHTML;
+    assert.ok(rendered.includes(app.draftNotice()));
+    for (const chapter of app.state.hunterPlusDraft.chapters) {
+      const title = lang === "en" ? chapter.title_en : chapter.title_hu;
+      assert.ok(rendered.includes(`${title} ${marker}`));
+    }
+    let copied;
+    app.navigator = { clipboard: { writeText: async text => { copied = text; } } };
+    app.copyDraft();
+    assert.ok(copied.startsWith(app.draftNotice()));
+    assert.ok(copied.includes(marker));
+    assert.match(copied, lang === "hu" ? /rögzített szövegsablon.*nem egyedi AI-generálás/ : /static template.*not custom AI generation/);
+    // Execute the actual print control against the rendered document.
+    let printed;
+    app.print = () => { printed = app.document.getElementById("app").innerHTML; };
+    const handler = rendered.match(/onclick="(window\.print\(\))"/)[1];
+    vm.runInContext(handler, app);
+    assert.ok(printed.includes(app.draftNotice()));
+    assert.ok(printed.includes(marker));
+  });
+
+  test(`marketing describes deterministic scoring and no automatic trial in ${lang}`, () => {
+    const app = loadApp();
+    app.state.lang = lang;
+    const landing = app.viewLanding();
+    assert.match(landing, lang === "hu" ? /determinisztikus, szabályalapú/i : /deterministic, rule-based/i);
+    assert.doesNotMatch(landing, /AI Funding Intelligence|AI ranks|AI rangsorol|5-day free trial|5 napos ingyenes prób/);
+    app.state.lead.sent = true;
+    const confirmation = app.leadCaptureBlock(0, []);
+    assert.match(confirmation, lang === "hu" ? /Automatikus e-mail értesítést nem küldünk/ : /No automatic email notification is sent/);
+    assert.doesNotMatch(confirmation, /start the free trial|elindíthatod az ingyenes próbát/);
+  });
+}
 
 test("the free assessment offers a follow-up, and only records one with consent", () => {
   const app = loadApp({ opportunities: [] });

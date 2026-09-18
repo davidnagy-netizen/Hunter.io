@@ -1,0 +1,280 @@
+/* Public entry point for styles migrated out of the compatibility shell. */
+:root {
+  color-scheme: light;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Use CSS viewport dimensions: Windows scaling and browser zoom both reduce
+   the space available to the layout. Do not compensate by shrinking text. */
+.shell {
+  --sidebar-width: 238px;
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+}
+
+.main {
+  min-width: 0;
+  width: 100%;
+}
+
+.rail {
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.rail > * {
+  flex-shrink: 0;
+}
+
+.rail-item {
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.hero,
+.compare,
+.stats,
+.calc,
+.detail-hero,
+.plus-workspace,
+.plus-features {
+  min-width: 0;
+}
+
+.hero > *,
+.compare > *,
+.stats > *,
+.calc > *,
+.detail-hero > *,
+.plus-workspace > *,
+.plus-features > *,
+.c360 > *,
+.opp-body,
+.cal-events,
+.panel {
+  min-width: 0;
+}
+
+.opp {
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+}
+
+.detail-hero {
+  grid-template-columns: minmax(0, 1fr) 168px;
+}
+
+.page-head,
+.section-title,
+.detail-actions,
+.ob-actions,
+.opp-right {
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.page-head h1,
+.detail-hero h1,
+.opp-body h3,
+.panel,
+.stat,
+.cal-ev .cname {
+  overflow-wrap: anywhere;
+}
+
+.btn {
+  max-width: 100%;
+  white-space: normal;
+}
+
+input,
+select,
+textarea {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.utable-wrap,
+.board {
+  min-width: 0;
+  max-width: 100%;
+  overscroll-behavior-x: contain;
+}
+
+.plus-workspace {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr);
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.plus-features {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  max-width: 560px;
+  margin: 0 auto 26px;
+  text-align: left;
+}
+
+.modal {
+  max-height: calc(100vh - 40px);
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.mobile-toolbar {
+  display: none;
+}
+
+/* Keep navigation attached to the viewport while the content scrolls.
+   Reserve its grid column so the page cannot slide underneath it. */
+@media (min-width: 901px) {
+  .rail {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: var(--sidebar-width);
+    z-index: 80;
+  }
+
+  .main {
+    grid-column: 2;
+  }
+}
+
+/* A 1920px display at 150% scaling has roughly a 1280px CSS viewport. */
+@media (min-width: 901px) and (max-width: 1280px) {
+  .shell {
+    --sidebar-width: 208px;
+  }
+
+  .rail {
+    padding: 18px 10px;
+  }
+
+  .rail-item {
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .main {
+    padding: 28px 24px 48px;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .plus-workspace,
+  .c360 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 1100px) {
+  .hero {
+    gap: 28px;
+  }
+
+  .opp {
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .opp-right {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+  }
+}
+
+@media (max-width: 900px) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  /* Keep language/workspace controls in document flow above page headings. */
+  .mobile-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    padding: 10px 14px;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .mobile-app-lang,
+  .mobile-ws {
+    position: static;
+  }
+
+  .mobile-app-lang {
+    margin-left: auto;
+  }
+
+  .main {
+    padding-bottom: calc(110px + env(safe-area-inset-bottom));
+  }
+
+  .plus-workspace,
+  .detail-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mnav button {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    padding-inline: 4px;
+  }
+
+  .cal-ev {
+    flex-wrap: wrap;
+  }
+
+  .cal-ev .cname {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .nav,
+  .ob-top {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .plus-features,
+  .stats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .panel,
+  .modal,
+  .auth-card {
+    padding: 20px;
+  }
+
+  .facets,
+  .adm-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hist-change,
+  .act {
+    flex-wrap: wrap;
+  }
+}
