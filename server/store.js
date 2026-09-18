@@ -25,6 +25,7 @@
  */
 
 import fs from "node:fs";
+import fsPromises from "node:fs/promises";
 import path from "node:path";
 import crypto from "node:crypto";
 
@@ -49,15 +50,18 @@ const MAX_ACTIVITY = 200;
 const MAX_NOTES = 200;
 const MAX_TASKS = 200;
 
+/** @param {string} prefix @returns {string} */
 export function newId(prefix = "u") {
   return `${prefix}_${crypto.randomBytes(9).toString("base64url")}`;
 }
 
+/** JSON-backed application state with serialized durable writes. */
 export class Store {
   #file;
   #data;
-  #writeQueue = Promise.resolve();
-  #dirty = false;
+  #mutationRevision = 0;
+  #persistedRevision = 0;
+  #writing = null;
 
   constructor(file) {
     this.#file = file;
@@ -82,23 +86,84 @@ export class Store {
     }
   }
 
-  /** Serialized, atomic write. Returns a promise that settles once on disk. */
+  /** Record a mutation and schedule a coalesced, serialized write. */
   #commit() {
-    this.#dirty = true;
-    this.#writeQueue = this.#writeQueue.then(() => {
-      if (!this.#dirty) return;
-      this.#dirty = false;
-      const tmp = `${this.#file}.${process.pid}.tmp`;
-      fs.mkdirSync(path.dirname(this.#file), { recursive: true });
-      fs.writeFileSync(tmp, JSON.stringify(this.#data, null, 2), "utf8");
-      fs.renameSync(tmp, this.#file);
+    this.#mutationRevision++;
+    this.#startWrite();
+  }
+
+  #startWrite() {
+    if (this.#writing) return this.#writing;
+    const attempt = Promise.resolve().then(async () => {
+      try {
+        while (this.#persistedRevision !== this.#mutationRevision) {
+          const revision = this.#mutationRevision;
+          await this.#save();
+          this.#persistedRevision = revision;
+        }
+      } finally {
+        this.#writing = null;
+      }
     });
-    return this.#writeQueue;
+    this.#writing = attempt;
+    // Mutations stay synchronous; explicit flush callers still see rejection.
+    attempt.catch(() => {});
+    return attempt;
+  }
+
+  async #save() {
+    const tmp = `${this.#file}.${Date.now()}.${process.pid}.${crypto.randomUUID()}.tmp`;
+    let handle;
+    let created = false;
+    let operation = "serialize";
+    try {
+      const snapshot = JSON.stringify(this.#data, null, 2);
+      operation = "mkdir";
+      await fsPromises.mkdir(path.dirname(this.#file), { recursive: true });
+      operation = "open";
+      handle = await fsPromises.open(tmp, "wx");
+      created = true;
+      operation = "write";
+      await handle.writeFile(snapshot, "utf8");
+      operation = "sync";
+      await handle.sync();
+      operation = "close";
+      await handle.close();
+      handle = null;
+      operation = "rename";
+      await this.#renameWithRetry(tmp);
+      created = false;
+    } catch (error) {
+      console.error(`[store] ${operation} ${error.code || "UNKNOWN"}`);
+      throw error;
+    } finally {
+      if (handle) await handle.close().catch(() => {});
+      if (created) await fsPromises.unlink(tmp).catch(() => {});
+    }
+  }
+
+  async #renameWithRetry(tmp) {
+    const retryableCodes = new Set(["EPERM", "EACCES", "EBUSY"]);
+    const backoffMs = [25, 50, 100, 200, 400];
+
+    for (let attempt = 0; ; attempt++) {
+      try {
+        await fsPromises.rename(tmp, this.#file);
+        return;
+      } catch (error) {
+        const canRetry = retryableCodes.has(error.code) && attempt < backoffMs.length;
+        if (!canRetry) throw error;
+        await new Promise(resolve => setTimeout(resolve, backoffMs[attempt]));
+      }
+    }
   }
 
   /** Forces any pending write to land — used by tests and on shutdown. */
+  /** @returns {Promise<void>} Resolves only after all revisions are durable. */
   async flush() {
-    await this.#writeQueue;
+    while (this.#writing || this.#persistedRevision !== this.#mutationRevision) {
+      await (this.#writing || this.#startWrite());
+    }
   }
 
   // -- users ---------------------------------------------------------------
@@ -545,6 +610,7 @@ const TRACKED_FIELDS = [
   "projectName", "funding_pref", "consortium_ready", "eu_experience", "de_minimis_ok",
 ];
 
+/** @param {object|null} before @param {object|null} after @returns {Array<object>} */
 export function diffProfile(before, after) {
   const changes = [];
   for (const field of TRACKED_FIELDS) {
@@ -557,6 +623,7 @@ export function diffProfile(before, after) {
 }
 
 /** A subscription is active while it has not expired. */
+/** @param {object|null} subscription @param {Date} now @returns {boolean} */
 export function isSubscriptionActive(subscription, now = new Date()) {
   if (!subscription) return false;
   if (subscription.status !== "active" && subscription.status !== "trial") return false;
@@ -564,6 +631,7 @@ export function isSubscriptionActive(subscription, now = new Date()) {
   return new Date(subscription.validUntil) > now;
 }
 
+/** @param {object|null} subscription @param {Date} now @returns {number|null} */
 export function subscriptionDaysLeft(subscription, now = new Date()) {
   if (!isSubscriptionActive(subscription, now) || !subscription.validUntil) return null;
   return Math.max(0, Math.ceil((new Date(subscription.validUntil) - now) / 86400000));

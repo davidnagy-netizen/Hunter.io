@@ -401,6 +401,7 @@ test("the store keeps notes, tasks and stages, and survives a reload", async () 
   assert.equal(reopened.deleteNote(user.id, after.notes[0].id), true);
   assert.equal(reopened.deleteNote(user.id, "n_nonexistent"), false);
   assert.equal(reopened.deleteTask(user.id, task.id), true);
+  await reopened.flush();
   fs.rmSync(dir, { recursive: true, force: true });
 });
 
@@ -428,7 +429,7 @@ test("a lead becomes an account without losing the conversation", async () => {
   fs.rmSync(dir, { recursive: true, force: true });
 });
 
-test("the open-task list spans every subject and puts the dated ones first", () => {
+test("the open-task list spans every subject and puts the dated ones first", async () => {
   const { store, dir } = scratchStore();
   const a = store.createUser({ username: "alfa", passwordHash: "x", salt: "y", company: "Alfa Kft." });
   const lead = store.createLead({ email: "b@beta.hu", company: "Beta Kft." });
@@ -442,6 +443,7 @@ test("the open-task list spans every subject and puts the dated ones first", () 
   assert.equal(open[0].subjectKind, "lead");
   assert.equal(open[0].company, "Beta Kft.");
   assert.equal(open[1].subjectKind, "account");
+  await store.flush();
   fs.rmSync(dir, { recursive: true, force: true });
 });
 
@@ -513,7 +515,11 @@ async function startServer() {
   return {
     call,
     async stop() {
-      child.kill();
+      if (child.exitCode === null && child.signalCode === null) {
+        const exited = new Promise(resolve => child.once("exit", resolve));
+        child.kill();
+        await exited;
+      }
       fs.rmSync(dir, { recursive: true, force: true });
     },
   };

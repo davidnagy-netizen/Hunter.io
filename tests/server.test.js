@@ -110,8 +110,12 @@ test("HUNTER API", async (t) => {
   let stderr = "";
   child.stderr.on("data", (d) => (stderr += d));
 
-  t.after(() => {
-    child.kill();
+  t.after(async () => {
+    if (child.exitCode === null && child.signalCode === null) {
+      const exited = new Promise(resolve => child.once("exit", resolve));
+      child.kill();
+      await exited;
+    }
     fs.rmSync(tmp, { recursive: true, force: true });
   });
 
@@ -581,6 +585,14 @@ test("HUNTER API", async (t) => {
     const page = await fetch(`${BASE}/`);
     assert.equal(page.status, 200);
     assert.ok((await page.text()).includes("HUNTER"));
+
+    const stylesheet = await fetch(`${BASE}/css/main.css`);
+    assert.equal(stylesheet.status, 200);
+    assert.match(stylesheet.headers.get("content-type"), /^text\/css/);
+
+    const module = await fetch(`${BASE}/js/app.js`);
+    assert.equal(module.status, 200);
+    assert.match(module.headers.get("content-type"), /^application\/javascript/);
 
     // fetch() normalizes "../" away before it reaches the wire, so the request
     // has to be written by hand to test the guard at all.

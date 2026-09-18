@@ -7,11 +7,11 @@
   "scripts": {
     "start": "node server/server.js",
     "dev": "node --watch server/server.js",
-    "test": "node --test tests/*.test.js",
+    "test": "node --test test/*.test.js tests/*.test.js",
     "build:catalog": "node src/pipeline/buildCatalog.js --live",
-    "scrape:open": "python \"scraping data/scrapping data from ec.europa.eu funding-tenders/funding_tenders_scraper.py\" --type grants --status open --max-records 900 --page-size 100 --output data/raw/eu_open_grants.jsonl",
-    "scrape:forthcoming": "python \"scraping data/scrapping data from ec.europa.eu funding-tenders/funding_tenders_scraper.py\" --type grants --status forthcoming --max-records 900 --page-size 100 --output data/raw/eu_forthcoming_grants.jsonl",
-    "scrape:benchmarks": "python \"scraping data/scrapping data from kohesio.ec.europa.eu/kohesio_scraper.py\" --country HU --period 2021-2027 --limit 50 --max-records 400 --fetch-details --output data/raw/kohesio_hungary.jsonl",
+    "scrape:open": "python \"scrapers/sedia/funding_tenders_scraper.py\" --type grants --status open --max-records 900 --page-size 100 --output data/raw/eu_open_grants.jsonl",
+    "scrape:forthcoming": "python \"scrapers/sedia/funding_tenders_scraper.py\" --type grants --status forthcoming --max-records 900 --page-size 100 --output data/raw/eu_forthcoming_grants.jsonl",
+    "scrape:benchmarks": "python \"scrapers/kohesio/kohesio_scraper.py\" --country HU --period 2021-2027 --limit 50 --max-records 400 --fetch-details --output data/raw/kohesio_hungary.jsonl",
     "refresh": "npm run scrape:open && npm run scrape:forthcoming && npm run build:catalog"
   },
   "keywords": [
