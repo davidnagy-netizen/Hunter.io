@@ -1,12 +1,11 @@
 import { useTranslation } from "react-i18next";
-import { Panel } from "@/shared/components";
+import { Panel, PageHead } from "@/shared/components";
 import { useFormat } from "@/shared/hooks/useFormat";
 import { groupByMonth } from "../domain/calendar";
 import { RELEVANT_SCORE } from "../domain/shortlist";
 import { useOpportunitiesData } from "../hooks/useOpportunitiesData";
 import { CatalogStatus } from "./CatalogStatus";
 import { DeadlineRow } from "./DeadlineRow";
-import { PageHead } from "./PageHead";
 import { TeaserCard } from "./TeaserCard";
 import { UpsellBlock } from "./UpsellBlock";
 import "../i18n";

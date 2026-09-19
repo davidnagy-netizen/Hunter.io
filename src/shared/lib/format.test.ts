@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatDate, formatHuf, formatMonth } from "./format";
+import { formatDate, formatDateTime, formatHuf, formatMonth } from "./format";
 
 describe("formatHuf", () => {
   it("uses millions below a billion", () => {
@@ -33,5 +33,13 @@ describe("formatMonth", () => {
     expect(formatMonth(2026, 10, "en")).toBe("October 2026");
     expect(formatMonth(2026, 10, "hu")).toBe("2026. október");
     expect(formatMonth(2027, 1, "en")).toBe("January 2027");
+  });
+});
+
+describe("formatDateTime", () => {
+  // No `Z`: parsed as local time, so the wall-clock digits are the same in any timezone.
+  it("appends the time to the date, in each language's order", () => {
+    expect(formatDateTime("2026-09-19T15:31:00", "en")).toMatch(/19 Sep\w* 2026.*15:31/);
+    expect(formatDateTime("2026-09-19T15:31:00", "hu")).toMatch(/2026\. szept\. 19\.\s*15:31/);
   });
 });

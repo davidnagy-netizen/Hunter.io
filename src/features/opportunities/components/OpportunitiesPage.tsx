@@ -2,10 +2,10 @@ import { useTranslation } from "react-i18next";
 import { useOpportunitiesData } from "../hooks/useOpportunitiesData";
 import { CatalogStatus } from "./CatalogStatus";
 import { OpportunityCard } from "./OpportunityCard";
-import { PageHead } from "./PageHead";
 import { TeaserCard } from "./TeaserCard";
 import { UpsellBlock } from "./UpsellBlock";
 import "../i18n";
+import { PageHead } from "@/shared/components";
 
 /** Every qualifying call, then — separately — what the engine ruled out and why. */
 export function OpportunitiesPage() {

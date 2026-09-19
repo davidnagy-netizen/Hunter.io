@@ -19,6 +19,17 @@ export function formatDate(iso: string, lang: Lang): string {
   return date.toLocaleDateString("hu-HU", { year: "numeric", month: "2-digit", day: "2-digit" }).replace(/\s/g, "");
 }
 
+/** `19 Sep 2026, 15:31` in English, `2026. szept. 19. 15:31` in Hungarian — an event timestamp. */
+export function formatDateTime(iso: string, lang: Lang): string {
+  return new Date(iso).toLocaleString(locale(lang), {
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
 /** "October 2026" / "2026. október" — a month heading. `month` is 1–12. */
 export function formatMonth(year: number, month: number, lang: Lang): string {
   const date = new Date(Date.UTC(year, month - 1, 1));

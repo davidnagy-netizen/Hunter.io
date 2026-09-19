@@ -3,14 +3,14 @@ import userEvent from "@testing-library/user-event";
 import { Route, Routes } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { renderWithProviders } from "@/test/renderWithProviders";
-import { useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
+import { useCurrentUser, useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
 import { opportunitiesApi } from "@/features/opportunities/api/opportunities.api";
 import { useOnboardingDraftStore } from "@/features/profile/store/onboardingDraftStore";
 import { metaApi } from "@/shared/api/meta.api";
 import { leadsApi } from "../api/leads.api";
 import { AssessmentPage } from "./AssessmentPage";
 
-vi.mock("@/features/authentication/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn() }));
+vi.mock("@/features/authentication/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn(), useCurrentUser: vi.fn() }));
 vi.mock("@/shared/api/meta.api", () => ({ metaApi: { get: vi.fn() } }));
 vi.mock("@/features/opportunities/api/opportunities.api", () => ({
   opportunitiesApi: { catalog: vi.fn(), catalogFor: vi.fn(), search: vi.fn(), searchFor: vi.fn(), detail: vi.fn(), toggleSaved: vi.fn() },
@@ -62,6 +62,7 @@ function renderFunnel() {
     <Routes>
       <Route path="/assess" element={<AssessmentPage />} />
       <Route path="/app" element={<p>the app</p>} />
+      <Route path="/admin" element={<p>the console</p>} />
       <Route path="/onboarding" element={<p>onboarding</p>} />
       <Route path="/" element={<p>landing</p>} />
     </Routes>,
@@ -71,6 +72,7 @@ function renderFunnel() {
 
 beforeEach(() => {
   vi.mocked(useIsAuthenticated).mockReturnValue(false);
+  vi.mocked(useCurrentUser).mockReturnValue(null);
   vi.mocked(metaApi.get).mockResolvedValue(META);
   vi.mocked(opportunitiesApi.catalogFor).mockResolvedValue(gatedCatalog());
   vi.mocked(leadsApi.submit).mockReset();
@@ -140,8 +142,16 @@ describe("AssessmentPage", () => {
 
   it("sends a signed-in visitor to the app instead", async () => {
     vi.mocked(useIsAuthenticated).mockReturnValue(true);
+    vi.mocked(useCurrentUser).mockReturnValue({ role: "user" } as never);
     renderFunnel();
     expect(await screen.findByText("the app")).toBeInTheDocument();
+  });
+
+  it("sends a signed-in administrator to the console", async () => {
+    vi.mocked(useIsAuthenticated).mockReturnValue(true);
+    vi.mocked(useCurrentUser).mockReturnValue({ role: "admin" } as never);
+    renderFunnel();
+    expect(await screen.findByText("the console")).toBeInTheDocument();
   });
 
   it("cancelling goes back to the landing page", async () => {

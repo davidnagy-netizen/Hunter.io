@@ -1,10 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { Panel } from "@/shared/components";
+import { Panel, PageHead } from "@/shared/components";
 import { useOpportunitiesData } from "../hooks/useOpportunitiesData";
 import { useSaved } from "../hooks/useSaved";
 import { CatalogStatus } from "./CatalogStatus";
 import { OpportunityCard } from "./OpportunityCard";
-import { PageHead } from "./PageHead";
 import "../i18n";
 
 /**

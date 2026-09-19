@@ -1,0 +1,4 @@
+{
+  "loading": "Loading…",
+  "loadFailed": "Could not load this: {{message}}"
+}

@@ -2,7 +2,8 @@ import { useTranslation } from "react-i18next";
 import { Link, Navigate } from "react-router";
 import { ArrowIcon, Button, CircularProgress, LanguageToggle, Logo, TargetIcon, CheckBadge, WarnBadge, buttonClasses } from "@/shared/components";
 import { useFormat } from "@/shared/hooks/useFormat";
-import { useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
+import { useCurrentUser } from "@/features/authentication/hooks/useAuth";
+import { homePathFor } from "@/features/authentication/lib/homePath";
 import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
 import { ComparisonSection } from "./ComparisonSection";
 import { HowItWorks, PriceTeaser, Sources } from "./InfoSections";
@@ -57,10 +58,11 @@ function HeroPreview() {
  */
 export function LandingPage() {
   const { t } = useTranslation("landing");
-  const isAuthenticated = useIsAuthenticated();
+  const user = useCurrentUser();
   const { profile } = useCompanyProfile();
 
-  if (isAuthenticated && profile) return <Navigate to="/app" replace />;
+  // An administrator has no use for a company profile, so they go straight to the console.
+  if (user && (user.role === "admin" || profile)) return <Navigate to={homePathFor(user)} replace />;
 
   return (
     <div className="min-h-screen bg-paper">

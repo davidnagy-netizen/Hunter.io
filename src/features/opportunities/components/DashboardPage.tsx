@@ -5,11 +5,11 @@ import { RELEVANT_SCORE } from "../domain/shortlist";
 import { useOpportunitiesData } from "../hooks/useOpportunitiesData";
 import { CatalogStatus } from "./CatalogStatus";
 import { OpportunityCard } from "./OpportunityCard";
-import { PageHead } from "./PageHead";
 import { TeaserCard } from "./TeaserCard";
 import { UpcomingDeadlines } from "./UpcomingDeadlines";
 import { UpsellBlock } from "./UpsellBlock";
 import "../i18n";
+import { PageHead } from "@/shared/components";
 
 function StatTile({ value, label, color }: { value: number; label: string; color?: string }) {
   return (

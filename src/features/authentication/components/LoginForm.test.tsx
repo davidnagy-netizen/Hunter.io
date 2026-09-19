@@ -31,7 +31,8 @@ describe("LoginForm", () => {
   });
 
   it("submits the entered credentials and calls onSuccess", async () => {
-    vi.mocked(authApi.login).mockResolvedValue({ success: true, user: {} as AuthUser });
+    const signedIn = { username: "demo", role: "user" } as AuthUser;
+    vi.mocked(authApi.login).mockResolvedValue({ success: true, user: signedIn });
     const onSuccess = vi.fn();
     const user = userEvent.setup();
     renderWithProviders(<LoginForm onSuccess={onSuccess} />);
@@ -43,7 +44,7 @@ describe("LoginForm", () => {
     await waitFor(() =>
       expect(authApi.login).toHaveBeenCalledWith({ username: "demo", password: "demo1234" }),
     );
-    await waitFor(() => expect(onSuccess).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(onSuccess).toHaveBeenCalledWith(signedIn));
   });
 
   it("shows the server's translated error message on a rejected login", async () => {

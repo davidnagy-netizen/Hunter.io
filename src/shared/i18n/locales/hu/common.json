@@ -1,0 +1,4 @@
+{
+  "loading": "Betöltés…",
+  "loadFailed": "Ezt nem sikerült betölteni: {{message}}"
+}

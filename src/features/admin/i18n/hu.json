@@ -1,0 +1,172 @@
+{
+  "nav": {
+    "overview": "Áttekintés",
+    "users": "Felhasználók",
+    "system": "Rendszer"
+  },
+  "overview": {
+    "title": "Áttekintés",
+    "subtitle": "Mi igényel ma figyelmet, és hogy áll a rendszer.",
+    "stats": {
+      "users": "Felhasználó",
+      "activeSubscriptions": "Aktív előfizetés",
+      "awaitingAccess": "Hozzáférésre vár",
+      "newThisWeek": "Új a héten",
+      "sessions": "Élő munkamenet"
+    },
+    "awaiting": {
+      "title": "Hozzáférésre vár",
+      "empty": "Mindenki hozzáféréssel rendelkezik.",
+      "trial": "Próba",
+      "monthly": "Havi"
+    },
+    "expiring": {
+      "title": "Hamarosan lejár (14 nap)",
+      "empty": "Egy előfizetés sem jár le két héten belül.",
+      "extend": "Hosszabbítás",
+      "daysLeft": "{{count}} nap"
+    },
+    "plans": {
+      "title": "Aktív csomagok",
+      "empty": "Még nincs aktív előfizetés."
+    },
+    "recentSignups": {
+      "title": "Legutóbbi regisztrációk"
+    },
+    "activity": {
+      "title": "Legutóbbi tevékenység",
+      "subtitle": "Minden fiókból, időrendben.",
+      "empty": "Nincs rögzített tevékenység."
+    },
+    "granted": "Hozzáférés megadva: {{name}}."
+  },
+  "users": {
+    "title": "Felhasználók",
+    "subtitle": "Felhasználók és előfizetések kezelése. Fizetési átjáró még nincs bekötve — a hozzáférést itt adod meg.",
+    "stats": {
+      "users": "Felhasználó",
+      "activeSubscriptions": "Aktív előfizetés",
+      "admins": "Adminisztrátor",
+      "sessions": "Élő munkamenet"
+    },
+    "adminBadge": "admin",
+    "disabledBadge": "letiltva",
+    "registered": "Regisztrált",
+    "profileVersions": "{{count}} profilverzió",
+    "validUntil": "eddig",
+    "grantedBy": "kiosztotta",
+    "grant": {
+      "plan": "Csomag",
+      "days": "Napok",
+      "daysHint": "nem kötelező",
+      "note": "Megjegyzés",
+      "submit": "Hozzáférés megadása",
+      "submitting": "Megadás…",
+      "done": "Hozzáférés megadva.",
+      "revoke": "Visszavonás",
+      "revoked": "Hozzáférés visszavonva."
+    },
+    "history": "Előzmények",
+    "disable": "Letiltás",
+    "enable": "Feloldás"
+  },
+  "history": {
+    "back": "Vissza a felhasználókhoz",
+    "subscriptions": {
+      "title": "Előfizetési előzmények",
+      "empty": "Még nem kapott hozzáférést.",
+      "granted": "Megadva",
+      "revoked": "Visszavonva",
+      "by": "által"
+    },
+    "versions": {
+      "title": "Cégprofil verziói",
+      "empty": "Nincs mentett profil.",
+      "version": "{{count}}. verzió"
+    },
+    "activity": {
+      "title": "Tevékenység",
+      "empty": "Nincs rögzített tevékenység."
+    },
+    "notFound": "Nincs ilyen felhasználó."
+  },
+  "system": {
+    "title": "Rendszer",
+    "subtitle": "A felhívás-katalógus állapota és frissítése. Az adat az Európai Bizottság portáljáról érkezik.",
+    "catalog": {
+      "title": "Katalógus",
+      "total": "Felhívás összesen",
+      "open": "Ebből nyitott",
+      "builtAt": "Utoljára épült",
+      "builtBy": "Forrás",
+      "eurHuf": "Árfolyam"
+    },
+    "refresh": {
+      "title": "Automatikus frissítés",
+      "status": "Állapot",
+      "enabled": "bekapcsolva",
+      "disabled": "kikapcsolva",
+      "interval": "Gyakoriság",
+      "hours": "{{count}} ó",
+      "lastSuccess": "Utolsó sikeres",
+      "nextRun": "Következő",
+      "runs": "Futás / hiba",
+      "now": "Frissítés most",
+      "running": "Frissítés folyamatban…",
+      "done": "Katalógus frissítve — {{count}} felhívás."
+    }
+  },
+  "yes": "Igen",
+  "no": "Nem",
+  "fields": {
+    "company": "Cégnév",
+    "employees": "Létszám",
+    "county": "Megye",
+    "region": "Régió",
+    "teaor": "TEÁOR",
+    "industryId": "Iparág",
+    "sector": "Szektor",
+    "orgType": "Szervezeti forma",
+    "revBand": "Árbevétel",
+    "closed_business_years": "Lezárt üzleti évek",
+    "goals": "Fejlesztési célok",
+    "investment_value": "Projektérték",
+    "projectName": "Projekt neve",
+    "funding_pref": "Forráspreferencia",
+    "consortium_ready": "Konzorciumi készség",
+    "eu_experience": "EU-s tapasztalat",
+    "de_minimis_ok": "De minimis keret"
+  },
+  "activity": {
+    "account": {
+      "created": "Fiók létrehozva",
+      "login": "Belépés",
+      "password_changed": "Jelszó módosítva",
+      "updated": "Fiók módosítva"
+    },
+    "profile": {
+      "saved": "Cégprofil mentve",
+      "restored": "Korábbi profil visszaállítva",
+      "answered": "Jogosultsági kérdés megválaszolva"
+    },
+    "opportunity": {
+      "viewed": "Felhívás megnyitva",
+      "saved": "Felhívás elmentve",
+      "unsaved": "Mentés visszavonva"
+    },
+    "subscription": {
+      "granted": "Előfizetés megadva",
+      "revoked": "Előfizetés visszavonva"
+    },
+    "search": "Keresés",
+    "crm": {
+      "stage": "CRM szakasz módosítva",
+      "lead_converted": "Érdeklődőből fiók lett"
+    }
+  },
+  "validation": {
+    "plan": "Válassz csomagot.",
+    "days": "Egész napszámot adj meg, legalább 1-et.",
+    "note": "A megjegyzés legfeljebb 200 karakter."
+  }
+}

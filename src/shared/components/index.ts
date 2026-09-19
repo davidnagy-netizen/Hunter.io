@@ -23,6 +23,8 @@ export type { ChipButtonProps } from "./ChipButton";
 export { LanguageToggle } from "./LanguageToggle";
 
 export { Logo } from "./Logo";
+export { PageHead } from "./PageHead";
+export { QueryStatus } from "./QueryStatus";
 export * from "./icons";
 
 export { MatchingLoader } from "./MatchingLoader";

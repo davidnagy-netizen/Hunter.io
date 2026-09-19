@@ -9,7 +9,13 @@ import { OpportunityDetailPage } from "@/features/opportunities/components/Oppor
 import { CalendarPage } from "@/features/opportunities/components/CalendarPage";
 import { SavedPage } from "@/features/opportunities/components/SavedPage";
 import { SearchPage } from "@/features/opportunities/components/SearchPage";
+import { AdminOverviewPage } from "@/features/admin/components/AdminOverviewPage";
+import { SystemPage } from "@/features/admin/components/SystemPage";
+import { UserHistoryPage } from "@/features/admin/components/UserHistoryPage";
+import { UsersPage } from "@/features/admin/components/UsersPage";
 import { AppShell } from "@/app/layout/AppShell";
+import { ADMIN_NAV, APP_NAV } from "@/app/layout/navigation";
+import { RequireAdmin } from "@/app/layout/RequireAdmin";
 import { RequireProfile } from "@/app/layout/RequireProfile";
 
 /**
@@ -43,7 +49,7 @@ export const router = createBrowserRouter([
     path: "/app",
     element: (
       <RequireProfile>
-        <AppShell />
+        <AppShell nav={APP_NAV} workspace="app" />
       </RequireProfile>
     ),
     children: [
@@ -53,6 +59,20 @@ export const router = createBrowserRouter([
       { path: "search", element: <SearchPage /> },
       { path: "calendar", element: <CalendarPage /> },
       { path: "saved", element: <SavedPage /> },
+    ],
+  },
+  {
+    path: "/admin",
+    element: (
+      <RequireAdmin>
+        <AppShell nav={ADMIN_NAV} workspace="admin" />
+      </RequireAdmin>
+    ),
+    children: [
+      { index: true, element: <AdminOverviewPage /> },
+      { path: "users", element: <UsersPage /> },
+      { path: "users/:id", element: <UserHistoryPage /> },
+      { path: "system", element: <SystemPage /> },
     ],
   },
 ]);

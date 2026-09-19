@@ -26,5 +26,11 @@
   "adminHint": "Bemutató hozzáférés: <b>admin</b> / <b>admin</b> — adminisztrátori fiók, előfizetések kiosztásához.",
   "backToHome": "Vissza a főoldalra",
   "welcome": "Üdv, {{username}}!",
-  "signedOut": "Kijelentkeztél"
+  "signedOut": "Kijelentkeztél",
+  "subscription": {
+    "trial": "Próbaidő · {{count}} nap",
+    "active": "Aktív előfizetés",
+    "activeDays": "Aktív előfizetés · {{count}} nap",
+    "none": "Nincs előfizetés"
+  }
 }

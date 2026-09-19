@@ -47,3 +47,10 @@ export const CheckBadge = () => (
 export const WarnBadge = () => (
   <span aria-hidden className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-amber-bg text-xs font-bold text-amber">!</span>
 );
+
+export const UserIcon = (p: IconProps) => (
+  <svg {...base(p)}><circle cx="12" cy="8" r="4" /><path d="M4.5 20.5c1-4 4-6 7.5-6s6.5 2 7.5 6" /></svg>
+);
+export const ShieldIcon = (p: IconProps) => (
+  <svg {...base(p)}><path d="M12 3l7.5 3v5.5c0 4.5-3 8-7.5 9.5-4.5-1.5-7.5-5-7.5-9.5V6L12 3z" /><path d="M9 12l2.2 2.2L15.5 10" /></svg>
+);

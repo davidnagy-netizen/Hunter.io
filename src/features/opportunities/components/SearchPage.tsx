@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Button, SearchIcon } from "@/shared/components";
+import { Button, SearchIcon, PageHead } from "@/shared/components";
 import { useMetaQuery } from "@/shared/api/meta.queries";
 import { useLang } from "@/shared/hooks/useFormat";
 import { useSearchQuery } from "../api/opportunities.queries";
@@ -12,7 +12,6 @@ import {
 } from "../domain/searchState";
 import { useFacetLabel } from "../hooks/useFacetLabel";
 import { useSearchState } from "../hooks/useSearchState";
-import { PageHead } from "./PageHead";
 import { SearchFacets } from "./SearchFacets";
 import { SearchResultCard } from "./SearchResultCard";
 import { TeaserCard } from "./TeaserCard";

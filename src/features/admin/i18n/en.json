@@ -1,0 +1,172 @@
+{
+  "nav": {
+    "overview": "Overview",
+    "users": "Users",
+    "system": "System"
+  },
+  "overview": {
+    "title": "Overview",
+    "subtitle": "What needs attention today, and how the system is doing.",
+    "stats": {
+      "users": "Users",
+      "activeSubscriptions": "Active subscriptions",
+      "awaitingAccess": "Awaiting access",
+      "newThisWeek": "New this week",
+      "sessions": "Live sessions"
+    },
+    "awaiting": {
+      "title": "Awaiting access",
+      "empty": "Everyone has access.",
+      "trial": "Trial",
+      "monthly": "Monthly"
+    },
+    "expiring": {
+      "title": "Expiring soon (14 days)",
+      "empty": "No subscription expires within two weeks.",
+      "extend": "Extend",
+      "daysLeft": "{{count}} days"
+    },
+    "plans": {
+      "title": "Active plans",
+      "empty": "No active subscriptions yet."
+    },
+    "recentSignups": {
+      "title": "Recent sign-ups"
+    },
+    "activity": {
+      "title": "Recent activity",
+      "subtitle": "Across every account, newest first.",
+      "empty": "No activity recorded."
+    },
+    "granted": "Access granted to {{name}}."
+  },
+  "users": {
+    "title": "Users",
+    "subtitle": "Manage accounts and subscriptions. No payment gateway is connected yet — access is granted here.",
+    "stats": {
+      "users": "Users",
+      "activeSubscriptions": "Active subscriptions",
+      "admins": "Administrators",
+      "sessions": "Live sessions"
+    },
+    "adminBadge": "admin",
+    "disabledBadge": "disabled",
+    "registered": "Registered",
+    "profileVersions": "{{count}} profile versions",
+    "validUntil": "until",
+    "grantedBy": "granted by",
+    "grant": {
+      "plan": "Plan",
+      "days": "Days",
+      "daysHint": "optional",
+      "note": "Note",
+      "submit": "Grant access",
+      "submitting": "Granting…",
+      "done": "Access granted.",
+      "revoke": "Revoke",
+      "revoked": "Access revoked."
+    },
+    "history": "History",
+    "disable": "Disable",
+    "enable": "Enable"
+  },
+  "history": {
+    "back": "Back to users",
+    "subscriptions": {
+      "title": "Subscription history",
+      "empty": "Never had access.",
+      "granted": "Granted",
+      "revoked": "Revoked",
+      "by": "by"
+    },
+    "versions": {
+      "title": "Company profile versions",
+      "empty": "No saved profile.",
+      "version": "Version {{count}}"
+    },
+    "activity": {
+      "title": "Activity",
+      "empty": "No activity recorded."
+    },
+    "notFound": "There is no such user."
+  },
+  "system": {
+    "title": "System",
+    "subtitle": "The state of the call catalog and its refresh. The data comes from the European Commission's portal.",
+    "catalog": {
+      "title": "Catalog",
+      "total": "Calls in total",
+      "open": "Currently open",
+      "builtAt": "Last built",
+      "builtBy": "Built by",
+      "eurHuf": "Exchange rate"
+    },
+    "refresh": {
+      "title": "Automatic refresh",
+      "status": "Status",
+      "enabled": "enabled",
+      "disabled": "disabled",
+      "interval": "Interval",
+      "hours": "{{count}} h",
+      "lastSuccess": "Last success",
+      "nextRun": "Next run",
+      "runs": "Runs / failures",
+      "now": "Refresh now",
+      "running": "Refreshing…",
+      "done": "Catalog refreshed — {{count}} calls."
+    }
+  },
+  "yes": "Yes",
+  "no": "No",
+  "fields": {
+    "company": "Company",
+    "employees": "Employees",
+    "county": "County",
+    "region": "Region",
+    "teaor": "NACE",
+    "industryId": "Industry",
+    "sector": "Sector",
+    "orgType": "Organisation type",
+    "revBand": "Revenue",
+    "closed_business_years": "Closed business years",
+    "goals": "Development goals",
+    "investment_value": "Project value",
+    "projectName": "Project name",
+    "funding_pref": "Funding preference",
+    "consortium_ready": "Consortium capability",
+    "eu_experience": "EU experience",
+    "de_minimis_ok": "De minimis headroom"
+  },
+  "activity": {
+    "account": {
+      "created": "Account created",
+      "login": "Signed in",
+      "password_changed": "Password changed",
+      "updated": "Account updated"
+    },
+    "profile": {
+      "saved": "Company profile saved",
+      "restored": "Earlier profile restored",
+      "answered": "Eligibility question answered"
+    },
+    "opportunity": {
+      "viewed": "Call opened",
+      "saved": "Call saved",
+      "unsaved": "Call unsaved"
+    },
+    "subscription": {
+      "granted": "Subscription granted",
+      "revoked": "Subscription revoked"
+    },
+    "search": "Search",
+    "crm": {
+      "stage": "CRM stage changed",
+      "lead_converted": "Lead became an account"
+    }
+  },
+  "validation": {
+    "plan": "Please choose a plan.",
+    "days": "Enter a whole number of days, at least 1.",
+    "note": "Keep the note under 200 characters."
+  }
+}

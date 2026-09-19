@@ -26,5 +26,11 @@
   "adminHint": "Demo access: <b>admin</b> / <b>admin</b> — administrator account for granting subscriptions.",
   "backToHome": "Back to the home page",
   "welcome": "Welcome, {{username}}!",
-  "signedOut": "You have been signed out"
+  "signedOut": "You have been signed out",
+  "subscription": {
+    "trial": "Trial · {{count}} days",
+    "active": "Active",
+    "activeDays": "Active · {{count}} days",
+    "none": "No subscription"
+  }
 }

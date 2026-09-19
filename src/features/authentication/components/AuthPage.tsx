@@ -2,8 +2,10 @@ import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router";
 import { LanguageToggle, Panel } from "@/shared/components";
 import { useMeQuery } from "../api/auth.queries";
+import type { AuthUser } from "../types/auth.types";
 import { LoginForm } from "./LoginForm";
 import { RegisterForm } from "./RegisterForm";
+import { homePathFor } from "../lib/homePath";
 import "../i18n";
 
 export type AuthMode = "login" | "register";
@@ -15,7 +17,8 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
   const isRegister = mode === "register";
 
   // `/app` sends a visitor without a profile on to the onboarding wizard.
-  const handleSuccess = () => navigate("/app");
+  const handleRegistered = () => navigate("/app");
+  const handleSignedIn = (user: AuthUser) => navigate(homePathFor(user));
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-paper p-6">
@@ -52,9 +55,9 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
 
           <div className="mt-5">
             {isRegister ? (
-              <RegisterForm onSuccess={handleSuccess} />
+              <RegisterForm onSuccess={handleRegistered} />
             ) : (
-              <LoginForm onSuccess={handleSuccess} />
+              <LoginForm onSuccess={handleSignedIn} />
             )}
           </div>
 

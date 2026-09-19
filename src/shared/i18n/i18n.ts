@@ -2,6 +2,8 @@ import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
 import huErrors from "./locales/hu/errors.json";
 import enErrors from "./locales/en/errors.json";
+import huCommon from "./locales/hu/common.json";
+import enCommon from "./locales/en/common.json";
 
 export type SupportedLanguage = "hu" | "en";
 export const DEFAULT_LANGUAGE: SupportedLanguage = "hu";
@@ -28,11 +30,11 @@ function readPersistedLanguage(): SupportedLanguage {
 void i18next.use(initReactI18next).init({
   lng: readPersistedLanguage(),
   fallbackLng: DEFAULT_LANGUAGE,
-  ns: ["errors"],
+  ns: ["errors", "common"],
   defaultNS: "errors",
   resources: {
-    hu: { errors: huErrors },
-    en: { errors: enErrors },
+    hu: { errors: huErrors, common: huCommon },
+    en: { errors: enErrors, common: enCommon },
   },
   interpolation: {
     // React already escapes interpolated values.

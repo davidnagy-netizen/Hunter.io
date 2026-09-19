@@ -4,7 +4,8 @@ import { Navigate, useNavigate } from "react-router";
 import { Button, ChipButton, LanguageToggle, Logo, MatchingLoader, SelectField } from "@/shared/components";
 import { useMetaQuery } from "@/shared/api/meta.queries";
 import { useLang } from "@/shared/hooks/useFormat";
-import { useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
+import { useCurrentUser } from "@/features/authentication/hooks/useAuth";
+import { homePathFor } from "@/features/authentication/lib/homePath";
 import { useOnboardingDraftStore } from "@/features/profile/store/onboardingDraftStore";
 import { useAssessmentPreview } from "../hooks/useAssessmentPreview";
 import {
@@ -113,7 +114,7 @@ function QuestionBody({
 export function AssessmentPage() {
   const { t } = useTranslation("assessment");
   const navigate = useNavigate();
-  const isAuthenticated = useIsAuthenticated();
+  const user = useCurrentUser();
   const meta = useMetaQuery();
   const setDraft = useOnboardingDraftStore((state) => state.setDraft);
 
@@ -131,7 +132,7 @@ export function AssessmentPage() {
   const preview = useAssessmentPreview(profile);
 
   // The funnel is for visitors; someone already signed in has their own matches.
-  if (isAuthenticated) return <Navigate to="/app" replace />;
+  if (user) return <Navigate to={homePathFor(user)} replace />;
 
   const question = QUESTIONS[stepIndex];
   const last = stepIndex === QUESTIONS.length - 1;

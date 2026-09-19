@@ -5,10 +5,11 @@ import { Button, TextField } from "@/shared/components";
 import { useTranslatedApiError } from "@/shared/api/useTranslatedApiError";
 import { useLoginMutation } from "../api/auth.queries";
 import { loginSchema, type LoginFormValues } from "../schemas/auth.schemas";
+import type { AuthUser } from "../types/auth.types";
 import "../i18n";
 
 export interface LoginFormProps {
-  onSuccess?: () => void;
+  onSuccess?: (user: AuthUser) => void;
 }
 
 export function LoginForm({ onSuccess }: LoginFormProps) {
@@ -22,7 +23,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
   const apiErrorMessage = useTranslatedApiError(login.error);
 
   const onSubmit = (values: LoginFormValues) => {
-    login.mutate(values, { onSuccess });
+    login.mutate(values, { onSuccess: (response) => onSuccess?.(response.user) });
   };
 
   return (
