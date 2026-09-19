@@ -1,0 +1,10 @@
+{
+  "shell": {
+    "signOut": "Sign out",
+    "signIn": "Sign in",
+    "notSignedIn": "Not signed in",
+    "free": "free",
+    "subscriber": "subscriber",
+    "admin": "administrator"
+  }
+}

@@ -28,7 +28,7 @@ and cut over, its behavior should still match what those documents promise.
 | `authentication` | ✅ done — login, register, session, `isAdmin`/`isSubscriber`, verified against the real server |
 | `profile` (onboarding + version history) | ✅ done — wizard, server/local sync fork, version history + restore, verified against the real server (profile-sync bug fixed — see [Decisions](#decisions--changes-log)) |
 | `scoring` (eligibility engine + Hunter Score) | ✅ done — server engine imported directly (no copy), answers fork, ring/badge/breakdown/question components; 241/241 live scores match the server (see [Decisions](#decisions--changes-log)) |
-| `opportunities` (dashboard/list/detail/search/calendar/saved) | not started |
+| `opportunities` (dashboard/list/detail/search/calendar/saved) | 🟡 half done — app shell, dashboard, list, detail (incl. calculator, save, gated view) ✅; **search, calendar and the saved page still to do** |
 | `assessment` (free readiness funnel + lead capture) | not started |
 | `admin` | not started |
 | `crm` | not started |
@@ -72,7 +72,7 @@ analysis (or ask in-session) for the full rationale; the short version:
 
 ```
 src/
-├── app/            # router, providers (QueryClient, etc.), shell/layout composition
+├── app/            # router, providers (QueryClient, etc.), layout (AppShell, RequireProfile), the `app` i18n namespace
 ├── features/       # one folder per bounded piece of product functionality
 │   └── <feature>/
 │       ├── components/   # feature-owned UI
@@ -81,10 +81,10 @@ src/
 │       ├── types/         # feature-owned types
 │       └── domain/        # (scoring, assessment only) pure business-rule functions
 └── shared/         # genuinely cross-feature only — see rule below
-    ├── components/  # generic, domain-free UI atoms (Button, Badge, Panel, CircularProgress, TextField, LanguageToggle)
-    ├── hooks/
+    ├── components/  # generic, domain-free UI atoms (Button, Badge, Panel, CircularProgress, TextField, SelectField, ChipButton, LanguageToggle, Logo, icons)
+    ├── hooks/        # useLang / useFormat (language-bound money and date formatters)
     ├── api/          # the Axios instance, typed ApiError mapping, useTranslatedApiError
-    ├── lib/
+    ├── lib/          # format.ts (formatHuf, formatDate)
     ├── store/        # cross-feature client state (Zustand) — currently just `uiStore` (language)
     ├── i18n/          # i18next setup + the `errors` namespace (shared across every feature)
     └── types/
@@ -121,8 +121,10 @@ authentication, profile, opportunities → crm (read-only)
    lives in a feature's `hooks/`/`domain/`/`api/`, never inline in JSX.
    Components stay presentational: `Component → hook → service/API`.
 4. `app/` composes features together (routing, the sidebar/nav shell); it
-   does not contain feature logic. Each feature should be able to describe
-   its own routes/nav entry without `app/` importing its internals.
+   does not contain feature logic. Each feature describes its own nav entries
+   (`features/<name>/nav.ts`, typed by `shared/types/navigation.types.ts`);
+   `app/layout/AppShell.tsx` concatenates them. Adding a feature to the nav is
+   one line there.
 
 ---
 
@@ -194,7 +196,7 @@ the `authentication` feature, and the `profile` feature (schema, local store,
 the `useCompanyProfile` sync-fork hook, `OnboardingWizard`, `ProfileHistoryPanel`),
 and the `scoring` feature (engine wiring pinned to the demo-company scores,
 the answers fork with optimistic update/rollback, the scoring hooks, and its
-four components) — 92 tests, all passing.
+four components) — 126 tests, all passing (the `opportunities` screens, forks and app-shell guard added in slice 5).
 
 Feature tests that need React Query and/or routing use
 [`src/test/renderWithProviders.tsx`](src/test/renderWithProviders.tsx)
@@ -237,6 +239,75 @@ by some other process (a fixture script or a previously-populated
 
 Newest first. Each entry says what changed, why, and what it affects — the
 things that would otherwise only live in a chat transcript.
+
+### 2026-09-19 — `opportunities` feature, part 1 (slice 5): shell, dashboard, list, detail
+The signed-in application now exists at `/app`: an `AppShell` (sidebar on
+desktop, bottom bar on narrow screens, account block), a `RequireProfile`
+guard (no profile → onboarding), and three screens — dashboard, the full list
+(with what the engine ruled out, and why), and the opportunity detail page.
+**Search, the funding calendar and the saved-calls page are the next
+sub-slice.** Verified in the browser against the real server in all three
+tiers — subscriber, registered-but-unsubscribed, and anonymous — in both
+languages.
+
+Live results: as a subscriber, the list splits into 187 qualifying + 54
+excluded = 241, the same numbers the server reports for the shortlist, with
+prizes filtered out. The detail page showed the right arithmetic (30M project
+× 80% = 24M funded / 6M own; edit to 50M → 40M / 10M), saved a call
+server-side, and linked to the portal's real published URLs. For a gated
+account the response carried **zero** opportunities and 12 teasers, and the
+page had no links or titles in it at all. An anonymous visitor's profile went
+in the request body and came back as teasers.
+
+Built:
+- `api/opportunities.queries.ts` — `useCatalog`. Subscribers/admins get the
+  full catalog and it is scored locally (feature `scoring`); everyone else
+  gets teasers the *server* scored. The query key includes the profile and
+  answers **only** for gated accounts: a subscriber's response doesn't depend
+  on either, so editing a profile must not re-download the 1.3 MB catalog.
+  No request is made for an anonymous visitor without a profile (the server
+  would silently score its demo company instead).
+- `domain/` — `calculateGrant`, `splitShortlist`/`dashboardStats`,
+  `applyLinks` (pure, tested).
+- `store/localSavedStore` + `api/saved.queries` + `hooks/useSaved` — the same
+  server-vs-local fork as profile and answers, optimistic when signed in.
+- `OpportunityCard` — **one component** for a qualifying call and an excluded
+  one, replacing the legacy's four renderers (`oppCard`, `searchCard`,
+  `blockedCard`, `teaserRow`; the fourth is `TeaserCard`). The whole card is
+  a stretched `<Link>` on the title with the "official call" icon as an
+  independent link above it (nested anchors are invalid HTML).
+- `useRuleValueFormatter` — turns `{field, value}` into "28 employees" /
+  "Pest county" for every "(yours: …)" note.
+- Shared additions: `formatHuf`/`formatDate` + `useFormat`, icons, `Logo`,
+  `buttonClasses` (for an `<a>` that must look like a button).
+- 34 new tests (126 total). The temporary `ScoringShowcase` from the previous
+  slice is deleted — the real dashboard supersedes it.
+
+Decisions and findings:
+- **The grant calculator is a small deliberate duplicate.** `fundingCalculator`
+  lives in `server/server.js`, which starts a server when imported, so unlike
+  the engine it can't be shared. `calculateGrant` mirrors it (about ten lines,
+  pinned by tests). If the server's arithmetic changes, change this too.
+- **Legacy inconsistency, kept: the "to watch / missing data" dashboard tile
+  is defined two ways.** For a subscriber it counts calls that are
+  CONDITIONAL or INSUFFICIENT_DATA (legacy behavior); for a gated account it
+  shows the server's `needsAnswer`, which is INSUFFICIENT_DATA only. Same
+  account profile read 187 vs 0 across the two tiers in testing. Fixing it
+  needs a server-side stat change, so it is recorded rather than papered over.
+- **Detail pages read the catalog, so a call that isn't in it (e.g. a
+  forthcoming call reached from search) shows "no longer available".** The
+  search sub-slice must fall back to `GET /api/opportunities/:id`.
+- **The signed-in upsell has no button yet** — the account/subscription
+  screen isn't migrated. Anonymous visitors get "Create a company account".
+- **`/app` for an admin without a profile goes to onboarding.** The legacy
+  app sent admins to the admin console instead; that lands with the `admin`
+  feature.
+- **A card reads "Funding: 2.2 bn HUF" instead of "2.2 bn HUF–2.2 bn HUF"**
+  when a call's minimum and maximum are equal (the legacy card repeated it).
+- **The app shell's own strings are a separate `app` i18n namespace**, not
+  borrowed from a feature's.
+- Test data left in the local, gitignored `users.json`: `gate-check-1`
+  (registered, unsubscribed) and `profile-test-co` (monthly plan).
 
 ### 2026-09-19 — `scoring` feature (slice 4): one engine, not two
 The eligibility engine and Hunter Score now live in exactly one place. Instead
@@ -291,8 +362,8 @@ Decisions and findings:
   `explainScore`, the client hand-rolled its own detail text). The server's
   version is the pinned, tested one, so it is the one adopted.
 - **Temporary code:** `src/ScoringShowcase.tsx` (and its `window.__scores`
-  verification hook) exercises the feature against the real catalog with a
-  throwaway inline catalog query. It goes away when `opportunities` lands.
+  verification hook) exercised the feature against the real catalog. Deleted
+  in slice 5 when the real dashboard landed.
 
 ### 2026-09-19 — `profile` feature (slice 3): the sync-bug fix, verified live
 Onboarding wizard (6 steps, React Hook Form + Zod, ported from the legacy

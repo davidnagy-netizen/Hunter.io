@@ -2,6 +2,11 @@ import { createBrowserRouter } from "react-router";
 import App from "@/App";
 import { AuthPage } from "@/features/authentication/components/AuthPage";
 import { OnboardingWizard } from "@/features/profile/components/OnboardingWizard";
+import { DashboardPage } from "@/features/opportunities/components/DashboardPage";
+import { OpportunitiesPage } from "@/features/opportunities/components/OpportunitiesPage";
+import { OpportunityDetailPage } from "@/features/opportunities/components/OpportunityDetailPage";
+import { AppShell } from "@/app/layout/AppShell";
+import { RequireProfile } from "@/app/layout/RequireProfile";
 
 /**
  * Route tree, assembled here from routes each feature owns. `app/` composes;
@@ -25,5 +30,18 @@ export const router = createBrowserRouter([
   {
     path: "/onboarding",
     element: <OnboardingWizard />,
+  },
+  {
+    path: "/app",
+    element: (
+      <RequireProfile>
+        <AppShell />
+      </RequireProfile>
+    ),
+    children: [
+      { index: true, element: <DashboardPage /> },
+      { path: "opportunities", element: <OpportunitiesPage /> },
+      { path: "opportunities/:id", element: <OpportunityDetailPage /> },
+    ],
   },
 ]);

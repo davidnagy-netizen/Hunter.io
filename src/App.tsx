@@ -4,7 +4,6 @@ import { useCurrentUser, useIsAdmin, useIsSubscriber } from "@/features/authenti
 import { useLogoutMutation } from "@/features/authentication/api/auth.queries";
 import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
 import { ProfileHistoryPanel } from "@/features/profile/components/ProfileHistoryPanel";
-import { ScoringShowcase } from "@/ScoringShowcase";
 
 /**
  * Temporary showcase: proves the Tailwind theme, the shared primitives, and
@@ -59,6 +58,10 @@ function App() {
           )}
         </Panel>
 
+        <Link to="/app" className="w-fit">
+          <Button variant="dark">Open the app →</Button>
+        </Link>
+
         <Panel title="Company profile" subtitle="Server-backed when signed in, browser-only otherwise">
           {profile ? (
             <div className="flex flex-col gap-2 text-sm">
@@ -81,8 +84,6 @@ function App() {
         </Panel>
 
         <ProfileHistoryPanel />
-
-        <ScoringShowcase />
 
         <Panel title="Buttons" subtitle="Variants ported from the legacy .btn-* classes">
           <div className="flex flex-wrap gap-3">

@@ -1,4 +1,5 @@
 export { Button } from "./Button";
+export { buttonClasses } from "./buttonStyles";
 export type { ButtonProps, ButtonVariant, ButtonSize } from "./Button";
 
 export { Badge } from "./Badge";
@@ -20,3 +21,6 @@ export { ChipButton } from "./ChipButton";
 export type { ChipButtonProps } from "./ChipButton";
 
 export { LanguageToggle } from "./LanguageToggle";
+
+export { Logo } from "./Logo";
+export * from "./icons";

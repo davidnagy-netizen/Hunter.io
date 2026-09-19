@@ -14,9 +14,8 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
   const { data } = useMeQuery();
   const isRegister = mode === "register";
 
-  // TODO(opportunities): once the dashboard exists this should land there
-  // instead of "/" — see frontend/README.md status table.
-  const handleSuccess = () => navigate("/");
+  // `/app` sends a visitor without a profile on to the onboarding wizard.
+  const handleSuccess = () => navigate("/app");
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-paper p-6">

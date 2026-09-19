@@ -75,9 +75,8 @@ export function OnboardingWizard() {
       .map((w) => w[0])
       .join("")
       .toUpperCase();
-    // TODO(opportunities): once the dashboard exists this should land there.
     await saveProfile({ ...values, initials, country: "HU" });
-    navigate("/");
+    navigate("/app");
   }
 
   async function handleLoadDemo() {

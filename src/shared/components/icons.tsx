@@ -1,0 +1,29 @@
+import type { SVGProps } from "react";
+
+type IconProps = SVGProps<SVGSVGElement> & { size?: number };
+
+function base({ size = 18, ...rest }: IconProps) {
+  return { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": true, ...rest } as const;
+}
+
+export const TargetIcon = (p: IconProps) => (
+  <svg {...base(p)}><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="4.5" /><circle cx="12" cy="12" r="1.4" fill="currentColor" /></svg>
+);
+export const GridIcon = (p: IconProps) => (
+  <svg {...base(p)}><rect x="3" y="3" width="7" height="7" rx="1.5" /><rect x="14" y="3" width="7" height="7" rx="1.5" /><rect x="3" y="14" width="7" height="7" rx="1.5" /><rect x="14" y="14" width="7" height="7" rx="1.5" /></svg>
+);
+export const ListIcon = (p: IconProps) => (
+  <svg {...base(p)}><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01" /></svg>
+);
+export const ExternalIcon = (p: IconProps) => (
+  <svg {...base({ size: 14, ...p })}><path d="M14 5h5v5M19 5l-8 8M18 14v4a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2h4" /></svg>
+);
+export const LockIcon = (p: IconProps) => (
+  <svg {...base({ size: 16, ...p })}><rect x="5" y="10.5" width="14" height="10" rx="2.5" /><path d="M8 10.5V8a4 4 0 018 0v2.5" /></svg>
+);
+export const BackIcon = (p: IconProps) => (
+  <svg {...base({ size: 17, ...p })}><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
+);
+export const ExitIcon = (p: IconProps) => (
+  <svg {...base(p)}><path d="M15 12H4M11 7l-5 5 5 5" /><path d="M10 4h7a2 2 0 012 2v12a2 2 0 01-2 2h-7" /></svg>
+);
