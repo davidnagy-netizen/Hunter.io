@@ -262,8 +262,8 @@ Fundor provides bilingual capabilities with runtime locale switching and environ
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/davidnagy-netizen/Hunter.io.git
-   cd Hunter.io
+   git clone https://github.com/davidnagy-netizen/fundordothu.git
+   cd fundordothu
    ```
 
 2. **Install dependencies:**
