@@ -451,7 +451,7 @@
 @endpush
 
 @section('content')
-<div id="react-root" data-react-component="HomePage" data-props="{{ json_encode(['featuredOpportunities' => $featuredOpportunities]) }}">
+<div id="react-root" data-react-component="HomePage" data-props="{{ json_encode(['featuredOpportunities' => $featuredOpportunities, 'currentLocale' => app()->getLocale()]) }}">
 <div class="fundor-container">
 
     <!-- 1. Hero Section -->
