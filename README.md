@@ -8,7 +8,7 @@
 
 [![PHP Version](https://img.shields.io/badge/PHP-8.2%2B-777BB4?style=flat-square&logo=php&logoColor=white)](https://php.net)
 [![Laravel Framework](https://img.shields.io/badge/Laravel-11%20%2F%2013-FF2D20?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-D99A2B?style=flat-square)](LICENSE)
+[![License: Proprietary](https://img.shields.io/badge/License-Proprietary%20%7C%20All%20Rights%20Reserved-CA4A4A?style=flat-square)](#-license--intellectual-property-protection)
 [![Interface](https://img.shields.io/badge/Bilingual-Hungarian%20%7C%20English-199268?style=flat-square)](#-bilingual-architecture-hu--en)
 [![Scoring Engine](https://img.shields.io/badge/Engine-Deterministic-0E1726?style=flat-square)](#-core-algorithms--scoring-engine)
 [![WCAG AA](https://img.shields.io/badge/Accessibility-WCAG%20AA%20Compliant-0E7550?style=flat-square)](#-design-system--color-tokens)
@@ -307,25 +307,19 @@ php artisan test --filter=LocalizationTest
 
 ---
 
-## License
+## License & Intellectual Property Protection
 
-This project is open-source software licensed under the **[MIT License](LICENSE)**.
+This software, its source code, scoring algorithms, and user interface architecture are **PROPRIETARY AND CONFIDENTIAL** property of **Fundor.hu / Aetherpontis**. All rights reserved.
 
-```
-MIT License
+> **LEGAL NOTICE & STATUTORY WARNING:**  
+> Strictly zero permission is granted to copy, clone, mirror, reproduce, modify, redistribute, sublicense, decompile, or reverse engineer this software, in whole or in part, without prior explicit written permission from the copyright holder.
+>
+> Any unauthorized copying, distribution, or replacement constitutes intentional copyright infringement under domestic and international intellectual property legislation (including EU Directive 2004/48/EC and WIPO conventions). Violators will be prosecuted to the maximum extent of the law, including civil claims for statutory and compensatory damages, injunctive relief, and criminal prosecution.
 
-Copyright (c) 2026 Aetherpontis
+For complete terms and legal enforcement details, see the official **[LICENSE](LICENSE)** document.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-```
+For licensing permissions, enterprise agreements, or legal inquiries:
+- Legal Department: `legal@fundor.hu` / `contact@aetherpontis.com`
 
 ---
 
