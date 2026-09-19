@@ -9,9 +9,18 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(import.meta.dirname, './src'),
+      // The server's pure-ESM engine (eligibility, scoring, profile
+      // normalization) is imported directly rather than copied — see
+      // features/scoring and README "Decisions".
+      '@server-src': path.resolve(import.meta.dirname, '../src'),
     },
   },
   server: {
+    fs: {
+      // Allow the dev server to serve the engine files that live outside
+      // frontend/.
+      allow: [path.resolve(import.meta.dirname, '..')],
+    },
     // Proxies API calls to the Node server (see ../server) so the browser
     // sees same-origin requests in dev — the session cookie is httpOnly +
     // SameSite=Lax, which a cross-origin dev setup would otherwise break.

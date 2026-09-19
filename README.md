@@ -27,7 +27,7 @@ and cut over, its behavior should still match what those documents promise.
 | 1 — Testing infrastructure (Vitest + RTL) | ✅ done |
 | `authentication` | ✅ done — login, register, session, `isAdmin`/`isSubscriber`, verified against the real server |
 | `profile` (onboarding + version history) | ✅ done — wizard, server/local sync fork, version history + restore, verified against the real server (profile-sync bug fixed — see [Decisions](#decisions--changes-log)) |
-| `scoring` (eligibility engine + Hunter Score) | not started |
+| `scoring` (eligibility engine + Hunter Score) | ✅ done — server engine imported directly (no copy), answers fork, ring/badge/breakdown/question components; 241/241 live scores match the server (see [Decisions](#decisions--changes-log)) |
 | `opportunities` (dashboard/list/detail/search/calendar/saved) | not started |
 | `assessment` (free readiness funnel + lead capture) | not started |
 | `admin` | not started |
@@ -131,6 +131,13 @@ authentication, profile, opportunities → crm (read-only)
 `@/...` resolves to `src/...` (configured in both `vite.config.ts` and
 `tsconfig.app.json` — keep them in sync if this ever changes).
 
+`@server-src/...` resolves to the **repo-root** `../src/...` — the Node
+server's own pure-ESM engine. Only `features/scoring/domain/` imports from
+it (through `engine.ts`); no other code should. Also configured in
+`vite.config.ts` (alias + `server.fs.allow`) and `tsconfig.app.json`. Types
+for those JS files are hand-written in
+`features/scoring/domain/serverEngine.d.ts` (deliberately not `allowJs`).
+
 ---
 
 ## Design system
@@ -184,8 +191,10 @@ configuration to resolve Vite-specific things (the `@` alias,
 **What's covered so far:** the five shared primitives
 (`Button`/`Badge`/`Panel`/`CircularProgress`/`TextField`/`SelectField`/`ChipButton`),
 the `authentication` feature, and the `profile` feature (schema, local store,
-the `useCompanyProfile` sync-fork hook, `OnboardingWizard`, `ProfileHistoryPanel`)
-— 61 tests, all passing.
+the `useCompanyProfile` sync-fork hook, `OnboardingWizard`, `ProfileHistoryPanel`),
+and the `scoring` feature (engine wiring pinned to the demo-company scores,
+the answers fork with optimistic update/rollback, the scoring hooks, and its
+four components) — 92 tests, all passing.
 
 Feature tests that need React Query and/or routing use
 [`src/test/renderWithProviders.tsx`](src/test/renderWithProviders.tsx)
@@ -228,6 +237,62 @@ by some other process (a fixture script or a previously-populated
 
 Newest first. Each entry says what changed, why, and what it affects — the
 things that would otherwise only live in a chat transcript.
+
+### 2026-09-19 — `scoring` feature (slice 4): one engine, not two
+The eligibility engine and Hunter Score now live in exactly one place. Instead
+of porting the legacy client's copy to TypeScript (a third copy) or adding a
+parity test between two, `features/scoring/domain/engine.ts` **re-exports the
+server's own `src/engine/*.js`** through the `@server-src` alias. "Keep a
+client-side engine as a fallback" is therefore literally the same code, and
+cannot drift from the server. No server changes were needed — the engine
+files are pure ESM with no Node imports. Tradeoffs accepted: the frontend
+build now depends on the repo layout (`../src`), and the engine is JS with
+hand-written `.d.ts` types rather than TypeScript.
+
+Verified live against the real server as a subscriber: the browser scored
+all 255 open calls locally and **241/241 comparable scores matched
+`/api/search` exactly**, both before and after answering a question (the 14
+the server's search omits are all `awardsFunding: false` prizes/labels).
+Answering one question ("can you join a consortium?") took 142 calls from
+"needs an answer" to 0 instantly, and the answer was stored server-side.
+
+Built: `domain/` (facade + types), `store/localAnswersStore` (anonymous),
+`api/answers.*` + `hooks/useEligibilityAnswers` (same server-vs-local fork as
+`useCompanyProfile`, with an optimistic cache update so scores change on
+click, rolled back if the server rejects it), `hooks/useScoring`
+(`useScoringInputs`/`useHunterScore`/`useRankedOpportunities`), and the
+components `HunterScoreRing`, `EligibilityBadge` (the verdict → `Badge` tone
+mapping `shared/` deliberately doesn't own), `ScoreBreakdown` (expandable
+factors, text from the engine's own bilingual `explainScore`) and
+`EligibilityQuestion`. 31 new tests (92 total).
+
+Decisions and findings:
+- **`/api/opportunities/:id/answer` is not dead code — reversing the earlier
+  call.** It is the *only* thing that writes `user.answers` on the server.
+  The legacy client never called it, so a signed-in user's answers lived only
+  in one browser and never followed them across devices. Answers now use it
+  when signed in (local store when anonymous), the same fork as the profile.
+  Its `:id` only has to exist; the answer is stored company-wide.
+- **Scoring uses the catalog's reference date, not the browser clock.** The
+  server can pin "today" (`HUNTER_TODAY`, exposed as `meta.today`);
+  `useScoringInputs` passes it to the engine, otherwise client and server
+  deadline maths (and therefore scores) would disagree.
+- **Profiles are normalized before scoring** (`normalizeProfile`, the
+  server's function), so an anonymous visitor's local profile gets the
+  derived `sector`/`sizeClass`/`orgType` the rules read.
+- **`rankedOpps` does not exclude `awardsFunding: false` calls; the server
+  filters them out of its shortlist and search.** The temporary showcase
+  showed prizes ("European Prize for Women Innovators") ranked at 72. The
+  `opportunities` slice must filter them (root README §8: excluded by
+  default).
+- **Legacy divergence observed (read, not measured):** the old `core.js`
+  client copy differs from the server engine in places (e.g. how
+  `partnerShare` falls back when `intensity` is missing; the server has
+  `explainScore`, the client hand-rolled its own detail text). The server's
+  version is the pinned, tested one, so it is the one adopted.
+- **Temporary code:** `src/ScoringShowcase.tsx` (and its `window.__scores`
+  verification hook) exercises the feature against the real catalog with a
+  throwaway inline catalog query. It goes away when `opportunities` lands.
 
 ### 2026-09-19 — `profile` feature (slice 3): the sync-bug fix, verified live
 Onboarding wizard (6 steps, React Hook Form + Zod, ported from the legacy

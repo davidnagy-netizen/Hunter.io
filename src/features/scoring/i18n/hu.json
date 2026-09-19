@@ -1,0 +1,19 @@
+{
+  "verdict": {
+    "ELIGIBLE": "Jogosult",
+    "CONDITIONAL": "Feltételesen jogosult",
+    "INSUFFICIENT_DATA": "Hiányzó adat",
+    "NOT_ELIGIBLE": "Nem jogosult"
+  },
+  "score": {
+    "name": "Hunter Score",
+    "outOf": "/ 100",
+    "estimated": "becsült",
+    "blocked": "Nem jogosult",
+    "aria": "Hunter Score: {{score}} a 100-ból",
+    "ariaEstimated": "Hunter Score: {{score}} a 100-ból (becsült)"
+  },
+  "breakdown": {
+    "weight": "{{pct}}%"
+  }
+}
