@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router";
-import App from "@/App";
+import { AssessmentPage } from "@/features/assessment/components/AssessmentPage";
+import { LandingPage } from "@/features/landing/components/LandingPage";
 import { AuthPage } from "@/features/authentication/components/AuthPage";
 import { OnboardingWizard } from "@/features/profile/components/OnboardingWizard";
 import { DashboardPage } from "@/features/opportunities/components/DashboardPage";
@@ -20,7 +21,11 @@ import { RequireProfile } from "@/app/layout/RequireProfile";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <LandingPage />,
+  },
+  {
+    path: "/assess",
+    element: <AssessmentPage />,
   },
   {
     path: "/login",

@@ -39,3 +39,11 @@ export const StarIcon = (p: IconProps) => (
 export const ArrowIcon = (p: IconProps) => (
   <svg {...base({ size: 15, strokeWidth: 2, ...p })}><path d="M5 12h14M13 6l6 6-6 6" /></svg>
 );
+
+/** Small filled status glyphs, for inline "why" lists. */
+export const CheckBadge = () => (
+  <span aria-hidden className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-green-bg text-xs font-bold text-green">✓</span>
+);
+export const WarnBadge = () => (
+  <span aria-hidden className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-amber-bg text-xs font-bold text-amber">!</span>
+);

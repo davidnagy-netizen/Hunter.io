@@ -89,13 +89,13 @@ export function AppShell() {
             </NavLink>
           ))}
         </nav>
-        <LanguageToggle className="self-start" />
+        <LanguageToggle className="self-start" tone="dark" />
         <AccountBlock />
       </aside>
 
       <div className="flex items-center justify-between bg-ink px-4 py-3 md:hidden">
         <Logo dark />
-        <LanguageToggle />
+        <LanguageToggle tone="dark" />
       </div>
 
       <main className="px-4 pb-24 pt-6 md:ml-60 md:px-10 md:py-10">

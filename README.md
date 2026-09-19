@@ -29,7 +29,8 @@ and cut over, its behavior should still match what those documents promise.
 | `profile` (onboarding + version history) | ✅ done — wizard, server/local sync fork, version history + restore, verified against the real server (profile-sync bug fixed — see [Decisions](#decisions--changes-log)) |
 | `scoring` (eligibility engine + Hunter Score) | ✅ done — server engine imported directly (no copy), answers fork, ring/badge/breakdown/question components; 241/241 live scores match the server (see [Decisions](#decisions--changes-log)) |
 | `opportunities` (dashboard/list/detail/search/calendar/saved) | ✅ done — app shell, dashboard, list, detail, search, calendar, saved; verified against the real server in all three access tiers |
-| `assessment` (free readiness funnel + lead capture) | not started |
+| `assessment` (free readiness funnel + lead capture) | ✅ done — 6-question funnel, readiness score (ported unchanged; **the keep/replace decision is still open**), censored real matches, lead capture, hand-off into onboarding |
+| `landing` (public front door) | ✅ done — pitch, worked example, sources, price; replaces the temporary showcase page |
 | `admin` | not started |
 | `crm` | not started |
 | `hunter-plus` (demo) | not started |
@@ -104,6 +105,7 @@ on the ones listed before it):
 authentication → profile → scoring → opportunities → assessment → hunter-plus
                                                      ↘ hunter-plus
 authentication → admin
+profile, opportunities → assessment;   authentication, profile → landing
 authentication, profile, opportunities → crm (read-only)
 ```
 
@@ -196,7 +198,7 @@ the `authentication` feature, and the `profile` feature (schema, local store,
 the `useCompanyProfile` sync-fork hook, `OnboardingWizard`, `ProfileHistoryPanel`),
 and the `scoring` feature (engine wiring pinned to the demo-company scores,
 the answers fork with optimistic update/rollback, the scoring hooks, and its
-four components) — 160 tests, all passing (the `opportunities` screens, forks and app-shell guard added in slices 5–6).
+four components) — 203 tests, all passing (slices 5–7 added the `opportunities` screens and forks, the app-shell guard, the assessment funnel, lead capture, the landing page, the loader and the shared motion components).
 
 Feature tests that need React Query and/or routing use
 [`src/test/renderWithProviders.tsx`](src/test/renderWithProviders.tsx)
@@ -239,6 +241,80 @@ by some other process (a fixture script or a previously-populated
 
 Newest first. Each entry says what changed, why, and what it affects — the
 things that would otherwise only live in a chat transcript.
+
+### 2026-09-19 — `assessment` + `landing` (slice 7): the public front door
+A visitor can now go landing → free assessment → readiness result → either
+"set up a profile" (pre-filled) or "ask us to get in touch", all without an
+account. The temporary showcase page at `/` is deleted; `/` is the real
+landing page, `/assess` the funnel.
+
+Verified in the browser, anonymous, against the real server: all six steps
+(each gates "Next" until answered), the loader, a readiness score of 97, "You
+qualify for 187 calls" and real grant amounts on censored matches (60M × 80% =
+48M). The lead form refused an empty email, a bad email, and a good email
+without consent; a consented submission was then read back through the admin
+CRM API — stored with source `assessment`, readiness 97, the raw answers and
+the profile built from them. "View access options" landed on onboarding
+pre-filled (30 staff, Pest, the "2 or more" chip highlighted, company name
+empty) **without** creating a profile, so onboarding wasn't skipped. A signed-in
+account is redirected from `/` and `/assess` to `/app`. Hungarian verified.
+
+Built:
+- `features/assessment` — `domain/questions.ts` (the six questions and the
+  two profile builders), `domain/readiness.ts`, `api/leads.*`,
+  `hooks/useAssessmentPreview` (reuses the app's catalog endpoint; the
+  visitor's profile travels in the body), `LeadCaptureForm` (React Hook Form +
+  Zod), `AssessmentResult`, `AssessmentPage`.
+- `features/landing` — all copy is in `i18n/{hu,en}.json` (including the
+  worked example's figures), so editing the pitch is a JSON change.
+- `features/profile/store/onboardingDraftStore` — answers to pre-fill the
+  wizard with. **Not the profile:** a profile's existence is what
+  `RequireProfile` and every scored screen key off, so parking half-known
+  answers there would skip onboarding and score against invented numbers.
+- Shared: `MatchingLoader` (the branded pipeline overlay), `Reveal` (scroll-in,
+  reduced-motion aware), `usePrefersReducedMotion`, a dark `LanguageToggle`
+  tone, and the hero photo as a real file (`public/hero.jpg`, extracted from
+  the base64 blob in the legacy `core.js`).
+- 43 new tests (203 total).
+
+**Open decision — the readiness score.** `readinessScore()` is ported
+*unchanged* into `assessment/domain/readiness.ts` and kept apart from the
+Hunter Score, because that decision was deferred. It is a shallow additive
+heuristic (base 40, capped at 97; its uncapped maximum is 100, so the cap
+really applies) that never looks at eligibility, so a visitor can score high
+while qualifying for few calls. The server stores whatever number the browser
+sends and does not recompute it. Replacing it means editing that one file.
+
+Deliberate changes from the legacy funnel:
+- **"2 or more closed years" is stored as `4`, not `3`.** The onboarding
+  wizard's chip is `4`, so the legacy value pre-filled a wizard with no chip
+  highlighted.
+- **The onboarding pre-fill carries only what the visitor answered.** The
+  legacy also invented a company name (`"A céged"`, which ended up in the
+  wizard's name box), a revenue band and a project name.
+- **No `matchIds` are sent with a lead.** The legacy computed them from a
+  catalog that an anonymous browser never holds (so it always sent none); the
+  server derives the top matches itself when none are supplied.
+- **If the matches can't be loaded, the result says so** instead of claiming
+  "You qualify for 0 calls".
+- **A signed-in visitor is redirected** from `/assess` to `/app`, and from `/`
+  to `/app` when they have a profile. An *anonymous* visitor who has built a
+  profile still sees the landing page, with an "Open the app" link, so
+  they're never trapped away from it.
+
+**Copy to review — carried over verbatim, and inconsistent with the product.**
+`PRODUCT-STATUS.md` says the catalog is 100% EU-level and that
+`palyazat.gov.hu` and `kap.gov.hu` were never scraped. The landing page still
+lists both as "official sources", cites "549 results" in the plain-list
+comparison, and shows Hungarian programmes (GINOP, DIMOP, TOP…) in its worked
+example. It also says a lead will be written back to, while nobody is
+notified when a lead arrives (PRODUCT-STATUS §3.5); the on-screen text does
+add that no automatic email is sent. These are the product owner's words, so
+they were ported as-is and isolated in `landing/i18n` and `assessment/i18n`
+for a copy decision, not silently rewritten.
+
+Not done: the onboarding wizard doesn't use `MatchingLoader` on finish (the
+legacy did); it would be a one-line addition now that the component exists.
 
 ### 2026-09-19 — `opportunities` feature, part 2 (slice 6): search, calendar, saved
 Finishes the feature. Search (`/app/search`), the funding calendar

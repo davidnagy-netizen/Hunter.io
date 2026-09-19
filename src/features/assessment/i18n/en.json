@@ -1,0 +1,77 @@
+{
+  "progress": "Free assessment",
+  "approx": "approx. 2 min",
+  "sub": "No registration. At the end you get your Hunter Readiness Score.",
+  "questions": {
+    "employees": "How many people does your company employ?",
+    "county": "Where is your main project location?",
+    "industryId": "Which industry best describes the company?",
+    "closed_business_years": "How many closed business years do you have?",
+    "goals": "What would you develop in the next 12 months?",
+    "investment_value": "What is the scale of the planned investment?"
+  },
+  "options": {
+    "employees": {
+      "tiny": "1–4 employees",
+      "small": "5–15 employees",
+      "mid": "16–50 employees",
+      "large": "51–250 employees"
+    },
+    "closed_business_years": {
+      "none": "None yet",
+      "one": "1 year",
+      "twoPlus": "2 or more"
+    },
+    "investment_value": {
+      "xs": "1–10M HUF",
+      "s": "10–30M HUF",
+      "m": "30–100M HUF",
+      "l": "Over 100M HUF"
+    }
+  },
+  "chooseCounty": "Choose a county…",
+  "actions": {
+    "cancel": "Cancel",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "result": "See my result"
+  },
+  "loader": {
+    "title": "Evaluating your answers",
+    "steps": [
+      "Processing company data",
+      "Loading the live call catalog",
+      "Eligibility pre-screening",
+      "Calculating Readiness Score",
+      "Finding matching directions"
+    ]
+  },
+  "result": {
+    "label": "Your assessment result",
+    "score": "Hunter Readiness Score",
+    "outOf": "/ 100",
+    "bands": {
+      "strong": "Strong position",
+      "good": "Good basis, work to do",
+      "early": "Early stage"
+    },
+    "qualify_one": "You qualify for {{count}} call",
+    "qualify_other": "You qualify for {{count}} calls",
+    "explain": "The scores and amounts below are real — computed from your answers. Which call each one is becomes visible with a subscription.",
+    "lockHint": "The call names, their deadlines and the submission links unlock with a subscription.",
+    "cta": "View access options",
+    "previewFailed": "We couldn't load your matches right now, but your readiness score above is still valid."
+  },
+  "lead": {
+    "title": "Ask us to get in touch",
+    "body": "We will look at your answers and write back about which open calls could work for you. We use your details for this only, and you can ask us to delete them at any time.",
+    "email": "Email address",
+    "company": "Company (optional)",
+    "contactName": "Contact name (optional)",
+    "consent": "I agree to be contacted at the address above about funding opportunities.",
+    "submit": "Ask for a follow-up",
+    "sending": "Sending…",
+    "done": "Thank you — your follow-up request is recorded. No automatic email notification is sent."
+  }
+}

@@ -7,6 +7,7 @@ import { Button, ChipButton, LanguageToggle, Panel, SelectField, TextField } fro
 import { useMetaQuery } from "@/shared/api/meta.queries";
 import type { Region } from "@/shared/types/reference.types";
 import { useCompanyProfile } from "../hooks/useCompanyProfile";
+import { useOnboardingDraftStore } from "../store/onboardingDraftStore";
 import { companyProfileSchema, STEP_FIELDS, type CompanyProfileFormValues } from "../schemas/profile.schemas";
 import "../i18n";
 
@@ -31,12 +32,15 @@ export function OnboardingWizard() {
   const navigate = useNavigate();
   const meta = useMetaQuery();
   const { profile, saveProfile, loadDemo, isSaving, saveError } = useCompanyProfile();
+  const draft = useOnboardingDraftStore((state) => state.draft);
+  const clearDraft = useOnboardingDraftStore((state) => state.clear);
   const [stepIndex, setStepIndex] = useState(0);
   const step: Step = STEPS[stepIndex];
 
   const form = useForm<CompanyProfileFormValues>({
     resolver: zodResolver(companyProfileSchema),
-    defaultValues: { ...DEFAULT_VALUES, ...profile },
+    // Saved profile wins over a draft, which wins over the blank defaults.
+    defaultValues: { ...DEFAULT_VALUES, ...draft, ...profile },
   });
   const { control, register, handleSubmit, trigger, watch, setValue, formState } = form;
   const errors = formState.errors;
@@ -76,6 +80,7 @@ export function OnboardingWizard() {
       .join("")
       .toUpperCase();
     await saveProfile({ ...values, initials, country: "HU" });
+    clearDraft();
     navigate("/app");
   }
 

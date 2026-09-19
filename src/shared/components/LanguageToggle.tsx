@@ -6,12 +6,13 @@ const LANGUAGES: { code: SupportedLanguage; label: string }[] = [
   { code: "en", label: "EN" },
 ];
 
-export function LanguageToggle({ className = "" }: { className?: string }) {
+export function LanguageToggle({ className = "", tone = "light" }: { className?: string; tone?: "light" | "dark" }) {
+  const dark = tone === "dark";
   const lang = useUiStore((state) => state.lang);
   const setLang = useUiStore((state) => state.setLang);
 
   return (
-    <div className={["inline-flex overflow-hidden rounded-md border border-line-strong", className].join(" ")}>
+    <div className={["inline-flex overflow-hidden rounded-md border", dark ? "border-white/30" : "border-line-strong", className].join(" ")}>
       {LANGUAGES.map(({ code, label }) => (
         <button
           key={code}
@@ -20,7 +21,9 @@ export function LanguageToggle({ className = "" }: { className?: string }) {
           aria-pressed={lang === code}
           className={[
             "px-2.5 py-1 text-xs font-medium transition-colors",
-            lang === code ? "bg-ink text-white" : "bg-white text-muted hover:bg-paper",
+            dark
+              ? lang === code ? "bg-white text-ink" : "bg-transparent text-white/70 hover:bg-white/10"
+              : lang === code ? "bg-ink text-white" : "bg-white text-muted hover:bg-paper",
           ].join(" ")}
         >
           {label}

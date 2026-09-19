@@ -24,3 +24,8 @@ export { LanguageToggle } from "./LanguageToggle";
 
 export { Logo } from "./Logo";
 export * from "./icons";
+
+export { MatchingLoader } from "./MatchingLoader";
+export type { MatchingLoaderProps } from "./MatchingLoader";
+
+export { Reveal } from "./Reveal";

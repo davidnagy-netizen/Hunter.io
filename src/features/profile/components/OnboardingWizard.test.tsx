@@ -6,6 +6,7 @@ import { useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
 import { metaApi } from "@/shared/api/meta.api";
 import type { MetaResponse } from "@/shared/types/reference.types";
 import { useLocalProfileStore } from "../store/localProfileStore";
+import { useOnboardingDraftStore } from "../store/onboardingDraftStore";
 import { DEMO_PROFILE } from "../data/demoProfile";
 import { OnboardingWizard } from "./OnboardingWizard";
 
@@ -36,6 +37,7 @@ describe("OnboardingWizard", () => {
     vi.mocked(useIsAuthenticated).mockReturnValue(false);
     vi.mocked(metaApi.get).mockResolvedValue(META);
     useLocalProfileStore.getState().clear();
+    useOnboardingDraftStore.getState().clear();
   });
 
   it("loading the demo company jumps to the company step with fields pre-filled", async () => {
@@ -104,5 +106,28 @@ describe("OnboardingWizard", () => {
     expect(saved.consortium_ready).toBe(false);
     expect(saved.initials).toBe("TK");
     expect(saved.country).toBe("HU");
+    expect(useOnboardingDraftStore.getState().draft).toBeNull();
+  });
+
+  it("starts from a draft (e.g. the free assessment's answers) without needing a saved profile", async () => {
+    useOnboardingDraftStore.getState().setDraft({ employees: 30, county: "Pest", region: "HU12", closed_business_years: 4 });
+    const user = userEvent.setup();
+    renderWithProviders(<OnboardingWizard />);
+
+    await user.click(screen.getByRole("button", { name: /inkább kitöltöm magam|fill it in myself/i }));
+    expect(await screen.findByDisplayValue("30")).toBeInTheDocument();
+    expect(screen.getByRole("combobox", { name: /megye|county/i })).toHaveValue("Pest");
+    expect(screen.getByRole("button", { name: /2 vagy több|2 or more/i })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.queryByDisplayValue("Assessment")).not.toBeInTheDocument();
+  });
+
+  it("a saved profile wins over a draft", async () => {
+    useLocalProfileStore.getState().setProfile(DEMO_PROFILE);
+    useOnboardingDraftStore.getState().setDraft({ employees: 999 });
+    const user = userEvent.setup();
+    renderWithProviders(<OnboardingWizard />);
+
+    await user.click(screen.getByRole("button", { name: /inkább kitöltöm magam|fill it in myself/i }));
+    expect(await screen.findByDisplayValue(String(DEMO_PROFILE.employees))).toBeInTheDocument();
   });
 });

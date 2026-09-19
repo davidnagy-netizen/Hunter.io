@@ -1,0 +1,156 @@
+{
+  "nav": {
+    "assess": "Mire vagyok jogosult?",
+    "how": "Hogyan működik",
+    "login": "Belépés",
+    "openApp": "Az alkalmazás megnyitása"
+  },
+  "hero": {
+    "eyebrow": "Szabályalapú pályázatkeresés",
+    "line1": "Ne te keresd a pályázatot.",
+    "line2": "A Hunter megtalálja neked.",
+    "lead": "A cégprofilod alapján megkeressük, rangsoroljuk és érthetően bemutatjuk a releváns támogatásokat — hivatalos forrásokból.",
+    "cta": "Megnézem, mire vagyok jogosult",
+    "register": "Cégfiók létrehozása",
+    "trust": "Hivatalos források:",
+    "trustNames": "EU Funding & Tenders · palyazat.gov.hu · kap.gov.hu",
+    "imageAlt": "Vállalati csapat egy sikeres pályázat után"
+  },
+  "preview": {
+    "program": "GINOP Plusz",
+    "title": "Vállalati digitalizáció",
+    "score": 87,
+    "pass": "10–50 fős cégnek szól",
+    "passYours": "(nálad: 28 fő)",
+    "warn": "30% saját forrás",
+    "warnYours": "(~9 M Ft)",
+    "funding": "Támogatás:",
+    "fundingValue": "5–50 M Ft",
+    "deadline": "Határidő:",
+    "deadlineDate": "2026-10-30"
+  },
+  "compare": {
+    "kicker": "A különbség — egy valós példán",
+    "title": "Nem pályázatlista. Személyre szabott támogatási intelligencia.",
+    "sub": "Ugyanaz a cég, kétféle eredmény. Íme egy konkrét példa, végigszámolva.",
+    "scenarioLabel": "A példacég",
+    "facts": [
+      {
+        "label": "",
+        "value": "28 fős",
+        "rest": "gyártó KKV"
+      },
+      {
+        "label": "helyszín:",
+        "value": "Pest megye"
+      },
+      {
+        "label": "cél:",
+        "value": "digitalizáció"
+      },
+      {
+        "label": "beruházás:",
+        "value": "30 M Ft"
+      }
+    ],
+    "old": {
+      "title": "Hagyományos pályázatfigyelő",
+      "count": "549",
+      "countLabel": "találat a listában",
+      "list": "GINOP Plusz · KEHOP Plusz · DIMOP Plusz · TOP Plusz · Széchenyi Terv Plusz · VINOP Plusz · KAP · EFOP Plusz · EU Horizon · EIC · IKOP Plusz",
+      "more": "+539 további",
+      "steps": [
+        "Végigolvasod és keresgélsz a listában",
+        "Kézzel értelmezed a feltételeket",
+        "Magad döntöd el, jogosult vagy-e"
+      ],
+      "verdict": "✕ Eredmény: több óra munka, bizonytalan döntés"
+    },
+    "new": {
+      "head": "Ebből ez a",
+      "headCount": "3",
+      "headTail": "illik a céghez:",
+      "supportLabel": "Támogatás",
+      "ownLabel": "· önerő",
+      "cards": [
+        {
+          "score": 95,
+          "program": "Széchenyi Terv Plusz",
+          "title": "Technológiai gép- és eszközbeszerzés",
+          "support": "10–100 M Ft",
+          "own": "~16,5 M Ft",
+          "date": "2027-01-31"
+        },
+        {
+          "score": 87,
+          "program": "GINOP Plusz",
+          "title": "Vállalati digitalizáció (ERP, gyártásvezérlés)",
+          "support": "5–50 M Ft",
+          "own": "~15 M Ft",
+          "date": "2026-10-30"
+        },
+        {
+          "score": 87,
+          "program": "DIMOP Plusz",
+          "title": "Mesterséges intelligencia és szoftverfejlesztés",
+          "support": "10–75 M Ft",
+          "own": "~12 M Ft",
+          "date": "2026-12-15"
+        }
+      ],
+      "excludedLabel": "A jogosultsági motor ezeket kiszűrte",
+      "excluded": [
+        {
+          "name": "TOP Plusz",
+          "reason": "— Pest megye nem támogatható helyszín"
+        },
+        {
+          "name": "KAP",
+          "reason": "— nem mezőgazdasági főtevékenység"
+        },
+        {
+          "name": "EIC Accelerator",
+          "reason": "— a 30 M Ft projekt a min. 50 M Ft alatt van"
+        }
+      ]
+    }
+  },
+  "how": {
+    "kicker": "Hogyan működik",
+    "title": "Három lépés a cégprofiltól a döntésig",
+    "items": [
+      {
+        "title": "Cégprofil",
+        "text": "Néhány kérdés a cégedről: méret, régió, tevékenység, fejlesztési cél, tervezett beruházás. Minden válasz pontosabb találatot jelent."
+      },
+      {
+        "title": "Determinisztikus, szabályalapú pontozás és jogosultsági motor",
+        "text": "A determinisztikus, szabályalapú motor szűr, pontoz és indokol. A hiányzó adatokat megkérdezzük."
+      },
+      {
+        "title": "Releváns pályázatok",
+        "text": "Hunter Score, tételes indoklás, támogatáskalkulátor, határidőnaptár. Tudod, mi éri meg, és mi a következő lépés."
+      }
+    ]
+  },
+  "sources": {
+    "kicker": "Hivatalos, elsődleges források",
+    "title": "Az adat onnan jön, ahonnan számít",
+    "sub": "Minden találat a hivatalos felhívásra és annak verziószámára hivatkozik. Nincs találgatás, nincs elavult másolat.",
+    "chips": [
+      "European Commission — Funding & Tenders Portal",
+      "Pályázati Portál — palyazat.gov.hu",
+      "KAP — kap.gov.hu",
+      "Széchenyi Terv Plusz programok"
+    ]
+  },
+  "price": {
+    "title": "5 990 Ft / hó egy rendszerért, ami helyetted figyel",
+    "note": "A támogatás feltételeit a hivatalos felhívás határozza meg. Az eredmény nem garantált.",
+    "amount": "5 990 Ft",
+    "per": "/ hó",
+    "versus": "vs. 5–50 M Ft elérhető támogatás",
+    "cta": "Kezdd az ingyenes felméréssel"
+  },
+  "footer": "HUNTER — szabályalapú pályázatkereső · MVP prototípus · Nem hatósági döntés"
+}
