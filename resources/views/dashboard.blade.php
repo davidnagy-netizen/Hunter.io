@@ -4,7 +4,7 @@
 @section('header_title', __('Vállalati Pályázati Irányítópult'))
 
 @section('content')
-<div id="react-root" data-react-component="DashboardPage" data-props="{{ json_encode(['stats' => $stats, 'profile' => $profile, 'opportunities' => $opportunities]) }}">
+<div id="react-root" data-react-component="DashboardPage" data-props="{{ json_encode(['stats' => $stats, 'profile' => $profile, 'opportunities' => $opportunities, 'currentLocale' => app()->getLocale()]) }}">
 <div>
     <!-- Metrics Header -->
     <div class="grid grid-cols-3" style="margin-bottom: 24px;">

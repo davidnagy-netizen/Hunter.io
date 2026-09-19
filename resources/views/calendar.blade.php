@@ -4,7 +4,7 @@
 @section('header_title', __('Támogatási Határidők és Beadási Ütemezés'))
 
 @section('content')
-<div id="react-root" data-react-component="CalendarPage" data-props="{{ json_encode(['grouped' => $grouped]) }}">
+<div id="react-root" data-react-component="CalendarPage" data-props="{{ json_encode(['grouped' => $grouped, 'currentLocale' => app()->getLocale()]) }}">
 <div style="max-width: 900px; margin: 0 auto;">
     <div style="margin-bottom: 24px;">
         <h3 style="font-size: 22px; margin-bottom: 6px;">{{ __('Időrendi Pályázati Naptár') }}</h3>

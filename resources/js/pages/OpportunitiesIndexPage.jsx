@@ -4,7 +4,7 @@ import Button from '../components/Button';
 
 /**
  * OpportunitiesIndexPage React component.
- * Catalog search, program filter, and paginated grant list.
+ * Catalog search, program filter, and paginated grant list with full bilingual localization.
  */
 export default function OpportunitiesIndexPage({
     opportunities = [],
@@ -12,14 +12,34 @@ export default function OpportunitiesIndexPage({
     searchQuery = '',
     selectedProgram = '',
     csrfToken = '',
+    currentLocale = 'hu',
 }) {
+    const isEn = currentLocale === 'en';
     const [q, setQ] = useState(searchQuery);
     const [program, setProgram] = useState(selectedProgram);
 
-    // If opportunities is a Laravel paginator object, items are under opportunities.data
     const items = Array.isArray(opportunities)
         ? opportunities
         : (opportunities?.data || []);
+
+    const t = {
+        searchPlaceholder: isEn
+            ? 'Search by keyword, code, or call title...'
+            : 'Keresés kulcsszóra, kódra vagy felhívás címre...',
+        allPrograms: isEn ? '-- All Program Families --' : '-- Minden programcsalád --',
+        filterBtn: isEn ? 'Filter' : 'Szűrés',
+        clearBtn: isEn ? 'Clear' : 'Törlés',
+        deadline: isEn ? 'Deadline:' : 'Határidő:',
+        daysUnit: isEn ? 'days left' : 'nap',
+        rolling: isEn ? 'Upcoming' : 'Közelgő',
+        budgetPrefix: isEn ? 'Funding:' : 'Keret:',
+        budgetUnit: isEn ? 'million HUF' : 'M Ft',
+        intensityLabel: isEn ? 'Funding intensity:' : 'Támogatási intenzitás:',
+        openScore: isEn ? 'Open & Score →' : 'Megnyitás & Pontozás →',
+        emptyMessage: isEn
+            ? 'No grant opportunities match your search criteria.'
+            : 'A keresési feltételeknek megfelelő pályázati lehetőség nem található.',
+    };
 
     return (
         <div>
@@ -32,7 +52,7 @@ export default function OpportunitiesIndexPage({
                             name="q"
                             value={q}
                             onChange={(e) => setQ(e.target.value)}
-                            placeholder="Keresés kulcsszóra, kódra vagy felhívás címre..."
+                            placeholder={t.searchPlaceholder}
                             style={{
                                 width: '100%',
                                 padding: '10px 14px',
@@ -52,7 +72,7 @@ export default function OpportunitiesIndexPage({
                                 borderRadius: '8px',
                             }}
                         >
-                            <option value="">Minden programcsalád</option>
+                            <option value="">{t.allPrograms}</option>
                             <option value="GINOP Plusz">GINOP Plusz</option>
                             <option value="KEHOP Plusz">KEHOP Plusz</option>
                             <option value="DIMOP Plusz">DIMOP Plusz</option>
@@ -60,11 +80,11 @@ export default function OpportunitiesIndexPage({
                         </select>
                     </div>
                     <Button type="submit" variant="dark" style={{ padding: '10px 18px' }}>
-                        Szűrés
+                        {t.filterBtn}
                     </Button>
                     {(q || program) && (
                         <Button href="/opportunities" variant="ghost" style={{ padding: '10px 14px' }}>
-                            Törlés
+                            {t.clearBtn}
                         </Button>
                     )}
                 </form>
@@ -98,14 +118,14 @@ export default function OpportunitiesIndexPage({
                                             {opp.code}
                                         </span>
                                         <Badge variant={daysRemaining <= 14 ? 'amber' : 'slate'}>
-                                            {opp.deadline ? new Date(opp.deadline).toLocaleDateString('hu-HU') : 'Közelgő'} ({daysRemaining} nap)
+                                            {opp.deadline ? new Date(opp.deadline).toLocaleDateString(isEn ? 'en-US' : 'hu-HU') : t.rolling} ({daysRemaining} {t.daysUnit})
                                         </Badge>
                                     </div>
                                     <h3 style={{ fontSize: '18px', marginBottom: '6px', color: 'var(--ink)' }}>
                                         {opp.title}
                                     </h3>
                                     <div style={{ fontSize: '13.5px', color: 'var(--muted)' }}>
-                                        Keret: {Math.round(opp.funding_min / 1000000)}–{Math.round(opp.funding_max / 1000000)} M Ft • Támogatási intenzitás: {Math.round(opp.intensity * 100)}%
+                                        {t.budgetPrefix} {Math.round(opp.funding_min / 1000000)}–{Math.round(opp.funding_max / 1000000)} {t.budgetUnit} • {t.intensityLabel} {Math.round(opp.intensity * 100)}%
                                     </div>
                                 </div>
 
@@ -117,7 +137,7 @@ export default function OpportunitiesIndexPage({
                                         </button>
                                     </form>
                                     <Button href={`/opportunities/${opp.code}`} variant="gold" style={{ fontSize: '13.5px' }}>
-                                        Megnyitás & Pontozás
+                                        {t.openScore}
                                     </Button>
                                 </div>
                             </div>
@@ -125,7 +145,7 @@ export default function OpportunitiesIndexPage({
                     })
                 ) : (
                     <div className="card" style={{ textAlign: 'center', color: 'var(--muted)', padding: '40px' }}>
-                        A keresési feltételeknek megfelelő pályázati lehetőség nem található.
+                        {t.emptyMessage}
                     </div>
                 )}
             </div>

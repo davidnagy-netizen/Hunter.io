@@ -4,7 +4,7 @@
 @section('header_title', __('Nyitott és Várható Pályázatok Katalógusa'))
 
 @section('content')
-<div id="react-root" data-react-component="OpportunitiesIndexPage" data-props="{{ json_encode(['opportunities' => $opportunities, 'searchQuery' => request('q', ''), 'selectedProgram' => request('program', '')]) }}">
+<div id="react-root" data-react-component="OpportunitiesIndexPage" data-props="{{ json_encode(['opportunities' => $opportunities, 'searchQuery' => request('q', ''), 'selectedProgram' => request('program', ''), 'currentLocale' => app()->getLocale()]) }}">
 <div>
     <!-- Filter Bar -->
     <div class="card" style="padding: 18px 24px; margin-bottom: 24px;">

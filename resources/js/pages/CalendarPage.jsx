@@ -4,21 +4,40 @@ import Button from '../components/Button';
 
 /**
  * CalendarPage React component.
- * Chronological grant deadlines grouped by year and month.
+ * Chronological grant deadlines grouped by year and month with bilingual localization.
  */
 export default function CalendarPage({
     grouped = {},
+    currentLocale = 'hu',
 }) {
+    const isEn = currentLocale === 'en';
     const months = Object.keys(grouped || {});
+
+    const t = {
+        title: isEn ? 'Chronological Grant Calendar' : 'Időrendi Pályázati Naptár',
+        desc: isEn
+            ? 'Submission cutoffs for open and pending grant calls organized chronologically by month.'
+            : 'A nyitott és beadás alatt álló felhívások benyújtási határideje hónapok szerint rendezve.',
+        callsUnit: isEn ? 'calls' : 'felhívás',
+        fundingPrefix: isEn ? 'Funding:' : 'Keret:',
+        fundingUnit: isEn ? 'million HUF' : 'M Ft',
+        deadlinePrefix: isEn ? 'Deadline:' : 'Határidő:',
+        daysUnit: isEn ? 'days left' : 'nap',
+        rolling: isEn ? 'Upcoming' : 'Közelgő',
+        detailsBtn: isEn ? 'Details →' : 'Részletek →',
+        emptyMessage: isEn
+            ? 'No upcoming grant deadlines recorded.'
+            : 'Nincsenek közeledő pályázati határidők rögzítve.',
+    };
 
     return (
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
             <div style={{ marginBottom: '24px' }}>
                 <h1 style={{ fontSize: '22px', marginBottom: '6px', color: 'var(--ink)' }}>
-                    Időrendi Pályázati Naptár
+                    {t.title}
                 </h1>
                 <p style={{ color: 'var(--muted)', margin: 0 }}>
-                    A nyitott és beadás alatt álló felhívások benyújtási határideje hónapok szerint rendezve.
+                    {t.desc}
                 </p>
             </div>
 
@@ -37,7 +56,7 @@ export default function CalendarPage({
                                     borderBottom: '1px solid var(--line)',
                                     paddingBottom: '10px'
                                 }}>
-                                    📅 {monthKey} ({opps.length} felhívás)
+                                    📅 {monthKey} ({opps.length} {t.callsUnit})
                                 </div>
 
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -66,16 +85,16 @@ export default function CalendarPage({
                                                         <span style={{ fontWeight: 600, fontSize: '15px', color: 'var(--ink)' }}>{opp.title}</span>
                                                     </div>
                                                     <div style={{ fontSize: '13px', color: 'var(--muted)' }}>
-                                                        Keret: {Math.round(opp.funding_min / 1000000)}–{Math.round(opp.funding_max / 1000000)} M Ft
+                                                        {t.fundingPrefix} {Math.round(opp.funding_min / 1000000)}–{Math.round(opp.funding_max / 1000000)} {t.fundingUnit}
                                                     </div>
                                                 </div>
 
                                                 <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                                                     <Badge variant={daysRemaining <= 14 ? 'amber' : 'slate'}>
-                                                        {opp.deadline ? new Date(opp.deadline).toLocaleDateString('hu-HU') : 'Közelgő'} ({daysRemaining} nap)
+                                                        {opp.deadline ? new Date(opp.deadline).toLocaleDateString(isEn ? 'en-US' : 'hu-HU') : t.rolling} ({daysRemaining} {t.daysUnit})
                                                     </Badge>
                                                     <Button href={`/opportunities/${opp.code}`} variant="ghost" style={{ padding: '6px 12px', fontSize: '13px' }}>
-                                                        Részletek
+                                                        {t.detailsBtn}
                                                     </Button>
                                                 </div>
                                             </div>
@@ -87,7 +106,7 @@ export default function CalendarPage({
                     })
                 ) : (
                     <div className="card" style={{ textAlign: 'center', color: 'var(--muted)', padding: '40px' }}>
-                        Nincsenek közeledő pályázati határidők rögzítve.
+                        {t.emptyMessage}
                     </div>
                 )}
             </div>
