@@ -25,7 +25,7 @@ and cut over, its behavior should still match what those documents promise.
 |---|---|
 | 0 — Vite/React/TS scaffold, Tailwind theme, shared primitives | ✅ done |
 | 1 — Testing infrastructure (Vitest + RTL) | ✅ done |
-| `authentication` | not started |
+| `authentication` | ✅ done — login, register, session, `isAdmin`/`isSubscriber`, verified against the real server |
 | `profile` (onboarding + version history) | not started |
 | `scoring` (eligibility engine + Hunter Score) | not started |
 | `opportunities` (dashboard/list/detail/search/calendar/saved) | not started |
@@ -55,7 +55,8 @@ resolved versions.
 | Client state | Zustand | 5.0.x | Chosen over Redux Toolkit — see [Decisions](#decisions--changes-log) |
 | HTTP client | Axios | 1.20.x | One instance in `shared/api`, never called directly from components |
 | Routing | `react-router` | 8.4.x | **Not** `react-router-dom` — see [Decisions](#decisions--changes-log) |
-| Forms | React Hook Form + Zod | 7.88.x / 4.6.x | Zod also used to validate API responses at the boundary, not just form input |
+| Forms | React Hook Form + Zod + `@hookform/resolvers` | 7.88.x / 4.6.x / 5.9.x | Zod also used to validate API responses at the boundary, not just form input |
+| i18n | i18next + react-i18next | 26.4.x / 17.0.x | HU default, EN fallback; per-feature namespaces — see [Decisions](#decisions--changes-log) |
 | Testing | Vitest + React Testing Library | 5.0.x / 16.3.x | + `@testing-library/jest-dom`, `@testing-library/user-event`, `@vitest/coverage-v8` |
 | Lint | Oxlint (Vite 8's default) | 1.81.x | Not ESLint — this was the scaffold's own default, kept as-is |
 
@@ -80,13 +81,21 @@ src/
 │       ├── types/         # feature-owned types
 │       └── domain/        # (scoring, assessment only) pure business-rule functions
 └── shared/         # genuinely cross-feature only — see rule below
-    ├── components/  # generic, domain-free UI atoms (Button, Badge, Panel, CircularProgress, ...)
+    ├── components/  # generic, domain-free UI atoms (Button, Badge, Panel, CircularProgress, TextField, LanguageToggle)
     ├── hooks/
-    ├── api/          # the Axios instance + typed ApiError mapping
+    ├── api/          # the Axios instance, typed ApiError mapping, useTranslatedApiError
     ├── lib/
-    ├── i18n/
+    ├── store/        # cross-feature client state (Zustand) — currently just `uiStore` (language)
+    ├── i18n/          # i18next setup + the `errors` namespace (shared across every feature)
     └── types/
 ```
+
+A feature that has its own translated strings owns an `i18n/` folder too
+(`hu.json`/`en.json` + an `index.ts` that calls
+`registerFeatureTranslations()`), imported once from that feature's entry
+component — this keeps `shared/i18n` from having to import from `features/`,
+which would invert the dependency direction. See `features/authentication/i18n/`
+for the reference example.
 
 **Feature list and dependency direction** (no cycles — a feature only depends
 on the ones listed before it):
@@ -173,21 +182,40 @@ configuration to resolve Vite-specific things (the `@` alias,
   `npm run coverage` for a coverage report.
 
 **What's covered so far:** the four shared primitives
-(`Button`/`Badge`/`Panel`/`CircularProgress`), 14 tests, all passing. No
-feature code exists yet to test.
+(`Button`/`Badge`/`Panel`/`CircularProgress`), plus the `authentication`
+feature (Zod schemas, `LoginForm`, `RegisterForm`, the `useAuth` derived
+hooks) — 36 tests, all passing.
+
+Feature tests that need React Query and/or routing use
+[`src/test/renderWithProviders.tsx`](src/test/renderWithProviders.tsx)
+instead of RTL's bare `render`. API calls are mocked at the feature's
+`*.api.ts` module boundary (`vi.mock("../api/auth.api", ...)`), not at the
+network layer — no MSW yet; revisit if that stops scaling.
 
 ---
 
 ## Getting started
 
+The Node backend (`../server`) must be running for anything past the shared
+primitives — the frontend dev server proxies `/api/*` to it (see
+`vite.config.ts`).
+
 ```bash
+# from the repo root, in one terminal:
+npm start           # backend on :3000 — see ../README.md
+
+# from frontend/, in another terminal:
 npm install
-npm run dev        # http://localhost:5173
-npm test           # run the test suite once
-npm run test:watch # watch mode
-npm run lint        # oxlint
-npm run build       # tsc -b && vite build
+npm run dev          # http://localhost:5173, proxies /api to :3000
+npm test             # run the test suite once
+npm run test:watch  # watch mode
+npm run lint          # oxlint
+npm run build         # tsc -b && vite build
 ```
+
+Seeded accounts to test against (from the root README): `admin`/`admin`
+(administrator), `demo`/`demo1234` (full subscriber), `demo_free`/`demo1234`
+(registered, no subscription).
 
 ---
 
@@ -195,6 +223,68 @@ npm run build       # tsc -b && vite build
 
 Newest first. Each entry says what changed, why, and what it affects — the
 things that would otherwise only live in a chat transcript.
+
+### 2026-09-19 — `authentication` feature (slice 2)
+Login, register, session (`GET /api/auth/me`), logout, and the derived
+`useCurrentUser`/`useIsAdmin`/`useIsSubscriber`/`useIsAuthenticated` hooks
+every other feature will read auth state through. Verified end-to-end
+against the real Node server (not mocked) in the browser: login/logout as
+`admin`/`admin`, session survives a full page reload, client-side validation
+mirrors the server's rules exactly, the bilingual toggle re-translates the
+whole page live. 36 tests total (schemas, both forms, the derived hooks).
+
+Built along the way, now shared infrastructure for every future feature:
+- `shared/api/httpClient.ts` — the one Axios instance (`withCredentials:
+  true`, `baseURL: "/api"`).
+- `shared/api/apiError.ts` + `useTranslatedApiError` — normalizes any
+  Axios/API error into `{status, code, message}` and translates `code`
+  through the `errors` i18n namespace, falling back to the server's raw
+  message when there's no translation. Every feature that surfaces API
+  errors should use `useTranslatedApiError`, not re-derive this.
+- `shared/i18n/` — i18next + react-i18next, HU default/fallback. Seeded with
+  a shared `errors` namespace (ported 1:1 from the legacy `API_ERRORS`
+  dictionary in the old `bootstrap.js`) so every feature's server-error
+  messages come from one place. A feature with its own strings gets its own
+  `i18n/{hu,en}.json` + `i18n/index.ts` calling `registerFeatureTranslations()`
+  — see `features/authentication/i18n/` as the reference. Deliberately
+  designed now rather than deferred: retrofitting `t()` calls into
+  components after the fact is far more tedious than building them in from
+  the start, and the legacy app's bilingual HU/EN support (with an automated
+  parity test) is a real, documented product requirement, not a nice-to-have.
+- `shared/store/uiStore.ts` — Zustand, currently just `lang`, persisted under
+  its own `hunter-rewrite-ui` localStorage key (deliberately distinct from
+  the legacy app's `hunter_state` key, so the two frontends can't clobber
+  each other's storage while both exist during the migration).
+- `shared/components/TextField.tsx` and `LanguageToggle.tsx` — generic,
+  reused by every form and every screen respectively.
+- `vite.config.ts` gained a dev proxy (`/api` → `http://localhost:3000`) so
+  the browser sees same-origin requests — required for the server's httpOnly
+  `SameSite=Lax` session cookie to survive the frontend and backend running
+  on different ports in dev.
+
+Decisions made and why:
+- **Session state lives only in React Query (`useMeQuery`), not mirrored
+  into Zustand.** `useAuth.ts`'s derived hooks (`useCurrentUser`,
+  `useIsAdmin`, ...) all read the same `["auth", "me"]` query — React Query's
+  cache already dedupes this across every component, so a separate store
+  would just be a second copy of server state to keep in sync, which
+  directly contradicts "don't use global state management for data that
+  should naturally be managed by React Query." (An earlier version of the
+  architecture plan considered a "thin Zustand mirror for synchronous reads"
+  — that idea is superseded by this entry.)
+- **Zod validation error messages are i18n keys, not literal strings** (e.g.
+  `z.string().regex(USERNAME_PATTERN, "errors:INVALID_USERNAME")`). Forms
+  call `t(errors.field.message)` to resolve them. This reuses the exact same
+  `errors` namespace as server-side error translation, so a username
+  rejected by client-side Zod and one rejected by the server show the
+  identical message — single source of truth for what that string says in
+  each language.
+- **Login validates only "non-empty", not the username/password format
+  rules.** Mirrors the server precisely: `validateCredentials()` in
+  `server/auth.js` is only called from `/register` and `/password`, not
+  `/login`, which always answers a mismatch with the single generic
+  `BAD_CREDENTIALS` — telling a visitor *which* field was wrong on a login
+  attempt would leak information a real login screen shouldn't.
 
 ### 2026-09-19 — Testing infrastructure added
 Installed Vitest 5, React Testing Library 16, `@testing-library/jest-dom` 7,

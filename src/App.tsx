@@ -1,19 +1,58 @@
-import { Badge, Button, CircularProgress, Panel } from "@/shared/components";
+import { Link } from "react-router";
+import { Badge, Button, CircularProgress, LanguageToggle, Panel } from "@/shared/components";
+import { useCurrentUser, useIsAdmin, useIsSubscriber } from "@/features/authentication/hooks/useAuth";
+import { useLogoutMutation } from "@/features/authentication/api/auth.queries";
 
 /**
- * Temporary slice-1 showcase: proves the Tailwind theme and the shared
- * primitives render correctly against the ported design tokens. This is not
- * a real screen — it gets replaced once the first real feature (assessment
- * or authentication) lands its own routes.
+ * Temporary showcase: proves the Tailwind theme, the shared primitives, and
+ * (as of the `authentication` slice) the real session/login flow against the
+ * Node server. This is not a real screen — it gets replaced once a feature
+ * with an actual landing page (`assessment` or `opportunities`) lands.
  */
 function App() {
+  const user = useCurrentUser();
+  const isAdmin = useIsAdmin();
+  const isSubscriber = useIsSubscriber();
+  const logout = useLogoutMutation();
+
   return (
     <div className="min-h-screen bg-paper p-8">
       <div className="mx-auto flex max-w-3xl flex-col gap-8">
-        <header>
-          <h1 className="font-display text-2xl font-semibold text-ink">HUNTER</h1>
-          <p className="text-muted">Design system showcase — slice 1</p>
+        <header className="flex items-start justify-between">
+          <div>
+            <h1 className="font-display text-2xl font-semibold text-ink">HUNTER</h1>
+            <p className="text-muted">Design system showcase — slice 2 (authentication)</p>
+          </div>
+          <LanguageToggle />
         </header>
+
+        <Panel title="Session" subtitle="Reads GET /api/auth/me through React Query">
+          {user ? (
+            <div className="flex flex-col gap-2 text-sm">
+              <p>
+                Signed in as <b>{user.username}</b> ({user.role}
+                {isAdmin ? ", admin" : ""}
+                {isSubscriber ? ", subscriber" : ""})
+              </p>
+              <Button variant="ghost" size="sm" className="w-fit" onClick={() => logout.mutate()}>
+                Sign out
+              </Button>
+            </div>
+          ) : (
+            <div className="flex gap-3">
+              <Link to="/login">
+                <Button variant="gold" size="sm">
+                  Sign in
+                </Button>
+              </Link>
+              <Link to="/register">
+                <Button variant="ghost" size="sm">
+                  Register
+                </Button>
+              </Link>
+            </div>
+          )}
+        </Panel>
 
         <Panel title="Buttons" subtitle="Variants ported from the legacy .btn-* classes">
           <div className="flex flex-wrap gap-3">

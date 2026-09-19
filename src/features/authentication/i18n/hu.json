@@ -1,0 +1,30 @@
+{
+  "login": {
+    "title": "Belépés",
+    "subtitle": "Lépj be a cégfiókoddal, hogy lásd a személyre szabott találataidat."
+  },
+  "register": {
+    "title": "Cégfiók létrehozása",
+    "subtitle": "Hozd létre a céged fiókját. A cégprofilod és az előzményeid a fiókhoz kötve maradnak."
+  },
+  "tabs": {
+    "login": "Belépés",
+    "register": "Regisztráció"
+  },
+  "fields": {
+    "username": "Felhasználónév",
+    "password": "Jelszó",
+    "company": "Cégnév",
+    "email": "E-mail",
+    "optional": "opcionális"
+  },
+  "actions": {
+    "submitLogin": "Belépés",
+    "submitRegister": "Fiók létrehozása",
+    "submitting": "Egy pillanat…"
+  },
+  "adminHint": "Bemutató hozzáférés: <b>admin</b> / <b>admin</b> — adminisztrátori fiók, előfizetések kiosztásához.",
+  "backToHome": "Vissza a főoldalra",
+  "welcome": "Üdv, {{username}}!",
+  "signedOut": "Kijelentkeztél"
+}
