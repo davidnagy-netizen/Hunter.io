@@ -27,3 +27,15 @@ export const BackIcon = (p: IconProps) => (
 export const ExitIcon = (p: IconProps) => (
   <svg {...base(p)}><path d="M15 12H4M11 7l-5 5 5 5" /><path d="M10 4h7a2 2 0 012 2v12a2 2 0 01-2 2h-7" /></svg>
 );
+export const SearchIcon = (p: IconProps) => (
+  <svg {...base(p)}><circle cx="11" cy="11" r="6.5" /><path d="M15.8 15.8L20 20" /></svg>
+);
+export const CalendarIcon = (p: IconProps) => (
+  <svg {...base(p)}><rect x="3.5" y="5" width="17" height="16" rx="2.5" /><path d="M3.5 9.5h17M8 3v4M16 3v4" /></svg>
+);
+export const StarIcon = (p: IconProps) => (
+  <svg {...base(p)}><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 17l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9L12 3.5z" /></svg>
+);
+export const ArrowIcon = (p: IconProps) => (
+  <svg {...base({ size: 15, strokeWidth: 2, ...p })}><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+);

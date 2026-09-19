@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { formatDate, formatHuf, type Lang } from "@/shared/lib/format";
+import { formatDate, formatHuf, formatMonth, type Lang } from "@/shared/lib/format";
 
 /** The active UI language, narrowed to the two we support. */
 export function useLang(): Lang {
@@ -14,5 +14,6 @@ export function useFormat() {
     lang,
     huf: (amount: number) => formatHuf(amount, lang),
     date: (iso: string) => formatDate(iso, lang),
+    month: (year: number, month: number) => formatMonth(year, month, lang),
   };
 }

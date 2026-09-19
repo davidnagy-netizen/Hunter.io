@@ -7,6 +7,7 @@ import { CatalogStatus } from "./CatalogStatus";
 import { OpportunityCard } from "./OpportunityCard";
 import { PageHead } from "./PageHead";
 import { TeaserCard } from "./TeaserCard";
+import { UpcomingDeadlines } from "./UpcomingDeadlines";
 import { UpsellBlock } from "./UpsellBlock";
 import "../i18n";
 
@@ -63,11 +64,14 @@ export function DashboardPage() {
               <UpsellBlock lockedCount={lockedTotal} />
             </div>
           ) : shown.length ? (
-            <div className="flex flex-col gap-3">
-              {shown.map((item) => (
-                <OpportunityCard key={item.opp.id} item={item} />
-              ))}
-            </div>
+            <>
+              <div className="flex flex-col gap-3">
+                {shown.map((item) => (
+                  <OpportunityCard key={item.opp.id} item={item} />
+                ))}
+              </div>
+              <UpcomingDeadlines relevant={eligible.filter((r) => (r.res.score ?? 0) >= RELEVANT_SCORE)} />
+            </>
           ) : (
             <p className="text-sm text-muted">{t("dashboard.empty")}</p>
           )}

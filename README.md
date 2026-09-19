@@ -28,7 +28,7 @@ and cut over, its behavior should still match what those documents promise.
 | `authentication` | ✅ done — login, register, session, `isAdmin`/`isSubscriber`, verified against the real server |
 | `profile` (onboarding + version history) | ✅ done — wizard, server/local sync fork, version history + restore, verified against the real server (profile-sync bug fixed — see [Decisions](#decisions--changes-log)) |
 | `scoring` (eligibility engine + Hunter Score) | ✅ done — server engine imported directly (no copy), answers fork, ring/badge/breakdown/question components; 241/241 live scores match the server (see [Decisions](#decisions--changes-log)) |
-| `opportunities` (dashboard/list/detail/search/calendar/saved) | 🟡 half done — app shell, dashboard, list, detail (incl. calculator, save, gated view) ✅; **search, calendar and the saved page still to do** |
+| `opportunities` (dashboard/list/detail/search/calendar/saved) | ✅ done — app shell, dashboard, list, detail, search, calendar, saved; verified against the real server in all three access tiers |
 | `assessment` (free readiness funnel + lead capture) | not started |
 | `admin` | not started |
 | `crm` | not started |
@@ -196,7 +196,7 @@ the `authentication` feature, and the `profile` feature (schema, local store,
 the `useCompanyProfile` sync-fork hook, `OnboardingWizard`, `ProfileHistoryPanel`),
 and the `scoring` feature (engine wiring pinned to the demo-company scores,
 the answers fork with optimistic update/rollback, the scoring hooks, and its
-four components) — 126 tests, all passing (the `opportunities` screens, forks and app-shell guard added in slice 5).
+four components) — 160 tests, all passing (the `opportunities` screens, forks and app-shell guard added in slices 5–6).
 
 Feature tests that need React Query and/or routing use
 [`src/test/renderWithProviders.tsx`](src/test/renderWithProviders.tsx)
@@ -239,6 +239,69 @@ by some other process (a fixture script or a previously-populated
 
 Newest first. Each entry says what changed, why, and what it affects — the
 things that would otherwise only live in a chat transcript.
+
+### 2026-09-19 — `opportunities` feature, part 2 (slice 6): search, calendar, saved
+Finishes the feature. Search (`/app/search`), the funding calendar
+(`/app/calendar`), the saved-calls page (`/app/saved`), the dashboard's
+"upcoming deadlines" list (left out of slice 5), and the detail-page fallback
+for calls the catalog doesn't hold. Verified in the browser against the real
+server as a subscriber and as a gated account.
+
+Live results: search totals matched the server exactly (602 with no filter;
+17 for `hydrogen` + Energy; 165 for "can apply alone"), the URL carried the
+whole state, paging read `2 / 9`, and changing the sort reset the page. A
+forthcoming call (`eu-horizon-cid-2027-01-02`) that search returns but the
+open-calls catalog does not opened correctly through the new fallback, with a
+locally computed score of 63 that matched the server's 63. For a gated account
+search returned 18 locked rows, none with a real link; the calendar showed
+only the 3 urgent teasers; saved showed a subscription notice.
+
+Built:
+- **One card, two sources.** `OpportunityCardView` is the single presentational
+  card, driven by a `CardModel`. `OpportunityCard` (catalog call scored in the
+  browser) and `SearchResultCard` (a row the server scored) are thin adapters
+  onto it. This is what "one card instead of the legacy's four" needed:
+  search rows have a different shape from ranked catalog calls.
+- **Search state lives in the URL** (`domain/searchState.ts`, `useSearchState`):
+  linkable, survives reload, back button steps through it. Pure parse/serialize
+  functions with tests. Filter changes return to page 1.
+- `useSearchQuery` (server-scored search; anonymous visitors send their profile
+  in the body), `useOpportunityDetailQuery` + `useOpportunity` (catalog first,
+  then `GET /api/opportunities/:id`; never for a gated account), the facet
+  panel with server-computed counts, `CalendarPage`, `SavedPage`,
+  `DeadlineRow`, `UpcomingDeadlines`.
+- `formatMonth` in `shared/lib`, and three icons.
+- 34 new tests (160 total).
+
+Bugs caught by this slice's own checks:
+- **Every search and every gated catalog load made two requests for a signed-in
+  account.** The query fired once before the profile had loaded (profile `null`
+  in the key) and again after. Found by a test asserting "one request", fixed
+  by waiting for the profile before requesting anything that depends on it (a
+  subscriber's catalog does not, so it still loads immediately). Confirmed in
+  the browser: one `/api/search`, after `/api/profile`.
+- **The consortium filter value is `"solo"`, not `"none"`.** I had guessed the
+  second value; reading `src/engine/search.js` showed `"none"` would have been
+  silently ignored by the server and returned everything.
+
+Deliberate changes from the legacy behavior:
+- **Search runs immediately** and shows results for an empty query (scored,
+  best first); the legacy screen showed a prompt until you pressed Search.
+- **"Upcoming deadlines" are the four earliest deadlines among relevant
+  matches.** The legacy took the four best-scoring matches and then sorted them
+  by date, which is not "upcoming".
+- **The calendar no longer says reminders and `.ics` export are "in the full
+  version".** Neither exists (PRODUCT-STATUS §3.6), so it says they are not
+  available yet.
+- **Saved shows everything saved, including a call the engine has since ruled
+  out.** The legacy card rendered a blank score for such a call.
+
+Known gaps carried forward:
+- The nav has no saved-count tag (the legacy sidebar showed one): nav entries
+  are static descriptors and a count needs a hook.
+- For a gated account, search facets still expose counts. That is the server's
+  decision (the legacy did the same).
+- The "to watch / missing data" tile inconsistency from slice 5 is unchanged.
 
 ### 2026-09-19 — `opportunities` feature, part 1 (slice 5): shell, dashboard, list, detail
 The signed-in application now exists at `/app`: an `AppShell` (sidebar on

@@ -5,6 +5,9 @@ import { OnboardingWizard } from "@/features/profile/components/OnboardingWizard
 import { DashboardPage } from "@/features/opportunities/components/DashboardPage";
 import { OpportunitiesPage } from "@/features/opportunities/components/OpportunitiesPage";
 import { OpportunityDetailPage } from "@/features/opportunities/components/OpportunityDetailPage";
+import { CalendarPage } from "@/features/opportunities/components/CalendarPage";
+import { SavedPage } from "@/features/opportunities/components/SavedPage";
+import { SearchPage } from "@/features/opportunities/components/SearchPage";
 import { AppShell } from "@/app/layout/AppShell";
 import { RequireProfile } from "@/app/layout/RequireProfile";
 
@@ -42,6 +45,9 @@ export const router = createBrowserRouter([
       { index: true, element: <DashboardPage /> },
       { path: "opportunities", element: <OpportunitiesPage /> },
       { path: "opportunities/:id", element: <OpportunityDetailPage /> },
+      { path: "search", element: <SearchPage /> },
+      { path: "calendar", element: <CalendarPage /> },
+      { path: "saved", element: <SavedPage /> },
     ],
   },
 ]);

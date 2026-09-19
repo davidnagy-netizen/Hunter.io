@@ -8,12 +8,15 @@ import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
 import { useLocalProfileStore } from "@/features/profile/store/localProfileStore";
 import { profileApi } from "@/features/profile/api/profile.api";
 import { opportunitiesApi } from "./opportunities.api";
-import { useCatalog } from "./opportunities.queries";
+import { useCatalog, useSearchQuery } from "./opportunities.queries";
+import { EMPTY_SEARCH } from "../domain/searchState";
 
 vi.mock("@/features/authentication/api/auth.api", () => ({ authApi: { me: vi.fn(), login: vi.fn(), register: vi.fn(), logout: vi.fn() } }));
 vi.mock("@/features/profile/api/profile.api", () => ({ profileApi: { get: vi.fn(), save: vi.fn(), loadDemo: vi.fn(), history: vi.fn(), restore: vi.fn() } }));
 vi.mock("@/features/scoring/api/answers.api", () => ({ answersApi: { save: vi.fn() } }));
-vi.mock("./opportunities.api", () => ({ opportunitiesApi: { catalog: vi.fn(), catalogFor: vi.fn(), toggleSaved: vi.fn() } }));
+vi.mock("./opportunities.api", () => ({
+  opportunitiesApi: { catalog: vi.fn(), catalogFor: vi.fn(), search: vi.fn(), searchFor: vi.fn(), detail: vi.fn(), toggleSaved: vi.fn() },
+}));
 
 const ME = (tier: string, user: unknown) => ({ user, entitlements: { tier }, plans: [], adminSeed: {} }) as never;
 let client = createTestQueryClient();
@@ -59,5 +62,47 @@ describe("useCatalog", () => {
     await waitFor(() => expect(result.current.catalog).toBeDefined());
     expect(opportunitiesApi.catalog).toHaveBeenCalledTimes(1);
     expect(opportunitiesApi.catalogFor).not.toHaveBeenCalled();
+  });
+});
+
+describe("useSearchQuery", () => {
+  beforeEach(() => {
+    vi.mocked(opportunitiesApi.search).mockResolvedValue({ results: [] } as never);
+    vi.mocked(opportunitiesApi.searchFor).mockResolvedValue({ results: [] } as never);
+  });
+
+  it("an anonymous visitor's search carries their browser-held profile in the body", async () => {
+    vi.mocked(authApi.me).mockResolvedValue(ME("anonymous", null));
+    useLocalProfileStore.getState().setProfile(DEMO_PROFILE);
+    const { result } = renderHook(() => useSearchQuery({ ...EMPTY_SEARCH, q: "ai" }, "en"), { wrapper });
+
+    await waitFor(() => expect(result.current.data).toBeDefined());
+    const [request, profile] = vi.mocked(opportunitiesApi.searchFor).mock.calls[0];
+    expect(new URLSearchParams(request).get("q")).toBe("ai");
+    expect(new URLSearchParams(request).get("lang")).toBe("en");
+    expect(profile).toEqual(DEMO_PROFILE);
+    expect(opportunitiesApi.search).not.toHaveBeenCalled();
+  });
+
+  it("a signed-in account searches with just the query — the server has its profile", async () => {
+    vi.mocked(authApi.me).mockResolvedValue(ME("subscriber", { id: "u1", role: "user" }));
+    vi.mocked(profileApi.get).mockResolvedValue({ profile: DEMO_PROFILE, answers: {}, saved: [], demoProfile: DEMO_PROFILE, versions: 1 });
+    const { result } = renderHook(() => useSearchQuery(EMPTY_SEARCH, "hu"), { wrapper });
+
+    await waitFor(() => expect(result.current.data).toBeDefined());
+    expect(opportunitiesApi.search).toHaveBeenCalledTimes(1);
+    expect(opportunitiesApi.searchFor).not.toHaveBeenCalled();
+  });
+
+  it("searches again when the query changes, not when nothing did", async () => {
+    vi.mocked(authApi.me).mockResolvedValue(ME("subscriber", { id: "u1", role: "user" }));
+    vi.mocked(profileApi.get).mockResolvedValue({ profile: DEMO_PROFILE, answers: {}, saved: [], demoProfile: DEMO_PROFILE, versions: 1 });
+    const { result, rerender } = renderHook(({ q }) => useSearchQuery({ ...EMPTY_SEARCH, q }, "hu"), { wrapper, initialProps: { q: "a" } });
+    await waitFor(() => expect(result.current.data).toBeDefined());
+
+    rerender({ q: "a" });
+    expect(opportunitiesApi.search).toHaveBeenCalledTimes(1);
+    rerender({ q: "b" });
+    await waitFor(() => expect(opportunitiesApi.search).toHaveBeenCalledTimes(2));
   });
 });

@@ -10,7 +10,7 @@ import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
 import { useLocalProfileStore } from "@/features/profile/store/localProfileStore";
 import { useLocalAnswersStore } from "@/features/scoring/store/localAnswersStore";
 import { useLocalSavedStore } from "../store/localSavedStore";
-import { useCatalog } from "../api/opportunities.queries";
+import { useCatalog, useOpportunityDetailQuery } from "../api/opportunities.queries";
 import type { Teaser } from "../types/opportunities.types";
 import { DashboardPage } from "./DashboardPage";
 import { OpportunitiesPage } from "./OpportunitiesPage";
@@ -18,7 +18,12 @@ import { OpportunityDetailPage } from "./OpportunityDetailPage";
 
 vi.mock("@/features/authentication/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn(), useIsSubscriber: vi.fn() }));
 vi.mock("@/shared/api/meta.api", () => ({ metaApi: { get: vi.fn() } }));
-vi.mock("../api/opportunities.queries", () => ({ useCatalog: vi.fn(), opportunitiesKeys: { all: ["opportunities"] } }));
+vi.mock("../api/opportunities.queries", () => ({
+  useCatalog: vi.fn(),
+  useSearchQuery: vi.fn(),
+  useOpportunityDetailQuery: vi.fn(),
+  opportunitiesKeys: { all: ["opportunities"] },
+}));
 
 const META = {
   today: "2026-09-07",
@@ -63,6 +68,7 @@ beforeEach(() => {
   vi.mocked(useIsAuthenticated).mockReturnValue(false);
   vi.mocked(useIsSubscriber).mockReturnValue(true);
   vi.mocked(metaApi.get).mockResolvedValue(META);
+  vi.mocked(useOpportunityDetailQuery).mockReturnValue({ data: undefined, isLoading: false } as never);
   useLocalProfileStore.getState().setProfile(DEMO_PROFILE);
   useLocalAnswersStore.getState().clear();
   useLocalSavedStore.getState().clear();
@@ -192,6 +198,23 @@ describe("OpportunityDetailPage", () => {
 
     await user.click(screen.getByRole("button", { name: /elmentve|saved/i }));
     expect(useLocalSavedStore.getState().ids).toEqual([]);
+  });
+
+  it("opens a call the open-calls catalog doesn't hold by fetching it from the server", async () => {
+    fullCatalog();
+    const forthcoming = { ...OPPS.find((o) => o.id === "szechenyi-tech")!, id: "forthcoming-1", title: "A forthcoming call" };
+    vi.mocked(useOpportunityDetailQuery).mockReturnValue({ data: forthcoming, isLoading: false } as never);
+    renderDetail("forthcoming-1");
+
+    expect(await screen.findByRole("heading", { level: 1, name: "A forthcoming call" })).toBeInTheDocument();
+    expect(vi.mocked(useOpportunityDetailQuery)).toHaveBeenCalledWith("forthcoming-1", true);
+  });
+
+  it("does not ask the server for a call that IS in the catalog", async () => {
+    fullCatalog();
+    renderDetail("szechenyi-tech");
+    await screen.findByRole("heading", { level: 1 });
+    expect(vi.mocked(useOpportunityDetailQuery)).toHaveBeenCalledWith("szechenyi-tech", false);
   });
 
   it("says a call is unavailable when it isn't in the catalog", async () => {

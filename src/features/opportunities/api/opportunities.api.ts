@@ -1,7 +1,8 @@
 import { httpClient } from "@/shared/api/httpClient";
 import type { CompanyProfile } from "@/features/profile/types/profile.types";
 import type { AnswerMap } from "@/features/scoring/types/scoring.types";
-import type { CatalogResponse, SaveOpportunityResponse } from "../types/opportunities.types";
+import type { Opportunity } from "@/features/scoring/types/scoring.types";
+import type { CatalogResponse, SaveOpportunityResponse, SearchResponse } from "../types/opportunities.types";
 
 export const opportunitiesApi = {
   /** A signed-in account: the server already holds its profile and answers. */
@@ -16,6 +17,22 @@ export const opportunitiesApi = {
    */
   catalogFor: (profile: CompanyProfile, answers: AnswerMap) =>
     httpClient.post<CatalogResponse>("/catalog", { profile, answers, saved: [] }).then((res) => res.data),
+
+  /** Scored search for a signed-in account (the server uses its stored profile). */
+  search: (query: string) => httpClient.get<SearchResponse>(`/search?${query}`).then((res) => res.data),
+
+  /** Scored search for an anonymous visitor: their browser-held profile travels in the body, as with `catalogFor`. */
+  searchFor: (query: string, profile: CompanyProfile, answers: AnswerMap) =>
+    httpClient.post<SearchResponse>(`/search?${query}`, { profile, answers, saved: [] }).then((res) => res.data),
+
+  /**
+   * One call by id, straight from the server. The catalog only holds *open*
+   * calls, but search also returns forthcoming ones; this is how those open.
+   * The server's detail payload spreads the whole opportunity, so it can be
+   * scored locally like any catalog entry.
+   */
+  detail: (oppId: string) =>
+    httpClient.get<{ opportunity: Opportunity }>(`/opportunities/${encodeURIComponent(oppId)}`).then((res) => res.data.opportunity),
 
   toggleSaved: (oppId: string) =>
     httpClient.post<SaveOpportunityResponse>(`/opportunities/${encodeURIComponent(oppId)}/save`).then((res) => res.data),

@@ -36,6 +36,8 @@ export function useOpportunitiesData() {
     gated,
     teasers: catalog?.gated ? catalog.teasers : NO_TEASERS,
     lockedTotal: catalog?.gated ? catalog.lockedTotal : 0,
+    /** Every ranked call, including prizes and labels — for screens that show what the user chose (saved). */
+    ranked,
     eligible,
     blocked,
     stats,

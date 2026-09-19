@@ -1,7 +1,10 @@
 {
   "nav": {
     "dashboard": "Dashboard",
-    "opportunities": "Pályázatok"
+    "opportunities": "Pályázatok",
+    "search": "Keresés",
+    "calendar": "Naptár",
+    "saved": "Kedvencek"
   },
   "loading": "Betöltés…",
   "error": "A katalógus nem érhető el: {{message}}",
@@ -17,7 +20,9 @@
     "recommended": "Neked ajánlott",
     "only70": "Csak a 70+ találatok",
     "lower": "Alacsonyabb relevancia is",
-    "empty": "Ezen a relevanciaszinten még nincs találat."
+    "empty": "Ezen a relevanciaszinten még nincs találat.",
+    "upcoming": "Következő határidők",
+    "fullCalendar": "Teljes naptár"
   },
   "list": {
     "title": "Pályázatok",
@@ -150,5 +155,63 @@
     "deMinimisNo": "nincs keret",
     "yes": "Igen",
     "no": "Nem"
+  },
+  "search": {
+    "title": "Keresés",
+    "subtitle": "Kereshetsz az összes nyitott és közelgő európai és magyar felhívás között. A találatok a cégprofilodra pontozva jelennek meg.",
+    "placeholder": "Keress témára, programra vagy azonosítóra — pl. hidrogén, digitalizáció, HORIZON-CL4",
+    "go": "Keresés",
+    "results_one": "{{count}} találat",
+    "results_other": "{{count}} találat",
+    "resultsFor": "erre: {{q}}",
+    "loading": "Keresés…",
+    "unavailable": "A keresés nem érhető el",
+    "empty": {
+      "title": "Nincs találat",
+      "body": "Próbálj tágabb kifejezést, vagy vegyél le egy szűrőt."
+    },
+    "onlyEligible": "Csak amire jogosult vagyok",
+    "sort": {
+      "": "Relevancia",
+      "-score": "Hunter Score",
+      "deadline": "Határidő",
+      "-budget": "Támogatás"
+    },
+    "facet": {
+      "program": "Program",
+      "goals": "Fejlesztési cél",
+      "actionCode": "Támogatási forma",
+      "consortium": "Pályázói forma"
+    },
+    "consortium": {
+      "required": "Konzorcium szükséges",
+      "solo": "Önállóan is pályázható"
+    },
+    "clearAll": "Összes szűrő törlése",
+    "remove": "Eltávolítás",
+    "prev": "Előző",
+    "next": "Következő",
+    "pageOf": "{{page}} / {{pages}}",
+    "source": "Forrás",
+    "inCatalog": "{{n}} felhívás a katalógusban",
+    "rate": "1 EUR = {{rate}} HUF (EKB középárfolyam)"
+  },
+  "calendar": {
+    "title": "Funding Calendar",
+    "subtitle": "Nem neked kell figyelned a határidőket — a Hunter figyeli helyetted. Csak a 70+ Hunter Score-ú, releváns találatok jelennek meg.",
+    "gatedSubtitle": "A közelgő beadási határidőid. A dátumok az előfizetéssel nyílnak meg — addig annyi látszik, hogy hány határidő vár rád és mekkora összegről van szó.",
+    "deadlines_one": "{{count}} beadási határidő",
+    "deadlines_other": "{{count}} beadási határidő",
+    "urgent": "{{n}} sürgős",
+    "days": "{{n}} nap",
+    "empty": "A releváns találataid között nincs közelgő határidő.",
+    "notice": "Az emlékeztetők (30/14/7/3 nap) és az .ics export még nem elérhető. Szakaszos elbírálásnál a keret a határidő előtt kimerülhet."
+  },
+  "saved": {
+    "title": "Kedvencek",
+    "subtitle": "Az elmentett lehetőségeid egy helyen.",
+    "emptyTitle": "Még nincs mentett pályázatod",
+    "emptyBody": "A találatok részletes oldalán az „Elmentem” gombbal teheted ide, amit később megnéznél.",
+    "gated": "Az elmentett felhívások az előfizetéssel nyílnak meg."
   }
 }

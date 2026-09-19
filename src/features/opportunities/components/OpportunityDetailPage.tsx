@@ -10,7 +10,7 @@ import { ruleLabel } from "@/features/scoring/domain/engine";
 import { useHunterScore } from "@/features/scoring/hooks/useScoring";
 import type { Opportunity } from "@/features/scoring/types/scoring.types";
 import { applyLinks, isCuratedReference } from "../domain/applyLinks";
-import { useOpportunitiesData } from "../hooks/useOpportunitiesData";
+import { useOpportunity } from "../hooks/useOpportunity";
 import { useRuleValueFormatter } from "../hooks/useRuleValueFormatter";
 import { useSaved } from "../hooks/useSaved";
 import { ApplyPanel } from "./ApplyPanel";
@@ -66,8 +66,8 @@ export function OpportunityDetailPage() {
   const { huf, date, lang } = useFormat();
   const formatValue = useRuleValueFormatter();
   const { profile } = useCompanyProfile();
-  const data = useOpportunitiesData();
-  const opp = data.find(id);
+  const data = useOpportunity(id);
+  const opp = data.opp;
   const result = useHunterScore(opp);
   const saved = useSaved();
 

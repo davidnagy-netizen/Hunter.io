@@ -40,7 +40,8 @@ export interface OptionalProfileField {
 }
 
 export interface MetaResponse {
-  catalog: unknown;
+  /** Catalog build info; absent until a catalog has been built. */
+  catalog: { counts?: { total: number }; eurHuf?: number } | null;
   reference: {
     regions: Region[];
     industries: Industry[];

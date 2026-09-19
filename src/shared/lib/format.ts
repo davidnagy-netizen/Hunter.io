@@ -18,3 +18,11 @@ export function formatDate(iso: string, lang: Lang): string {
   if (lang === "en") return date.toLocaleDateString("en-GB", { year: "numeric", month: "short", day: "2-digit" });
   return date.toLocaleDateString("hu-HU", { year: "numeric", month: "2-digit", day: "2-digit" }).replace(/\s/g, "");
 }
+
+/** "October 2026" / "2026. október" — a month heading. `month` is 1–12. */
+export function formatMonth(year: number, month: number, lang: Lang): string {
+  const date = new Date(Date.UTC(year, month - 1, 1));
+  const name = date.toLocaleDateString(locale(lang), { month: "long", timeZone: "UTC" });
+  const cased = name.charAt(0).toUpperCase() + name.slice(1);
+  return lang === "en" ? `${cased} ${year}` : `${year}. ${name}`;
+}
