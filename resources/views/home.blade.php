@@ -451,6 +451,7 @@
 @endpush
 
 @section('content')
+<div id="react-root" data-react-component="HomePage" data-props="{{ json_encode(['featuredOpportunities' => $featuredOpportunities]) }}">
 <div class="fundor-container">
 
     <!-- 1. Hero Section -->
@@ -994,6 +995,7 @@
         </div>
     </div>
 
+</div>
 </div>
 @endsection
 

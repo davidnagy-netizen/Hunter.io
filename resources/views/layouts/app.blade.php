@@ -13,6 +13,8 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @viteReactRefresh
+    @vite(['resources/css/app.css', 'resources/js/app.jsx'])
     @stack('styles')
 </head>
 <body>

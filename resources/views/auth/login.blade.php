@@ -1,6 +1,7 @@
 @extends('layouts.guest')
 @section('title', __('Bejelentkezés'))
 @section('content')
+<div id="react-root" data-react-component="LoginPage" data-props="{{ json_encode(['oldUsername' => old('username', ''), 'currentLocale' => app()->getLocale()]) }}">
 <section class="login-shell" aria-labelledby="login-heading">
     <aside class="login-visual">
         <img src="{{ asset('images/login-architecture.png') }}" alt="" width="1024" height="1536" fetchpriority="high">
@@ -32,6 +33,7 @@
         </div>
     </div>
 </section>
+</div>
 @endsection
 @push('styles')
 <style>

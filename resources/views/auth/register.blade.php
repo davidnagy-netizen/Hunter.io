@@ -3,6 +3,7 @@
 @section('title', __('Cégprofil Regisztráció'))
 
 @section('content')
+<div id="react-root" data-react-component="RegisterPage" data-props="{{ json_encode(['oldInput' => old()]) }}">
 <div style="max-width: 480px; margin: 50px auto; padding: 0 20px;">
     <div class="card" style="padding: 36px 32px;">
         <h3 style="font-size: 24px; margin-bottom: 8px; text-align: center;">{{ __('Regisztráció') }}</h3>
@@ -53,5 +54,6 @@
             {{ __('Már rendelkezik fiókkal?') }} <a href="{{ route('login') }}" style="color: var(--gold-deep); font-weight: 600;">{{ __('Jelentkezzen be') }}</a>
         </div>
     </div>
+</div>
 </div>
 @endsection

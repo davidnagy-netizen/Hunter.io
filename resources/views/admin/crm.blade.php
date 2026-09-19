@@ -4,6 +4,7 @@
 @section('header_title', __('Érdeklődők és Ügyfélkapcsolat Kezelés (CRM)'))
 
 @section('content')
+<div id="react-root" data-react-component="AdminCrmPage" data-props="{{ json_encode(['groupedLeads' => $groupedLeads]) }}">
 <div>
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
         <div>
@@ -65,5 +66,6 @@
             </div>
         @endforeach
     </div>
+</div>
 </div>
 @endsection

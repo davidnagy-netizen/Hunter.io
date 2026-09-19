@@ -4,6 +4,7 @@
 @section('header_title', __('Rendszer és Platform Áttekintés'))
 
 @section('content')
+<div id="react-root" data-react-component="AdminDashboardPage" data-props="{{ json_encode(['stats' => $stats, 'recentUsers' => $recentUsers, 'recentLeads' => $recentLeads]) }}">
 <div>
     <!-- System Metrics -->
     <div class="grid grid-cols-4" style="margin-bottom: 24px;">
@@ -66,5 +67,6 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection

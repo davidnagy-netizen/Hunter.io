@@ -4,6 +4,7 @@
 @section('header_title', $opportunity->program . ' • ' . $opportunity->title)
 
 @section('content')
+<div id="react-root" data-react-component="OpportunityShowPage" data-props="{{ json_encode(['opportunity' => $opportunity, 'profile' => $profile]) }}">
 <div style="max-width: 1040px; margin: 0 auto;">
     <!-- Top Summary Card with Score Ring -->
     <div class="card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; margin-bottom: 24px;">
@@ -155,5 +156,6 @@
             </form>
         </div>
     @endif
+</div>
 </div>
 @endsection

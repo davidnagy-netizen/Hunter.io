@@ -4,6 +4,7 @@
 @section('header_title', __('Vállalati Támogatási Profil Konfiguráció'))
 
 @section('content')
+<div id="react-root" data-react-component="OnboardingPage" data-props="{{ json_encode(['existingProfile' => $existingProfile, 'oldInput' => old()]) }}">
 <div style="max-width: 800px; margin: 0 auto;">
     <div class="card">
         <h3 style="font-size: 22px; margin-bottom: 6px;">{{ __('Strukturált Cégprofil') }}</h3>
@@ -109,5 +110,6 @@
             </div>
         </form>
     </div>
+</div>
 </div>
 @endsection

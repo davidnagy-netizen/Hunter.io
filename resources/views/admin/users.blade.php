@@ -4,6 +4,7 @@
 @section('header_title', __('Felhasználói Fiókok és Cégprofilok'))
 
 @section('content')
+<div id="react-root" data-react-component="AdminUsersPage" data-props="{{ json_encode(['users' => $users]) }}">
 <div class="card">
     <h3 style="font-size: 20px; margin-bottom: 16px;">{{ __('Regisztrált Felhasználók') }}</h3>
 
@@ -48,5 +49,6 @@
     <div style="margin-top: 20px;">
         {{ $users->links() }}
     </div>
+</div>
 </div>
 @endsection

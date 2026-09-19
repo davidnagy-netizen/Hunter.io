@@ -1176,8 +1176,11 @@
       transform: translateY(0);
     }
   </style>
+  @viteReactRefresh
+  @vite(['resources/css/app.css', 'resources/js/app.jsx'])
 </head>
 <body>
+<div id="react-root" data-react-component="GrassfeldPage">
 
   <!-- 1. Header & Navigation -->
   <header class="site-header" role="banner">
@@ -2514,5 +2517,6 @@
       });
     });
   </script>
+</div>
 </body>
 </html>

@@ -3,6 +3,7 @@
 @section('title', __('Ingyenes Pályázati Készültségi Felmérés'))
 
 @section('content')
+<div id="react-root" data-react-component="AssessmentPage" data-props="{{ json_encode(['completed' => $completed ?? false, 'readinessScore' => $readinessScore ?? 70, 'teaserOpportunities' => $teaserOpportunities ?? [], 'oldInput' => old()]) }}">
 <div style="max-width: 760px; margin: 40px auto; padding: 0 20px;">
     @if(isset($completed) && $completed)
         <!-- Assessment Result View -->
@@ -86,5 +87,6 @@
             </form>
         </div>
     @endif
+</div>
 </div>
 @endsection
