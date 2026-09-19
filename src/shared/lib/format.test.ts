@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatDate, formatDateTime, formatHuf, formatMonth } from "./format";
+import { formatDate, formatDateTime, formatHuf, formatMoney, formatMonth } from "./format";
 
 describe("formatHuf", () => {
   it("uses millions below a billion", () => {
@@ -41,5 +41,17 @@ describe("formatDateTime", () => {
   it("appends the time to the date, in each language's order", () => {
     expect(formatDateTime("2026-09-19T15:31:00", "en")).toMatch(/19 Sep\w* 2026.*15:31/);
     expect(formatDateTime("2026-09-19T15:31:00", "hu")).toMatch(/2026\. szept\. 19\.\s*15:31/);
+  });
+});
+
+describe("formatMoney", () => {
+  it("writes the whole amount, not millions", () => {
+    expect(formatMoney(5990, "en")).toBe("5,990 HUF");
+    expect(formatMoney(71880, "hu").replace(/\s/g, "")).toBe("71880Ft");
+  });
+
+  it("rounds to a whole forint and handles zero", () => {
+    expect(formatMoney(5990.6, "en")).toBe("5,991 HUF");
+    expect(formatMoney(0, "en")).toBe("0 HUF");
   });
 });

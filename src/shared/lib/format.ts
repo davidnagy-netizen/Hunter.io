@@ -12,6 +12,11 @@ export function formatHuf(amount: number, lang: Lang): string {
   return Math.round(amount / 1e6).toLocaleString(locale(lang)) + (lang === "en" ? "M HUF" : " M Ft");
 }
 
+/** A full, ungrouped-to-millions amount: `5 990 Ft` / `5,990 HUF`. For figures people write down (MRR, ARR), unlike the abbreviated `formatHuf`. */
+export function formatMoney(amount: number, lang: Lang): string {
+  return new Intl.NumberFormat(locale(lang)).format(Math.round(amount)) + (lang === "en" ? " HUF" : " Ft");
+}
+
 /** `2027.01.20.` in Hungarian, `20 Jan 2027` in English. */
 export function formatDate(iso: string, lang: Lang): string {
   const date = new Date(iso);

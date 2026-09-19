@@ -22,6 +22,10 @@ export type { ChipButtonProps } from "./ChipButton";
 
 export { LanguageToggle } from "./LanguageToggle";
 
+export { Pager } from "./Pager";
+export { Dialog } from "./Dialog";
+export type { DialogProps } from "./Dialog";
+
 export { Logo } from "./Logo";
 export { PageHead } from "./PageHead";
 export { QueryStatus } from "./QueryStatus";

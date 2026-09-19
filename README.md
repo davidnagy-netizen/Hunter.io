@@ -32,7 +32,7 @@ and cut over, its behavior should still match what those documents promise.
 | `assessment` (free readiness funnel + lead capture) | ✅ done — 6-question funnel, readiness score (ported unchanged; **the keep/replace decision is still open**), censored real matches, lead capture, hand-off into onboarding |
 | `landing` (public front door) | ✅ done — pitch, worked example, sources, price; replaces the temporary showcase page |
 | `admin` (overview, users, system) | 🟡 built and unit-tested (65 tests); **not yet clicked through as a signed-in admin in a browser** — that pass is pending (see the log entry) |
-| `crm` | not started |
+| `crm` (pipeline, contacts, leads, insights, contact record) | 🟡 built and unit-tested (127 tests); **signed-in browser pass pending**, as for `admin` |
 | `hunter-plus` (demo) | not started |
 
 Nothing here is wired up to the real Node server or served to real users yet.
@@ -106,7 +106,7 @@ authentication → profile → scoring → opportunities → assessment → hunt
                                                      ↘ hunter-plus
 authentication → admin   (+ opportunities, for its cache key only: a catalog refresh invalidates it)
 profile, opportunities → assessment;   authentication, profile → landing
-authentication, profile, opportunities → crm (read-only)
+authentication, admin (GrantForm, ProfileChanges, activity names), profile (types only) → crm
 ```
 
 **Rules that keep this from rotting back into a components/hooks/utils dump:**
@@ -198,7 +198,7 @@ the `authentication` feature, and the `profile` feature (schema, local store,
 the `useCompanyProfile` sync-fork hook, `OnboardingWizard`, `ProfileHistoryPanel`),
 and the `scoring` feature (engine wiring pinned to the demo-company scores,
 the answers fork with optimistic update/rollback, the scoring hooks, and its
-four components) — 268 tests, all passing (slices 5–7 added the `opportunities` screens and forks, the app-shell guard, the assessment funnel, lead capture, the landing page, the loader and the shared motion components; slice 8 the admin console, its route guard, the workspace switch and the admin-aware redirects).
+four components) — 395 tests, all passing (slices 5–7 added the `opportunities` screens and forks, the app-shell guard, the assessment funnel, lead capture, the landing page, the loader and the shared motion components; slice 8 the admin console, its route guard, the workspace switch and the admin-aware redirects; slice 9 the CRM, the shared `Dialog` and `Pager`).
 
 Feature tests that need React Query and/or routing use
 [`src/test/renderWithProviders.tsx`](src/test/renderWithProviders.tsx)
@@ -241,6 +241,119 @@ by some other process (a fixture script or a previously-populated
 
 Newest first. Each entry says what changed, why, and what it affects — the
 things that would otherwise only live in a chat transcript.
+
+### 2026-09-20 — `crm` part 2 (slice 9): contacts, leads, insights
+Finishes the CRM. Three more tabs, each a route (`/admin/crm/contacts`,
+`/leads`, `/insights`), and the tab strip now shows counts (open deals,
+contacts, leads) from the server's own metrics.
+
+Built:
+- **Contacts** — search, stage / lifecycle / source filters, six sorts, paging,
+  and a CSV export. The whole view is the URL (`?q=&stage=&sort=&page=`), so it
+  can be linked, survives a reload, and the back button steps through it;
+  changing any filter goes back to page 1. The export is a plain download link
+  built from the same filter (minus paging), so it carries the session cookie
+  itself and downloads exactly what the list shows. The previous page stays on
+  screen while the next filter loads.
+- **Leads** — who finished the free assessment and asked to be contacted, with
+  what they submitted (readiness, staff, county, project value) and a badge
+  when a lead has since become an account.
+- **Insights** — MRR / ARR / average per account / trial→paid, the acquisition
+  funnel, contacts by stage, revenue by plan, sources, a six-month chart as
+  inline SVG (no chart library), and the accounts that are active but not yet
+  subscribed, in call order. Where there is nothing to measure it shows a dash
+  and says why, never a zero: "no trial has completed yet", not "0%". The bar
+  and chart geometry is pure functions (`domain/insights.ts`), tested apart
+  from the SVG.
+- **Shared:** `Pager`, extracted from the search page's inline copy — the search
+  page now uses it too, and its three private pager strings are gone.
+- 49 new tests (395 total), including that "back" from a contact returns to
+  the exact filtered list it was opened from.
+
+Deliberate changes from the legacy CRM:
+- **"Back" from a contact returns to the tab — with its filters — it was opened
+  from** (recorded in navigation state by `ContactLink`); the legacy remembered
+  the tab in memory. Opened directly, it goes to the pipeline.
+- **Contacts are a real table with a horizontal-scroll wrapper**, not the
+  legacy's page-wide overflow; the search runs on Enter / the button, as the
+  legacy did (its `change` event), not per keystroke.
+- **The tab is a route**, so each can be linked; the legacy held it in state.
+
+Not exposed, because the legacy did not either: the server's `owner`, `tag`,
+`kind`, `minEngagement`, `hasOpenTask` and `overdue` contact filters, and the
+`facets`, `owners` and `tags` it returns alongside the list. Adding an owner
+filter would be small if the team wants one.
+
+Verification status is unchanged and stated plainly: unit tests, `tsc`, lint
+and the build are green; the **signed-in browser pass for both the admin
+console and the CRM is still pending** — it needs the admin password typed in,
+which was left to the project owner.
+
+### 2026-09-20 — `crm` part 1 (slice 9): the pipeline and the contact record
+The CRM is split like `opportunities` was. Part 1 is the two screens everything
+else hangs off: the **pipeline** (`/admin/crm`) and the **contact record**
+(`/admin/crm/contact/:id`). Part 2 (contacts list, leads, insights) is the entry
+above. The CRM sits second in the admin nav, as in the legacy console.
+
+Built:
+- **Pipeline:** five headline numbers (MRR with subscribers and ARR, running
+  trials with conversion, open deals with expected value, overdue tasks with
+  due-today, lapsed with churn), the overdue follow-ups, and one column per
+  stage. Cards are draggable; each also has a stage dropdown, which is the
+  keyboard/touch route. Every figure is the server's — the screen computes
+  nothing but "overdue" from the open-task list, as the legacy did.
+- **Contact record:** notes (with a kind — a call is not a decision),
+  follow-ups (tick, untick, delete, overdue flagged), timeline, engagement (the
+  score *and* the rows that produced it), company profile with goals by name,
+  saved calls, owner/tags, and — for accounts — the same grant / revoke form as
+  the users page, reused rather than copied (`admin`'s `GrantForm` gained an
+  `onChanged` callback so the CRM caches refetch). A lead gets its assessment
+  score and a delete button instead of access and engagement.
+- **Shared:** `Dialog` (an accessible modal primitive: focus in and back out,
+  Escape, backdrop), `formatMoney` / `useFormat().money` (the full `5 990 Ft`
+  for figures people write down, next to the abbreviating `formatHuf`).
+- **From `admin`, reused:** `GrantForm`, `ProfileChanges`, `useActivityLabel`.
+  Dependency direction stays acyclic: `crm → admin → authentication`.
+- 78 new tests (346 total). Two were checked to fail when the behaviour they
+  guard is removed (the drop-on-own-column guard, and — in slice 8 — the
+  cache invalidation).
+
+Verification status, stated plainly: unit tests, `tsc`, lint and the build are
+green, and an anonymous visit to `/admin/crm/...` was confirmed in the browser
+to land on `/login` without a single `/api/admin` request. **The signed-in
+pass has not been done** (it needs the admin password typed in, which was left
+to the project owner); until then neither the admin console nor the CRM has
+rendered against the live server's real responses.
+
+Deliberate changes from the legacy CRM:
+- **"Lost" asks for a reason in a dialog**, not a browser `prompt()`; deleting
+  a lead asks in a dialog, not `confirm()`. Both are focus-managed and
+  cancellable; a reason stays optional.
+- **Dropping a card on the column it is already in does nothing.** The legacy
+  re-saved the same stage, which reset "days in stage" to zero.
+- **Every CRM write refetches** instead of patching a cached copy: a stage
+  change also moves lifecycle-derived numbers (MRR, counts, days in stage),
+  and those are the server's to compute. (The legacy did the same, by hand.)
+- **Owner and tags are one form** with one Save; the legacy had a button each.
+- **The contact page is a route**, so a contact can be linked and survives a
+  reload; the legacy held "open contact" in state.
+- **The board's width scrolls inside the page column** (six 16 rem columns in
+  a 56 rem container) rather than the page growing.
+
+Things found in the server, not changed:
+- `portfolioMetrics()` prices open deals with `c.expectedPlan`, a field nothing
+  ever sets, so "expected value" is always *open deals × the monthly plan's
+  price*. The label ("Expected value") is fair; the comment above the function
+  ("the plan an admin marked it for") describes a feature that doesn't exist.
+- The board's task list is the first 40 open tasks (sorted by due date, so
+  overdue ones come first); with more than 40 overdue, the KPI would undercount.
+- Task due dates are stored as UTC midnight, and "overdue" here compares UTC
+  dates — the same convention, so a task due "today" is never shown as late
+  from a timezone ahead of UTC.
+
+Not done, on purpose: editing a lead's own fields (`POST /api/admin/crm/lead`
+supports it; the legacy UI never offered it) and the `source` override the
+contact endpoint accepts.
 
 ### 2026-09-19 — `admin` (slice 8): overview, users, system
 The operator's console: who signed up, who needs access, who is about to

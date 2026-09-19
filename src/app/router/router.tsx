@@ -13,6 +13,12 @@ import { AdminOverviewPage } from "@/features/admin/components/AdminOverviewPage
 import { SystemPage } from "@/features/admin/components/SystemPage";
 import { UserHistoryPage } from "@/features/admin/components/UserHistoryPage";
 import { UsersPage } from "@/features/admin/components/UsersPage";
+import { ContactsPage } from "@/features/crm/components/ContactsPage";
+import { InsightsPage } from "@/features/crm/components/InsightsPage";
+import { LeadsPage } from "@/features/crm/components/LeadsPage";
+import { ContactPage } from "@/features/crm/components/ContactPage";
+import { CrmLayout } from "@/features/crm/components/CrmLayout";
+import { PipelinePage } from "@/features/crm/components/PipelinePage";
 import { AppShell } from "@/app/layout/AppShell";
 import { ADMIN_NAV, APP_NAV } from "@/app/layout/navigation";
 import { RequireAdmin } from "@/app/layout/RequireAdmin";
@@ -70,6 +76,17 @@ export const router = createBrowserRouter([
     ),
     children: [
       { index: true, element: <AdminOverviewPage /> },
+      {
+        path: "crm",
+        element: <CrmLayout />,
+        children: [
+          { index: true, element: <PipelinePage /> },
+          { path: "contacts", element: <ContactsPage /> },
+          { path: "leads", element: <LeadsPage /> },
+          { path: "insights", element: <InsightsPage /> },
+        ],
+      },
+      { path: "crm/contact/:id", element: <ContactPage /> },
       { path: "users", element: <UsersPage /> },
       { path: "users/:id", element: <UserHistoryPage /> },
       { path: "system", element: <SystemPage /> },

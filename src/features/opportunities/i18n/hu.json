@@ -189,9 +189,6 @@
     },
     "clearAll": "Összes szűrő törlése",
     "remove": "Eltávolítás",
-    "prev": "Előző",
-    "next": "Következő",
-    "pageOf": "{{page}} / {{pages}}",
     "source": "Forrás",
     "inCatalog": "{{n}} felhívás a katalógusban",
     "rate": "1 EUR = {{rate}} HUF (EKB középárfolyam)"

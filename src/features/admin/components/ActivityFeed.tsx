@@ -1,5 +1,5 @@
-import { useTranslation } from "react-i18next";
 import { useFormat } from "@/shared/hooks/useFormat";
+import { useActivityLabel } from "../hooks/useActivityLabel";
 import type { AdminActivityEntry } from "../types/admin.types";
 import "../i18n";
 
@@ -8,8 +8,8 @@ import "../i18n";
  * says whose it is; on one account's page that would be noise.
  */
 export function ActivityFeed({ entries, showUser = false, empty }: { entries: AdminActivityEntry[]; showUser?: boolean; empty: string }) {
-  const { t } = useTranslation("admin");
   const { dateTime } = useFormat();
+  const activityLabel = useActivityLabel();
 
   if (entries.length === 0) return <p className="text-sm text-muted">{empty}</p>;
 
@@ -22,7 +22,7 @@ export function ActivityFeed({ entries, showUser = false, empty }: { entries: Ad
             <span className="w-36 shrink-0 text-xs text-muted">{dateTime(entry.at)}</span>
             {showUser && entry.username ? <b className="font-medium text-text">{entry.username}</b> : null}
             <span className="min-w-0 text-muted">
-              {t(`activity.${entry.type}`, { defaultValue: entry.type })}
+              {activityLabel(entry.type)}
               {detail ? <span className="text-text"> — {detail}</span> : null}
             </span>
           </li>

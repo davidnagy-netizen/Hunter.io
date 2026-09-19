@@ -1,0 +1,243 @@
+{
+  "nav": {
+    "crm": "CRM"
+  },
+  "title": "CRM",
+  "subtitle": "Ügyfélkapcsolat: kit kell ma felhívni, mennyit ér a portfólió, és mi hangzott el legutóbb. Minden szám a rögzített eseményekből számolódik.",
+  "tabs": {
+    "pipeline": "Tábla",
+    "contacts": "Kapcsolatok",
+    "leads": "Érdeklődők",
+    "insights": "Mutatók"
+  },
+  "back": "Vissza a CRM-hez",
+  "pipeline": {
+    "kpi": {
+      "mrr": {
+        "label": "MRR",
+        "sub": "{{count}} előfizető · ARR {{arr}}"
+      },
+      "trials": {
+        "label": "Futó próba",
+        "converted": "Eddigi átváltás: {{pct}}% ({{done}}/{{started}})",
+        "none": "Még nincs lezárt próba"
+      },
+      "openDeals": {
+        "label": "Nyitott ügy",
+        "value": "Várható érték: {{value}} / hó"
+      },
+      "overdue": {
+        "label": "Lejárt teendő",
+        "today": "Ma esedékes: {{count}}"
+      },
+      "lapsed": {
+        "label": "Lejárt előfizetés",
+        "detail": "30 napon belül: {{recent}} · lemorzsolódás {{pct}}%",
+        "none": "Még nincs miből lemorzsolódni"
+      }
+    },
+    "overdueTitle": "Lejárt teendők",
+    "open": "Megnyitás",
+    "empty": "Üres",
+    "note": "A kártyák húzhatók a szakaszok között; érintőképernyőn a kártyán lévő legördülő a megbízható út. A szakasz az egyetlen mező, amit ember állít be — az életciklus (érdeklődő, próba, előfizető, lejárt) a valós előfizetésből olvasódik ki."
+  },
+  "card": {
+    "daysInStage": "{{count}} napja itt",
+    "assessment": "{{score}} · felmérés",
+    "stage": "Szakasz"
+  },
+  "engagement": {
+    "hint": "Aktivitási mutató az elmúlt {{days}} nap rögzített eseményeiből",
+    "title": "Aktivitás",
+    "subtitle": "Az elmúlt {{days}} nap rögzített eseményeiből. Nem előrejelzés — az alábbi sorok az egészet megmagyarázzák.",
+    "empty": "Ebben az időszakban nem történt semmi.",
+    "lastSeen": "Utoljára itt járt",
+    "daysAgo": "{{count}} napja",
+    "signal": "{{label}} · {{count}}×"
+  },
+  "lostDialog": {
+    "title": "Miért veszett el?",
+    "field": "Indok (nem kötelező)",
+    "confirm": "Elveszettnek jelölöm",
+    "cancel": "Mégse"
+  },
+  "moved": "Áthelyezve: {{stage}}",
+  "contact": {
+    "history": "Előzmények",
+    "delete": "Érdeklődő törlése",
+    "lostReason": "Elveszett, indok:",
+    "arrived": "érkezett {{date}}",
+    "disabled": "letiltva",
+    "notFound": "Nincs ilyen kapcsolat.",
+    "deleteDialog": {
+      "title": "Biztosan törlöd ezt az érdeklődőt?",
+      "body": "Az érdeklődő, a hozzá tartozó feljegyzések és teendők törlődnek. Ez nem vonható vissza.",
+      "confirm": "Törlés",
+      "cancel": "Mégse"
+    }
+  },
+  "notes": {
+    "title": "Feljegyzések",
+    "subtitle": "Amit egy hívás után leírsz, az marad meg hat hét múlva is. A típus azért külön mező, mert egy telefon és egy döntés nem ugyanaz.",
+    "placeholder": "Mi hangzott el?",
+    "kind": "Típus",
+    "save": "Rögzítés",
+    "empty": "Még nincs feljegyzés.",
+    "delete": "törlés",
+    "kinds": {
+      "note": "Feljegyzés",
+      "call": "Telefon",
+      "email": "E-mail",
+      "meeting": "Találkozó",
+      "decision": "Döntés"
+    }
+  },
+  "timeline": {
+    "title": "Idővonal",
+    "subtitle": "Ami történt: amit a cég csinált, amit mi adtunk neki, hogyan változott a profilja, és amit leírtunk.",
+    "empty": "Még nem történt semmi.",
+    "noteLogged": "{{kind}} rögzítve",
+    "profileVersion": "Cégprofil módosult",
+    "taskCreated": "Teendő rögzítve",
+    "taskCompleted": "Teendő kész",
+    "firstSave": "első mentés",
+    "due": "Határidő: {{date}}",
+    "days": "{{count}} nap",
+    "by": "kiosztotta: {{name}}"
+  },
+  "access": {
+    "title": "Hozzáférés",
+    "monthlyValue": "Havi érték",
+    "validUntil": "Eddig érvényes",
+    "note": "Fizetési átjáró még nincs bekötve — a hozzáférést itt adod meg, és minden kiosztás naplózódik."
+  },
+  "tasks": {
+    "title": "Teendők",
+    "placeholder": "Mi a következő lépés?",
+    "due": "Határidő",
+    "add": "Hozzáadás",
+    "empty": "Nincs nyitott teendő.",
+    "done": "Kész",
+    "noDue": "nincs határidő",
+    "delete": "törlés"
+  },
+  "profile": {
+    "title": "Cégprofil",
+    "employees": "Létszám",
+    "county": "Megye",
+    "teaor": "TEÁOR",
+    "projectValue": "Projektérték",
+    "revenue": "Árbevétel",
+    "versions": "Profilverzió",
+    "empty": "Még nem töltött ki cégprofilt — ez önmagában is a hívás témája.",
+    "readiness": "Felmérés eredménye"
+  },
+  "saved": {
+    "title": "Elmentett felhívások",
+    "subtitle": "Amit ez a cég félretett — ez mondja meg, miről érdemes beszélni."
+  },
+  "classification": {
+    "title": "Besorolás",
+    "owner": "Felelős",
+    "tags": "Címkék, vesszővel",
+    "save": "Mentés"
+  },
+  "validation": {
+    "note": "A bejegyzés nem lehet üres.",
+    "task": "A teendőhöz megnevezés kell.",
+    "owner": "A felelős neve legfeljebb 60 karakter."
+  },
+  "contacts": {
+    "search": "Keresés",
+    "searchLabel": "Kapcsolatok keresése",
+    "searchPlaceholder": "Cég, felhasználó, e-mail, címke…",
+    "allStages": "Minden szakasz",
+    "allLifecycles": "Minden életciklus",
+    "allSources": "Minden forrás",
+    "sortLabel": "Rendezés",
+    "sorts": {
+      "recent": "Legújabb",
+      "engagement": "Aktivitás",
+      "value": "Havi érték",
+      "expiring": "Hamarosan lejár",
+      "stale": "Legrégebb óta áll",
+      "company": "Cégnév"
+    },
+    "csv": "CSV letöltése",
+    "count": "{{count}} kapcsolat a szűrés szerint",
+    "empty": "Nincs találat erre a szűrésre",
+    "col": {
+      "company": "Cég",
+      "lifecycle": "Életciklus",
+      "stage": "Szakasz",
+      "engagement": "Aktivitás",
+      "value": "Havi érték",
+      "task": "Teendő"
+    },
+    "daysLeft": "{{count}} nap van hátra",
+    "daysInStage": "{{count}} napja",
+    "assessment": "Felmérés: {{score}}",
+    "overdue": "lejárt",
+    "open": "Megnyitás"
+  },
+  "leads": {
+    "intro": "Az ingyenes felmérést kitöltők, akik kérték, hogy keressük meg őket. A válaszaik és a readiness pontszámuk azé a kitöltésé, amit valóban elküldtek — az első hívás nem üres lapról indul.",
+    "col": {
+      "company": "Cég és kapcsolattartó",
+      "assessment": "Felmérés",
+      "stage": "Szakasz",
+      "arrived": "Érkezett"
+    },
+    "converted": "fiókká vált",
+    "staff": "{{count}} fő",
+    "empty": "Még nem érkezett érdeklődő",
+    "emptyHint": "Az ingyenes felmérés végén lehet kérni a megkeresést; az ott megadott adatok kerülnek ide."
+  },
+  "insights": {
+    "kpi": {
+      "mrr": {
+        "label": "MRR",
+        "sub": "Az aktív, fizetős előfizetések 30 napra vetített értéke"
+      },
+      "arr": {
+        "label": "ARR",
+        "sub": "MRR × 12 — nem előrejelzés"
+      },
+      "arpa": {
+        "label": "Átlagos havi díj",
+        "sub": "{{count}} fizető fiók"
+      },
+      "conversion": {
+        "label": "Próba → előfizetés",
+        "sub": "{{done}} a {{started}} próbából",
+        "none": "Még egy próba sem zárult le"
+      }
+    },
+    "funnel": {
+      "title": "Tölcsér",
+      "leads": "Érdeklődő",
+      "registered": "Regisztrált",
+      "trials": "Próbaidőn",
+      "subscribers": "Előfizető"
+    },
+    "stages": "Szakaszok",
+    "revenueByPlan": "Bevétel csomag szerint",
+    "noPlans": "Még nincs aktív fizetős előfizetés.",
+    "sources": "Honnan érkeztek",
+    "noSources": "Még nincs rögzített forrás.",
+    "trend": {
+      "title": "Új kapcsolatok havonta",
+      "subtitle": "A regisztrációk és az érdeklődők tényleges időbélyegéből, az elmúlt hat hónapra. Az üres hónap is látszik, mert az is információ.",
+      "signups": "Regisztráció",
+      "leads": "Érdeklődő",
+      "aria": "Havi új kapcsolatok"
+    },
+    "warm": {
+      "title": "Aktív, de még nem előfizető",
+      "subtitle": "Fiókok, amelyek az elmúlt {{days}} napban használták a terméket, de nincs előfizetésük. Ez a lista a leghasznosabb hívási sorrend, mert megtörtént eseményeken alapul.",
+      "empty": "Jelenleg nincs ilyen fiók.",
+      "detail": "aktivitás {{score}}",
+      "lastSeen": "{{count}} napja járt itt"
+    }
+  }
+}

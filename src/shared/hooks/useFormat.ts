@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { formatDate, formatDateTime, formatHuf, formatMonth, type Lang } from "@/shared/lib/format";
+import { formatDate, formatDateTime, formatHuf, formatMoney, formatMonth, type Lang } from "@/shared/lib/format";
 
 /** The active UI language, narrowed to the two we support. */
 export function useLang(): Lang {
@@ -13,6 +13,7 @@ export function useFormat() {
   return {
     lang,
     huf: (amount: number) => formatHuf(amount, lang),
+    money: (amount: number) => formatMoney(amount, lang),
     date: (iso: string) => formatDate(iso, lang),
     dateTime: (iso: string) => formatDateTime(iso, lang),
     month: (year: number, month: number) => formatMonth(year, month, lang),

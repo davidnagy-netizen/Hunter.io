@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Button, SearchIcon, PageHead } from "@/shared/components";
+import { Button, SearchIcon, PageHead, Pager } from "@/shared/components";
 import { useMetaQuery } from "@/shared/api/meta.queries";
 import { useLang } from "@/shared/hooks/useFormat";
 import { useSearchQuery } from "../api/opportunities.queries";
@@ -158,17 +158,7 @@ export function SearchPage() {
           <div className="mt-4">
             <UpsellBlock lockedCount={result.lockedCount} />
           </div>
-          {pages > 1 ? (
-            <nav aria-label="pagination" className="mt-6 flex items-center justify-center gap-4 text-sm">
-              <Button variant="ghost" size="sm" disabled={result.page <= 1} onClick={() => update({ ...state, page: result.page - 1 })}>
-                {t("search.prev")}
-              </Button>
-              <span className="text-muted">{t("search.pageOf", { page: result.page, pages })}</span>
-              <Button variant="ghost" size="sm" disabled={result.page >= pages} onClick={() => update({ ...state, page: result.page + 1 })}>
-                {t("search.next")}
-              </Button>
-            </nav>
-          ) : null}
+          <Pager page={result.page} pages={pages} onPage={(page) => update({ ...state, page })} />
         </>
       ) : null}
 

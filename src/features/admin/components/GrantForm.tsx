@@ -14,10 +14,12 @@ export interface GrantFormProps {
   plans: Plan[];
   /** Only an active subscription can be revoked. */
   canRevoke: boolean;
+  /** Called after a grant or revoke succeeds, for a host screen that caches the account elsewhere (the CRM contact page). */
+  onChanged?: () => void;
 }
 
 /** Give one account access (any plan, optionally for a custom number of days) or take it away. */
-export function GrantForm({ userId, plans, canRevoke }: GrantFormProps) {
+export function GrantForm({ userId, plans, canRevoke, onChanged }: GrantFormProps) {
   const { t } = useTranslation("admin");
   const lang = useLang();
   const grant = useGrantSubscriptionMutation();
@@ -38,7 +40,12 @@ export function GrantForm({ userId, plans, canRevoke }: GrantFormProps) {
     revoke.reset();
     grant.mutate(
       { userId, planId: values.planId, days: values.days, note: values.note || undefined },
-      { onSuccess: () => reset({ planId: values.planId, days: undefined, note: "" }) },
+      {
+        onSuccess: () => {
+          reset({ planId: values.planId, days: undefined, note: "" });
+          onChanged?.();
+        },
+      },
     );
   };
 
@@ -69,7 +76,10 @@ export function GrantForm({ userId, plans, canRevoke }: GrantFormProps) {
           {grant.isPending ? t("users.grant.submitting") : t("users.grant.submit")}
         </Button>
         {canRevoke ? (
-          <Button type="button" size="sm" variant="danger" disabled={busy} onClick={() => { grant.reset(); revoke.mutate(userId); }}>
+          <Button type="button" size="sm" variant="danger" disabled={busy} onClick={() => {
+              grant.reset();
+              revoke.mutate(userId, { onSuccess: () => onChanged?.() });
+            }}>
             {t("users.grant.revoke")}
           </Button>
         ) : null}

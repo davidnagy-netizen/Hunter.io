@@ -189,9 +189,6 @@
     },
     "clearAll": "Clear all filters",
     "remove": "Remove",
-    "prev": "Previous",
-    "next": "Next",
-    "pageOf": "{{page}} / {{pages}}",
     "source": "Source",
     "inCatalog": "{{n}} calls in the catalog",
     "rate": "1 EUR = {{rate}} HUF (ECB reference rate)"
