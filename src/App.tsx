@@ -2,18 +2,22 @@ import { Link } from "react-router";
 import { Badge, Button, CircularProgress, LanguageToggle, Panel } from "@/shared/components";
 import { useCurrentUser, useIsAdmin, useIsSubscriber } from "@/features/authentication/hooks/useAuth";
 import { useLogoutMutation } from "@/features/authentication/api/auth.queries";
+import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
+import { ProfileHistoryPanel } from "@/features/profile/components/ProfileHistoryPanel";
 
 /**
  * Temporary showcase: proves the Tailwind theme, the shared primitives, and
- * (as of the `authentication` slice) the real session/login flow against the
- * Node server. This is not a real screen — it gets replaced once a feature
- * with an actual landing page (`assessment` or `opportunities`) lands.
+ * (as of the `authentication`/`profile` slices) the real session/login flow
+ * and company-profile flow against the Node server. This is not a real
+ * screen — it gets replaced once a feature with an actual landing page
+ * (`assessment` or `opportunities`) lands.
  */
 function App() {
   const user = useCurrentUser();
   const isAdmin = useIsAdmin();
   const isSubscriber = useIsSubscriber();
   const logout = useLogoutMutation();
+  const { profile } = useCompanyProfile();
 
   return (
     <div className="min-h-screen bg-paper p-8">
@@ -53,6 +57,29 @@ function App() {
             </div>
           )}
         </Panel>
+
+        <Panel title="Company profile" subtitle="Server-backed when signed in, browser-only otherwise">
+          {profile ? (
+            <div className="flex flex-col gap-2 text-sm">
+              <p>
+                <b>{profile.company}</b> — {profile.employees} employees, {profile.county}
+              </p>
+              <Link to="/onboarding" className="w-fit">
+                <Button variant="ghost" size="sm">
+                  Edit profile
+                </Button>
+              </Link>
+            </div>
+          ) : (
+            <Link to="/onboarding">
+              <Button variant="gold" size="sm">
+                Set up company profile
+              </Button>
+            </Link>
+          )}
+        </Panel>
+
+        <ProfileHistoryPanel />
 
         <Panel title="Buttons" subtitle="Variants ported from the legacy .btn-* classes">
           <div className="flex flex-wrap gap-3">

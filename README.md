@@ -26,7 +26,7 @@ and cut over, its behavior should still match what those documents promise.
 | 0 — Vite/React/TS scaffold, Tailwind theme, shared primitives | ✅ done |
 | 1 — Testing infrastructure (Vitest + RTL) | ✅ done |
 | `authentication` | ✅ done — login, register, session, `isAdmin`/`isSubscriber`, verified against the real server |
-| `profile` (onboarding + version history) | not started |
+| `profile` (onboarding + version history) | ✅ done — wizard, server/local sync fork, version history + restore, verified against the real server (profile-sync bug fixed — see [Decisions](#decisions--changes-log)) |
 | `scoring` (eligibility engine + Hunter Score) | not started |
 | `opportunities` (dashboard/list/detail/search/calendar/saved) | not started |
 | `assessment` (free readiness funnel + lead capture) | not started |
@@ -181,10 +181,11 @@ configuration to resolve Vite-specific things (the `@` alias,
 - `npm test` runs once (CI-style); `npm run test:watch` for local dev;
   `npm run coverage` for a coverage report.
 
-**What's covered so far:** the four shared primitives
-(`Button`/`Badge`/`Panel`/`CircularProgress`), plus the `authentication`
-feature (Zod schemas, `LoginForm`, `RegisterForm`, the `useAuth` derived
-hooks) — 36 tests, all passing.
+**What's covered so far:** the five shared primitives
+(`Button`/`Badge`/`Panel`/`CircularProgress`/`TextField`/`SelectField`/`ChipButton`),
+the `authentication` feature, and the `profile` feature (schema, local store,
+the `useCompanyProfile` sync-fork hook, `OnboardingWizard`, `ProfileHistoryPanel`)
+— 61 tests, all passing.
 
 Feature tests that need React Query and/or routing use
 [`src/test/renderWithProviders.tsx`](src/test/renderWithProviders.tsx)
@@ -215,7 +216,11 @@ npm run build         # tsc -b && vite build
 
 Seeded accounts to test against (from the root README): `admin`/`admin`
 (administrator), `demo`/`demo1234` (full subscriber), `demo_free`/`demo1234`
-(registered, no subscription).
+(registered, no subscription). **Note:** on a fresh clone/`server/data`, only
+`admin`/`admin` actually exists — the `demo`/`demo_free` accounts are seeded
+by some other process (a fixture script or a previously-populated
+`server/data/users.json`) that hadn't run in this checkout as of the
+`profile` slice. Register a throwaway account instead if they're not there.
 
 ---
 
@@ -223,6 +228,86 @@ Seeded accounts to test against (from the root README): `admin`/`admin`
 
 Newest first. Each entry says what changed, why, and what it affects — the
 things that would otherwise only live in a chat transcript.
+
+### 2026-09-19 — `profile` feature (slice 3): the sync-bug fix, verified live
+Onboarding wizard (6 steps, React Hook Form + Zod, ported from the legacy
+`OB_STEPS`), demo-company loader, and version history + restore. Verified
+end-to-end in the browser against the real server, including the specific
+scenario that used to be broken: signed in as a fresh test account, saved
+the profile (version 1 created, diff `null → ...` for every field), edited
+one field and saved again (**version 2 created**, diff `employees: 28 → 45`
+— this is the exact save the legacy `syncProfileToServer()` no-op used to
+silently drop), then restored version 1 (**version 3 created**, diff
+`employees: 45 → 28` — restoring is itself recorded, matching the root
+README's documented behavior). Also verified the anonymous path separately:
+filled the wizard as a signed-out visitor, confirmed via
+`read_network_requests` that no `/api/profile*` call fired, and confirmed
+the result landed in `localStorage["hunter-rewrite-profile"]` instead.
+
+Built:
+- `shared/api/meta.api.ts` + `meta.queries.ts` (`useMetaQuery`) — fetches
+  `GET /api/meta` (regions/industries/goals/revenue bands/org types). Put in
+  `shared/` rather than inside `profile` because `opportunities` will need
+  the same catalog-label parts of this response later; each feature is
+  expected to select just the slice it needs from the one shared query.
+- `features/profile/store/localProfileStore.ts` — the anonymous-visitor
+  profile, Zustand + persist, under its own `hunter-rewrite-profile`
+  localStorage key (distinct from `hunter-rewrite-ui` and the legacy app's
+  `hunter_state`).
+- `features/profile/hooks/useCompanyProfile.ts` — the single hook that
+  decides server-backed vs. local-only profile and **is** the sync-bug fix:
+  `saveProfile`/`loadDemo` call the server on every invocation when
+  authenticated, with no "only the first time" special case anywhere.
+- `shared/components/SelectField.tsx` and `ChipButton.tsx` — generic form
+  primitives, joining `TextField`.
+
+Decisions made and why:
+- **Region/industry names are translated via `defaultValue` fallback, not a
+  duplicated Hungarian source.** `GET /api/meta` returns `Goal` and `OrgType`
+  already bilingual (`label`/`label_en` or `label_hu`/`label_en`), but
+  `Region`/`Industry` only carry one Hungarian `name`/`label` — matching
+  `src/data/referenceData.js` exactly. Rather than hand-copying the
+  Hungarian strings into `features/profile/i18n/hu.json` just to have
+  something to key against, the English resource file only defines
+  `regions.<code>`/`industries.<id>` keys, and the lookup
+  (`t("profile:regions.HU12", { defaultValue: region.name })`) falls through
+  to the server's own Hungarian text when no English entry is needed. One
+  fewer place for the Hungarian source of truth to drift.
+- **Goals and org types read `label_en`/`label_hu` directly off the API
+  response instead of going through i18next at all.** They're already
+  bilingual server-side; routing them through a translation key would just
+  be an unnecessary extra layer. (An earlier pass in this same slice
+  actually got this wrong — see the bug note below.)
+- **The demo company's static data (`DEMO_PROFILE`) is duplicated
+  client-side**, in `features/profile/data/demoProfile.ts`, mirroring
+  `src/data/referenceData.js#DEMO_PROFILE` exactly. Unlike the eligibility
+  engine, this is inert data with no logic to drift — an acceptable, small,
+  documented duplication, needed so the anonymous "load demo" path (which
+  must not call the server) has something to load.
+- **Numeric form fields use `register(field, { valueAsNumber: true })`, not
+  `z.coerce.number()`.** Zod's coercion makes the schema's *input* type
+  `unknown`, which breaks React Hook Form's resolver typing (input type must
+  match output type). Keeping the schema as plain `z.number()` and doing the
+  string→number conversion at the RHF layer instead keeps everything typed
+  correctly end to end.
+
+Bugs found and fixed during this slice's own browser verification (not
+carried over from the legacy app — introduced and caught in the same pass):
+- Development goal chips and organisation-type chips were rendering through
+  a nonexistent i18n key (`profile:goal_<id>`, `profile:orgType_<id>`) with
+  the Hungarian label as `defaultValue`, so they silently stayed in
+  Hungarian even with English selected. Fixed by reading `label_en` directly
+  (see the decision above) — caught by looking at an actual screenshot with
+  English selected, not by the automated tests, which didn't assert on
+  language switching for this screen. Worth adding that assertion later.
+- The region hint below the county picker reused the "County / project
+  location" field label as its own caption ("County / project location:
+  HU12"), rather than a distinct "Region code" label. Fixed to match the
+  legacy copy ("Region code: HU12 · Pest megye").
+- The organisation-type size hint ("Based on N employees this is an
+  SME/large enterprise") was hardcoded in English regardless of the active
+  language. Fixed with proper `profile:orgTypeHintSme`/`orgTypeHintLarge`
+  i18n keys.
 
 ### 2026-09-19 — `authentication` feature (slice 2)
 Login, register, session (`GET /api/auth/me`), logout, and the derived

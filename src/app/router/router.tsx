@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import App from "@/App";
 import { AuthPage } from "@/features/authentication/components/AuthPage";
+import { OnboardingWizard } from "@/features/profile/components/OnboardingWizard";
 
 /**
  * Route tree, assembled here from routes each feature owns. `app/` composes;
@@ -20,5 +21,9 @@ export const router = createBrowserRouter([
   {
     path: "/register",
     element: <AuthPage mode="register" />,
+  },
+  {
+    path: "/onboarding",
+    element: <OnboardingWizard />,
   },
 ]);

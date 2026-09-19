@@ -13,4 +13,10 @@ export type { CircularProgressProps } from "./CircularProgress";
 export { TextField } from "./TextField";
 export type { TextFieldProps } from "./TextField";
 
+export { SelectField } from "./SelectField";
+export type { SelectFieldProps } from "./SelectField";
+
+export { ChipButton } from "./ChipButton";
+export type { ChipButtonProps } from "./ChipButton";
+
 export { LanguageToggle } from "./LanguageToggle";
