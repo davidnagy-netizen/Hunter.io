@@ -598,7 +598,7 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; padding-top: 10px;">
             <div style="background: rgba(255,255,255,0.05); padding: 14px 18px; border-radius: 8px;">
                 <div style="font-size: 12px; color: var(--muted-2);">{{ __('Beruházási Költségvetés') }}</div>
-                <div style="font-size: 20px; font-weight: 700; color: #FFFFFF; font-family: var(--display);">30 000 000 Ft</div>
+                <div style="font-size: 20px; font-weight: 700; color: #FFFFFF; font-family: var(--display);">30 000 000 {{ __('Ft') }}</div>
             </div>
             <div style="background: rgba(255,255,255,0.05); padding: 14px 18px; border-radius: 8px;">
                 <div style="font-size: 12px; color: var(--muted-2);">{{ __('Támogatási Intenzitás') }}</div>
@@ -606,12 +606,11 @@
             </div>
             <div style="background: rgba(255,255,255,0.05); padding: 14px 18px; border-radius: 8px;">
                 <div style="font-size: 12px; color: var(--muted-2);">{{ __('Vissza Nem Térítendő Támogatás') }}</div>
-                <div style="font-size: 20px; font-weight: 700; color: var(--green); font-family: var(--display);">15 000 000 Ft</div>
+                <div style="font-size: 20px; font-weight: 700; color: var(--green); font-family: var(--display);">15 000 000 {{ __('Ft') }}</div>
             </div>
             <div style="background: rgba(255,255,255,0.05); padding: 14px 18px; border-radius: 8px;">
                 <div style="font-size: 12px; color: var(--muted-2);">{{ __('Szükséges Saját Forrás') }}</div>
-                <div style="font-size: 20px; font-weight: 700; color: #CBD5E1; font-family: var(--display);">15 000 000 Ft</div>
-            </div>
+                <div style="font-size: 20px; font-weight: 700; color: #CBD5E1; font-family: var(--display);">15 000 000 {{ __('Ft') }}</div>
         </div>
     </div>
 
@@ -763,7 +762,7 @@
                 <div class="sim-slider-row">
                     <div class="sim-label-val">
                         <span>{{ __('Tervezett Beruházási Költségvetés') }}</span>
-                        <strong id="sim-investment-val" style="color: var(--ink); font-size: 17px; font-family: var(--display);">30 M Ft</strong>
+                        <strong id="sim-investment-val" style="color: var(--ink); font-size: 17px; font-family: var(--display);">30 {{ __('M Ft') }}</strong>
                     </div>
                     <input type="range" id="sim-investment" class="sim-slider-input" min="5" max="150" step="5" value="30">
                 </div>
@@ -803,13 +802,12 @@
 
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-size: 13.5px; color: #CBD5E1;">{{ __('Számított Támogatási Összeg:') }}</span>
-                    <strong id="sim-grant-display" style="font-size: 22px; font-weight: 700; color: var(--green); font-family: var(--display);">15 M Ft</strong>
+                    <strong id="sim-grant-display" style="font-size: 22px; font-weight: 700; color: var(--green); font-family: var(--display);">15 {{ __('M Ft') }}</strong>
                 </div>
 
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-size: 13.5px; color: #CBD5E1;">{{ __('Szükséges Saját Tőke:') }}</span>
-                    <strong id="sim-own-display" style="font-size: 16px; color: #FFFFFF; font-family: var(--display);">15 M Ft</strong>
-                </div>
+                    <strong id="sim-own-display" style="font-size: 16px; color: #FFFFFF; font-family: var(--display);">15 {{ __('M Ft') }}</strong>
 
                 <div style="margin-top: 6px;">
                     <a href="{{ route('assessment.show') }}" class="btn btn-gold" style="width: 100%; font-weight: 700;">
@@ -840,7 +838,7 @@
                         </div>
                         <h4 style="font-size: 17px; margin-bottom: 10px; color: var(--ink);">{{ __($opp->title) }}</h4>
                         <div style="font-size: 13.5px; color: var(--muted); margin-bottom: 16px;">
-                            {{ __('Támogatás:') }} {{ number_format($opp->funding_min / 1000000, 0) }} {{ __('és') }} {{ number_format($opp->funding_max / 1000000, 0) }} {{ __('M Ft között') }} ({{ round($opp->intensity * 100) }}%)
+                            {{ __('Támogatás:') }} {{ number_format($opp->funding_min / 1000000, 0) }}–{{ number_format($opp->funding_max / 1000000, 0) }} {{ __('M Ft') }} ({{ round($opp->intensity * 100) }}{{ __('% intenzitás)') }}
                         </div>
                     </div>
                     <div>
@@ -1032,7 +1030,7 @@
         const lblSmall = @json(__('Kisvállalkozás'));
         const lblMedium = @json(__('Középvállalkozás'));
         const lblEmployees = @json(__('fő'));
-
+        const lblMFt = @json(__('M Ft'));
         function updateGrantCalculation() {
             if (!empInput || !invInput) return;
             const emp = parseInt(empInput.value, 10);
@@ -1045,7 +1043,7 @@
             if (emp >= 50) category = lblMedium;
             else if (emp >= 10) category = lblSmall;
             empVal.textContent = `${emp} ${lblEmployees} (${category})`;
-            invVal.textContent = `${inv} M Ft`;
+            invVal.textContent = `${inv} ${lblMFt}`;
 
             // Intensity Logic: Konvergencia 50-60%, Pest 40-50%, Budapest 30-40%
             let intensity = 0.50;
@@ -1070,8 +1068,8 @@
 
             scoreDisplay.textContent = `${score} / 100`;
             intensityDisplay.textContent = `${Math.round(intensity * 100)}%`;
-            grantDisplay.textContent = `${grantAmount} M Ft`;
-            ownDisplay.textContent = `${ownAmount} M Ft`;
+            grantDisplay.textContent = `${grantAmount} ${lblMFt}`;
+            ownDisplay.textContent = `${ownAmount} ${lblMFt}`;
         }
 
         if (empInput) empInput.addEventListener('input', updateGrantCalculation);

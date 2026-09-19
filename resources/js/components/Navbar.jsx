@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import LanguageSwitcher from './LanguageSwitcher';
 
 /**
- * Public and authenticated navigation rail/header with route awareness.
+ * Public and authenticated navigation rail/header with route awareness and bilingual localization.
  */
 export default function Navbar({
     user = null,
@@ -10,28 +10,28 @@ export default function Navbar({
     currentLocale = 'hu',
     csrfToken = '',
 }) {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const isEn = currentLocale === 'en';
 
     return (
         <header className="public-header">
             <div className="public-header-brand">
                 <a href="/">Fundor.hu</a>
-                <span className="logo-badge">INTELLIGENCIA</span>
+                <span className="logo-badge">{isEn ? 'INTELLIGENCE' : 'INTELLIGENCIA'}</span>
             </div>
 
             {/* Desktop Actions */}
-            <nav className="public-header-actions" aria-label="Fő navigáció">
+            <nav className="public-header-actions" aria-label={isEn ? 'Main navigation' : 'Fő navigáció'}>
                 <LanguageSwitcher currentLocale={currentLocale} />
                 <a
                     href="/assessment"
                     className="btn btn-ghost"
                     aria-current={currentPath === '/assessment' ? 'page' : undefined}
                 >
-                    Ingyenes Felmérés
+                    {isEn ? 'Free Assessment' : 'Ingyenes Felmérés'}
                 </a>
                 {user ? (
                     <a href="/dashboard" className="btn btn-gold">
-                        Irányítópult
+                        {isEn ? 'Dashboard' : 'Irányítópult'}
                     </a>
                 ) : (
                     <a
@@ -39,7 +39,7 @@ export default function Navbar({
                         className="btn btn-gold"
                         aria-current={currentPath === '/login' ? 'page' : undefined}
                     >
-                        Bejelentkezés
+                        {isEn ? 'Log in' : 'Bejelentkezés'}
                     </a>
                 )}
             </nav>

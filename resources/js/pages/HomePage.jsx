@@ -187,7 +187,7 @@ export default function HomePage({
                                         {opp.title}
                                     </h3>
                                     <p style={{ fontSize: '13.5px', color: 'var(--muted)', lineHeight: 1.5, marginBottom: '16px' }}>
-                                        {t.fundingRange} <strong>{Math.round((opp.funding_min || 10000000) / 1000000)} - {Math.round((opp.funding_max || 100000000) / 1000000)} M Ft</strong> ({Math.round((opp.intensity || 0.5) * 100)}% {t.intensity})
+                                        {t.fundingRange} <strong>{Math.round((opp.funding_min || 10000000) / 1000000)}–{Math.round((opp.funding_max || 100000000) / 1000000)} {isEn ? 'M HUF' : 'M Ft'}</strong> ({Math.round((opp.intensity || 0.5) * 100)}% {t.intensity})
                                     </p>
                                 </div>
                                 <div style={{ borderTop: '1px solid var(--line)', paddingTop: '14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -222,7 +222,7 @@ export default function HomePage({
                     </p>
                 </div>
 
-                <GrantCalculator initialInvestment={30000000} intensity={0.5} maxFunding={100000000} />
+                <GrantCalculator currentLocale={currentLocale} initialInvestment={30000000} intensity={0.5} maxFunding={100000000} />
             </section>
 
             {/* Comparison Section */}

@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 
 /**
  * Interactive investment budget, intensity, and own-contribution calculator.
- * Supports dynamic slider and numeric adjustment with real-time recalculation.
+ * Supports dynamic slider and numeric adjustment with real-time recalculation and localization.
  */
 export default function GrantCalculator({
     initialInvestment = 30000000,
     intensity = 0.5,
     maxFunding = 100000000,
-    currency = 'Ft',
+    currency,
+    currentLocale = 'hu',
 }) {
+    const isEn = currentLocale === 'en';
+    const activeCurrency = currency || (isEn ? 'HUF' : 'Ft');
     const [investment, setInvestment] = useState(initialInvestment);
 
     const calculatedGrant = Math.min(maxFunding, Math.round(investment * intensity));
@@ -18,20 +21,41 @@ export default function GrantCalculator({
     const ownPercentage = 100 - grantPercentage;
 
     const formatCurrency = (val) => {
-        return new Intl.NumberFormat('hu-HU').format(val);
+        return new Intl.NumberFormat(isEn ? 'en-US' : 'hu-HU').format(val);
+    };
+
+    const t = {
+        title: isEn ? 'Grant and Equity Calculator' : 'Támogatás és Önerő Kalkulátor',
+        investmentLabel: isEn ? 'Planned project investment:' : 'Tervezett beruházás összege:',
+        sliderAria: isEn ? 'Planned investment slider' : 'Tervezett beruházás csúszka',
+        slider5M: isEn ? '5M HUF' : '5 M Ft',
+        slider50M: isEn ? '50M HUF' : '50 M Ft',
+        slider100M: isEn ? '100M HUF' : '100 M Ft',
+        slider200M: isEn ? '200M HUF' : '200 M Ft',
+        grantRatioTitle: isEn ? `Grant: ${grantPercentage}%` : `Támogatás: ${grantPercentage}%`,
+        ownRatioTitle: isEn ? `Own equity: ${ownPercentage}%` : `Önerő: ${ownPercentage}%`,
+        grantRatioLabel: isEn ? `● Non-repayable grant: ${grantPercentage}%` : `● Vissza nem térítendő: ${grantPercentage}%`,
+        ownRatioLabel: isEn ? `● Own funds: ${ownPercentage}%` : `● Saját erő: ${ownPercentage}%`,
+        plannedTotal: isEn ? 'Planned total:' : 'Tervezett összeg:',
+        intensityLabel: isEn ? 'Funding intensity:' : 'Támogatási intenzitás:',
+        grantExpected: isEn ? 'Estimated non-repayable grant:' : 'Várható vissza nem térítendő támogatás:',
+        ownRequired: isEn ? 'Required own equity:' : 'Szükséges saját forrás (önerő):',
+        note: isEn
+            ? `Note: Maximum funding cap for this scheme is ${Math.round(maxFunding / 1000000)}M ${activeCurrency}.`
+            : `Megjegyzés: A maximális támogatási plafon ennél a konstrukciónál ${Math.round(maxFunding / 1000000)} M ${activeCurrency}.`,
     };
 
     return (
         <div className="card" style={{ margin: 0 }}>
             <h4 style={{ fontSize: '18px', marginBottom: '16px' }}>
-                Támogatás és Önerő Kalkulátor
+                {t.title}
             </h4>
 
             {/* Slider & Input */}
             <div style={{ marginBottom: '20px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                     <label htmlFor="investment-slider" style={{ fontSize: '13.5px', color: 'var(--muted)', fontWeight: 500 }}>
-                        Tervezett beruházás összege:
+                        {t.investmentLabel}
                     </label>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                         <input
@@ -52,7 +76,7 @@ export default function GrantCalculator({
                                 textAlign: 'right',
                             }}
                         />
-                        <span style={{ fontWeight: 600, fontSize: '14px' }}>{currency}</span>
+                        <span style={{ fontWeight: 600, fontSize: '14px' }}>{activeCurrency}</span>
                     </div>
                 </div>
 
@@ -64,14 +88,14 @@ export default function GrantCalculator({
                     step="1000000"
                     value={investment}
                     onChange={(e) => setInvestment(Number(e.target.value))}
-                    aria-label="Tervezett beruházás csúszka"
+                    aria-label={t.sliderAria}
                     style={{ width: '100%', accentColor: 'var(--gold-deep)', cursor: 'pointer' }}
                 />
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: 'var(--muted-2)' }}>
-                    <span>5 M Ft</span>
-                    <span>50 M Ft</span>
-                    <span>100 M Ft</span>
-                    <span>200 M Ft</span>
+                    <span>{t.slider5M}</span>
+                    <span>{t.slider50M}</span>
+                    <span>{t.slider100M}</span>
+                    <span>{t.slider200M}</span>
                 </div>
             </div>
 
@@ -84,7 +108,7 @@ export default function GrantCalculator({
                             background: 'var(--gold-deep)',
                             transition: 'width 0.2s ease',
                         }}
-                        title={`Támogatás: ${grantPercentage}%`}
+                        title={t.grantRatioTitle}
                     />
                     <div
                         style={{
@@ -92,15 +116,15 @@ export default function GrantCalculator({
                             background: 'var(--ink-2)',
                             transition: 'width 0.2s ease',
                         }}
-                        title={`Önerő: ${ownPercentage}%`}
+                        title={t.ownRatioTitle}
                     />
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', marginTop: '6px' }}>
                     <span style={{ color: 'var(--gold-deep)', fontWeight: 600 }}>
-                        ● Vissza nem térítendő: {grantPercentage}%
+                        {t.grantRatioLabel}
                     </span>
                     <span style={{ color: 'var(--ink)', fontWeight: 600 }}>
-                        ● Saját erő: {ownPercentage}%
+                        {t.ownRatioLabel}
                     </span>
                 </div>
             </div>
@@ -108,27 +132,27 @@ export default function GrantCalculator({
             {/* Breakdown Summary */}
             <div style={{ background: 'var(--paper)', padding: '18px', borderRadius: 'var(--radius-sm)', marginBottom: '16px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                    <span style={{ color: 'var(--muted)' }}>Tervezett összeg:</span>
-                    <strong>{formatCurrency(investment)} {currency}</strong>
+                    <span style={{ color: 'var(--muted)' }}>{t.plannedTotal}</span>
+                    <strong>{formatCurrency(investment)} {activeCurrency}</strong>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                    <span style={{ color: 'var(--muted)' }}>Támogatási intenzitás:</span>
+                    <span style={{ color: 'var(--muted)' }}>{t.intensityLabel}</span>
                     <strong style={{ color: 'var(--green)' }}>{Math.round(intensity * 100)}%</strong>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', borderTop: '1px solid var(--line)', paddingTop: '8px' }}>
-                    <span>Várható vissza nem térítendő támogatás:</span>
+                    <span>{t.grantExpected}</span>
                     <strong style={{ color: 'var(--gold-deep)', fontSize: '16px' }}>
-                        {formatCurrency(calculatedGrant)} {currency}
+                        {formatCurrency(calculatedGrant)} {activeCurrency}
                     </strong>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>Szükséges saját forrás (önerő):</span>
-                    <strong>{formatCurrency(calculatedOwn)} {currency}</strong>
+                    <span>{t.ownRequired}</span>
+                    <strong>{formatCurrency(calculatedOwn)} {activeCurrency}</strong>
                 </div>
             </div>
 
             <div style={{ fontSize: '12px', color: 'var(--muted-2)' }}>
-                Megjegyzés: A maximális támogatási plafon ennél a konstrukciónál {Math.round(maxFunding / 1000000)} M {currency}.
+                {t.note}
             </div>
         </div>
     );
