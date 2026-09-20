@@ -31,9 +31,9 @@ and cut over, its behavior should still match what those documents promise.
 | `opportunities` (dashboard/list/detail/search/calendar/saved) | ✅ done — app shell, dashboard, list, detail, search, calendar, saved; verified against the real server in all three access tiers |
 | `assessment` (free readiness funnel + lead capture) | ✅ done — 6-question funnel, readiness score (ported unchanged; **the keep/replace decision is still open**), censored real matches, lead capture, hand-off into onboarding |
 | `landing` (public front door) | ✅ done — pitch, worked example, sources, price; replaces the temporary showcase page |
-| `admin` (overview, users, system) | 🟡 built and unit-tested (65 tests); **not yet clicked through as a signed-in admin in a browser** — that pass is pending (see the log entry) |
-| `crm` (pipeline, contacts, leads, insights, contact record) | 🟡 built and unit-tested (127 tests); **signed-in browser pass pending**, as for `admin` |
-| `hunter-plus` (demo) | 🟡 built and unit-tested (29 tests); the locked screen and nav were checked in a browser as an anonymous visitor, but **the workspace itself needs a signed-in subscriber/admin session and has not been seen live** |
+| `admin` (overview, users, system) | ✅ done — unit-tested (65 tests); signed-in pass done by the developer, who reported it "all good" (2026-09-20) |
+| `crm` (pipeline, contacts, leads, insights, contact record) | ✅ done — unit-tested (127 tests); signed-in pass done by the developer, who reported it "all good" (2026-09-20) |
+| `hunter-plus` (demo) | ✅ done — unit-tested (29 tests); locked screen, nav and mobile bar checked in a browser as an anonymous visitor by the assistant; workspace: signed-in pass done by the developer, who reported it "all good" (2026-09-20) |
 
 Nothing here is wired up to the real Node server or served to real users yet.
 `../public` remains the live app until a feature is actually cut over.
@@ -127,6 +127,22 @@ authentication, admin (GrantForm, ProfileChanges, activity names), profile (type
    (`features/<name>/nav.ts`, typed by `shared/types/navigation.types.ts`);
    `app/layout/AppShell.tsx` concatenates them. Adding a feature to the nav is
    one line there.
+
+---
+
+## API contract
+
+[`docs/openapi.yaml`](docs/openapi.yaml) is an OpenAPI 3.0.3 description of every
+HTTP operation this frontend calls (32 operations over 28 paths), for the backend
+team. Open it in <https://editor.swagger.io> (File → Import file) or any Swagger UI.
+It was written from the `*.api.ts` files and checked against the server's route
+code; the anonymous endpoints were also validated against the live server's real
+responses, and the admin/CRM schemas against the output of the server's own
+builder functions. **No new endpoints are needed** — the current server already
+has all of them; the spec's description lists seven issues to fix (an
+unauthenticated catalog rebuild, shared anonymous state, a leaky locked-detail
+response, …). Keep it in step with the `*.api.ts` files: a new call there means
+a new operation there.
 
 ---
 
@@ -309,16 +325,18 @@ Deliberate changes from the legacy screen:
 Verification status, stated plainly: unit tests, `tsc`, lint and the build are
 green. In a browser, as an anonymous visitor: the locked screen (four features,
 register link, **no unlock control**), the lock on the nav item, and the mobile
-bar. **Not seen live:** the workspace itself — it needs a subscriber or admin
-session, which means the password typed in, left to the project owner. That one
-sign-in pass would now cover the admin console, the CRM and Hunter Plus.
+bar. The workspace itself needs a subscriber or admin session, so the
+assistant never saw it live; **the developer did the signed-in pass over the
+admin console, the CRM and Hunter Plus
+(2026-09-20).** That was the developer's own check: the assistant did not observe it
+and has no record of what was clicked or whether anything was adjusted.
 
 ## All planned slices are built
 
 Every slice of the agreed plan now exists in `frontend/`. What stands between
 this and cutting over from `../public`:
-1. **The signed-in browser pass** (admin, CRM, Hunter Plus workspace) — the
-   only parts never seen against the live server's real responses.
+1. ~~The signed-in browser pass~~ (admin, CRM, Hunter Plus workspace) — done by
+   the developer (2026-09-20).
 2. **Open product decisions:** the readiness-score keep/replace, the landing
    copy that contradicts `PRODUCT-STATUS.md`, and the Hunter Plus gate above.
 3. **Server fix:** `POST /api/refresh` is unauthenticated (see the slice 8
@@ -369,10 +387,10 @@ Not exposed, because the legacy did not either: the server's `owner`, `tag`,
 `facets`, `owners` and `tags` it returns alongside the list. Adding an owner
 filter would be small if the team wants one.
 
-Verification status is unchanged and stated plainly: unit tests, `tsc`, lint
-and the build are green; the **signed-in browser pass for both the admin
-console and the CRM is still pending** — it needs the admin password typed in,
-which was left to the project owner.
+Verification status: unit tests, `tsc`, lint and the build are green, and the
+**signed-in browser pass for the admin console and the CRM was done by the
+developer (2026-09-20)** — the assistant does
+not type the admin password, so it did not observe that pass.
 
 ### 2026-09-20 — `crm` part 1 (slice 9): the pipeline and the contact record
 The CRM is split like `opportunities` was. Part 1 is the two screens everything
@@ -406,9 +424,9 @@ Built:
 Verification status, stated plainly: unit tests, `tsc`, lint and the build are
 green, and an anonymous visit to `/admin/crm/...` was confirmed in the browser
 to land on `/login` without a single `/api/admin` request. **The signed-in
-pass has not been done** (it needs the admin password typed in, which was left
-to the project owner); until then neither the admin console nor the CRM has
-rendered against the live server's real responses.
+pass was later done by the developer
+(2026-09-20)** — the assistant did not observe it (it does not type the admin
+password).
 
 Deliberate changes from the legacy CRM:
 - **"Lost" asks for a reason in a dialog**, not a browser `prompt()`; deleting
@@ -476,10 +494,9 @@ Built:
 
 Verification status, stated plainly: unit tests, `tsc` and the production
 build are green, and anonymous `/admin` was confirmed in the browser to land
-on `/login`. **The signed-in pass has not been done** — reaching the console
-needs the admin password typed into the login form, which was left to the
-project owner rather than done by the assistant. Until that pass, the console
-has never rendered against the live server's real responses.
+on `/login`. **The signed-in pass was later done by the developer (2026-09-20)** — reaching the console needs the admin
+password typed into the login form, which the assistant leaves to the owner, so
+it did not observe that pass.
 
 Deliberate changes from the legacy console:
 - **A non-admin who opens `/admin` is redirected to `/app`** (and an
@@ -521,7 +538,7 @@ scope for the rewrite — but it should be: the route wants the same
 `requireAdmin` the others use. Until then, don't `curl` it "to see".
 
 Known gaps / follow-ups:
-- The signed-in browser pass above.
+- ~~The signed-in browser pass~~ — done by the developer (see above).
 - Route-level code splitting: the admin screens now ship in every visitor's
   bundle (the build warns the main chunk is over 500 kB). React Router's
   route `lazy` would keep them, and later the CRM, out of it.
