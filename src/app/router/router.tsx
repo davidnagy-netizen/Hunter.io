@@ -13,6 +13,7 @@ import { AdminOverviewPage } from "@/features/admin/components/AdminOverviewPage
 import { SystemPage } from "@/features/admin/components/SystemPage";
 import { UserHistoryPage } from "@/features/admin/components/UserHistoryPage";
 import { UsersPage } from "@/features/admin/components/UsersPage";
+import { PlusPage } from "@/features/hunter-plus/components/PlusPage";
 import { ContactsPage } from "@/features/crm/components/ContactsPage";
 import { InsightsPage } from "@/features/crm/components/InsightsPage";
 import { LeadsPage } from "@/features/crm/components/LeadsPage";
@@ -65,6 +66,7 @@ export const router = createBrowserRouter([
       { path: "search", element: <SearchPage /> },
       { path: "calendar", element: <CalendarPage /> },
       { path: "saved", element: <SavedPage /> },
+      { path: "plus", element: <PlusPage /> },
     ],
   },
   {

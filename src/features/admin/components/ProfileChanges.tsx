@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useFormat } from "@/shared/hooks/useFormat";
-import { useMetaQuery } from "@/shared/api/meta.queries";
+import { useGoalLabel } from "@/shared/hooks/useGoalLabel";
 import { describeValue } from "../domain/profileChanges";
 import type { ProfileVersionChange } from "../types/admin.types";
 import "../i18n";
@@ -8,17 +8,14 @@ import "../i18n";
 /** "Employees: 28 → 45" lines for one profile version. Goal ids are shown by name. */
 export function ProfileChanges({ changes }: { changes: ProfileVersionChange[] }) {
   const { t } = useTranslation("admin");
-  const { lang, huf } = useFormat();
-  const goals = useMetaQuery().data?.reference.goals;
+  const { huf } = useFormat();
+  const goalLabel = useGoalLabel();
 
   const formatters = {
     huf,
     yes: t("yes"),
     no: t("no"),
-    goalLabel: (id: string) => {
-      const goal = goals?.find((g) => g.id === id);
-      return goal ? (lang === "en" ? goal.label_en : goal.label) : id;
-    },
+    goalLabel,
   };
 
   return (

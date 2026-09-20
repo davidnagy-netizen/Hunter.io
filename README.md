@@ -33,7 +33,7 @@ and cut over, its behavior should still match what those documents promise.
 | `landing` (public front door) | ✅ done — pitch, worked example, sources, price; replaces the temporary showcase page |
 | `admin` (overview, users, system) | 🟡 built and unit-tested (65 tests); **not yet clicked through as a signed-in admin in a browser** — that pass is pending (see the log entry) |
 | `crm` (pipeline, contacts, leads, insights, contact record) | 🟡 built and unit-tested (127 tests); **signed-in browser pass pending**, as for `admin` |
-| `hunter-plus` (demo) | not started |
+| `hunter-plus` (demo) | 🟡 built and unit-tested (29 tests); the locked screen and nav were checked in a browser as an anonymous visitor, but **the workspace itself needs a signed-in subscriber/admin session and has not been seen live** |
 
 Nothing here is wired up to the real Node server or served to real users yet.
 `../public` remains the live app until a feature is actually cut over.
@@ -102,8 +102,8 @@ for the reference example.
 on the ones listed before it):
 
 ```
-authentication → profile → scoring → opportunities → assessment → hunter-plus
-                                                     ↘ hunter-plus
+authentication → profile → scoring → opportunities → assessment
+                                        ↘ hunter-plus   (authentication, profile, scoring, opportunities → hunter-plus)
 authentication → admin   (+ opportunities, for its cache key only: a catalog refresh invalidates it)
 profile, opportunities → assessment;   authentication, profile → landing
 authentication, admin (GrantForm, ProfileChanges, activity names), profile (types only) → crm
@@ -198,7 +198,7 @@ the `authentication` feature, and the `profile` feature (schema, local store,
 the `useCompanyProfile` sync-fork hook, `OnboardingWizard`, `ProfileHistoryPanel`),
 and the `scoring` feature (engine wiring pinned to the demo-company scores,
 the answers fork with optimistic update/rollback, the scoring hooks, and its
-four components) — 395 tests, all passing (slices 5–7 added the `opportunities` screens and forks, the app-shell guard, the assessment funnel, lead capture, the landing page, the loader and the shared motion components; slice 8 the admin console, its route guard, the workspace switch and the admin-aware redirects; slice 9 the CRM, the shared `Dialog` and `Pager`).
+four components) — 432 tests, all passing (slices 5–7 added the `opportunities` screens and forks, the app-shell guard, the assessment funnel, lead capture, the landing page, the loader and the shared motion components; slice 8 the admin console, its route guard, the workspace switch and the admin-aware redirects; slice 9 the CRM, the shared `Dialog` and `Pager`; slice 10 Hunter Plus and the nav badge / short-label slots).
 
 Feature tests that need React Query and/or routing use
 [`src/test/renderWithProviders.tsx`](src/test/renderWithProviders.tsx)
@@ -241,6 +241,91 @@ by some other process (a fixture script or a previously-populated
 
 Newest first. Each entry says what changed, why, and what it affects — the
 things that would otherwise only live in a chat transcript.
+
+### 2026-09-20 — `hunter-plus` (slice 10): the labelled demo, gated by real access
+The last planned slice. Hunter Plus is, by the product's own admission
+(`PRODUCT-STATUS.md` §3.3–3.4), a **demo**: pick a call that fits the company,
+tick off the documents it asks for, and generate a fixed three-chapter
+application template filled with the company's and the call's real figures.
+There is no AI and no server side. It is at `/app/plus`, the last entry in the
+client nav.
+
+**Product decision, flagged — the browser "activate" switch is not ported.**
+In the legacy app, "Activate preview" wrote a flag into the visitor's own
+browser and unlocked the screen for free; `PRODUCT-STATUS.md` §3.3 calls that
+out as a paywall hole. Here the screen is gated by the account's **real
+entitlements** (`useIsSubscriber()` — a subscriber or an admin), the same
+thing the server enforces on the catalog. Everyone else sees an honest
+description (what it is, that it isn't AI, that access is granted by an
+administrator for now) and, if they have no account, a link to register —
+and no button that pretends to unlock anything. The activation modal is gone
+with it. This is a behaviour change on a product question; if you *want* a
+public, self-service preview, it is a small addition (a persisted flag beside
+the docs store), but it would reopen the hole.
+
+Built (`features/hunter-plus`):
+- `domain/draft.ts` (`draftFigures`, `draftToText`), `domain/documents.ts`,
+  `store/docChecksStore` (Zustand + persist, key `hunter-rewrite-plus-docs`),
+  `hooks/useDraftChapters`, and the components `PlusPage` (the gate),
+  `PlusLockScreen`, `PlusWorkspace`, `GrantPicker`, `DocumentChecklist`,
+  `DraftPanel`, `PlusNavBadge`.
+- **The draft is derived on every render, not stored.** The legacy stored both
+  languages in state; here switching language re-words it and changing the call
+  drops it (the panel remounts on `key`), with nothing to keep in sync. Text
+  lives in `i18n/{hu,en}.json` as templates.
+- Shell: `NavItem` gained an optional `badge` component ("PRO" for a
+  subscriber, a lock for anyone else — read from the real entitlements) and an
+  optional `shortLabelKey` for the narrow bottom bar. The shell also prints
+  cleanly now (`print:hidden` on the sidebar and bars), because "Print / Save
+  PDF" is a feature of this screen.
+- Shared: `useGoalLabel()` — the third place needing "goal id → name", so admin's
+  `ProfileChanges` and the CRM's `ProfilePanel` now use it instead of their own
+  copies.
+- 37 new tests (432 total; 29 in the feature itself, the rest for `useGoalLabel`, the shell's badge and short label, and the nav). Two were checked to fail when the behaviour they
+  guard is removed: the access gate, and the draft resetting when the call
+  changes.
+
+Deliberate changes from the legacy screen:
+- **Gated by entitlement, not a browser flag** (above).
+- **Goals are shown by name.** The legacy printed raw ids ("circular,
+  environment") into the text.
+- **No invented numbers.** The legacy fell back to a 30 M Ft project value when
+  none was set (a profile always has one now) and printed `undefined` for a
+  missing NACE code; the activity sentence is now simply reworded without it,
+  and a call with no intensity yields no grant rather than `NaN`.
+- **A tick stays on its document.** Checks are keyed by the document's text,
+  not its position, so a catalog refresh that reorders the list can't move
+  them.
+- **With no fitting call, the screen says so** instead of falling back to
+  the catalog's first call, however ineligible.
+- **The generate / copy toasts are inline messages** (there is no toast
+  system, by design); a failed clipboard write is reported rather than
+  silently ignored.
+- **The mobile bottom bar now has all six entries** (the legacy hid Calendar
+  and Plus there). To fit 375 px they use a smaller label and, for Hunter Plus,
+  a short one ("Plus"); checked in a browser in both languages — nothing
+  truncates.
+
+Verification status, stated plainly: unit tests, `tsc`, lint and the build are
+green. In a browser, as an anonymous visitor: the locked screen (four features,
+register link, **no unlock control**), the lock on the nav item, and the mobile
+bar. **Not seen live:** the workspace itself — it needs a subscriber or admin
+session, which means the password typed in, left to the project owner. That one
+sign-in pass would now cover the admin console, the CRM and Hunter Plus.
+
+## All planned slices are built
+
+Every slice of the agreed plan now exists in `frontend/`. What stands between
+this and cutting over from `../public`:
+1. **The signed-in browser pass** (admin, CRM, Hunter Plus workspace) — the
+   only parts never seen against the live server's real responses.
+2. **Open product decisions:** the readiness-score keep/replace, the landing
+   copy that contradicts `PRODUCT-STATUS.md`, and the Hunter Plus gate above.
+3. **Server fix:** `POST /api/refresh` is unauthenticated (see the slice 8
+   entry).
+4. **Follow-ups:** route-level code splitting (the main chunk is over 500 kB),
+   the account/subscription screen, `MatchingLoader` on the onboarding finish,
+   and folding `opportunities`' `CatalogStatus` into the shared `QueryStatus`.
 
 ### 2026-09-20 — `crm` part 2 (slice 9): contacts, leads, insights
 Finishes the CRM. Three more tabs, each a route (`/admin/crm/contacts`,

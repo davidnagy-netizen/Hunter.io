@@ -7,6 +7,7 @@ import { profileApi } from "@/features/profile/api/profile.api";
 import type { MeResponse } from "@/features/authentication/types/auth.types";
 import { GridIcon } from "@/shared/components";
 import type { NavItem } from "@/shared/types/navigation.types";
+import "@/features/admin/i18n";
 import { AppShell } from "./AppShell";
 
 vi.mock("@/features/authentication/api/auth.api", () => ({ authApi: { me: vi.fn(), login: vi.fn(), register: vi.fn(), logout: vi.fn() } }));
@@ -40,6 +41,19 @@ beforeEach(() => {
   vi.mocked(profileApi.get).mockResolvedValue({ profile: null, answers: {}, saved: [], demoProfile: {} as never, versions: 0 });
 });
 
+function renderWithBadgedItem() {
+  const Badge = () => <span>BADGE</span>;
+  const nav: NavItem[] = [{ to: "/admin", labelKey: "nav.overview", shortLabelKey: "nav.users", namespace: "admin", icon: GridIcon, end: true, badge: Badge }];
+  return renderWithProviders(
+    <Routes>
+      <Route element={<AppShell nav={nav} workspace="admin" />}>
+        <Route path="/admin" element={<p>page body</p>} />
+      </Route>
+    </Routes>,
+    { route: "/admin" },
+  );
+}
+
 describe("AppShell", () => {
   it("renders exactly the nav entries it is given, and the routed page", async () => {
     me("admin");
@@ -64,5 +78,22 @@ describe("AppShell", () => {
     renderShell("app");
     await screen.findByText("page body");
     expect(screen.queryByRole("group", { name: /munkaterület|workspace/i })).not.toBeInTheDocument();
+  });
+
+  it("decorates a nav item with its badge in the sidebar only", async () => {
+    me("admin");
+    renderWithBadgedItem();
+    await screen.findByText("page body");
+    expect(screen.getAllByText("BADGE")).toHaveLength(1);
+  });
+
+  it("uses an item's short label in the bottom bar and the full one in the sidebar", async () => {
+    me("admin");
+    renderWithBadgedItem();
+    await screen.findByText("page body");
+    const links = screen.getAllByRole("link", { name: /áttekintés|overview|felhasználók|users/i });
+    const texts = links.map((l) => l.textContent);
+    expect(texts.some((t) => /áttekintés|overview/i.test(t ?? ""))).toBe(true);
+    expect(texts.some((t) => /^(felhasználók|users)$/i.test(t ?? ""))).toBe(true);
   });
 });

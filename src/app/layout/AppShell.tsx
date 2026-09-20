@@ -120,7 +120,7 @@ export function AppShell({ nav, workspace }: AppShellProps) {
 
   return (
     <div className="min-h-screen bg-paper">
-      <aside className="fixed inset-y-0 left-0 hidden w-60 flex-col gap-6 bg-ink p-5 text-white md:flex">
+      <aside className="fixed inset-y-0 left-0 hidden w-60 flex-col gap-6 bg-ink p-5 text-white md:flex print:hidden">
         <Logo dark />
         <WorkspaceSwitch workspace={workspace} />
         <nav className="flex flex-1 flex-col gap-1">
@@ -138,6 +138,11 @@ export function AppShell({ nav, workspace }: AppShellProps) {
             >
               <item.icon />
               {t(`${item.namespace}:${item.labelKey}`)}
+              {item.badge ? (
+                <span className="ml-auto">
+                  <item.badge />
+                </span>
+              ) : null}
             </NavLink>
           ))}
         </nav>
@@ -145,7 +150,7 @@ export function AppShell({ nav, workspace }: AppShellProps) {
         <AccountBlock />
       </aside>
 
-      <div className="flex items-center justify-between bg-ink px-4 py-3 md:hidden">
+      <div className="flex items-center justify-between bg-ink px-4 py-3 md:hidden print:hidden">
         <Logo dark />
         <div className="flex items-center gap-2">
           <MobileWorkspaceLink workspace={workspace} />
@@ -153,24 +158,24 @@ export function AppShell({ nav, workspace }: AppShellProps) {
         </div>
       </div>
 
-      <main className="px-4 pb-24 pt-6 md:ml-60 md:px-10 md:py-10">
+      <main className="px-4 pb-24 pt-6 md:ml-60 md:px-10 md:py-10 print:m-0 print:p-0">
         <div className="mx-auto max-w-4xl">
           <Outlet />
         </div>
       </main>
 
-      <nav className="fixed inset-x-0 bottom-0 flex justify-around border-t border-line bg-surface py-2 md:hidden">
+      <nav className="fixed inset-x-0 bottom-0 flex border-t border-line bg-surface py-2 md:hidden print:hidden">
         {nav.map((item) => (
           <NavLink
             key={item.to}
             to={item.to}
             end={item.end}
             className={({ isActive }) =>
-              ["flex flex-col items-center gap-0.5 px-4 py-1 text-xs", isActive ? "text-gold-deep" : "text-muted"].join(" ")
+              ["flex min-w-0 flex-1 flex-col items-center gap-0.5 px-0.5 py-1 text-[11px]", isActive ? "text-gold-deep" : "text-muted"].join(" ")
             }
           >
             <item.icon />
-            {t(`${item.namespace}:${item.labelKey}`)}
+            <span className="max-w-full truncate">{t(`${item.namespace}:${item.shortLabelKey ?? item.labelKey}`)}</span>
           </NavLink>
         ))}
       </nav>

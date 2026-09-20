@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Panel } from "@/shared/components";
 import { useFormat } from "@/shared/hooks/useFormat";
-import { useMetaQuery } from "@/shared/api/meta.queries";
+import { useGoalLabel } from "@/shared/hooks/useGoalLabel";
 import type { CompanyProfile } from "@/features/profile/types/profile.types";
 import "../i18n";
 
@@ -17,12 +17,8 @@ function Fact({ label, children }: { label: string; children: React.ReactNode })
 /** The company's own funding profile — the most useful thing to have in front of you on a call. Empty is itself a finding. */
 export function ProfilePanel({ profile, profileVersions, readiness }: { profile: Partial<CompanyProfile> | null; profileVersions: number; readiness?: number | null }) {
   const { t } = useTranslation("crm");
-  const { lang, huf } = useFormat();
-  const goals = useMetaQuery().data?.reference.goals;
-  const goalLabel = (id: string) => {
-    const goal = goals?.find((g) => g.id === id);
-    return goal ? (lang === "en" ? goal.label_en : goal.label) : id;
-  };
+  const { huf } = useFormat();
+  const goalLabel = useGoalLabel();
 
   return (
     <Panel title={t("profile.title")}>
