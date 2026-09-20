@@ -8,7 +8,7 @@
   "hero": {
     "eyebrow": "Rule-based funding intelligence",
     "line1": "Don't go looking for grants.",
-    "line2": "Hunter finds them for you.",
+    "line2": "Fundor finds them for you.",
     "lead": "Based on your company profile we find, rank and clearly present the relevant funding — from official sources.",
     "cta": "See what I'm eligible for",
     "register": "Create a company account",
@@ -129,7 +129,7 @@
       },
       {
         "title": "Relevant grants",
-        "text": "Hunter Score, itemized justification, funding calculator, deadline calendar. You know what's worth it and what comes next."
+        "text": "Fundor Score, itemized justification, funding calculator, deadline calendar. You know what's worth it and what comes next."
       }
     ]
   },
@@ -152,5 +152,5 @@
     "versus": "vs. 5–50M HUF available funding",
     "cta": "Start with the free assessment"
   },
-  "footer": "HUNTER — rule-based grant finder · MVP prototype · Not an official determination"
+  "footer": "FUNDOR — rule-based grant finder · MVP prototype · Not an official determination"
 }

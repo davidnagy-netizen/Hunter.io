@@ -8,15 +8,15 @@ vi.mock("@/features/authentication/hooks/useAuth", () => ({ useIsSubscriber: vi.
 beforeEach(() => vi.mocked(useIsSubscriber).mockReturnValue(false));
 
 describe("PlusNavBadge", () => {
-  it("tags a subscriber's link PRO", () => {
+  it("tags a subscriber's link PLUS", () => {
     vi.mocked(useIsSubscriber).mockReturnValue(true);
     render(<PlusNavBadge />);
-    expect(screen.getByText("PRO")).toBeInTheDocument();
+    expect(screen.getByText("PLUS")).toBeInTheDocument();
   });
 
   it("locks it for everyone else", () => {
     const { container } = render(<PlusNavBadge />);
-    expect(screen.queryByText("PRO")).not.toBeInTheDocument();
+    expect(screen.queryByText("PLUS")).not.toBeInTheDocument();
     expect(container.querySelector("svg")).toBeInTheDocument();
   });
 });

@@ -7,6 +7,7 @@ import { BAND_COLOR } from "@/features/scoring/domain/bandStyle";
 import { scoreBand } from "@/features/scoring/domain/engine";
 import type { CardModel } from "../domain/cardModel";
 import "../i18n";
+import { BRAND } from "@/shared/brand";
 
 const CARD = "relative flex gap-4 rounded-lg border border-line bg-surface p-4 shadow-card transition-shadow hover:shadow-card-lg";
 
@@ -71,7 +72,7 @@ export function OpportunityCardView({ model }: { model: CardModel }) {
         <span className="font-display text-3xl font-semibold" style={{ color }}>
           {model.score ?? "—"}
         </span>
-        <span className="text-[11px] text-muted">Hunter</span>
+        <span className="text-[11px] text-muted">{BRAND.name}</span>
         <span className="mt-1 h-1 w-full overflow-hidden rounded-full bg-line">
           <span className="block h-full" style={{ width: `${score}%`, background: color }} />
         </span>

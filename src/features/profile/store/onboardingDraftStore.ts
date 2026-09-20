@@ -22,6 +22,6 @@ export const useOnboardingDraftStore = create<OnboardingDraftState>()(
       setDraft: (draft) => set({ draft }),
       clear: () => set({ draft: null }),
     }),
-    { name: "hunter-rewrite-onboarding-draft" },
+    { name: "fundor-rewrite-onboarding-draft" },
   ),
 );

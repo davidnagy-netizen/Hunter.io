@@ -1,10 +1,11 @@
 openapi: 3.0.3
 
 info:
-  title: Hunter API
+  title: Fundor API
   version: 2.1.0
   description: |
-    The HTTP API the **Hunter React frontend** (`frontend/`) calls: grant/funding intelligence for Hungarian SMEs.
+    The HTTP API the **Fundor React frontend** (`frontend/`) calls: grant/funding intelligence for Hungarian SMEs.
+    (The product was called *Hunter* until 2026-09-20 — see *Rebrand* below.)
 
     This document was written **from the frontend's `*.api.ts` files, checked against the existing Node server**
     (`server/routes/*.js`, `server/server.js`, `server/crm.js`, `server/auth.js`). Every operation below is one the
@@ -52,6 +53,25 @@ info:
     They are deliberately **not** in this spec. (Two of them, `POST /sync` and `POST /profile/reset`, are security
     problems — see below.)
 
+    ## Rebrand: Hunter → Fundor (fundor.hu) — what the backend still says
+
+    The product is now **Fundor** (`fundor.hu`; decision log D-01/D-02 in `FUNDOR-CHANGE-SPECIFICATION.md`; the premium
+    tier is **Fundor Plus**). The frontend is renamed. **This spec describes what the server returns today**, so these
+    server-owned names still read *Hunter* and are the backend team's to change:
+
+    | Where | Today | Notes |
+    |---|---|---|
+    | Session cookie | `hunter_session` | Renaming signs every user out once. Suggest accepting both names for the 7-day session lifetime. Set `Domain`/`Secure` for `fundor.hu`. |
+    | CSV download | `Content-Disposition: … filename="hunter-crm-contacts.csv"` | Shown to the operator. Suggest `fundor-crm-contacts.csv`. |
+    | `GET /health` (not used by the frontend) | `service: "HUNTER API"` | |
+    | Seeded admin account | company `Hunter — adminisztráció` | Visible in the admin console user list and CRM. |
+    | Environment variables | `HUNTER_ADMIN_USER`, `HUNTER_ADMIN_PASSWORD`, `HUNTER_SECURE_COOKIE`, `HUNTER_DATA_DIR`, `HUNTER_PERSIST`, `HUNTER_AUTO_REFRESH`, `HUNTER_REFRESH_HOURS`, `HUNTER_REFRESH_MAX_RECORDS`, `HUNTER_REFRESH_ON_BOOT`, `HUNTER_INCLUDE_CURATED`, `HUNTER_INCLUDE_FORTHCOMING`, `HUNTER_TODAY` | Renaming breaks existing deployments' config; keep the old names as fallbacks for a release. |
+    | Code / deployment | `hunterScore()` in `src/engine`, `package.json` name `hunter-io`, `render.yaml` service `hunter-io` (and so the hosting hostname) | The frontend aliases `hunterScore` → `fundorScore` at one import, so renaming it only needs that line changed. |
+    | Hosting | — | TLS and the redirect from any previously shared link are the backend/hosting team's. CORS is not needed while the app is served same-origin. |
+
+    Nothing in the API's *paths, fields or error codes* carries the name, so **no client-visible contract changes** are
+    needed for the rebrand itself.
+
     ## Issues found while writing this spec (backend action requested)
 
     1. **`POST /refresh` (and `POST /sync`) have no authentication.** Anyone, signed in or not, can make the server
@@ -84,7 +104,7 @@ info:
        EU portal data, but the stated design — and the product's paywall — is that a gated caller cannot identify a call.)
 
   contact:
-    name: Hunter frontend
+    name: Fundor frontend
   
 servers:
   - url: http://localhost:3000/api
@@ -367,7 +387,7 @@ paths:
         **Everyone else** (`gated: true`): `opportunities` is empty (`maxResults` is 0), and `teasers` carries the censored
         rows; `stats` and `lockedTotal` are the server's real counts (the browser has nothing to count).
         Prizes/labels (`awardsFunding: false`) are excluded from the gated list.
-      x-frontend: { used-by: [Dashboard, Opportunities, Calendar, Saved, Hunter Plus] }
+      x-frontend: { used-by: [Dashboard, Opportunities, Calendar, Saved, Fundor Plus] }
       parameters:
         - name: forthcoming
           in: query

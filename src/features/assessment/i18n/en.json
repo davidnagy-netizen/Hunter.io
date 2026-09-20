@@ -1,7 +1,7 @@
 {
   "progress": "Free assessment",
   "approx": "approx. 2 min",
-  "sub": "No registration. At the end you get your Hunter Readiness Score.",
+  "sub": "No registration. At the end you get your Fundor Readiness Score.",
   "questions": {
     "employees": "How many people does your company employ?",
     "county": "Where is your main project location?",
@@ -49,7 +49,7 @@
   },
   "result": {
     "label": "Your assessment result",
-    "score": "Hunter Readiness Score",
+    "score": "Fundor Readiness Score",
     "outOf": "/ 100",
     "bands": {
       "strong": "Strong position",

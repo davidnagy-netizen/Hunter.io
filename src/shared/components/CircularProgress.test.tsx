@@ -9,8 +9,8 @@ describe("CircularProgress", () => {
   });
 
   it("accepts a custom accessible label", () => {
-    render(<CircularProgress value={87} aria-label="Hunter Score 87 out of 100" />);
-    expect(screen.getByRole("img", { name: "Hunter Score 87 out of 100" })).toBeInTheDocument();
+    render(<CircularProgress value={87} aria-label="Fundor Score 87 out of 100" />);
+    expect(screen.getByRole("img", { name: "Fundor Score 87 out of 100" })).toBeInTheDocument();
   });
 
   it("clamps out-of-range values into 0–100", () => {

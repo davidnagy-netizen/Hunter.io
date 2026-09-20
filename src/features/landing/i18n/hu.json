@@ -8,7 +8,7 @@
   "hero": {
     "eyebrow": "Szabályalapú pályázatkeresés",
     "line1": "Ne te keresd a pályázatot.",
-    "line2": "A Hunter megtalálja neked.",
+    "line2": "A Fundor megtalálja neked.",
     "lead": "A cégprofilod alapján megkeressük, rangsoroljuk és érthetően bemutatjuk a releváns támogatásokat — hivatalos forrásokból.",
     "cta": "Megnézem, mire vagyok jogosult",
     "register": "Cégfiók létrehozása",
@@ -129,7 +129,7 @@
       },
       {
         "title": "Releváns pályázatok",
-        "text": "Hunter Score, tételes indoklás, támogatáskalkulátor, határidőnaptár. Tudod, mi éri meg, és mi a következő lépés."
+        "text": "Fundor Score, tételes indoklás, támogatáskalkulátor, határidőnaptár. Tudod, mi éri meg, és mi a következő lépés."
       }
     ]
   },
@@ -152,5 +152,5 @@
     "versus": "vs. 5–50 M Ft elérhető támogatás",
     "cta": "Kezdd az ingyenes felméréssel"
   },
-  "footer": "HUNTER — szabályalapú pályázatkereső · MVP prototípus · Nem hatósági döntés"
+  "footer": "FUNDOR — szabályalapú pályázatkereső · MVP prototípus · Nem hatósági döntés"
 }

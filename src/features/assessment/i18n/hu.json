@@ -1,7 +1,7 @@
 {
   "progress": "Ingyenes felmérés",
   "approx": "kb. 2 perc",
-  "sub": "Nincs regisztráció. A végén megkapod a Hunter Readiness Score-odat.",
+  "sub": "Nincs regisztráció. A végén megkapod a Fundor Readiness Score-odat.",
   "questions": {
     "employees": "Hány főt foglalkoztat a céged?",
     "county": "Hol van a fő megvalósítási helyszínetek?",
@@ -49,7 +49,7 @@
   },
   "result": {
     "label": "A felmérésed eredménye",
-    "score": "Hunter Readiness Score",
+    "score": "Fundor Readiness Score",
     "outOf": "/ 100",
     "bands": {
       "strong": "Erős pozíció",

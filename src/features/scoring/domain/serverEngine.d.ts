@@ -30,7 +30,7 @@ declare module "@server-src/engine/scoring.js" {
   import type {
     AnswerMap,
     FactorExplanation,
-    HunterScoreResult,
+    FundorScoreResult,
     Opportunity,
     RankedOpportunity,
     ScoreBand,
@@ -42,7 +42,7 @@ declare module "@server-src/engine/scoring.js" {
     profile: CompanyProfile | null,
     adHocAnswers?: AnswerMap,
     referenceDate?: Date,
-  ): HunterScoreResult;
+  ): FundorScoreResult;
   export function scoreBand(score: number | null): ScoreBand & { color: string };
   export function rankedOpps(
     profile: CompanyProfile | null,
@@ -53,7 +53,7 @@ declare module "@server-src/engine/scoring.js" {
   export function explainScore(
     opp: Opportunity,
     profile: CompanyProfile | null,
-    res: HunterScoreResult,
+    res: FundorScoreResult,
     lang?: "hu" | "en",
   ): FactorExplanation[];
 }

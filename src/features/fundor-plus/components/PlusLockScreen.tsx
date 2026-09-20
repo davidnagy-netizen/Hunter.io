@@ -9,7 +9,7 @@ interface Feature {
   text: string;
 }
 
-/** What Hunter Plus is, honestly, for someone without access. There is no switch to flip: access is the account's real subscription. */
+/** What Fundor Plus is, honestly, for someone without access. There is no switch to flip: access is the account's real subscription. */
 export function PlusLockScreen() {
   const { t } = useTranslation("plus");
   const isAuthenticated = useIsAuthenticated();

@@ -15,6 +15,6 @@ export const useLocalSavedStore = create<LocalSavedState>()(
       toggle: (id) => set((s) => ({ ids: s.ids.includes(id) ? s.ids.filter((x) => x !== id) : [...s.ids, id] })),
       clear: () => set({ ids: [] }),
     }),
-    { name: "hunter-rewrite-saved" },
+    { name: "fundor-rewrite-saved" },
   ),
 );

@@ -27,6 +27,6 @@ export const useLocalAnswersStore = create<LocalAnswersState>()(
         }),
       clear: () => set({ answers: {} }),
     }),
-    { name: "hunter-rewrite-answers" },
+    { name: "fundor-rewrite-answers" },
   ),
 );

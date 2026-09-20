@@ -26,6 +26,6 @@ export const useUiStore = create<UiState>()(
         set({ lang });
       },
     }),
-    { name: "hunter-rewrite-ui" },
+    { name: "fundor-rewrite-ui" },
   ),
 );

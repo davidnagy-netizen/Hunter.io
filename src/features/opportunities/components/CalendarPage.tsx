@@ -11,7 +11,7 @@ import { UpsellBlock } from "./UpsellBlock";
 import "../i18n";
 
 /**
- * Submission deadlines by month, for the matches worth acting on (Hunter Score
+ * Submission deadlines by month, for the matches worth acting on (Fundor Score
  * 70+). A deadline is itself paid data — a date plus a grant figure identifies
  * a call — so a gated account sees only the urgent teasers.
  */

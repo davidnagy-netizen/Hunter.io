@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import { useMetaQuery } from "@/shared/api/meta.queries";
 import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
-import { DEFAULT_REFERENCE_DATE, hunterScore, normalizeProfile, rankedOpps } from "../domain/engine";
+import { DEFAULT_REFERENCE_DATE, fundorScore, normalizeProfile, rankedOpps } from "../domain/engine";
 import { useEligibilityAnswers } from "./useEligibilityAnswers";
-import type { HunterScoreResult, Opportunity, RankedOpportunity } from "../types/scoring.types";
+import type { FundorScoreResult, Opportunity, RankedOpportunity } from "../types/scoring.types";
 
 /**
  * Everything the engine needs besides the opportunity itself, resolved once:
@@ -30,10 +30,10 @@ export function useScoringInputs() {
  * only path that recalculates instantly when an answer changes. Features that
  * show server-scored results (e.g. paginated search) use those instead.
  */
-export function useHunterScore(opp: Opportunity | undefined): HunterScoreResult | null {
+export function useFundorScore(opp: Opportunity | undefined): FundorScoreResult | null {
   const { profile, answers, referenceDate } = useScoringInputs();
   return useMemo(
-    () => (opp && profile ? hunterScore(opp, profile, answers, referenceDate) : null),
+    () => (opp && profile ? fundorScore(opp, profile, answers, referenceDate) : null),
     [opp, profile, answers, referenceDate],
   );
 }

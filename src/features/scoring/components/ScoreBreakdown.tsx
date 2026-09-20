@@ -2,7 +2,7 @@ import { useId, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { CompanyProfile } from "@/features/profile/types/profile.types";
 import { explainScore } from "../domain/engine";
-import type { HunterScoreResult, Opportunity } from "../types/scoring.types";
+import type { FundorScoreResult, Opportunity } from "../types/scoring.types";
 import "../i18n";
 
 /**
@@ -18,7 +18,7 @@ export function ScoreBreakdown({
 }: {
   opp: Opportunity;
   profile: CompanyProfile | null;
-  result: HunterScoreResult;
+  result: FundorScoreResult;
 }) {
   const { t, i18n } = useTranslation("scoring");
   const baseId = useId();

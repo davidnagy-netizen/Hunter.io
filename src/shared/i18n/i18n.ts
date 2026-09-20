@@ -17,7 +17,7 @@ export const DEFAULT_LANGUAGE: SupportedLanguage = "hu";
  */
 function readPersistedLanguage(): SupportedLanguage {
   try {
-    const raw = localStorage.getItem("hunter-rewrite-ui");
+    const raw = localStorage.getItem("fundor-rewrite-ui");
     if (!raw) return DEFAULT_LANGUAGE;
     const parsed = JSON.parse(raw);
     const lang = parsed?.state?.lang;

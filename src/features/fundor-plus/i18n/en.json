@@ -1,10 +1,10 @@
 {
   "nav": {
-    "plus": "Hunter Plus (demo)",
-    "pro": "PRO",
-    "plusShort": "Plus"
+    "plus": "Fundor Plus (demo)",
+    "plusShort": "Plus",
+    "badge": "PLUS"
   },
-  "title": "Hunter Plus (demo)",
+  "title": "Fundor Plus (demo)",
   "subtitle": "A browser demo of application templates.",
   "notice": "Application draft (demo): a static template populated with profile and call fields, not custom AI generation.",
   "lock": {

@@ -4,7 +4,7 @@ import { BAND_COLOR } from "../domain/bandStyle";
 import { scoreBand } from "../domain/engine";
 import "../i18n";
 
-export interface HunterScoreRingProps {
+export interface FundorScoreRingProps {
   /** `null` for a blocked (NOT_ELIGIBLE) call — those are never scored. */
   score: number | null;
   /** The verdict is INSUFFICIENT_DATA: the number is an estimate and says so. */
@@ -13,7 +13,7 @@ export interface HunterScoreRingProps {
   showBandLabel?: boolean;
 }
 
-export function HunterScoreRing({ score, estimated = false, size = 156, showBandLabel = true }: HunterScoreRingProps) {
+export function FundorScoreRing({ score, estimated = false, size = 156, showBandLabel = true }: FundorScoreRingProps) {
   const { t, i18n } = useTranslation("scoring");
 
   if (score === null) {

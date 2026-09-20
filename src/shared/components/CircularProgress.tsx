@@ -15,7 +15,7 @@ export interface CircularProgressProps {
 
 /**
  * Generic circular progress ring. Purely presentational: it knows nothing
- * about Hunter Score bands or readiness bands — feature code decides the
+ * about Fundor Score bands or readiness bands — feature code decides the
  * color and the centered content (see features/scoring and
  * features/assessment for the domain-specific wrappers).
  *

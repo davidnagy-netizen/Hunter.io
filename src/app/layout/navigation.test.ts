@@ -6,7 +6,7 @@ describe("workspace navigation", () => {
     expect(ADMIN_NAV.map((item) => item.to)).toEqual(["/admin", "/admin/crm", "/admin/users", "/admin/system"]);
   });
 
-  it("puts Hunter Plus last in the client workspace, with its access badge", () => {
+  it("puts Fundor Plus last in the client workspace, with its access badge", () => {
     const last = APP_NAV.at(-1)!;
     expect(last.to).toBe("/app/plus");
     expect(last.badge).toBeDefined();

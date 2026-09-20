@@ -8,6 +8,7 @@ import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
 import { ComparisonSection } from "./ComparisonSection";
 import { HowItWorks, PriceTeaser, Sources } from "./InfoSections";
 import "../i18n";
+import { BRAND } from "@/shared/brand";
 
 function HeroPreview() {
   const { t } = useTranslation("landing");
@@ -19,7 +20,7 @@ function HeroPreview() {
           <div className="text-xs font-medium text-muted">{t("preview.program")}</div>
           <h3 className="font-display text-base font-semibold">{t("preview.title")}</h3>
         </div>
-        <CircularProgress value={87} size={58} strokeWidth={6} color="var(--color-gold)" aria-label="Hunter Score 87">
+        <CircularProgress value={87} size={58} strokeWidth={6} color="var(--color-gold)" aria-label={`${BRAND.name} Score 87`}>
           <span className="font-display text-sm font-semibold">87</span>
         </CircularProgress>
       </div>

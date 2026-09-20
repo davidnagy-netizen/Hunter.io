@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { OPPS } from "@server-src/data/mockGrants.js";
 import { DEMO_PROFILE as SERVER_DEMO_PROFILE } from "@server-src/data/referenceData.js";
 import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
-import { checkRule, evaluateEligibility, explainScore, hunterScore, normalizeProfile, rankedOpps, scoreBand } from "./engine";
+import { checkRule, evaluateEligibility, explainScore, fundorScore, normalizeProfile, rankedOpps, scoreBand } from "./engine";
 
 const byId = (id: string) => {
   const opp = OPPS.find((o) => o.id === id);
@@ -23,18 +23,18 @@ describe("engine wiring (the server's own engine, run through the frontend build
   });
 
   it("reproduces the pinned demo-company scores (95 / 87 / 87) and verdicts", () => {
-    const szechenyi = hunterScore(byId("szechenyi-tech"), DEMO_PROFILE);
+    const szechenyi = fundorScore(byId("szechenyi-tech"), DEMO_PROFILE);
     expect([szechenyi.score, szechenyi.elig.status]).toEqual([95, "CONDITIONAL"]);
 
-    const ginop = hunterScore(byId("ginop-dig"), DEMO_PROFILE);
+    const ginop = fundorScore(byId("ginop-dig"), DEMO_PROFILE);
     expect([ginop.score, ginop.elig.status, ginop.estimated]).toEqual([87, "INSUFFICIENT_DATA", true]);
 
-    const dimop = hunterScore(byId("dimop-ai"), DEMO_PROFILE);
+    const dimop = fundorScore(byId("dimop-ai"), DEMO_PROFILE);
     expect([dimop.score, dimop.elig.status]).toEqual([87, "CONDITIONAL"]);
   });
 
   it("never scores a NOT_ELIGIBLE call", () => {
-    const top = hunterScore(byId("top-site"), DEMO_PROFILE);
+    const top = fundorScore(byId("top-site"), DEMO_PROFILE);
     expect(top.blocked).toBe(true);
     expect(top.score).toBeNull();
     expect(top.factors).toBeNull();
@@ -42,8 +42,8 @@ describe("engine wiring (the server's own engine, run through the frontend build
 
   it("resolves an INSUFFICIENT_DATA call from an ad-hoc answer, in both directions", () => {
     const ginop = byId("ginop-dig");
-    expect(hunterScore(ginop, DEMO_PROFILE, { "ginop-dig:de_minimis_ok": true }).score).toBe(89);
-    expect(hunterScore(ginop, DEMO_PROFILE, { "ginop-dig:de_minimis_ok": false }).elig.status).toBe("NOT_ELIGIBLE");
+    expect(fundorScore(ginop, DEMO_PROFILE, { "ginop-dig:de_minimis_ok": true }).score).toBe(89);
+    expect(fundorScore(ginop, DEMO_PROFILE, { "ginop-dig:de_minimis_ok": false }).elig.status).toBe("NOT_ELIGIBLE");
   });
 
   it("a bare-field answer resolves every call that asks the same question", () => {
@@ -76,7 +76,7 @@ describe("engine wiring (the server's own engine, run through the frontend build
 
   it("explainScore returns the five weighted factors in both languages", () => {
     const opp = byId("szechenyi-tech");
-    const res = hunterScore(opp, DEMO_PROFILE);
+    const res = fundorScore(opp, DEMO_PROFILE);
     const hu = explainScore(opp, DEMO_PROFILE, res, "hu");
     const en = explainScore(opp, DEMO_PROFILE, res, "en");
     expect(hu.map((f) => f.key)).toEqual(["elig", "fit", "size", "timing", "feas"]);

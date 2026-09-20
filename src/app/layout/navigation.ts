@@ -1,6 +1,6 @@
 import { adminNav } from "@/features/admin/nav";
 import { crmNav } from "@/features/crm/nav";
-import { plusNav } from "@/features/hunter-plus/nav";
+import { plusNav } from "@/features/fundor-plus/nav";
 import { opportunitiesNav } from "@/features/opportunities/nav";
 import type { NavItem } from "@/shared/types/navigation.types";
 

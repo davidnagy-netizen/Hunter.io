@@ -6,12 +6,12 @@
     "NOT_ELIGIBLE": "Not eligible"
   },
   "score": {
-    "name": "Hunter Score",
+    "name": "Fundor Score",
     "outOf": "/ 100",
     "estimated": "estimated",
     "blocked": "Not eligible",
-    "aria": "Hunter Score: {{score}} out of 100",
-    "ariaEstimated": "Hunter Score: {{score}} out of 100 (estimated)"
+    "aria": "Fundor Score: {{score}} out of 100",
+    "ariaEstimated": "Fundor Score: {{score}} out of 100 (estimated)"
   },
   "breakdown": {
     "weight": "{{pct}}%"

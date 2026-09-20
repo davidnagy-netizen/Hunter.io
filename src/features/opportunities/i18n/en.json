@@ -10,7 +10,7 @@
   "error": "The catalog is unavailable: {{message}}",
   "dashboard": {
     "welcome": "Welcome, {{company}}!",
-    "found": "Hunter found {{n}} opportunities based on your company profile. Here are the matches that matter for your decision.",
+    "found": "Fundor found {{n}} opportunities based on your company profile. Here are the matches that matter for your decision.",
     "tiles": {
       "total": "relevant grants for you",
       "strong": "very strong (85+)",
@@ -82,7 +82,7 @@
     },
     "closingIn": "{{n}} days to deadline",
     "breakdown": {
-      "title": "Hunter Score breakdown",
+      "title": "Fundor Score breakdown",
       "subtitle": "Five factors, weighted per the specification. Click a factor for the detailed justification."
     },
     "why": {
@@ -119,7 +119,7 @@
     "documents": "Required documents",
     "apply": {
       "title": "How to apply",
-      "body": "Submission happens in the funder's own system — Hunter points you there, and the call text is always the authority on the conditions.",
+      "body": "Submission happens in the funder's own system — Fundor points you there, and the call text is always the authority on the conditions.",
       "officialPage": "Official call page",
       "officialSub": "{{ref}} — full text, annexes, FAQ",
       "submission": "Submission system — start a proposal",
@@ -173,7 +173,7 @@
     "onlyEligible": "Only what I'm eligible for",
     "sort": {
       "": "Relevance",
-      "-score": "Hunter Score",
+      "-score": "Fundor Score",
       "deadline": "Deadline",
       "-budget": "Grant size"
     },
@@ -195,7 +195,7 @@
   },
   "calendar": {
     "title": "Funding Calendar",
-    "subtitle": "You don't have to track the deadlines — Hunter tracks them for you. Only relevant matches with a Hunter Score of 70+ are shown.",
+    "subtitle": "You don't have to track the deadlines — Fundor tracks them for you. Only relevant matches with a Fundor Score of 70+ are shown.",
     "gatedSubtitle": "Your upcoming submission deadlines. The dates unlock with a subscription — until then you can see how many are waiting and how much money is involved.",
     "deadlines_one": "{{count}} submission deadline",
     "deadlines_other": "{{count}} submission deadlines",

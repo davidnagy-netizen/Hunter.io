@@ -7,6 +7,7 @@ import { LoginForm } from "./LoginForm";
 import { RegisterForm } from "./RegisterForm";
 import { homePathFor } from "../lib/homePath";
 import "../i18n";
+import { BRAND } from "@/shared/brand";
 
 export type AuthMode = "login" | "register";
 
@@ -24,7 +25,7 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
     <div className="flex min-h-screen items-center justify-center bg-paper p-6">
       <div className="w-full max-w-md">
         <div className="mb-4 flex items-center justify-between">
-          <span className="font-display text-lg font-semibold text-ink">HUNTER</span>
+          <span className="font-display text-lg font-semibold text-ink">{BRAND.wordmark}</span>
           <LanguageToggle />
         </div>
 

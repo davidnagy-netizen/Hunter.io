@@ -1,6 +1,7 @@
-# Hunter — Frontend (rewrite)
+# Fundor — Frontend (rewrite)
 
-This is the in-progress React rewrite of Hunter's frontend. It replaces the
+This is the in-progress React rewrite of Fundor's frontend (the product was called
+Hunter until 2026-09-20 — see the rename entry in the log). It replaces the
 legacy hand-split static app in [`../public`](../public) (global `state`
 object, string-templated DOM, inline `onclick` handlers — see the root
 [README.md](../README.md) for what the *product* does and how the *server*
@@ -27,13 +28,13 @@ and cut over, its behavior should still match what those documents promise.
 | 1 — Testing infrastructure (Vitest + RTL) | ✅ done |
 | `authentication` | ✅ done — login, register, session, `isAdmin`/`isSubscriber`, verified against the real server |
 | `profile` (onboarding + version history) | ✅ done — wizard, server/local sync fork, version history + restore, verified against the real server (profile-sync bug fixed — see [Decisions](#decisions--changes-log)) |
-| `scoring` (eligibility engine + Hunter Score) | ✅ done — server engine imported directly (no copy), answers fork, ring/badge/breakdown/question components; 241/241 live scores match the server (see [Decisions](#decisions--changes-log)) |
+| `scoring` (eligibility engine + Fundor Score) | ✅ done — server engine imported directly (no copy), answers fork, ring/badge/breakdown/question components; 241/241 live scores match the server (see [Decisions](#decisions--changes-log)) |
 | `opportunities` (dashboard/list/detail/search/calendar/saved) | ✅ done — app shell, dashboard, list, detail, search, calendar, saved; verified against the real server in all three access tiers |
 | `assessment` (free readiness funnel + lead capture) | ✅ done — 6-question funnel, readiness score (ported unchanged; **the keep/replace decision is still open**), censored real matches, lead capture, hand-off into onboarding |
 | `landing` (public front door) | ✅ done — pitch, worked example, sources, price; replaces the temporary showcase page |
 | `admin` (overview, users, system) | ✅ done — unit-tested (65 tests); signed-in pass done by the developer, who reported it "all good" (2026-09-20) |
 | `crm` (pipeline, contacts, leads, insights, contact record) | ✅ done — unit-tested (127 tests); signed-in pass done by the developer, who reported it "all good" (2026-09-20) |
-| `hunter-plus` (demo) | ✅ done — unit-tested (29 tests); locked screen, nav and mobile bar checked in a browser as an anonymous visitor by the assistant; workspace: signed-in pass done by the developer, who reported it "all good" (2026-09-20) |
+| `fundor-plus` (demo) | ✅ done — unit-tested (29 tests); locked screen, nav and mobile bar checked in a browser as an anonymous visitor by the assistant; workspace: signed-in pass done by the developer, who reported it "all good" (2026-09-20) |
 
 Nothing here is wired up to the real Node server or served to real users yet.
 `../public` remains the live app until a feature is actually cut over.
@@ -103,7 +104,7 @@ on the ones listed before it):
 
 ```
 authentication → profile → scoring → opportunities → assessment
-                                        ↘ hunter-plus   (authentication, profile, scoring, opportunities → hunter-plus)
+                                        ↘ fundor-plus   (authentication, profile, scoring, opportunities → fundor-plus)
 authentication → admin   (+ opportunities, for its cache key only: a catalog refresh invalidates it)
 profile, opportunities → assessment;   authentication, profile → landing
 authentication, admin (GrantForm, ProfileChanges, activity names), profile (types only) → crm
@@ -214,7 +215,7 @@ the `authentication` feature, and the `profile` feature (schema, local store,
 the `useCompanyProfile` sync-fork hook, `OnboardingWizard`, `ProfileHistoryPanel`),
 and the `scoring` feature (engine wiring pinned to the demo-company scores,
 the answers fork with optimistic update/rollback, the scoring hooks, and its
-four components) — 432 tests, all passing (slices 5–7 added the `opportunities` screens and forks, the app-shell guard, the assessment funnel, lead capture, the landing page, the loader and the shared motion components; slice 8 the admin console, its route guard, the workspace switch and the admin-aware redirects; slice 9 the CRM, the shared `Dialog` and `Pager`; slice 10 Hunter Plus and the nav badge / short-label slots).
+four components) — 438 tests, all passing (slices 5–7 added the `opportunities` screens and forks, the app-shell guard, the assessment funnel, lead capture, the landing page, the loader and the shared motion components; slice 8 the admin console, its route guard, the workspace switch and the admin-aware redirects; slice 9 the CRM, the shared `Dialog` and `Pager`; slice 10 Fundor Plus and the nav badge / short-label slots).
 
 Feature tests that need React Query and/or routing use
 [`src/test/renderWithProviders.tsx`](src/test/renderWithProviders.tsx)
@@ -257,6 +258,85 @@ by some other process (a fixture script or a previously-populated
 
 Newest first. Each entry says what changed, why, and what it affects — the
 things that would otherwise only live in a chat transcript.
+
+> **Naming.** The product was renamed **Hunter → Fundor** on 2026-09-20 (see the
+> first entry). Entries dated before that, and the ones written earlier the same
+> day, are a dated record and keep the old name and old identifiers
+> (`hunter-plus`, `HunterScoreRing`, `useHunterScore`, `hunter-rewrite-*`). The
+> current names are `fundor-plus`, `FundorScoreRing`, `useFundorScore`,
+> `fundor-rewrite-*`.
+
+### 2026-09-20 — Rename: Hunter → Fundor (CR-01)
+The product is now **Fundor**, at **fundor.hu** (`hunter.io` is not available).
+Source: `../FUNDOR-CHANGE-SPECIFICATION.md` v0.2 — decision D-01 (the domain) and
+D-02 (the premium tier is **Fundor Plus**; the old "Pro" wording is superseded).
+Only CR-01 (the rename) is done here; CR-02 (loans) and CR-03 (registration) are
+not started — see the end of this entry. Frontend only: the legacy `public/`, the
+server and the root `src/` are untouched (standing rule), so the backend and the
+root docs still say Hunter — the list is below and in the API spec.
+
+Changed:
+- **What users see:** the wordmark (top bar, sign-in, onboarding), the page title,
+  and every translated string in both languages — *Fundor Score*, *Fundor
+  Readiness Score*, *Fundor Plus*, the landing page and its footer, the opportunity
+  and calendar copy, the score labels and their screen-reader text. The nav tag
+  on Fundor Plus is now **PLUS** (was PRO, per D-02).
+- **What developers see:** the score ring, hook and result type
+  (`FundorScoreRing`, `useFundorScore`, `FundorScoreResult`), the feature folder
+  (`features/fundor-plus`) and the browser storage keys (`fundor-rewrite-*`).
+  The storage keys are safe to change now because nothing has shipped; a browser
+  that ran a development build loses its saved profile, answers and language
+  choice once.
+- **One place for the name in code:** `shared/brand.ts` (`BRAND`), used by the
+  wordmark, the sign-in header and the score labels. Translated copy says
+  "Fundor" literally.
+- **The server's own name for the engine** (`hunterScore`) is renamed at a single
+  boundary — `scoring/domain/engine.ts` re-exports it as `fundorScore` — so the
+  rest of the app never says Hunter.
+- **`brand.test.ts` turns the acceptance criterion into a test:** no old name in
+  any locale file (either language), in any source file, in `index.html` or in
+  `public/`, apart from an allow-list of server-owned tokens (`HUNTER_*` env
+  vars, `hunter_state`, `hunterScore`, a document's filename). Checked to fail
+  when the old name is put back. Also verified in a browser: 18 route × language
+  combinations render no "Hunter" (text, labels, alt text or title).
+- 438 tests (6 new).
+
+Not done, and why:
+- **No new logo or favicon.** None was provided. The wordmark is text; the mark
+  is still the *target/crosshair* icon (a hunting metaphor that no longer fits the
+  name) and the favicon is still the Vite scaffold's placeholder. Both need a
+  designer, and are the one visible part of CR-01 that is unfinished.
+- **The tagline still says "grant finder"** ("rule-based grant finder · MVP
+  prototype"). The spec's open question 4 — repositioning to "funding intelligence
+  including subsidised credit" — is undecided, so the copy was renamed, not
+  rewritten.
+- **Trademark clearance (HIPO / EUIPO) and defensive domains** (`fundor.com`, `.eu`,
+  misspellings) are outstanding per the spec — the name should not appear in
+  public-facing material until they are cleared.
+- **The backend still says Hunter** (for the backend team): the session cookie
+  `hunter_session` (renaming it signs everyone out once — accept both for a week),
+  the CSV download name `hunter-crm-contacts.csv`, `/health`'s
+  `service: "HUNTER API"`, the seeded admin account's company name
+  "Hunter — adminisztráció" (shown in the admin console), the `HUNTER_*`
+  environment variables, `package.json`'s name, `render.yaml`'s service name (and
+  so the hosting URL), the engine's `hunterScore`, and the root `README.md`,
+  `PRODUCT-STATUS.md` and `HUNTER-PROJECT-OVERVIEW.md`. Hosting for `fundor.hu`
+  (TLS, cookie `Domain`/`Secure`, the redirect from any old link) is theirs too.
+- **Nothing to change** for the spec's email-sender, privacy-notice and terms
+  references: the frontend has none of those yet (they arrive with CR-03).
+- **Hungarian suffixes.** Suffixes follow the last vowel: *Hunter* took front-vowel
+  endings (*Hunterrel*, *Hunternek*, *Hunterhez*), *Fundor* takes back-vowel ones
+  (*Fundorral*, *Fundornak*, *Fundorhoz*). No suffixed form appears in the copy
+  today (the article — "a Fundor megtalálja neked" — is unaffected), but any
+  future copy that suffixes the name must use the back-vowel forms.
+- **Not started: CR-02 and CR-03.** CR-02 (subsidised loans) is blocked by the
+  spec's own legal question and needs an instrument-type model on every record;
+  CR-03 (registration with a NAV company lookup, revenue bands, TEÁOR'25) needs
+  new backend endpoints. Neither is a rename.
+- Seen along the way, unrelated and older: the Hungarian calendar heading reads
+  "Funding Calendar" — the legacy app never translated it either (its
+  `L("Funding Calendar")` has no entry), and it was ported as it was.
+
 
 ### 2026-09-20 — `hunter-plus` (slice 10): the labelled demo, gated by real access
 The last planned slice. Hunter Plus is, by the product's own admission

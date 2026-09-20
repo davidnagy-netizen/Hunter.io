@@ -9,7 +9,7 @@ interface DocChecksState {
 
 /**
  * Which required documents the user has ticked off. Client-owned and
- * per-browser by design (Hunter Plus is a demo with no server side), so it
+ * per-browser by design (Fundor Plus is a demo with no server side), so it
  * lives in Zustand with persistence, under its own key.
  */
 export const useDocChecksStore = create<DocChecksState>()(
@@ -24,6 +24,6 @@ export const useDocChecksStore = create<DocChecksState>()(
           return { checks: next };
         }),
     }),
-    { name: "hunter-rewrite-plus-docs" },
+    { name: "fundor-rewrite-plus-docs" },
   ),
 );

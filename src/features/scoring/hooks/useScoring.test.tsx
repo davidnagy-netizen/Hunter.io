@@ -10,7 +10,7 @@ import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
 import { useLocalProfileStore } from "@/features/profile/store/localProfileStore";
 import { useLocalAnswersStore } from "../store/localAnswersStore";
 import { useEligibilityAnswers } from "./useEligibilityAnswers";
-import { useHunterScore, useRankedOpportunities } from "./useScoring";
+import { useFundorScore, useRankedOpportunities } from "./useScoring";
 
 vi.mock("@/features/authentication/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn() }));
 vi.mock("@/shared/api/meta.api", () => ({ metaApi: { get: vi.fn() } }));
@@ -32,21 +32,21 @@ afterEach(() => {
   useLocalAnswersStore.getState().clear();
 });
 
-describe("useHunterScore", () => {
+describe("useFundorScore", () => {
   it("scores an opportunity for the current company", async () => {
-    const { result } = renderHook(() => useHunterScore(opp("szechenyi-tech")), { wrapper });
+    const { result } = renderHook(() => useFundorScore(opp("szechenyi-tech")), { wrapper });
     await waitFor(() => expect(result.current?.score).toBe(95));
   });
 
   it("is null when there is no company profile yet", () => {
     useLocalProfileStore.getState().clear();
-    const { result } = renderHook(() => useHunterScore(opp("szechenyi-tech")), { wrapper });
+    const { result } = renderHook(() => useFundorScore(opp("szechenyi-tech")), { wrapper });
     expect(result.current).toBeNull();
   });
 
   it("recalculates immediately when an eligibility answer changes (the ask-and-recalculate loop)", async () => {
     const { result } = renderHook(
-      () => ({ score: useHunterScore(opp("ginop-dig")), answers: useEligibilityAnswers() }),
+      () => ({ score: useFundorScore(opp("ginop-dig")), answers: useEligibilityAnswers() }),
       { wrapper },
     );
     await waitFor(() => expect(result.current.score?.score).toBe(87));

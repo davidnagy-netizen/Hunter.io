@@ -5,11 +5,11 @@ import { OPPS } from "@server-src/data/mockGrants.js";
 import { renderWithProviders } from "@/test/renderWithProviders";
 import { useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
 import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
-import { hunterScore } from "../domain/engine";
+import { fundorScore } from "../domain/engine";
 import { useLocalAnswersStore } from "../store/localAnswersStore";
 import { EligibilityBadge } from "./EligibilityBadge";
 import { EligibilityQuestion } from "./EligibilityQuestion";
-import { HunterScoreRing } from "./HunterScoreRing";
+import { FundorScoreRing } from "./FundorScoreRing";
 import { ScoreBreakdown } from "./ScoreBreakdown";
 
 vi.mock("@/features/authentication/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn() }));
@@ -45,20 +45,20 @@ describe("EligibilityBadge", () => {
   });
 });
 
-describe("HunterScoreRing", () => {
+describe("FundorScoreRing", () => {
   it("shows the score with an accessible label", () => {
-    renderWithProviders(<HunterScoreRing score={87} />);
+    renderWithProviders(<FundorScoreRing score={87} />);
     expect(screen.getByRole("img", { name: /87/ })).toBeInTheDocument();
     expect(screen.getByText("87")).toBeInTheDocument();
   });
 
   it("says when a score is only an estimate", () => {
-    renderWithProviders(<HunterScoreRing score={87} estimated />);
+    renderWithProviders(<FundorScoreRing score={87} estimated />);
     expect(screen.getByRole("img", { name: /becsült|estimated/i })).toBeInTheDocument();
   });
 
   it("shows a blocked state, not a number, for a call that is never scored", () => {
-    renderWithProviders(<HunterScoreRing score={null} />);
+    renderWithProviders(<FundorScoreRing score={null} />);
     expect(screen.getByRole("img", { name: /nem jogosult|not eligible/i })).toBeInTheDocument();
     expect(screen.queryByText("/ 100")).not.toBeInTheDocument();
   });
@@ -68,7 +68,7 @@ describe("ScoreBreakdown", () => {
   it("lists the five factors and expands one into its concrete reason", async () => {
     const user = userEvent.setup();
     const o = opp("szechenyi-tech");
-    renderWithProviders(<ScoreBreakdown opp={o} profile={DEMO_PROFILE} result={hunterScore(o, DEMO_PROFILE)} />);
+    renderWithProviders(<ScoreBreakdown opp={o} profile={DEMO_PROFILE} result={fundorScore(o, DEMO_PROFILE)} />);
 
     const rows = screen.getAllByRole("button");
     expect(rows).toHaveLength(5);
@@ -82,7 +82,7 @@ describe("ScoreBreakdown", () => {
   it("renders nothing for a blocked call", () => {
     const o = opp("top-site");
     const { container } = renderWithProviders(
-      <ScoreBreakdown opp={o} profile={DEMO_PROFILE} result={hunterScore(o, DEMO_PROFILE)} />,
+      <ScoreBreakdown opp={o} profile={DEMO_PROFILE} result={fundorScore(o, DEMO_PROFILE)} />,
     );
     expect(container).toBeEmptyDOMElement();
   });

@@ -10,7 +10,7 @@
   "error": "A katalógus nem érhető el: {{message}}",
   "dashboard": {
     "welcome": "Üdv, {{company}}!",
-    "found": "A Hunter {{n}} lehetőséget talált a cégprofilod alapján. Íme a döntéshez fontos találatok.",
+    "found": "A Fundor {{n}} lehetőséget talált a cégprofilod alapján. Íme a döntéshez fontos találatok.",
     "tiles": {
       "total": "releváns pályázat neked",
       "strong": "nagyon erős (85+)",
@@ -82,7 +82,7 @@
     },
     "closingIn": "{{n}} nap a határidőig",
     "breakdown": {
-      "title": "Hunter Score bontása",
+      "title": "Fundor Score bontása",
       "subtitle": "Öt faktor, a spec szerinti súlyozással. Kattints egy faktorra a részletes indoklásért."
     },
     "why": {
@@ -119,7 +119,7 @@
     "documents": "Szükséges dokumentumok",
     "apply": {
       "title": "Hogyan pályázz",
-      "body": "A beadás a kiíró hivatalos rendszerében történik — a Hunter ide irányít, a pontos feltételeket mindig a felhívás szövege adja.",
+      "body": "A beadás a kiíró hivatalos rendszerében történik — a Fundor ide irányít, a pontos feltételeket mindig a felhívás szövege adja.",
       "officialPage": "Hivatalos felhívás oldala",
       "officialSub": "{{ref}} — teljes szöveg, mellékletek, GYIK",
       "submission": "Beadási felület — pályázat indítása",
@@ -173,7 +173,7 @@
     "onlyEligible": "Csak amire jogosult vagyok",
     "sort": {
       "": "Relevancia",
-      "-score": "Hunter Score",
+      "-score": "Fundor Score",
       "deadline": "Határidő",
       "-budget": "Támogatás"
     },
@@ -195,7 +195,7 @@
   },
   "calendar": {
     "title": "Funding Calendar",
-    "subtitle": "Nem neked kell figyelned a határidőket — a Hunter figyeli helyetted. Csak a 70+ Hunter Score-ú, releváns találatok jelennek meg.",
+    "subtitle": "Nem neked kell figyelned a határidőket — a Fundor figyeli helyetted. Csak a 70+ Fundor Score-ú, releváns találatok jelennek meg.",
     "gatedSubtitle": "A közelgő beadási határidőid. A dátumok az előfizetéssel nyílnak meg — addig annyi látszik, hogy hány határidő vár rád és mekkora összegről van szó.",
     "deadlines_one": "{{count}} beadási határidő",
     "deadlines_other": "{{count}} beadási határidő",

@@ -10,6 +10,7 @@ import { useCompanyProfile } from "../hooks/useCompanyProfile";
 import { useOnboardingDraftStore } from "../store/onboardingDraftStore";
 import { companyProfileSchema, STEP_FIELDS, type CompanyProfileFormValues } from "../schemas/profile.schemas";
 import "../i18n";
+import { BRAND } from "@/shared/brand";
 
 const STEPS = ["intro", "company", "activity", "goals", "investment", "setup"] as const;
 type Step = (typeof STEPS)[number];
@@ -96,7 +97,7 @@ export function OnboardingWizard() {
     <div className="flex min-h-screen flex-col bg-paper p-6">
       <div className="mx-auto flex w-full max-w-lg flex-1 flex-col">
         <div className="mb-4 flex items-center justify-between">
-          <span className="font-display text-lg font-semibold text-ink">HUNTER</span>
+          <span className="font-display text-lg font-semibold text-ink">{BRAND.wordmark}</span>
           <div className="flex items-center gap-3">
             <LanguageToggle />
             <Button variant="ghost" size="sm" onClick={() => navigate("/")}>

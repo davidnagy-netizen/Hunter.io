@@ -18,7 +18,7 @@ interface LocalProfileState {
  * profile entirely and this store stops being read.
  *
  * Persisted under its own key — distinct from both the legacy app's
- * `hunter_state` and this rewrite's own `hunter-rewrite-ui` — so each piece
+ * `hunter_state` and this rewrite's own `fundor-rewrite-ui` — so each piece
  * of state can be inspected/cleared independently.
  */
 export const useLocalProfileStore = create<LocalProfileState>()(
@@ -28,6 +28,6 @@ export const useLocalProfileStore = create<LocalProfileState>()(
       setProfile: (profile) => set({ profile }),
       clear: () => set({ profile: null }),
     }),
-    { name: "hunter-rewrite-profile" },
+    { name: "fundor-rewrite-profile" },
   ),
 );

@@ -1,10 +1,10 @@
 {
   "nav": {
-    "plus": "Hunter Plus (demó)",
-    "pro": "PRO",
-    "plusShort": "Plus"
+    "plus": "Fundor Plus (demó)",
+    "plusShort": "Plus",
+    "badge": "PLUS"
   },
-  "title": "Hunter Plus (demó)",
+  "title": "Fundor Plus (demó)",
   "subtitle": "Pályázati sablonok böngészőben futó bemutatója (demó).",
   "notice": "Pályázati vázlat (demó): rögzített szövegsablon profil- és felhívásadatokkal, nem egyedi AI-generálás.",
   "lock": {

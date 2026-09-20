@@ -6,12 +6,12 @@
     "NOT_ELIGIBLE": "Nem jogosult"
   },
   "score": {
-    "name": "Hunter Score",
+    "name": "Fundor Score",
     "outOf": "/ 100",
     "estimated": "becsült",
     "blocked": "Nem jogosult",
-    "aria": "Hunter Score: {{score}} a 100-ból",
-    "ariaEstimated": "Hunter Score: {{score}} a 100-ból (becsült)"
+    "aria": "Fundor Score: {{score}} a 100-ból",
+    "ariaEstimated": "Fundor Score: {{score}} a 100-ból (becsült)"
   },
   "breakdown": {
     "weight": "{{pct}}%"

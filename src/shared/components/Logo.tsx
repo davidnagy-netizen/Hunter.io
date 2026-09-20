@@ -1,4 +1,5 @@
 import { TargetIcon } from "./icons";
+import { BRAND } from "../brand";
 
 export function Logo({ dark = false }: { dark?: boolean }) {
   return (
@@ -7,7 +8,7 @@ export function Logo({ dark = false }: { dark?: boolean }) {
         <TargetIcon size={20} />
       </span>
       <span className="flex flex-col leading-none">
-        <span className="font-display text-base font-semibold tracking-wide">HUNTER</span>
+        <span className="font-display text-base font-semibold tracking-wide">{BRAND.wordmark}</span>
         <small className={["text-[10px]", dark ? "text-white/60" : "text-muted"].join(" ")}>funding intelligence</small>
       </span>
     </div>

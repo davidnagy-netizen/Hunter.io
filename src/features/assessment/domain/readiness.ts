@@ -9,10 +9,10 @@ export interface ReadinessInput {
 export type ReadinessBand = "strong" | "good" | "early";
 
 /**
- * The "Hunter Readiness Score" (0–100) the free assessment ends on — the
+ * The "Fundor Readiness Score" (0–100) the free assessment ends on — the
  * headline output the original spec calls for (HUNTER-PROJECT-OVERVIEW §3.2).
  *
- * **Ported unchanged, and deliberately kept apart from the real Hunter Score.**
+ * **Ported unchanged, and deliberately kept apart from the real Fundor Score.**
  * It is a shallow additive heuristic over five answers: it never looks at the
  * catalog or at eligibility, so a visitor can score high here while qualifying
  * for few calls. Whether to keep, unify or replace it is an open product

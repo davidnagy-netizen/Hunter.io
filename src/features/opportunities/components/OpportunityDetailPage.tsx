@@ -4,10 +4,10 @@ import { BackIcon, Badge, Button, ExternalIcon, Panel, buttonClasses } from "@/s
 import { useFormat } from "@/shared/hooks/useFormat";
 import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
 import { EligibilityBadge } from "@/features/scoring/components/EligibilityBadge";
-import { HunterScoreRing } from "@/features/scoring/components/HunterScoreRing";
+import { FundorScoreRing } from "@/features/scoring/components/FundorScoreRing";
 import { ScoreBreakdown } from "@/features/scoring/components/ScoreBreakdown";
 import { ruleLabel } from "@/features/scoring/domain/engine";
-import { useHunterScore } from "@/features/scoring/hooks/useScoring";
+import { useFundorScore } from "@/features/scoring/hooks/useScoring";
 import type { Opportunity } from "@/features/scoring/types/scoring.types";
 import { applyLinks, isCuratedReference } from "../domain/applyLinks";
 import { useOpportunity } from "../hooks/useOpportunity";
@@ -68,7 +68,7 @@ export function OpportunityDetailPage() {
   const { profile } = useCompanyProfile();
   const data = useOpportunity(id);
   const opp = data.opp;
-  const result = useHunterScore(opp);
+  const result = useFundorScore(opp);
   const saved = useSaved();
 
   if (data.isLoading || data.error) {
@@ -135,7 +135,7 @@ export function OpportunityDetailPage() {
               <Fact label={t("detail.facts.applicant")} value={applicant} />
             </div>
           </div>
-          <HunterScoreRing score={result.score} estimated={result.estimated} />
+          <FundorScoreRing score={result.score} estimated={result.estimated} />
         </div>
       </Panel>
 

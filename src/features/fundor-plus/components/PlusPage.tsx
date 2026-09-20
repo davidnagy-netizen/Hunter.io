@@ -3,7 +3,7 @@ import { PlusLockScreen } from "./PlusLockScreen";
 import { PlusWorkspace } from "./PlusWorkspace";
 
 /**
- * Hunter Plus is a labelled demo, but who may open it is decided by the
+ * Fundor Plus is a labelled demo, but who may open it is decided by the
  * account's real entitlements (the same the server enforces on the catalog),
  * not by a flag the visitor can set in their own browser.
  */

@@ -11,11 +11,11 @@ describe("Panel", () => {
 
   it("renders a title and subtitle when given", () => {
     render(
-      <Panel title="Hunter Score breakdown" subtitle="Five factors, weighted per the specification.">
+      <Panel title="Fundor Score breakdown" subtitle="Five factors, weighted per the specification.">
         Body content
       </Panel>,
     );
-    expect(screen.getByRole("heading", { name: "Hunter Score breakdown" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Fundor Score breakdown" })).toBeInTheDocument();
     expect(screen.getByText("Five factors, weighted per the specification.")).toBeInTheDocument();
   });
 });

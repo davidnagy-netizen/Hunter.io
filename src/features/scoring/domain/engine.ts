@@ -14,5 +14,6 @@ export {
   evaluateEligibility,
   ruleLabel,
 } from "@server-src/engine/eligibility.js";
-export { explainScore, hunterScore, rankedOpps, scoreBand } from "@server-src/engine/scoring.js";
+// The server still calls this `hunterScore` (backend rebrand pending); it is renamed at this one boundary so the rest of the app never says Fundor.
+export { explainScore, hunterScore as fundorScore, rankedOpps, scoreBand } from "@server-src/engine/scoring.js";
 export { normalizeProfile } from "@server-src/engine/profile.js";

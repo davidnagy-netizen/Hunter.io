@@ -108,7 +108,7 @@ export interface ScoreFactors {
   feas: number;
 }
 
-export interface HunterScoreResult {
+export interface FundorScoreResult {
   elig: EligibilityResult;
   blocked: boolean;
   /** `null` when blocked — a NOT_ELIGIBLE call is never given a score. */
@@ -137,7 +137,7 @@ export interface FactorExplanation {
 
 export interface RankedOpportunity {
   opp: Opportunity;
-  res: HunterScoreResult;
+  res: FundorScoreResult;
 }
 
 /**

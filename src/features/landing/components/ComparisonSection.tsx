@@ -3,10 +3,11 @@ import { Reveal } from "@/shared/components";
 import { useFormat } from "@/shared/hooks/useFormat";
 import type { ExampleCard, ExcludedExample, Fact } from "./landingTypes";
 import "../i18n";
+import { BRAND } from "@/shared/brand";
 
 /**
  * The worked example that makes the pitch concrete: the same company seen
- * through a plain grant list and through Hunter. Every figure is fixed
+ * through a plain grant list and through Fundor. Every figure is fixed
  * example content (from the original spec's demo company), not live data.
  */
 export function ComparisonSection() {
@@ -52,7 +53,7 @@ export function ComparisonSection() {
           </div>
 
           <div className="rounded-lg border border-gold bg-gold-bg/40 p-6">
-            <h3 className="font-display text-sm font-semibold text-gold-deep">Hunter</h3>
+            <h3 className="font-display text-sm font-semibold text-gold-deep">{BRAND.name}</h3>
             <p className="mt-2 text-sm">
               {t("compare.new.head")} <b>{t("compare.new.headCount")}</b> {t("compare.new.headTail")}
             </p>
