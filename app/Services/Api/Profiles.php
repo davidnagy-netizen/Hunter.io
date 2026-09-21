@@ -4,6 +4,7 @@ namespace App\Services\Api;
 
 use App\Models\CompanyProfile;
 use App\Models\User;
+use App\Services\Sector\SectorMap;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -59,10 +60,15 @@ class Profiles
         }
         $p['region'] ??= '';
         $p['teaor'] ??= '';
-        $division = (int) $p['teaor'];
-        $p['sector'] = match (true) {
-            $division >= 1 && $division <= 3 => 'agriculture', $division >= 10 && $division <= 33 => 'manufacturing', $division >= 41 && $division <= 43 => 'construction', $division >= 45 && $division <= 47 => 'trade', $division >= 49 && $division <= 53 => 'transport', $division >= 55 && $division <= 56 => 'tourism', $division >= 58 && $division <= 63 => 'ict', default => 'services'
-        };
+        // The sector is derived from the activity code, in the vocabulary the calls' rules use (see SectorMap), and is
+        // always recomputed: a profile saved earlier may carry a stale value, and a caller-supplied one cannot be told
+        // apart from it. An activity in no sector leaves the field unset, which the engine treats as unknown.
+        $sector = SectorMap::of($p['teaor']);
+        if ($sector === null) {
+            unset($p['sector']);
+        } else {
+            $p['sector'] = $sector;
+        }
 
         return $p;
     }
