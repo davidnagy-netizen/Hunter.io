@@ -59,7 +59,8 @@ export interface MeResponse {
   user: AuthUser | null;
   entitlements: Entitlements;
   plans: Plan[];
-  adminSeed: AdminSeed;
+  /** Development-only demo hint; the backend omits it (and must, in production). */
+  adminSeed?: AdminSeed;
 }
 
 /** Response shape of `POST /api/auth/login` and `/register`. */

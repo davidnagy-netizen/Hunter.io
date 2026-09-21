@@ -68,7 +68,7 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
             )}
           </div>
 
-          {!isRegister && data?.adminSeed.usingDefaultPassword ? (
+          {!isRegister && data?.adminSeed?.usingDefaultPassword ? (
             <div
               className="mt-4 rounded-md bg-gold-bg p-3 text-xs text-gold-deep"
               // Safe: a fixed translation string we author, not user input.

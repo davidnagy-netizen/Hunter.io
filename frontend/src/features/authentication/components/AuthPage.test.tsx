@@ -1,4 +1,4 @@
-import { screen } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Route, Routes } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
@@ -80,5 +80,16 @@ describe("AuthPage after registering", () => {
       employees: 12, company: "Alfa Gyártó és Kereskedelmi Kft.", taxNumber: "12345674-2-42",
     });
     useOnboardingDraftStore.getState().clear();
+  });
+});
+
+describe("AuthPage without the development admin hint", () => {
+  it("renders the login form when /auth/me has no adminSeed — the backend omits it", async () => {
+    const { adminSeed: _omitted, ...withoutSeed } = ANONYMOUS;
+    vi.mocked(authApi.me).mockResolvedValue(withoutSeed as MeResponse);
+    renderLogin();
+    expect(await screen.findByRole("button", { name: /^belépés$|^sign in$/i })).toBeInTheDocument();
+    await waitFor(() => expect(authApi.me).toHaveBeenCalled());
+    expect(screen.queryByText(/bemutató hozzáférés|demo access/i)).not.toBeInTheDocument();
   });
 });
