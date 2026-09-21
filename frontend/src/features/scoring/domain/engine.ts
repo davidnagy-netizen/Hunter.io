@@ -1,11 +1,17 @@
 /**
  * The scoring feature's public domain API. Everything here is a re-export of
- * the server's own engine (see `serverEngine.d.ts`) — the client-side
- * "fallback" the product requires is literally the same code, not a
- * reimplementation, so it cannot drift from what the server computes.
+ * the vendored browser engine (`vendor/engine-src`, see its README) — the
+ * client-side scoring the product keeps on purpose, so a subscriber's catalog
+ * can be ranked without a request per call, and as the fallback if the API
+ * cannot score.
+ *
+ * **It is a copy of the Node prototype's engine, and the PHP backend has its
+ * own implementation of the same formulas.** They can drift; until a parity
+ * test compares them, a difference between a score from the API (search,
+ * detail) and one computed here is a bug in one of them.
  *
  * Other features import from here (or the feature's hooks), never from
- * `@server-src` directly.
+ * `@engine-src` directly.
  */
 export {
   DEFAULT_REFERENCE_DATE,
@@ -13,7 +19,7 @@ export {
   daysToDeadline,
   evaluateEligibility,
   ruleLabel,
-} from "@server-src/engine/eligibility.js";
+} from "@engine-src/engine/eligibility.js";
 // The server still calls this `hunterScore` (backend rebrand pending); it is renamed at this one boundary so the rest of the app never says Fundor.
-export { explainScore, hunterScore as fundorScore, rankedOpps, scoreBand } from "@server-src/engine/scoring.js";
-export { normalizeProfile } from "@server-src/engine/profile.js";
+export { explainScore, hunterScore as fundorScore, rankedOpps, scoreBand } from "@engine-src/engine/scoring.js";
+export { normalizeProfile } from "@engine-src/engine/profile.js";

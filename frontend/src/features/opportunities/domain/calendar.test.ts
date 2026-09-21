@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { OPPS } from "@server-src/data/mockGrants.js";
+import { OPPS } from "@engine-src/data/mockGrants.js";
 import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
 import { rankedOpps } from "@/features/scoring/domain/engine";
 import type { RankedOpportunity } from "@/features/scoring/types/scoring.types";

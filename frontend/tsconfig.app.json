@@ -20,7 +20,7 @@
        as of TypeScript 6.0 and unnecessary with moduleResolution: "bundler") */
     "paths": {
       "@/*": ["./src/*"],
-      "@server-src/*": ["../src/*"]
+      "@engine-src/*": ["./vendor/engine-src/*"]
     },
 
     /* Linting */

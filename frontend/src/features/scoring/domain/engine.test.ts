@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { OPPS } from "@server-src/data/mockGrants.js";
-import { DEMO_PROFILE as SERVER_DEMO_PROFILE } from "@server-src/data/referenceData.js";
+import { OPPS } from "@engine-src/data/mockGrants.js";
+import { DEMO_PROFILE as SERVER_DEMO_PROFILE } from "@engine-src/data/referenceData.js";
 import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
 import { checkRule, evaluateEligibility, explainScore, fundorScore, normalizeProfile, rankedOpps, scoreBand } from "./engine";
 

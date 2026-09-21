@@ -1,7 +1,7 @@
 import { screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { OPPS } from "@server-src/data/mockGrants.js";
+import { OPPS } from "@engine-src/data/mockGrants.js";
 import { renderWithProviders } from "@/test/renderWithProviders";
 import { useIsAuthenticated, useIsSubscriber } from "@/features/authentication/hooks/useAuth";
 import { useCatalog } from "@/features/opportunities/api/opportunities.queries";

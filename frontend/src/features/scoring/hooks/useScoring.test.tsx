@@ -2,7 +2,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { act, renderHook, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { ReactNode } from "react";
-import { OPPS } from "@server-src/data/mockGrants.js";
+import { OPPS } from "@engine-src/data/mockGrants.js";
 import { createTestQueryClient } from "@/test/renderWithProviders";
 import { useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
 import { metaApi } from "@/shared/api/meta.api";
