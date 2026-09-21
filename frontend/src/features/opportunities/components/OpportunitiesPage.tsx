@@ -34,7 +34,7 @@ export function OpportunitiesPage() {
             </h2>
             <div className="flex flex-col gap-3">
               {eligible.map((item) => (
-                <OpportunityCard key={item.opp.id} item={item} />
+                <OpportunityCard key={item.id} item={item} />
               ))}
             </div>
 
@@ -48,7 +48,7 @@ export function OpportunitiesPage() {
                 </div>
                 <div className="flex flex-col gap-3">
                   {blocked.map((item) => (
-                    <OpportunityCard key={item.opp.id} item={item} />
+                    <OpportunityCard key={item.id} item={item} />
                   ))}
                 </div>
               </>

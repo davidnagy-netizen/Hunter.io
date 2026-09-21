@@ -4,7 +4,6 @@ import { Badge, ExternalIcon } from "@/shared/components";
 import { useFormat } from "@/shared/hooks/useFormat";
 import { EligibilityBadge } from "@/features/scoring/components/EligibilityBadge";
 import { BAND_COLOR } from "@/features/scoring/domain/bandStyle";
-import { scoreBand } from "@/features/scoring/domain/engine";
 import type { CardModel } from "../domain/cardModel";
 import "../i18n";
 import { BRAND } from "@/shared/brand";
@@ -61,7 +60,7 @@ export function OpportunityCardView({ model }: { model: CardModel }) {
   }
 
   const score = model.score ?? 0;
-  const color = BAND_COLOR[scoreBand(score).key];
+  const color = model.band ? BAND_COLOR[model.band.key] : "var(--color-muted)";
   const low = model.fundingMin ?? model.fundingMax ?? 0;
   const high = model.fundingMax ?? model.fundingMin ?? 0;
   const range = !(low || high) ? t("card.notPublished") : low === high ? huf(high) : `${huf(low)}–${huf(high)}`;

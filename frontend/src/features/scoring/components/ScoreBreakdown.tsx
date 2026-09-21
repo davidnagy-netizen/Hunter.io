@@ -1,31 +1,19 @@
 import { useId, useState } from "react";
 import { useTranslation } from "react-i18next";
-import type { CompanyProfile } from "@/features/profile/types/profile.types";
-import { explainScore } from "../domain/engine";
-import type { FundorScoreResult, Opportunity } from "../types/scoring.types";
+import type { FactorExplanation } from "../types/scoring.types";
 import "../i18n";
 
 /**
  * The five weighted factors behind a score, each expandable into the
- * concrete reason it landed where it did. The text comes from the engine's
- * own `explainScore` (bilingual, built from the company's actual values) —
- * nothing here re-derives it. Renders nothing for a blocked call.
+ * concrete reason it landed where it did. The wording comes from the server
+ * (in the active language, built from the company's actual values) — nothing
+ * here re-derives it. Renders nothing for a blocked call, which has no factors.
  */
-export function ScoreBreakdown({
-  opp,
-  profile,
-  result,
-}: {
-  opp: Opportunity;
-  profile: CompanyProfile | null;
-  result: FundorScoreResult;
-}) {
-  const { t, i18n } = useTranslation("scoring");
+export function ScoreBreakdown({ factors }: { factors: FactorExplanation[] }) {
+  const { t } = useTranslation("scoring");
   const baseId = useId();
   const [openKey, setOpenKey] = useState<string | null>(null);
-
-  if (!result.factors) return null;
-  const factors = explainScore(opp, profile, result, i18n.language === "en" ? "en" : "hu");
+  if (!factors.length) return null;
 
   return (
     <ul className="flex flex-col gap-1">

@@ -2,44 +2,36 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
 import { useMeQuery } from "@/features/authentication/api/auth.queries";
 import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
-import { useEligibilityAnswers } from "@/features/scoring/hooks/useEligibilityAnswers";
+import { opportunitiesKeys } from "@/shared/api/opportunitiesKeys";
+import { useLang } from "@/shared/hooks/useFormat";
 import { opportunitiesApi } from "./opportunities.api";
 import { toSearchRequest, type SearchState } from "../domain/searchState";
 
-export const opportunitiesKeys = {
-  all: ["opportunities"] as const,
-  catalog: (scope: unknown) => [...opportunitiesKeys.all, "catalog", scope] as const,
-};
+export { opportunitiesKeys };
 
 /**
- * The catalog for whoever is looking.
+ * The catalog for whoever is looking, scored by the server for their company.
  *
- * A subscriber/admin gets every open call — the browser then scores them
- * locally (`features/scoring`). Everyone else gets teasers the *server*
- * scored for their profile, so for them the answer depends on the profile and
- * answers and the key includes both. A subscriber's response doesn't depend on
- * either, so their key doesn't — editing a profile must not re-download 1.3 MB.
+ * A subscriber/admin gets every open call with its score, verdict, checks and
+ * factors; everyone else gets censored teasers. Either way the *server* did
+ * the scoring, so the answer depends on the company and the language. A
+ * signed-in account's profile and answers live on the server, so the key does
+ * not carry them — whatever changes them invalidates `opportunitiesKeys.all`.
+ * An anonymous visitor's profile is browser-held and travels in the request,
+ * so it is part of the key.
  */
 export function useCatalog() {
   const me = useMeQuery();
   const isAuthenticated = useIsAuthenticated();
   const { profile } = useCompanyProfile();
-  const { answers } = useEligibilityAnswers();
-
-  const tier = me.data?.entitlements.tier;
-  const isFull = tier === "subscriber" || tier === "admin";
+  const lang = useLang();
 
   const query = useQuery({
-    queryKey: opportunitiesKeys.catalog(isFull ? "full" : { isAuthenticated, profile, answers }),
-    queryFn: () => {
-      if (isAuthenticated) return opportunitiesApi.catalog();
-      // `enabled` guarantees a profile for anonymous callers.
-      return opportunitiesApi.catalogFor(profile!, answers);
-    },
-    // A subscriber's catalog doesn't depend on the profile, so it needn't wait
-    // for it. Everyone else's does — and asking before it has loaded would
-    // request twice (once with no profile in the key, once with it).
-    enabled: me.isSuccess && (isFull || profile !== null),
+    queryKey: opportunitiesKeys.catalog(lang, isAuthenticated ? "account" : profile),
+    queryFn: () => (isAuthenticated ? opportunitiesApi.catalog(lang) : opportunitiesApi.catalogFor(profile!, lang)),
+    // An anonymous visitor's response depends on their profile: asking before
+    // it has loaded would request twice (once without it, once with).
+    enabled: me.isSuccess && (isAuthenticated || profile !== null),
     staleTime: 5 * 60_000,
   });
 
@@ -47,34 +39,31 @@ export function useCatalog() {
 }
 
 /**
- * Scored search. Unlike the catalog, the *server* scores every row here (it
- * has to — ranking by relevance needs the whole index), so the results depend
- * on the profile and answers for every tier, and the key includes both.
- * The previous page stays on screen while the next loads.
+ * Scored search. Ranking by relevance needs the whole index, so the server
+ * scores every row for every tier. The previous page stays on screen while
+ * the next loads.
  */
 export function useSearchQuery(state: SearchState, lang: "hu" | "en") {
   const me = useMeQuery();
   const isAuthenticated = useIsAuthenticated();
   const { profile } = useCompanyProfile();
-  const { answers } = useEligibilityAnswers();
   const request = toSearchRequest(state, lang);
 
   return useQuery({
-    queryKey: [...opportunitiesKeys.all, "search", request, isAuthenticated, profile, answers] as const,
-    queryFn: () => (isAuthenticated ? opportunitiesApi.search(request) : opportunitiesApi.searchFor(request, profile!, answers)),
-    // Results are scored for the profile, so wait for it: asking first would
-    // search twice (once with no profile in the key, once with it).
-    enabled: me.isSuccess && profile !== null,
+    queryKey: opportunitiesKeys.search(request, isAuthenticated ? "account" : profile),
+    queryFn: () => (isAuthenticated ? opportunitiesApi.search(request) : opportunitiesApi.searchFor(request, profile!)),
+    enabled: me.isSuccess && (isAuthenticated || profile !== null),
     placeholderData: keepPreviousData,
     staleTime: 60_000,
   });
 }
 
-/** A single call fetched by id — the fallback for anything the open-calls catalog doesn't hold. */
+/** A single call by id, scored and explained for the current company. */
 export function useOpportunityDetailQuery(oppId: string, enabled: boolean) {
+  const lang = useLang();
   return useQuery({
-    queryKey: [...opportunitiesKeys.all, "detail", oppId] as const,
-    queryFn: () => opportunitiesApi.detail(oppId),
+    queryKey: opportunitiesKeys.detail(oppId, lang),
+    queryFn: () => opportunitiesApi.detail(oppId, lang),
     enabled,
     staleTime: 5 * 60_000,
     retry: false,

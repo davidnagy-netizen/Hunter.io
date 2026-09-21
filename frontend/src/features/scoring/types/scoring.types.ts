@@ -1,32 +1,26 @@
-import type { CompanyProfile } from "@/features/profile/types/profile.types";
-
 export type RuleOperator = "between" | "in" | "not_in" | ">=" | "<=" | "==" | "includes_any";
 
-export interface QuizOption {
-  t_hu?: string;
-  t_en?: string;
-  t?: string;
-  v: boolean | string | number | null;
-}
-
-/** An inline question that can resolve an `unknown` rule (e.g. de minimis headroom). */
-export interface RuleQuiz {
-  q_hu?: string;
-  q_en?: string;
-  q?: string;
-  opts: QuizOption[];
-}
-
-/** A declarative `{field, op, value}` rule carried by every opportunity. */
+/** A declarative `{field, op, value}` rule carried by every opportunity. The server evaluates it; the browser never does. */
 export interface Rule {
   field: string;
   op: RuleOperator;
   value: unknown;
   weight?: number;
-  label?: string;
-  label_hu?: string;
-  label_en?: string;
-  quiz?: RuleQuiz;
+}
+
+export interface QuizOption {
+  t_hu?: string;
+  t_en?: string;
+  v: boolean | string | number | null;
+}
+
+/** An open eligibility question the server would like answered (`questions[]` on a scored call). */
+export interface EligibilityQuestionDef {
+  field: string;
+  scope: "global" | "call";
+  q_hu: string;
+  q_en: string;
+  opts: QuizOption[];
 }
 
 export interface ConsortiumRequirement {
@@ -43,10 +37,9 @@ export interface PartnerShare {
 }
 
 /**
- * An opportunity as `GET /api/catalog` returns it (after the server's
- * `trim()`): everything the eligibility engine and the score read, plus the
- * display fields the opportunity screens will use. Only the fields a
- * feature actually reads are typed; the server sends more.
+ * An opportunity as `GET /api/catalog` returns it (trimmed): the call itself,
+ * with no verdict for any company. Only the fields a feature actually reads
+ * are typed; the server sends more.
  */
 export interface Opportunity {
   id: string;
@@ -81,53 +74,29 @@ export type EligibilityStatus = "ELIGIBLE" | "CONDITIONAL" | "INSUFFICIENT_DATA"
 
 export type RuleStatus = "pass" | "fail" | "unknown";
 
-export interface EligibilityCheck {
-  rule: Rule;
-  status: RuleStatus;
-  value: unknown;
-}
-
-export interface EligibilityCondition {
-  type: "own" | "deadline" | "admin" | "consortium" | "no_funding";
-  text_hu: string;
-  text_en: string;
-}
-
-export interface EligibilityResult {
-  status: EligibilityStatus;
-  checks: EligibilityCheck[];
-  conditions: EligibilityCondition[];
-  days: number;
-}
-
-export interface ScoreFactors {
-  elig: number;
-  fit: number;
-  size: number;
-  timing: number;
-  feas: number;
-}
-
-export interface FundorScoreResult {
-  elig: EligibilityResult;
-  blocked: boolean;
-  /** `null` when blocked — a NOT_ELIGIBLE call is never given a score. */
-  score: number | null;
-  factors: ScoreFactors | null;
-  /** True when the verdict is INSUFFICIENT_DATA: the score is an estimate. */
-  estimated: boolean;
-}
-
 export type ScoreBandKey = "strong" | "relevant" | "conditional" | "low";
 
+/** The server's band for a score, already worded in the requested language. */
 export interface ScoreBand {
   key: ScoreBandKey;
-  lbl_hu: string;
-  lbl_en: string;
+  label: string;
 }
 
+export interface ScoreCheck {
+  field: string;
+  /** Already worded in the requested language. */
+  label: string;
+  status: RuleStatus;
+  /** The company's own value that was checked; `null` when unknown. */
+  yourValue: unknown;
+  required: unknown;
+  operator: string;
+}
+
+export type FactorKey = "elig" | "fit" | "size" | "timing" | "feas";
+
 export interface FactorExplanation {
-  key: keyof ScoreFactors;
+  key: FactorKey;
   weight: number;
   /** 0–100. */
   value: number;
@@ -135,15 +104,44 @@ export interface FactorExplanation {
   detail: string;
 }
 
-export interface RankedOpportunity {
-  opp: Opportunity;
-  res: FundorScoreResult;
+/** Grant arithmetic for the company's own project value, worked out by the server. */
+export interface GrantCalculation {
+  projectValueHuf: number;
+  intensity: number;
+  grantHuf: number;
+  ownContributionHuf: number;
+  cappedByCeiling: boolean;
+  ceilingHuf: number | null;
+  partnerShare?: PartnerShare | null;
+  callGrantHuf?: number | null;
+  currencyNote?: string | null;
 }
 
 /**
- * Ad-hoc eligibility answers. A key is either a bare field (`de_minimis_ok`,
- * applies to every call that asks) or `"<oppId>:<field>"` (one call only).
+ * What the server worked out for this caller's company about one call. The
+ * server is the only scorer: the browser shows these values and never
+ * recomputes them.
  */
-export type AnswerMap = Record<string, boolean | string | number>;
+export interface ScoreFields {
+  /** Days until the deadline, by the server's clock. */
+  daysLeft: number | null;
+  /** `null` when blocked — a NOT_ELIGIBLE call is never given a score. */
+  score: number | null;
+  blocked: boolean;
+  /** True when the verdict is INSUFFICIENT_DATA: the score is an estimate. */
+  estimated: boolean;
+  verdict: EligibilityStatus;
+  band: ScoreBand | null;
+  blockedReasons: string[];
+  checks: ScoreCheck[];
+  /** Things to watch out for, already worded. */
+  conditions: string[];
+  factors: FactorExplanation[];
+  questions: EligibilityQuestionDef[];
+  calculator: GrantCalculation | null;
+}
 
-export type ScoringProfile = CompanyProfile & Record<string, unknown>;
+export type ScoredOpportunity = Opportunity & ScoreFields;
+
+/** Ad-hoc eligibility answers, keyed by field (or `"<oppId>:<field>"`). */
+export type AnswerMap = Record<string, boolean | string | number>;

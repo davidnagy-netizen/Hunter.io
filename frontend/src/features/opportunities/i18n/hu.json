@@ -107,14 +107,16 @@
     },
     "calculator": {
       "title": "Támogatáskalkulátor",
-      "subtitle": "A tervezett projektértékből és a támogatási intenzitásból.",
+      "subtitle": "A profilodban megadott projektértékből és a támogatási intenzitásból.",
       "value": "Tervezett projektérték (Ft)",
       "intensity": "Támogatási intenzitás",
       "expected": "Várható támogatás",
       "own": "Szükséges önerő",
       "hintShare": "A számítás a becsült partneri részesedéshez igazodik (kb. {{max}} felső határ), nem a teljes projektkerethez.",
       "hintCeiling": "A támogatás a keretösszegre ({{max}}) van korlátozva.",
-      "hintNone": "A felhívás nem közöl támogatási felső határt."
+      "hintNone": "A felhívás nem közöl támogatási felső határt.",
+      "fromProfile": "A projektérték a cégprofilodból származik. Módosítsd a profilodban, és a számítás frissül.",
+      "profileLink": "Profil megnyitása"
     },
     "documents": "Szükséges dokumentumok",
     "apply": {

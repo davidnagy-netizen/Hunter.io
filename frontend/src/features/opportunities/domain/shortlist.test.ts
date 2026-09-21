@@ -1,35 +1,46 @@
 import { describe, expect, it } from "vitest";
-import { OPPS } from "@engine-src/data/mockGrants.js";
-import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
-import { rankedOpps } from "@/features/scoring/domain/engine";
-import type { Opportunity, RankedOpportunity } from "@/features/scoring/types/scoring.types";
-import { dashboardStats, splitShortlist } from "./shortlist";
+import { CALL, subscriberCatalog } from "@/test/apiFixtures";
+import { rankScored, splitShortlist } from "./shortlist";
 
-const ranked = rankedOpps(DEMO_PROFILE, OPPS);
+describe("rankScored", () => {
+  const rows = subscriberCatalog().opportunities;
 
-describe("splitShortlist", () => {
-  it("separates qualifying calls from ruled-out ones", () => {
-    const { eligible, blocked } = splitShortlist(ranked);
-    expect(eligible.every((r) => !r.res.blocked)).toBe(true);
-    expect(blocked.every((r) => r.res.blocked)).toBe(true);
-    expect(blocked.some((r) => r.opp.id === "top-site")).toBe(true);
+  it("puts qualifying calls first, best score first, and blocked calls last", () => {
+    const ranked = rankScored([...rows]);
+    const firstBlocked = ranked.findIndex((r) => r.blocked);
+    expect(firstBlocked).toBeGreaterThan(0);
+    expect(ranked.slice(firstBlocked).every((r) => r.blocked)).toBe(true);
+    const scores = ranked.slice(0, firstBlocked).map((r) => r.score ?? 0);
+    expect(scores).toEqual([...scores].sort((a, b) => b - a));
   });
 
-  it("drops prizes and quality labels, which award no money", () => {
-    const prize = { ...OPPS[0], id: "prize", awardsFunding: false } as Opportunity;
-    const withPrize: RankedOpportunity[] = [...ranked, { opp: prize, res: ranked[0].res }];
-    const { eligible, blocked } = splitShortlist(withPrize);
-    expect([...eligible, ...blocked].some((r) => r.opp.id === "prize")).toBe(false);
+  it("breaks a tie on score by the sooner deadline", () => {
+    const tied = rankScored([...rows]).filter((r) => r.score === 51);
+    expect(tied.length).toBeGreaterThan(1);
+    expect(tied.map((r) => r.deadline)).toEqual([...tied.map((r) => r.deadline)].sort());
+  });
+
+  it("drops a call already past its deadline, and keeps one with no day count", () => {
+    const [a, b] = rows;
+    expect(rankScored([{ ...a, daysLeft: -1 }, { ...b, daysLeft: null }]).map((r) => r.id)).toEqual([b.id]);
   });
 });
 
-describe("dashboardStats", () => {
-  it("counts the four dashboard tiles with the legacy thresholds", () => {
-    const { eligible } = splitShortlist(ranked);
-    const stats = dashboardStats(eligible);
-    expect(stats.total).toBe(eligible.length);
-    expect(stats.strong).toBe(eligible.filter((r) => (r.res.score ?? 0) >= 85).length);
-    expect(stats.closingSoon).toBe(eligible.filter((r) => r.res.elig.days <= 14).length);
-    expect(stats.needsAttention).toBeGreaterThan(0);
+describe("splitShortlist", () => {
+  const ranked = rankScored([...subscriberCatalog().opportunities]);
+
+  it("leaves prizes and labels (awardsFunding: false) out of the funding shortlist", () => {
+    const { eligible, blocked } = splitShortlist(ranked);
+    const label = ranked.find((r) => r.awardsFunding === false)!;
+    expect(label).toBeDefined();
+    expect([...eligible, ...blocked].some((r) => r.id === label.id)).toBe(false);
+  });
+
+  it("splits the rest by the server's blocked flag, and agrees with the server's own stats", () => {
+    const catalog = subscriberCatalog();
+    const { eligible, blocked } = splitShortlist(rankScored([...catalog.opportunities]));
+    expect(eligible.length).toBe(catalog.stats.eligible);
+    expect(blocked.length).toBe(catalog.stats.blocked);
+    expect(blocked.map((r) => r.id)).toContain(CALL.blocked);
   });
 });

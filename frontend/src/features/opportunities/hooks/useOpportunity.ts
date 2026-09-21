@@ -2,9 +2,9 @@ import { useOpportunityDetailQuery } from "../api/opportunities.queries";
 import { useOpportunitiesData } from "./useOpportunitiesData";
 
 /**
- * One call by id: from the catalog when it's there (no request), otherwise
- * from the server. Never resolves for a gated account — the server withholds
- * a call's identity from them by design, so there is nothing to show.
+ * One call by id, scored: from the catalog when it's there (no request),
+ * otherwise from the server. Never resolves for a gated account — the server
+ * withholds a call's identity from them by design, so there is nothing to show.
  */
 export function useOpportunity(oppId: string) {
   const data = useOpportunitiesData();

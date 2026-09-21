@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { profileKeys } from "@/features/profile/api/profile.queries";
 import type { GetProfileResponse } from "@/features/profile/types/profile.types";
+import { opportunitiesKeys } from "@/shared/api/opportunitiesKeys";
+import { useLang } from "@/shared/hooks/useFormat";
 import { answersApi } from "./answers.api";
 import type { AnswerMap } from "../types/scoring.types";
 
@@ -11,16 +13,19 @@ interface SaveAnswerVariables {
 }
 
 /**
- * Saves an answer for a signed-in account, updating the cached profile
- * response *before* the request returns. The whole point of the
- * ask-and-recalculate loop is that every affected score changes the instant
- * the user clicks — waiting on a round trip would lose that. On failure the
- * cache is rolled back to what the server last confirmed.
+ * Saves an answer for a signed-in account. The chip the user clicked is
+ * marked at once (the cached profile response is updated before the request
+ * returns, and rolled back on failure); the scores follow as soon as the
+ * server has re-scored — the answered call straight from the response, every
+ * other call that asks the same thing by refetching. The mutation stays
+ * pending until that refetch is done, so the question can't be answered twice
+ * against stale scores.
  */
 export function useSaveAnswerMutation() {
   const queryClient = useQueryClient();
+  const lang = useLang();
   return useMutation({
-    mutationFn: ({ oppId, field, value }: SaveAnswerVariables) => answersApi.save(oppId, field, value),
+    mutationFn: ({ oppId, field, value }: SaveAnswerVariables) => answersApi.save(oppId, field, value, lang),
     onMutate: async ({ field, value }) => {
       await queryClient.cancelQueries({ queryKey: profileKeys.detail() });
       const previous = queryClient.getQueryData<GetProfileResponse>(profileKeys.detail());
@@ -35,6 +40,13 @@ export function useSaveAnswerMutation() {
     onError: (_error, _vars, context) => {
       if (context?.previous) queryClient.setQueryData(profileKeys.detail(), context.previous);
     },
-    onSettled: () => queryClient.invalidateQueries({ queryKey: profileKeys.detail() }),
+    onSuccess: (data, { oppId }) => {
+      if (data.opportunity) queryClient.setQueryData(opportunitiesKeys.detail(oppId, lang), data.opportunity);
+    },
+    onSettled: () =>
+      Promise.all([
+        queryClient.invalidateQueries({ queryKey: profileKeys.detail() }),
+        queryClient.invalidateQueries({ queryKey: opportunitiesKeys.all }),
+      ]),
   });
 }

@@ -15,6 +15,7 @@ export function SearchResultCard({ row }: { row: SearchRow }) {
     fundingMax: row.fundingMax,
     sourceUrl: row.sourceUrl,
     score: row.score,
+    band: row.band,
     blocked: row.blocked,
     verdict: row.verdict,
     exclusionReason: row.blockedReasons[0] ?? null,

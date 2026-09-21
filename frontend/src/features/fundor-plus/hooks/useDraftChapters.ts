@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useFormat } from "@/shared/hooks/useFormat";
 import { useGoalLabel } from "@/shared/hooks/useGoalLabel";
 import type { CompanyProfile } from "@/features/profile/types/profile.types";
-import type { Opportunity } from "@/features/scoring/types/scoring.types";
+import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
 import { draftFigures, type DraftChapter } from "../domain/draft";
 import "../i18n";
 
@@ -12,7 +12,7 @@ import "../i18n";
  * switching language re-words it, and changing the profile or the call
  * changes it, with nothing to keep in sync.
  */
-export function useDraftChapters(profile: CompanyProfile, opp: Opportunity): DraftChapter[] {
+export function useDraftChapters(profile: CompanyProfile, opp: ScoredOpportunity): DraftChapter[] {
   const { t } = useTranslation("plus");
   const { huf } = useFormat();
   const goalLabel = useGoalLabel();

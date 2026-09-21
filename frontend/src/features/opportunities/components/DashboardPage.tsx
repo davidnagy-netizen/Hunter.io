@@ -28,7 +28,7 @@ export function DashboardPage() {
   const { isLoading, error, gated, teasers, lockedTotal, eligible, stats } = useOpportunitiesData();
   const [showAll, setShowAll] = useState(false);
 
-  const shown = showAll ? eligible : eligible.filter((r) => (r.res.score ?? 0) >= RELEVANT_SCORE);
+  const shown = showAll ? eligible : eligible.filter((r) => (r.score ?? 0) >= RELEVANT_SCORE);
 
   return (
     <>
@@ -67,10 +67,10 @@ export function DashboardPage() {
             <>
               <div className="flex flex-col gap-3">
                 {shown.map((item) => (
-                  <OpportunityCard key={item.opp.id} item={item} />
+                  <OpportunityCard key={item.id} item={item} />
                 ))}
               </div>
-              <UpcomingDeadlines relevant={eligible.filter((r) => (r.res.score ?? 0) >= RELEVANT_SCORE)} />
+              <UpcomingDeadlines relevant={eligible.filter((r) => (r.score ?? 0) >= RELEVANT_SCORE)} />
             </>
           ) : (
             <p className="text-sm text-muted">{t("dashboard.empty")}</p>

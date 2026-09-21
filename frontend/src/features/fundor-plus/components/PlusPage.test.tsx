@@ -1,13 +1,13 @@
 import { screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { OPPS } from "@engine-src/data/mockGrants.js";
+import { subscriberCatalog } from "@/test/apiFixtures";
 import { renderWithProviders } from "@/test/renderWithProviders";
 import { useIsAuthenticated, useIsSubscriber } from "@/features/authentication/hooks/useAuth";
 import { useCatalog } from "@/features/opportunities/api/opportunities.queries";
 import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
 import { useLocalProfileStore } from "@/features/profile/store/localProfileStore";
-import { useLocalAnswersStore } from "@/features/scoring/store/localAnswersStore";
+import { formatHuf } from "@/shared/lib/format";
 import { metaApi } from "@/shared/api/meta.api";
 import { useUiStore } from "@/shared/store/uiStore";
 import { useDocChecksStore } from "../store/docChecksStore";
@@ -36,8 +36,10 @@ const META = {
   },
 } as never;
 
-function fullCatalog(opportunities: unknown[] = OPPS) {
-  vi.mocked(useCatalog).mockReturnValue({ catalog: { gated: false, total: opportunities.length, opportunities }, isLoading: false, error: null } as never);
+/** The real scored subscriber catalog; `opportunities` replaces its rows for a test that needs different ones. */
+function fullCatalog(opportunities: ReturnType<typeof subscriberCatalog>["opportunities"] = subscriberCatalog().opportunities) {
+  const catalog = { ...subscriberCatalog(), opportunities };
+  vi.mocked(useCatalog).mockReturnValue({ catalog, isLoading: false, error: null } as never);
 }
 
 const picker = () => screen.getByRole("heading", { name: /válassz pályázatot|select grant/i }).closest("div.rounded-lg") as HTMLElement;
@@ -49,7 +51,6 @@ beforeEach(() => {
   vi.mocked(useIsAuthenticated).mockReturnValue(false);
   vi.mocked(metaApi.get).mockResolvedValue(META);
   useLocalProfileStore.getState().setProfile(DEMO_PROFILE);
-  useLocalAnswersStore.getState().clear();
   useDocChecksStore.setState({ checks: {} });
   useUiStore.getState().setLang("hu");
   fullCatalog();
@@ -146,6 +147,18 @@ describe("PlusWorkspace — the demo draft", () => {
     expect(text).toContain(String(DEMO_PROFILE.employees));
     expect(text).toContain(DEMO_PROFILE.county);
     expect(text).not.toMatch(/undefined|NaN|\{\{/);
+  });
+
+  it("quotes the grant and own contribution the server calculated for the selected call", async () => {
+    const user = userEvent.setup();
+    const catalog = subscriberCatalog();
+    const first = catalog.opportunities.filter((o) => !o.blocked && o.awardsFunding !== false).sort((a, b) => (b.score ?? 0) - (a.score ?? 0))[0];
+    renderWithProviders(<PlusPage />);
+    await screen.findByText(/készen áll|ready to draft/i);
+    await user.click(generate());
+
+    const summary = (await screen.findByRole("heading", { level: 3, name: /vezetői összefoglaló/i })).parentElement!.textContent!;
+    expect(summary).toContain(formatHuf(first.calculator!.grantHuf, "hu"));
   });
 
   it("names the call's goals, not their ids", async () => {
@@ -251,7 +264,7 @@ describe("PlusWorkspace — required documents", () => {
   });
 
   it("says so for a call that lists no documents", async () => {
-    fullCatalog(OPPS.map((o: object) => ({ ...o, docs: [] })));
+    fullCatalog(subscriberCatalog().opportunities.map((o) => ({ ...o, docs: [] })));
     renderWithProviders(<PlusPage />);
     expect(await screen.findByText(/nem sorol fel|lists no separate documents/i)).toBeInTheDocument();
   });

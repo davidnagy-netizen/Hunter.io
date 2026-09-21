@@ -1736,6 +1736,7 @@ components:
         estimated: { type: boolean }
         verdict: { type: string, enum: [ELIGIBLE, CONDITIONAL, INSUFFICIENT_DATA, NOT_ELIGIBLE] }
         band: { anyOf: [{ $ref: '#/components/schemas/Band' }, { type: object, nullable: true, enum: [null] }] }
+        blockedReasons: { type: array, items: { type: string }, description: 'Why the call is ruled out, already worded in `lang`; empty when it is not blocked.' }
         checks: { type: array, maxItems: 0, items: { type: object }, description: Always empty when locked. }
         conditions: { type: array, maxItems: 0, items: { type: string } }
         factors: { type: array, maxItems: 0, items: { type: object } }

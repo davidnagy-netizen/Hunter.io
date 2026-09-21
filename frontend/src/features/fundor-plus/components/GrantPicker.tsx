@@ -1,16 +1,16 @@
 import { useTranslation } from "react-i18next";
 import { Badge, Panel } from "@/shared/components";
-import type { RankedOpportunity } from "@/features/scoring/types/scoring.types";
+import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
 import "../i18n";
 
 /** The calls that fit this company, best first. Pick one to work on. */
-export function GrantPicker({ options, selectedId, onSelect }: { options: RankedOpportunity[]; selectedId: string; onSelect: (id: string) => void }) {
+export function GrantPicker({ options, selectedId, onSelect }: { options: ScoredOpportunity[]; selectedId: string; onSelect: (id: string) => void }) {
   const { t } = useTranslation("plus");
 
   return (
     <Panel title={t("workspace.select")} className="print:hidden">
       <ul className="flex max-h-96 flex-col gap-2 overflow-y-auto">
-        {options.map(({ opp, res }) => {
+        {options.map((opp) => {
           const selected = opp.id === selectedId;
           return (
             <li key={opp.id}>
@@ -24,7 +24,7 @@ export function GrantPicker({ options, selectedId, onSelect }: { options: Ranked
                 ].join(" ")}
               >
                 <span className="min-w-0 truncate">{opp.title}</span>
-                {res.score != null ? <Badge tone="green">{res.score}</Badge> : null}
+                {opp.score != null ? <Badge tone="green">{opp.score}</Badge> : null}
               </button>
             </li>
           );

@@ -1,16 +1,31 @@
-import type { RankedOpportunity } from "@/features/scoring/types/scoring.types";
+import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
+
+/**
+ * Orders the server's scored catalog for display: qualifying calls by score
+ * (an unscored, blocked call never outranks a scored one), then by deadline;
+ * blocked calls last; anything already past its deadline dropped. The server
+ * returns the catalog in call-code order and leaves the ordering to the screen.
+ */
+export function rankScored(rows: ScoredOpportunity[]): ScoredOpportunity[] {
+  return rows
+    .filter((r) => r.daysLeft === null || r.daysLeft >= 0)
+    .sort(
+      (a, b) =>
+        Number(a.blocked) - Number(b.blocked) ||
+        (b.score ?? -1) - (a.score ?? -1) ||
+        a.deadline.localeCompare(b.deadline),
+    );
+}
 
 /**
  * Prizes and quality labels award no money, so they don't belong in a funding
- * shortlist. The server already leaves them out of its own shortlist and
- * search; the engine's `rankedOpps` does not, so the client has to
- * (root README §8).
+ * shortlist (the server leaves them out of its own totals and search).
  */
-export function splitShortlist(ranked: RankedOpportunity[]) {
-  const fundable = ranked.filter((r) => r.opp.awardsFunding !== false);
+export function splitShortlist(ranked: ScoredOpportunity[]) {
+  const fundable = ranked.filter((r) => r.awardsFunding !== false);
   return {
-    eligible: fundable.filter((r) => !r.res.blocked),
-    blocked: fundable.filter((r) => r.res.blocked),
+    eligible: fundable.filter((r) => !r.blocked),
+    blocked: fundable.filter((r) => r.blocked),
   };
 }
 
@@ -21,17 +36,8 @@ export interface DashboardStats {
   needsAttention: number;
 }
 
-/** Same tiles and thresholds as the legacy dashboard: strong is 85+, "closing" is 14 days. */
-export function dashboardStats(eligible: RankedOpportunity[]): DashboardStats {
-  return {
-    total: eligible.length,
-    strong: eligible.filter((r) => (r.res.score ?? 0) >= 85).length,
-    closingSoon: eligible.filter((r) => r.res.elig.days <= 14).length,
-    needsAttention: eligible.filter(
-      (r) => r.res.elig.status === "CONDITIONAL" || r.res.elig.status === "INSUFFICIENT_DATA",
-    ).length,
-  };
-}
-
 /** The dashboard's default view hides everything below the "relevant" band. */
 export const RELEVANT_SCORE = 70;
+
+/** A call this close to its deadline is "closing soon" on cards and in the calendar. */
+export const URGENT_DAYS = 14;

@@ -7,7 +7,7 @@ import { BRAND } from "@/shared/brand";
  * Acceptance criterion CR-01: no occurrence of the old name in either
  * language variant, the page title or the served files. These are the only
  * server-owned tokens still allowed to say it — they name things that live in
- * the backend (env vars, the session cookie, the vendored engine's exported
+ * the backend (env vars, the session cookie, the old prototype engine's exported
  * function, the legacy app's storage key, a document's filename) and are renamed there, not here.
  */
 const SERVER_OWNED = /HUNTER_[A-Z_]+|hunter_state|hunter_session|hunterScore|HUNTER-PROJECT-OVERVIEW/g;

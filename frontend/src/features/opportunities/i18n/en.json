@@ -107,14 +107,16 @@
     },
     "calculator": {
       "title": "Grant calculator",
-      "subtitle": "From the planned project value and the funding intensity.",
+      "subtitle": "From the project value in your profile and the funding intensity.",
       "value": "Planned project value (HUF)",
       "intensity": "Funding intensity",
       "expected": "Expected funding",
       "own": "Required own contribution",
       "hintShare": "The calculation is capped at your estimated partner share (about {{max}}), not the whole project grant.",
       "hintCeiling": "Funding is capped at the ceiling ({{max}}).",
-      "hintNone": "The call does not publish a funding ceiling."
+      "hintNone": "The call does not publish a funding ceiling.",
+      "fromProfile": "The project value comes from your company profile. Change it there and the calculation updates.",
+      "profileLink": "Open profile"
     },
     "documents": "Required documents",
     "apply": {

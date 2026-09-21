@@ -2,12 +2,9 @@ import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router";
 import { BackIcon, Badge, Button, ExternalIcon, Panel, buttonClasses } from "@/shared/components";
 import { useFormat } from "@/shared/hooks/useFormat";
-import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
 import { EligibilityBadge } from "@/features/scoring/components/EligibilityBadge";
 import { FundorScoreRing } from "@/features/scoring/components/FundorScoreRing";
 import { ScoreBreakdown } from "@/features/scoring/components/ScoreBreakdown";
-import { ruleLabel } from "@/features/scoring/domain/engine";
-import { useFundorScore } from "@/features/scoring/hooks/useScoring";
 import type { Opportunity } from "@/features/scoring/types/scoring.types";
 import { applyLinks, isCuratedReference } from "../domain/applyLinks";
 import { useOpportunity } from "../hooks/useOpportunity";
@@ -63,12 +60,10 @@ function SourceNote({ opp }: { opp: Opportunity }) {
 export function OpportunityDetailPage() {
   const { id = "" } = useParams();
   const { t } = useTranslation("opportunities");
-  const { huf, date, lang } = useFormat();
+  const { huf, date } = useFormat();
   const formatValue = useRuleValueFormatter();
-  const { profile } = useCompanyProfile();
   const data = useOpportunity(id);
   const opp = data.opp;
-  const result = useFundorScore(opp);
   const saved = useSaved();
 
   if (data.isLoading || data.error) {
@@ -91,7 +86,7 @@ export function OpportunityDetailPage() {
     );
   }
 
-  if (!opp || !result || !profile) {
+  if (!opp) {
     return (
       <>
         <BackLink />
@@ -102,7 +97,7 @@ export function OpportunityDetailPage() {
     );
   }
 
-  const days = result.elig.days;
+  const days = opp.daysLeft ?? 0;
   const links = applyLinks(opp);
   const applyHref = links.submit || links.official;
   const hasRange = opp.fundingMin || opp.fundingMax;
@@ -125,7 +120,7 @@ export function OpportunityDetailPage() {
             <p className="text-xs font-medium text-muted">{opp.program}</p>
             <h1 className="font-display text-xl font-semibold text-ink">{opp.title}</h1>
             <div className="mt-2 flex flex-wrap gap-2">
-              <EligibilityBadge status={result.elig.status} />
+              <EligibilityBadge status={opp.verdict} />
               {days <= 14 ? <Badge tone="amber">{t("detail.closingIn", { n: days })}</Badge> : <Badge tone="slate">{t("card.open")}</Badge>}
             </div>
             <div className="mt-4 grid grid-cols-2 gap-2 lg:grid-cols-4">
@@ -135,11 +130,11 @@ export function OpportunityDetailPage() {
               <Fact label={t("detail.facts.applicant")} value={applicant} />
             </div>
           </div>
-          <FundorScoreRing score={result.score} estimated={result.estimated} />
+          <FundorScoreRing score={opp.score} band={opp.band} estimated={opp.estimated} />
         </div>
       </Panel>
 
-      {result.blocked ? (
+      {opp.blocked ? (
         <div className="flex flex-col gap-6">
           <div className="rounded-lg bg-red-bg p-5">
             <h2 className="font-display text-lg font-semibold text-red">{t("detail.blocked.title")}</h2>
@@ -147,16 +142,16 @@ export function OpportunityDetailPage() {
           </div>
           <Panel title={t("detail.blocked.criteria")}>
             <ul className="flex flex-col gap-2">
-              {result.elig.checks
+              {opp.checks
                 .filter((c) => c.status !== "unknown")
                 .sort((a, b) => Number(b.status === "fail") - Number(a.status === "fail"))
                 .map((c) => (
                   <CheckLine
-                    key={c.rule.field + c.rule.op}
+                    key={c.field + c.operator}
                     status={c.status === "fail" ? "fail" : "pass"}
-                    yours={t("detail.why.yours", { value: formatValue(c.rule.field, c.value) })}
+                    yours={t("detail.why.yours", { value: formatValue(c.field, c.yourValue) })}
                   >
-                    {ruleLabel(c.rule, lang)}
+                    {c.label}
                   </CheckLine>
                 ))}
             </ul>
@@ -165,14 +160,14 @@ export function OpportunityDetailPage() {
       ) : (
         <div className="flex flex-col gap-6">
           <Panel title={t("detail.breakdown.title")} subtitle={t("detail.breakdown.subtitle")}>
-            <ScoreBreakdown opp={opp} profile={profile} result={result} />
+            <ScoreBreakdown factors={opp.factors} />
           </Panel>
           <Panel title={t("detail.why.title")} subtitle={t("detail.why.subtitle")}>
-            <WhyBlocks opp={opp} elig={result.elig} projectValueHuf={profile.investment_value} />
+            <WhyBlocks opp={opp} />
           </Panel>
           <ConsortiumPanel opp={opp} />
           <Panel title={t("detail.calculator.title")} subtitle={t("detail.calculator.subtitle")}>
-            <FundingCalculator key={opp.id} opp={opp} initialValueHuf={profile.investment_value} />
+            <FundingCalculator opp={opp} />
           </Panel>
           {opp.docs?.length ? (
             <Panel title={t("detail.documents")}>

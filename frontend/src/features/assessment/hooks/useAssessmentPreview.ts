@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { opportunitiesApi } from "@/features/opportunities/api/opportunities.api";
 import type { Teaser } from "@/features/opportunities/types/opportunities.types";
+import { useLang } from "@/shared/hooks/useFormat";
 import type { CompanyProfile } from "@/features/profile/types/profile.types";
 
 export interface AssessmentPreview {
@@ -16,10 +17,11 @@ export interface AssessmentPreview {
  * travels in the request body.
  */
 export function useAssessmentPreview(profile: CompanyProfile | null) {
+  const lang = useLang();
   return useQuery({
-    queryKey: ["assessment", "preview", profile] as const,
+    queryKey: ["assessment", "preview", lang, profile] as const,
     queryFn: async (): Promise<AssessmentPreview> => {
-      const catalog = await opportunitiesApi.catalogFor(profile!, {});
+      const catalog = await opportunitiesApi.catalogFor(profile!, lang);
       // A visitor is always gated. If a subscriber somehow gets here, there
       // are no teasers to show and no server-side count to report.
       if (!catalog.gated) return { eligible: 0, teasers: [] };

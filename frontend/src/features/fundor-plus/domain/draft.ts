@@ -1,5 +1,5 @@
 import type { CompanyProfile } from "@/features/profile/types/profile.types";
-import type { Opportunity } from "@/features/scoring/types/scoring.types";
+import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
 
 /** The real numbers a draft is built from — nothing here is invented; a missing value stays missing. */
 export interface DraftFigures {
@@ -9,18 +9,24 @@ export interface DraftFigures {
   teaor: string | null;
   /** The company's planned project value, in HUF. */
   total: number;
-  /** total × the call's support intensity. */
+  /** What the server calculates the company would receive: project value × intensity, up to the ceiling. */
   grant: number;
-  /** What the company puts in itself: total − grant. */
+  /** What the company puts in itself: the rest of the project value. */
   own: number;
   intensityPct: number;
   goalIds: string[];
   docs: string[];
 }
 
-export function draftFigures(profile: CompanyProfile, opp: Pick<Opportunity, "intensity" | "goals" | "docs">): DraftFigures {
+/**
+ * The money comes from the server's own calculation for this company and call
+ * (`calculator`), never from arithmetic done here. A workspace call always has
+ * one — it is only offered for scored, qualifying calls.
+ */
+export function draftFigures(profile: CompanyProfile, opp: Pick<ScoredOpportunity, "intensity" | "goals" | "docs" | "calculator">): DraftFigures {
   const intensity = opp.intensity || 0;
-  const grant = profile.investment_value * intensity;
+  const grant = opp.calculator?.grantHuf ?? 0;
+  const own = opp.calculator?.ownContributionHuf ?? 0;
   return {
     company: profile.company,
     employees: profile.employees,
@@ -28,7 +34,7 @@ export function draftFigures(profile: CompanyProfile, opp: Pick<Opportunity, "in
     teaor: profile.teaor || null,
     total: profile.investment_value,
     grant,
-    own: profile.investment_value - grant,
+    own,
     intensityPct: Math.round(intensity * 100),
     goalIds: opp.goals ?? [],
     docs: opp.docs ?? [],

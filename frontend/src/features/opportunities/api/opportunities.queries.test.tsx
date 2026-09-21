@@ -1,5 +1,5 @@
 import { QueryClientProvider } from "@tanstack/react-query";
-import { renderHook, waitFor } from "@testing-library/react";
+import { act, renderHook, waitFor } from "@testing-library/react";
 import type { ReactNode } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createTestQueryClient } from "@/test/renderWithProviders";
@@ -7,6 +7,8 @@ import { authApi } from "@/features/authentication/api/auth.api";
 import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
 import { useLocalProfileStore } from "@/features/profile/store/localProfileStore";
 import { profileApi } from "@/features/profile/api/profile.api";
+import { useUiStore } from "@/shared/store/uiStore";
+import { useSaveProfileMutation } from "@/features/profile/api/profile.queries";
 import { opportunitiesApi } from "./opportunities.api";
 import { useCatalog, useSearchQuery } from "./opportunities.queries";
 import { EMPTY_SEARCH } from "../domain/searchState";
@@ -39,7 +41,7 @@ describe("useCatalog", () => {
     const { result } = renderHook(() => useCatalog(), { wrapper });
 
     await waitFor(() => expect(result.current.catalog).toBeDefined());
-    expect(opportunitiesApi.catalogFor).toHaveBeenCalledWith(DEMO_PROFILE, {});
+    expect(opportunitiesApi.catalogFor).toHaveBeenCalledWith(DEMO_PROFILE, "hu");
     expect(opportunitiesApi.catalog).not.toHaveBeenCalled();
   });
 
@@ -61,7 +63,31 @@ describe("useCatalog", () => {
 
     await waitFor(() => expect(result.current.catalog).toBeDefined());
     expect(opportunitiesApi.catalog).toHaveBeenCalledTimes(1);
+    expect(opportunitiesApi.catalog).toHaveBeenCalledWith("hu");
     expect(opportunitiesApi.catalogFor).not.toHaveBeenCalled();
+  });
+
+  it("asks again, in the new language, when the language changes: the server words the explanations", async () => {
+    vi.mocked(authApi.me).mockResolvedValue(ME("subscriber", { id: "u1", role: "user" }));
+    vi.mocked(profileApi.get).mockResolvedValue({ profile: DEMO_PROFILE, answers: {}, saved: [], demoProfile: DEMO_PROFILE, versions: 1 });
+    const { result } = renderHook(() => useCatalog(), { wrapper });
+    await waitFor(() => expect(result.current.catalog).toBeDefined());
+
+    act(() => useUiStore.getState().setLang("en"));
+    await waitFor(() => expect(opportunitiesApi.catalog).toHaveBeenCalledWith("en"));
+    act(() => useUiStore.getState().setLang("hu"));
+  });
+
+  it("is refetched when the account's profile is saved: the server scored it for the old profile", async () => {
+    vi.mocked(authApi.me).mockResolvedValue(ME("subscriber", { id: "u1", role: "user" }));
+    vi.mocked(profileApi.get).mockResolvedValue({ profile: DEMO_PROFILE, answers: {}, saved: [], demoProfile: DEMO_PROFILE, versions: 1 });
+    vi.mocked(profileApi.save).mockResolvedValue({ success: true, profile: DEMO_PROFILE } as never);
+    const { result } = renderHook(() => ({ catalog: useCatalog(), save: useSaveProfileMutation() }), { wrapper });
+    await waitFor(() => expect(result.current.catalog.catalog).toBeDefined());
+    expect(opportunitiesApi.catalog).toHaveBeenCalledTimes(1);
+
+    await act(() => result.current.save.mutateAsync(DEMO_PROFILE));
+    await waitFor(() => expect(opportunitiesApi.catalog).toHaveBeenCalledTimes(2));
   });
 });
 

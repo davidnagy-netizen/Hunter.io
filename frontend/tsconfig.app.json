@@ -19,8 +19,7 @@
     /* Path aliases (resolved relative to this file — `baseUrl` is deprecated
        as of TypeScript 6.0 and unnecessary with moduleResolution: "bundler") */
     "paths": {
-      "@/*": ["./src/*"],
-      "@engine-src/*": ["./vendor/engine-src/*"]
+      "@/*": ["./src/*"]
     },
 
     /* Linting */

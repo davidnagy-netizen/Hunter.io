@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { authKeys } from "@/features/authentication/api/auth.queries";
+import { opportunitiesKeys } from "@/shared/api/opportunitiesKeys";
 import { profileApi } from "./profile.api";
 import type { CompanyProfile } from "../types/profile.types";
 
@@ -31,12 +32,20 @@ export function useProfileHistoryQuery(enabled: boolean) {
   });
 }
 
+/** The server scores every call for the stored profile, so any change to it makes the scored data stale. */
+function invalidateProfileAndScores(queryClient: ReturnType<typeof useQueryClient>) {
+  return Promise.all([
+    queryClient.invalidateQueries({ queryKey: profileKeys.all }),
+    queryClient.invalidateQueries({ queryKey: opportunitiesKeys.all }),
+  ]);
+}
+
 export function useSaveProfileMutation() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (profile: CompanyProfile) => profileApi.save(profile),
     onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: profileKeys.all });
+      void invalidateProfileAndScores(queryClient);
       // A save can be this account's first profile, which flips `hasProfile`
       // on the session response too.
       void queryClient.invalidateQueries({ queryKey: authKeys.me() });
@@ -48,7 +57,7 @@ export function useLoadDemoProfileMutation() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: profileApi.loadDemo,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: profileKeys.all }),
+    onSuccess: () => invalidateProfileAndScores(queryClient),
   });
 }
 
@@ -56,6 +65,6 @@ export function useRestoreProfileMutation() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (version: number) => profileApi.restore(version),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: profileKeys.all }),
+    onSuccess: () => invalidateProfileAndScores(queryClient),
   });
 }

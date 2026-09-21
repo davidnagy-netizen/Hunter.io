@@ -15,7 +15,7 @@ export function PlusWorkspace() {
   const data = useOpportunitiesData();
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  const current = data.eligible.find((r) => r.opp.id === selectedId) ?? data.eligible[0];
+  const current = data.eligible.find((r) => r.id === selectedId) ?? data.eligible[0];
 
   return (
     <>
@@ -36,10 +36,10 @@ export function PlusWorkspace() {
       {current && profile ? (
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
           <div className="flex flex-col gap-4">
-            <GrantPicker options={data.eligible} selectedId={current.opp.id} onSelect={setSelectedId} />
-            <DocumentChecklist oppId={current.opp.id} docs={current.opp.docs ?? []} />
+            <GrantPicker options={data.eligible} selectedId={current.id} onSelect={setSelectedId} />
+            <DocumentChecklist oppId={current.id} docs={current.docs ?? []} />
           </div>
-          <DraftPanel key={current.opp.id} profile={profile} opp={current.opp} />
+          <DraftPanel key={current.id} profile={profile} opp={current} />
         </div>
       ) : null}
     </>

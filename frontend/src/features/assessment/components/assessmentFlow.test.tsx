@@ -112,9 +112,9 @@ describe("AssessmentPage", () => {
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(/187/);
     expect(screen.getAllByRole("article")).toHaveLength(4);
 
-    const [profile, answers] = vi.mocked(opportunitiesApi.catalogFor).mock.calls[0];
+    const [profile, lang] = vi.mocked(opportunitiesApi.catalogFor).mock.calls[0];
     expect(profile).toMatchObject({ employees: 30, county: "Pest", region: "HU12", teaor: "28", closed_business_years: 4, investment_value: 60e6, orgType: "sme" });
-    expect(answers).toEqual({});
+    expect(lang).toBe("hu");
   });
 
   it("says so when the matches can't be loaded, instead of claiming 0 calls", async () => {

@@ -2,7 +2,6 @@ import { useTranslation } from "react-i18next";
 import { LockIcon } from "@/shared/components";
 import { useFormat } from "@/shared/hooks/useFormat";
 import { BAND_COLOR } from "@/features/scoring/domain/bandStyle";
-import { scoreBand } from "@/features/scoring/domain/engine";
 import type { Teaser } from "../types/opportunities.types";
 import "../i18n";
 
@@ -14,8 +13,8 @@ import "../i18n";
  */
 export function TeaserCard({ teaser }: { teaser: Teaser }) {
   const { t } = useTranslation("opportunities");
-  const { huf, lang } = useFormat();
-  const band = teaser.score !== null ? scoreBand(teaser.score) : null;
+  const { huf } = useFormat();
+  const band = teaser.band;
   const color = band ? BAND_COLOR[band.key] : "var(--color-muted)";
 
   const money = teaser.grantHuf ? (
@@ -37,7 +36,7 @@ export function TeaserCard({ teaser }: { teaser: Teaser }) {
           {teaser.score ?? "—"}
           {teaser.estimated ? <sup className="text-xs">*</sup> : null}
         </span>
-        <span className="text-[11px] text-muted">{band ? (lang === "en" ? band.lbl_en : band.lbl_hu) : ""}</span>
+        <span className="text-[11px] text-muted">{band?.label ?? ""}</span>
       </div>
       <div className="min-w-0 flex-1">
         <span className="block h-3 w-1/3 rounded bg-line" />

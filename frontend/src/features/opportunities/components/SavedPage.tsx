@@ -15,7 +15,7 @@ export function SavedPage() {
   const { t } = useTranslation("opportunities");
   const { isLoading, error, gated, ranked } = useOpportunitiesData();
   const saved = useSaved();
-  const items = ranked.filter((r) => saved.ids.includes(r.opp.id));
+  const items = ranked.filter((r) => saved.ids.includes(r.id));
 
   return (
     <>
@@ -30,7 +30,7 @@ export function SavedPage() {
         ) : items.length ? (
           <div className="flex flex-col gap-3">
             {items.map((item) => (
-              <OpportunityCard key={item.opp.id} item={item} />
+              <OpportunityCard key={item.id} item={item} />
             ))}
           </div>
         ) : (

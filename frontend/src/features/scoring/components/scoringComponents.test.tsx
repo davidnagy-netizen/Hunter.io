@@ -1,24 +1,27 @@
 import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { OPPS } from "@engine-src/data/mockGrants.js";
+import { detailOf } from "@/test/apiFixtures";
 import { renderWithProviders } from "@/test/renderWithProviders";
 import { useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
+import { profileApi } from "@/features/profile/api/profile.api";
 import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
-import { fundorScore } from "../domain/engine";
-import { useLocalAnswersStore } from "../store/localAnswersStore";
+import { answersApi } from "../api/answers.api";
 import { EligibilityBadge } from "./EligibilityBadge";
 import { EligibilityQuestion } from "./EligibilityQuestion";
 import { FundorScoreRing } from "./FundorScoreRing";
 import { ScoreBreakdown } from "./ScoreBreakdown";
 
 vi.mock("@/features/authentication/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn() }));
-
-const opp = (id: string) => OPPS.find((o) => o.id === id)!;
+vi.mock("@/features/profile/api/profile.api", () => ({
+  profileApi: { get: vi.fn(), save: vi.fn(), loadDemo: vi.fn(), history: vi.fn(), restore: vi.fn() },
+}));
+vi.mock("../api/answers.api", () => ({ answersApi: { save: vi.fn() } }));
 
 beforeEach(() => {
-  vi.mocked(useIsAuthenticated).mockReturnValue(false);
-  useLocalAnswersStore.getState().clear();
+  vi.mocked(useIsAuthenticated).mockReturnValue(true);
+  vi.mocked(profileApi.get).mockResolvedValue({ profile: DEMO_PROFILE, answers: {}, saved: [], demoProfile: DEMO_PROFILE, versions: 1 });
+  vi.mocked(answersApi.save).mockResolvedValue({ success: true, key: "consortium_ready", value: true });
 });
 
 describe("EligibilityBadge", () => {
@@ -46,10 +49,11 @@ describe("EligibilityBadge", () => {
 });
 
 describe("FundorScoreRing", () => {
-  it("shows the score with an accessible label", () => {
-    renderWithProviders(<FundorScoreRing score={87} />);
+  it("shows the score with an accessible label and the server's own band wording", () => {
+    renderWithProviders(<FundorScoreRing score={87} band={{ key: "strong", label: "Erős egyezés" }} />);
     expect(screen.getByRole("img", { name: /87/ })).toBeInTheDocument();
     expect(screen.getByText("87")).toBeInTheDocument();
+    expect(screen.getByText("Erős egyezés")).toBeInTheDocument();
   });
 
   it("says when a score is only an estimate", () => {
@@ -65,46 +69,44 @@ describe("FundorScoreRing", () => {
 });
 
 describe("ScoreBreakdown", () => {
-  it("lists the five factors and expands one into its concrete reason", async () => {
+  it("lists the five factors and expands one into the server's explanation", async () => {
     const user = userEvent.setup();
-    const o = opp("szechenyi-tech");
-    renderWithProviders(<ScoreBreakdown opp={o} profile={DEMO_PROFILE} result={fundorScore(o, DEMO_PROFILE)} />);
+    const opp = detailOf("consortium");
+    renderWithProviders(<ScoreBreakdown factors={opp.factors} />);
 
     const rows = screen.getAllByRole("button");
     expect(rows).toHaveLength(5);
     expect(rows[0]).toHaveAttribute("aria-expanded", "false");
+    expect(screen.getByText(opp.factors[0].label)).toBeInTheDocument();
 
     await user.click(rows[0]);
     expect(rows[0]).toHaveAttribute("aria-expanded", "true");
-    expect(screen.getByText(/kötelező feltétel|hard criteria/i)).toBeInTheDocument();
+    expect(screen.getByText(opp.factors[0].detail)).toBeInTheDocument();
   });
 
-  it("renders nothing for a blocked call", () => {
-    const o = opp("top-site");
-    const { container } = renderWithProviders(
-      <ScoreBreakdown opp={o} profile={DEMO_PROFILE} result={fundorScore(o, DEMO_PROFILE)} />,
-    );
+  it("renders nothing for a blocked call, which has no factors", () => {
+    const { container } = renderWithProviders(<ScoreBreakdown factors={detailOf("blocked").factors} />);
     expect(container).toBeEmptyDOMElement();
   });
 });
 
 describe("EligibilityQuestion", () => {
-  const deMinimis = () => opp("ginop-dig").hard.find((r) => r.field === "de_minimis_ok")!;
+  const question = () => detailOf("consortium").questions[0];
 
-  it("asks the rule's question and stores the answer company-wide", async () => {
+  it("asks the server's question in the active language and stores the answer company-wide", async () => {
     const user = userEvent.setup();
-    renderWithProviders(<EligibilityQuestion oppId="ginop-dig" rule={deMinimis()} />);
+    renderWithProviders(<EligibilityQuestion oppId="eu-edf-2026-da-acc-airdef-eatmi" question={question()} />);
 
-    expect(screen.getByText(/de minimis/i)).toBeInTheDocument();
-    await user.click(screen.getByRole("button", { name: /^igen$|^yes$/i }));
+    expect(screen.getByText(/konzorcium/i)).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: /^igen, van partnerhálózatom$/i }));
 
-    await waitFor(() => expect(useLocalAnswersStore.getState().answers).toEqual({ de_minimis_ok: true }));
-    expect(screen.getByRole("button", { name: /^igen$|^yes$/i })).toHaveAttribute("aria-pressed", "true");
+    await waitFor(() =>
+      expect(answersApi.save).toHaveBeenCalledWith("eu-edf-2026-da-acc-airdef-eatmi", "consortium_ready", true, "hu"),
+    );
   });
 
-  it("renders nothing for a rule that has no quiz", () => {
-    const rule = opp("ginop-dig").hard.find((r) => !r.quiz)!;
-    const { container } = renderWithProviders(<EligibilityQuestion oppId="ginop-dig" rule={rule} />);
-    expect(container).toBeEmptyDOMElement();
+  it("offers every option the server sent, including 'I don't know'", () => {
+    renderWithProviders(<EligibilityQuestion oppId="x" question={question()} />);
+    expect(screen.getAllByRole("button")).toHaveLength(question().opts.length);
   });
 });

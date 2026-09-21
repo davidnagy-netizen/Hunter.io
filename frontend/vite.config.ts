@@ -18,9 +18,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(import.meta.dirname, './src'),
-      // The scoring engine the browser runs, vendored unchanged from the
-      // Node prototype — see vendor/engine-src/README.md.
-      '@engine-src': path.resolve(import.meta.dirname, './vendor/engine-src'),
     },
   },
   server: {

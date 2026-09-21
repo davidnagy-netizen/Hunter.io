@@ -1,13 +1,12 @@
 import { screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { OPPS } from "@engine-src/data/mockGrants.js";
+import { CALL, subscriberCatalog } from "@/test/apiFixtures";
 import { renderWithProviders } from "@/test/renderWithProviders";
 import { useIsAuthenticated, useIsSubscriber } from "@/features/authentication/hooks/useAuth";
 import { metaApi } from "@/shared/api/meta.api";
 import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
 import { useLocalProfileStore } from "@/features/profile/store/localProfileStore";
-import { useLocalAnswersStore } from "@/features/scoring/store/localAnswersStore";
 import { useLocalSavedStore } from "../store/localSavedStore";
 import { useCatalog, useSearchQuery } from "../api/opportunities.queries";
 import type { SearchResponse, SearchRow, Teaser } from "../types/opportunities.types";
@@ -51,8 +50,16 @@ const searchResult = (over: Partial<SearchResponse> = {}): SearchResponse => ({
 });
 const mockSearch = (data: SearchResponse | undefined, extra: object = {}) =>
   vi.mocked(useSearchQuery).mockReturnValue({ data, isLoading: false, error: null, ...extra } as never);
-const fullCatalog = () =>
-  vi.mocked(useCatalog).mockReturnValue({ catalog: { gated: false, total: OPPS.length, opportunities: OPPS }, isLoading: false, error: null } as never);
+/**
+ * The subscriber catalog the real API returned. Its best real score for the
+ * fixture company is 69, so — as the dashboard and calendar only feature 70+ —
+ * `relevant` lifts the first few calls over that line.
+ */
+const fullCatalog = (relevant = 4) => {
+  const catalog = subscriberCatalog();
+  catalog.opportunities.filter((o) => !o.blocked).slice(0, relevant).forEach((o) => (o.score = 80));
+  vi.mocked(useCatalog).mockReturnValue({ catalog, isLoading: false, error: null } as never);
+};
 
 beforeEach(() => {
   vi.mocked(useIsAuthenticated).mockReturnValue(false);
@@ -60,7 +67,6 @@ beforeEach(() => {
   vi.mocked(metaApi.get).mockResolvedValue(META);
   vi.mocked(useSearchQuery).mockReset();
   useLocalProfileStore.getState().setProfile(DEMO_PROFILE);
-  useLocalAnswersStore.getState().clear();
   useLocalSavedStore.getState().clear();
 });
 
@@ -173,8 +179,8 @@ describe("SavedPage", () => {
 
   it("lists saved calls — including one the engine has ruled out, rather than hiding it", async () => {
     fullCatalog();
-    useLocalSavedStore.getState().toggle("szechenyi-tech");
-    useLocalSavedStore.getState().toggle("top-site");
+    useLocalSavedStore.getState().toggle(CALL.plain);
+    useLocalSavedStore.getState().toggle(CALL.blocked);
     renderWithProviders(<SavedPage />);
     expect(await screen.findAllByRole("article")).toHaveLength(2);
   });

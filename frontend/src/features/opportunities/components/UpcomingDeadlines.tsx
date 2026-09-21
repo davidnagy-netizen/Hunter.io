@@ -3,11 +3,11 @@ import { Link } from "react-router";
 import { ArrowIcon } from "@/shared/components";
 import { DeadlineRow } from "./DeadlineRow";
 import { upcomingDeadlines } from "../domain/calendar";
-import type { RankedOpportunity } from "@/features/scoring/types/scoring.types";
+import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
 import "../i18n";
 
 /** The dashboard's short list of what closes next, with a way into the full calendar. */
-export function UpcomingDeadlines({ relevant }: { relevant: RankedOpportunity[] }) {
+export function UpcomingDeadlines({ relevant }: { relevant: ScoredOpportunity[] }) {
   const { t } = useTranslation("opportunities");
   const next = upcomingDeadlines(relevant, 4);
   if (!next.length) return null;
@@ -22,7 +22,7 @@ export function UpcomingDeadlines({ relevant }: { relevant: RankedOpportunity[] 
       </div>
       <ul className="rounded-lg border border-line bg-surface p-1 shadow-card">
         {next.map((item) => (
-          <DeadlineRow key={item.opp.id} item={item} />
+          <DeadlineRow key={item.id} item={item} />
         ))}
       </ul>
     </section>

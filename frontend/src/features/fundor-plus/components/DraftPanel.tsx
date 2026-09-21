@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Badge, Button, Panel } from "@/shared/components";
 import type { CompanyProfile } from "@/features/profile/types/profile.types";
-import type { Opportunity } from "@/features/scoring/types/scoring.types";
+import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
 import { draftToText } from "../domain/draft";
 import { useDraftChapters } from "../hooks/useDraftChapters";
 import "../i18n";
@@ -13,7 +13,7 @@ import "../i18n";
  * profile and the call. Remounted (via `key`) when the call changes, so a
  * draft never lingers under a different grant's title.
  */
-export function DraftPanel({ profile, opp }: { profile: CompanyProfile; opp: Opportunity }) {
+export function DraftPanel({ profile, opp }: { profile: CompanyProfile; opp: ScoredOpportunity }) {
   const { t } = useTranslation("plus");
   const chapters = useDraftChapters(profile, opp);
   const [generated, setGenerated] = useState(false);

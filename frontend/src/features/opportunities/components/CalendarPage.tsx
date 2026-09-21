@@ -19,7 +19,7 @@ export function CalendarPage() {
   const { t } = useTranslation("opportunities");
   const { month } = useFormat();
   const { isLoading, error, gated, teasers, lockedTotal, eligible } = useOpportunitiesData();
-  const months = groupByMonth(eligible.filter((r) => (r.res.score ?? 0) >= RELEVANT_SCORE));
+  const months = groupByMonth(eligible.filter((r) => (r.score ?? 0) >= RELEVANT_SCORE));
 
   return (
     <>
@@ -50,7 +50,7 @@ export function CalendarPage() {
                 </div>
                 <ul className="-mx-3">
                   {m.items.map((item) => (
-                    <DeadlineRow key={item.opp.id} item={item} />
+                    <DeadlineRow key={item.id} item={item} />
                   ))}
                 </ul>
               </Panel>

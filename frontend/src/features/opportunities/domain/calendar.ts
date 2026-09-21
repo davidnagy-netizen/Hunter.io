@@ -1,4 +1,5 @@
-import type { RankedOpportunity } from "@/features/scoring/types/scoring.types";
+import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
+import { URGENT_DAYS } from "./shortlist";
 
 export interface CalendarMonth {
   /** `YYYY-MM`, sortable. */
@@ -6,12 +7,15 @@ export interface CalendarMonth {
   year: number;
   /** 1–12. */
   month: number;
-  items: RankedOpportunity[];
+  items: ScoredOpportunity[];
   /** Deadlines within 14 days. */
   urgent: number;
 }
 
-const byDeadline = (a: RankedOpportunity, b: RankedOpportunity) => a.opp.deadline.localeCompare(b.opp.deadline);
+/** Within {@link URGENT_DAYS} of the deadline, by the server's clock. */
+export const isUrgent = (item: ScoredOpportunity) => item.daysLeft !== null && item.daysLeft <= URGENT_DAYS;
+
+const byDeadline = (a: ScoredOpportunity, b: ScoredOpportunity) => a.deadline.localeCompare(b.deadline);
 
 /**
  * Groups calls by the month of their deadline, oldest month first, soonest
@@ -19,17 +23,17 @@ const byDeadline = (a: RankedOpportunity, b: RankedOpportunity) => a.opp.deadlin
  * string rather than through `Date`, so a browser timezone can't push a
  * 1 October deadline into September.
  */
-export function groupByMonth(items: RankedOpportunity[]): CalendarMonth[] {
+export function groupByMonth(items: ScoredOpportunity[]): CalendarMonth[] {
   const months = new Map<string, CalendarMonth>();
   for (const item of items) {
-    const key = item.opp.deadline.slice(0, 7);
+    const key = item.deadline.slice(0, 7);
     let month = months.get(key);
     if (!month) {
       month = { key, year: Number(key.slice(0, 4)), month: Number(key.slice(5, 7)), items: [], urgent: 0 };
       months.set(key, month);
     }
     month.items.push(item);
-    if (item.res.elig.days <= 14) month.urgent += 1;
+    if (isUrgent(item)) month.urgent += 1;
   }
   return [...months.values()]
     .sort((a, b) => a.key.localeCompare(b.key))
@@ -37,12 +41,12 @@ export function groupByMonth(items: RankedOpportunity[]): CalendarMonth[] {
 }
 
 /** The next few deadlines, soonest first. */
-export function upcomingDeadlines(items: RankedOpportunity[], count: number): RankedOpportunity[] {
+export function upcomingDeadlines(items: ScoredOpportunity[], count: number): ScoredOpportunity[] {
   return [...items].sort(byDeadline).slice(0, count);
 }
 
 /** Dot color for a calendar row: urgent beats strong beats ordinary. */
-export function deadlineTone(item: RankedOpportunity): "amber" | "green" | "gold" {
-  if (item.res.elig.days <= 14) return "amber";
-  return (item.res.score ?? 0) >= 85 ? "green" : "gold";
+export function deadlineTone(item: ScoredOpportunity): "amber" | "green" | "gold" {
+  if (isUrgent(item)) return "amber";
+  return item.band?.key === "strong" ? "green" : "gold";
 }

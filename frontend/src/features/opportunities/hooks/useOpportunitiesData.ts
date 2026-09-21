@@ -1,34 +1,31 @@
 import { useMemo } from "react";
-import { useRankedOpportunities } from "@/features/scoring/hooks/useScoring";
 import { useCatalog } from "../api/opportunities.queries";
-import { dashboardStats, splitShortlist, type DashboardStats } from "../domain/shortlist";
+import { rankScored, splitShortlist, type DashboardStats } from "../domain/shortlist";
 import type { Teaser } from "../types/opportunities.types";
 
 const NO_TEASERS: Teaser[] = [];
+const NO_ROWS: never[] = [];
 
 /**
- * Everything the opportunity screens read, in one place: the catalog, ranked
- * for the current company (locally, with the server's own engine) and split
- * into what qualifies and what the engine ruled out.
+ * Everything the opportunity screens read, in one place: the catalog as the
+ * server scored it for the current company, ordered for display and split
+ * into what qualifies and what was ruled out. Nothing is scored in the
+ * browser.
  *
- * Two shapes hide behind it. A subscriber gets real opportunities. Anyone
+ * Two shapes hide behind it. A subscriber gets scored opportunities. Anyone
  * else gets `gated: true`, no opportunities, server-scored `teasers`, and the
- * server's own totals — the browser has nothing to rank, so `stats` comes
- * from the server instead of being computed.
+ * server's own totals.
  */
 export function useOpportunitiesData() {
   const { catalog, isLoading, error } = useCatalog();
   const gated = catalog?.gated ?? false;
-  const ranked = useRankedOpportunities(catalog && !catalog.gated ? catalog.opportunities : undefined);
+  const ranked = useMemo(() => (catalog && !catalog.gated ? rankScored([...catalog.opportunities]) : NO_ROWS), [catalog]);
   const { eligible, blocked } = useMemo(() => splitShortlist(ranked), [ranked]);
 
   const stats: DashboardStats = useMemo(() => {
-    if (catalog?.gated) {
-      const s = catalog.stats;
-      return { total: s.eligible, strong: s.strong, closingSoon: s.closingSoon, needsAttention: s.needsAnswer };
-    }
-    return dashboardStats(eligible);
-  }, [catalog, eligible]);
+    const s = catalog?.stats;
+    return { total: s?.eligible ?? 0, strong: s?.strong ?? 0, closingSoon: s?.closingSoon ?? 0, needsAttention: s?.needsAnswer ?? 0 };
+  }, [catalog]);
 
   return {
     isLoading,
