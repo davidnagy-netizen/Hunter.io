@@ -30,5 +30,6 @@
   "EMAIL_TAKEN": "Ezzel az e-mail-címmel már van fiók.",
   "REFRESH_UNAVAILABLE": "A katalógusfrissítés nincs beállítva ezen a szerveren.",
   "NO_SUCH_OPPORTUNITY": "Ez a felhívás már nem létezik.",
-  "FIELD_REQUIRED": "Egy kötelező mező hiányzik."
+  "FIELD_REQUIRED": "Egy kötelező mező hiányzik.",
+  "TAXPAYER_LOOKUP_FAILED": "Nem sikerült ellenőrizni az adószámot a NAV nyilvántartásában. Ellenőrizd a számot, vagy próbáld meg később."
 }

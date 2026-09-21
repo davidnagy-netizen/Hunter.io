@@ -49,6 +49,25 @@ describe("OnboardingWizard", () => {
     expect(await screen.findByDisplayValue(DEMO_PROFILE.company)).toBeInTheDocument();
   });
 
+  it("keeps the company name NAV confirmed at registration read-only", async () => {
+    useOnboardingDraftStore.getState().setDraft({ company: "Alfa Gyártó és Kereskedelmi Kft.", taxNumber: "12345674-2-42" });
+    const user = userEvent.setup();
+    renderWithProviders(<OnboardingWizard />);
+
+    await user.click(screen.getByRole("button", { name: /inkább kitöltöm magam|fill it in myself/i }));
+    const company = await screen.findByDisplayValue("Alfa Gyártó és Kereskedelmi Kft.");
+    expect(company).toHaveAttribute("readonly");
+    expect(screen.getByText(/nav-ellenőrzött|verified by nav/i)).toBeInTheDocument();
+  });
+
+  it("leaves the company name editable when it was never verified (e.g. after the free assessment)", async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<OnboardingWizard />);
+
+    await user.click(screen.getByRole("button", { name: /inkább kitöltöm magam|fill it in myself/i }));
+    expect(await screen.findByLabelText(/cégnév|company name/i)).not.toHaveAttribute("readonly");
+  });
+
   it("blocks 'Next' on the company step until the required fields are valid", async () => {
     const user = userEvent.setup();
     renderWithProviders(<OnboardingWizard />);

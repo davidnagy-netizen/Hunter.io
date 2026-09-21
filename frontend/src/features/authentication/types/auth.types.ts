@@ -79,3 +79,18 @@ export interface RegisterPayload {
   company?: string;
   email?: string;
 }
+
+/** The official record NAV holds for a tax number (`POST /api/nav/taxpayer`). */
+export interface Taxpayer {
+  taxNumber: string;
+  companyName: string;
+  /** The trading name; equals `companyName` when NAV has none. */
+  shortName: string;
+  postalCode: string | null;
+  city: string | null;
+  streetAddress: string | null;
+  fullAddress: string;
+  /** `VALID`, or a reason the company cannot register (`SUSPENDED`, `DELETED`, …). */
+  status: string;
+  incorporationDate: string | null;
+}

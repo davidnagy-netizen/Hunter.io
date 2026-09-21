@@ -9,6 +9,7 @@
   },
   "fields": {
     "company": "Company name",
+    "verified": "verified by NAV · {{taxNumber}}",
     "employees": "Number of employees",
     "county": "County / project location",
     "closedYears": "Number of closed business years",

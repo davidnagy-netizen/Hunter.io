@@ -158,6 +158,48 @@ paths:
           description: "`USERNAME_TAKEN`."
           content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
 
+  /nav/taxpayer:
+    post:
+      tags: [Auth]
+      operationId: lookupTaxpayer
+      summary: Look up a company by tax number (registration step)
+      description: |
+        Public, on-demand and per registering user (CR-03): the caller sends the tax number they typed and gets the
+        official name and registered seat to **confirm read-only**; they never type the company name. The number is
+        validated first — 8 digits, `xxxxxxxx-y-zz` or 11 digits, with the Hungarian check digit (weights 9 7 3 1 9 7 3 on
+        the first seven digits, sum mod 10 = the eighth). A malformed or check-digit-failing number is `400
+        INVALID_REQUEST` with `fields.tax_number`; a number NAV does not know (or an unreachable NAV) is `422
+        TAXPAYER_LOOKUP_FAILED`. Nothing is stored. **Never harvest**: the register may not be mirrored, so callers must
+        look up only the company of the person registering.
+      x-frontend: { used-by: [Register form, step 1] }
+      security: [{}]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [tax_number]
+              properties:
+                tax_number: { type: string, example: 12345674-2-42 }
+      responses:
+        '200':
+          description: The taxpayer.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, taxpayer]
+                properties:
+                  success: { type: boolean, enum: [true] }
+                  taxpayer: { $ref: '#/components/schemas/Taxpayer' }
+        '400':
+          description: "`INVALID_REQUEST` — the tax number is malformed or fails the check digit (`fields.tax_number`)."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+        '422':
+          description: "`TAXPAYER_LOOKUP_FAILED`."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+
   /auth/login:
     post:
       tags: [Auth]
@@ -1129,6 +1171,23 @@ components:
         error: { type: string, description: 'A Hungarian message — a fallback only.' }
         code: { $ref: '#/components/schemas/ErrorCode' }
 
+    Taxpayer:
+      type: object
+      description: The official record NAV returned for a tax number.
+      required: [taxNumber, companyName, shortName, fullAddress, status]
+      properties:
+        taxNumber: { type: string, example: 12345674-2-42 }
+        companyName: { type: string, description: The registered legal name. }
+        shortName: { type: string, description: 'Trading name; equals `companyName` when NAV has none.' }
+        vatCode: { type: string, nullable: true }
+        countyCode: { type: string, nullable: true }
+        postalCode: { type: string, nullable: true }
+        city: { type: string, nullable: true }
+        streetAddress: { type: string, nullable: true }
+        fullAddress: { type: string }
+        status: { type: string, description: 'e.g. `VALID`, `SUSPENDED`, `DELETED`.', example: VALID }
+        incorporationDate: { type: string, nullable: true }
+
     ErrorCode:
       type: string
       description: Stable identifiers the frontend translates. Add new ones to the frontend's `errors.json` when introduced.
@@ -1165,6 +1224,7 @@ components:
         - EMPTY_NOTE
         - EMPTY_TASK
         - INVALID_DUE_DATE
+        - TAXPAYER_LOOKUP_FAILED
 
     ActivityEntry:
       type: object

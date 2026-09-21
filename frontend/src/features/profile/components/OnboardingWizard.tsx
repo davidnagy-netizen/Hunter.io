@@ -54,6 +54,8 @@ export function OnboardingWizard() {
 
   const employees = watch("employees");
   const region = watch("region");
+  // A company confirmed against NAV at registration keeps its official name: it is read, never typed.
+  const taxNumber = watch("taxNumber");
 
   async function goNext() {
     if (step === "intro") {
@@ -137,7 +139,13 @@ export function OnboardingWizard() {
 
             {step === "company" && (
               <div className="flex flex-col gap-4">
-                <TextField label={t("profile:fields.company")} {...register("company")} error={errors.company && t(errors.company.message as string)} />
+                <TextField
+                  label={t("profile:fields.company")}
+                  {...register("company")}
+                  readOnly={Boolean(taxNumber)}
+                  labelHint={taxNumber ? t("profile:fields.verified", { taxNumber }) : undefined}
+                  error={errors.company && t(errors.company.message as string)}
+                />
                 <TextField
                   label={t("profile:fields.employees")}
                   type="number"

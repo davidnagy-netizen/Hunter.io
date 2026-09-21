@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { authApi } from "./auth.api";
+import { taxpayerApi } from "./taxpayer.api";
 import type { LoginPayload, RegisterPayload } from "../types/auth.types";
 
 export const authKeys = {
@@ -45,4 +46,9 @@ export function useLogoutMutation() {
     mutationFn: authApi.logout,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: authKeys.me() }),
   });
+}
+
+/** Looks a company up by tax number for the registration form; nothing is cached or stored. */
+export function useTaxpayerLookupMutation() {
+  return useMutation({ mutationFn: (taxNumber: string) => taxpayerApi.lookup(taxNumber) });
 }

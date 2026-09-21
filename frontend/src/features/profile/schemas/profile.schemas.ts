@@ -11,6 +11,7 @@ const ORG_TYPE_IDS = ["sme", "large", "research", "university", "ngo", "public"]
  */
 export const companyProfileSchema = z.object({
   company: z.string().min(1, "profile:validation.company"),
+  taxNumber: z.string().optional(),
   // Plain z.number(), not z.coerce.number(): coercion makes zod's input type
   // `unknown`, which breaks RHF's resolver typing (input type != output
   // type). Numeric `<input>`s use `register(field, { valueAsNumber: true })`

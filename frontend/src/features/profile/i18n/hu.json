@@ -9,6 +9,7 @@
   },
   "fields": {
     "company": "Cégnév",
+    "verified": "NAV-ellenőrzött · {{taxNumber}}",
     "employees": "Alkalmazottak száma",
     "county": "Megye / megvalósítási helyszín",
     "closedYears": "Lezárt üzleti évek száma",

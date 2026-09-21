@@ -131,6 +131,7 @@ $save('detail.locked', $call('GET', "/opportunities/{$ids['plain']}?lang=hu", nu
 $save('search.subscriber', $call('GET', '/search?sort=-score&page=1&pageSize=20&lang=hu', null, $sub));
 $save('answer.consortium', $call('POST', "/opportunities/{$ids['consortium']}/answer?lang=hu", ['field' => 'consortium_ready', 'value' => true, 'scope' => 'global'], $sub));
 $save('detail.consortium.answered.hu', $call('GET', "/opportunities/{$ids['consortium']}?lang=hu", null, $sub));
+$save('nav.taxpayer', $call('POST', '/nav/taxpayer', ['tax_number' => '12345674-2-42']));
 $save('save.toggle', $call('POST', "/opportunities/{$ids['plain']}/save", [], $sub));
 $save('profile.subscriber', $call('GET', '/profile', null, $sub));
 $save('me.subscriber', $call('GET', '/auth/me', null, $sub));

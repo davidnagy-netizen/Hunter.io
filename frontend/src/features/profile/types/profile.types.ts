@@ -1,6 +1,8 @@
 /** Mirrors the shape `src/engine/profile.js#normalizeProfile` accepts and fills in. */
 export interface CompanyProfile {
   company: string;
+  /** The company's NAV-verified tax number (`xxxxxxxx-y-zz`), set at registration; kept by the server as an extra field. */
+  taxNumber?: string;
   initials?: string;
   employees: number;
   region?: string;

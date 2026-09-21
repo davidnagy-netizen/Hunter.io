@@ -5,7 +5,7 @@
   },
   "register": {
     "title": "Create a company account",
-    "subtitle": "Create your company's account. Your company profile and history stay tied to it."
+    "subtitle": "Three details are enough: email, password and tax number. We read the company name and seat from the NAV register; you only confirm them."
   },
   "tabs": {
     "login": "Sign in",
@@ -16,12 +16,19 @@
     "password": "Password",
     "company": "Company name",
     "email": "Email",
-    "optional": "optional"
+    "optional": "optional",
+    "taxNumber": "Tax number",
+    "taxNumberHint": "8 or 11 digits",
+    "taxNumberHelp": "E.g. 12345678 or 12345678-1-42. We check the number, then show you the company it belongs to."
   },
   "actions": {
     "submitLogin": "Sign in",
     "submitRegister": "Create account",
-    "submitting": "One moment…"
+    "submitting": "One moment…",
+    "findCompany": "Find my company",
+    "looking": "Looking it up at NAV…",
+    "confirmCompany": "This is my company — create account",
+    "changeTaxNumber": "Use a different tax number"
   },
   "adminHint": "Demo access: <b>admin</b> / <b>admin</b> — administrator account for granting subscriptions.",
   "backToHome": "Back to the home page",
@@ -32,5 +39,19 @@
     "active": "Active",
     "activeDays": "Active · {{count}} days",
     "none": "No subscription"
+  },
+  "confirm": {
+    "title": "NAV lists this company",
+    "name": "Company name",
+    "taxNumber": "Tax number",
+    "address": "Registered seat",
+    "notActive": "NAV lists this taxpayer as \"{{status}}\", so an account cannot be created for it."
+  },
+  "consent": {
+    "terms": "I accept the Terms of Service and have read the Privacy Notice.",
+    "marketing": "Send me newsletters and news of new funding opportunities (withdraw any time)."
+  },
+  "validation": {
+    "taxNumber": "Enter a valid Hungarian tax number (8 or 11 digits, with a correct check digit)."
   }
 }

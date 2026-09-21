@@ -5,7 +5,7 @@
   },
   "register": {
     "title": "Cégfiók létrehozása",
-    "subtitle": "Hozd létre a céged fiókját. A cégprofilod és az előzményeid a fiókhoz kötve maradnak."
+    "subtitle": "Három adat elég: e-mail, jelszó és adószám. A cég nevét és székhelyét a NAV nyilvántartásából olvassuk ki, te csak megerősíted."
   },
   "tabs": {
     "login": "Belépés",
@@ -16,12 +16,19 @@
     "password": "Jelszó",
     "company": "Cégnév",
     "email": "E-mail",
-    "optional": "opcionális"
+    "optional": "opcionális",
+    "taxNumber": "Adószám",
+    "taxNumberHint": "8 vagy 11 jegyű",
+    "taxNumberHelp": "Pl. 12345678 vagy 12345678-1-42. Ellenőrizzük a számot, majd megmutatjuk a hozzá tartozó céget."
   },
   "actions": {
     "submitLogin": "Belépés",
     "submitRegister": "Fiók létrehozása",
-    "submitting": "Egy pillanat…"
+    "submitting": "Egy pillanat…",
+    "findCompany": "Cég keresése",
+    "looking": "Keresés a NAV-nál…",
+    "confirmCompany": "Ez az én cégem — fiók létrehozása",
+    "changeTaxNumber": "Másik adószámot adok meg"
   },
   "adminHint": "Bemutató hozzáférés: <b>admin</b> / <b>admin</b> — adminisztrátori fiók, előfizetések kiosztásához.",
   "backToHome": "Vissza a főoldalra",
@@ -32,5 +39,19 @@
     "active": "Aktív előfizetés",
     "activeDays": "Aktív előfizetés · {{count}} nap",
     "none": "Nincs előfizetés"
+  },
+  "confirm": {
+    "title": "A NAV szerint ez a cég",
+    "name": "Cégnév",
+    "taxNumber": "Adószám",
+    "address": "Székhely",
+    "notActive": "A NAV nyilvántartásában ennek az adózónak az állapota „{{status}}”, ezzel nem hozható létre fiók."
+  },
+  "consent": {
+    "terms": "Elfogadom az Általános Szerződési Feltételeket, és megismertem az Adatkezelési Tájékoztatót.",
+    "marketing": "Kérek hírlevelet és tájékoztatást új pályázati lehetőségekről (bármikor visszavonható)."
+  },
+  "validation": {
+    "taxNumber": "Adj meg érvényes magyar adószámot (8 vagy 11 jegyű, helyes ellenőrző számjeggyel)."
   }
 }

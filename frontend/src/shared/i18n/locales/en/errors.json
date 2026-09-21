@@ -30,5 +30,6 @@
   "EMAIL_TAKEN": "An account with this email address already exists.",
   "REFRESH_UNAVAILABLE": "The catalog refresh is not configured on this server.",
   "NO_SUCH_OPPORTUNITY": "This call no longer exists.",
-  "FIELD_REQUIRED": "A required field is missing."
+  "FIELD_REQUIRED": "A required field is missing.",
+  "TAXPAYER_LOOKUP_FAILED": "We couldn't verify that tax number with NAV. Check the number, or try again later."
 }

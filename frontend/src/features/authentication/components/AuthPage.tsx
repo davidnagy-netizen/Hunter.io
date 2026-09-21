@@ -1,8 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router";
 import { LanguageToggle, Panel } from "@/shared/components";
+import { useOnboardingDraftStore } from "@/features/profile/store/onboardingDraftStore";
 import { useMeQuery } from "../api/auth.queries";
-import type { AuthUser } from "../types/auth.types";
+import type { AuthUser, Taxpayer } from "../types/auth.types";
 import { LoginForm } from "./LoginForm";
 import { RegisterForm } from "./RegisterForm";
 import { homePathFor } from "../lib/homePath";
@@ -17,8 +18,13 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
   const { data } = useMeQuery();
   const isRegister = mode === "register";
 
-  // `/app` sends a visitor without a profile on to the onboarding wizard.
-  const handleRegistered = () => navigate("/app");
+  // The confirmed company carries over to the onboarding wizard, which asks only for what NAV cannot tell us.
+  // `/app` sends a visitor without a profile on to the wizard.
+  const handleRegistered = (taxpayer: Taxpayer) => {
+    const { draft, setDraft } = useOnboardingDraftStore.getState();
+    setDraft({ ...draft, company: taxpayer.companyName, taxNumber: taxpayer.taxNumber });
+    navigate("/app");
+  };
   const handleSignedIn = (user: AuthUser) => navigate(homePathFor(user));
 
   return (

@@ -58,6 +58,7 @@ const CHECKS: Record<string, [string, ((body: any) => unknown)?]> = {
   "detail.plain.en.json": ["OpportunityDetail", (b) => b.opportunity],
   "detail.locked.json": ["OpportunityDetail", (b) => b.opportunity],
   "answer.consortium.json": ["OpportunityDetail", (b) => b.opportunity],
+  "nav.taxpayer.json": ["Taxpayer", (b) => b.taxpayer],
 };
 
 describe("recorded API responses", () => {
