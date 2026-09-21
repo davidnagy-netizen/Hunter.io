@@ -26,9 +26,9 @@ and cut over, its behavior should still match what those documents promise.
 |---|---|
 | 0 — Vite/React/TS scaffold, Tailwind theme, shared primitives | ✅ done |
 | 1 — Testing infrastructure (Vitest + RTL) | ✅ done |
-| `authentication` | ✅ done — login, register, session, `isAdmin`/`isSubscriber`, verified against the real server |
+| `authentication` | ✅ done — login, session, `isAdmin`/`isSubscriber`; registration follows the backend's CR-03 flow (email, password, tax number → NAV confirmation, two consents) |
 | `profile` (onboarding + version history) | ✅ done — wizard, server/local sync fork, version history + restore, verified against the real server (profile-sync bug fixed — see [Decisions](#decisions--changes-log)) |
-| `scoring` (eligibility engine + Fundor Score) | ✅ done — server engine imported directly (no copy), answers fork, ring/badge/breakdown/question components; 241/241 live scores match the server (see [Decisions](#decisions--changes-log)) |
+| `scoring` (Fundor Score display + eligibility questions) | ✅ done — **the server is the only scorer** (2026-09-21): the browser shows the score, verdict, checks, factors and questions the API returns, and posts answers |
 | `opportunities` (dashboard/list/detail/search/calendar/saved) | ✅ done — app shell, dashboard, list, detail, search, calendar, saved; verified against the real server in all three access tiers |
 | `assessment` (free readiness funnel + lead capture) | ✅ done — 6-question funnel, readiness score (ported unchanged; **the keep/replace decision is still open**), censored real matches, lead capture, hand-off into onboarding |
 | `landing` (public front door) | ✅ done — pitch, worked example, sources, price; replaces the temporary showcase page |
@@ -36,8 +36,9 @@ and cut over, its behavior should still match what those documents promise.
 | `crm` (pipeline, contacts, leads, insights, contact record) | ✅ done — unit-tested (127 tests); signed-in pass done by the developer, who reported it "all good" (2026-09-20) |
 | `fundor-plus` (demo) | ✅ done — unit-tested (29 tests); locked screen, nav and mobile bar checked in a browser as an anonymous visitor by the assistant; workspace: signed-in pass done by the developer, who reported it "all good" (2026-09-20) |
 
-Nothing here is wired up to the real Node server or served to real users yet.
-`../public` remains the live app until a feature is actually cut over.
+Served by the Laravel app (2026-09-21): `npm run build` writes to `../public/spa` and Laravel's fallback route serves
+it, replacing the backend's Blade/React pages. Every signed-in flow still needs a person to sign in and look — the
+assistant that wrote this never types passwords or creates accounts (see the log).
 
 ---
 
@@ -150,11 +151,8 @@ session cookie on every request, and **same-origin** (the dev proxy must not rew
 `@/...` resolves to `src/...` (configured in both `vite.config.ts` and
 `tsconfig.app.json` — keep them in sync if this ever changes).
 
-`@engine-src/...` resolves to `vendor/engine-src/...` — the browser-side scoring engine, **vendored unchanged** from
-the Node prototype (six pure-ESM files; see [`vendor/engine-src/README.md`](vendor/engine-src/README.md) for
-provenance and the drift risk against the backend's PHP implementation). Only `features/scoring/domain/` imports from
-it (through `engine.ts`); no other code should. Types for those JS files are hand-written in
-`features/scoring/domain/serverEngine.d.ts` (deliberately not `allowJs`).
+There is no second alias any more: the vendored browser engine (`@engine-src`) was removed on 2026-09-21 when scoring
+moved to the server.
 
 ---
 
@@ -195,6 +193,12 @@ here is one-way. Jest would work but would need its own separate
 configuration to resolve Vite-specific things (the `@` alias,
 `import.meta.env`) that Vitest gets for free.
 
+**Real API responses, not invented ones.** `src/test/fixtures/api/*.json` are recorded from the running Laravel app for
+one subscriber company (`php frontend/scripts/generate-api-fixtures.php` regenerates them on an in-memory database),
+and `fixtures/api/contract.test.ts` validates every one against `../openapi.yaml`. Screen tests build on them through
+`src/test/apiFixtures.ts`, so a test can't rest on a response shape the API never sends, and a backend change that
+breaks the contract fails here. Regenerate after changing the backend's scoring or catalog.
+
 **Conventions:**
 - Tests are colocated with the source file: `Button.tsx` + `Button.test.tsx`
   in the same folder, not a parallel `__tests__/` tree.
@@ -210,9 +214,8 @@ configuration to resolve Vite-specific things (the `@` alias,
 (`Button`/`Badge`/`Panel`/`CircularProgress`/`TextField`/`SelectField`/`ChipButton`),
 the `authentication` feature, and the `profile` feature (schema, local store,
 the `useCompanyProfile` sync-fork hook, `OnboardingWizard`, `ProfileHistoryPanel`),
-and the `scoring` feature (engine wiring pinned to the demo-company scores,
-the answers fork with optimistic update/rollback, the scoring hooks, and its
-four components) — 483 tests, all passing (slices 5–7 added the `opportunities` screens and forks, the app-shell guard, the assessment funnel, lead capture, the landing page, the loader and the shared motion components; slice 8 the admin console, its route guard, the workspace switch and the admin-aware redirects; slice 9 the CRM, the shared `Dialog` and `Pager`; slice 10 Fundor Plus and the nav badge / short-label slots).
+and the `scoring` feature (the answers hook with optimistic update/rollback and server re-scoring, and its
+four components) — 518 tests, all passing (slices 5–7 added the `opportunities` screens and forks, the app-shell guard, the assessment funnel, lead capture, the landing page, the loader and the shared motion components; slice 8 the admin console, its route guard, the workspace switch and the admin-aware redirects; slice 9 the CRM, the shared `Dialog` and `Pager`; slice 10 Fundor Plus and the nav badge / short-label slots).
 
 Feature tests that need React Query and/or routing use
 [`src/test/renderWithProviders.tsx`](src/test/renderWithProviders.tsx)
@@ -246,15 +249,19 @@ npm ci
 npm run dev          # http://localhost:5173, proxies /api to 127.0.0.1:8000
 npm test             # run the test suite once
 npm run lint         # oxlint
-npm run build        # tsc -b && vite build
+npm run build        # tsc -b && vite build → ../public/spa
 ```
+
+Two ways to look at it: the Vite dev server (hot reload) at <http://localhost:5173>, or `npm run build` and browse
+<http://127.0.0.1:8000> — Laravel serves the built app itself. `composer dev` from the repo root starts the backend and
+the Vite server together.
 
 Notes:
 - **Do not run `DatabaseSeeder`** on a shared database — it creates demonstration credentials.
 - The repo has no `storage/` skeleton, so on a fresh clone create it before `composer install`:
   `mkdir -p storage/framework/{cache/data,sessions,views} storage/logs storage/app/public bootstrap/cache`.
-- The backend's own suite (`php artisan test`) needs `npm ci && npm run build` at the repo root first (its Blade pages
-  need `public/build/manifest.json`).
+- The backend's suite (`php artisan test`) needs no frontend build: the Blade pages are gone, and the SPA route is
+  tested against a temporary `index.html`.
 - Point the proxy elsewhere with `VITE_API_PROXY_TARGET`. Keep browser requests same-origin: the API answers
   `403 CSRF_REJECTED` when a mutation's `Origin` differs from its `Host`.
 - To get an administrator for admin screens, the backend's guide grants the role to a development account through
@@ -274,6 +281,66 @@ things that would otherwise only live in a chat transcript.
 > current names are `fundor-plus`, `FundorScoreRing`, `useFundorScore`,
 > `fundor-rewrite-*`.
 
+### 2026-09-21 — One app: served by Laravel, scored by the server, registration per CR-03
+Three decisions from the developer, all now built:
+
+**1. This frontend replaces the backend's Blade + React-in-Blade pages.** Vite builds to `../public/spa` (`base: /spa/`
+only for `build`; dev serves `/`), and a single Laravel route (`routes/web.php`, `->name('spa')`) returns
+`public/spa/index.html` for every GET that isn't `/api/...`, so deep links and reloads work. The Blade views, their web
+controllers, `SetLocale`, `resources/{views,js,css}`, `public/{css,images,vendor}` and the root `package.json`/Vite
+config were removed. A missing build answers `503` with the command to run. `/api/health` replaced the Blade health
+page. Seven tests cover the fallback (`SpaFallbackTest`).
+
+**2. The server is the only scorer.** The backend has a scoring engine (`App\Services\Api\Scoring`), so the vendored JS
+engine is gone. This reverses the earlier "keep the client engine as a fallback" decision, at the developer's request.
+What it took:
+- *Measured first, not assumed.* The PHP scorer was compared with the JS engine on 48 real calls × 8 companies. Two
+  defects were found and fixed in the backend: `sector` was never derived from the activity code (fixed with
+  `SectorMap`, checked against all 99 divisions), and explanations lacked the JS engine's factor labels/details. The
+  comparison is frozen as golden tests (`ScoringParityTest`, fixtures in `tests/Fixtures/scoring`), so the scorer can't
+  drift from the reviewed formulas silently.
+- *The catalog is scored for subscribers.* `GET /catalog` used to return unscored rows to a subscriber and expect the
+  browser to score them. It now returns every open call with `score, verdict, band, checks, factors, conditions,
+  questions, calculator` for the caller's stored company, plus `stats` (contract: `ScoredOpportunity`). Non-subscribers
+  still get censored teasers only (`SubscriberScoringTest`).
+- *Frontend.* Catalog/search/detail requests carry `lang` (the server words check labels, factor details, conditions and
+  questions) and the language is part of every key. A profile save, demo load, restore or answered question invalidates
+  the scored queries (`shared/api/opportunitiesKeys`, shared so `profile` and `scoring` can do it without importing
+  `opportunities`). Screens read a flat `ScoredOpportunity`; the client only orders the catalog for display (best score
+  first, blocked last, past-deadline dropped) and hides prizes and labels (`awardsFunding: false`). An answer is posted;
+  the server re-scores, the answered call comes back in the response, the rest refetch.
+- *Removed:* `vendor/engine-src`, `@engine-src`, `features/scoring/domain/engine*`, `useScoring*`, the local answers
+  store, the local grant calculator. The anonymous visitor's browser-held answers went too: questions only appear on a
+  call's detail page, which needs a subscription.
+- *Behaviour changes you will notice.* (a) The grant calculator no longer has an editable project value: it shows the
+  server's figures for the value in the profile and links to the profile to change it (the server has no what-if
+  endpoint, and re-implementing the arithmetic in the browser is the drift this decision removes). (b) An answered
+  question re-scores after a round trip instead of instantly. (c) The dashboard's stat tiles come from the server's
+  `stats` for every tier. (d) The "closing soon" and calendar urgency use the server's `daysLeft`, i.e. the server's clock.
+- *Tests* are built on recorded API responses (see Testing) and validated against the contract.
+
+**3. Registration follows the backend (CR-03).** Step 1: email, password, tax number (check digit validated in the
+browser, same rule as the backend) and **two separate unticked consents** — terms + privacy (required), marketing
+(optional). The company is looked up with `POST /api/nav/taxpayer` and shown read-only; the visitor confirms it and picks
+a username (prefilled from the email), and the account is created with NAV's official name. The confirmed name and tax
+number carry into the onboarding wizard (name read-only, tax number saved with the profile as an extra field, which the
+server keeps). `/nav/taxpayer` and `TAXPAYER_LOOKUP_FAILED` were missing from the contract; they are in it now, with a
+recorded response fixture.
+
+Things the backend does not do yet, that this screen therefore cannot honestly claim (flag to the product owner):
+- **Consents are not recorded.** `POST /auth/register` takes no consent, so the two boxes gate the form but nothing is
+  stored — a GDPR record of consent needs a backend field (and timestamp, and the wording version).
+- **The tax number is not persisted by registration**, only later with the profile as an unlisted extra field.
+- **`/nav/taxpayer` is unauthenticated and unthrottled** and, when NAV isn't configured (`NAV_BASE_URL`), returns
+  *invented* companies ("Magyar Vállalkozás …") — fine for a demo, wrong in production. It is exactly the bulk-lookup
+  surface CR-03 forbids without a rate limit.
+- **No Terms/Privacy pages exist** to link from the consent line, and there is no double opt-in email.
+- **Revenue bands:** the backend has the six statutory bands in `TeaorClassificationService` but does not expose or use
+  them in scoring; the profile still stores the older five-band `revBand` string from `/meta`, so the wizard keeps that.
+  An exact-revenue field would be kept by the server but ignored by the scorer, so it was not added.
+- Stages 2 and 3 of the spec's progressive registration (company profile, project context) are the existing onboarding
+  wizard; nothing more was added there.
+
 ### 2026-09-21 — Moved into the Laravel repository
 The backend team rewrote the backend in Laravel (repository `origin/main`, history unrelated to the old Node/Hunter
 repository). The frontend now lives at `frontend/` in that repository, on branch `feat/frontend-rewrite`; its 12
@@ -282,7 +349,7 @@ and `../src` in the older entries below refer to the old Node repository.**
 
 The backend implements the same 32-operation contract this frontend was written against (its `openapi.yaml` has the
 same operation ids; the schemas differ only where noted below), so no screen had to be rewritten. What had to change:
-- **The scoring engine is vendored.** The frontend imported its browser-side engine from the Node server's `src/`, which
+- **The scoring engine is vendored.** *(Superseded the same day — see the entry above: the engine was removed and the server scores.)* The frontend imported its browser-side engine from the Node server's `src/`, which
   the Laravel repository doesn't have. Six pure files (about 50 kB) now live in `vendor/engine-src/`, unchanged, behind a
   renamed alias (`@engine-src`). **Risk:** the PHP backend has its own implementation of the formulas, so the browser
   and the API can now disagree. No parity test exists yet.
@@ -316,12 +383,12 @@ locked-detail leak are **fixed** in the Laravel backend (checked in code, plus o
 the **minimum password length is still 4**; the CRM board's `pipelineValueHuf` and task cap were not re-checked.
 
 Open decisions and follow-ups:
-- **Two frontends now exist.** The backend has its own Blade pages with React components (`resources/js`) at the same
+- **Two frontends now exist.** *(Resolved the same day: this app replaces the Blade pages — see above.)* The backend has its own Blade pages with React components (`resources/js`) at the same
   URLs as this app (`/`, `/login`, `/register`, `/onboarding`, `/opportunities`, `/assessment`, `/admin/*`). Someone has to
   decide whether this app replaces them or is served under its own path, and then add the fallback route, base path and
   build output that implies. Nothing of that is done.
-- **Parity test** between the vendored engine and the PHP scoring.
-- **CR-03 in the UI.** The backend added `POST /api/nav/taxpayer` and a three-stage registration; this frontend's
+- **Parity test** between the vendored engine and the PHP scoring. *(Done: golden tests in the backend.)*
+- **CR-03 in the UI.** *(Done — see above.)* The backend added `POST /api/nav/taxpayer` and a three-stage registration; this frontend's
   registration and onboarding don't use them yet.
 - Backend notes: the repository has no `storage/` skeleton (a fresh `composer install` fails), and
   `bootstrap/cache/packages.php` and `services.php` are tracked although generated.

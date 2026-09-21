@@ -202,51 +202,42 @@ Fundor provides bilingual capabilities with runtime locale switching and environ
 
 ## Directory Layout
 
+The backend is a JSON API under `/api`; the user interface is the React app in `frontend/`, built into `public/spa/`
+and served by one Laravel route. There are no Blade pages.
+
 ```text
 ├── app/
 │   ├── Http/
-│   │   ├── Controllers/
-│   │   │   ├── AdminController.php         # Administration and health metrics
-│   │   │   ├── AssessmentController.php    # 6-question free readiness flow
-│   │   │   ├── AuthController.php          # Session auth, registration, login
-│   │   │   ├── CalendarController.php      # Monthly deadline schedule
-│   │   │   ├── CrmController.php           # Lead management & CSV export
-│   │   │   ├── DashboardController.php     # SME overview and match cards
-│   │   │   ├── FavoriteController.php      # Bookmarked tenders
-│   │   │   ├── HomeController.php          # Public landing page controller
-│   │   │   ├── LocaleController.php        # Runtime language switching
-│   │   │   ├── OnboardingController.php    # 5-step company profile builder
-│   │   │   └── OpportunityController.php   # Catalog, scoring, grant calculator
-│   │   └── Middleware/
-│   │       └── SetLocale.php               # Environment-aware locale resolver
-│   └── Models/
-│       ├── CompanyProfile.php              # SME funding profile attributes
-│       ├── Lead.php                        # Assessment leads
-│       ├── Opportunity.php                 # Tenders with rules & scoring
-│       └── User.php                        # User accounts & roles
-├── config/
-│   ├── app.php                             # General configuration & locale bindings
-│   └── localization.php                    # Available locale mappings
-├── database/
-│   ├── migrations/                         # Database schema migrations
-│   └── seeders/
-│       └── DatabaseSeeder.php              # Curated Hungarian tenders seeder
-├── lang/
-│   ├── en.json                             # English translations catalog (370+ keys)
-│   ├── hu.json                             # Hungarian translations catalog
-│   └── hu/                                 # Hungarian validation & pagination
-├── public/
-│   └── css/app.css                         # Fundor design token stylesheet
-├── resources/
-│   └── views/
-│       ├── home.blade.php                  # Fundor flagship landing page
-│       └── layouts/
-│           ├── app.blade.php               # Authenticated application shell
-│           └── guest.blade.php             # Public guest layout
+│   │   ├── Controllers/Api/                # One controller per area of the contract (openapi.yaml)
+│   │   │   ├── AuthController.php          # Session cookie auth: register, login, logout, me
+│   │   │   ├── CatalogController.php       # Catalog, search, opportunity detail, saved, eligibility answers
+│   │   │   ├── ProfileController.php       # Company profile, versions, restore, reference data
+│   │   │   ├── NavTaxpayerController.php   # Registration: company lookup by tax number
+│   │   │   ├── LeadController.php          # Public lead capture from the free assessment
+│   │   │   ├── AdminController.php         # Users, subscriptions, catalog refresh
+│   │   │   ├── CrmController.php           # Pipeline, contacts, leads, notes, tasks
+│   │   │   └── HealthController.php        # /api/health
+│   │   ├── Middleware/FundorApi.php        # JSON-body rule and same-origin (CSRF) rule
+│   │   └── Requests/ValidateTaxpayerRequest.php   # Tax number shape + check digit
+│   ├── Services/
+│   │   ├── Api/Scoring.php                 # THE scorer: eligibility verdict + five-factor score + explanations
+│   │   ├── Api/Catalog.php                 # Scored catalog, teasers, locked detail (the paywall)
+│   │   ├── Api/{Accounts,Profiles,Crm,CatalogRefresh}.php
+│   │   ├── Nav/NavTaxpayerService.php      # NAV queryTaxpayer (on demand, cached)
+│   │   └── Sector/                         # TEÁOR → sector map, statutory revenue bands
+│   └── Models/                             # CompanyProfile, Lead, Opportunity, User
+├── config/fundor.php                       # Product settings (plans, EUR/HUF, feed URL, SPA index path)
+├── database/                               # Migrations and the OpportunitySeeder (demo calls; creates no accounts)
+├── frontend/                               # The React app (see frontend/README.md); builds to public/spa
+├── openapi.yaml                            # The API contract — single source of truth
+├── docs/FRONTEND-API.md                    # Setup notes and examples for the contract
+├── routes/
+│   ├── api.php                             # /api/...
+│   └── web.php                             # One fallback route: every non-/api GET returns the built SPA
 └── tests/
-    └── Feature/
-        ├── ExampleTest.php                 # Home page HTTP 200 assertion
-        └── LocalizationTest.php            # Bilingual translation tests
+    ├── Feature/                            # API contract, paywall/scoring, NAV lookup, SPA fallback
+    ├── Unit/                               # Scoring parity (golden), sector map, tax number, revenue bands
+    └── Fixtures/scoring/                   # 48 real calls × 8 companies scored by the reviewed prototype engine
 ```
 
 ---
@@ -256,38 +247,35 @@ Fundor provides bilingual capabilities with runtime locale switching and environ
 ### Prerequisites
 - **PHP 8.2** or higher (with `pdo_sqlite`, `mbstring`, `openssl`, `tokenizer`, `xml` extensions)
 - **Composer 2.x**
-- **Node.js 18+** & **npm**
+- **Node.js 22+** & **npm**
 
-### Installation Steps
+### Backend
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/davidnagy-netizen/fundordothu.git
-   cd fundordothu
-   ```
+```bash
+git clone https://github.com/davidnagy-netizen/fundordothu.git
+cd fundordothu
 
-2. **Install dependencies:**
-   ```bash
-   composer install
-   npm install
-   ```
+# the repository has no storage/ skeleton, so create it before installing
+mkdir -p storage/framework/{cache/data,sessions,views} storage/logs storage/app/public bootstrap/cache
 
-3. **Configure environment:**
-   ```bash
-   cp .env.example .env
-   php artisan key:generate
-   ```
+composer install
+cp .env.example .env && php artisan key:generate
+touch database/database.sqlite && php artisan migrate
+php artisan db:seed --class=OpportunitySeeder     # demo calls. Do NOT run DatabaseSeeder on a shared database.
+php artisan serve --host=127.0.0.1 --port=8000
+```
 
-4. **Initialize database & seed curated Hungarian tenders:**
-   ```bash
-   php artisan migrate --seed
-   ```
+### Frontend
 
-5. **Start local development server:**
-   ```bash
-   php artisan serve
-   ```
-   Open `http://127.0.0.1:8000` in your browser.
+```bash
+cd frontend && npm ci
+npm run dev        # http://localhost:5173 with hot reload; proxies /api to 127.0.0.1:8000
+# or
+npm run build      # writes public/spa; then open http://127.0.0.1:8000 — Laravel serves it
+```
+
+`composer dev` (repo root) starts the API and the Vite dev server together. Without a build, non-API URLs answer
+`503` with the command to run.
 
 ---
 
@@ -300,8 +288,11 @@ Execute the automated test suite with PHPUnit:
 php artisan test
 
 # Test specific components
-php artisan test --filter=ExampleTest
-php artisan test --filter=LocalizationTest
+php artisan test --filter=ScoringParityTest
+php artisan test --filter=SubscriberScoringTest
+
+# The frontend's tests (they read ../openapi.yaml and the recorded API responses)
+npm --prefix frontend test
 ```
 
 ---
