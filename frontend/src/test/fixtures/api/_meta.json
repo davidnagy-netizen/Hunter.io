@@ -1,0 +1,26 @@
+{
+    "generatedBy": "frontend/scripts/generate-api-fixtures.php",
+    "referenceDate": "2026-09-21",
+    "company": "Alfa Gyártó Kft.",
+    "callIds": [
+        "eu-edf-2026-da-acc-airdef-eatmi",
+        "eu-edf-2026-da-air-sps",
+        "eu-cerv-2026-daphne-prevention",
+        "eu-digital-eccc-2027-deploy-cyber-11-ai4sme",
+        "eu-esc-humaid-2021-qual-label-fp",
+        "eu-edf-2026-da-air-stfs",
+        "eu-edf-2026-ra-simtrain-msai",
+        "eu-cef-dig-2026-cable-repair-capacities-works",
+        "eu-cef-e-2026-pci-pmi-studies",
+        "eu-horizon-cid-2027-01-01",
+        "eu-cef-e-2026-pci-pmi-works",
+        "eu-erasmus-edu-2022-eche-cert-fp"
+    ],
+    "ids": {
+        "consortium": "eu-edf-2026-da-acc-airdef-eatmi",
+        "blocked": "eu-cerv-2026-daphne-prevention",
+        "estimated": "eu-edf-2026-da-acc-airdef-eatmi",
+        "plain": "eu-cef-dig-2026-cable-repair-capacities-works"
+    },
+    "note": "Recorded from the running API on an in-memory database. Regenerate instead of editing."
+}

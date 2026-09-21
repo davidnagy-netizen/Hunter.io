@@ -1,0 +1,65 @@
+{
+  "nav": {
+    "plus": "Fundor Plus (demó)",
+    "plusShort": "Plus",
+    "badge": "PLUS"
+  },
+  "title": "Fundor Plus (demó)",
+  "subtitle": "Pályázati sablonok böngészőben futó bemutatója (demó).",
+  "notice": "Pályázati vázlat (demó): rögzített szövegsablon profil- és felhívásadatokkal, nem egyedi AI-generálás.",
+  "lock": {
+    "headline": "Indítsd el a pályázatot — ne csak találd meg",
+    "body": "A bemutató a katalógus dokumentumlistáját és rögzített szövegsablonokat mutatja meg. Nem egyedi AI-szövegírás.",
+    "features": [
+      {
+        "title": "Munkaterület (demó)",
+        "text": "felhívásválasztás és dokumentumjelölők"
+      },
+      {
+        "title": "Dokumentumlista",
+        "text": "a katalógusban szereplő dokumentumok"
+      },
+      {
+        "title": "Szabályalapú kérdések",
+        "text": "hiányzó infók célzott bekérése"
+      },
+      {
+        "title": "Szövegsablon (demó)",
+        "text": "rögzített sablon, profil- és felhívásadatokkal"
+      }
+    ],
+    "access": "Aktív előfizetéssel érhető el. A hozzáférést jelenleg adminisztrátor adja meg — fizetési átjáró még nincs bekötve.",
+    "cta": "Cégfiók létrehozása"
+  },
+  "workspace": {
+    "previewActive": "Előnézet aktív (demó)",
+    "select": "Válassz pályázatot",
+    "docs": "Kötelező dokumentumok",
+    "noDocs": "A felhívás külön dokumentumot nem sorol fel.",
+    "generate": "Vázlat készítése (demó)",
+    "readyTitle": "Készen áll a pályázati vázlat elkészítésére?",
+    "copy": "Vágólapra másolás",
+    "print": "Nyomtatás / PDF mentés",
+    "copied": "Vázlat másolva (demó).",
+    "copyFailed": "A másolás nem sikerült — jelöld ki a szöveget, és told át kézzel.",
+    "demoTag": "(demó)",
+    "emptyTitle": "Még nincs felhívás, amin dolgozhatnál",
+    "emptyBody": "Ha a katalógus betöltődött és van a profilodhoz illő felhívás, itt jelenik meg."
+  },
+  "chapters": {
+    "executive": {
+      "title": "1. Vezetői összefoglaló és célkitűzés",
+      "body": "A {{company}} ({{employees}} fő, {{county}} megye) célja a jelenlegi termelési kapacitás modernizációja a(z) {{opp}} felhívás keretében. A projekt tervezett összköltsége {{total}}, melyből a várt támogatás mértéke {{grant}} ({{intensity}}% támogatási intenzitás mellett)."
+    },
+    "technical": {
+      "title": "2. Szakmai megvalósítás és technológiai indoklás",
+      "body": "A tervezett fejlesztés közvetlenül illeszkedik a program prioritásaihoz ({{goals}}). A megvalósítás során a cég a meglévő {{teaor}} TEÁOR szerinti tevékenységét fejleszti, biztosítva a magasabb hozzáadott értéket és munkahelymegtartást.",
+      "bodyNoTeaor": "A tervezett fejlesztés közvetlenül illeszkedik a program prioritásaihoz ({{goals}}). A megvalósítás során a cég a meglévő tevékenységét fejleszti, biztosítva a magasabb hozzáadott értéket és munkahelymegtartást."
+    },
+    "budget": {
+      "title": "3. Költségvetési terv és kötelező dokumentumok",
+      "body": "Szükséges önrész: {{own}}. A csatolandó mellékletek: {{docs}}.",
+      "bodyNoDocs": "Szükséges önrész: {{own}}. A felhívás külön mellékletet nem sorol fel."
+    }
+  }
+}

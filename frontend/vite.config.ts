@@ -1,0 +1,41 @@
+import path from 'node:path'
+import tailwindcss from '@tailwindcss/vite'
+import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite'
+
+// https://vite.dev/config/
+// `npm run build` writes into the Laravel app's public/spa, which serves it (routes/web.php); asset URLs are
+// therefore /spa/assets/... in a build and plain /assets/... in dev. The router itself stays at the site root.
+const isBuild = process.argv.includes('build')
+
+export default defineConfig({
+  base: isBuild ? '/spa/' : '/',
+  build: {
+    outDir: '../public/spa',
+    emptyOutDir: true,
+  },
+  plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      '@': path.resolve(import.meta.dirname, './src'),
+    },
+  },
+  server: {
+    fs: {
+      // Tests read the backend's contract (../openapi.yaml) as text.
+      allow: [path.resolve(import.meta.dirname, '..')],
+    },
+    // Proxies API calls to the Laravel backend so the browser sees same-origin
+    // requests in dev: the session cookie is httpOnly + SameSite=Lax, and the
+    // API rejects cross-origin mutations (403 CSRF_REJECTED) by comparing the
+    // request's Origin with its Host. So the proxy must NOT rewrite the Host
+    // header — `changeOrigin` stays false (docs/FRONTEND-API.md in the backend).
+    // Start the backend with: php artisan serve --host=127.0.0.1 --port=8000
+    proxy: {
+      '/api': {
+        target: process.env.VITE_API_PROXY_TARGET || 'http://127.0.0.1:8000',
+        changeOrigin: false,
+      },
+    },
+  },
+})

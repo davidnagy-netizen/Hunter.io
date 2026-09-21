@@ -1,0 +1,9 @@
+{
+  "loading": "Betöltés…",
+  "loadFailed": "Ezt nem sikerült betölteni: {{message}}",
+  "pager": {
+    "prev": "Előző",
+    "next": "Következő",
+    "pageOf": "{{page}} / {{pages}}"
+  }
+}

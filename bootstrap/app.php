@@ -7,7 +7,6 @@
  * health check endpoints, and exception handling for the application.
  */
 
-use App\Http\Middleware\SetLocale;
 use App\Services\Api\ApiError;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Foundation\Application;
@@ -25,7 +24,6 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->web(append: [SetLocale::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->dontReport([ApiError::class]);

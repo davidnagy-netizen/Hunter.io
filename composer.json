@@ -3,7 +3,13 @@
     "name": "fundor/grant-intelligence",
     "type": "project",
     "description": "Fundor.hu - Funding and Grant Intelligence Platform for SMEs (Laravel 13 Boilerplate)",
-    "keywords": ["laravel", "framework", "grants", "intelligence", "sme"],
+    "keywords": [
+        "laravel",
+        "framework",
+        "grants",
+        "intelligence",
+        "sme"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.2",
@@ -47,7 +53,7 @@
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"npm run dev\" --names=\"server,queue,vite\""
+            "npx concurrently -c \"#93c5fd,#fb7185\" \"php artisan serve --host=127.0.0.1 --port=8000\" \"npm --prefix frontend run dev\" --names=\"api,web\""
         ]
     },
     "extra": {

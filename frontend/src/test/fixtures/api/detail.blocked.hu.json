@@ -1,0 +1,158 @@
+{
+    "opportunity": {
+        "id": "eu-cerv-2026-daphne-prevention",
+        "title": "Preventing gender-based violence",
+        "sourceSystem": "EU_FUNDING_TENDERS",
+        "program": "EU – Citizens, Equality, Rights and Values Programme",
+        "status": "open",
+        "deadline": "2026-11-05",
+        "intensity": 0.9,
+        "fundingMin": 0,
+        "fundingMax": 0,
+        "partnerShare": null,
+        "consortium": {
+            "required": false,
+            "minPartners": 1,
+            "minCountries": 1
+        },
+        "smeFit": 0.1,
+        "highAdmin": false,
+        "awardsFunding": true,
+        "goals": [
+            "social"
+        ],
+        "goalScores": {
+            "defence": 2.5,
+            "social": 19.5
+        },
+        "described": true,
+        "docs": [
+            "Part A — Administrative forms",
+            "Part B — Technical description",
+            "Detailed budget table",
+            "Participant registration (PIC) and legal entity validation",
+            "Last closed annual accounts (financial capacity check)"
+        ],
+        "hard": [
+            {
+                "field": "orgType",
+                "op": "in",
+                "value": [
+                    "ngo",
+                    "public",
+                    "university",
+                    "research"
+                ],
+                "label_hu": "Pályázhat: ngo, public, university, research",
+                "label_en": "Eligible applicant types: ngo, public, university, research"
+            },
+            {
+                "field": "country",
+                "op": "in",
+                "value": [
+                    "HU"
+                ],
+                "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+                "label_en": "Legal entity established in Hungary (EU Member State)"
+            }
+        ],
+        "soft": [
+            {
+                "field": "goals",
+                "op": "includes_any",
+                "value": [
+                    "social"
+                ],
+                "weight": 0.5
+            },
+            {
+                "field": "sector",
+                "op": "in",
+                "value": [
+                    "education"
+                ],
+                "weight": 0.3
+            },
+            {
+                "field": "funding_pref",
+                "op": "includes_any",
+                "value": [
+                    "EU"
+                ],
+                "weight": 0.2
+            }
+        ],
+        "sectors": [
+            "education"
+        ],
+        "sourceRef": "eu-cerv-2026-daphne-prevention",
+        "sourceUrl": null,
+        "curated": false,
+        "isNew": false,
+        "summary": "",
+        "programShort": "EU – Citizens, Equality, Rights and Values Programme",
+        "applicantTypes": [],
+        "locked": false,
+        "score": null,
+        "blocked": true,
+        "estimated": false,
+        "verdict": "NOT_ELIGIBLE",
+        "band": null,
+        "daysLeft": 45,
+        "checks": [
+            {
+                "field": "orgType",
+                "label": "Pályázhat: ngo, public, university, research",
+                "status": "fail",
+                "yourValue": "sme",
+                "required": [
+                    "ngo",
+                    "public",
+                    "university",
+                    "research"
+                ],
+                "operator": "in"
+            },
+            {
+                "field": "country",
+                "label": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+                "status": "pass",
+                "yourValue": "HU",
+                "required": [
+                    "HU"
+                ],
+                "operator": "in"
+            }
+        ],
+        "conditions": [
+            "10% saját forrás szükséges"
+        ],
+        "factors": [],
+        "questions": [],
+        "blockedReasons": [
+            "Pályázhat: ngo, public, university, research"
+        ],
+        "benchmark": null,
+        "calculator": {
+            "projectValueHuf": 30000000,
+            "intensity": 0.9,
+            "grantHuf": 27000000,
+            "ownContributionHuf": 3000000,
+            "cappedByCeiling": false,
+            "ceilingHuf": null,
+            "partnerShare": null,
+            "callGrantHuf": 0,
+            "currencyNote": null
+        }
+    },
+    "saved": false,
+    "entitlements": {
+        "tier": "subscriber",
+        "maxResults": null,
+        "explanations": true,
+        "calculator": true,
+        "applyLinks": true,
+        "exportData": true,
+        "admin": false
+    }
+}

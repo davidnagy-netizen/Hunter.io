@@ -12,6 +12,8 @@ return [
         ['id' => 'quarterly', 'label_hu' => 'Negyedéves', 'label_en' => 'Quarterly', 'days' => 90, 'status' => 'active', 'priceHUF' => $price('FUNDOR_QUARTERLY_HUF')],
         ['id' => 'yearly', 'label_hu' => 'Éves', 'label_en' => 'Yearly', 'days' => 365, 'status' => 'active', 'priceHUF' => $price('FUNDOR_YEARLY_HUF')],
     ],
+    // The built React frontend (frontend/, `npm run build` writes it here). Served for every non-API GET.
+    'spa_index' => public_path('spa/index.html'),
     'catalog_feed_url' => env('FUNDOR_CATALOG_FEED_URL'),
     'eur_huf' => $price('FUNDOR_EUR_HUF'),
 ];

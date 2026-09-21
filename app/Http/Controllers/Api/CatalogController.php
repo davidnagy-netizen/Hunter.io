@@ -36,10 +36,13 @@ class CatalogController
         $ent = $this->accounts->entitlements($r->user());
         $rows = $this->catalog->rows($state, $r->query('lang', 'hu'), $r->boolean('forthcoming'));
         $meta = $this->catalog->metadata() + ['entitlements' => $ent];
+        // A subscriber gets every open call already scored for their company (score, verdict, checks, calculator, ...),
+        // plus the same totals a gated visitor gets. The server is the only scorer; the browser just shows the result.
         if ($ent['explanations']) {
-            return response()->json($meta + ['gated' => false, 'total' => count($rows), 'opportunities' => array_map(function ($o) {
-                return $this->catalog->unscored($o);
-            }, $rows)]);
+            $funding = array_values(array_filter($rows, fn ($o) => $o['awardsFunding']));
+
+            return response()->json($meta + ['gated' => false, 'total' => count($rows), 'opportunities' => array_map(fn ($o) => $this->catalog->trim($o), $rows),
+                'stats' => $this->catalog->stats($funding)]);
         }
         $rows = array_values(array_filter($rows, fn ($o) => $o['awardsFunding']));
         $eligible = array_values(array_filter($rows, fn ($o) => ! $o['blocked']));

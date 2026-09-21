@@ -1,0 +1,16 @@
+{
+    "success": true,
+    "taxpayer": {
+        "taxNumber": "12345674-2-42",
+        "companyName": "Alfa Gyártó és Kereskedelmi Kft.",
+        "shortName": "Alfa Gyártó Kft.",
+        "vatCode": "2",
+        "countyCode": "42",
+        "postalCode": "2100",
+        "city": "Gödöllő",
+        "streetAddress": "Páter Károly u. 1.",
+        "fullAddress": "2100 Gödöllő Páter Károly u. 1.",
+        "status": "VALID",
+        "incorporationDate": "2018-04-15"
+    }
+}

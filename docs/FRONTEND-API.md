@@ -68,8 +68,11 @@ The refresh failure response uses `{ok:false,error,status}` as specified. Cookie
   Unknown profile fields survive saves. Answers support global and call scopes; `value:null` deletes an answer.
 - `gated:true` means the catalog contains only teasers and aggregate counts. Teasers have positional refs, not call ids.
   The detail endpoint is also censored for anonymous and unsubscribed accounts. `/api/opportunities` is a gated catalog alias.
-- Subscriber/admin catalogs contain declarative `hard`/`soft` rules. Server search/detail scoring uses the same five-factor
-  formulas as the prototype in `hunter-mvp.html`. `/meta` provides reference data and the UTC scoring date.
+- **The server is the only scorer.** A subscriber/admin `GET /catalog` returns every open call already scored for their
+  stored profile and answers (`score`, `verdict`, `checks`, `factors` with a `detail` sentence each, `calculator`, ...) plus
+  `stats`; `/search` and `/opportunities/{id}` are scored the same way. The five-factor formulas, the sector mapping and the
+  explanation texts are pinned to the prototype engine by `tests/Unit/ScoringParityTest.php`. The browser must not
+  re-score. `/meta` provides reference data and the UTC scoring date.
 - Search facets are computed after filtering. Comma-separated facet parameters are supported; use
   `program=HORIZON,DIGITAL`. Pagination defaults to 20, with a maximum of 100.
 - Public lead capture requires literal JSON `consent:true`. Matching emails update an existing lead. No notification email is sent.

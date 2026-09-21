@@ -1,0 +1,65 @@
+{
+  "nav": {
+    "plus": "Fundor Plus (demo)",
+    "plusShort": "Plus",
+    "badge": "PLUS"
+  },
+  "title": "Fundor Plus (demo)",
+  "subtitle": "A browser demo of application templates.",
+  "notice": "Application draft (demo): a static template populated with profile and call fields, not custom AI generation.",
+  "lock": {
+    "headline": "Start the application — don't just find it",
+    "body": "The demo shows the catalog's document list and fixed text templates. It is not custom AI writing.",
+    "features": [
+      {
+        "title": "Workspace (demo)",
+        "text": "call selection and document tick-boxes"
+      },
+      {
+        "title": "Document list",
+        "text": "the documents listed in the catalog"
+      },
+      {
+        "title": "Rule-based questions",
+        "text": "targeted requests for missing information"
+      },
+      {
+        "title": "Text template (demo)",
+        "text": "a fixed template filled with profile and call data"
+      }
+    ],
+    "access": "Available with an active subscription. Access is granted by an administrator for now — no payment gateway is connected yet.",
+    "cta": "Create a company account"
+  },
+  "workspace": {
+    "previewActive": "Preview active (demo)",
+    "select": "Select grant",
+    "docs": "Required documents",
+    "noDocs": "This call lists no separate documents.",
+    "generate": "Generate draft (demo)",
+    "readyTitle": "Ready to draft your application?",
+    "copy": "Copy to clipboard",
+    "print": "Print / Save PDF",
+    "copied": "Draft copied (demo).",
+    "copyFailed": "Couldn't copy — select the text and copy it by hand.",
+    "demoTag": "(demo)",
+    "emptyTitle": "No call to work on yet",
+    "emptyBody": "Once the catalog has loaded and a call fits your profile, it appears here."
+  },
+  "chapters": {
+    "executive": {
+      "title": "1. Executive Summary and Objectives",
+      "body": "{{company}} ({{employees}} employees, {{county}} county) aims to modernize its production capacity under the {{opp}} call. Total planned investment is {{total}}, with expected non-repayable grant aid of {{grant}} ({{intensity}}% support intensity)."
+    },
+    "technical": {
+      "title": "2. Technical Implementation & Feasibility",
+      "body": "The planned development directly aligns with programme priorities ({{goals}}). During implementation, the enterprise expands its core {{teaor}} NACE activity, generating higher added value.",
+      "bodyNoTeaor": "The planned development directly aligns with programme priorities ({{goals}}). During implementation, the enterprise expands its core activity, generating higher added value."
+    },
+    "budget": {
+      "title": "3. Budget Plan & Required Annexes",
+      "body": "Required own contribution: {{own}}. Mandatory attachments: {{docs}}.",
+      "bodyNoDocs": "Required own contribution: {{own}}. The call lists no separate attachments."
+    }
+  }
+}

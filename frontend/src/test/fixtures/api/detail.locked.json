@@ -1,0 +1,40 @@
+{
+    "opportunity": {
+        "locked": true,
+        "id": null,
+        "title": null,
+        "program": null,
+        "deadline": null,
+        "score": 63,
+        "verdict": "CONDITIONAL",
+        "blocked": false,
+        "estimated": false,
+        "fundingMax": 0,
+        "intensity": 0.5,
+        "grantHuf": 15000000,
+        "band": {
+            "key": "conditional",
+            "label": "Feltételes lehetőség"
+        },
+        "closingSoon": true,
+        "description": "",
+        "checks": [],
+        "conditions": [],
+        "factors": [],
+        "questions": [],
+        "docs": [],
+        "calculator": null,
+        "benchmark": null
+    },
+    "saved": false,
+    "entitlements": {
+        "tier": "registered",
+        "maxResults": 0,
+        "explanations": false,
+        "calculator": false,
+        "applyLinks": false,
+        "exportData": false,
+        "admin": false,
+        "teasers": 12
+    }
+}

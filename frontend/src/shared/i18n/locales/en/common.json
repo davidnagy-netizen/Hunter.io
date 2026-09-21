@@ -1,0 +1,9 @@
+{
+  "loading": "Loading…",
+  "loadFailed": "Could not load this: {{message}}",
+  "pager": {
+    "prev": "Previous",
+    "next": "Next",
+    "pageOf": "{{page}} / {{pages}}"
+  }
+}

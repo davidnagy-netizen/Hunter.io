@@ -1,0 +1,276 @@
+{
+    "opportunity": {
+        "id": "eu-edf-2026-da-acc-airdef-eatmi",
+        "title": "High-end endo-atmospheric interception",
+        "sourceSystem": "EU_FUNDING_TENDERS",
+        "program": "EU – European Defence Fund",
+        "status": "open",
+        "deadline": "2026-09-29",
+        "intensity": 0.65,
+        "fundingMin": 0,
+        "fundingMax": 0,
+        "partnerShare": null,
+        "consortium": {
+            "required": true,
+            "minPartners": 3,
+            "minCountries": 3
+        },
+        "smeFit": 0.5,
+        "highAdmin": true,
+        "awardsFunding": true,
+        "goals": [
+            "defence"
+        ],
+        "goalScores": {
+            "digitalization": 1,
+            "rnd": 1,
+            "defence": 13
+        },
+        "described": true,
+        "docs": [
+            "Part A — Administrative forms",
+            "Part B — Technical description",
+            "Detailed budget table",
+            "Participant registration (PIC) and legal entity validation",
+            "Last closed annual accounts (financial capacity check)"
+        ],
+        "hard": [
+            {
+                "field": "orgType",
+                "op": "in",
+                "value": [
+                    "sme",
+                    "large",
+                    "research",
+                    "university",
+                    "ngo",
+                    "public"
+                ],
+                "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+                "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+            },
+            {
+                "field": "country",
+                "op": "in",
+                "value": [
+                    "HU"
+                ],
+                "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+                "label_en": "Legal entity established in Hungary (EU Member State)"
+            },
+            {
+                "field": "consortium_ready",
+                "op": "==",
+                "value": true,
+                "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+                "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+                "quiz": {
+                    "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+                    "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+                    "opts": [
+                        {
+                            "t_hu": "Igen, van partnerhálózatom",
+                            "t_en": "Yes, I have partners",
+                            "v": true
+                        },
+                        {
+                            "t_hu": "Nem, csak egyedül pályáznék",
+                            "t_en": "No, I would apply alone",
+                            "v": false
+                        },
+                        {
+                            "t_hu": "Nem tudom",
+                            "t_en": "I don't know",
+                            "v": null
+                        }
+                    ]
+                }
+            },
+            {
+                "field": "sector",
+                "op": "in",
+                "value": [
+                    "manufacturing",
+                    "it",
+                    "services"
+                ],
+                "label_hu": "Védelmi ipari képesség szükséges (EDF)",
+                "label_en": "Defence-sector capability required (EDF)"
+            }
+        ],
+        "soft": [
+            {
+                "field": "goals",
+                "op": "includes_any",
+                "value": [
+                    "defence"
+                ],
+                "weight": 0.5
+            },
+            {
+                "field": "funding_pref",
+                "op": "includes_any",
+                "value": [
+                    "EU"
+                ],
+                "weight": 0.2
+            }
+        ],
+        "sectors": [],
+        "sourceRef": "eu-edf-2026-da-acc-airdef-eatmi",
+        "sourceUrl": null,
+        "curated": false,
+        "isNew": false,
+        "summary": "",
+        "programShort": "EU – European Defence Fund",
+        "applicantTypes": [],
+        "locked": false,
+        "score": 51,
+        "blocked": false,
+        "estimated": true,
+        "verdict": "INSUFFICIENT_DATA",
+        "band": {
+            "key": "conditional",
+            "label": "Conditional opportunity"
+        },
+        "daysLeft": 8,
+        "checks": [
+            {
+                "field": "orgType",
+                "label": "Eligible applicant types: sme, large, research, university, ngo, public",
+                "status": "pass",
+                "yourValue": "sme",
+                "required": [
+                    "sme",
+                    "large",
+                    "research",
+                    "university",
+                    "ngo",
+                    "public"
+                ],
+                "operator": "in"
+            },
+            {
+                "field": "country",
+                "label": "Legal entity established in Hungary (EU Member State)",
+                "status": "pass",
+                "yourValue": "HU",
+                "required": [
+                    "HU"
+                ],
+                "operator": "in"
+            },
+            {
+                "field": "consortium_ready",
+                "label": "Consortium required: at least 3 independent entities from 3 different Member States",
+                "status": "unknown",
+                "yourValue": null,
+                "required": true,
+                "operator": "=="
+            },
+            {
+                "field": "sector",
+                "label": "Defence-sector capability required (EDF)",
+                "status": "pass",
+                "yourValue": "manufacturing",
+                "required": [
+                    "manufacturing",
+                    "it",
+                    "services"
+                ],
+                "operator": "in"
+            }
+        ],
+        "conditions": [
+            "35% own contribution required",
+            "Deadline approaching: 8 days left",
+            "High administrative burden",
+            "Consortium required"
+        ],
+        "factors": [
+            {
+                "key": "elig",
+                "weight": 0.35,
+                "value": 93,
+                "label": "Eligibility",
+                "detail": "3 of 4 hard criteria satisfied by your profile."
+            },
+            {
+                "key": "fit",
+                "weight": 0.25,
+                "value": 5,
+                "label": "Project fit",
+                "detail": "Call themes: defence. Your goals: digitalization, it, machinery."
+            },
+            {
+                "key": "size",
+                "weight": 0.15,
+                "value": 50,
+                "label": "Funding size",
+                "detail": "The call does not publish a contribution range, so this factor is scored neutrally."
+            },
+            {
+                "key": "timing",
+                "weight": 0.15,
+                "value": 45,
+                "label": "Timing",
+                "detail": "8 days remain until the deadline."
+            },
+            {
+                "key": "feas",
+                "weight": 0.1,
+                "value": 33,
+                "label": "Feasibility",
+                "detail": "35% own contribution, 5 required annexes, consortium of 3+ partners."
+            }
+        ],
+        "questions": [
+            {
+                "field": "consortium_ready",
+                "scope": "global",
+                "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+                "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+                "opts": [
+                    {
+                        "t_hu": "Igen, van partnerhálózatom",
+                        "t_en": "Yes, I have partners",
+                        "v": true
+                    },
+                    {
+                        "t_hu": "Nem, csak egyedül pályáznék",
+                        "t_en": "No, I would apply alone",
+                        "v": false
+                    },
+                    {
+                        "t_hu": "Nem tudom",
+                        "t_en": "I don't know",
+                        "v": null
+                    }
+                ]
+            }
+        ],
+        "blockedReasons": [],
+        "benchmark": null,
+        "calculator": {
+            "projectValueHuf": 30000000,
+            "intensity": 0.65,
+            "grantHuf": 19500000,
+            "ownContributionHuf": 10500000,
+            "cappedByCeiling": false,
+            "ceilingHuf": null,
+            "partnerShare": null,
+            "callGrantHuf": 0,
+            "currencyNote": null
+        }
+    },
+    "saved": false,
+    "entitlements": {
+        "tier": "subscriber",
+        "maxResults": null,
+        "explanations": true,
+        "calculator": true,
+        "applyLinks": true,
+        "exportData": true,
+        "admin": false
+    }
+}

@@ -1,0 +1,156 @@
+{
+  "nav": {
+    "assess": "What am I eligible for?",
+    "how": "How it works",
+    "login": "Sign in",
+    "openApp": "Open the app"
+  },
+  "hero": {
+    "eyebrow": "Rule-based funding intelligence",
+    "line1": "Don't go looking for grants.",
+    "line2": "Fundor finds them for you.",
+    "lead": "Based on your company profile we find, rank and clearly present the relevant funding — from official sources.",
+    "cta": "See what I'm eligible for",
+    "register": "Create a company account",
+    "trust": "Official sources:",
+    "trustNames": "EU Funding & Tenders · palyazat.gov.hu · kap.gov.hu",
+    "imageAlt": "Corporate team after a successful grant application"
+  },
+  "preview": {
+    "program": "GINOP Plus",
+    "title": "Corporate digitalization",
+    "score": 87,
+    "pass": "For companies with 10–50 employees",
+    "passYours": "(yours: 28 employees)",
+    "warn": "30% own contribution",
+    "warnYours": "(~9M HUF)",
+    "funding": "Funding:",
+    "fundingValue": "5–50M HUF",
+    "deadline": "Deadline:",
+    "deadlineDate": "2026-10-30"
+  },
+  "compare": {
+    "kicker": "The difference — on a real example",
+    "title": "Not a grant list. Personalized funding intelligence.",
+    "sub": "Same company, two different outcomes. Here is a concrete example, fully worked through.",
+    "scenarioLabel": "The example company",
+    "facts": [
+      {
+        "label": "",
+        "value": "28-employee",
+        "rest": "manufacturing SME"
+      },
+      {
+        "label": "location:",
+        "value": "Pest county"
+      },
+      {
+        "label": "goal:",
+        "value": "digitalization"
+      },
+      {
+        "label": "investment:",
+        "value": "30M HUF"
+      }
+    ],
+    "old": {
+      "title": "Traditional grant monitor",
+      "count": "549",
+      "countLabel": "results in the list",
+      "list": "GINOP Plus · KEHOP Plus · DIMOP Plus · TOP Plus · Széchenyi Plan Plus · VINOP Plus · CAP · EFOP Plus · EU Horizon · EIC · IKOP Plus",
+      "more": "+539 more",
+      "steps": [
+        "You read through and search the list",
+        "You interpret the conditions by hand",
+        "You decide for yourself whether you qualify"
+      ],
+      "verdict": "✕ Result: hours of work, an uncertain decision"
+    },
+    "new": {
+      "head": "Of those, these",
+      "headCount": "3",
+      "headTail": "fit the company:",
+      "supportLabel": "Funding",
+      "ownLabel": "· own contribution",
+      "cards": [
+        {
+          "score": 95,
+          "program": "Széchenyi Plan Plus",
+          "title": "Technology machinery and equipment procurement",
+          "support": "10–100M HUF",
+          "own": "~16.5M HUF",
+          "date": "2027-01-31"
+        },
+        {
+          "score": 87,
+          "program": "GINOP Plus",
+          "title": "Corporate digitalization (ERP, production control)",
+          "support": "5–50M HUF",
+          "own": "~15M HUF",
+          "date": "2026-10-30"
+        },
+        {
+          "score": 87,
+          "program": "DIMOP Plus",
+          "title": "Artificial intelligence and software development",
+          "support": "10–75M HUF",
+          "own": "~12M HUF",
+          "date": "2026-12-15"
+        }
+      ],
+      "excludedLabel": "The eligibility engine filtered these out",
+      "excluded": [
+        {
+          "name": "TOP Plus",
+          "reason": "— Pest county is not an eligible location"
+        },
+        {
+          "name": "CAP",
+          "reason": "— not an agricultural primary activity"
+        },
+        {
+          "name": "EIC Accelerator",
+          "reason": "— the 30M HUF project is below the 50M HUF minimum"
+        }
+      ]
+    }
+  },
+  "how": {
+    "kicker": "How it works",
+    "title": "Three steps from company profile to decision",
+    "items": [
+      {
+        "title": "Company profile",
+        "text": "A few questions about your company: size, region, activity, development goal, planned investment. Every answer sharpens the match."
+      },
+      {
+        "title": "Deterministic, rule-based scoring and eligibility engine",
+        "text": "A deterministic, rule-based engine filters, scores and explains. We ask for missing information."
+      },
+      {
+        "title": "Relevant grants",
+        "text": "Fundor Score, itemized justification, funding calculator, deadline calendar. You know what's worth it and what comes next."
+      }
+    ]
+  },
+  "sources": {
+    "kicker": "Official, primary sources",
+    "title": "The data comes from where it counts",
+    "sub": "Every match references the official call and its version number. No guesswork, no stale copies.",
+    "chips": [
+      "European Commission — Funding & Tenders Portal",
+      "Hungarian Grant Portal — palyazat.gov.hu",
+      "CAP — kap.gov.hu",
+      "Széchenyi Plan Plus programmes"
+    ]
+  },
+  "price": {
+    "title": "5,990 HUF/month for a system that watches for you",
+    "note": "Funding conditions are defined by the official call. Outcomes are not guaranteed.",
+    "amount": "5,990 HUF",
+    "per": "/ month",
+    "versus": "vs. 5–50M HUF available funding",
+    "cta": "Start with the free assessment"
+  },
+  "footer": "FUNDOR — rule-based grant finder · MVP prototype · Not an official determination"
+}

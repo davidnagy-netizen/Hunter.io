@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens ported from the legacy app's stylesheet (public/css/app.css).
+ * Tailwind v4 reads `@theme` as the source of truth and generates matching
+ * utilities (bg-gold, text-muted, rounded-lg, shadow-card, font-display, ...).
+ */
+@theme {
+  --color-ink: #0e1726;
+  --color-ink-2: #16233a;
+  --color-ink-3: #1e3050;
+
+  --color-paper: #f5f7fa;
+  --color-surface: #ffffff;
+  --color-surface-2: #fbfcfd;
+
+  --color-line: #e3e8ef;
+  --color-line-strong: #cdd5e0;
+
+  --color-text: #16202e;
+  --color-muted: #64707f;
+  --color-muted-2: #8a94a6;
+
+  --color-gold: #d99a2b;
+  --color-gold-deep: #b87c15;
+  --color-gold-bg: #fbf2de;
+
+  --color-green: #199268;
+  --color-green-bg: #e4f4ec;
+
+  --color-amber: #dd8331;
+  --color-amber-bg: #fbeedf;
+
+  --color-red: #ca4a4a;
+  --color-red-bg: #fae7e7;
+
+  --color-slate: #8a94a6;
+  --color-slate-bg: #eef1f5;
+
+  --color-blue: #2e6bd6;
+  --color-blue-bg: #e7effb;
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  --shadow-card: 0 1px 2px rgba(16, 23, 38, 0.04), 0 8px 24px -12px rgba(16, 23, 38, 0.14);
+  --shadow-card-lg: 0 2px 4px rgba(16, 23, 38, 0.05), 0 24px 48px -20px rgba(16, 23, 38, 0.28);
+
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+}

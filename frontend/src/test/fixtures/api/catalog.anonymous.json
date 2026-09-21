@@ -1,0 +1,156 @@
+{
+    "builtAt": "2026-09-21T12:00:00.000000Z",
+    "referenceDate": "2026-09-21",
+    "eurHuf": null,
+    "entitlements": {
+        "tier": "anonymous",
+        "maxResults": 0,
+        "explanations": false,
+        "calculator": false,
+        "applyLinks": false,
+        "exportData": false,
+        "admin": false,
+        "teasers": 12
+    },
+    "gated": true,
+    "total": 0,
+    "lockedTotal": 9,
+    "opportunities": [],
+    "teasers": [
+        {
+            "ref": "t0",
+            "locked": true,
+            "score": 69,
+            "band": {
+                "key": "conditional",
+                "label": "Feltételes lehetőség"
+            },
+            "estimated": true,
+            "grantHuf": 24000000,
+            "fundingMax": 0,
+            "intensity": 0.8,
+            "closingSoon": false
+        },
+        {
+            "ref": "t1",
+            "locked": true,
+            "score": 64,
+            "band": {
+                "key": "conditional",
+                "label": "Feltételes lehetőség"
+            },
+            "estimated": false,
+            "grantHuf": 15000000,
+            "fundingMax": 0,
+            "intensity": 0.5,
+            "closingSoon": true
+        },
+        {
+            "ref": "t2",
+            "locked": true,
+            "score": 64,
+            "band": {
+                "key": "conditional",
+                "label": "Feltételes lehetőség"
+            },
+            "estimated": false,
+            "grantHuf": 15000000,
+            "fundingMax": 0,
+            "intensity": 0.5,
+            "closingSoon": true
+        },
+        {
+            "ref": "t3",
+            "locked": true,
+            "score": 63,
+            "band": {
+                "key": "conditional",
+                "label": "Feltételes lehetőség"
+            },
+            "estimated": false,
+            "grantHuf": 15000000,
+            "fundingMax": 0,
+            "intensity": 0.5,
+            "closingSoon": true
+        },
+        {
+            "ref": "t4",
+            "locked": true,
+            "score": 54,
+            "band": {
+                "key": "conditional",
+                "label": "Feltételes lehetőség"
+            },
+            "estimated": true,
+            "grantHuf": 21000000,
+            "fundingMax": 9107000000,
+            "intensity": 0.7,
+            "closingSoon": false
+        },
+        {
+            "ref": "t5",
+            "locked": true,
+            "score": 53,
+            "band": {
+                "key": "conditional",
+                "label": "Feltételes lehetőség"
+            },
+            "estimated": true,
+            "grantHuf": 30000000,
+            "fundingMax": 0,
+            "intensity": 1,
+            "closingSoon": true
+        },
+        {
+            "ref": "t6",
+            "locked": true,
+            "score": 51,
+            "band": {
+                "key": "conditional",
+                "label": "Feltételes lehetőség"
+            },
+            "estimated": true,
+            "grantHuf": 19500000,
+            "fundingMax": 0,
+            "intensity": 0.65,
+            "closingSoon": true
+        },
+        {
+            "ref": "t7",
+            "locked": true,
+            "score": 51,
+            "band": {
+                "key": "conditional",
+                "label": "Feltételes lehetőség"
+            },
+            "estimated": true,
+            "grantHuf": 19500000,
+            "fundingMax": 0,
+            "intensity": 0.65,
+            "closingSoon": true
+        },
+        {
+            "ref": "t8",
+            "locked": true,
+            "score": 51,
+            "band": {
+                "key": "conditional",
+                "label": "Feltételes lehetőség"
+            },
+            "estimated": true,
+            "grantHuf": 19500000,
+            "fundingMax": 0,
+            "intensity": 0.65,
+            "closingSoon": true
+        }
+    ],
+    "stats": {
+        "catalogTotal": 11,
+        "openTotal": 11,
+        "eligible": 9,
+        "blocked": 2,
+        "strong": 0,
+        "closingSoon": 6,
+        "needsAnswer": 6
+    }
+}

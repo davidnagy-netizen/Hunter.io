@@ -1,0 +1,77 @@
+{
+  "progress": "Ingyenes felmérés",
+  "approx": "kb. 2 perc",
+  "sub": "Nincs regisztráció. A végén megkapod a Fundor Readiness Score-odat.",
+  "questions": {
+    "employees": "Hány főt foglalkoztat a céged?",
+    "county": "Hol van a fő megvalósítási helyszínetek?",
+    "industryId": "Melyik iparág írja le legjobban a céget?",
+    "closed_business_years": "Hány lezárt üzleti éved van?",
+    "goals": "Mit fejlesztenél a következő 12 hónapban?",
+    "investment_value": "Mekkora a tervezett beruházás nagyságrendje?"
+  },
+  "options": {
+    "employees": {
+      "tiny": "1–4 fő",
+      "small": "5–15 fő",
+      "mid": "16–50 fő",
+      "large": "51–250 fő"
+    },
+    "closed_business_years": {
+      "none": "Még nincs",
+      "one": "1 év",
+      "twoPlus": "2 vagy több"
+    },
+    "investment_value": {
+      "xs": "1–10 M Ft",
+      "s": "10–30 M Ft",
+      "m": "30–100 M Ft",
+      "l": "100 M Ft felett"
+    }
+  },
+  "chooseCounty": "Válassz megyét…",
+  "actions": {
+    "cancel": "Mégse",
+    "close": "Bezár",
+    "back": "Vissza",
+    "next": "Következő",
+    "result": "Eredményem megnézése"
+  },
+  "loader": {
+    "title": "Kiértékeljük a válaszaidat",
+    "steps": [
+      "Cégadatok feldolgozása",
+      "Élő felhívás-katalógus betöltése",
+      "Jogosultsági előszűrés",
+      "Readiness Score számítása",
+      "Illeszkedő irányok keresése"
+    ]
+  },
+  "result": {
+    "label": "A felmérésed eredménye",
+    "score": "Fundor Readiness Score",
+    "outOf": "/ 100",
+    "bands": {
+      "strong": "Erős pozíció",
+      "good": "Jó alap, van teendő",
+      "early": "Kezdeti szakasz"
+    },
+    "qualify_one": "{{count}} felhívásra pályázhatsz",
+    "qualify_other": "{{count}} felhívásra pályázhatsz",
+    "explain": "A pontszámok és az összegek alul valósak — a te válaszaidra számoltuk. Hogy melyik felhívásról van szó, az az előfizetéssel derül ki.",
+    "lockHint": "A felhívások neve, határideje és a beadási link az előfizetéssel oldódik fel.",
+    "cta": "Megnézem a hozzáférési lehetőségeket",
+    "previewFailed": "A találataidat most nem sikerült betölteni, de a fenti készültségi pontszám érvényes."
+  },
+  "lead": {
+    "title": "Kérem, hogy keressenek meg",
+    "body": "Megnézzük a válaszaidat, és megírjuk, melyik nyitott felhívás jöhet szóba nálatok. Az adataidat csak ehhez használjuk, és bármikor kérheted a törlésüket.",
+    "email": "E-mail cím",
+    "company": "Cégnév (nem kötelező)",
+    "contactName": "Kapcsolattartó neve (nem kötelező)",
+    "consent": "Hozzájárulok, hogy a megadott elérhetőségen megkeressenek a pályázati lehetőségekkel kapcsolatban.",
+    "submit": "Kérem a megkeresést",
+    "sending": "Küldés…",
+    "done": "Köszönjük — rögzítettük a megkeresési kérésedet. Automatikus e-mail értesítést nem küldünk."
+  }
+}

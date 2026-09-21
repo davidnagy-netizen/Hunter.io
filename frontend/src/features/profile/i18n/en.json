@@ -1,0 +1,99 @@
+{
+  "steps": {
+    "intro": { "title": "Let's start with the demo", "subtitle": "We load a ready-made example company, or you fill in your own." },
+    "company": { "title": "Your company's core data", "subtitle": "These determine eligibility." },
+    "activity": { "title": "Activity", "subtitle": "Industry and TEÁOR code — this filters the relevant programmes." },
+    "goals": { "title": "Development goals", "subtitle": "What would you like to achieve? You can pick several." },
+    "investment": { "title": "Planned investment", "subtitle": "We calculate the funding amount and size fit from this." },
+    "setup": { "title": "How would you apply?", "subtitle": "Most European calls require a consortium — this decides what's available to you." }
+  },
+  "fields": {
+    "company": "Company name",
+    "verified": "verified by NAV · {{taxNumber}}",
+    "employees": "Number of employees",
+    "county": "County / project location",
+    "closedYears": "Number of closed business years",
+    "revBand": "Annual revenue band",
+    "regionCode": "Region code",
+    "optional": "optional",
+    "industry": "Industry (primary activity)",
+    "goals": "Development goals",
+    "projectName": "Project name",
+    "investmentValue": "Planned project value (HUF)",
+    "fundingPref": "Funding preference",
+    "orgType": "Organisation type",
+    "consortiumReady": "Can you apply in an international consortium?",
+    "euExperience": "Have you applied for directly managed EU funding before?"
+  },
+  "closedYearsOptions": { "none": "None yet", "one": "1 year", "twoOrMore": "2 or more" },
+  "fundingPrefOptions": {
+    "non_refundable": "Non-repayable",
+    "loan_ok": "Subsidised loan too",
+    "EU": "EU",
+    "HU": "Hungarian"
+  },
+  "consortiumHint": "Horizon Europe research and innovation calls typically require at least 3 organisations from 3 different Member States. Calls you can submit alone — EIC Accelerator, Digital Europe, LIFE — remain available either way.",
+  "orgTypeHintSme": "Based on {{count}} employees this is an SME.",
+  "orgTypeHintLarge": "Based on {{count}} employees this is a large enterprise.",
+  "yes": "Yes",
+  "no": "No",
+  "notYet": "Not yet",
+  "onlyAlone": "No, only on my own",
+  "haveOrCanBuildPartners": "Yes, I have or can build partners",
+  "demoBanner": "For the fastest demo, load the <b>example company</b> (28-employee manufacturing SME, Pest county, digitalization, 30M HUF). You can change it any time.",
+  "actions": {
+    "loadDemo": "Load example company",
+    "fillMyself": "I'd rather fill it in myself",
+    "next": "Next",
+    "back": "Back",
+    "finish": "See my matches",
+    "exit": "Exit",
+    "restore": "Restore",
+    "saving": "Saving…"
+  },
+  "progress": "Company profile",
+  "toasts": {
+    "saved": "Company profile saved",
+    "saveFailed": "The save failed",
+    "restored": "Version {{version}} restored",
+    "restoreFailed": "The restore failed"
+  },
+  "history": {
+    "title": "Company profile versions",
+    "subtitle": "Every save is a version. Any of them can be restored.",
+    "empty": "No versions saved yet.",
+    "firstSave": "First save",
+    "signInRequired": "Profile history is only available when signed in — as an anonymous visitor your profile only exists in this browser."
+  },
+  "validation": {
+    "company": "Please enter a company name.",
+    "employees": "Please enter a positive headcount.",
+    "county": "Please choose a county.",
+    "closedYears": "Please enter the number of closed business years.",
+    "industry": "Please choose an industry.",
+    "goals": "Please choose at least one development goal.",
+    "investment": "Please enter a positive project value.",
+    "orgType": "Please choose an organisation type.",
+    "consortiumReady": "Please answer the consortium question."
+  },
+  "regions": {
+    "HU11": "Budapest",
+    "HU12": "Pest county",
+    "HU21": "Central Transdanubia",
+    "HU22": "Western Transdanubia",
+    "HU23": "Southern Transdanubia",
+    "HU31": "Northern Hungary",
+    "HU32": "Northern Great Plain",
+    "HU33": "Southern Great Plain"
+  },
+  "industries": {
+    "manuf": "Manufacturing / processing",
+    "logistics": "Logistics / transport",
+    "it": "IT / software / digital",
+    "trade": "Trade",
+    "agri": "Agriculture / food",
+    "construction": "Construction",
+    "tourism": "Tourism / hospitality",
+    "services": "Other services"
+  }
+}
