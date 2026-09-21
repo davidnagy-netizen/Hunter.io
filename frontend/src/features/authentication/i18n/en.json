@@ -52,6 +52,7 @@
     "marketing": "Send me newsletters and news of new funding opportunities (withdraw any time)."
   },
   "validation": {
+    "terms": "To register you need to accept the terms and the privacy notice.",
     "taxNumber": "Enter a valid Hungarian tax number (8 or 11 digits, with a correct check digit)."
   }
 }

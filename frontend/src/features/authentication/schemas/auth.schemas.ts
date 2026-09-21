@@ -28,7 +28,7 @@ export const registerSchema = z.object({
   email: z.string().min(1, "errors:EMAIL_REQUIRED").email("errors:INVALID_EMAIL"),
   password: z.string().min(MIN_PASSWORD_LENGTH, "errors:WEAK_PASSWORD"),
   taxNumber: z.string().refine(isValidTaxNumber, "authentication:validation.taxNumber"),
-  acceptTerms: z.boolean().refine((v) => v, "errors:CONSENT_REQUIRED"),
+  acceptTerms: z.boolean().refine((v) => v, "authentication:validation.terms"),
   marketingOptIn: z.boolean().optional(),
 });
 export type RegisterFormValues = z.infer<typeof registerSchema>;

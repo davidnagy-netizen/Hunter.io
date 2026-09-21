@@ -52,6 +52,7 @@
     "marketing": "Kérek hírlevelet és tájékoztatást új pályázati lehetőségekről (bármikor visszavonható)."
   },
   "validation": {
+    "terms": "A regisztrációhoz el kell fogadnod a feltételeket és az adatkezelési tájékoztatót.",
     "taxNumber": "Adj meg érvényes magyar adószámot (8 vagy 11 jegyű, helyes ellenőrző számjeggyel)."
   }
 }

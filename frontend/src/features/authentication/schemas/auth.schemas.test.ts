@@ -26,7 +26,7 @@ describe("registerSchema", () => {
   it("requires the terms consent: an unticked box is not consent", () => {
     const result = registerSchema.safeParse({ ...VALID, acceptTerms: false });
     expect(result.success).toBe(false);
-    expect(result.error?.issues[0].message).toBe("errors:CONSENT_REQUIRED");
+    expect(result.error?.issues[0].message).toBe("authentication:validation.terms");
   });
 
   it("does not let marketing consent stand in for the terms consent", () => {
