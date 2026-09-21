@@ -1,0 +1,19 @@
+{
+  "verdict": {
+    "ELIGIBLE": "Eligible",
+    "CONDITIONAL": "Conditionally eligible",
+    "INSUFFICIENT_DATA": "Missing data",
+    "NOT_ELIGIBLE": "Not eligible"
+  },
+  "score": {
+    "name": "Fundor Score",
+    "outOf": "/ 100",
+    "estimated": "estimated",
+    "blocked": "Not eligible",
+    "aria": "Fundor Score: {{score}} out of 100",
+    "ariaEstimated": "Fundor Score: {{score}} out of 100 (estimated)"
+  },
+  "breakdown": {
+    "weight": "{{pct}}%"
+  }
+}

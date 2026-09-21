@@ -1,0 +1,2273 @@
+openapi: 3.0.3
+
+info:
+  title: Fundor API
+  version: 2.1.0
+  description: |
+    The HTTP API the **Fundor React frontend** (`frontend/`) calls: grant/funding intelligence for Hungarian SMEs.
+    (The product was called *Hunter* until 2026-09-20 — see *Rebrand* below.)
+
+    This document was written **from the frontend's `*.api.ts` files, checked against the existing Node server**
+    (`server/routes/*.js`, `server/server.js`, `server/crm.js`, `server/auth.js`). Every operation below is one the
+    frontend actually calls; `x-frontend` on each says which screen uses it. **No new endpoint is required** — the current
+    server already implements all of them. What the backend team is asked to do is (a) keep these contracts stable and
+    (b) fix the issues listed under *Issues found while writing this spec* at the end of this description.
+
+    ## Conventions
+
+    * **Base path** `/api`. JSON in, JSON out (`Content-Type: application/json`). Responses over 1 KB are gzipped when the
+      client sends `Accept-Encoding: gzip` (the catalog is > 1 MB uncompressed).
+    * **Session**: `POST /auth/login` or `/auth/register` sets an **httpOnly, SameSite=Lax cookie `hunter_session`**
+      (7-day sliding expiry). The frontend sends it on every request (`withCredentials`). There are no tokens in bodies.
+    * **Errors** are `{ "error": "<Hungarian message>", "code": "<STABLE_CODE>" }`. The frontend **translates by `code`**
+      (HU/EN) and only falls back to `error` when there is no code — so every error should carry a `code`
+      (a `404` on `/opportunities/{id}` currently has none). Codes are listed in `components/schemas/ErrorCode`.
+    * **Language**: endpoints that word text for humans (`/search`, `/opportunities/{id}`) take `?lang=hu|en`.
+    * **Dates**: ISO-8601. `deadline`, `opening`: `YYYY-MM-DD`. Timestamps: full ISO date-time (UTC).
+    * **Money**: HUF as plain numbers unless a field name says otherwise (`…Eur`).
+    * `Infinity` is serialised by JSON as `null`: `entitlements.maxResults: null` means **unlimited**.
+
+    ## Access tiers (`entitlements.tier`)
+
+    | Tier | Who | Sees |
+    |---|---|---|
+    | `anonymous` | no session | censored **teasers** only |
+    | `registered` | signed in, no active subscription | censored **teasers** only |
+    | `subscriber` | active `trial`/`active` subscription | full opportunities, explanations, calculator, apply links |
+    | `admin` | `role: admin` | everything, plus `/admin/*` |
+
+    **The paywall is enforced by the server, never by the browser.** For anonymous/registered callers the API must never
+    return a real opportunity's identity (id, title, programme, call ids, exact deadline, links) — only a `Teaser`
+    (real score + real money figure, nothing that identifies the call; `ref` is positional). This is the most important
+    invariant to preserve. See `Teaser`, `GatedCatalog`, `OpportunityDetail`.
+
+    ## Anonymous callers are stateless
+
+    The server keeps **no** profile for an anonymous visitor. The browser holds it and sends it in the request body
+    (`{ profile, answers, saved }`, see `StatelessState`) to `POST /catalog` and `POST /search`. A signed-in caller uses
+    `GET` and the server uses the profile stored on the account. If a body profile is present it wins.
+
+    ## Endpoints the current server has that the frontend does **not** use
+    `GET|POST /dashboard`, `GET|POST /saved`, `GET /benchmarks`, `GET /health`, `POST /sync`, `POST /profile/reset`,
+    `POST /auth/password` (needed later by the not-yet-built account screen), `POST /admin/user/delete`.
+    They are deliberately **not** in this spec. (Two of them, `POST /sync` and `POST /profile/reset`, are security
+    problems — see below.)
+
+    ## Rebrand: Hunter → Fundor (fundor.hu) — what the backend still says
+
+    The product is now **Fundor** (`fundor.hu`; decision log D-01/D-02 in `FUNDOR-CHANGE-SPECIFICATION.md`; the premium
+    tier is **Fundor Plus**). The frontend is renamed. **This spec describes what the server returns today**, so these
+    server-owned names still read *Hunter* and are the backend team's to change:
+
+    | Where | Today | Notes |
+    |---|---|---|
+    | Session cookie | `hunter_session` | Renaming signs every user out once. Suggest accepting both names for the 7-day session lifetime. Set `Domain`/`Secure` for `fundor.hu`. |
+    | CSV download | `Content-Disposition: … filename="hunter-crm-contacts.csv"` | Shown to the operator. Suggest `fundor-crm-contacts.csv`. |
+    | `GET /health` (not used by the frontend) | `service: "HUNTER API"` | |
+    | Seeded admin account | company `Hunter — adminisztráció` | Visible in the admin console user list and CRM. |
+    | Environment variables | `HUNTER_ADMIN_USER`, `HUNTER_ADMIN_PASSWORD`, `HUNTER_SECURE_COOKIE`, `HUNTER_DATA_DIR`, `HUNTER_PERSIST`, `HUNTER_AUTO_REFRESH`, `HUNTER_REFRESH_HOURS`, `HUNTER_REFRESH_MAX_RECORDS`, `HUNTER_REFRESH_ON_BOOT`, `HUNTER_INCLUDE_CURATED`, `HUNTER_INCLUDE_FORTHCOMING`, `HUNTER_TODAY` | Renaming breaks existing deployments' config; keep the old names as fallbacks for a release. |
+    | Code / deployment | `hunterScore()` in `src/engine`, `package.json` name `hunter-io`, `render.yaml` service `hunter-io` (and so the hosting hostname) | The frontend aliases `hunterScore` → `fundorScore` at one import, so renaming it only needs that line changed. |
+    | Hosting | — | TLS and the redirect from any previously shared link are the backend/hosting team's. CORS is not needed while the app is served same-origin. |
+
+    Nothing in the API's *paths, fields or error codes* carries the name, so **no client-visible contract changes** are
+    needed for the rebrand itself.
+
+    ## Issues found while writing this spec (backend action requested)
+
+    1. **`POST /refresh` (and `POST /sync`) have no authentication.** Anyone, signed in or not, can make the server
+       re-download the EU catalog and overwrite `server/data/catalog.json`. This actually happened once during testing
+       (catalog went 621 → 546 calls). `POST /refresh` must require `role: admin` (the admin console's "Refresh now"
+       button calls it); `POST /sync` should be removed or protected the same way. *(A ticket for this is open.)*
+    2. **Anonymous state is one shared global file.** Without a session, `POST /profile`, `POST /profile/load-demo`,
+       `POST /profile/reset`, `POST /opportunities/{id}/save` and `POST /opportunities/{id}/answer` write to the single
+       `db.json`, and `GET /profile` returns it to **every** anonymous visitor. Worse, `resolveState()` merges the shared
+       `db.answers` into **every** caller's answers (`{...user.answers, ...db.answers, ...body.answers}`), so one
+       anonymous request can change other users' scores. The frontend no longer sends any anonymous write (anonymous
+       state lives in the browser and travels in request bodies), so these should become no-ops/401 for anonymous
+       callers and `db.answers`/`db.profile` must not be merged into other callers' state.
+    3. **`POST /profile/load-demo` ignores the signed-in user** and overwrites the shared `db.profile` instead of
+       anything on the account. The frontend only uses the *returned* demo profile (it then saves via `POST /profile`), so
+       the endpoint should simply **return** the normalised demo profile and persist nothing.
+    4. **`GET /auth/me` discloses `adminSeed`** (`usingDefaultPassword`, `username`) to anonymous callers. The login page
+       uses it to print a demo hint. Fine for local dev; it should not be sent in production.
+    5. **Minimum password length is 4** (`MIN_PASSWORD` in `server/auth.js`).
+    6. Minor: the CRM board's `pipelineValueHuf` prices deals with `expectedPlan`, a field nothing ever sets (so it is
+       always *open deals × the monthly plan price*); `tasks` on the board is capped at 40.
+    7. **The locked call detail still leaks identifying fields.** `GET /opportunities/{id}` for an anonymous/registered
+       caller nulls `id`, `title`, `program`, `callId`, `sourceRef`, `deadline` and the links (as the code comments
+       promise), but `gateDetail` only overwrites a fixed list, and the object is a spread of the whole opportunity, so
+       these are **still returned**: `callTitle`, `keywords` (which contains the call reference, e.g.
+       `LIFE-2026-SAP-ENV`), `deadlines` (the exact date(s)), `opening`, `conditionsHtml` (the full conditions text),
+       `goalEvidence`, `goalScores`, `budget`, `grantType`, `hungary`, `crossCuttingPriorities`. The catalog and search
+       endpoints (which is all the frontend calls for a gated user) do **not** leak like this — only the detail endpoint
+       does. Fix by building the locked response from an allow-list rather than a deny-list. (The underlying data is public
+       EU portal data, but the stated design — and the product's paywall — is that a gated caller cannot identify a call.)
+
+  contact:
+    name: Fundor frontend
+  
+servers:
+  - url: http://localhost:3000/api
+    description: Local development (the Vite dev server proxies `/api` to this)
+
+tags:
+  - name: Auth
+    description: Accounts and the session cookie.
+  - name: Profile
+    description: The company profile that every score is computed against.
+  - name: Reference
+    description: Reference vocabularies (regions, industries, goals, labels).
+  - name: Catalog
+    description: Opportunities, search, detail, saved calls and eligibility answers. **Paywalled.**
+  - name: Leads
+    description: Public lead capture from the free assessment.
+  - name: Admin
+    description: 'Operator console. `role: admin` only.'
+  - name: CRM
+    description: 'Sales pipeline over accounts and leads. `role: admin` only.'
+
+security:
+  - {}
+  - cookieAuth: []
+
+paths:
+  # ------------------------------------------------------------------ Auth
+  /auth/me:
+    get:
+      tags: [Auth]
+      operationId: getSession
+      summary: Who am I, and what may I see?
+      description: |
+        Called on every page load. Works for anonymous callers (`user: null`). The frontend derives *isAdmin*,
+        *isSubscriber* and *isAuthenticated* from this one response.
+      x-frontend: { used-by: [every screen, route guards] }
+      responses:
+        '200':
+          description: The session.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/MeResponse' }
+
+  /auth/register:
+    post:
+      tags: [Auth]
+      operationId: register
+      summary: Create an account and sign in
+      description: |
+        Creates the account, opens a session (sets the cookie) and, if a lead with the same `email` exists, marks that lead
+        as converted. `password` must be ≥ 4 chars (see issue 5); `username` matches `^[a-zA-Z0-9._-]{3,32}$`.
+      x-frontend: { used-by: [Register form] }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [username, password]
+              properties:
+                username: { type: string, example: acme }
+                password: { type: string, format: password }
+                company: { type: string }
+                email: { type: string, format: email }
+      responses:
+        '201':
+          description: Created and signed in.
+          headers:
+            Set-Cookie: { $ref: '#/components/headers/SetSessionCookie' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AuthActionResponse' }
+        '400':
+          description: "`INVALID_USERNAME` or `WEAK_PASSWORD`."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+        '409':
+          description: "`USERNAME_TAKEN`."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+
+  /auth/login:
+    post:
+      tags: [Auth]
+      operationId: login
+      summary: Sign in
+      x-frontend: { used-by: [Login form] }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [username, password]
+              properties:
+                username: { type: string }
+                password: { type: string, format: password }
+      responses:
+        '200':
+          description: Signed in.
+          headers:
+            Set-Cookie: { $ref: '#/components/headers/SetSessionCookie' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AuthActionResponse' }
+        '401':
+          description: "`BAD_CREDENTIALS`. The same answer for an unknown user and a wrong password."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+        '403':
+          description: "`ACCOUNT_DISABLED`."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+
+  /auth/logout:
+    post:
+      tags: [Auth]
+      operationId: logout
+      summary: Sign out (destroys the session, clears the cookie)
+      x-frontend: { used-by: [Account block in the app shell] }
+      responses:
+        '200':
+          description: Signed out. Also 200 when there was no session.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Success' }
+
+  # --------------------------------------------------------------- Profile
+  /profile:
+    get:
+      tags: [Profile]
+      operationId: getProfile
+      summary: The company profile, answers and saved calls
+      description: |
+        For a signed-in caller: the account's own data. The frontend calls this **only when signed in** (anonymous state
+        is browser-held; see issue 2).
+      x-frontend: { used-by: [App route guard, onboarding, every scored screen] }
+      responses:
+        '200':
+          description: Profile state.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/GetProfileResponse' }
+    post:
+      tags: [Profile]
+      operationId: saveProfile
+      summary: Save the company profile (creates a new version)
+      description: |
+        Signed-in only for the frontend's purposes. Every save **must** create a version (`version`, `changed[]`) — the
+        history screen and the CRM timeline read them. The server normalises the profile (fills `country`, `orgType`,
+        `sizeClass`, `sector`, `region` from `county`) and echoes it back.
+      x-frontend: { used-by: [Onboarding wizard, profile edit] }
+      security: [{ cookieAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [profile]
+              properties:
+                profile: { $ref: '#/components/schemas/CompanyProfile' }
+                source: { type: string, description: 'Free-text origin of the change', example: profile form }
+      responses:
+        '200':
+          description: Saved.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SaveProfileResponse' }
+        '401': { $ref: '#/components/responses/LoginRequired' }
+
+  /profile/load-demo:
+    post:
+      tags: [Profile]
+      operationId: loadDemoProfile
+      summary: Return the example company (Alfa Gyártó Kft.)
+      description: |
+        The frontend uses **only the returned profile** to pre-fill the wizard and then saves it with `POST /profile`.
+        **Required behaviour: return the normalised demo profile and persist nothing.** (Today it overwrites a shared
+        file — issue 3.)
+      x-frontend: { used-by: [Onboarding "Load example company"] }
+      responses:
+        '200':
+          description: The demo profile.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, profile]
+                properties:
+                  success: { type: boolean, enum: [true] }
+                  profile: { $ref: '#/components/schemas/CompanyProfile' }
+
+  /profile/history:
+    get:
+      tags: [Profile]
+      operationId: getProfileHistory
+      summary: Versions of the company profile, newest first
+      x-frontend: { used-by: [Profile history panel] }
+      security: [{ cookieAuth: [] }]
+      responses:
+        '200':
+          description: History.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [current, versions, activity]
+                properties:
+                  current: { type: object, allOf: [{ $ref: '#/components/schemas/CompanyProfile' }], nullable: true }
+                  versions:
+                    type: array
+                    items: { $ref: '#/components/schemas/ProfileVersion' }
+                  activity:
+                    type: array
+                    description: The account's 40 most recent activity entries.
+                    items: { $ref: '#/components/schemas/ActivityEntry' }
+        '401': { $ref: '#/components/responses/LoginRequired' }
+
+  /profile/restore:
+    post:
+      tags: [Profile]
+      operationId: restoreProfileVersion
+      summary: Make an earlier version current (recorded as a new version)
+      x-frontend: { used-by: [Profile history panel] }
+      security: [{ cookieAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [version]
+              properties:
+                version: { type: integer, minimum: 1 }
+      responses:
+        '200':
+          description: Restored.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, profile, versions]
+                properties:
+                  success: { type: boolean, enum: [true] }
+                  profile: { $ref: '#/components/schemas/CompanyProfile' }
+                  versions:
+                    type: array
+                    items: { $ref: '#/components/schemas/ProfileVersion' }
+        '401': { $ref: '#/components/responses/LoginRequired' }
+        '404':
+          description: "`NO_SUCH_VERSION`."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+
+  # ------------------------------------------------------------- Reference
+  /meta:
+    get:
+      tags: [Reference]
+      operationId: getMeta
+      summary: Reference vocabularies and catalog build info
+      description: |
+        Public and cacheable (the frontend caches it for 30 minutes). `today` is the server's **reference date**
+        (`referenceDate()`); the frontend uses it — not the browser clock — as "today" when scoring, so a deadline can
+        never look different in the browser than on the server.
+      x-frontend: { used-by: [Onboarding, Search filters, Assessment, Admin/CRM goal names, every scored screen] }
+      responses:
+        '200':
+          description: Reference data.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/MetaResponse' }
+
+  # --------------------------------------------------------------- Catalog
+  /catalog:
+    get:
+      tags: [Catalog]
+      operationId: getCatalog
+      summary: The catalog for the signed-in caller
+      description: |
+        **Subscriber/admin** (`gated: false`): every open call, trimmed (`summary` ≤ 240 chars; no `description`,
+        `conditionsHtml`, `goalEvidence`, `deadlines`). The **browser scores them locally** with the same engine the server
+        uses (`src/engine`), so `hard`/`soft` rules, `intensity`, `partnerShare`, etc. must be present.
+
+        **Everyone else** (`gated: true`): `opportunities` is empty (`maxResults` is 0), and `teasers` carries the censored
+        rows; `stats` and `lockedTotal` are the server's real counts (the browser has nothing to count).
+        Prizes/labels (`awardsFunding: false`) are excluded from the gated list.
+      x-frontend: { used-by: [Dashboard, Opportunities, Calendar, Saved, Fundor Plus] }
+      parameters:
+        - name: forthcoming
+          in: query
+          description: Also include not-yet-open calls.
+          schema: { type: boolean, default: false }
+        - $ref: '#/components/parameters/Lang'
+      responses:
+        '200':
+          description: The catalog (full or gated).
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CatalogResponse' }
+    post:
+      tags: [Catalog]
+      operationId: getCatalogFor
+      summary: The catalog for an anonymous visitor (their profile travels in the body)
+      description: |
+        Same response as `GET`. The body's `profile`/`answers` are used instead of a stored profile.
+        **Callers must not send this until the visitor has a profile** — with none, the server would score against its demo
+        company.
+      x-frontend: { used-by: [Dashboard, Opportunities, Assessment result preview] }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/StatelessState' }
+      responses:
+        '200':
+          description: The catalog (in practice always gated for anonymous callers).
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CatalogResponse' }
+
+  /search:
+    get:
+      tags: [Catalog]
+      operationId: search
+      summary: Scored full-text search for the signed-in caller
+      description: |
+        BM25 search over open **and forthcoming** calls with facet counts computed over the *already filtered* set. Rows are
+        `SearchRow` for a subscriber/admin and `Teaser` for everyone else (`lockedCount` = how many). Records a `search`
+        activity when a signed-in caller passes a non-empty `q`.
+      x-frontend: { used-by: [Search page] }
+      parameters:
+        - { name: q, in: query, schema: { type: string } }
+        - name: sort
+          in: query
+          description: Empty = relevance.
+          schema: { type: string, enum: ['', -score, deadline, -budget] }
+        - { name: page, in: query, schema: { type: integer, minimum: 1, default: 1 } }
+        - { name: pageSize, in: query, schema: { type: integer, minimum: 1, maximum: 100, default: 20 } }
+        - $ref: '#/components/parameters/Lang'
+        - name: personalized
+          in: query
+          description: "`false` = unscored search (no profile)."
+          schema: { type: boolean, default: true }
+        - name: program
+          in: query
+          description: Programme short names (`HORIZON`, `DIGITAL`…). Repeated or comma-separated. OR within a facet, AND across facets.
+          schema: { type: array, items: { type: string } }
+          style: form
+          explode: false
+        - { name: actionCode, in: query, schema: { type: array, items: { type: string } }, style: form, explode: false }
+        - { name: goals, in: query, schema: { type: array, items: { type: string } }, style: form, explode: false }
+        - name: consortium
+          in: query
+          schema: { type: string, enum: [required, solo] }
+        - name: eligibleOnly
+          in: query
+          schema: { type: boolean, default: false }
+        - name: minScore
+          in: query
+          description: Supported by the server; not used by the frontend yet.
+          schema: { type: integer }
+        - { name: sectors, in: query, description: 'Supported by the server; not used by the frontend yet.', schema: { type: array, items: { type: string } }, style: form, explode: false }
+        - { name: orgType, in: query, description: 'Supported by the server; not used by the frontend yet.', schema: { type: array, items: { type: string } }, style: form, explode: false }
+        - { name: deadlineFrom, in: query, description: 'Supported; not used yet.', schema: { type: string, format: date } }
+        - { name: deadlineTo, in: query, description: 'Supported; not used yet.', schema: { type: string, format: date } }
+        - { name: budgetMin, in: query, description: 'Supported; not used yet.', schema: { type: number } }
+        - { name: budgetMax, in: query, description: 'Supported; not used yet.', schema: { type: number } }
+        - { name: minIntensity, in: query, description: 'Supported; not used yet.', schema: { type: number } }
+        - name: awardsFunding
+          in: query
+          description: "`false` includes prizes/labels (default excludes them)."
+          schema: { type: boolean, default: true }
+      responses:
+        '200':
+          description: One page of results.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SearchResponse' }
+    post:
+      tags: [Catalog]
+      operationId: searchFor
+      summary: Scored search for an anonymous visitor (profile in the body)
+      description: Same query parameters and response as `GET /search`.
+      x-frontend: { used-by: [Search page] }
+      parameters:
+        - { name: q, in: query, schema: { type: string } }
+        - { name: sort, in: query, schema: { type: string, enum: ['', -score, deadline, -budget] } }
+        - { name: page, in: query, schema: { type: integer, minimum: 1, default: 1 } }
+        - { name: pageSize, in: query, schema: { type: integer, minimum: 1, maximum: 100, default: 20 } }
+        - $ref: '#/components/parameters/Lang'
+        - { name: program, in: query, schema: { type: array, items: { type: string } }, style: form, explode: false }
+        - { name: actionCode, in: query, schema: { type: array, items: { type: string } }, style: form, explode: false }
+        - { name: goals, in: query, schema: { type: array, items: { type: string } }, style: form, explode: false }
+        - { name: consortium, in: query, schema: { type: string, enum: [required, solo] } }
+        - { name: eligibleOnly, in: query, schema: { type: boolean, default: false } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/StatelessState' }
+      responses:
+        '200':
+          description: One page of results.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SearchResponse' }
+
+  /opportunities/{id}:
+    get:
+      tags: [Catalog]
+      operationId: getOpportunity
+      summary: One call, scored and explained
+      description: |
+        Used for calls that are **not** in the catalog payload — search also returns *forthcoming* calls, and the catalog
+        only holds open ones. The response **spreads the whole opportunity** so the browser can score it like any catalog
+        entry. Records `opportunity.viewed` for a signed-in caller.
+
+        For a caller without `entitlements.explanations` the identity is meant to be stripped (`gateDetail`): `id`, `title`,
+        `program…`, `deadline`, `docs`, links and all explanation arrays are `null`/`[]`, `locked: true`; score and money
+        survive. **It is incomplete today — issue 7.** The frontend never calls this endpoint for a gated account.
+      x-frontend: { used-by: [Opportunity detail page (fallback when not in catalog)] }
+      parameters:
+        - $ref: '#/components/parameters/OpportunityId'
+        - $ref: '#/components/parameters/Lang'
+      responses:
+        '200':
+          description: The call.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [opportunity, saved, entitlements]
+                properties:
+                  opportunity: { $ref: '#/components/schemas/OpportunityDetail' }
+                  saved: { type: boolean }
+                  entitlements: { $ref: '#/components/schemas/Entitlements' }
+        '404':
+          description: 'No such call. Body is `{ "error": "No opportunity with id ''…''" }` **with no `code`** — please add one (e.g. `NO_SUCH_OPPORTUNITY`).'
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+
+  /opportunities/{id}/save:
+    post:
+      tags: [Catalog]
+      operationId: toggleSaved
+      summary: Save / unsave a call (a toggle)
+      description: |
+        Toggles the id in the account's saved list. **The frontend calls this only when signed in**; an anonymous
+        visitor's saved list is browser-held. For a signed-in caller it records `opportunity.saved` / `opportunity.unsaved`.
+      x-frontend: { used-by: [Opportunity card, detail page, Saved] }
+      security: [{ cookieAuth: [] }]
+      parameters:
+        - $ref: '#/components/parameters/OpportunityId'
+      responses:
+        '200':
+          description: The new saved list.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, saved, isSaved, persisted]
+                properties:
+                  success: { type: boolean, enum: [true] }
+                  saved:
+                    type: array
+                    items: { type: string }
+                    description: All saved call ids after the toggle.
+                  isSaved: { type: boolean, description: 'Whether *this* id is now saved.' }
+                  persisted: { type: boolean }
+        '404':
+          description: No such call.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+
+  /opportunities/{id}/answer:
+    post:
+      tags: [Catalog]
+      operationId: saveAnswer
+      summary: Store an answer to an eligibility question
+      description: |
+        The engine can ask a question inline when one profile field is the only thing blocking a verdict (e.g. de minimis
+        headroom). This is **the only endpoint that persists a signed-in account's answers**, so they follow the user across
+        devices. `id` only has to exist; with `scope: global` the answer is stored against the bare `field` and applies to
+        every call that asks it, with `scope: call` against `"<id>:<field>"`. `value: null` clears it. Records
+        `profile.answered`. The frontend calls it **only when signed in**.
+      x-frontend: { used-by: [Eligibility question on the detail page] }
+      security: [{ cookieAuth: [] }]
+      parameters:
+        - $ref: '#/components/parameters/OpportunityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [field]
+              properties:
+                field: { type: string, example: de_minimis_ok }
+                value:
+                  description: 'A boolean, string or number. `null` clears the answer.'
+                  oneOf: [{ type: boolean }, { type: string }, { type: number }]
+                scope: { type: string, enum: [global, call], default: global }
+      responses:
+        '200':
+          description: Stored.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, key, value]
+                properties:
+                  success: { type: boolean, enum: [true] }
+                  key: { type: string, description: 'The stored key (`field` or `<id>:<field>`).' }
+                  value:
+                    description: 'The stored value; `null` when the answer was cleared.'
+                    oneOf: [{ type: boolean }, { type: string }, { type: number }]
+                  opportunity: { $ref: '#/components/schemas/OpportunityDetail' }
+        '400':
+          description: "`field is required` (no code today)."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+        '404':
+          description: No such call.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+
+  # ----------------------------------------------------------------- Leads
+  /leads:
+    post:
+      tags: [Leads]
+      operationId: submitLead
+      summary: Capture a lead from the free assessment (public)
+      description: |
+        No session required. **`consent: true` is mandatory** — the server refuses a lead without it. Submitting again with
+        the same `email` **updates** the existing lead (`200`, `updated: true`) instead of creating a duplicate (`201`).
+        `readiness` is only clamped to 0–100; the server does **not** recompute it. When no `matchIds` are sent the server
+        derives the lead's top 5 matches from `profile`. Nobody is notified of a new lead today (there is no email
+        capability) — it appears in the CRM.
+      x-frontend: { used-by: [Assessment result → "get in touch" form] }
+      security: [{}]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/LeadRequest' }
+      responses:
+        '201':
+          description: Created.
+          content: { application/json: { schema: { $ref: '#/components/schemas/LeadResponse' } } }
+        '200':
+          description: Updated an existing lead with that email.
+          content: { application/json: { schema: { $ref: '#/components/schemas/LeadResponse' } } }
+        '400':
+          description: "`EMAIL_REQUIRED`, `INVALID_EMAIL` or `CONSENT_REQUIRED`."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+
+  # ----------------------------------------------------------------- Admin
+  /admin/overview:
+    get:
+      tags: [Admin]
+      operationId: adminOverview
+      summary: What needs attention today, and how the system is doing
+      x-frontend: { used-by: [Admin overview, Admin system] }
+      security: [{ cookieAuth: [] }]
+      responses:
+        '200':
+          description: Overview.
+          content: { application/json: { schema: { $ref: '#/components/schemas/AdminOverview' } } }
+        '401': { $ref: '#/components/responses/LoginRequired' }
+        '403': { $ref: '#/components/responses/AdminRequired' }
+
+  /admin/users:
+    get:
+      tags: [Admin]
+      operationId: adminUsers
+      summary: Every account, with subscription and profile-version count
+      x-frontend: { used-by: [Admin users] }
+      security: [{ cookieAuth: [] }]
+      responses:
+        '200':
+          description: Accounts.
+          content: { application/json: { schema: { $ref: '#/components/schemas/AdminUsersResponse' } } }
+        '401': { $ref: '#/components/responses/LoginRequired' }
+        '403': { $ref: '#/components/responses/AdminRequired' }
+
+  /admin/history:
+    get:
+      tags: [Admin]
+      operationId: adminUserHistory
+      summary: One account's subscription log, profile versions and activity
+      x-frontend: { used-by: [Admin user history] }
+      security: [{ cookieAuth: [] }]
+      parameters:
+        - { name: userId, in: query, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: History.
+          content: { application/json: { schema: { $ref: '#/components/schemas/AdminUserHistory' } } }
+        '401': { $ref: '#/components/responses/LoginRequired' }
+        '403': { $ref: '#/components/responses/AdminRequired' }
+        '404': { $ref: '#/components/responses/NoSuchUser' }
+
+  /admin/subscription:
+    post:
+      tags: [Admin]
+      operationId: adminSetSubscription
+      summary: Grant / extend / revoke access (there is no payment gateway; this is how anyone becomes a subscriber)
+      description: |
+        **Grant**: `planId` (+ optional `days` overriding the plan's length, optional `note`). If the account already has an
+        active subscription the new period is **added after its `validUntil`** (an extension); otherwise it starts now.
+        **Revoke**: `revoke: true` (ignores `planId`). Both are written to the subscription log and the activity log.
+        `days`, when present, must be a positive number; anything else falls back to the plan's own length.
+      x-frontend: { used-by: [Admin overview quick-grant, Admin users, CRM contact page] }
+      security: [{ cookieAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [userId]
+              properties:
+                userId: { type: string }
+                planId: { type: string, enum: [trial, monthly, quarterly, yearly] }
+                days: { type: number, exclusiveMinimum: true, minimum: 0 }
+                note: { type: string }
+                revoke: { type: boolean }
+      responses:
+        '200':
+          description: Updated account.
+          content: { application/json: { schema: { $ref: '#/components/schemas/UserResponse' } } }
+        '400':
+          description: "`UNKNOWN_PLAN`."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+        '401': { $ref: '#/components/responses/LoginRequired' }
+        '403': { $ref: '#/components/responses/AdminRequired' }
+        '404': { $ref: '#/components/responses/NoSuchUser' }
+
+  /admin/user:
+    post:
+      tags: [Admin]
+      operationId: adminPatchUser
+      summary: Disable / enable an account (or change its role)
+      description: |
+        Disabling destroys the account's sessions. An admin **cannot** disable or demote **themselves**
+        (`CANNOT_DEMOTE_SELF`) — a locked-out sole admin cannot be recovered through the product. The frontend only sends
+        `disabled`; `role` is supported by the server but has no UI.
+      x-frontend: { used-by: [Admin users → Disable / Enable] }
+      security: [{ cookieAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [userId]
+              properties:
+                userId: { type: string }
+                disabled: { type: boolean }
+                role: { type: string, enum: [admin, user] }
+      responses:
+        '200':
+          description: Updated account.
+          content: { application/json: { schema: { $ref: '#/components/schemas/UserResponse' } } }
+        '400':
+          description: "`CANNOT_DEMOTE_SELF`."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+        '401': { $ref: '#/components/responses/LoginRequired' }
+        '403': { $ref: '#/components/responses/AdminRequired' }
+        '404': { $ref: '#/components/responses/NoSuchUser' }
+
+  /refresh:
+    post:
+      tags: [Admin]
+      operationId: adminRefreshCatalog
+      summary: Rebuild the catalog now from the live EC Funding & Tenders portal
+      description: |
+        Long-running (tens of seconds); overwrites the catalog. Called by the admin console's "Refresh now" button, after
+        which the frontend drops every cached catalog-derived result.
+
+        **⚠ Today this has no authentication (issue 1). It must require `role: admin`.**
+      x-frontend: { used-by: [Admin → System → Refresh now] }
+      security: [{ cookieAuth: [] }]
+      responses:
+        '200':
+          description: Rebuilt.
+          content: { application/json: { schema: { $ref: '#/components/schemas/RefreshResponse' } } }
+        '401': { $ref: '#/components/responses/LoginRequired' }
+        '403': { $ref: '#/components/responses/AdminRequired' }
+        '502':
+          description: 'The portal could not be reached / the rebuild failed. Body is the refresher''s result (`ok: false`) with an `error`.'
+          content: { application/json: { schema: { $ref: '#/components/schemas/RefreshResponse' } } }
+        '503':
+          description: The refresher is not running.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+
+  # ------------------------------------------------------------------- CRM
+  /admin/crm:
+    get:
+      tags: [CRM]
+      operationId: crmBoard
+      summary: Pipeline board, portfolio metrics, trend and open tasks
+      description: |
+        Everything the pipeline and insights screens need in one call. **Every number is computed server-side from recorded
+        facts** (the UI invents none): `lifecycle` from the subscription and its log, `engagement` from the activity log,
+        revenue from the real price list against subscriptions active *now*. Admin accounts are excluded from the board.
+        `board` is keyed by stage id, each column sorted by `daysInStage` descending.
+      x-frontend: { used-by: [CRM pipeline, CRM insights, CRM tab counts] }
+      security: [{ cookieAuth: [] }]
+      responses:
+        '200':
+          description: The board.
+          content: { application/json: { schema: { $ref: '#/components/schemas/CrmBoardResponse' } } }
+        '401': { $ref: '#/components/responses/LoginRequired' }
+        '403': { $ref: '#/components/responses/AdminRequired' }
+
+  /admin/crm/contacts:
+    get:
+      tags: [CRM]
+      operationId: crmContacts
+      summary: Filterable, sortable, paged contact list — or a CSV export of the same filter
+      description: |
+        With `format=csv` the response is `text/csv` (UTF-8 **with BOM**, RFC-4180 quoting, `Content-Disposition:
+        attachment; filename="hunter-crm-contacts.csv"`) containing **every** match (no paging). The frontend uses a plain
+        `<a href>` for it, so it relies on the session cookie, not a header. Columns: kind, company, contact, email, phone,
+        lifecycle, stage, owner, source, tags, created_at, last_login_at, plan, subscription_active, valid_until, days_left,
+        monthly_value_huf, engagement, days_since_active, days_in_stage, open_tasks, notes, employees, county,
+        investment_value_huf, readiness.
+      x-frontend: { used-by: [CRM contacts tab, CSV download] }
+      security: [{ cookieAuth: [] }]
+      parameters:
+        - { name: q, in: query, description: 'Case-insensitive substring over company, username, email, contact name, project name and tags.', schema: { type: string } }
+        - { name: stage, in: query, schema: { type: string } }
+        - { name: lifecycle, in: query, schema: { type: string, enum: [lead, registered, trial, subscriber, expired] } }
+        - { name: source, in: query, schema: { type: string, enum: [assessment, signup, admin] } }
+        - { name: sort, in: query, schema: { type: string, enum: [recent, oldest, engagement, value, expiring, stale, company], default: recent } }
+        - { name: page, in: query, schema: { type: integer, minimum: 1, default: 1 } }
+        - { name: pageSize, in: query, schema: { type: integer, minimum: 1, maximum: 200, default: 25 } }
+        - { name: format, in: query, schema: { type: string, enum: [csv] } }
+        - { name: owner, in: query, description: 'Supported; no UI yet.', schema: { type: string } }
+        - { name: tag, in: query, description: 'Supported; no UI yet.', schema: { type: string } }
+        - { name: kind, in: query, description: 'Supported; no UI yet.', schema: { type: string, enum: [account, lead] } }
+        - { name: minEngagement, in: query, description: 'Supported; no UI yet.', schema: { type: integer, minimum: 0, maximum: 100 } }
+        - { name: hasOpenTask, in: query, description: 'Supported; no UI yet.', schema: { type: boolean } }
+        - { name: overdue, in: query, description: 'Supported; no UI yet.', schema: { type: boolean } }
+      responses:
+        '200':
+          description: A page of contacts, or the CSV.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ContactsResponse' }
+            text/csv:
+              schema: { type: string, format: binary }
+        '401': { $ref: '#/components/responses/LoginRequired' }
+        '403': { $ref: '#/components/responses/AdminRequired' }
+
+  /admin/crm/leads:
+    get:
+      tags: [CRM]
+      operationId: crmLeads
+      summary: Captured assessment leads
+      x-frontend: { used-by: [CRM leads tab] }
+      security: [{ cookieAuth: [] }]
+      responses:
+        '200':
+          description: Leads, in the same shape as contacts.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [leads, vocabulary]
+                properties:
+                  leads:
+                    type: array
+                    items: { $ref: '#/components/schemas/CrmContact' }
+                  vocabulary:
+                    type: object
+                    properties:
+                      stages: { type: array, items: { $ref: '#/components/schemas/VocabEntry' } }
+                      sources: { type: array, items: { $ref: '#/components/schemas/VocabEntry' } }
+        '401': { $ref: '#/components/responses/LoginRequired' }
+        '403': { $ref: '#/components/responses/AdminRequired' }
+
+  /admin/crm/lead:
+    post:
+      tags: [CRM]
+      operationId: crmLeadUpdate
+      summary: Delete a lead (or edit its own fields)
+      description: |
+        The frontend only uses `remove: true`. The server also accepts edits to `company`, `contactName`, `phone`, `email`,
+        `note` (each trimmed and length-capped; `null`/`""` clears).
+      x-frontend: { used-by: [CRM contact page → Delete lead] }
+      security: [{ cookieAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [id]
+              properties:
+                id: { type: string }
+                remove: { type: boolean }
+                company: { type: string, nullable: true, maxLength: 120 }
+                contactName: { type: string, nullable: true, maxLength: 120 }
+                phone: { type: string, nullable: true, maxLength: 40 }
+                email: { type: string, nullable: true, maxLength: 200 }
+                note: { type: string, nullable: true, maxLength: 500 }
+      responses:
+        '200':
+          description: Deleted (`{success}`) or updated (`{success, lead}`).
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success]
+                properties:
+                  success: { type: boolean, enum: [true] }
+                  lead: { type: object, additionalProperties: true }
+        '401': { $ref: '#/components/responses/LoginRequired' }
+        '403': { $ref: '#/components/responses/AdminRequired' }
+        '404':
+          description: "`NO_SUCH_LEAD`."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+
+  /admin/crm/contact:
+    get:
+      tags: [CRM]
+      operationId: crmContact
+      summary: The full record of one account or lead
+      description: |
+        `id` is an account id **or** a lead id. For an account the server assembles the contact, its profile, notes, tasks,
+        profile versions, subscription log, a merged **timeline** (newest first, capped at 120 entries: activity,
+        subscription changes, profile versions, notes, tasks) and the calls it saved. For a lead, `versions` and
+        `subscriptions` are `[]`, `savedCalls` is `[]`, and the raw `lead` is included.
+      x-frontend: { used-by: [CRM contact page] }
+      security: [{ cookieAuth: [] }]
+      parameters:
+        - { name: id, in: query, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: The record.
+          content: { application/json: { schema: { $ref: '#/components/schemas/ContactDetail' } } }
+        '401': { $ref: '#/components/responses/LoginRequired' }
+        '403': { $ref: '#/components/responses/AdminRequired' }
+        '404':
+          description: "`NO_SUCH_CONTACT`."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+    post:
+      tags: [CRM]
+      operationId: crmContactUpdate
+      summary: Move a contact between stages; set owner, tags, source
+      description: |
+        `stage` is the **only human-set field** (lifecycle/engagement/revenue are derived). Setting a stage records who and
+        when (`stageSetBy`/`stageSetAt`, which drive `daysInStage`), stores `lostReason` only for `lost`, and — for accounts —
+        writes a `crm.stage` activity. `owner` ≤ 60 chars; `tags` are trimmed, de-duplicated, ≤ 30 chars each, max 12.
+        `""`/`null` owner and an empty `tags` array **clear** the field.
+      x-frontend: { used-by: [CRM board (drag / dropdown), CRM contact page] }
+      security: [{ cookieAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [id]
+              properties:
+                id: { type: string }
+                stage: { type: string, enum: [new, contacted, qualified, proposal, won, lost] }
+                lostReason: { type: string, maxLength: 300 }
+                owner: { type: string, nullable: true, maxLength: 60 }
+                tags: { type: array, maxItems: 12, items: { type: string, maxLength: 30 } }
+                source: { type: string, nullable: true, maxLength: 40, description: 'Supported; no UI.' }
+      responses:
+        '200':
+          description: Updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, crm]
+                properties:
+                  success: { type: boolean, enum: [true] }
+                  crm: { type: object, additionalProperties: true, description: 'The stored CRM record for the subject.' }
+        '400':
+          description: "`UNKNOWN_STAGE`."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+        '401': { $ref: '#/components/responses/LoginRequired' }
+        '403': { $ref: '#/components/responses/AdminRequired' }
+        '404':
+          description: "`NO_SUCH_CONTACT`."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+
+  /admin/crm/note:
+    post:
+      tags: [CRM]
+      operationId: crmNote
+      summary: Add or delete a note
+      description: |
+        Add: `{id, text, kind?}` → `201`. Delete: `{id, noteId, remove: true}` → `200`. `text` is trimmed and capped at 4000
+        chars; an unknown `kind` becomes `note`.
+      x-frontend: { used-by: [CRM contact page → Notes] }
+      security: [{ cookieAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [id]
+              properties:
+                id: { type: string }
+                text: { type: string, maxLength: 4000 }
+                kind: { type: string, enum: [note, call, email, meeting, decision], default: note }
+                noteId: { type: string }
+                remove: { type: boolean }
+      responses:
+        '201':
+          description: Note added.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, note, notes]
+                properties:
+                  success: { type: boolean, enum: [true] }
+                  note: { $ref: '#/components/schemas/CrmNote' }
+                  notes: { type: array, items: { $ref: '#/components/schemas/CrmNote' } }
+        '200':
+          description: Note deleted.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, notes]
+                properties:
+                  success: { type: boolean, enum: [true] }
+                  notes: { type: array, items: { $ref: '#/components/schemas/CrmNote' } }
+        '400':
+          description: "`EMPTY_NOTE`."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+        '401': { $ref: '#/components/responses/LoginRequired' }
+        '403': { $ref: '#/components/responses/AdminRequired' }
+        '404':
+          description: "`NO_SUCH_CONTACT` or `NO_SUCH_NOTE`."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+
+  /admin/crm/task:
+    post:
+      tags: [CRM]
+      operationId: crmTask
+      summary: Add, tick / untick, or delete a follow-up task
+      description: |
+        Add: `{id, title, dueAt?}` → `201` (`dueAt` is any date string; stored as an ISO instant — the frontend sends
+        `YYYY-MM-DD`, i.e. UTC midnight, and compares dates in UTC). Tick/untick: `{id, taskId, done}` → `200`.
+        Delete: `{id, taskId, remove: true}` → `200`. Title ≤ 200 chars.
+      x-frontend: { used-by: [CRM contact page → Follow-ups] }
+      security: [{ cookieAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [id]
+              properties:
+                id: { type: string }
+                title: { type: string, maxLength: 200 }
+                dueAt: { type: string, nullable: true, example: '2026-10-05' }
+                taskId: { type: string }
+                done: { type: boolean }
+                remove: { type: boolean }
+      responses:
+        '201':
+          description: Task added.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, task, tasks]
+                properties:
+                  success: { type: boolean, enum: [true] }
+                  task: { $ref: '#/components/schemas/CrmTask' }
+                  tasks: { type: array, items: { $ref: '#/components/schemas/CrmTask' } }
+        '200':
+          description: Task updated (`task` + `tasks`) or deleted (`tasks`).
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, tasks]
+                properties:
+                  success: { type: boolean, enum: [true] }
+                  task: { $ref: '#/components/schemas/CrmTask' }
+                  tasks: { type: array, items: { $ref: '#/components/schemas/CrmTask' } }
+        '400':
+          description: "`EMPTY_TASK` or `INVALID_DUE_DATE`."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+        '401': { $ref: '#/components/responses/LoginRequired' }
+        '403': { $ref: '#/components/responses/AdminRequired' }
+        '404':
+          description: "`NO_SUCH_CONTACT` or `NO_SUCH_TASK`."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+
+# ===================================================================== components
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: hunter_session
+      description: httpOnly, SameSite=Lax, 7-day sliding expiry. Set by `/auth/login` and `/auth/register`.
+
+  headers:
+    SetSessionCookie:
+      description: "`hunter_session=<token>; Path=/; HttpOnly; SameSite=Lax; Max-Age=604800` (+ `Secure` when configured)."
+      schema: { type: string }
+
+  parameters:
+    Lang:
+      name: lang
+      in: query
+      description: Language for server-worded text (verdict labels, blocked reasons, explanations).
+      schema: { type: string, enum: [hu, en], default: hu }
+    OpportunityId:
+      name: id
+      in: path
+      required: true
+      description: The opportunity id, e.g. `eu-life-2026-sap-env-gov`.
+      schema: { type: string }
+
+  responses:
+    LoginRequired:
+      description: "`LOGIN_REQUIRED` — no valid session."
+      content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+    AdminRequired:
+      description: "`ADMIN_REQUIRED` — signed in but not an administrator."
+      content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+    NoSuchUser:
+      description: "`NO_SUCH_USER`."
+      content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+
+  schemas:
+    # ------------------------------------------------------------- shared
+    Success:
+      type: object
+      required: [success]
+      properties:
+        success: { type: boolean, enum: [true] }
+
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error: { type: string, description: 'A Hungarian message — a fallback only.' }
+        code: { $ref: '#/components/schemas/ErrorCode' }
+
+    ErrorCode:
+      type: string
+      description: Stable identifiers the frontend translates. Add new ones to the frontend's `errors.json` when introduced.
+      enum:
+        - LOGIN_REQUIRED
+        - ADMIN_REQUIRED
+        - BAD_CREDENTIALS
+        - ACCOUNT_DISABLED
+        - USERNAME_TAKEN
+        - INVALID_USERNAME
+        - WEAK_PASSWORD
+        - WRONG_PASSWORD
+        - NO_SUCH_VERSION
+        - NO_SUCH_USER
+        - UNKNOWN_PLAN
+        - CANNOT_DEMOTE_SELF
+        - CANNOT_DELETE_SELF
+        - EMAIL_REQUIRED
+        - INVALID_EMAIL
+        - CONSENT_REQUIRED
+        - NO_SUCH_CONTACT
+        - NO_SUCH_LEAD
+        - NO_SUCH_NOTE
+        - NO_SUCH_TASK
+        - UNKNOWN_STAGE
+        - EMPTY_NOTE
+        - EMPTY_TASK
+        - INVALID_DUE_DATE
+
+    ActivityEntry:
+      type: object
+      description: One recorded action. Only `at` and `type` are guaranteed; the rest is whatever detail that action had.
+      required: [at, type]
+      properties:
+        at: { type: string, format: date-time }
+        type:
+          type: string
+          example: opportunity.saved
+          description: "One of: account.created, account.login, account.password_changed, account.updated, profile.saved, profile.restored, profile.answered, opportunity.viewed, opportunity.saved, opportunity.unsaved, subscription.granted, subscription.revoked, search, crm.stage, crm.lead_converted."
+        userId: { type: string, description: 'Present on cross-account feeds.' }
+        username: { type: string, description: 'Present on cross-account feeds.' }
+        company: { type: string, nullable: true }
+        title: { type: string }
+        q: { type: string }
+        field: { type: string }
+        by: { type: string }
+        plan: { type: string }
+      additionalProperties: true
+
+    # -------------------------------------------------------------- auth
+    Entitlements:
+      type: object
+      required: [tier, explanations, calculator, applyLinks, exportData, admin]
+      properties:
+        tier: { type: string, enum: [anonymous, registered, subscriber, admin] }
+        maxResults:
+          type: number
+          nullable: true
+          description: How many *full* results a caller may see. `0` for anonymous/registered; **`null` = unlimited** (JSON cannot carry Infinity).
+        teasers: { type: integer, description: "How many censored rows a gated caller gets (12). Absent for subscriber/admin." }
+        explanations: { type: boolean }
+        calculator: { type: boolean }
+        applyLinks: { type: boolean }
+        exportData: { type: boolean }
+        admin: { type: boolean }
+
+    Subscription:
+      type: object
+      required: [active, daysLeft]
+      properties:
+        status: { type: string, enum: [none, trial, active] }
+        plan: { type: string, nullable: true }
+        validUntil: { type: string, format: date-time, nullable: true }
+        grantedBy: { type: string, nullable: true }
+        grantedAt: { type: string, format: date-time, nullable: true }
+        note: { type: string, nullable: true }
+        active: { type: boolean, description: 'Computed by the server from `validUntil`.' }
+        daysLeft: { type: integer, nullable: true, description: 'Whole days until `validUntil`; null when none.' }
+
+    User:
+      type: object
+      description: The account summary. **Never** includes the password hash or salt.
+      required: [id, username, role, createdAt, disabled, subscription, entitlements, hasProfile]
+      properties:
+        id: { type: string }
+        username: { type: string }
+        email: { type: string, nullable: true }
+        company: { type: string, nullable: true }
+        role: { type: string, enum: [admin, user] }
+        createdAt: { type: string, format: date-time }
+        lastLoginAt: { type: string, format: date-time, nullable: true }
+        disabled: { type: boolean }
+        subscription: { $ref: '#/components/schemas/Subscription' }
+        entitlements: { $ref: '#/components/schemas/Entitlements' }
+        hasProfile: { type: boolean }
+
+    Plan:
+      type: object
+      required: [id, label_hu, label_en, days, status]
+      properties:
+        id: { type: string, enum: [trial, monthly, quarterly, yearly] }
+        label_hu: { type: string }
+        label_en: { type: string }
+        days: { type: integer }
+        status: { type: string, enum: [trial, active], description: 'What `subscription.status` becomes when granted.' }
+        priceHUF: { type: number, description: 'Absent for the trial.' }
+
+    MeResponse:
+      type: object
+      required: [user, entitlements, plans, adminSeed]
+      properties:
+        user: { type: object, allOf: [{ $ref: '#/components/schemas/User' }], nullable: true }
+        entitlements: { $ref: '#/components/schemas/Entitlements' }
+        plans: { type: array, items: { $ref: '#/components/schemas/Plan' } }
+        adminSeed:
+          type: object
+          description: "**Disclosure — see issue 4.** Used only by the login page's demo hint."
+          properties:
+            usingDefaultPassword: { type: boolean }
+            username: { type: string }
+
+    AuthActionResponse:
+      type: object
+      required: [success, user]
+      properties:
+        success: { type: boolean, enum: [true] }
+        user: { $ref: '#/components/schemas/User' }
+
+    UserResponse:
+      type: object
+      required: [success, user]
+      properties:
+        success: { type: boolean, enum: [true] }
+        user: { $ref: '#/components/schemas/User' }
+
+    # ----------------------------------------------------------- profile
+    CompanyProfile:
+      type: object
+      description: |
+        What a score is computed against. The server **normalises** it (`normalizeProfile`): `country` defaults to `HU`,
+        `orgType` is derived from `employees` (≤ 249 → `sme`, else `large`), `sizeClass` from headcount, `sector` from
+        `teaor`, `region` from `county`; `goals` and `funding_pref` are always arrays. Unknown extra fields are kept.
+      required: [company, employees, county, industryId, closed_business_years, goals, investment_value, funding_pref]
+      properties:
+        company: { type: string, example: Alfa Gyártó Kft. }
+        initials: { type: string, example: AG }
+        employees: { type: integer, minimum: 0 }
+        region: { type: string, description: 'NUTS-2 code, e.g. `HU12`. Derived from `county`.', example: HU12 }
+        county: { type: string, example: Pest }
+        industryId: { type: string, description: 'An `industries[].id` from `/meta`.', example: manuf }
+        teaor: { type: string, description: 'NACE/TEÁOR division.', example: '28' }
+        revBand: { type: string, description: 'A `revBands[]` value from `/meta`.' }
+        closed_business_years: { type: integer, minimum: 0 }
+        goals: { type: array, items: { type: string }, description: '`goals[].id` from `/meta`.' }
+        investment_value: { type: number, description: 'Planned project value in HUF.' }
+        projectName: { type: string }
+        funding_pref: { type: array, items: { type: string }, example: [non_refundable] }
+        de_minimis_ok: { type: boolean, description: 'Optional; left unset so the engine asks.' }
+        country: { type: string, example: HU }
+        orgType: { type: string, enum: [sme, large, research, university, ngo, public] }
+        consortium_ready: { type: boolean, description: 'Optional; left unset so the engine asks.' }
+        eu_experience: { type: boolean, description: 'Optional; left unset so the engine asks.' }
+      additionalProperties: true
+
+    AnswerMap:
+      type: object
+      description: 'Eligibility answers. A key is a bare field (`de_minimis_ok`, applies to every call) or `"<oppId>:<field>"` (one call).'
+      additionalProperties:
+        oneOf: [{ type: boolean }, { type: string }, { type: number }]
+
+    StatelessState:
+      type: object
+      description: |
+        The anonymous visitor's browser-held state, sent with `POST /catalog` and `POST /search`. `profile` wins over any
+        stored profile and is normalised. `saved` is echoed into `saved`-aware results.
+      required: [profile]
+      properties:
+        profile: { $ref: '#/components/schemas/CompanyProfile' }
+        answers: { $ref: '#/components/schemas/AnswerMap' }
+        saved: { type: array, items: { type: string } }
+
+    ProfileVersionChange:
+      type: object
+      required: [field]
+      properties:
+        field: { type: string, example: employees }
+        from: { description: 'Any JSON value or null.' }
+        to: { description: 'Any JSON value or null.' }
+
+    ProfileVersion:
+      type: object
+      required: [version, at, source, changed]
+      properties:
+        version: { type: integer, minimum: 1 }
+        at: { type: string, format: date-time }
+        source: { type: string, example: profile form }
+        changed:
+          type: array
+          description: The diff against the previous version (tracked fields only). Empty for the first save.
+          items: { $ref: '#/components/schemas/ProfileVersionChange' }
+        profile: { $ref: '#/components/schemas/CompanyProfile' }
+
+    GetProfileResponse:
+      type: object
+      required: [profile, answers, saved, demoProfile, versions]
+      properties:
+        profile: { type: object, allOf: [{ $ref: '#/components/schemas/CompanyProfile' }], nullable: true }
+        answers: { $ref: '#/components/schemas/AnswerMap' }
+        saved: { type: array, items: { type: string }, description: 'Saved call ids.' }
+        demoProfile: { $ref: '#/components/schemas/CompanyProfile' }
+        versions: { type: integer, description: 'How many versions the account has.' }
+        lastEuSync: { type: string, format: date-time, nullable: true }
+
+    SaveProfileResponse:
+      type: object
+      required: [success, profile]
+      properties:
+        success: { type: boolean, enum: [true] }
+        profile: { $ref: '#/components/schemas/CompanyProfile' }
+        version: { type: integer }
+        changed:
+          type: array
+          items: { $ref: '#/components/schemas/ProfileVersionChange' }
+
+    # --------------------------------------------------------- reference
+    MetaResponse:
+      type: object
+      required: [catalog, reference, labels, optionalProfileFields, today]
+      properties:
+        catalog:
+          type: object
+          nullable: true
+          description: Catalog build info (`catalogState.meta`); null until a catalog exists. Extra fields exist (`counts.bySource`, `ingestion`, `sources`, …).
+          properties:
+            builtAt: { type: string, format: date-time }
+            referenceDate: { type: string, format: date }
+            eurHuf: { type: number }
+            counts:
+              type: object
+              properties:
+                total: { type: integer }
+                open: { type: integer }
+                forthcoming: { type: integer }
+          additionalProperties: true
+        reference:
+          type: object
+          required: [regions, industries, goals, revBands, orgTypes]
+          properties:
+            regions:
+              type: array
+              items:
+                type: object
+                required: [code, name, counties]
+                properties:
+                  code: { type: string, example: HU12 }
+                  name: { type: string, example: Pest megye }
+                  counties: { type: array, items: { type: string } }
+            industries:
+              type: array
+              items:
+                type: object
+                required: [id, label, teaor]
+                properties:
+                  id: { type: string, example: manuf }
+                  label: { type: string, description: 'Hungarian.' }
+                  teaor: { type: string }
+            goals:
+              type: array
+              items:
+                type: object
+                required: [id, label, label_en]
+                properties:
+                  id: { type: string, example: digitalization }
+                  label: { type: string, description: 'Hungarian.' }
+                  label_en: { type: string }
+            revBands: { type: array, items: { type: string } }
+            orgTypes:
+              type: array
+              items:
+                type: object
+                required: [id, label_hu, label_en]
+                properties:
+                  id: { type: string }
+                  label_hu: { type: string }
+                  label_en: { type: string }
+        labels:
+          type: object
+          required: [programmes, actions]
+          properties:
+            programmes: { type: object, additionalProperties: { type: string }, description: 'Programme short name → full name.' }
+            actions: { type: object, additionalProperties: { type: string }, description: 'Action code → label.' }
+        optionalProfileFields:
+          type: array
+          description: Fields the engine can ask about inline when one is the only unknown blocking a verdict.
+          items:
+            type: object
+            required: [field, weight, q_hu, q_en, opts]
+            properties:
+              field: { type: string, example: consortium_ready }
+              weight: { type: number }
+              q_hu: { type: string }
+              q_en: { type: string }
+              opts:
+                type: array
+                items:
+                  type: object
+                  required: [t_hu, t_en, v]
+                  properties:
+                    t_hu: { type: string }
+                    t_en: { type: string }
+                    v: { type: boolean }
+        today: { type: string, format: date, description: 'The server''s reference date.' }
+
+    # ----------------------------------------------------------- catalog
+    Rule:
+      type: object
+      description: A declarative eligibility/fit rule, evaluated by the engine on the client and on the server.
+      required: [field, op, value]
+      properties:
+        field: { type: string, example: orgType }
+        op: { type: string, enum: [between, in, not_in, '>=', '<=', '==', includes_any] }
+        value: { description: 'Depends on `op`.' }
+        weight: { type: number }
+        label_hu: { type: string }
+        label_en: { type: string }
+        quiz:
+          type: object
+          description: An inline question that can resolve an `unknown` rule.
+          properties:
+            q_hu: { type: string }
+            q_en: { type: string }
+            opts:
+              type: array
+              items:
+                type: object
+                properties:
+                  t_hu: { type: string }
+                  t_en: { type: string }
+                  v: { description: 'boolean, or null' }
+
+    Opportunity:
+      type: object
+      description: |
+        A funding call as the catalog returns it (trimmed). Only the fields the frontend reads are listed; the server sends
+        more, and extra fields must keep being sent. **`hard`, `soft`, `intensity`, `partnerShare`, `consortium`,
+        `smeFit`, `highAdmin`, `awardsFunding`, `goals`/`goalScores`, `docs`, `deadline` are required by the browser-side
+        scoring engine.**
+      required: [id, program, title, deadline, intensity, goals, hard]
+      properties:
+        id: { type: string }
+        sourceSystem: { type: string, example: EU_FUNDING_TENDERS }
+        sourceRef: { type: string }
+        sourceUrl: { type: string, nullable: true }
+        submissionUrl: { type: string, nullable: true }
+        program: { type: string }
+        programShort: { type: string, example: HORIZON }
+        callId: { type: string }
+        callTitle: { type: string }
+        actionCode: { type: string }
+        actionLabel: { type: string }
+        title: { type: string }
+        summary: { type: string, maxLength: 240 }
+        status: { type: string, enum: [open, forthcoming] }
+        opening: { type: string, format: date }
+        deadline: { type: string, format: date }
+        currency: { type: string, example: EUR }
+        eurHuf: { type: number }
+        fundingMin: { type: number, nullable: true, description: 'HUF.' }
+        fundingMax: { type: number, nullable: true, description: 'HUF.' }
+        intensity: { type: number, minimum: 0, maximum: 1, description: 'Grant share of eligible cost.' }
+        budget: { type: object, additionalProperties: true }
+        consortium:
+          type: object
+          properties:
+            required: { type: boolean }
+            minPartners: { type: integer }
+            minCountries: { type: integer }
+        partnerShare:
+          type: object
+          nullable: true
+          properties:
+            minHuf: { type: number }
+            typicalHuf: { type: number }
+            maxHuf: { type: number }
+            basis: { type: string }
+        applicantTypes: { type: array, items: { type: string } }
+        smeFit: { type: number }
+        highAdmin: { type: boolean }
+        awardsFunding: { type: boolean, description: "`false` for prizes / labels — excluded from funding shortlists." }
+        goals: { type: array, items: { type: string } }
+        goalScores: { type: object, additionalProperties: { type: number } }
+        sectors: { type: array, items: { type: string } }
+        described: { type: boolean }
+        docs: { type: array, items: { type: string }, description: 'Required documents.' }
+        isNew: { type: boolean }
+        curated: { type: boolean }
+        hard: { type: array, items: { $ref: '#/components/schemas/Rule' } }
+        soft: { type: array, items: { $ref: '#/components/schemas/Rule' } }
+      additionalProperties: true
+
+    Band:
+      type: object
+      properties:
+        key: { type: string, enum: [strong, relevant, conditional, low] }
+        label: { type: string, description: 'Worded in the requested language.' }
+
+    Teaser:
+      type: object
+      description: |
+        The **only** shape a gated caller ever sees for a call. It says how good the call is for them and roughly what it is
+        worth, and nothing that identifies it: **no id, title, programme, call id, exact deadline or link**. `ref` is
+        positional (`t0`, `t1`, …). `closingSoon` replaces the deadline (≤ 30 days), because a date + a grant figure is a
+        fingerprint. `grantHuf` = the *caller's own* project value × this call's intensity.
+      required: [ref, locked, score, band, estimated, grantHuf, fundingMax, intensity, closingSoon]
+      properties:
+        ref: { type: string, example: t0 }
+        locked: { type: boolean, enum: [true] }
+        score: { type: integer, nullable: true, minimum: 0, maximum: 100 }
+        band: { type: object, allOf: [{ $ref: '#/components/schemas/Band' }], nullable: true }
+        estimated: { type: boolean, description: 'True when the verdict is INSUFFICIENT_DATA — the score is an estimate.' }
+        grantHuf: { type: number, nullable: true }
+        fundingMax: { type: number, nullable: true }
+        intensity: { type: number, nullable: true }
+        closingSoon: { type: boolean }
+
+    CatalogStats:
+      type: object
+      required: [catalogTotal, openTotal, eligible, blocked, strong, closingSoon, needsAnswer]
+      properties:
+        catalogTotal: { type: integer }
+        openTotal: { type: integer }
+        eligible: { type: integer }
+        blocked: { type: integer }
+        strong: { type: integer, description: 'Eligible with score ≥ 85.' }
+        closingSoon: { type: integer, description: 'Eligible with ≤ 14 days left.' }
+        needsAnswer: { type: integer, description: 'Eligible but only an estimate (a question would sharpen it).' }
+
+    FullCatalog:
+      type: object
+      required: [gated, total, opportunities, builtAt, referenceDate, eurHuf, entitlements]
+      properties:
+        gated: { type: boolean, enum: [false] }
+        total: { type: integer }
+        opportunities: { type: array, items: { $ref: '#/components/schemas/Opportunity' } }
+        builtAt: { type: string, format: date-time, nullable: true }
+        referenceDate: { type: string, format: date, nullable: true }
+        eurHuf: { type: number, nullable: true }
+        entitlements: { $ref: '#/components/schemas/Entitlements' }
+
+    GatedCatalog:
+      type: object
+      required: [gated, total, lockedTotal, opportunities, teasers, stats, builtAt, referenceDate, eurHuf, entitlements]
+      properties:
+        gated: { type: boolean, enum: [true] }
+        total: { type: integer, description: 'How many full opportunities were returned (0 for anonymous/registered).' }
+        lockedTotal: { type: integer, description: 'Eligible calls beyond what this caller may see.' }
+        opportunities: { type: array, items: { $ref: '#/components/schemas/Opportunity' } }
+        teasers: { type: array, items: { $ref: '#/components/schemas/Teaser' } }
+        stats: { $ref: '#/components/schemas/CatalogStats' }
+        builtAt: { type: string, format: date-time, nullable: true }
+        referenceDate: { type: string, format: date, nullable: true }
+        eurHuf: { type: number, nullable: true }
+        entitlements: { $ref: '#/components/schemas/Entitlements' }
+
+    CatalogResponse:
+      description: Discriminate on the boolean `gated`.
+      oneOf:
+        - $ref: '#/components/schemas/FullCatalog'
+        - $ref: '#/components/schemas/GatedCatalog'
+
+    SearchRow:
+      type: object
+      description: A scored result card for a subscriber/admin (server `toCard`).
+      required: [id, title, program, deadline, daysLeft, goals, intensity, score, blocked, estimated, verdict, band, blockedReasons]
+      properties:
+        id: { type: string }
+        title: { type: string }
+        program: { type: string }
+        programShort: { type: string }
+        actionCode: { type: string }
+        actionLabel: { type: string }
+        callId: { type: string }
+        sourceRef: { type: string }
+        sourceUrl: { type: string, nullable: true }
+        submissionUrl: { type: string, nullable: true }
+        sourceSystem: { type: string }
+        curated: { type: boolean }
+        status: { type: string }
+        deadline: { type: string, format: date }
+        daysLeft: { type: integer }
+        summary: { type: string, maxLength: 260 }
+        goals: { type: array, items: { type: string } }
+        sectors: { type: array, items: { type: string } }
+        intensity: { type: number }
+        fundingMin: { type: number, nullable: true }
+        fundingMax: { type: number, nullable: true }
+        budget: { type: object, additionalProperties: true }
+        consortium: { type: object, additionalProperties: true }
+        applicantTypes: { type: array, items: { type: string } }
+        awardsFunding: { type: boolean }
+        highAdmin: { type: boolean }
+        score: { type: integer, nullable: true, description: 'Null when blocked.' }
+        blocked: { type: boolean }
+        estimated: { type: boolean }
+        verdict: { type: string, nullable: true, enum: [ELIGIBLE, CONDITIONAL, INSUFFICIENT_DATA, NOT_ELIGIBLE] }
+        band: { type: object, allOf: [{ $ref: '#/components/schemas/Band' }], nullable: true }
+        blockedReasons: { type: array, items: { type: string }, description: 'Already worded in the requested language.' }
+        relevance: { type: number, description: 'BM25 relevance for the query (search only).' }
+
+    FacetValue:
+      type: object
+      required: [value, count]
+      properties:
+        value: { type: string }
+        count: { type: integer }
+
+    SearchResponse:
+      type: object
+      required: [query, total, page, pageSize, sort, facets, results, lockedCount, entitlements]
+      properties:
+        query: { type: string }
+        total: { type: integer, description: 'Matches across all pages (the real count, even for gated callers).' }
+        page: { type: integer }
+        pageSize: { type: integer }
+        sort: { type: string }
+        personalized: { type: boolean }
+        profileUsed:
+          type: object
+          nullable: true
+          properties:
+            company: { type: string }
+            orgType: { type: string }
+            goals: { type: array, items: { type: string } }
+            fromRequest: { type: boolean, description: 'True when the profile came from the request body.' }
+        account:
+          type: object
+          nullable: true
+          properties:
+            username: { type: string }
+            tier: { type: string }
+        entitlements: { $ref: '#/components/schemas/Entitlements' }
+        facets:
+          type: object
+          description: Facet name (`program`, `goals`, `actionCode`, `consortium`, …) → counts, computed over the *already filtered* set.
+          additionalProperties:
+            type: array
+            items: { $ref: '#/components/schemas/FacetValue' }
+        results:
+          type: array
+          description: '`SearchRow` for a subscriber/admin, `Teaser` (`locked: true`) for everyone else.'
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/SearchRow'
+              - $ref: '#/components/schemas/Teaser'
+        lockedCount: { type: integer, description: 'How many rows on this page are teasers.' }
+
+    OpportunityDetail:
+      description: |
+        `OpportunityDetailFull` for a caller with `entitlements.explanations` (subscriber/admin); otherwise
+        `OpportunityDetailLocked` (`locked: true`, identity fields `null`). Discriminate on `locked`.
+      oneOf:
+        - $ref: '#/components/schemas/OpportunityDetailFull'
+        - $ref: '#/components/schemas/OpportunityDetailLocked'
+
+    OpportunityDetailLocked:
+      type: object
+      description: |
+        What a caller **without** `entitlements.explanations` gets (`gateDetail` in `server/server.js`): the score and the
+        money survive, the identity is meant to be stripped. **It is not fully stripped today — see issue 7**: the fields
+        listed under `additionalProperties` below are still sent.
+      required: [locked, score, verdict]
+      properties:
+        locked: { type: boolean, enum: [true] }
+        closingSoon: { type: boolean, description: 'Replaces the deadline: ≤ 30 days.' }
+        id: { type: string, nullable: true, description: Always null when locked. }
+        title: { type: string, nullable: true, description: Always null when locked. }
+        program: { type: string, nullable: true, description: Always null when locked. }
+        programShort: { type: string, nullable: true }
+        actionCode: { type: string, nullable: true }
+        actionLabel: { type: string, nullable: true }
+        callId: { type: string, nullable: true }
+        sourceRef: { type: string, nullable: true }
+        sourceSystem: { type: string, nullable: true }
+        summary: { type: string, nullable: true }
+        description: { type: string, description: 'Empty string when locked.' }
+        deadline: { type: string, format: date, nullable: true, description: Always null when locked. }
+        daysLeft: { type: integer, nullable: true }
+        sourceUrl: { type: string, nullable: true }
+        submissionUrl: { type: string, nullable: true }
+        goals: { type: array, items: { type: string }, description: Always empty when locked. }
+        sectors: { type: array, items: { type: string } }
+        applicantTypes: { type: array, items: { type: string } }
+        docs: { type: array, items: { type: string } }
+        score: { type: integer, nullable: true }
+        blocked: { type: boolean }
+        estimated: { type: boolean }
+        verdict: { type: string, enum: [ELIGIBLE, CONDITIONAL, INSUFFICIENT_DATA, NOT_ELIGIBLE] }
+        band: { type: object, allOf: [{ $ref: '#/components/schemas/Band' }], nullable: true }
+        checks: { type: array, items: { type: object }, description: Always empty when locked. }
+        conditions: { type: array, items: { type: string } }
+        factors: { type: array, items: { type: object } }
+        questions: { type: array, items: { type: object } }
+        benchmark: { type: object, nullable: true }
+        calculator: { type: object, nullable: true }
+      additionalProperties: true
+
+    OpportunityDetailFull:
+      description: |
+        The whole opportunity (all of `Opportunity`, plus `description` and `conditionsHtml`) **plus** the caller-specific
+        scoring below.
+      allOf:
+        - { $ref: '#/components/schemas/Opportunity' }
+        - type: object
+          properties:
+            locked: { type: boolean, description: 'Present and true when the identity has been stripped.' }
+            closingSoon: { type: boolean, description: 'Present when locked.' }
+            daysLeft: { type: integer, nullable: true }
+            score: { type: integer, nullable: true }
+            blocked: { type: boolean }
+            estimated: { type: boolean }
+            verdict: { type: string, enum: [ELIGIBLE, CONDITIONAL, INSUFFICIENT_DATA, NOT_ELIGIBLE] }
+            band: { type: object, allOf: [{ $ref: '#/components/schemas/Band' }], nullable: true }
+            checks:
+              type: array
+              items:
+                type: object
+                properties:
+                  field: { type: string }
+                  label: { type: string }
+                  status: { type: string, enum: [pass, fail, unknown] }
+                  yourValue: { description: 'The profile value that was checked; null when unknown.' }
+                  required: {}
+                  operator: { type: string }
+            conditions: { type: array, items: { type: string } }
+            factors:
+              type: array
+              description: The five-factor score explanation.
+              items:
+                type: object
+                properties:
+                  key: { type: string, enum: [elig, fit, size, timing, feas] }
+                  weight: { type: number }
+                  value: { type: number, minimum: 0, maximum: 100 }
+                  label: { type: string }
+                  detail: { type: string }
+            questions:
+              type: array
+              description: Open eligibility questions that would sharpen the verdict.
+              items: { type: object, additionalProperties: true }
+            benchmark: { type: object, nullable: true, additionalProperties: true }
+            calculator:
+              type: object
+              nullable: true
+              description: Grant arithmetic for this company.
+              properties:
+                projectValueHuf: { type: number }
+                intensity: { type: number }
+                grantHuf: { type: number }
+                ownContributionHuf: { type: number }
+                cappedByCeiling: { type: boolean }
+                ceilingHuf: { type: number, nullable: true }
+                partnerShare: { type: object, nullable: true, additionalProperties: true }
+                callGrantHuf: { type: number, nullable: true }
+                currencyNote: { type: string, nullable: true }
+
+    # ------------------------------------------------------------- leads
+    LeadRequest:
+      type: object
+      required: [email, consent]
+      properties:
+        email: { type: string, format: email, maxLength: 200 }
+        consent: { type: boolean, enum: [true], description: 'Mandatory. Anything but `true` is rejected.' }
+        company: { type: string, maxLength: 120 }
+        contactName: { type: string, maxLength: 120 }
+        phone: { type: string, maxLength: 40 }
+        note: { type: string, maxLength: 500 }
+        readiness: { type: number, minimum: 0, maximum: 100, description: 'Clamped and rounded; **not** recomputed by the server.' }
+        answers:
+          type: object
+          description: 'Only these keys are kept: employees, county, industryId, closed_business_years, goals, investment_value.'
+          additionalProperties: true
+        profile:
+          type: object
+          description: 'Only these keys are kept: employees, region, county, industryId, teaor, orgType, goals, investment_value, closed_business_years.'
+          additionalProperties: true
+        matchIds:
+          type: array
+          maxItems: 5
+          items: { type: string }
+          description: Optional. When omitted the server derives the top 5 matches from `profile`.
+
+    LeadResponse:
+      type: object
+      required: [success, id, updated]
+      properties:
+        success: { type: boolean, enum: [true] }
+        id: { type: string }
+        updated: { type: boolean }
+
+    # ------------------------------------------------------------- admin
+    RefreshStatus:
+      type: object
+      description: '`refresher.status`; `{ "enabled": false }` when no refresher is running.'
+      required: [enabled]
+      properties:
+        enabled: { type: boolean }
+        intervalHours: { type: number }
+        lastAttemptAt: { type: string, format: date-time, nullable: true }
+        lastSuccessAt: { type: string, format: date-time, nullable: true }
+        lastError:
+          type: object
+          nullable: true
+          properties:
+            message: { type: string }
+            at: { type: string, format: date-time }
+        lastReport: { type: object, nullable: true, additionalProperties: true }
+        nextRunAt: { type: string, format: date-time, nullable: true }
+        runs: { type: integer }
+        failures: { type: integer }
+
+    RefreshResponse:
+      type: object
+      required: [ok]
+      properties:
+        ok: { type: boolean }
+        total: { type: integer, description: 'Calls in the rebuilt catalog.' }
+        report: { type: object, additionalProperties: true }
+        error: { type: string, description: 'Present when `ok` is false.' }
+        catalog:
+          type: object
+          properties:
+            total: { type: integer }
+            builtAt: { type: string, format: date-time, nullable: true }
+        status: { $ref: '#/components/schemas/RefreshStatus' }
+
+    AdminOverview:
+      type: object
+      required: [stats, byPlan, expiringSoon, awaitingAccess, recentSignups, activity, plans, system]
+      properties:
+        stats:
+          type: object
+          properties:
+            users: { type: integer }
+            admins: { type: integer }
+            disabled: { type: integer }
+            activeSubscriptions: { type: integer }
+            withoutSubscription: { type: integer, description: 'Non-admin accounts with no active subscription.' }
+            newThisWeek: { type: integer }
+            sessions: { type: integer }
+            profilesSaved: { type: integer }
+        byPlan: { type: object, additionalProperties: { type: integer }, description: 'Plan id → active subscriptions.' }
+        expiringSoon:
+          type: array
+          description: Active subscriptions ending within 14 days, soonest first.
+          items:
+            allOf:
+              - $ref: '#/components/schemas/User'
+              - type: object
+                required: [daysLeft]
+                properties:
+                  daysLeft: { type: integer }
+        awaitingAccess:
+          type: array
+          description: Up to 8 newest non-admin accounts with no active subscription.
+          items: { $ref: '#/components/schemas/User' }
+        recentSignups:
+          type: array
+          description: The 6 newest accounts.
+          items: { $ref: '#/components/schemas/User' }
+        activity:
+          type: array
+          description: The 20 most recent activity entries across every account.
+          items: { $ref: '#/components/schemas/ActivityEntry' }
+        plans: { type: array, items: { $ref: '#/components/schemas/Plan' } }
+        system:
+          type: object
+          required: [catalogTotal, catalogOpen, builtBy, refresh]
+          properties:
+            catalogTotal: { type: integer }
+            catalogOpen: { type: integer }
+            builtAt: { type: string, format: date-time, nullable: true }
+            builtBy: { type: string }
+            eurHuf: { type: number, nullable: true }
+            refresh: { $ref: '#/components/schemas/RefreshStatus' }
+
+    AdminUser:
+      allOf:
+        - $ref: '#/components/schemas/User'
+        - type: object
+          required: [profileVersions]
+          properties:
+            profileVersions: { type: integer }
+            lastActivity: { type: object, allOf: [{ $ref: '#/components/schemas/ActivityEntry' }], nullable: true }
+
+    AdminUsersResponse:
+      type: object
+      required: [stats, plans, users]
+      properties:
+        stats:
+          type: object
+          properties:
+            users: { type: integer }
+            admins: { type: integer }
+            activeSubscriptions: { type: integer }
+            sessions: { type: integer }
+            leads: { type: integer }
+        plans: { type: array, items: { $ref: '#/components/schemas/Plan' } }
+        users: { type: array, items: { $ref: '#/components/schemas/AdminUser' } }
+
+    SubscriptionLogEntry:
+      type: object
+      required: [at, action]
+      properties:
+        at: { type: string, format: date-time }
+        action: { type: string, enum: [granted, revoked] }
+        by: { type: string }
+        plan: { type: string }
+        days: { type: integer }
+        validUntil: { type: string, format: date-time }
+        note: { type: string, nullable: true }
+
+    AdminUserHistory:
+      type: object
+      required: [user, versions, subscriptions, activity]
+      properties:
+        user: { $ref: '#/components/schemas/User' }
+        versions: { type: array, items: { $ref: '#/components/schemas/ProfileVersion' } }
+        subscriptions: { type: array, items: { $ref: '#/components/schemas/SubscriptionLogEntry' }, description: 'Newest first.' }
+        activity: { type: array, items: { $ref: '#/components/schemas/ActivityEntry' }, description: 'Newest first, up to 60.' }
+
+    # --------------------------------------------------------------- CRM
+    VocabEntry:
+      type: object
+      required: [id, label_hu, label_en]
+      properties:
+        id: { type: string }
+        label_hu: { type: string }
+        label_en: { type: string }
+        tone: { type: string, description: 'Stages only.' }
+
+    PriceEntry:
+      type: object
+      required: [id, label_hu, label_en, days, priceHUF, monthlyHUF]
+      properties:
+        id: { type: string }
+        label_hu: { type: string }
+        label_en: { type: string }
+        days: { type: integer }
+        priceHUF: { type: number, nullable: true }
+        monthlyHUF: { type: number, description: 'The price normalised to 30 days; 0 for the trial.' }
+
+    CrmVocabulary:
+      type: object
+      description: |
+        The CRM's vocabularies, sent with the data so the UI never hard-codes them. `stages` are ordered (the board renders
+        them left to right; `won` and `lost` are terminal): new, contacted, qualified, proposal, won, lost.
+        `lifecycles` (observed, never chosen): lead, registered, trial, subscriber, expired.
+        `sources`: assessment, signup, admin.
+      required: [stages, lifecycles, sources, plans]
+      properties:
+        stages: { type: array, items: { $ref: '#/components/schemas/VocabEntry' } }
+        lifecycles: { type: array, items: { $ref: '#/components/schemas/VocabEntry' } }
+        sources: { type: array, items: { $ref: '#/components/schemas/VocabEntry' } }
+        plans: { type: array, items: { $ref: '#/components/schemas/PriceEntry' } }
+
+    CrmNote:
+      type: object
+      required: [id, at, kind, body]
+      properties:
+        id: { type: string }
+        at: { type: string, format: date-time }
+        by: { type: string, nullable: true }
+        kind: { type: string, enum: [note, call, email, meeting, decision] }
+        body: { type: string }
+
+    CrmTask:
+      type: object
+      required: [id, at, title]
+      properties:
+        id: { type: string }
+        at: { type: string, format: date-time }
+        by: { type: string, nullable: true }
+        title: { type: string }
+        dueAt: { type: string, format: date-time, nullable: true }
+        doneAt: { type: string, format: date-time, nullable: true }
+        doneBy: { type: string, nullable: true }
+
+    OpenTask:
+      allOf:
+        - $ref: '#/components/schemas/CrmTask'
+        - type: object
+          required: [subjectId, subjectKind]
+          properties:
+            subjectId: { type: string }
+            subjectKind: { type: string, enum: [account, lead, unknown] }
+            company: { type: string, nullable: true }
+            username: { type: string, nullable: true }
+
+    Engagement:
+      type: object
+      description: |
+        An **activity indicator, not a prediction**, counted from real activity-log entries in the last `window` days. Each
+        signal contributes `count × points` capped per signal; the total is scaled by recency (full weight ≤ 7 days, tapering
+        to 0.2 beyond the window). Returned with its breakdown so the UI can show exactly what produced the number.
+      required: [score, signals, window, band]
+      properties:
+        score: { type: integer, minimum: 0, maximum: 100 }
+        signals:
+          type: array
+          items:
+            type: object
+            required: [type, count, points, label_hu, label_en]
+            properties:
+              type: { type: string, example: opportunity.saved }
+              count: { type: integer }
+              points: { type: integer }
+              label_hu: { type: string }
+              label_en: { type: string }
+        lastActiveAt: { type: string, format: date-time, nullable: true }
+        daysSinceActive: { type: integer, nullable: true }
+        window: { type: integer, example: 30 }
+        band:
+          type: object
+          properties:
+            key: { type: string, enum: [high, medium, low, none] }
+            label_hu: { type: string }
+            label_en: { type: string }
+
+    CrmContact:
+      type: object
+      description: An account or a captured lead, in the one shape the board renders.
+      required: [id, kind, role, createdAt, lifecycle, stage, tags, source, subscription, monthlyValueHuf, engagement, notes, openTasks, overdueTasks]
+      properties:
+        id: { type: string }
+        kind: { type: string, enum: [account, lead] }
+        username: { type: string, nullable: true }
+        email: { type: string, nullable: true }
+        company: { type: string, nullable: true }
+        contactName: { type: string, nullable: true, description: 'Leads.' }
+        phone: { type: string, nullable: true, description: 'Leads.' }
+        role: { type: string, description: '`admin`, `user`, or `lead`.' }
+        disabled: { type: boolean }
+        createdAt: { type: string, format: date-time }
+        lastLoginAt: { type: string, format: date-time, nullable: true }
+        lifecycle: { type: string, enum: [lead, registered, trial, subscriber, expired] }
+        stage: { type: string, description: 'Human-set; falls back to a value derived from the lifecycle (subscriber→won, trial→proposal, expired→contacted, else new).' }
+        stageSetBy: { type: string, nullable: true }
+        stageSetAt: { type: string, format: date-time, nullable: true }
+        daysInStage: { type: integer, nullable: true, description: 'Since `stageSetAt`, or since sign-up when nobody has moved it.' }
+        owner: { type: string, nullable: true }
+        tags: { type: array, items: { type: string } }
+        source: { type: string, enum: [assessment, signup, admin] }
+        lostReason: { type: string, nullable: true }
+        subscription:
+          type: object
+          properties:
+            status: { type: string }
+            plan: { type: string, nullable: true }
+            active: { type: boolean }
+            validUntil: { type: string, format: date-time, nullable: true }
+            daysLeft: { type: integer, nullable: true }
+            grantedBy: { type: string, nullable: true }
+            grantedAt: { type: string, format: date-time, nullable: true }
+            note: { type: string, nullable: true }
+        monthlyValueHuf: { type: number, description: 'Only for an *active paid* subscription; a trial is worth 0.' }
+        engagement: { $ref: '#/components/schemas/Engagement' }
+        readiness: { type: number, nullable: true, description: 'Leads only — the score they arrived with.' }
+        profileVersions: { type: integer }
+        hasProfile: { type: boolean }
+        convertedUserId: { type: string, nullable: true, description: 'Leads that later registered.' }
+        profile:
+          type: object
+          nullable: true
+          description: A profile summary (an account's saved one, or what a lead's assessment produced).
+          additionalProperties: true
+        notes: { type: integer, description: 'How many notes.' }
+        lastNote: { type: object, allOf: [{ $ref: '#/components/schemas/CrmNote' }], nullable: true }
+        openTasks: { type: integer }
+        nextTask: { type: object, allOf: [{ $ref: '#/components/schemas/CrmTask' }], nullable: true }
+        overdueTasks: { type: integer }
+
+    PortfolioMetrics:
+      type: object
+      description: Every figure is counted from the contacts; where there is no data the answer is `0` or `null` (never a made-up number).
+      properties:
+        contacts: { type: integer }
+        accounts: { type: integer }
+        leads: { type: integer }
+        subscribers: { type: integer }
+        trials: { type: integer }
+        expired: { type: integer }
+        registered: { type: integer }
+        mrrHuf: { type: number, description: 'Monthly recurring revenue of *active paid* subscriptions.' }
+        arrHuf: { type: number, description: 'MRR × 12 — not a forecast.' }
+        arpaHuf: { type: number }
+        pipelineValueHuf: { type: number, description: 'See issue 6.' }
+        openDeals: { type: integer, description: 'Contacts not in `won`/`lost`.' }
+        byStage: { type: object, additionalProperties: { type: integer } }
+        byPlan:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              count: { type: integer }
+              monthlyHuf: { type: number }
+        bySource: { type: object, additionalProperties: { type: integer } }
+        trialStarted: { type: integer, description: 'Accounts ever granted a trial.' }
+        trialConverted: { type: integer, description: 'Of those, granted a paid plan later.' }
+        trialConversionPct: { type: integer, nullable: true, description: '`null` (not 0) when nobody has ever trialled.' }
+        lapsed30d: { type: integer }
+        churnPct: { type: integer, nullable: true }
+        engagedAccounts: { type: integer }
+        warmUnsubscribed:
+          type: array
+          description: Up to 8 unsubscribed accounts with engagement ≥ 20, most engaged first.
+          items:
+            type: object
+            properties:
+              id: { type: string }
+              company: { type: string, nullable: true }
+              username: { type: string, nullable: true }
+              lifecycle: { type: string }
+              score: { type: integer }
+              daysSinceActive: { type: integer, nullable: true }
+
+    TrendBucket:
+      type: object
+      description: One month. The last 6 months are always returned, oldest first, **including empty ones**.
+      required: [key, year, month, signups, leads, won]
+      properties:
+        key: { type: string, example: 2026-09 }
+        year: { type: integer }
+        month: { type: integer, minimum: 1, maximum: 12 }
+        signups: { type: integer }
+        leads: { type: integer }
+        won: { type: integer }
+
+    CrmBoardResponse:
+      type: object
+      required: [vocabulary, metrics, trend, board, tasks, engagementWindowDays, generatedAt]
+      properties:
+        vocabulary: { $ref: '#/components/schemas/CrmVocabulary' }
+        metrics: { $ref: '#/components/schemas/PortfolioMetrics' }
+        trend: { type: array, items: { $ref: '#/components/schemas/TrendBucket' } }
+        board:
+          type: object
+          description: Stage id → contacts in it (admins excluded), sorted by `daysInStage` descending.
+          additionalProperties:
+            type: array
+            items: { $ref: '#/components/schemas/CrmContact' }
+        tasks:
+          type: array
+          description: Open tasks across all contacts, dated ones first by due date; capped at 40 (issue 6).
+          items: { $ref: '#/components/schemas/OpenTask' }
+        engagementWindowDays: { type: integer, example: 30 }
+        generatedAt: { type: string, format: date-time }
+
+    ContactsResponse:
+      type: object
+      required: [total, page, pageSize, contacts, vocabulary]
+      properties:
+        total: { type: integer, description: 'Matches across all pages.' }
+        page: { type: integer }
+        pageSize: { type: integer }
+        contacts: { type: array, items: { $ref: '#/components/schemas/CrmContact' } }
+        facets:
+          type: object
+          description: Counts over the matched set (not used by the frontend yet).
+          properties:
+            stage: { type: object, additionalProperties: { type: integer } }
+            lifecycle: { type: object, additionalProperties: { type: integer } }
+            source: { type: object, additionalProperties: { type: integer } }
+            owner: { type: object, additionalProperties: { type: integer } }
+        owners: { type: array, items: { type: string }, description: 'Distinct owners (not used yet).' }
+        tags: { type: array, items: { type: string }, description: 'Distinct tags (not used yet).' }
+        vocabulary: { $ref: '#/components/schemas/CrmVocabulary' }
+
+    TimelineEntry:
+      type: object
+      description: One line of the merged, newest-first timeline.
+      required: [at, kind, type, detail]
+      properties:
+        at: { type: string, format: date-time }
+        kind: { type: string, enum: [activity, subscription, profile, note, task] }
+        type:
+          type: string
+          description: An activity type, `subscription.granted|revoked`, `profile.version`, `note.<kind>`, `task.created|completed`.
+        detail: { type: object, additionalProperties: true, description: 'The underlying record (activity entry / subscription log entry / version / note / task).' }
+
+    ContactDetail:
+      type: object
+      required: [contact, notes, tasks, versions, subscriptions, timeline, savedCalls, plans, vocabulary]
+      properties:
+        contact: { $ref: '#/components/schemas/CrmContact' }
+        profile:
+          type: object
+          nullable: true
+          description: An account's full profile, or the summary a lead's assessment produced.
+          additionalProperties: true
+        notes: { type: array, items: { $ref: '#/components/schemas/CrmNote' } }
+        tasks: { type: array, items: { $ref: '#/components/schemas/CrmTask' } }
+        versions: { type: array, items: { $ref: '#/components/schemas/ProfileVersion' } }
+        subscriptions: { type: array, items: { $ref: '#/components/schemas/SubscriptionLogEntry' } }
+        timeline: { type: array, maxItems: 120, items: { $ref: '#/components/schemas/TimelineEntry' } }
+        savedCalls:
+          type: array
+          items:
+            type: object
+            required: [id]
+            properties:
+              id: { type: string }
+              title: { type: string, nullable: true, description: 'Null when the call has since left the catalog.' }
+              program: { type: string, nullable: true }
+              deadline: { type: string, format: date, nullable: true }
+        plans: { type: array, items: { $ref: '#/components/schemas/Plan' } }
+        vocabulary: { $ref: '#/components/schemas/CrmVocabulary' }
+        lead: { type: object, additionalProperties: true, description: 'The raw lead record; present only for a lead.' }

@@ -1,0 +1,17 @@
+{
+  "shell": {
+    "signOut": "Sign out",
+    "signIn": "Sign in",
+    "notSignedIn": "Not signed in",
+    "free": "free",
+    "subscriber": "subscriber",
+    "admin": "administrator",
+    "workspace": {
+      "label": "Workspace",
+      "client": "Client view",
+      "admin": "Admin",
+      "clientNote": "You are seeing what a client sees.",
+      "adminNote": "Managing accounts and subscriptions."
+    }
+  }
+}

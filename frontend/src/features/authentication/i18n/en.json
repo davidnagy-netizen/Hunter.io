@@ -1,0 +1,36 @@
+{
+  "login": {
+    "title": "Sign in",
+    "subtitle": "Sign in with your company account to see your personalised matches."
+  },
+  "register": {
+    "title": "Create a company account",
+    "subtitle": "Create your company's account. Your company profile and history stay tied to it."
+  },
+  "tabs": {
+    "login": "Sign in",
+    "register": "Register"
+  },
+  "fields": {
+    "username": "Username",
+    "password": "Password",
+    "company": "Company name",
+    "email": "Email",
+    "optional": "optional"
+  },
+  "actions": {
+    "submitLogin": "Sign in",
+    "submitRegister": "Create account",
+    "submitting": "One moment…"
+  },
+  "adminHint": "Demo access: <b>admin</b> / <b>admin</b> — administrator account for granting subscriptions.",
+  "backToHome": "Back to the home page",
+  "welcome": "Welcome, {{username}}!",
+  "signedOut": "You have been signed out",
+  "subscription": {
+    "trial": "Trial · {{count}} days",
+    "active": "Active",
+    "activeDays": "Active · {{count}} days",
+    "none": "No subscription"
+  }
+}

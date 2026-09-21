@@ -1,0 +1,78 @@
+{
+  "steps": {
+    "intro": { "title": "Kezdjük a demóval", "subtitle": "Betöltünk egy kész mintacéget, vagy kitöltöd a sajátoddal." },
+    "company": { "title": "A céged alapadatai", "subtitle": "Ezek határozzák meg a jogosultságot." },
+    "activity": { "title": "Tevékenység", "subtitle": "Iparág és TEÁOR — ez szűri a releváns programokat." },
+    "goals": { "title": "Fejlesztési célok", "subtitle": "Mit szeretnél megvalósítani? Több is lehet." },
+    "investment": { "title": "Tervezett beruházás", "subtitle": "A támogatás mértékét és a méret-illeszkedést ebből számoljuk." },
+    "setup": { "title": "Hogyan pályáznál?", "subtitle": "Az európai felhívások nagy része konzorciumot kíván — ez dönti el, mi elérhető számodra." }
+  },
+  "fields": {
+    "company": "Cégnév",
+    "employees": "Alkalmazottak száma",
+    "county": "Megye / megvalósítási helyszín",
+    "closedYears": "Lezárt üzleti évek száma",
+    "revBand": "Éves árbevétel sáv",
+    "regionCode": "Régiókód",
+    "optional": "opcionális",
+    "industry": "Iparág (fő tevékenység)",
+    "goals": "Fejlesztési célok",
+    "projectName": "Projekt neve",
+    "investmentValue": "Tervezett projektérték (Ft)",
+    "fundingPref": "Támogatási preferencia",
+    "orgType": "Szervezeti forma",
+    "consortiumReady": "Tudsz nemzetközi konzorciumban pályázni?",
+    "euExperience": "Pályáztatok már közvetlen EU-s forrásra?"
+  },
+  "closedYearsOptions": { "none": "Még nincs", "one": "1 év", "twoOrMore": "2 vagy több" },
+  "fundingPrefOptions": {
+    "non_refundable": "Vissza nem térítendő",
+    "loan_ok": "Támogatott hitel is",
+    "EU": "EU-s",
+    "HU": "Magyar"
+  },
+  "consortiumHint": "A Horizon Europe kutatási és innovációs felhívásai jellemzően legalább 3 szervezetet kívánnak 3 különböző tagállamból. Az önállóan beadható felhívások (pl. EIC Accelerator, Digital Europe, LIFE) ettől függetlenül elérhetők.",
+  "orgTypeHintSme": "A {{count}} fős létszám alapján ez KKV.",
+  "orgTypeHintLarge": "A {{count}} fős létszám alapján ez nagyvállalat.",
+  "yes": "Igen",
+  "no": "Nem",
+  "notYet": "Még nem",
+  "onlyAlone": "Nem, csak önállóan",
+  "haveOrCanBuildPartners": "Igen, van vagy építhető partnerségem",
+  "demoBanner": "A leggyorsabb bemutatóhoz töltsd be a <b>mintacéget</b> (28 fős gyártó KKV, Pest megye, digitalizáció, 30 M Ft). Bármikor átírhatod.",
+  "actions": {
+    "loadDemo": "Mintacég betöltése",
+    "fillMyself": "Inkább kitöltöm magam",
+    "next": "Következő",
+    "back": "Vissza",
+    "finish": "Találataim megnézése",
+    "exit": "Kilépés",
+    "restore": "Visszaállítás",
+    "saving": "Mentés…"
+  },
+  "progress": "Cégprofil",
+  "toasts": {
+    "saved": "Cégprofil elmentve",
+    "saveFailed": "A mentés nem sikerült",
+    "restored": "{{version}}. verzió visszaállítva",
+    "restoreFailed": "A visszaállítás nem sikerült"
+  },
+  "history": {
+    "title": "Cégprofil verziói",
+    "subtitle": "Minden mentés új verzió. Bármelyik visszaállítható.",
+    "empty": "Még nincs mentett verzió.",
+    "firstSave": "Első mentés",
+    "signInRequired": "A profilelőzmények csak bejelentkezve érhetők el — anonim látogatóként a profilod csak ebben a böngészőben létezik."
+  },
+  "validation": {
+    "company": "Adj meg egy cégnevet.",
+    "employees": "Adj meg egy pozitív létszámot.",
+    "county": "Válassz megyét.",
+    "closedYears": "Add meg a lezárt üzleti évek számát.",
+    "industry": "Válassz iparágat.",
+    "goals": "Válassz legalább egy fejlesztési célt.",
+    "investment": "Adj meg egy pozitív projektértéket.",
+    "orgType": "Válassz szervezeti formát.",
+    "consortiumReady": "Válaszolj a konzorciumi kérdésre."
+  }
+}

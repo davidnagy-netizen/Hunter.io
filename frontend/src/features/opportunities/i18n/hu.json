@@ -1,0 +1,214 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "opportunities": "Pályázatok",
+    "search": "Keresés",
+    "calendar": "Naptár",
+    "saved": "Kedvencek"
+  },
+  "loading": "Betöltés…",
+  "error": "A katalógus nem érhető el: {{message}}",
+  "dashboard": {
+    "welcome": "Üdv, {{company}}!",
+    "found": "A Fundor {{n}} lehetőséget talált a cégprofilod alapján. Íme a döntéshez fontos találatok.",
+    "tiles": {
+      "total": "releváns pályázat neked",
+      "strong": "nagyon erős (85+)",
+      "closing": "hamarosan lejár",
+      "attention": "figyelendő / hiányos adat"
+    },
+    "recommended": "Neked ajánlott",
+    "only70": "Csak a 70+ találatok",
+    "lower": "Alacsonyabb relevancia is",
+    "empty": "Ezen a relevanciaszinten még nincs találat.",
+    "upcoming": "Következő határidők",
+    "fullCalendar": "Teljes naptár"
+  },
+  "list": {
+    "title": "Pályázatok",
+    "subtitle": "Minden találat a cégprofilodra rangsorolva. A jogosultsági motor előre kiszűri, amire nem felelsz meg.",
+    "gatedSubtitle": "A cégprofilod alapján {{n}} felhívásra pályázhatsz. Az alábbi pontszámok és összegek valósak.",
+    "relevant": "Releváns",
+    "blocked": "Nem jogosult",
+    "blockedNote": "Kizárva a szabálymotor által"
+  },
+  "card": {
+    "support": "Támogatás:",
+    "intensity": "Intenzitás:",
+    "deadline": "Határidő:",
+    "why": "Miért ajánljuk?",
+    "whyNot": "Miért?",
+    "new": "Új",
+    "open": "Nyitva",
+    "closingSoon": "Hamarosan lejár",
+    "excluded": "Kizárva",
+    "missingData": "Hiányzó adat",
+    "exclusionFallback": "Nem teljesül egy kizáró feltétel",
+    "yours": "nálad: {{value}}",
+    "officialCall": "Hivatalos felhívás megnyitása",
+    "notPublished": "Nincs megadva"
+  },
+  "teaser": {
+    "grant": "Neked járó támogatás",
+    "ceiling": "Támogatási keret",
+    "notStated": "Támogatás: a felhívás nem közli",
+    "rate": "{{pct}}% támogatási intenzitás",
+    "unlock": "Feloldás",
+    "note": "A pontszám és az összeg a te cégprofilodra számolt valós érték. A felhívás neve, határideje és a beadási link az előfizetéssel oldódik fel.",
+    "noteEmpty": "A találataid az előfizetéssel nyílnak meg.",
+    "moreTitle": "Még {{n}} találat vár rád",
+    "moreBody": "Az előfizetés megnyitja a teljes találati listát, az öt tényezős indoklást, a támogatáskalkulátort és a beadási linkeket. A hozzáférést jelenleg adminisztrátor adja meg — fizetési átjáró még nem kapcsolódik.",
+    "cta": "Cégfiók létrehozása"
+  },
+  "detail": {
+    "back": "Vissza a találatokhoz",
+    "notFound": {
+      "title": "Ez a felhívás már nem elérhető",
+      "body": "Lehet, hogy lejárt a határideje, vagy lekerült a portálról."
+    },
+    "gated": {
+      "title": "A felhívás részletei az előfizetéssel nyílnak meg",
+      "body": "Előfizetés nélkül a felhívás neve, határideje és linkjei nem láthatók — a listán csak a pontszám és az összeg."
+    },
+    "facts": {
+      "funding": "Támogatás",
+      "fundingWhole": "Támogatás (teljes projekt)",
+      "intensity": "Intenzitás",
+      "deadline": "Beadási határidő",
+      "applicant": "Pályázói forma",
+      "single": "Önállóan pályázható",
+      "consortium": "{{partners}} partner, {{countries}} ország",
+      "notPublished": "Nincs megadva"
+    },
+    "closingIn": "{{n}} nap a határidőig",
+    "breakdown": {
+      "title": "Fundor Score bontása",
+      "subtitle": "Öt faktor, a spec szerinti súlyozással. Kattints egy faktorra a részletes indoklásért."
+    },
+    "why": {
+      "title": "Miért ajánljuk?",
+      "subtitle": "Minden állítás a te konkrét adataidból következik, és a hivatalos felhívásra hivatkozik.",
+      "pass": "Miért ajánljuk",
+      "watch": "Mire figyelj",
+      "unknown": "Mit nem tudunk még",
+      "yours": "(nálad: {{value}})"
+    },
+    "blocked": {
+      "title": "Ez a pályázat a cégprofilod alapján nem releváns",
+      "body": "A szabályalapú jogosultsági motor legalább egy kizáró feltételt talált. A pontozás ezt nem írhatja felül.",
+      "criteria": "Kizáró feltételek"
+    },
+    "consortium": {
+      "title": "Konzorciumi követelmény",
+      "body": "Ez a felhívás nem adható be egyedül: legalább {{partners}} független szervezet kell, {{countries}} különböző tagállamból.",
+      "share": "Becsült partneri részesedés",
+      "range": "Reális sáv",
+      "note": "Becslés: a teljes projektre szóló támogatás egy partnerre jutó része. A Horizon konzorciumok jellemzően a minimumnál több, 8–15 tagot számlálnak, ezért egy partner részesedése lényegesen kisebb az egyenlő osztásnál."
+    },
+    "calculator": {
+      "title": "Támogatáskalkulátor",
+      "subtitle": "A tervezett projektértékből és a támogatási intenzitásból.",
+      "value": "Tervezett projektérték (Ft)",
+      "intensity": "Támogatási intenzitás",
+      "expected": "Várható támogatás",
+      "own": "Szükséges önerő",
+      "hintShare": "A számítás a becsült partneri részesedéshez igazodik (kb. {{max}} felső határ), nem a teljes projektkerethez.",
+      "hintCeiling": "A támogatás a keretösszegre ({{max}}) van korlátozva.",
+      "hintNone": "A felhívás nem közöl támogatási felső határt."
+    },
+    "documents": "Szükséges dokumentumok",
+    "apply": {
+      "title": "Hogyan pályázz",
+      "body": "A beadás a kiíró hivatalos rendszerében történik — a Fundor ide irányít, a pontos feltételeket mindig a felhívás szövege adja.",
+      "officialPage": "Hivatalos felhívás oldala",
+      "officialSub": "{{ref}} — teljes szöveg, mellékletek, GYIK",
+      "submission": "Beadási felület — pályázat indítása",
+      "submissionSub": "EU Login belépés szükséges",
+      "portal": "Kiíró portál",
+      "portalSub": "keresés, határidők, helpdesk",
+      "daysLeft": "Beadási határidő: {{date}} — {{n}} nap van hátra.",
+      "passed": "A beadási határidő lejárt.",
+      "curatedNote": "Ez egy kurált referencia-bejegyzés egy magyar nemzeti programról, nem a portálról letöltött felhívás. A számok és feltételek a program tipikus paramétereit tükrözik — a beadás előtt mindig a hivatalos kiírást nézd meg.",
+      "curatedPortal": "Széchenyi Terv Plusz pályázati portál",
+      "curatedPortalSub": "palyazat.gov.hu — itt jelennek meg a hivatalos kiírások",
+      "start": "Beadás a portálon",
+      "openOfficial": "Irány a hivatalos felhívás",
+      "noLink": "Nincs közvetlen link"
+    },
+    "actions": {
+      "save": "Elmentem",
+      "saved": "✓ Elmentve"
+    },
+    "source": {
+      "label": "Forrás",
+      "ecPortal": "Európai Bizottság — Funding & Tenders portál",
+      "curated": "Magyar nemzeti program — kurált referencia-bejegyzés",
+      "national": "Magyar nemzeti program",
+      "disclaimer": "A jogosultsági kimenet előszűrés, nem hatósági döntés.",
+      "officialCall": "Hivatalos felhívás"
+    }
+  },
+  "value": {
+    "employees": "{{n}} fő",
+    "closedYears": "{{n}} lezárt év",
+    "deMinimisYes": "van keret",
+    "deMinimisNo": "nincs keret",
+    "yes": "Igen",
+    "no": "Nem"
+  },
+  "search": {
+    "title": "Keresés",
+    "subtitle": "Kereshetsz az összes nyitott és közelgő európai és magyar felhívás között. A találatok a cégprofilodra pontozva jelennek meg.",
+    "placeholder": "Keress témára, programra vagy azonosítóra — pl. hidrogén, digitalizáció, HORIZON-CL4",
+    "go": "Keresés",
+    "results_one": "{{count}} találat",
+    "results_other": "{{count}} találat",
+    "resultsFor": "erre: {{q}}",
+    "loading": "Keresés…",
+    "unavailable": "A keresés nem érhető el",
+    "empty": {
+      "title": "Nincs találat",
+      "body": "Próbálj tágabb kifejezést, vagy vegyél le egy szűrőt."
+    },
+    "onlyEligible": "Csak amire jogosult vagyok",
+    "sort": {
+      "": "Relevancia",
+      "-score": "Fundor Score",
+      "deadline": "Határidő",
+      "-budget": "Támogatás"
+    },
+    "facet": {
+      "program": "Program",
+      "goals": "Fejlesztési cél",
+      "actionCode": "Támogatási forma",
+      "consortium": "Pályázói forma"
+    },
+    "consortium": {
+      "required": "Konzorcium szükséges",
+      "solo": "Önállóan is pályázható"
+    },
+    "clearAll": "Összes szűrő törlése",
+    "remove": "Eltávolítás",
+    "source": "Forrás",
+    "inCatalog": "{{n}} felhívás a katalógusban",
+    "rate": "1 EUR = {{rate}} HUF (EKB középárfolyam)"
+  },
+  "calendar": {
+    "title": "Funding Calendar",
+    "subtitle": "Nem neked kell figyelned a határidőket — a Fundor figyeli helyetted. Csak a 70+ Fundor Score-ú, releváns találatok jelennek meg.",
+    "gatedSubtitle": "A közelgő beadási határidőid. A dátumok az előfizetéssel nyílnak meg — addig annyi látszik, hogy hány határidő vár rád és mekkora összegről van szó.",
+    "deadlines_one": "{{count}} beadási határidő",
+    "deadlines_other": "{{count}} beadási határidő",
+    "urgent": "{{n}} sürgős",
+    "days": "{{n}} nap",
+    "empty": "A releváns találataid között nincs közelgő határidő.",
+    "notice": "Az emlékeztetők (30/14/7/3 nap) és az .ics export még nem elérhető. Szakaszos elbírálásnál a keret a határidő előtt kimerülhet."
+  },
+  "saved": {
+    "title": "Kedvencek",
+    "subtitle": "Az elmentett lehetőségeid egy helyen.",
+    "emptyTitle": "Még nincs mentett pályázatod",
+    "emptyBody": "A találatok részletes oldalán az „Elmentem” gombbal teheted ide, amit később megnéznél.",
+    "gated": "Az elmentett felhívások az előfizetéssel nyílnak meg."
+  }
+}

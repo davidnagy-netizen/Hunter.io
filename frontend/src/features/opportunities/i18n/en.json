@@ -1,0 +1,214 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "opportunities": "Grants",
+    "search": "Search",
+    "calendar": "Calendar",
+    "saved": "Saved"
+  },
+  "loading": "Loading…",
+  "error": "The catalog is unavailable: {{message}}",
+  "dashboard": {
+    "welcome": "Welcome, {{company}}!",
+    "found": "Fundor found {{n}} opportunities based on your company profile. Here are the matches that matter for your decision.",
+    "tiles": {
+      "total": "relevant grants for you",
+      "strong": "very strong (85+)",
+      "closing": "closing soon",
+      "attention": "to watch / missing data"
+    },
+    "recommended": "Recommended for you",
+    "only70": "Only 70+ matches",
+    "lower": "Include lower relevance",
+    "empty": "No matches at this relevance level yet.",
+    "upcoming": "Upcoming deadlines",
+    "fullCalendar": "Full calendar"
+  },
+  "list": {
+    "title": "Grants",
+    "subtitle": "Every match ranked against your company profile. The eligibility engine filters out what you don't qualify for in advance.",
+    "gatedSubtitle": "Your company profile qualifies for {{n}} calls. The scores and amounts below are real.",
+    "relevant": "Relevant",
+    "blocked": "Not eligible",
+    "blockedNote": "Excluded by the rule engine"
+  },
+  "card": {
+    "support": "Funding:",
+    "intensity": "Intensity:",
+    "deadline": "Deadline:",
+    "why": "Why recommended?",
+    "whyNot": "Why?",
+    "new": "New",
+    "open": "Open",
+    "closingSoon": "Closing soon",
+    "excluded": "Excluded",
+    "missingData": "Missing data",
+    "exclusionFallback": "An exclusion criterion is not met",
+    "yours": "yours: {{value}}",
+    "officialCall": "Open the official call",
+    "notPublished": "Not published"
+  },
+  "teaser": {
+    "grant": "Grant you would receive",
+    "ceiling": "Grant ceiling",
+    "notStated": "Grant: the call does not state one",
+    "rate": "{{pct}}% funding rate",
+    "unlock": "Unlock",
+    "note": "The score and the amount are real figures computed for your company profile. The call name, its deadline and the submission link unlock with a subscription.",
+    "noteEmpty": "Your matches unlock with a subscription.",
+    "moreTitle": "{{n}} more matches are waiting",
+    "moreBody": "A subscription opens the full result list, the five-factor reasoning, the grant calculator and the submission links. Access is granted by an administrator for now — no payment gateway is connected yet.",
+    "cta": "Create a company account"
+  },
+  "detail": {
+    "back": "Back to matches",
+    "notFound": {
+      "title": "This call is no longer available",
+      "body": "Its deadline may have passed, or it may have been withdrawn from the portal."
+    },
+    "gated": {
+      "title": "Call details unlock with a subscription",
+      "body": "Without an active subscription the call's name, deadline and links are withheld — only the score and the amount are shown, on the list."
+    },
+    "facts": {
+      "funding": "Grant",
+      "fundingWhole": "Grant (whole project)",
+      "intensity": "Intensity",
+      "deadline": "Submission deadline",
+      "applicant": "Applicant setup",
+      "single": "Single applicant",
+      "consortium": "{{partners}} partners, {{countries}} countries",
+      "notPublished": "Not published"
+    },
+    "closingIn": "{{n}} days to deadline",
+    "breakdown": {
+      "title": "Fundor Score breakdown",
+      "subtitle": "Five factors, weighted per the specification. Click a factor for the detailed justification."
+    },
+    "why": {
+      "title": "Why we recommend this",
+      "subtitle": "Every statement follows from your own concrete data and references the official call.",
+      "pass": "Why we recommend it",
+      "watch": "What to watch",
+      "unknown": "What we don't know yet",
+      "yours": "(yours: {{value}})"
+    },
+    "blocked": {
+      "title": "This call is not relevant based on your company profile",
+      "body": "The rule-based eligibility engine found at least one exclusion criterion. Scoring cannot override it.",
+      "criteria": "Exclusion criteria"
+    },
+    "consortium": {
+      "title": "Consortium requirement",
+      "body": "This call cannot be submitted alone: at least {{partners}} independent organisations from {{countries}} different Member States are required.",
+      "share": "Estimated partner share",
+      "range": "Realistic range",
+      "note": "An estimate: one partner's slice of the project grant. Horizon consortia typically run well past the minimum, with eight to fifteen members, so a single partner's share is much smaller than an even split."
+    },
+    "calculator": {
+      "title": "Grant calculator",
+      "subtitle": "From the planned project value and the funding intensity.",
+      "value": "Planned project value (HUF)",
+      "intensity": "Funding intensity",
+      "expected": "Expected funding",
+      "own": "Required own contribution",
+      "hintShare": "The calculation is capped at your estimated partner share (about {{max}}), not the whole project grant.",
+      "hintCeiling": "Funding is capped at the ceiling ({{max}}).",
+      "hintNone": "The call does not publish a funding ceiling."
+    },
+    "documents": "Required documents",
+    "apply": {
+      "title": "How to apply",
+      "body": "Submission happens in the funder's own system — Fundor points you there, and the call text is always the authority on the conditions.",
+      "officialPage": "Official call page",
+      "officialSub": "{{ref}} — full text, annexes, FAQ",
+      "submission": "Submission system — start a proposal",
+      "submissionSub": "requires an EU Login account",
+      "portal": "Funder's portal",
+      "portalSub": "search, deadlines, helpdesk",
+      "daysLeft": "Submission deadline: {{date}} — {{n}} days left.",
+      "passed": "The submission deadline has passed.",
+      "curatedNote": "This is a curated reference entry for a Hungarian national programme, not a record pulled from the portal. The figures reflect the programme's typical parameters — always check the official call text before applying.",
+      "curatedPortal": "Hungarian national funding portal",
+      "curatedPortalSub": "palyazat.gov.hu — this is where official calls are published",
+      "start": "Start the application",
+      "openOfficial": "Open the official call",
+      "noLink": "No direct link available"
+    },
+    "actions": {
+      "save": "Save",
+      "saved": "✓ Saved"
+    },
+    "source": {
+      "label": "Source",
+      "ecPortal": "European Commission — Funding & Tenders Portal",
+      "curated": "Hungarian national programme — curated reference entry",
+      "national": "Hungarian national programme",
+      "disclaimer": "The eligibility output is a pre-screen, not an official determination.",
+      "officialCall": "Official call"
+    }
+  },
+  "value": {
+    "employees": "{{n}} employees",
+    "closedYears": "{{n}} closed years",
+    "deMinimisYes": "headroom available",
+    "deMinimisNo": "no headroom",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "search": {
+    "title": "Search",
+    "subtitle": "Search every open and forthcoming European and Hungarian call. Results are scored against your company profile.",
+    "placeholder": "Search a topic, programme or identifier — e.g. hydrogen, digitalisation, HORIZON-CL4",
+    "go": "Search",
+    "results_one": "{{count}} result",
+    "results_other": "{{count}} results",
+    "resultsFor": "for {{q}}",
+    "loading": "Searching…",
+    "unavailable": "Search is unavailable",
+    "empty": {
+      "title": "No results",
+      "body": "Try a broader term, or remove a filter."
+    },
+    "onlyEligible": "Only what I'm eligible for",
+    "sort": {
+      "": "Relevance",
+      "-score": "Fundor Score",
+      "deadline": "Deadline",
+      "-budget": "Grant size"
+    },
+    "facet": {
+      "program": "Programme",
+      "goals": "Development goal",
+      "actionCode": "Funding instrument",
+      "consortium": "Applicant setup"
+    },
+    "consortium": {
+      "required": "Consortium required",
+      "solo": "Can apply alone"
+    },
+    "clearAll": "Clear all filters",
+    "remove": "Remove",
+    "source": "Source",
+    "inCatalog": "{{n}} calls in the catalog",
+    "rate": "1 EUR = {{rate}} HUF (ECB reference rate)"
+  },
+  "calendar": {
+    "title": "Funding Calendar",
+    "subtitle": "You don't have to track the deadlines — Fundor tracks them for you. Only relevant matches with a Fundor Score of 70+ are shown.",
+    "gatedSubtitle": "Your upcoming submission deadlines. The dates unlock with a subscription — until then you can see how many are waiting and how much money is involved.",
+    "deadlines_one": "{{count}} submission deadline",
+    "deadlines_other": "{{count}} submission deadlines",
+    "urgent": "{{n}} urgent",
+    "days": "{{n}} days",
+    "empty": "No upcoming deadlines among your relevant matches.",
+    "notice": "Deadline reminders (30/14/7/3 days) and .ics export are not available yet. With staged evaluation the budget may run out before the deadline."
+  },
+  "saved": {
+    "title": "Saved",
+    "subtitle": "Your saved opportunities in one place.",
+    "emptyTitle": "You have no saved grants yet",
+    "emptyBody": "Use the “Save” button on a match's detail page to put here whatever you want to revisit.",
+    "gated": "Saved calls unlock with a subscription."
+  }
+}

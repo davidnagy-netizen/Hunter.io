@@ -1,0 +1,243 @@
+{
+  "nav": {
+    "crm": "CRM"
+  },
+  "title": "CRM",
+  "subtitle": "Customer relationships: who to call today, what the portfolio is worth, and what was last said. Every figure is computed from recorded events.",
+  "tabs": {
+    "pipeline": "Pipeline",
+    "contacts": "Contacts",
+    "leads": "Leads",
+    "insights": "Insights"
+  },
+  "back": "Back to the CRM",
+  "pipeline": {
+    "kpi": {
+      "mrr": {
+        "label": "MRR",
+        "sub": "{{count}} subscribers · ARR {{arr}}"
+      },
+      "trials": {
+        "label": "Running trials",
+        "converted": "Converted so far: {{pct}}% ({{done}}/{{started}})",
+        "none": "No completed trial yet"
+      },
+      "openDeals": {
+        "label": "Open deals",
+        "value": "Expected value: {{value}} / mo"
+      },
+      "overdue": {
+        "label": "Overdue tasks",
+        "today": "Due today: {{count}}"
+      },
+      "lapsed": {
+        "label": "Lapsed",
+        "detail": "In the last 30 days: {{recent}} · churn {{pct}}%",
+        "none": "Nothing to churn from yet"
+      }
+    },
+    "overdueTitle": "Overdue follow-ups",
+    "open": "Open",
+    "empty": "Empty",
+    "note": "Cards drag between stages; on a touch screen the dropdown on the card is the reliable route. Stage is the only field a person sets — the lifecycle (lead, trial, subscriber, lapsed) is read off the real subscription."
+  },
+  "card": {
+    "daysInStage": "{{count}}d in stage",
+    "assessment": "{{score}} · assessment",
+    "stage": "Stage"
+  },
+  "engagement": {
+    "hint": "Activity indicator from the recorded events of the last {{days}} days",
+    "title": "Engagement",
+    "subtitle": "From the recorded events of the last {{days}} days. Not a prediction — the rows below account for the whole of it.",
+    "empty": "Nothing happened in this window.",
+    "lastSeen": "Last seen",
+    "daysAgo": "{{count}}d ago",
+    "signal": "{{label}} · {{count}}×"
+  },
+  "lostDialog": {
+    "title": "Why was it lost?",
+    "field": "Reason (optional)",
+    "confirm": "Mark as lost",
+    "cancel": "Cancel"
+  },
+  "moved": "Moved to {{stage}}",
+  "contact": {
+    "history": "History",
+    "delete": "Delete lead",
+    "lostReason": "Lost, reason:",
+    "arrived": "arrived {{date}}",
+    "disabled": "disabled",
+    "notFound": "There is no such contact.",
+    "deleteDialog": {
+      "title": "Delete this lead for good?",
+      "body": "The lead and its notes and tasks are removed. This cannot be undone.",
+      "confirm": "Delete",
+      "cancel": "Cancel"
+    }
+  },
+  "notes": {
+    "title": "Notes",
+    "subtitle": "What you write down after a call is what survives six weeks later. The kind is a separate field because a phone call and a decision are not the same thing.",
+    "placeholder": "What was said?",
+    "kind": "Kind",
+    "save": "Save",
+    "empty": "No notes yet.",
+    "delete": "delete",
+    "kinds": {
+      "note": "Note",
+      "call": "Call",
+      "email": "Email",
+      "meeting": "Meeting",
+      "decision": "Decision"
+    }
+  },
+  "timeline": {
+    "title": "Timeline",
+    "subtitle": "What happened: what the company did, what we granted them, how their profile changed, and what we wrote down.",
+    "empty": "Nothing has happened yet.",
+    "noteLogged": "{{kind}} logged",
+    "profileVersion": "Company profile changed",
+    "taskCreated": "Follow-up added",
+    "taskCompleted": "Follow-up completed",
+    "firstSave": "first save",
+    "due": "Due {{date}}",
+    "days": "{{count}} days",
+    "by": "by {{name}}"
+  },
+  "access": {
+    "title": "Access",
+    "monthlyValue": "Monthly value",
+    "validUntil": "Valid until",
+    "note": "No payment gateway is connected yet — access is granted here, and every grant is logged."
+  },
+  "tasks": {
+    "title": "Follow-ups",
+    "placeholder": "What is the next step?",
+    "due": "Due date",
+    "add": "Add",
+    "empty": "No open follow-up.",
+    "done": "Done",
+    "noDue": "no due date",
+    "delete": "delete"
+  },
+  "profile": {
+    "title": "Company profile",
+    "employees": "Employees",
+    "county": "County",
+    "teaor": "NACE",
+    "projectValue": "Project value",
+    "revenue": "Revenue",
+    "versions": "Profile versions",
+    "empty": "No company profile filled in yet — which is itself a reason to call.",
+    "readiness": "Assessment result"
+  },
+  "saved": {
+    "title": "Saved calls",
+    "subtitle": "What this company set aside — the best guide there is to what to talk about."
+  },
+  "classification": {
+    "title": "Classification",
+    "owner": "Owner",
+    "tags": "Tags, comma separated",
+    "save": "Save"
+  },
+  "validation": {
+    "note": "A note cannot be empty.",
+    "task": "A task needs a title.",
+    "owner": "Keep the owner under 60 characters."
+  },
+  "contacts": {
+    "search": "Search",
+    "searchLabel": "Search contacts",
+    "searchPlaceholder": "Company, user, email, tag…",
+    "allStages": "All stages",
+    "allLifecycles": "All lifecycles",
+    "allSources": "All sources",
+    "sortLabel": "Sort",
+    "sorts": {
+      "recent": "Newest",
+      "engagement": "Engagement",
+      "value": "Monthly value",
+      "expiring": "Expiring soon",
+      "stale": "Longest in stage",
+      "company": "Company name"
+    },
+    "csv": "Download CSV",
+    "count": "{{count}} contacts matching",
+    "empty": "Nothing matches this filter",
+    "col": {
+      "company": "Company",
+      "lifecycle": "Lifecycle",
+      "stage": "Stage",
+      "engagement": "Engagement",
+      "value": "Monthly value",
+      "task": "Task"
+    },
+    "daysLeft": "{{count}} days left",
+    "daysInStage": "{{count}}d",
+    "assessment": "Assessment: {{score}}",
+    "overdue": "overdue",
+    "open": "Open"
+  },
+  "leads": {
+    "intro": "Visitors who completed the free assessment and asked to be contacted. Their answers and readiness score are from the submission they actually made, so the first call does not start from a blank page.",
+    "col": {
+      "company": "Company and contact",
+      "assessment": "Assessment",
+      "stage": "Stage",
+      "arrived": "Arrived"
+    },
+    "converted": "became an account",
+    "staff": "{{count}} staff",
+    "empty": "No leads yet",
+    "emptyHint": "The free assessment offers a follow-up at the end; what is entered there arrives here."
+  },
+  "insights": {
+    "kpi": {
+      "mrr": {
+        "label": "MRR",
+        "sub": "The 30-day value of subscriptions that are active right now"
+      },
+      "arr": {
+        "label": "ARR",
+        "sub": "MRR × 12 — not a forecast"
+      },
+      "arpa": {
+        "label": "Average per account",
+        "sub": "{{count}} paying accounts"
+      },
+      "conversion": {
+        "label": "Trial → paid",
+        "sub": "{{done}} of {{started}} trials",
+        "none": "No trial has completed yet"
+      }
+    },
+    "funnel": {
+      "title": "Funnel",
+      "leads": "Leads",
+      "registered": "Registered",
+      "trials": "On trial",
+      "subscribers": "Subscribers"
+    },
+    "stages": "Stages",
+    "revenueByPlan": "Revenue by plan",
+    "noPlans": "No paid subscription is active yet.",
+    "sources": "Where they came from",
+    "noSources": "No source recorded yet.",
+    "trend": {
+      "title": "New contacts by month",
+      "subtitle": "From the real timestamps of sign-ups and leads, over the last six months. An empty month is shown too, because that is information as well.",
+      "signups": "Sign-ups",
+      "leads": "Leads",
+      "aria": "New contacts per month"
+    },
+    "warm": {
+      "title": "Active, but not yet subscribed",
+      "subtitle": "Accounts that used the product in the last {{days}} days but have no subscription. This is the most useful call order there is, because it rests on things that actually happened.",
+      "empty": "No account is in that position right now.",
+      "detail": "engagement {{score}}",
+      "lastSeen": "last seen {{count}}d ago"
+    }
+  }
+}
