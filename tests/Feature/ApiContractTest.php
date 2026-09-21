@@ -37,13 +37,8 @@ class ApiContractTest extends TestCase
 
     public function test_all_contract_operations_return_json_shapes_for_frontend(): void
     {
-        $snapshots = [];
-        $call = function (string $method, string $uri, array $body = [], int $status = 200) use (&$snapshots) {
-            $response = $this->json($method, '/api'.$uri, $body)->assertStatus($status);
-            $path = preg_replace('#/opportunities/[^/]+#', '/opportunities/{id}', explode('?', $uri)[0]);
-            $snapshots[] = ['path' => $path, 'method' => strtolower($method), 'status' => (string) $status, 'body' => json_decode($response->getContent())];
-
-            return $response;
+        $call = function (string $method, string $uri, array $body = [], int $status = 200) {
+            return $this->json($method, '/api'.$uri, $body)->assertStatus($status);
         };
         $this->opportunity();
         $call('GET', '/auth/me');
@@ -93,9 +88,6 @@ class ApiContractTest extends TestCase
         $call('POST', '/admin/crm/task', ['id' => $leadId, 'taskId' => $task, 'remove' => true]);
         $call('POST', '/admin/crm/lead', ['id' => $leadId, 'remove' => true]);
         $call('POST', '/admin/subscription', ['userId' => (string) $u->id, 'revoke' => true]);
-        if (getenv('API_CONTRACT_CAPTURE')) {
-            file_put_contents(base_path('api-contract-responses.json'), json_encode($snapshots, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR));
-        }
     }
 
     public function test_registration_cookie_login_logout_and_errors(): void
