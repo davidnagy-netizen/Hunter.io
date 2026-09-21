@@ -356,8 +356,9 @@ paths:
       summary: The catalog for the signed-in caller
       description: |
         **Subscriber/admin** (`gated: false`): every open call, trimmed (`summary` ≤ 240 chars; no `description`,
-        `conditionsHtml`, `goalEvidence`, `deadlines`). The **browser scores them locally** with the same engine the server
-        uses (`src/engine`), so `hard`/`soft` rules, `intensity`, `partnerShare`, etc. must be present.
+        `conditionsHtml`, `goalEvidence`, `deadlines`), **already scored for the caller's stored company profile and
+        answers** (`ScoredOpportunity`: score, verdict, checks, factors, calculator, ...), plus the same `stats` a gated
+        caller gets. The browser does not score anything itself.
 
         **Everyone else** (`gated: true`): `opportunities` is empty (`maxResults` is 0), and `teasers` carries the censored
         rows; `stats` and `lockedTotal` are the server's real counts (the browser has nothing to count).
@@ -1480,9 +1481,7 @@ components:
       type: object
       description: |
         A funding call as the catalog returns it (trimmed). Only the fields the frontend reads are listed; the server sends
-        more, and extra fields must keep being sent. **`hard`, `soft`, `intensity`, `partnerShare`, `consortium`,
-        `smeFit`, `highAdmin`, `awardsFunding`, `goals`/`goalScores`, `docs`, `deadline` are required by the browser-side
-        scoring engine.**
+        more, and extra fields must keep being sent.
       required: [id, program, title, deadline, intensity, goals, hard]
       properties:
         id: { type: string }
@@ -1575,11 +1574,12 @@ components:
 
     FullCatalog:
       type: object
-      required: [gated, total, opportunities, builtAt, referenceDate, eurHuf, entitlements]
+      required: [gated, total, opportunities, stats, builtAt, referenceDate, eurHuf, entitlements]
       properties:
         gated: { type: boolean, enum: [false] }
         total: { type: integer }
-        opportunities: { type: array, items: { $ref: '#/components/schemas/Opportunity' } }
+        opportunities: { type: array, items: { $ref: '#/components/schemas/ScoredOpportunity' } }
+        stats: { $ref: '#/components/schemas/CatalogStats' }
         builtAt: { type: string, format: date-time, nullable: true }
         referenceDate: { type: string, format: date, nullable: true }
         eurHuf: { type: number, nullable: true }
@@ -1744,64 +1744,80 @@ components:
         calculator: { type: object, nullable: true, enum: [null] }
       additionalProperties: false
 
+    ScoreFields:
+      type: object
+      description: |
+        What the server worked out for **this caller's company** about one call. The server is the only scorer: the
+        browser shows these values and never recomputes them. `score` is null when the call is ruled out (`blocked`);
+        `checks[].label` and `factors[].label/detail` are already worded in the requested `lang`. Every factor carries a
+        `detail` sentence explaining what it scored and why.
+      properties:
+        locked: { type: boolean, description: 'Present and true when the identity has been stripped.' }
+        closingSoon: { type: boolean, description: 'Present when locked.' }
+        daysLeft: { type: integer, nullable: true }
+        score: { type: integer, nullable: true }
+        blocked: { type: boolean }
+        estimated: { type: boolean }
+        verdict: { type: string, enum: [ELIGIBLE, CONDITIONAL, INSUFFICIENT_DATA, NOT_ELIGIBLE] }
+        band: { anyOf: [{ $ref: '#/components/schemas/Band' }, { type: object, nullable: true, enum: [null] }] }
+        checks:
+          type: array
+          items:
+            type: object
+            properties:
+              field: { type: string }
+              label: { type: string }
+              status: { type: string, enum: [pass, fail, unknown] }
+              yourValue: { description: 'The profile value that was checked; null when unknown.' }
+              required: {}
+              operator: { type: string }
+        conditions: { type: array, items: { type: string } }
+        factors:
+          type: array
+          description: The five-factor score explanation.
+          items:
+            type: object
+            properties:
+              key: { type: string, enum: [elig, fit, size, timing, feas] }
+              weight: { type: number }
+              value: { type: number, minimum: 0, maximum: 100 }
+              label: { type: string }
+              detail: { type: string }
+        questions:
+          type: array
+          description: Open eligibility questions that would sharpen the verdict.
+          items: { type: object, additionalProperties: true }
+        benchmark: { type: object, nullable: true, additionalProperties: true }
+        calculator:
+          type: object
+          nullable: true
+          description: Grant arithmetic for this company.
+          properties:
+            projectValueHuf: { type: number }
+            intensity: { type: number }
+            grantHuf: { type: number }
+            ownContributionHuf: { type: number }
+            cappedByCeiling: { type: boolean }
+            ceilingHuf: { type: number, nullable: true }
+            partnerShare: { type: object, nullable: true, additionalProperties: true }
+            callGrantHuf: { type: number, nullable: true }
+            currencyNote: { type: string, nullable: true }
+
     OpportunityDetailFull:
       description: |
         The whole opportunity (all of `Opportunity`, plus `description` and `conditionsHtml`) **plus** the caller-specific
-        scoring below.
+        scoring (`ScoreFields`).
       allOf:
         - { $ref: '#/components/schemas/Opportunity' }
-        - type: object
-          properties:
-            locked: { type: boolean, description: 'Present and true when the identity has been stripped.' }
-            closingSoon: { type: boolean, description: 'Present when locked.' }
-            daysLeft: { type: integer, nullable: true }
-            score: { type: integer, nullable: true }
-            blocked: { type: boolean }
-            estimated: { type: boolean }
-            verdict: { type: string, enum: [ELIGIBLE, CONDITIONAL, INSUFFICIENT_DATA, NOT_ELIGIBLE] }
-            band: { anyOf: [{ $ref: '#/components/schemas/Band' }, { type: object, nullable: true, enum: [null] }] }
-            checks:
-              type: array
-              items:
-                type: object
-                properties:
-                  field: { type: string }
-                  label: { type: string }
-                  status: { type: string, enum: [pass, fail, unknown] }
-                  yourValue: { description: 'The profile value that was checked; null when unknown.' }
-                  required: {}
-                  operator: { type: string }
-            conditions: { type: array, items: { type: string } }
-            factors:
-              type: array
-              description: The five-factor score explanation.
-              items:
-                type: object
-                properties:
-                  key: { type: string, enum: [elig, fit, size, timing, feas] }
-                  weight: { type: number }
-                  value: { type: number, minimum: 0, maximum: 100 }
-                  label: { type: string }
-                  detail: { type: string }
-            questions:
-              type: array
-              description: Open eligibility questions that would sharpen the verdict.
-              items: { type: object, additionalProperties: true }
-            benchmark: { type: object, nullable: true, additionalProperties: true }
-            calculator:
-              type: object
-              nullable: true
-              description: Grant arithmetic for this company.
-              properties:
-                projectValueHuf: { type: number }
-                intensity: { type: number }
-                grantHuf: { type: number }
-                ownContributionHuf: { type: number }
-                cappedByCeiling: { type: boolean }
-                ceilingHuf: { type: number, nullable: true }
-                partnerShare: { type: object, nullable: true, additionalProperties: true }
-                callGrantHuf: { type: number, nullable: true }
-                currencyNote: { type: string, nullable: true }
+        - { $ref: '#/components/schemas/ScoreFields' }
+
+    ScoredOpportunity:
+      description: |
+        A call as a **subscriber's** `GET /catalog` returns it: the trimmed `Opportunity` plus its `ScoreFields` for the
+        caller's stored company profile and answers.
+      allOf:
+        - { $ref: '#/components/schemas/Opportunity' }
+        - { $ref: '#/components/schemas/ScoreFields' }
 
     # ------------------------------------------------------------- leads
     LeadRequest:

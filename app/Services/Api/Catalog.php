@@ -41,11 +41,6 @@ class Catalog
         return $o;
     }
 
-    public function unscored(array $row): array
-    {
-        return $this->trim(array_diff_key($row, array_flip(['locked', 'score', 'blocked', 'estimated', 'verdict', 'band', 'daysLeft', 'checks', 'conditions', 'factors', 'questions', 'blockedReasons', 'benchmark', 'calculator'])));
-    }
-
     public function rows(array $state, string $lang = 'hu', bool $forthcoming = false): array
     {
         return Opportunity::whereIn('status', $forthcoming ? ['open', 'forthcoming'] : ['open'])->orderBy('code')->get()->map(function ($model) use ($state, $lang) {
