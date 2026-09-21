@@ -4,6 +4,9 @@
 /public/storage
 /storage/*.key
 /vendor
+/api-contract-responses.json
+/api-test-output.txt
+/.tmp-openapi-validation
 .env
 .env.backup
 .env.production

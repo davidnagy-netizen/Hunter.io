@@ -1,6 +1,9 @@
 <div align="center">
 
 # Fundor.hu
+
+Frontend integration: [API setup and examples](docs/FRONTEND-API.md) · [OpenAPI contract](openapi.yaml)
+
 ### AI-Powered Grant & Funding Intelligence for Hungarian SMEs
 
 > *"Ne te keresd a pályázatot. A Fundor megtalálja neked."*  

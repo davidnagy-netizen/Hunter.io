@@ -2,25 +2,26 @@ openapi: 3.0.3
 
 info:
   title: Fundor API (Target Specification)
-  version: 2.2.0
+  version: 2.3.0
   description: |
     **Target specification for the Fundor API**, providing grant/funding intelligence for Hungarian SMEs.
     This is the contract to implement in the Laravel application, not documentation of currently available endpoints.
     This project must implement the operations and schemas below. `x-frontend` records intended screen consumers;
     it does not imply that a screen or operation is already implemented.
 
-    ## Implementation baseline (2026-09-21)
+    ## Laravel implementation (2026-09-21)
 
-    `routes/api.php` currently registers only `GET /api/health`, `GET /api/opportunities`, and `POST /api/leads`.
-    All other operations below require implementation. Existing Blade web routes, including `/login`, `/register`,
-    and `/admin/*`, do not implement the JSON operations under `/api` described here.
+    The operations below are registered in `routes/api.php`, backed by database persistence and API-specific
+    `hunter_session` cookies. Apply migrations before using them. Existing Blade login sessions are separate.
+    See `docs/FRONTEND-API.md` for local setup, request examples and deployment configuration.
 
-    The existing lead endpoint also requires adaptation: it accepts `contact_name` and `readiness_score`, requires
-    `contact_name`, and returns `{ success, lead }`. This target instead uses `contactName` and `readiness`, requires
-    consent, updates a lead with a matching email, and returns `{ success, id, updated }`.
-    Laravel validation errors, authentication redirects, and session defaults must be adapted to this API contract.
-    The current `/api/health` and `/api/opportunities` endpoints are outside this target's scope; their omission does
-    not request their removal. In particular, review the public opportunity listing against the paywall requirements.
+    `GET /api/health` remains an operational endpoint outside this contract. `GET /api/opportunities` is a
+    compatibility alias of `GET /catalog` and enforces the same paywall.
+    Refresh requires `FUNDOR_CATALOG_FEED_URL`, a deployment-controlled normalized catalog feed; without it,
+    `POST /refresh` returns `503 REFRESH_UNAVAILABLE`. The raw EC portal ingestion adapter is not included.
+    Subscription prices are deployment configuration because this contract does not specify numeric prices.
+    Until configured, plan prices are absent and price-dependent CRM values are null, not fabricated revenue.
+    Reference vocabularies and five-factor scoring are based on the repository's `hunter-mvp.html` engine.
 
     ## Conventions
 
@@ -81,7 +82,7 @@ info:
 
 servers:
   - url: /api
-    description: Target API on the application origin; not all operations are implemented.
+    description: API on the Laravel application origin.
 
 tags:
   - name: Auth
@@ -284,7 +285,7 @@ paths:
                 type: object
                 required: [current, versions, activity]
                 properties:
-                  current: { type: object, allOf: [{ $ref: '#/components/schemas/CompanyProfile' }], nullable: true }
+                  current: { anyOf: [{ $ref: '#/components/schemas/CompanyProfile' }, { type: object, nullable: true, enum: [null] }] }
                   versions:
                     type: array
                     items: { $ref: '#/components/schemas/ProfileVersion' }
@@ -380,8 +381,7 @@ paths:
       summary: The catalog for an anonymous visitor (their profile travels in the body)
       description: |
         Same response as `GET`. The body's `profile`/`answers` are used instead of a stored profile.
-        **Callers must not send this until the visitor has a profile** — with none, the server would score against its demo
-        company.
+        **Callers must not send this until the visitor has a profile** — missing profiles are rejected. The server never substitutes another account or a demo company.
       x-frontend: { used-by: [Dashboard, Opportunities, Assessment result preview] }
       requestBody:
         required: true
@@ -573,7 +573,7 @@ paths:
                 field: { type: string, example: de_minimis_ok }
                 value:
                   description: 'A boolean, string or number. `null` clears the answer.'
-                  oneOf: [{ type: boolean }, { type: string }, { type: number }]
+                  oneOf: [{ type: boolean, nullable: true }, { type: string }, { type: number }]
                 scope: { type: string, enum: [global, call], default: global }
       responses:
         '200':
@@ -588,7 +588,7 @@ paths:
                   key: { type: string, description: 'The stored key (`field` or `<id>:<field>`).' }
                   value:
                     description: 'The stored value; `null` when the answer was cleared.'
-                    oneOf: [{ type: boolean }, { type: string }, { type: number }]
+                    oneOf: [{ type: boolean, nullable: true }, { type: string }, { type: number }]
                   opportunity: { $ref: '#/components/schemas/OpportunityDetail' }
         '400':
           description: "`FIELD_REQUIRED` — the answer field is missing."
@@ -745,9 +745,10 @@ paths:
     post:
       tags: [Admin]
       operationId: adminRefreshCatalog
-      summary: Rebuild the catalog now from the live EC Funding & Tenders portal
+      summary: Rebuild the catalog from the configured normalized funding feed
       description: |
-        Long-running (tens of seconds); overwrites the catalog. Called by the admin console's "Refresh now" button, after
+        Long-running (up to 60 seconds); validates the complete feed before changing the catalog.
+        Locally curated records are preserved; imported records absent from the feed are marked closed. Called by the admin console's "Refresh now" button, after
         which the frontend drops every cached catalog-derived result.
 
         **Requires an authenticated session and `role: admin`.**
@@ -763,7 +764,7 @@ paths:
           description: 'The portal could not be reached / the rebuild failed. Body is the refresher''s result (`ok: false`) with an `error`.'
           content: { application/json: { schema: { $ref: '#/components/schemas/RefreshResponse' } } }
         '503':
-          description: The refresher is not running.
+          description: '`REFRESH_UNAVAILABLE` — the normalized catalog feed is not configured.'
           content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
 
   # ------------------------------------------------------------------- CRM
@@ -901,7 +902,7 @@ paths:
       operationId: crmContact
       summary: The full record of one account or lead
       description: |
-        `id` is an account id **or** a lead id. For an account the server assembles the contact, its profile, notes, tasks,
+        `id` is an account id **or** a lead id (`lead:<database-id>`). Treat all ids as opaque strings. For an account the server assembles the contact, its profile, notes, tasks,
         profile versions, subscription log, a merged **timeline** (newest first, capped at 120 entries: activity,
         subscription changes, profile versions, notes, tasks) and the calls it saved. For a lead, `versions` and
         `subscriptions` are `[]`, `savedCalls` is `[]`, and the raw `lead` is included.
@@ -1131,6 +1132,12 @@ components:
       type: string
       description: Stable identifiers the frontend translates. Add new ones to the frontend's `errors.json` when introduced.
       enum:
+        - INVALID_REQUEST
+        - INTERNAL_ERROR
+        - JSON_REQUIRED
+        - CSRF_REJECTED
+        - EMAIL_TAKEN
+        - REFRESH_UNAVAILABLE
         - LOGIN_REQUIRED
         - ADMIN_REQUIRED
         - BAD_CREDENTIALS
@@ -1240,7 +1247,7 @@ components:
       type: object
       required: [user, entitlements, plans]
       properties:
-        user: { type: object, allOf: [{ $ref: '#/components/schemas/User' }], nullable: true }
+        user: { anyOf: [{ $ref: '#/components/schemas/User' }, { type: object, nullable: true, enum: [null] }] }
         entitlements: { $ref: '#/components/schemas/Entitlements' }
         plans: { type: array, items: { $ref: '#/components/schemas/Plan' } }
         adminSeed:
@@ -1335,7 +1342,7 @@ components:
       type: object
       required: [profile, answers, saved, demoProfile, versions]
       properties:
-        profile: { type: object, allOf: [{ $ref: '#/components/schemas/CompanyProfile' }], nullable: true }
+        profile: { anyOf: [{ $ref: '#/components/schemas/CompanyProfile' }, { type: object, nullable: true, enum: [null] }] }
         answers: { $ref: '#/components/schemas/AnswerMap' }
         saved: { type: array, items: { type: string }, description: 'Saved call ids.' }
         demoProfile: { $ref: '#/components/schemas/CompanyProfile' }
@@ -1547,7 +1554,7 @@ components:
         ref: { type: string, example: t0 }
         locked: { type: boolean, enum: [true] }
         score: { type: integer, nullable: true, minimum: 0, maximum: 100 }
-        band: { type: object, allOf: [{ $ref: '#/components/schemas/Band' }], nullable: true }
+        band: { anyOf: [{ $ref: '#/components/schemas/Band' }, { type: object, nullable: true, enum: [null] }] }
         estimated: { type: boolean, description: 'True when the verdict is INSUFFICIENT_DATA — the score is an estimate.' }
         grantHuf: { type: number, nullable: true }
         fundingMax: { type: number, nullable: true }
@@ -1634,7 +1641,7 @@ components:
         blocked: { type: boolean }
         estimated: { type: boolean }
         verdict: { type: string, nullable: true, enum: [ELIGIBLE, CONDITIONAL, INSUFFICIENT_DATA, NOT_ELIGIBLE, null] }
-        band: { type: object, allOf: [{ $ref: '#/components/schemas/Band' }], nullable: true }
+        band: { anyOf: [{ $ref: '#/components/schemas/Band' }, { type: object, nullable: true, enum: [null] }] }
         blockedReasons: { type: array, items: { type: string }, description: 'Already worded in the requested language.' }
         relevance: { type: number, description: 'BM25 relevance for the query (search only).' }
 
@@ -1701,6 +1708,9 @@ components:
       required: [locked, score, verdict]
       properties:
         locked: { type: boolean, enum: [true] }
+        fundingMax: { type: number, nullable: true }
+        intensity: { type: number, nullable: true }
+        grantHuf: { type: number, nullable: true }
         closingSoon: { type: boolean, description: 'Replaces the deadline: ≤ 30 days.' }
         id: { type: string, nullable: true, enum: [null], description: Always null when locked. }
         title: { type: string, nullable: true, enum: [null], description: Always null when locked. }
@@ -1725,7 +1735,7 @@ components:
         blocked: { type: boolean }
         estimated: { type: boolean }
         verdict: { type: string, enum: [ELIGIBLE, CONDITIONAL, INSUFFICIENT_DATA, NOT_ELIGIBLE] }
-        band: { type: object, allOf: [{ $ref: '#/components/schemas/Band' }], nullable: true }
+        band: { anyOf: [{ $ref: '#/components/schemas/Band' }, { type: object, nullable: true, enum: [null] }] }
         checks: { type: array, maxItems: 0, items: { type: object }, description: Always empty when locked. }
         conditions: { type: array, maxItems: 0, items: { type: string } }
         factors: { type: array, maxItems: 0, items: { type: object } }
@@ -1749,7 +1759,7 @@ components:
             blocked: { type: boolean }
             estimated: { type: boolean }
             verdict: { type: string, enum: [ELIGIBLE, CONDITIONAL, INSUFFICIENT_DATA, NOT_ELIGIBLE] }
-            band: { type: object, allOf: [{ $ref: '#/components/schemas/Band' }], nullable: true }
+            band: { anyOf: [{ $ref: '#/components/schemas/Band' }, { type: object, nullable: true, enum: [null] }] }
             checks:
               type: array
               items:
@@ -1920,7 +1930,7 @@ components:
           required: [profileVersions]
           properties:
             profileVersions: { type: integer }
-            lastActivity: { type: object, allOf: [{ $ref: '#/components/schemas/ActivityEntry' }], nullable: true }
+            lastActivity: { anyOf: [{ $ref: '#/components/schemas/ActivityEntry' }, { type: object, nullable: true, enum: [null] }] }
 
     AdminUsersResponse:
       type: object
@@ -1977,7 +1987,7 @@ components:
         label_en: { type: string }
         days: { type: integer }
         priceHUF: { type: number, nullable: true }
-        monthlyHUF: { type: number, description: 'The price normalised to 30 days; 0 for the trial.' }
+        monthlyHUF: { type: number, nullable: true, description: 'The price normalised to 30 days; 0 for the trial; null when the paid plan price is not configured.' }
 
     CrmVocabulary:
       type: object
@@ -2092,7 +2102,7 @@ components:
             grantedBy: { type: string, nullable: true }
             grantedAt: { type: string, format: date-time, nullable: true }
             note: { type: string, nullable: true }
-        monthlyValueHuf: { type: number, description: 'Only for an *active paid* subscription; a trial is worth 0.' }
+        monthlyValueHuf: { type: number, nullable: true, description: 'Only for an *active paid* subscription; a trial is worth 0.' }
         engagement: { $ref: '#/components/schemas/Engagement' }
         readiness: { type: number, nullable: true, description: 'Leads only — the score they arrived with.' }
         profileVersions: { type: integer }
@@ -2104,9 +2114,9 @@ components:
           description: A profile summary (an account's saved one, or what a lead's assessment produced).
           additionalProperties: true
         notes: { type: integer, description: 'How many notes.' }
-        lastNote: { type: object, allOf: [{ $ref: '#/components/schemas/CrmNote' }], nullable: true }
+        lastNote: { anyOf: [{ $ref: '#/components/schemas/CrmNote' }, { type: object, nullable: true, enum: [null] }] }
         openTasks: { type: integer }
-        nextTask: { type: object, allOf: [{ $ref: '#/components/schemas/CrmTask' }], nullable: true }
+        nextTask: { anyOf: [{ $ref: '#/components/schemas/CrmTask' }, { type: object, nullable: true, enum: [null] }] }
         overdueTasks: { type: integer }
 
     PortfolioMetrics:
@@ -2120,10 +2130,10 @@ components:
         trials: { type: integer }
         expired: { type: integer }
         registered: { type: integer }
-        mrrHuf: { type: number, description: 'Monthly recurring revenue of *active paid* subscriptions.' }
-        arrHuf: { type: number, description: 'MRR × 12 — not a forecast.' }
-        arpaHuf: { type: number }
-        pipelineValueHuf: { type: number, description: 'Estimate: open deal count multiplied by the monthly plan price; not committed revenue.' }
+        mrrHuf: { type: number, nullable: true, description: 'Monthly recurring revenue of *active paid* subscriptions.' }
+        arrHuf: { type: number, nullable: true, description: 'MRR × 12 — not a forecast.' }
+        arpaHuf: { type: number, nullable: true }
+        pipelineValueHuf: { type: number, nullable: true, description: 'Estimate: open deal count multiplied by the monthly plan price; not committed revenue.' }
         openDeals: { type: integer, description: 'Contacts not in `won`/`lost`.' }
         byStage: { type: object, additionalProperties: { type: integer } }
         byPlan:
@@ -2132,7 +2142,7 @@ components:
             type: object
             properties:
               count: { type: integer }
-              monthlyHuf: { type: number }
+              monthlyHuf: { type: number, nullable: true }
         bySource: { type: object, additionalProperties: { type: integer } }
         trialStarted: { type: integer, description: 'Accounts ever granted a trial.' }
         trialConverted: { type: integer, description: 'Of those, granted a paid plan later.' }
