@@ -4,7 +4,16 @@ import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
+// `npm run build` writes into the Laravel app's public/spa, which serves it (routes/web.php); asset URLs are
+// therefore /spa/assets/... in a build and plain /assets/... in dev. The router itself stays at the site root.
+const isBuild = process.argv.includes('build')
+
 export default defineConfig({
+  base: isBuild ? '/spa/' : '/',
+  build: {
+    outDir: '../public/spa',
+    emptyOutDir: true,
+  },
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {

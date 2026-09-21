@@ -115,7 +115,7 @@ export function LandingPage() {
           </div>
           <div className="relative pb-16 md:pb-10">
             <img
-              src="/hero.jpg"
+              src={`${import.meta.env.BASE_URL}hero.jpg`}
               alt={t("hero.imageAlt")}
               width={740}
               height={452}
