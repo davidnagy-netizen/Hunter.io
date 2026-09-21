@@ -133,17 +133,15 @@ authentication, admin (GrantForm, ProfileChanges, activity names), profile (type
 
 ## API contract
 
-[`docs/openapi.yaml`](docs/openapi.yaml) is an OpenAPI 3.0.3 description of every
-HTTP operation this frontend calls (32 operations over 28 paths), for the backend
-team. Open it in <https://editor.swagger.io> (File → Import file) or any Swagger UI.
-It was written from the `*.api.ts` files and checked against the server's route
-code; the anonymous endpoints were also validated against the live server's real
-responses, and the admin/CRM schemas against the output of the server's own
-builder functions. **No new endpoints are needed** — the current server already
-has all of them; the spec's description lists seven issues to fix (an
-unauthenticated catalog rebuild, shared anonymous state, a leaky locked-detail
-response, …). Keep it in step with the `*.api.ts` files: a new call there means
-a new operation there.
+The contract is the backend's [`../openapi.yaml`](../openapi.yaml) (OpenAPI 3.0.3, v2.3.0 — 32 operations), with setup
+notes in [`../docs/FRONTEND-API.md`](../docs/FRONTEND-API.md). Open it in <https://editor.swagger.io> (File → Import
+file). The frontend's own copy of the spec was removed when this folder moved into the Laravel repository: the backend
+implemented the same 32 operations (identical operation ids) and its file is now the single source of truth.
+
+Two things read it. `src/shared/i18n/errorCodes.test.ts` fails if any error code listed in the contract has no
+Hungarian or English message, and a new call in a `*.api.ts` file should be checked against it. Requests must follow
+its rules: **JSON body on every POST** (`{}` when there is nothing to say — `shared/api/httpClient.ts` does this), the
+session cookie on every request, and **same-origin** (the dev proxy must not rewrite `Host`).
 
 ---
 
@@ -152,11 +150,10 @@ a new operation there.
 `@/...` resolves to `src/...` (configured in both `vite.config.ts` and
 `tsconfig.app.json` — keep them in sync if this ever changes).
 
-`@server-src/...` resolves to the **repo-root** `../src/...` — the Node
-server's own pure-ESM engine. Only `features/scoring/domain/` imports from
-it (through `engine.ts`); no other code should. Also configured in
-`vite.config.ts` (alias + `server.fs.allow`) and `tsconfig.app.json`. Types
-for those JS files are hand-written in
+`@engine-src/...` resolves to `vendor/engine-src/...` — the browser-side scoring engine, **vendored unchanged** from
+the Node prototype (six pure-ESM files; see [`vendor/engine-src/README.md`](vendor/engine-src/README.md) for
+provenance and the drift risk against the backend's PHP implementation). Only `features/scoring/domain/` imports from
+it (through `engine.ts`); no other code should. Types for those JS files are hand-written in
 `features/scoring/domain/serverEngine.d.ts` (deliberately not `allowJs`).
 
 ---
@@ -215,7 +212,7 @@ the `authentication` feature, and the `profile` feature (schema, local store,
 the `useCompanyProfile` sync-fork hook, `OnboardingWizard`, `ProfileHistoryPanel`),
 and the `scoring` feature (engine wiring pinned to the demo-company scores,
 the answers fork with optimistic update/rollback, the scoring hooks, and its
-four components) — 438 tests, all passing (slices 5–7 added the `opportunities` screens and forks, the app-shell guard, the assessment funnel, lead capture, the landing page, the loader and the shared motion components; slice 8 the admin console, its route guard, the workspace switch and the admin-aware redirects; slice 9 the CRM, the shared `Dialog` and `Pager`; slice 10 Fundor Plus and the nav badge / short-label slots).
+four components) — 483 tests, all passing (slices 5–7 added the `opportunities` screens and forks, the app-shell guard, the assessment funnel, lead capture, the landing page, the loader and the shared motion components; slice 8 the admin console, its route guard, the workspace switch and the admin-aware redirects; slice 9 the CRM, the shared `Dialog` and `Pager`; slice 10 Fundor Plus and the nav badge / short-label slots).
 
 Feature tests that need React Query and/or routing use
 [`src/test/renderWithProviders.tsx`](src/test/renderWithProviders.tsx)
@@ -227,30 +224,41 @@ network layer — no MSW yet; revisit if that stops scaling.
 
 ## Getting started
 
-The Node backend (`../server`) must be running for anything past the shared
-primitives — the frontend dev server proxies `/api/*` to it (see
-`vite.config.ts`).
+`frontend/` lives inside the Laravel repository. The dev server proxies `/api/*` to the Laravel app, so the backend
+must be running for anything past the shared primitives.
 
 ```bash
-# from the repo root, in one terminal:
-npm start           # backend on :3000 — see ../README.md
-
-# from frontend/, in another terminal:
-npm install
-npm run dev          # http://localhost:5173, proxies /api to :3000
-npm test             # run the test suite once
-npm run test:watch  # watch mode
-npm run lint          # oxlint
-npm run build         # tsc -b && vite build
+# from the repo root (one-time): PHP 8.2+, Composer, Node 22+
+composer install
+cp .env.example .env && php artisan key:generate
+touch database/database.sqlite && php artisan migrate
+php artisan db:seed --class=OpportunitySeeder   # four demo calls; creates NO accounts
 ```
 
-Seeded accounts to test against (from the root README): `admin`/`admin`
-(administrator), `demo`/`demo1234` (full subscriber), `demo_free`/`demo1234`
-(registered, no subscription). **Note:** on a fresh clone/`server/data`, only
-`admin`/`admin` actually exists — the `demo`/`demo_free` accounts are seeded
-by some other process (a fixture script or a previously-populated
-`server/data/users.json`) that hadn't run in this checkout as of the
-`profile` slice. Register a throwaway account instead if they're not there.
+```bash
+# terminal 1, from the repo root:
+php artisan serve --host=127.0.0.1 --port=8000
+```
+
+```bash
+# terminal 2, from frontend/:
+npm ci
+npm run dev          # http://localhost:5173, proxies /api to 127.0.0.1:8000
+npm test             # run the test suite once
+npm run lint         # oxlint
+npm run build        # tsc -b && vite build
+```
+
+Notes:
+- **Do not run `DatabaseSeeder`** on a shared database — it creates demonstration credentials.
+- The repo has no `storage/` skeleton, so on a fresh clone create it before `composer install`:
+  `mkdir -p storage/framework/{cache/data,sessions,views} storage/logs storage/app/public bootstrap/cache`.
+- The backend's own suite (`php artisan test`) needs `npm ci && npm run build` at the repo root first (its Blade pages
+  need `public/build/manifest.json`).
+- Point the proxy elsewhere with `VITE_API_PROXY_TARGET`. Keep browser requests same-origin: the API answers
+  `403 CSRF_REJECTED` when a mutation's `Origin` differs from its `Host`.
+- To get an administrator for admin screens, the backend's guide grants the role to a development account through
+  Tinker (`docs/FRONTEND-API.md`). Nothing here creates credentials for you.
 
 ---
 
@@ -265,6 +273,58 @@ things that would otherwise only live in a chat transcript.
 > (`hunter-plus`, `HunterScoreRing`, `useHunterScore`, `hunter-rewrite-*`). The
 > current names are `fundor-plus`, `FundorScoreRing`, `useFundorScore`,
 > `fundor-rewrite-*`.
+
+### 2026-09-21 — Moved into the Laravel repository
+The backend team rewrote the backend in Laravel (repository `origin/main`, history unrelated to the old Node/Hunter
+repository). The frontend now lives at `frontend/` in that repository, on branch `feat/frontend-rewrite`; its 12
+commits are preserved (reachable through the merge commit's second parent). **Paths such as `../server`, `../public`
+and `../src` in the older entries below refer to the old Node repository.**
+
+The backend implements the same 32-operation contract this frontend was written against (its `openapi.yaml` has the
+same operation ids; the schemas differ only where noted below), so no screen had to be rewritten. What had to change:
+- **The scoring engine is vendored.** The frontend imported its browser-side engine from the Node server's `src/`, which
+  the Laravel repository doesn't have. Six pure files (about 50 kB) now live in `vendor/engine-src/`, unchanged, behind a
+  renamed alias (`@engine-src`). **Risk:** the PHP backend has its own implementation of the formulas, so the browser
+  and the API can now disagree. No parity test exists yet.
+- **Every POST needs a JSON body.** Logout, load-demo, refresh and save-toggle sent none, and the API answers
+  `415 JSON_REQUIRED`. `httpClient` now sends `{}`. Verified against the running backend (415 without, 200 with).
+- **The dev proxy must not rewrite `Host`.** The API compares a mutation's `Origin` with its `Host` and answers
+  `403 CSRF_REJECTED` otherwise; `changeOrigin` is now `false` and the target is `127.0.0.1:8000`. Verified: a POST
+  with a mismatched Origin is rejected, the same POST through the proxy succeeds.
+- **Eight new error codes are translated** (`INVALID_REQUEST`, `INTERNAL_ERROR`, `JSON_REQUIRED`, `CSRF_REJECTED`,
+  `EMAIL_TAKEN`, `REFRESH_UNAVAILABLE`, `NO_SUCH_OPPORTUNITY`, `FIELD_REQUIRED`), and a test reads the code list from the
+  contract so a future addition can't ship without a message.
+- **CRM revenue can be unknown.** With plan prices unset, the API returns `null` for MRR, ARR, average per account,
+  expected value, each contact's monthly value and per-plan revenue. The screens show a dash and say why — never a
+  made-up 0 Ft.
+- Also: my own comments that said the browser engine "cannot drift" from the server were corrected, and two comments the
+  rename had inverted ("never says Fundor") were fixed.
+
+Verified against the running Laravel app (anonymous flows only — see below): `GET /auth/me`, `/meta`, `/catalog`,
+`POST /catalog` and `/search` with a browser-held profile, and the error shapes all validate against the contract's
+schemas. In a browser at `localhost:5174`, the dashboard, opportunities and search screens render the API's four
+demo calls as censored matches with no error banner, and every request returns 200. The backend's own tests pass
+(30 of 30) once its root assets are built. 483 frontend tests.
+
+**Not verified:** any signed-in flow (login, onboarding save, admin, CRM, saved calls, answers). Those need an account,
+and creating one or typing a password is left to a person. The contract tests and unit tests cover their shapes; the
+running app has not been exercised signed in.
+
+Status of the issues found in the old Node server (they were written up in the spec that was removed from this repo):
+refresh without authentication, shared anonymous state, `load-demo` ignoring the user, `adminSeed` disclosure and the
+locked-detail leak are **fixed** in the Laravel backend (checked in code, plus one anonymous GET of a locked detail);
+the **minimum password length is still 4**; the CRM board's `pipelineValueHuf` and task cap were not re-checked.
+
+Open decisions and follow-ups:
+- **Two frontends now exist.** The backend has its own Blade pages with React components (`resources/js`) at the same
+  URLs as this app (`/`, `/login`, `/register`, `/onboarding`, `/opportunities`, `/assessment`, `/admin/*`). Someone has to
+  decide whether this app replaces them or is served under its own path, and then add the fallback route, base path and
+  build output that implies. Nothing of that is done.
+- **Parity test** between the vendored engine and the PHP scoring.
+- **CR-03 in the UI.** The backend added `POST /api/nav/taxpayer` and a three-stage registration; this frontend's
+  registration and onboarding don't use them yet.
+- Backend notes: the repository has no `storage/` skeleton (a fresh `composer install` fails), and
+  `bootstrap/cache/packages.php` and `services.php` are tracked although generated.
 
 ### 2026-09-20 — Rename: Hunter → Fundor (CR-01)
 The product is now **Fundor**, at **fundor.hu** (`hunter.io` is not available).
