@@ -1,0 +1,62 @@
+{
+    "profile": {
+        "sizeClass": "small",
+        "sector": "manufacturing",
+        "company": "Alfa Gyártó Kft.",
+        "initials": "AG",
+        "employees": 28,
+        "region": "HU12",
+        "county": "Pest",
+        "industryId": "manuf",
+        "teaor": "28",
+        "revBand": "500 M–1 Mrd Ft",
+        "closed_business_years": 4,
+        "goals": [
+            "digitalization",
+            "it",
+            "machinery"
+        ],
+        "investment_value": 30000000,
+        "funding_pref": [
+            "non_refundable",
+            "EU",
+            "HU"
+        ],
+        "country": "HU",
+        "orgType": "sme"
+    },
+    "answers": {
+        "consortium_ready": true
+    },
+    "saved": [
+        "eu-cef-dig-2026-cable-repair-capacities-works"
+    ],
+    "demoProfile": {
+        "company": "Alfa Gyártó Kft.",
+        "initials": "AG",
+        "employees": 28,
+        "county": "Pest",
+        "industryId": "manuf",
+        "teaor": "28",
+        "revBand": "500 M–1 Mrd Ft",
+        "closed_business_years": 4,
+        "goals": [
+            "digitalization",
+            "it",
+            "machinery"
+        ],
+        "investment_value": 30000000,
+        "funding_pref": [
+            "non_refundable",
+            "EU",
+            "HU"
+        ],
+        "country": "HU",
+        "orgType": "sme",
+        "sizeClass": "small",
+        "region": "HU12",
+        "sector": "manufacturing"
+    },
+    "versions": 1,
+    "lastEuSync": "2026-09-21T12:00:00.000000Z"
+}

@@ -1,0 +1,71 @@
+{
+    "user": {
+        "id": "1",
+        "username": "subscriber",
+        "email": "subscriber@example.test",
+        "company": "Alfa Gyártó Kft.",
+        "role": "user",
+        "createdAt": "2026-09-21T12:00:00.000000Z",
+        "lastLoginAt": null,
+        "disabled": false,
+        "subscription": {
+            "status": "active",
+            "plan": "monthly",
+            "validUntil": "2026-10-21T12:00:00.000000Z",
+            "active": true,
+            "daysLeft": 30,
+            "grantedBy": null,
+            "grantedAt": null,
+            "note": null
+        },
+        "entitlements": {
+            "tier": "subscriber",
+            "maxResults": null,
+            "explanations": true,
+            "calculator": true,
+            "applyLinks": true,
+            "exportData": true,
+            "admin": false
+        },
+        "hasProfile": true
+    },
+    "entitlements": {
+        "tier": "subscriber",
+        "maxResults": null,
+        "explanations": true,
+        "calculator": true,
+        "applyLinks": true,
+        "exportData": true,
+        "admin": false
+    },
+    "plans": [
+        {
+            "id": "trial",
+            "label_hu": "Próba",
+            "label_en": "Trial",
+            "days": 14,
+            "status": "trial"
+        },
+        {
+            "id": "monthly",
+            "label_hu": "Havi",
+            "label_en": "Monthly",
+            "days": 30,
+            "status": "active"
+        },
+        {
+            "id": "quarterly",
+            "label_hu": "Negyedéves",
+            "label_en": "Quarterly",
+            "days": 90,
+            "status": "active"
+        },
+        {
+            "id": "yearly",
+            "label_hu": "Éves",
+            "label_en": "Yearly",
+            "days": 365,
+            "status": "active"
+        }
+    ]
+}

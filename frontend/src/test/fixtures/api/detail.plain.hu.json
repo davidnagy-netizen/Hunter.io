@@ -1,0 +1,181 @@
+{
+    "opportunity": {
+        "id": "eu-cef-dig-2026-cable-repair-capacities-works",
+        "title": "Submarine Cable Repair Capacities - Works",
+        "sourceSystem": "EU_FUNDING_TENDERS",
+        "program": "EU – Connecting Europe Facility",
+        "status": "open",
+        "deadline": "2026-10-08",
+        "intensity": 0.5,
+        "fundingMin": 0,
+        "fundingMax": 0,
+        "partnerShare": null,
+        "consortium": {
+            "required": false,
+            "minPartners": 1,
+            "minCountries": 1
+        },
+        "smeFit": 0.3,
+        "highAdmin": true,
+        "awardsFunding": true,
+        "goals": [],
+        "goalScores": {
+            "digitalization": 7,
+            "cybersecurity": 4,
+            "machinery": 4,
+            "mobility": 1,
+            "environment": 1,
+            "defence": 4,
+            "social": 1,
+            "ai": 5,
+            "it": 5
+        },
+        "described": true,
+        "docs": [
+            "Part A — Administrative forms",
+            "Part B — Technical description and implementation plan",
+            "Member State agreement / letter of support",
+            "Cost-benefit analysis and maturity documentation",
+            "Last closed annual accounts (financial capacity check)"
+        ],
+        "hard": [
+            {
+                "field": "orgType",
+                "op": "in",
+                "value": [
+                    "large",
+                    "public",
+                    "sme"
+                ],
+                "label_hu": "Pályázhat: large, public, sme",
+                "label_en": "Eligible applicant types: large, public, sme"
+            },
+            {
+                "field": "country",
+                "op": "in",
+                "value": [
+                    "HU"
+                ],
+                "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+                "label_en": "Legal entity established in Hungary (EU Member State)"
+            }
+        ],
+        "soft": [
+            {
+                "field": "funding_pref",
+                "op": "includes_any",
+                "value": [
+                    "EU"
+                ],
+                "weight": 0.2
+            }
+        ],
+        "sectors": [],
+        "sourceRef": "eu-cef-dig-2026-cable-repair-capacities-works",
+        "sourceUrl": null,
+        "curated": false,
+        "isNew": false,
+        "summary": "",
+        "programShort": "EU – Connecting Europe Facility",
+        "applicantTypes": [],
+        "locked": false,
+        "score": 63,
+        "blocked": false,
+        "estimated": false,
+        "verdict": "CONDITIONAL",
+        "band": {
+            "key": "conditional",
+            "label": "Feltételes lehetőség"
+        },
+        "daysLeft": 17,
+        "checks": [
+            {
+                "field": "orgType",
+                "label": "Pályázhat: large, public, sme",
+                "status": "pass",
+                "yourValue": "sme",
+                "required": [
+                    "large",
+                    "public",
+                    "sme"
+                ],
+                "operator": "in"
+            },
+            {
+                "field": "country",
+                "label": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+                "status": "pass",
+                "yourValue": "HU",
+                "required": [
+                    "HU"
+                ],
+                "operator": "in"
+            }
+        ],
+        "conditions": [
+            "50% saját forrás szükséges",
+            "Magas adminisztrációs teher"
+        ],
+        "factors": [
+            {
+                "key": "elig",
+                "weight": 0.35,
+                "value": 100,
+                "label": "Jogosultság",
+                "detail": "2 kötelező feltételből 2 teljesül a cégprofilod alapján."
+            },
+            {
+                "key": "fit",
+                "weight": 0.25,
+                "value": 23,
+                "label": "Projekt-illeszkedés",
+                "detail": "A felhívás témái: nincs besorolva. A te céljaid: digitalization, it, machinery."
+            },
+            {
+                "key": "size",
+                "weight": 0.15,
+                "value": 50,
+                "label": "Támogatás mérete",
+                "detail": "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+            },
+            {
+                "key": "timing",
+                "weight": 0.15,
+                "value": 72,
+                "label": "Időzítés",
+                "detail": "17 nap van a beadási határidőig."
+            },
+            {
+                "key": "feas",
+                "weight": 0.1,
+                "value": 39,
+                "label": "Megvalósíthatóság",
+                "detail": "50% önerő, 5 kötelező melléklet."
+            }
+        ],
+        "questions": [],
+        "blockedReasons": [],
+        "benchmark": null,
+        "calculator": {
+            "projectValueHuf": 30000000,
+            "intensity": 0.5,
+            "grantHuf": 15000000,
+            "ownContributionHuf": 15000000,
+            "cappedByCeiling": false,
+            "ceilingHuf": null,
+            "partnerShare": null,
+            "callGrantHuf": 0,
+            "currencyNote": null
+        }
+    },
+    "saved": false,
+    "entitlements": {
+        "tier": "subscriber",
+        "maxResults": null,
+        "explanations": true,
+        "calculator": true,
+        "applyLinks": true,
+        "exportData": true,
+        "admin": false
+    }
+}
