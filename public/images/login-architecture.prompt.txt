@@ -1,5 +1,0 @@
-Generated using the built-in image_gen tool.
-Asset: public/images/login-architecture.png
-
-Prompt:
-Create a premium editorial architectural photograph for the left panel of Fundor, a Hungarian SME funding platform login screen. Portrait 2:3 composition. Modern Budapest office architecture with elegant limestone facades and glass, warm late afternoon sunlight, subtle trees in foreground, refined natural photography, deep navy shadows and warm amber highlights. No people in foreground. Building and sunlight concentrated upper two thirds; lower third darker and calm for white website headline overlay. Photorealistic, sophisticated, understated European business atmosphere. No text, no letters, no logos, no UI. Save generated asset for use in website.

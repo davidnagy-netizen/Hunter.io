@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CatalogController;
 use App\Http\Controllers\Api\CrmController;
+use App\Http\Controllers\Api\HealthController;
 use App\Http\Controllers\Api\LeadController;
 use App\Http\Controllers\Api\NavTaxpayerController;
 use App\Http\Controllers\Api\ProfileController;
@@ -18,7 +19,7 @@ use App\Http\Middleware\FundorApi;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(FundorApi::class)->group(function () {
-    Route::get('/health', [App\Http\Controllers\AdminController::class, 'health'])->name('api.health');
+    Route::get('/health', HealthController::class)->name('api.health');
     Route::post('/nav/taxpayer', [NavTaxpayerController::class, 'lookup'])->name('api.nav.taxpayer');
     Route::get('/auth/me', [AuthController::class, 'me']);
     Route::post('/auth/register', [AuthController::class, 'register']);
