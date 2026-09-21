@@ -21,3 +21,4 @@ database/database.sqlite-journal
 /storage/framework/sessions/*
 /storage/framework/views/*
 /storage/logs/*.log
+AGENTS.md
