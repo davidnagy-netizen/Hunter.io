@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Carbon;
 
 /**
  * Class User
@@ -21,11 +22,11 @@ use Illuminate\Notifications\Notifiable;
  * @property string $password
  * @property string $role ('user' | 'admin')
  * @property string|null $subscription_plan
- * @property \Illuminate\Support\Carbon|null $subscription_expires_at
+ * @property Carbon|null $subscription_expires_at
  * @property bool $disabled
- * @property \Illuminate\Support\Carbon|null $last_login_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $last_login_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  */
 class User extends Authenticatable
 {
@@ -77,8 +78,6 @@ class User extends Authenticatable
 
     /**
      * Get the structured company profile owned by this user.
-     *
-     * @return HasOne
      */
     public function companyProfile(): HasOne
     {
@@ -87,8 +86,6 @@ class User extends Authenticatable
 
     /**
      * Get the leads associated with this user.
-     *
-     * @return HasMany
      */
     public function leads(): HasMany
     {
@@ -97,8 +94,6 @@ class User extends Authenticatable
 
     /**
      * Check if the user has an active administrative role.
-     *
-     * @return bool
      */
     public function isAdmin(): bool
     {
@@ -107,8 +102,6 @@ class User extends Authenticatable
 
     /**
      * Check if the user has an active subscription.
-     *
-     * @return bool
      */
     public function hasActiveSubscription(): bool
     {

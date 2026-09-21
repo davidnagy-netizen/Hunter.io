@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Enums\InstrumentType;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * Class Opportunity
@@ -19,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $funding_min
  * @property float $funding_max
  * @property float $intensity (e.g. 0.50 for 50% non-repayable grant rate)
- * @property \Illuminate\Support\Carbon $deadline
+ * @property Carbon $deadline
  * @property string $source_reference
  * @property string|null $source_url
  * @property bool $curated
@@ -29,8 +32,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property array<array<string, mixed>> $hard_rules
  * @property array<array<string, mixed>> $soft_rules
  * @property string $status ('open' | 'closed' | 'forthcoming')
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  */
 class Opportunity extends Model
 {
@@ -59,10 +62,16 @@ class Opportunity extends Model
         'hard_rules',
         'soft_rules',
         'status',
+        'instrument_type',
+        'effective_from_date',
+        'source_document_reference',
+        'last_verified_date',
     ];
 
     /**
      * Attribute type casting definitions.
+     *
+     * Reference: CR-02 Section 4.2 - Enforcing InstrumentType enum casting.
      *
      * @return array<string, string>
      */
@@ -80,14 +89,17 @@ class Opportunity extends Model
             'docs' => 'array',
             'hard_rules' => 'array',
             'soft_rules' => 'array',
+            'instrument_type' => InstrumentType::class,
+            'effective_from_date' => 'date',
+            'last_verified_date' => 'date',
         ];
     }
 
     /**
      * Scope a query to only include open funding opportunities.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param  Builder  $query
+     * @return Builder
      */
     public function scopeOpen($query)
     {
@@ -95,14 +107,64 @@ class Opportunity extends Model
     }
 
     /**
-     * Calculate remaining days until submission deadline relative to a given date.
+     * Scope a query to strictly filter non-repayable grant opportunities.
      *
-     * @param  \Illuminate\Support\Carbon|null  $now
-     * @return int
+     * @param  Builder  $query
+     * @return Builder
      */
-    public function daysRemaining(?\Illuminate\Support\Carbon $now = null): int
+    public function scopeGrants($query)
+    {
+        return $query->whereIn('instrument_type', [
+            InstrumentType::GRANT->value,
+            InstrumentType::COMBINED->value,
+        ]);
+    }
+
+    /**
+     * Scope a query to strictly filter debt/loan instruments (e.g. Kavosz Széchenyi products).
+     *
+     * @param  Builder  $query
+     * @return Builder
+     */
+    public function scopeLoans($query)
+    {
+        return $query->whereIn('instrument_type', [
+            InstrumentType::SUBSIDISED_LOAN->value,
+            InstrumentType::GUARANTEE->value,
+        ]);
+    }
+
+    /**
+     * Check if this opportunity is a loan product.
+     *
+     * @return bool True if this is a subsidised loan or guarantee.
+     */
+    public function isLoan(): bool
+    {
+        return $this->instrument_type instanceof InstrumentType
+            ? $this->instrument_type->isDebtInstrument()
+            : in_array($this->instrument_type, [InstrumentType::SUBSIDISED_LOAN->value, InstrumentType::GUARANTEE->value], true);
+    }
+
+    /**
+     * Check if this opportunity is a non-repayable grant.
+     *
+     * @return bool True if this is a grant or combined product.
+     */
+    public function isGrant(): bool
+    {
+        return $this->instrument_type instanceof InstrumentType
+            ? $this->instrument_type->isGrant()
+            : in_array($this->instrument_type, [InstrumentType::GRANT->value, InstrumentType::COMBINED->value], true);
+    }
+
+    /**
+     * Calculate remaining days until submission deadline relative to a given date.
+     */
+    public function daysRemaining(?Carbon $now = null): int
     {
         $now = $now ?? now();
+
         return (int) $now->diffInDays($this->deadline, false);
     }
 }

@@ -16,9 +16,6 @@ class HomeController extends Controller
 {
     /**
      * Display the public landing page.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

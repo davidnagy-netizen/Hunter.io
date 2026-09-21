@@ -9,9 +9,9 @@
       B2B Fintech & Grant Intelligence for Hungarian SMEs,
       in an authoritative modern grotesk editorial style, dial ENERGY 1 / RHYTHM 2 / MOTION 1.
 
-      Color Tokens (per HUNTER-PROJECT-OVERVIEW specification):
+      Color Tokens (per Fundor specification - Updated per CR-01 Rebrand requirement):
       - Ink: #0E1726 (Dark background and deep typography)
-      - Hunter Gold: #D99A2B (Accent and target metaphor)
+      - Fundor Gold: #D99A2B (Accent and target metaphor)
       - Accessible Gold text on light: #8D5E06 (5.62:1 contrast)
       - Semantic Green (Eligible): #199268
       - Semantic Amber (Conditional): #DD8331

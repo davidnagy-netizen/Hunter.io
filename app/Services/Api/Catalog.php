@@ -13,10 +13,16 @@ class Catalog
     {
         $extra = json_decode($o->getRawOriginal('api_extra') ?? '{}', true) ?: [];
         foreach (['budget', 'goalScores'] as $map) {
-            if (array_key_exists($map, $extra)) $extra[$map] = (object) $extra[$map];
+            if (array_key_exists($map, $extra)) {
+                $extra[$map] = (object) $extra[$map];
+            }
         }
-        if (isset($extra['consortium'])) $extra['consortium'] += ['required' => false];
-        if (isset($extra['partnerShare']) && $extra['partnerShare'] === []) $extra['partnerShare'] = null;
+        if (isset($extra['consortium'])) {
+            $extra['consortium'] += ['required' => false];
+        }
+        if (isset($extra['partnerShare']) && $extra['partnerShare'] === []) {
+            $extra['partnerShare'] = null;
+        }
 
         return array_replace($extra, ['id' => $o->code, 'program' => $o->program, 'title' => $o->title,
             'deadline' => $o->deadline->toDateString(), 'intensity' => $o->intensity, 'goals' => $o->goals ?? [],

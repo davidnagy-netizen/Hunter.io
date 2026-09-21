@@ -16,11 +16,12 @@ use App\Http\Controllers\CrmController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\OnboardingController;
 use App\Http\Controllers\OpportunityController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/locale', [\App\Http\Controllers\LocaleController::class, 'update'])->name('locale.update');
+Route::post('/locale', [LocaleController::class, 'update'])->name('locale.update');
 
 /*
 |--------------------------------------------------------------------------

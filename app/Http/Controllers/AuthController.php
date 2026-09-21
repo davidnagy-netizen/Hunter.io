@@ -20,8 +20,6 @@ class AuthController extends Controller
 {
     /**
      * Show the login form.
-     *
-     * @return \Illuminate\View\View
      */
     public function showLoginForm(): View
     {
@@ -30,9 +28,6 @@ class AuthController extends Controller
 
     /**
      * Handle an incoming authentication request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function login(Request $request): RedirectResponse
     {
@@ -63,8 +58,6 @@ class AuthController extends Controller
 
     /**
      * Show the registration form.
-     *
-     * @return \Illuminate\View\View
      */
     public function showRegisterForm(): View
     {
@@ -73,9 +66,6 @@ class AuthController extends Controller
 
     /**
      * Handle registration of a new user account.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function register(Request $request): RedirectResponse
     {
@@ -104,9 +94,6 @@ class AuthController extends Controller
 
     /**
      * Destroy an authenticated session.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function logout(Request $request): RedirectResponse
     {

@@ -16,9 +16,6 @@ class CalendarController extends Controller
 {
     /**
      * Display the chronological grant deadlines calendar.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {

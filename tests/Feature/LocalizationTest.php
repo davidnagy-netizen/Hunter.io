@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Database\Seeders\OpportunitySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -38,7 +39,7 @@ class LocalizationTest extends TestCase
 
     public function test_grant_details_translate_without_changing_stored_content(): void
     {
-        $this->seed(\Database\Seeders\OpportunitySeeder::class);
+        $this->seed(OpportunitySeeder::class);
         $this->actingAs(User::factory()->create())->withSession(['locale' => 'en'])->get('/opportunities/ginop-dig')
             ->assertOk()->assertSee('Business digitalization (ERP, production management)')
             ->assertSee('Latest completed annual report')->assertSee('Grant and own contribution calculator');

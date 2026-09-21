@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
  * Class Lead
@@ -23,8 +24,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property array<string, mixed>|null $answers
  * @property string|null $note
  * @property string|null $source ('assessment' | 'contact_form' | 'manual')
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  */
 class Lead extends Model
 {
@@ -63,8 +64,6 @@ class Lead extends Model
 
     /**
      * Get the registered user converted from this lead, if any.
-     *
-     * @return BelongsTo
      */
     public function user(): BelongsTo
     {

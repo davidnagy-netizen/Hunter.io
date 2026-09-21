@@ -18,9 +18,6 @@ class CrmController extends Controller
 {
     /**
      * Display the CRM pipeline management board.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {
@@ -32,9 +29,6 @@ class CrmController extends Controller
 
     /**
      * Store a newly created lead from API or web form.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function store(Request $request): JsonResponse|RedirectResponse
     {
@@ -62,10 +56,6 @@ class CrmController extends Controller
 
     /**
      * Update the pipeline stage for a lead.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Lead  $lead
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function updateStage(Request $request, Lead $lead): RedirectResponse
     {
@@ -80,12 +70,10 @@ class CrmController extends Controller
 
     /**
      * Export all contacts and leads as a downloadable CSV.
-     *
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
     public function exportCsv(): StreamedResponse
     {
-        $fileName = 'fundor_leads_' . date('Y-m-d') . '.csv';
+        $fileName = 'fundor_leads_'.date('Y-m-d').'.csv';
 
         return response()->streamDownload(function () {
             $handle = fopen('php://output', 'w');

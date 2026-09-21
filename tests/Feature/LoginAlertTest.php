@@ -25,7 +25,7 @@ class LoginAlertTest extends TestCase
                     $config = $data['config'] ?? $data;
 
                     return $config['title'] === $title && $config['icon'] === 'error'
-                        && !isset($config['timer']);
+                        && ! isset($config['timer']);
                 });
             $this->assertGuest();
             $this->get('/login')->assertOk()->assertSee('swalConfig', false)

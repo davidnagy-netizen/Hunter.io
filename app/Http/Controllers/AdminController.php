@@ -18,9 +18,6 @@ class AdminController extends Controller
 {
     /**
      * Display the administrative overview dashboard.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\View\View
      */
     public function dashboard(Request $request): View
     {
@@ -42,9 +39,6 @@ class AdminController extends Controller
 
     /**
      * Display user administration list.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\View\View
      */
     public function users(Request $request): View
     {
@@ -55,8 +49,6 @@ class AdminController extends Controller
 
     /**
      * API health status endpoint.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
     public function health(): JsonResponse
     {

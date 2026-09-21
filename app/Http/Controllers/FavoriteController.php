@@ -16,9 +16,6 @@ class FavoriteController extends Controller
 {
     /**
      * Display the list of saved opportunities.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {
@@ -31,10 +28,6 @@ class FavoriteController extends Controller
 
     /**
      * Toggle the bookmark status of an opportunity.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function toggle(Request $request, int $id): RedirectResponse
     {

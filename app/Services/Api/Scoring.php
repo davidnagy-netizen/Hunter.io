@@ -4,7 +4,14 @@ namespace App\Services\Api;
 
 use Illuminate\Support\Carbon;
 
-/** PHP counterpart of the five-factor engine in hunter-mvp.html. */
+/**
+ * Class Scoring
+ *
+ * Implements the deterministic Fundor five-factor evaluation engine.
+ * Computes eligibility verdicts, match scores (0-100), and personalized explanations.
+ *
+ * Reference: CR-01 (Fundor Score nomenclature) & CR-02 (Scoring Separation).
+ */
 class Scoring
 {
     public function rule(mixed $value, string $op, mixed $target): string
@@ -26,8 +33,26 @@ class Scoring
         return $pass === null ? 'unknown' : ($pass ? 'pass' : 'fail');
     }
 
+    /**
+     * Compute deterministic eligibility score and breakdown for a given opportunity and profile.
+     *
+     * @param  array<string, mixed>  $o  Opportunity record payload.
+     * @param  array<string, mixed>  $p  Company profile payload.
+     * @param  array<string, mixed>  $answers  User-provided eligibility question answers.
+     * @param  string  $lang  Language code ('hu' or 'en').
+     * @return array<string, mixed> Evaluated score payload.
+     *
+     * @throws \InvalidArgumentException If a debt instrument is passed into grant scoring pipeline.
+     */
     public function score(array $o, array $p, array $answers = [], string $lang = 'hu'): array
     {
+        // Reference: CR-02 Section 4.2 - Strict Scoring Separation
+        // Non-repayable grants award free capital, whereas subsidised loans are debt obligations.
+        // Debt instruments must evaluate interest subsidies/cost of capital saved rather than grant award formulas.
+        if (isset($o['instrument_type']) && in_array($o['instrument_type'], ['subsidised_loan', 'guarantee'], true)) {
+            throw new \InvalidArgumentException('Subsidised loans and debt instruments cannot be evaluated using grant award scoring algorithms (CR-02).');
+        }
+
         $en = $lang === 'en';
         $field = fn ($key) => $answers[$o['id'].':'.$key] ?? $answers[$key] ?? $p[$key] ?? null;
         $checks = [];

@@ -17,7 +17,7 @@ class LocaleController extends Controller
         $request->session()->put('locale', $validated['locale']);
         $target = $validated['return_to'] ?? '/';
         // Only allow local paths, including the original query string.
-        if (!str_starts_with($target, '/') || str_starts_with($target, '//') || preg_match('/[\\\\\x00-\x20]/', $target)) {
+        if (! str_starts_with($target, '/') || str_starts_with($target, '//') || preg_match('/[\\\\\x00-\x20]/', $target)) {
             $target = '/';
         }
 

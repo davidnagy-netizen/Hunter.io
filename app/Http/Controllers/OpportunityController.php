@@ -18,9 +18,6 @@ class OpportunityController extends Controller
 {
     /**
      * Display a listing of funding opportunities with optional search filters.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\View\View
      */
     public function index(Request $request): View
     {
@@ -30,8 +27,8 @@ class OpportunityController extends Controller
         if ($search = $request->query('q')) {
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('program', 'like', "%{$search}%")
-                  ->orWhere('code', 'like', "%{$search}%");
+                    ->orWhere('program', 'like', "%{$search}%")
+                    ->orWhere('code', 'like', "%{$search}%");
             });
         }
 
@@ -47,9 +44,6 @@ class OpportunityController extends Controller
 
     /**
      * Display the specified opportunity with detailed score breakdown and grant calculator.
-     *
-     * @param  string  $code
-     * @return \Illuminate\View\View
      */
     public function show(string $code): View
     {
@@ -62,10 +56,6 @@ class OpportunityController extends Controller
 
     /**
      * Resolve a missing data question directly from the opportunity detail view.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $code
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function answerQuestion(Request $request, string $code): RedirectResponse
     {

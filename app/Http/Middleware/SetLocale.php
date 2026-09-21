@@ -19,6 +19,7 @@ class SetLocale
 
         $locale = $request->session()->get('locale', $defaultLocale);
         app()->setLocale(array_key_exists($locale, config('localization.locales')) ? $locale : 'hu');
+
         return $next($request);
     }
 }

@@ -18,9 +18,6 @@ class AssessmentController extends Controller
 {
     /**
      * Display the free assessment wizard questions.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\View\View
      */
     public function show(Request $request): View
     {
@@ -29,9 +26,6 @@ class AssessmentController extends Controller
 
     /**
      * Process the assessment answers, calculate readiness, and store lead capture.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
      */
     public function submit(Request $request): View|RedirectResponse
     {
@@ -53,7 +47,7 @@ class AssessmentController extends Controller
         if ((int) $validated['closed_years'] >= 2) {
             $score += 20;
         }
-        if (!empty($validated['goals'])) {
+        if (! empty($validated['goals'])) {
             $score += 15;
         }
         $readinessScore = min(100, $score);
