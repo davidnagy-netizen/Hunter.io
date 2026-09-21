@@ -9,7 +9,6 @@ import { createRoot } from 'react-dom/client';
 
 // Page components
 import HomePage from './pages/HomePage';
-import GrassfeldPage from './pages/GrassfeldPage';
 import AssessmentPage from './pages/AssessmentPage';
 import DashboardPage from './pages/DashboardPage';
 import OpportunitiesIndexPage from './pages/OpportunitiesIndexPage';
@@ -36,7 +35,6 @@ import Card from './components/Card';
 // Component registry mapping names to modules
 export const components = {
     HomePage,
-    GrassfeldPage,
     AssessmentPage,
     DashboardPage,
     OpportunitiesIndexPage,

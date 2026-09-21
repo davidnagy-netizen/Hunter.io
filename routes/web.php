@@ -36,11 +36,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/assessment', [AssessmentController::class, 'show'])->name('assessment.show');
 Route::post('/assessment', [AssessmentController::class, 'submit'])->name('assessment.submit');
 
-// Grassfeld AI Budgeting App landing page showcase
-Route::get('/grassfeld', function () {
-    return view('grassfeld');
-})->name('grassfeld');
-
 /*
 |--------------------------------------------------------------------------
 | Guest Authentication Routes

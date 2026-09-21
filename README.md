@@ -236,19 +236,16 @@ Fundor provides bilingual capabilities with runtime locale switching and environ
 │   ├── hu.json                             # Hungarian translations catalog
 │   └── hu/                                 # Hungarian validation & pagination
 ├── public/
-│   ├── css/app.css                         # Fundor design token stylesheet
-│   └── grassfeld.html                      # Standalone zero-dependency HTML build
+│   └── css/app.css                         # Fundor design token stylesheet
 ├── resources/
 │   └── views/
 │       ├── home.blade.php                  # Fundor flagship landing page
-│       ├── grassfeld.blade.php             # Dedicated grant & budgeting showcase
 │       └── layouts/
 │           ├── app.blade.php               # Authenticated application shell
 │           └── guest.blade.php             # Public guest layout
 └── tests/
     └── Feature/
         ├── ExampleTest.php                 # Home page HTTP 200 assertion
-        ├── GrassfeldTest.php               # Showcase page HTTP 200 assertion
         └── LocalizationTest.php            # Bilingual translation tests
 ```
 
@@ -304,7 +301,6 @@ php artisan test
 
 # Test specific components
 php artisan test --filter=ExampleTest
-php artisan test --filter=GrassfeldTest
 php artisan test --filter=LocalizationTest
 ```
 
