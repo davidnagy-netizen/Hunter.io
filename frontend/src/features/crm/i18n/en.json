@@ -15,7 +15,8 @@
     "kpi": {
       "mrr": {
         "label": "MRR",
-        "sub": "{{count}} subscribers · ARR {{arr}}"
+        "sub": "{{count}} subscribers · ARR {{arr}}",
+        "unknown": "Plan prices are not set on the server, so revenue cannot be calculated yet."
       },
       "trials": {
         "label": "Running trials",
@@ -211,7 +212,8 @@
         "label": "Trial → paid",
         "sub": "{{done}} of {{started}} trials",
         "none": "No trial has completed yet"
-      }
+      },
+      "unknown": "Plan prices are not set on the server, so revenue cannot be calculated yet."
     },
     "funnel": {
       "title": "Funnel",

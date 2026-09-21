@@ -33,6 +33,22 @@ beforeEach(() => {
   );
 });
 
+describe("InsightsPage — revenue the server doesn't know yet", () => {
+  it("shows dashes for MRR, ARR and the average, and explains why once", async () => {
+    vi.mocked(crmApi.board).mockResolvedValue(
+      makeBoard({ trend: TREND, metrics: { ...METRICS, mrrHuf: null, arrHuf: null, arpaHuf: null, pipelineValueHuf: null, byPlan: { monthly: { count: 1, monthlyHuf: null } } } }),
+    );
+    renderWithProviders(<InsightsPage />);
+    const mrr = (await screen.findByText(/^mrr$/i)).parentElement!;
+    expect(within(mrr).getByText("—")).toBeInTheDocument();
+    expect(within(mrr).getByText(/csomagárak nincsenek beállítva|plan prices are not set/i)).toBeInTheDocument();
+    expect(within(screen.getByText(/^arr$/i).parentElement!).getByText("—")).toBeInTheDocument();
+    const plans = within(screen.getByRole("heading", { name: /bevétel csomag szerint|revenue by plan/i }).closest("div.rounded-lg") as HTMLElement);
+    expect(plans.getByText("—")).toBeInTheDocument();
+    expect(screen.queryByText(/^0\s?(Ft|HUF)$/)).not.toBeInTheDocument();
+  });
+});
+
 describe("InsightsPage", () => {
   it("states the revenue figures and what they mean", async () => {
     renderWithProviders(<InsightsPage />);

@@ -14,6 +14,8 @@ export function useFormat() {
     lang,
     huf: (amount: number) => formatHuf(amount, lang),
     money: (amount: number) => formatMoney(amount, lang),
+    /** For a figure the server may not know (`null`): a dash, never a made-up 0. */
+    moneyOrDash: (amount: number | null | undefined) => (amount == null ? "—" : formatMoney(amount, lang)),
     date: (iso: string) => formatDate(iso, lang),
     dateTime: (iso: string) => formatDateTime(iso, lang),
     month: (year: number, month: number) => formatMonth(year, month, lang),

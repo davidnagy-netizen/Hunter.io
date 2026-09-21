@@ -20,7 +20,8 @@ export interface PriceEntry {
   label_en: string;
   days: number;
   priceHUF: number | null;
-  monthlyHUF: number;
+  /** `null` when this paid plan's price isn't configured on the server (0 for the trial). */
+  monthlyHUF: number | null;
 }
 
 export interface Vocabulary {
@@ -116,7 +117,8 @@ export interface CrmContact {
   lostReason: string | null;
 
   subscription: ContactSubscription;
-  monthlyValueHuf: number;
+  /** `null` for an active paid subscription whose plan price isn't configured; a trial is 0. */
+  monthlyValueHuf: number | null;
 
   engagement: Engagement;
   /** Leads only: the readiness score they arrived with. */
@@ -141,13 +143,14 @@ export interface PortfolioMetrics {
   trials: number;
   expired: number;
   registered: number;
-  mrrHuf: number;
-  arrHuf: number;
-  arpaHuf: number;
-  pipelineValueHuf: number;
+  /** Revenue figures are `null` — unknown, not zero — while plan prices aren't configured on the server. */
+  mrrHuf: number | null;
+  arrHuf: number | null;
+  arpaHuf: number | null;
+  pipelineValueHuf: number | null;
   openDeals: number;
   byStage: Record<string, number>;
-  byPlan: Record<string, { count: number; monthlyHuf: number }>;
+  byPlan: Record<string, { count: number; monthlyHuf: number | null }>;
   bySource: Record<string, number>;
   trialStarted: number;
   trialConverted: number;

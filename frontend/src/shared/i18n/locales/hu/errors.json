@@ -22,5 +22,13 @@
   "INVALID_DUE_DATE": "Érvénytelen határidő.",
   "EMAIL_REQUIRED": "Adj meg egy e-mail címet.",
   "INVALID_EMAIL": "Ez az e-mail cím nem érvényes.",
-  "CONSENT_REQUIRED": "A megkereséshez hozzájárulás szükséges."
+  "CONSENT_REQUIRED": "A megkereséshez hozzájárulás szükséges.",
+  "INVALID_REQUEST": "A kérés érvénytelen. Ellenőrizd, amit megadtál.",
+  "INTERNAL_ERROR": "Hiba történt a szerver oldalán. Próbáld újra egy pillanat múlva.",
+  "JSON_REQUIRED": "A kérés formátuma nem fogadható el. Töltsd újra az oldalt, és próbáld újra.",
+  "CSRF_REJECTED": "A kérést biztonsági okból elutasítottuk. Töltsd újra az oldalt, és próbáld újra.",
+  "EMAIL_TAKEN": "Ezzel az e-mail-címmel már van fiók.",
+  "REFRESH_UNAVAILABLE": "A katalógusfrissítés nincs beállítva ezen a szerveren.",
+  "NO_SUCH_OPPORTUNITY": "Ez a felhívás már nem létezik.",
+  "FIELD_REQUIRED": "Egy kötelező mező hiányzik."
 }

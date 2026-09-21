@@ -13,7 +13,7 @@ import "../i18n";
 /** The portfolio in numbers. Every figure is counted from recorded events; where there is nothing to measure it says so rather than draw zero. */
 export function InsightsPage() {
   const { t } = useTranslation("crm");
-  const { money } = useFormat();
+  const { moneyOrDash } = useFormat();
   const board = useCrmBoardQuery();
   const data = board.data;
   const labels = useVocabLabels(data?.vocabulary);
@@ -26,10 +26,10 @@ export function InsightsPage() {
   return (
     <div className="flex flex-col gap-6">
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <KpiTile tone="green" value={money(m.mrrHuf)} label={t("insights.kpi.mrr.label")} sub={t("insights.kpi.mrr.sub")} />
-        <KpiTile value={money(m.arrHuf)} label={t("insights.kpi.arr.label")} sub={t("insights.kpi.arr.sub")} />
+        <KpiTile tone="green" value={moneyOrDash(m.mrrHuf)} label={t("insights.kpi.mrr.label")} sub={m.mrrHuf == null ? t("insights.kpi.unknown") : t("insights.kpi.mrr.sub")} />
+        <KpiTile value={moneyOrDash(m.arrHuf)} label={t("insights.kpi.arr.label")} sub={t("insights.kpi.arr.sub")} />
         <KpiTile
-          value={m.subscribers ? money(m.arpaHuf) : "—"}
+          value={m.subscribers ? moneyOrDash(m.arpaHuf) : "—"}
           label={t("insights.kpi.arpa.label")}
           sub={t("insights.kpi.arpa.sub", { count: m.subscribers })}
         />
@@ -58,7 +58,7 @@ export function InsightsPage() {
                   <span className="text-muted">
                     {labels.plan(plan)} · {x.count}
                   </span>
-                  <b className="font-medium">{money(x.monthlyHuf)}</b>
+                  <b className="font-medium">{moneyOrDash(x.monthlyHuf)}</b>
                 </li>
               ))}
             </ul>

@@ -20,6 +20,6 @@ export {
   evaluateEligibility,
   ruleLabel,
 } from "@engine-src/engine/eligibility.js";
-// The server still calls this `hunterScore` (backend rebrand pending); it is renamed at this one boundary so the rest of the app never says Fundor.
+// The vendored engine still calls this `hunterScore` (the prototype's name); it is renamed at this one boundary so the rest of the app never uses the prototype's name.
 export { explainScore, hunterScore as fundorScore, rankedOpps, scoreBand } from "@engine-src/engine/scoring.js";
 export { normalizeProfile } from "@engine-src/engine/profile.js";

@@ -15,7 +15,7 @@ import "../i18n";
 /** The sales pipeline: the numbers that matter today, what is late, and every open deal by stage. */
 export function PipelinePage() {
   const { t } = useTranslation("crm");
-  const { money, date } = useFormat();
+  const { moneyOrDash, date } = useFormat();
   const lang = useLang();
   const board = useCrmBoardQuery();
   const stageMove = useStageMove();
@@ -33,9 +33,13 @@ export function PipelinePage() {
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
         <KpiTile
           tone="green"
-          value={money(m.mrrHuf)}
+          value={moneyOrDash(m.mrrHuf)}
           label={t("pipeline.kpi.mrr.label")}
-          sub={t("pipeline.kpi.mrr.sub", { count: m.subscribers, arr: money(m.arrHuf) })}
+          sub={
+            m.mrrHuf == null
+              ? t("pipeline.kpi.mrr.unknown")
+              : t("pipeline.kpi.mrr.sub", { count: m.subscribers, arr: moneyOrDash(m.arrHuf) })
+          }
         />
         <KpiTile
           tone="amber"
@@ -47,7 +51,7 @@ export function PipelinePage() {
               : t("pipeline.kpi.trials.none")
           }
         />
-        <KpiTile value={m.openDeals} label={t("pipeline.kpi.openDeals.label")} sub={t("pipeline.kpi.openDeals.value", { value: money(m.pipelineValueHuf) })} />
+        <KpiTile value={m.openDeals} label={t("pipeline.kpi.openDeals.label")} sub={t("pipeline.kpi.openDeals.value", { value: moneyOrDash(m.pipelineValueHuf) })} />
         <KpiTile tone="gold" value={overdue.length} label={t("pipeline.kpi.overdue.label")} sub={t("pipeline.kpi.overdue.today", { count: dueToday.length })} />
         <KpiTile
           value={m.expired}

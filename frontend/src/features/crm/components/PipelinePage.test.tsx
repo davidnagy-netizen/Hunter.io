@@ -61,6 +61,25 @@ describe("PipelinePage — headline numbers", () => {
   });
 });
 
+describe("PipelinePage — revenue the server doesn't know yet", () => {
+  const unknown = { ...METRICS, mrrHuf: null, arrHuf: null, arpaHuf: null, pipelineValueHuf: null };
+
+  it("shows a dash and says why, instead of a made-up 0 Ft", async () => {
+    vi.mocked(crmApi.board).mockResolvedValue(makeBoard({ metrics: unknown }));
+    renderWithProviders(<PipelinePage />);
+    const mrr = (await screen.findByText(/^mrr$/i)).parentElement!;
+    expect(within(mrr).getByText("—")).toBeInTheDocument();
+    expect(within(mrr).getByText(/csomagárak nincsenek beállítva|plan prices are not set/i)).toBeInTheDocument();
+    expect(screen.queryByText(/^0\s?(Ft|HUF)$/)).not.toBeInTheDocument();
+  });
+
+  it("shows a dash for the expected value of open deals too", async () => {
+    vi.mocked(crmApi.board).mockResolvedValue(makeBoard({ metrics: unknown }));
+    renderWithProviders(<PipelinePage />);
+    expect(await screen.findByText(/várható érték: —|expected value: —/i)).toBeInTheDocument();
+  });
+});
+
 describe("PipelinePage — overdue follow-ups", () => {
   it("lists what is late, with whose it is and a link to them", async () => {
     vi.mocked(crmApi.board).mockResolvedValue(makeBoard({ tasks: [openTask({ dueAt: daysFromNow(-2), title: "Send the quote" })] }));

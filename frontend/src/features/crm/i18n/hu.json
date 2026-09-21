@@ -15,7 +15,8 @@
     "kpi": {
       "mrr": {
         "label": "MRR",
-        "sub": "{{count}} előfizető · ARR {{arr}}"
+        "sub": "{{count}} előfizető · ARR {{arr}}",
+        "unknown": "A csomagárak nincsenek beállítva a szerveren, ezért a bevétel még nem számolható."
       },
       "trials": {
         "label": "Futó próba",
@@ -211,7 +212,8 @@
         "label": "Próba → előfizetés",
         "sub": "{{done}} a {{started}} próbából",
         "none": "Még egy próba sem zárult le"
-      }
+      },
+      "unknown": "A csomagárak nincsenek beállítva a szerveren, ezért a bevétel még nem számolható."
     },
     "funnel": {
       "title": "Tölcsér",

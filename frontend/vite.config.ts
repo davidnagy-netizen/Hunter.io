@@ -15,6 +15,10 @@ export default defineConfig({
     },
   },
   server: {
+    fs: {
+      // Tests read the backend's contract (../openapi.yaml) as text.
+      allow: [path.resolve(import.meta.dirname, '..')],
+    },
     // Proxies API calls to the Laravel backend so the browser sees same-origin
     // requests in dev: the session cookie is httpOnly + SameSite=Lax, and the
     // API rejects cross-origin mutations (403 CSRF_REJECTED) by comparing the
