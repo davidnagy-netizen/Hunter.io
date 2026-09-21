@@ -128,9 +128,25 @@ class Scoring
             $feas -= .06;
         }
         $feas = max(.2, $feas);
+        $passed = count(array_filter($checks, fn ($c) => $c['status'] === 'pass'));
+        $total = count($checks);
+        $mine = $this->millions($p['investment_value'] ?? 0);
+        $own = (int) round((1 - $o['intensity']) * 100);
+        $consortium = ($o['consortium']['required'] ?? false) ? ($en ? ', consortium of '.($o['consortium']['minPartners'] ?? 0).'+ partners' : ', '.($o['consortium']['minPartners'] ?? 0).'+ partneres konzorcium') : '';
+        $themes = implode(', ', $o['goals']);
+        $yours = implode(', ', $goals);
+        $details = [
+            'elig' => $en ? "$passed of $total hard criteria satisfied by your profile." : "$total kötelező feltételből $passed teljesül a cégprofilod alapján.",
+            'fit' => $en ? 'Call themes: '.($themes ?: 'not classified').'. Your goals: '.($yours ?: 'none set').'.'
+                : 'A felhívás témái: '.($themes ?: 'nincs besorolva').'. A te céljaid: '.($yours ?: 'nincs megadva').'.',
+            'size' => $this->sizeDetail($o, $mine, $en),
+            'timing' => $en ? "$days days remain until the deadline." : "$days nap van a beadási határidőig.",
+            'feas' => $en ? "$own% own contribution, ".count($o['docs'])." required annexes$consortium." : "$own% önerő, ".count($o['docs'])." kötelező melléklet$consortium.",
+        ];
+        // Same wording, weights and whole-number values as the prototype engine's explanation (the UI shows `detail` as written).
         $factors = [];
-        foreach (['elig' => [$elig, .35, 'Eligibility', 'Jogosultság'], 'fit' => [$fit, .25, 'Project fit', 'Projektilleszkedés'], 'size' => [$size, .15, 'Funding size', 'Támogatási összeg'], 'timing' => [$timing, .15, 'Timing', 'Időzítés'], 'feas' => [$feas, .10, 'Feasibility', 'Megvalósíthatóság']] as $key => [$value, $weight, $english, $hu]) {
-            $factors[] = ['key' => $key, 'weight' => $weight, 'value' => round($value * 100, 2), 'label' => $en ? $english : $hu, 'detail' => ''];
+        foreach (['elig' => [$elig, .35, 'Eligibility', 'Jogosultság'], 'fit' => [$fit, .25, 'Project fit', 'Projekt-illeszkedés'], 'size' => [$size, .15, 'Funding size', 'Támogatás mérete'], 'timing' => [$timing, .15, 'Timing', 'Időzítés'], 'feas' => [$feas, .10, 'Feasibility', 'Megvalósíthatóság']] as $key => [$value, $weight, $english, $hu]) {
+            $factors[] = ['key' => $key, 'weight' => $weight, 'value' => (int) round($value * 100), 'label' => $en ? $english : $hu, 'detail' => $details[$key]];
         }
         $score = $blocked ? null : (int) round(100 * (.35 * $elig + .25 * $fit + .15 * $size + .15 * $timing + .10 * $feas));
         $bandKey = $score >= 85 ? 'strong' : ($score >= 70 ? 'relevant' : ($score >= 50 ? 'conditional' : 'low'));
@@ -145,5 +161,38 @@ class Scoring
             'benchmark' => null, 'calculator' => ['projectValueHuf' => $v, 'intensity' => $o['intensity'], 'grantHuf' => $grant,
                 'ownContributionHuf' => $v - $grant, 'cappedByCeiling' => $grant < $v * $o['intensity'], 'ceilingHuf' => $ceiling,
                 'partnerShare' => $o['partnerShare'] ?? null, 'callGrantHuf' => $o['fundingMax'], 'currencyNote' => null]];
+    }
+
+    /** Whole millions of HUF, as the explanations quote them. */
+    private function millions(mixed $n): int
+    {
+        return (int) round(((float) ($n ?: 0)) / 1e6);
+    }
+
+    /** Says what the funding figure was compared against: a whole consortium grant, a per-project range, or nothing published. */
+    private function sizeDetail(array $o, int $mine, bool $en): string
+    {
+        $call = $this->millions($o['fundingMax'] ?: $o['fundingMin']);
+        if (! empty($o['partnerShare'])) {
+            $typical = $this->millions($o['partnerShare']['typicalHuf'] ?? 0);
+            $min = $this->millions($o['partnerShare']['minHuf'] ?? 0);
+            $max = $this->millions($o['partnerShare']['maxHuf'] ?? 0);
+
+            return $en
+                ? "The {$call}M HUF grant covers the whole consortium. One partner's share is typically around {$typical}M HUF ({$min}–{$max}M), against your {$mine}M HUF project."
+                : "A {$call} M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően {$typical} M Ft körül van ({$min}–{$max} M Ft), a te projekted {$mine} M Ft.";
+        }
+        if ($o['fundingMin'] || $o['fundingMax']) {
+            $lo = $this->millions($o['fundingMin']);
+            $hi = $this->millions($o['fundingMax']);
+
+            return $en
+                ? "Grant per project {$lo}–{$hi}M HUF against your {$mine}M HUF project."
+                : "A felhívás projektenkénti támogatása {$lo}–{$hi} M Ft, a te projekted {$mine} M Ft.";
+        }
+
+        return $en
+            ? 'The call does not publish a contribution range, so this factor is scored neutrally.'
+            : 'A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap.';
     }
 }

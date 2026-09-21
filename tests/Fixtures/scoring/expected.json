@@ -1,0 +1,7553 @@
+{
+ "referenceDate": "2026-09-21",
+ "cases": [
+  {
+   "name": "demo (28 staff, Pest, manufacturing)",
+   "profile": null,
+   "answers": {},
+   "results": {
+    "eu-cef-dig-2026-cable-repair-capacities-works": {
+     "score": 63,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 17,
+     "factors": {
+      "elig": 100,
+      "fit": 23,
+      "size": 50,
+      "timing": 72,
+      "feas": 39
+     },
+     "failedRules": 0
+    },
+    "eu-cef-e-2026-pci-pmi-studies": {
+     "score": 64,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 45,
+      "size": 50,
+      "timing": 45,
+      "feas": 39
+     },
+     "failedRules": 0
+    },
+    "eu-cef-e-2026-pci-pmi-works": {
+     "score": 64,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 45,
+      "size": 50,
+      "timing": 45,
+      "feas": 39
+     },
+     "failedRules": 0
+    },
+    "eu-cerv-2026-daphne-prevention": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 45,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-digital-eccc-2027-deploy-cyber-11-ai4sme": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 115,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-edf-2026-da-acc-airdef-eatmi": {
+     "score": 51,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 93,
+      "fit": 5,
+      "size": 50,
+      "timing": 45,
+      "feas": 33
+     },
+     "failedRules": 0
+    },
+    "eu-edf-2026-da-air-sps": {
+     "score": 51,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 93,
+      "fit": 5,
+      "size": 50,
+      "timing": 45,
+      "feas": 33
+     },
+     "failedRules": 0
+    },
+    "eu-edf-2026-da-air-stfs": {
+     "score": 51,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 93,
+      "fit": 5,
+      "size": 50,
+      "timing": 45,
+      "feas": 33
+     },
+     "failedRules": 0
+    },
+    "eu-edf-2026-ra-simtrain-msai": {
+     "score": 53,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 93,
+      "fit": 5,
+      "size": 50,
+      "timing": 45,
+      "feas": 47
+     },
+     "failedRules": 0
+    },
+    "eu-erasmus-edu-2022-eche-cert-fp": {
+     "score": 69,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 127,
+     "factors": {
+      "elig": 90,
+      "fit": 36,
+      "size": 50,
+      "timing": 100,
+      "feas": 57
+     },
+     "failedRules": 0
+    },
+    "eu-esc-humaid-2021-qual-label-fp": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 1,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-euba-euaa-2026-asylumcaselaw": {
+     "score": 65,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 36,
+      "size": 50,
+      "timing": 45,
+      "feas": 69
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cid-2027-01-01": {
+     "score": 54,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 359,
+     "factors": {
+      "elig": 90,
+      "fit": 3,
+      "size": 40,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cid-2027-01-02": {
+     "score": 60,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 359,
+     "factors": {
+      "elig": 90,
+      "fit": 26,
+      "size": 40,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2026-01-democracy-01": {
+     "score": 51,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 3,
+      "size": 54,
+      "timing": 45,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2026-01-democracy-07": {
+     "score": 51,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 3,
+      "size": 54,
+      "timing": 45,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2026-01-transfo-05": {
+     "score": 51,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 3,
+      "size": 54,
+      "timing": 45,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2027-01-democracy-08": {
+     "score": 57,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 90,
+      "fit": 3,
+      "size": 54,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2027-01-transfo-06": {
+     "score": 68,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 90,
+      "fit": 45,
+      "size": 54,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl3-2026-01-infra-03": {
+     "score": 68,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 45,
+     "factors": {
+      "elig": 90,
+      "fit": 49,
+      "size": 48,
+      "timing": 92,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl3-2027-01-fct-03": {
+     "score": 58,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 409,
+     "factors": {
+      "elig": 90,
+      "fit": 3,
+      "size": 62,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl4-2027-01-mat-prod-06": {
+     "score": 70,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 134,
+     "factors": {
+      "elig": 90,
+      "fit": 49,
+      "size": 45,
+      "timing": 100,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl4-2027-04-data-09": {
+     "score": 63,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 178,
+     "factors": {
+      "elig": 90,
+      "fit": 30,
+      "size": 40,
+      "timing": 100,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl4-2027-space-03-71": {
+     "score": 56,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 346,
+     "factors": {
+      "elig": 90,
+      "fit": 3,
+      "size": 44,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2026-11-d3-14": {
+     "score": 55,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 71,
+     "factors": {
+      "elig": 90,
+      "fit": 3,
+      "size": 40,
+      "timing": 92,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2027-02-d3-10": {
+     "score": 57,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 191,
+     "factors": {
+      "elig": 90,
+      "fit": 3,
+      "size": 48,
+      "timing": 100,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2027-03-d5-18": {
+     "score": 56,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 205,
+     "factors": {
+      "elig": 90,
+      "fit": 3,
+      "size": 40,
+      "timing": 100,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2027-07-d3-11": {
+     "score": 61,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 436,
+     "factors": {
+      "elig": 90,
+      "fit": 30,
+      "size": 40,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2026-01-circbio-01": {
+     "score": 48,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 3,
+      "size": 42,
+      "timing": 45,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2026-04-governance-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 66,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl6-2027-01-circbio-03": {
+     "score": 56,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 366,
+     "factors": {
+      "elig": 90,
+      "fit": 3,
+      "size": 49,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2027-02-climate-02": {
+     "score": 56,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 90,
+      "fit": 3,
+      "size": 46,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2027-02-farm2fork-08": {
+     "score": 54,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 90,
+      "fit": 3,
+      "size": 40,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-eic-2026-defence-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 37,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-eic-2026-step": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 65,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-hlth-2027-01-envhlth-02": {
+     "score": 58,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 204,
+     "factors": {
+      "elig": 90,
+      "fit": 3,
+      "size": 44,
+      "timing": 100,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-infra-2027-dev-01-02": {
+     "score": 67,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 267,
+     "factors": {
+      "elig": 90,
+      "fit": 45,
+      "size": 49,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-ju-eurohpc-2026-qti-13-01": {
+     "score": 65,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 57,
+     "factors": {
+      "elig": 90,
+      "fit": 37,
+      "size": 44,
+      "timing": 92,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-miss-2026-03-ocean-01": {
+     "score": 60,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 49,
+      "size": 40,
+      "timing": 45,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-miss-2027-01-clima-02": {
+     "score": 66,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 365,
+     "factors": {
+      "elig": 90,
+      "fit": 33,
+      "size": 62,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-miss-2027-04-cit-03": {
+     "score": 60,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 381,
+     "factors": {
+      "elig": 90,
+      "fit": 26,
+      "size": 40,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-msca-2027-cofund-01-01": {
+     "score": 58,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 197,
+     "factors": {
+      "elig": 90,
+      "fit": 5,
+      "size": 50,
+      "timing": 100,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-neb-2027-01-business-01": {
+     "score": 60,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 436,
+     "factors": {
+      "elig": 90,
+      "fit": 26,
+      "size": 46,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-03-widening-01": {
+     "score": 64,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 3,
+     "factors": {
+      "elig": 90,
+      "fit": 25,
+      "size": 100,
+      "timing": 45,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-gender-prize-01": {
+     "score": 57,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 4,
+      "size": 50,
+      "timing": 45,
+      "feas": 72
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-gender-prize-02": {
+     "score": 57,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 4,
+      "size": 50,
+      "timing": 45,
+      "feas": 72
+     },
+     "failedRules": 0
+    },
+    "eu-i3-2026-inv2a": {
+     "score": 71,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 52,
+     "factors": {
+      "elig": 90,
+      "fit": 59,
+      "size": 50,
+      "timing": 92,
+      "feas": 35
+     },
+     "failedRules": 0
+    },
+    "eu-life-2026-sap-clima-gov": {
+     "score": 56,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 1,
+     "factors": {
+      "elig": 100,
+      "fit": 4,
+      "size": 50,
+      "timing": 45,
+      "feas": 56
+     },
+     "failedRules": 0
+    }
+   },
+   "details": {
+    "en": {
+     "eu-cef-dig-2026-cable-repair-capacities-works": {
+      "elig": [
+       "Eligibility",
+       "2 of 2 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: not classified. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The call does not publish a contribution range, so this factor is scored neutrally."
+      ],
+      "timing": [
+       "Timing",
+       "17 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "50% own contribution, 5 required annexes."
+      ]
+     },
+     "eu-cef-e-2026-pci-pmi-studies": {
+      "elig": [
+       "Eligibility",
+       "2 of 2 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: energy, it. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The call does not publish a contribution range, so this factor is scored neutrally."
+      ],
+      "timing": [
+       "Timing",
+       "9 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "50% own contribution, 5 required annexes."
+      ]
+     },
+     "eu-cef-e-2026-pci-pmi-works": {
+      "elig": [
+       "Eligibility",
+       "2 of 2 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: energy, it. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The call does not publish a contribution range, so this factor is scored neutrally."
+      ],
+      "timing": [
+       "Timing",
+       "9 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "50% own contribution, 5 required annexes."
+      ]
+     },
+     "eu-edf-2026-da-acc-airdef-eatmi": {
+      "elig": [
+       "Eligibility",
+       "3 of 4 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: defence. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The call does not publish a contribution range, so this factor is scored neutrally."
+      ],
+      "timing": [
+       "Timing",
+       "8 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "35% own contribution, 5 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-edf-2026-da-air-sps": {
+      "elig": [
+       "Eligibility",
+       "3 of 4 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: defence. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The call does not publish a contribution range, so this factor is scored neutrally."
+      ],
+      "timing": [
+       "Timing",
+       "8 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "35% own contribution, 5 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-edf-2026-da-air-stfs": {
+      "elig": [
+       "Eligibility",
+       "3 of 4 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: defence. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The call does not publish a contribution range, so this factor is scored neutrally."
+      ],
+      "timing": [
+       "Timing",
+       "8 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "35% own contribution, 5 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-edf-2026-ra-simtrain-msai": {
+      "elig": [
+       "Eligibility",
+       "3 of 4 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: defence. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The call does not publish a contribution range, so this factor is scored neutrally."
+      ],
+      "timing": [
+       "Timing",
+       "8 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "0% own contribution, 5 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-erasmus-edu-2022-eche-cert-fp": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: not classified. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The call does not publish a contribution range, so this factor is scored neutrally."
+      ],
+      "timing": [
+       "Timing",
+       "127 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "20% own contribution, 5 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-euba-euaa-2026-asylumcaselaw": {
+      "elig": [
+       "Eligibility",
+       "2 of 2 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: not classified. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The call does not publish a contribution range, so this factor is scored neutrally."
+      ],
+      "timing": [
+       "Timing",
+       "9 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "20% own contribution, 5 required annexes."
+      ]
+     },
+     "eu-horizon-cid-2027-01-01": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: energy, environment. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 9107M HUF grant covers the whole consortium. One partner's share is typically around 1093M HUF (546–2277M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "359 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "30% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-cid-2027-01-02": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: energy, environment, machinery, innovation, mobility. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 9107M HUF grant covers the whole consortium. One partner's share is typically around 1093M HUF (546–2277M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "359 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "30% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-cl2-2026-01-democracy-01": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: social. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 1457M HUF grant covers the whole consortium. One partner's share is typically around 175M HUF (87–364M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "2 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "0% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-cl2-2026-01-democracy-07": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: social. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 1457M HUF grant covers the whole consortium. One partner's share is typically around 175M HUF (87–364M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "2 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "0% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-cl2-2026-01-transfo-05": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: training. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 1457M HUF grant covers the whole consortium. One partner's share is typically around 175M HUF (87–364M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "2 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "0% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-cl2-2027-01-democracy-08": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: social, export. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 1457M HUF grant covers the whole consortium. One partner's share is typically around 175M HUF (87–364M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "367 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "0% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-cl2-2027-01-transfo-06": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: training, digitalization. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 1457M HUF grant covers the whole consortium. One partner's share is typically around 175M HUF (87–364M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "367 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "0% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-cl3-2026-01-infra-03": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: cybersecurity, it. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 1639M HUF grant covers the whole consortium. One partner's share is typically around 197M HUF (98–410M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "45 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "30% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-cl3-2027-01-fct-03": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: social, cybersecurity, rnd. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 1093M HUF grant covers the whole consortium. One partner's share is typically around 131M HUF (66–273M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "409 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "0% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-cl4-2027-01-mat-prod-06": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: machinery, innovation. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 2368M HUF grant covers the whole consortium. One partner's share is typically around 284M HUF (142–592M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "134 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "0% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-cl4-2027-04-data-09": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: energy, rnd, it, ai. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 3643M HUF grant covers the whole consortium. One partner's share is typically around 437M HUF (219–911M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "178 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "30% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-cl4-2027-space-03-71": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: space, electronics, rnd. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 5464M HUF grant covers the whole consortium. One partner's share is typically around 656M HUF (328–1366M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "346 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "0% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-cl5-2026-11-d3-14": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: energy, environment, innovation, rnd. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 2732M HUF grant covers the whole consortium. One partner's share is typically around 328M HUF (164–683M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "71 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "30% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-cl5-2027-02-d3-10": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: energy, employment, environment. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 1639M HUF grant covers the whole consortium. One partner's share is typically around 197M HUF (98–410M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "191 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "30% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-cl5-2027-03-d5-18": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: energy, mobility. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 3643M HUF grant covers the whole consortium. One partner's share is typically around 437M HUF (219–911M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "205 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "30% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-cl5-2027-07-d3-11": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: environment, energy, digitalization, ai. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 3096M HUF grant covers the whole consortium. One partner's share is typically around 372M HUF (186–774M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "436 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "30% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-cl6-2026-01-circbio-01": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: circular, environment. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 2186M HUF grant covers the whole consortium. One partner's share is typically around 262M HUF (131–546M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "2 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "30% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-cl6-2027-01-circbio-03": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: circular, environment. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 1821M HUF grant covers the whole consortium. One partner's share is typically around 219M HUF (109–455M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "366 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "0% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-cl6-2027-02-climate-02": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: agriculture, environment, cybersecurity. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 2186M HUF grant covers the whole consortium. One partner's share is typically around 262M HUF (131–546M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "367 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "0% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-cl6-2027-02-farm2fork-08": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: ai, rnd, agriculture. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 2841M HUF grant covers the whole consortium. One partner's share is typically around 341M HUF (170–710M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "367 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "30% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-hlth-2027-01-envhlth-02": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: health, environment. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 4007M HUF grant covers the whole consortium. One partner's share is typically around 481M HUF (240–1002M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "204 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "0% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-infra-2027-dev-01-02": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: rnd, it. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 1821M HUF grant covers the whole consortium. One partner's share is typically around 219M HUF (109–455M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "267 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "0% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-ju-eurohpc-2026-qti-13-01": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: electronics, rnd, it. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 7286M HUF grant covers the whole consortium. One partner's share is typically around 874M HUF (437–1821M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "57 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "0% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-miss-2026-03-ocean-01": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: environment, digitalization. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 2823M HUF grant covers the whole consortium. One partner's share is typically around 339M HUF (169–706M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "2 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "30% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-miss-2027-01-clima-02": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: ai, environment, digitalization. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 1093M HUF grant covers the whole consortium. One partner's share is typically around 131M HUF (66–273M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "365 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "0% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-miss-2027-04-cit-03": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: mobility, environment, social, digitalization, energy. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 3279M HUF grant covers the whole consortium. One partner's share is typically around 393M HUF (197–820M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "381 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "30% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-msca-2027-cofund-01-01": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: rnd. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The call does not publish a contribution range, so this factor is scored neutrally."
+      ],
+      "timing": [
+       "Timing",
+       "197 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "30% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-neb-2027-01-business-01": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: building, culture, social, machinery, environment. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 1821M HUF grant covers the whole consortium. One partner's share is typically around 219M HUF (109–455M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "436 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "30% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-widera-2026-03-widening-01": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: not classified. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The 219M HUF grant covers the whole consortium. One partner's share is typically around 26M HUF (13–55M), against your 30M HUF project."
+      ],
+      "timing": [
+       "Timing",
+       "3 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "0% own contribution, 6 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-horizon-widera-2026-gender-prize-01": {
+      "elig": [
+       "Eligibility",
+       "2 of 2 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: social. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The call does not publish a contribution range, so this factor is scored neutrally."
+      ],
+      "timing": [
+       "Timing",
+       "8 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "0% own contribution, 6 required annexes."
+      ]
+     },
+     "eu-horizon-widera-2026-gender-prize-02": {
+      "elig": [
+       "Eligibility",
+       "2 of 2 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: social. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The call does not publish a contribution range, so this factor is scored neutrally."
+      ],
+      "timing": [
+       "Timing",
+       "8 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "0% own contribution, 6 required annexes."
+      ]
+     },
+     "eu-i3-2026-inv2a": {
+      "elig": [
+       "Eligibility",
+       "2 of 3 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: innovation, machinery. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The call does not publish a contribution range, so this factor is scored neutrally."
+      ],
+      "timing": [
+       "Timing",
+       "52 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "30% own contribution, 5 required annexes, consortium of 3+ partners."
+      ]
+     },
+     "eu-life-2026-sap-clima-gov": {
+      "elig": [
+       "Eligibility",
+       "2 of 2 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: training, environment, social. Your goals: digitalization, it, machinery."
+      ],
+      "size": [
+       "Funding size",
+       "The call does not publish a contribution range, so this factor is scored neutrally."
+      ],
+      "timing": [
+       "Timing",
+       "1 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "40% own contribution, 6 required annexes."
+      ]
+     }
+    },
+    "hu": {
+     "eu-cef-dig-2026-cable-repair-capacities-works": {
+      "elig": [
+       "Jogosultság",
+       "2 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: nincs besorolva. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+      ],
+      "timing": [
+       "Időzítés",
+       "17 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "50% önerő, 5 kötelező melléklet."
+      ]
+     },
+     "eu-cef-e-2026-pci-pmi-studies": {
+      "elig": [
+       "Jogosultság",
+       "2 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: energy, it. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+      ],
+      "timing": [
+       "Időzítés",
+       "9 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "50% önerő, 5 kötelező melléklet."
+      ]
+     },
+     "eu-cef-e-2026-pci-pmi-works": {
+      "elig": [
+       "Jogosultság",
+       "2 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: energy, it. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+      ],
+      "timing": [
+       "Időzítés",
+       "9 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "50% önerő, 5 kötelező melléklet."
+      ]
+     },
+     "eu-edf-2026-da-acc-airdef-eatmi": {
+      "elig": [
+       "Jogosultság",
+       "4 kötelező feltételből 3 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: defence. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+      ],
+      "timing": [
+       "Időzítés",
+       "8 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "35% önerő, 5 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-edf-2026-da-air-sps": {
+      "elig": [
+       "Jogosultság",
+       "4 kötelező feltételből 3 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: defence. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+      ],
+      "timing": [
+       "Időzítés",
+       "8 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "35% önerő, 5 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-edf-2026-da-air-stfs": {
+      "elig": [
+       "Jogosultság",
+       "4 kötelező feltételből 3 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: defence. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+      ],
+      "timing": [
+       "Időzítés",
+       "8 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "35% önerő, 5 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-edf-2026-ra-simtrain-msai": {
+      "elig": [
+       "Jogosultság",
+       "4 kötelező feltételből 3 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: defence. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+      ],
+      "timing": [
+       "Időzítés",
+       "8 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "0% önerő, 5 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-erasmus-edu-2022-eche-cert-fp": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: nincs besorolva. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+      ],
+      "timing": [
+       "Időzítés",
+       "127 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "20% önerő, 5 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-euba-euaa-2026-asylumcaselaw": {
+      "elig": [
+       "Jogosultság",
+       "2 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: nincs besorolva. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+      ],
+      "timing": [
+       "Időzítés",
+       "9 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "20% önerő, 5 kötelező melléklet."
+      ]
+     },
+     "eu-horizon-cid-2027-01-01": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: energy, environment. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 9107 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 1093 M Ft körül van (546–2277 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "359 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "30% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-cid-2027-01-02": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: energy, environment, machinery, innovation, mobility. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 9107 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 1093 M Ft körül van (546–2277 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "359 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "30% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-cl2-2026-01-democracy-01": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: social. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 1457 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 175 M Ft körül van (87–364 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "2 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "0% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-cl2-2026-01-democracy-07": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: social. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 1457 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 175 M Ft körül van (87–364 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "2 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "0% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-cl2-2026-01-transfo-05": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: training. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 1457 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 175 M Ft körül van (87–364 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "2 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "0% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-cl2-2027-01-democracy-08": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: social, export. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 1457 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 175 M Ft körül van (87–364 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "367 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "0% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-cl2-2027-01-transfo-06": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: training, digitalization. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 1457 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 175 M Ft körül van (87–364 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "367 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "0% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-cl3-2026-01-infra-03": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: cybersecurity, it. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 1639 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 197 M Ft körül van (98–410 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "45 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "30% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-cl3-2027-01-fct-03": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: social, cybersecurity, rnd. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 1093 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 131 M Ft körül van (66–273 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "409 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "0% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-cl4-2027-01-mat-prod-06": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: machinery, innovation. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 2368 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 284 M Ft körül van (142–592 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "134 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "0% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-cl4-2027-04-data-09": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: energy, rnd, it, ai. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 3643 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 437 M Ft körül van (219–911 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "178 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "30% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-cl4-2027-space-03-71": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: space, electronics, rnd. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 5464 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 656 M Ft körül van (328–1366 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "346 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "0% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-cl5-2026-11-d3-14": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: energy, environment, innovation, rnd. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 2732 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 328 M Ft körül van (164–683 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "71 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "30% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-cl5-2027-02-d3-10": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: energy, employment, environment. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 1639 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 197 M Ft körül van (98–410 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "191 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "30% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-cl5-2027-03-d5-18": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: energy, mobility. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 3643 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 437 M Ft körül van (219–911 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "205 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "30% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-cl5-2027-07-d3-11": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: environment, energy, digitalization, ai. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 3096 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 372 M Ft körül van (186–774 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "436 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "30% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-cl6-2026-01-circbio-01": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: circular, environment. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 2186 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 262 M Ft körül van (131–546 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "2 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "30% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-cl6-2027-01-circbio-03": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: circular, environment. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 1821 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 219 M Ft körül van (109–455 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "366 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "0% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-cl6-2027-02-climate-02": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: agriculture, environment, cybersecurity. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 2186 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 262 M Ft körül van (131–546 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "367 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "0% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-cl6-2027-02-farm2fork-08": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: ai, rnd, agriculture. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 2841 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 341 M Ft körül van (170–710 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "367 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "30% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-hlth-2027-01-envhlth-02": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: health, environment. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 4007 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 481 M Ft körül van (240–1002 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "204 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "0% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-infra-2027-dev-01-02": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: rnd, it. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 1821 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 219 M Ft körül van (109–455 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "267 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "0% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-ju-eurohpc-2026-qti-13-01": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: electronics, rnd, it. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 7286 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 874 M Ft körül van (437–1821 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "57 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "0% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-miss-2026-03-ocean-01": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: environment, digitalization. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 2823 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 339 M Ft körül van (169–706 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "2 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "30% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-miss-2027-01-clima-02": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: ai, environment, digitalization. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 1093 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 131 M Ft körül van (66–273 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "365 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "0% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-miss-2027-04-cit-03": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: mobility, environment, social, digitalization, energy. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 3279 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 393 M Ft körül van (197–820 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "381 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "30% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-msca-2027-cofund-01-01": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: rnd. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+      ],
+      "timing": [
+       "Időzítés",
+       "197 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "30% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-neb-2027-01-business-01": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: building, culture, social, machinery, environment. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 1821 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 219 M Ft körül van (109–455 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "436 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "30% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-widera-2026-03-widening-01": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: nincs besorolva. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A 219 M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően 26 M Ft körül van (13–55 M Ft), a te projekted 30 M Ft."
+      ],
+      "timing": [
+       "Időzítés",
+       "3 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "0% önerő, 6 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-horizon-widera-2026-gender-prize-01": {
+      "elig": [
+       "Jogosultság",
+       "2 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: social. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+      ],
+      "timing": [
+       "Időzítés",
+       "8 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "0% önerő, 6 kötelező melléklet."
+      ]
+     },
+     "eu-horizon-widera-2026-gender-prize-02": {
+      "elig": [
+       "Jogosultság",
+       "2 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: social. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+      ],
+      "timing": [
+       "Időzítés",
+       "8 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "0% önerő, 6 kötelező melléklet."
+      ]
+     },
+     "eu-i3-2026-inv2a": {
+      "elig": [
+       "Jogosultság",
+       "3 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: innovation, machinery. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+      ],
+      "timing": [
+       "Időzítés",
+       "52 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "30% önerő, 5 kötelező melléklet, 3+ partneres konzorcium."
+      ]
+     },
+     "eu-life-2026-sap-clima-gov": {
+      "elig": [
+       "Jogosultság",
+       "2 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: training, environment, social. A te céljaid: digitalization, it, machinery."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+      ],
+      "timing": [
+       "Időzítés",
+       "1 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "40% önerő, 6 kötelező melléklet."
+      ]
+     }
+    }
+   }
+  },
+  {
+   "name": "micro Budapest services, consortium_ready=true",
+   "profile": {
+    "company": "Mikro Kft.",
+    "employees": 4,
+    "region": "HU11",
+    "county": "Budapest",
+    "industryId": "it",
+    "teaor": "62",
+    "closed_business_years": 2,
+    "goals": [
+     "it",
+     "digitalization"
+    ],
+    "investment_value": 8000000,
+    "funding_pref": [
+     "non_refundable"
+    ],
+    "eu_experience": true
+   },
+   "answers": {
+    "consortium_ready": true,
+    "de_minimis_ok": true
+   },
+   "results": {
+    "eu-cef-dig-2026-cable-repair-capacities-works": {
+     "score": 59,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 17,
+     "factors": {
+      "elig": 100,
+      "fit": 7,
+      "size": 50,
+      "timing": 72,
+      "feas": 39
+     },
+     "failedRules": 0
+    },
+    "eu-cef-e-2026-pci-pmi-studies": {
+     "score": 64,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 42,
+      "size": 50,
+      "timing": 45,
+      "feas": 39
+     },
+     "failedRules": 0
+    },
+    "eu-cef-e-2026-pci-pmi-works": {
+     "score": 63,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 41,
+      "size": 50,
+      "timing": 45,
+      "feas": 39
+     },
+     "failedRules": 0
+    },
+    "eu-cerv-2026-daphne-prevention": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 45,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-digital-eccc-2027-deploy-cyber-11-ai4sme": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 115,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-edf-2026-da-acc-airdef-eatmi": {
+     "score": 53,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 41
+     },
+     "failedRules": 0
+    },
+    "eu-edf-2026-da-air-sps": {
+     "score": 53,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 41
+     },
+     "failedRules": 0
+    },
+    "eu-edf-2026-da-air-stfs": {
+     "score": 53,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 41
+     },
+     "failedRules": 0
+    },
+    "eu-edf-2026-ra-simtrain-msai": {
+     "score": 55,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 55
+     },
+     "failedRules": 0
+    },
+    "eu-erasmus-edu-2022-eche-cert-fp": {
+     "score": 69,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 127,
+     "factors": {
+      "elig": 100,
+      "fit": 20,
+      "size": 50,
+      "timing": 100,
+      "feas": 65
+     },
+     "failedRules": 0
+    },
+    "eu-esc-humaid-2021-qual-label-fp": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 1,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-euba-euaa-2026-asylumcaselaw": {
+     "score": 61,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 20,
+      "size": 50,
+      "timing": 45,
+      "feas": 69
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cid-2027-01-01": {
+     "score": 57,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 359,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 40,
+      "timing": 84,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cid-2027-01-02": {
+     "score": 57,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 359,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 40,
+      "timing": 84,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2026-01-democracy-01": {
+     "score": 53,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 44,
+      "timing": 45,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2026-01-democracy-07": {
+     "score": 53,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 44,
+      "timing": 45,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2026-01-transfo-05": {
+     "score": 53,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 44,
+      "timing": 45,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2027-01-democracy-08": {
+     "score": 59,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 44,
+      "timing": 84,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2027-01-transfo-06": {
+     "score": 70,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 100,
+      "fit": 42,
+      "size": 44,
+      "timing": 84,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl3-2026-01-infra-03": {
+     "score": 71,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 45,
+     "factors": {
+      "elig": 100,
+      "fit": 50,
+      "size": 40,
+      "timing": 92,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl3-2027-01-fct-03": {
+     "score": 59,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 409,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 44,
+      "timing": 84,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl4-2027-01-mat-prod-06": {
+     "score": 62,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 134,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 44,
+      "timing": 100,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl4-2027-04-data-09": {
+     "score": 67,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 178,
+     "factors": {
+      "elig": 100,
+      "fit": 27,
+      "size": 40,
+      "timing": 100,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl4-2027-space-03-71": {
+     "score": 59,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 346,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 44,
+      "timing": 84,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2026-11-d3-14": {
+     "score": 59,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 71,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 40,
+      "timing": 92,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2027-02-d3-10": {
+     "score": 60,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 191,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 40,
+      "timing": 100,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2027-03-d5-18": {
+     "score": 60,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 205,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 40,
+      "timing": 100,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2027-07-d3-11": {
+     "score": 64,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 436,
+     "factors": {
+      "elig": 100,
+      "fit": 27,
+      "size": 40,
+      "timing": 84,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2026-01-circbio-01": {
+     "score": 52,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 40,
+      "timing": 45,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2026-04-governance-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 66,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl6-2027-01-circbio-03": {
+     "score": 59,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 366,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 44,
+      "timing": 84,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2027-02-climate-02": {
+     "score": 59,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 44,
+      "timing": 84,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2027-02-farm2fork-08": {
+     "score": 59,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 100,
+      "fit": 4,
+      "size": 40,
+      "timing": 84,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-eic-2026-defence-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 37,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-eic-2026-step": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 65,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-hlth-2027-01-envhlth-02": {
+     "score": 62,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 204,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 44,
+      "timing": 100,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-infra-2027-dev-01-02": {
+     "score": 71,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 267,
+     "factors": {
+      "elig": 100,
+      "fit": 46,
+      "size": 44,
+      "timing": 84,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-ju-eurohpc-2026-qti-13-01": {
+     "score": 69,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 57,
+     "factors": {
+      "elig": 100,
+      "fit": 35,
+      "size": 44,
+      "timing": 92,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-miss-2026-03-ocean-01": {
+     "score": 63,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 100,
+      "fit": 46,
+      "size": 40,
+      "timing": 45,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-miss-2027-01-clima-02": {
+     "score": 68,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 365,
+     "factors": {
+      "elig": 100,
+      "fit": 35,
+      "size": 44,
+      "timing": 84,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-miss-2027-04-cit-03": {
+     "score": 63,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 381,
+     "factors": {
+      "elig": 100,
+      "fit": 23,
+      "size": 40,
+      "timing": 84,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-msca-2027-cofund-01-01": {
+     "score": 61,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 197,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 100,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-neb-2027-01-business-01": {
+     "score": 57,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 436,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 40,
+      "timing": 84,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-03-widening-01": {
+     "score": 59,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 3,
+     "factors": {
+      "elig": 100,
+      "fit": 7,
+      "size": 73,
+      "timing": 45,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-gender-prize-01": {
+     "score": 56,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 72
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-gender-prize-02": {
+     "score": 56,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 72
+     },
+     "failedRules": 0
+    },
+    "eu-i3-2026-inv2a": {
+     "score": 61,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 52,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 92,
+      "feas": 43
+     },
+     "failedRules": 0
+    },
+    "eu-life-2026-sap-clima-gov": {
+     "score": 55,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 1,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 56
+     },
+     "failedRules": 0
+    }
+   }
+  },
+  {
+   "name": "large 400 staff, no goals",
+   "profile": {
+    "company": "Nagy Zrt.",
+    "employees": 400,
+    "region": "HU21",
+    "county": "Győr-Moson-Sopron",
+    "industryId": "manuf",
+    "teaor": "29",
+    "closed_business_years": 15,
+    "goals": [],
+    "investment_value": 900000000,
+    "funding_pref": [
+     "non_refundable"
+    ]
+   },
+   "answers": {},
+   "results": {
+    "eu-cef-dig-2026-cable-repair-capacities-works": {
+     "score": 59,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 17,
+     "factors": {
+      "elig": 100,
+      "fit": 7,
+      "size": 50,
+      "timing": 72,
+      "feas": 39
+     },
+     "failedRules": 0
+    },
+    "eu-cef-e-2026-pci-pmi-studies": {
+     "score": 53,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 39
+     },
+     "failedRules": 0
+    },
+    "eu-cef-e-2026-pci-pmi-works": {
+     "score": 53,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 39
+     },
+     "failedRules": 0
+    },
+    "eu-cerv-2026-daphne-prevention": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 45,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-digital-eccc-2027-deploy-cyber-11-ai4sme": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 115,
+     "factors": {},
+     "failedRules": 2
+    },
+    "eu-edf-2026-da-acc-airdef-eatmi": {
+     "score": 50,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 93,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 33
+     },
+     "failedRules": 0
+    },
+    "eu-edf-2026-da-air-sps": {
+     "score": 50,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 93,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 33
+     },
+     "failedRules": 0
+    },
+    "eu-edf-2026-da-air-stfs": {
+     "score": 50,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 93,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 33
+     },
+     "failedRules": 0
+    },
+    "eu-edf-2026-ra-simtrain-msai": {
+     "score": 51,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 93,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 47
+     },
+     "failedRules": 0
+    },
+    "eu-erasmus-edu-2022-eche-cert-fp": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 127,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-esc-humaid-2021-qual-label-fp": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 1,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-euba-euaa-2026-asylumcaselaw": {
+     "score": 61,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 20,
+      "size": 50,
+      "timing": 45,
+      "feas": 69
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cid-2027-01-01": {
+     "score": 63,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 359,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 96,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cid-2027-01-02": {
+     "score": 63,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 359,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 96,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2026-01-democracy-01": {
+     "score": 56,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 87,
+      "timing": 45,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2026-01-democracy-07": {
+     "score": 56,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 87,
+      "timing": 45,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2026-01-transfo-05": {
+     "score": 56,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 87,
+      "timing": 45,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2027-01-democracy-08": {
+     "score": 62,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 87,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2027-01-transfo-06": {
+     "score": 62,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 87,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl3-2026-01-infra-03": {
+     "score": 63,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 45,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 90,
+      "timing": 92,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl3-2027-01-fct-03": {
+     "score": 60,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 409,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 72,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl4-2027-01-mat-prod-06": {
+     "score": 68,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 134,
+     "factors": {
+      "elig": 90,
+      "fit": 8,
+      "size": 100,
+      "timing": 100,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl4-2027-04-data-09": {
+     "score": 65,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 178,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 96,
+      "timing": 100,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl4-2027-space-03-71": {
+     "score": 64,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 346,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 100,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2026-11-d3-14": {
+     "score": 64,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 71,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 96,
+      "timing": 92,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2027-02-d3-10": {
+     "score": 64,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 191,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 90,
+      "timing": 100,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2027-03-d5-18": {
+     "score": 65,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 205,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 96,
+      "timing": 100,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2027-07-d3-11": {
+     "score": 63,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 436,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 96,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2026-01-circbio-01": {
+     "score": 57,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 96,
+      "timing": 45,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2026-04-governance-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 66,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl6-2027-01-circbio-03": {
+     "score": 64,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 366,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 100,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2027-02-climate-02": {
+     "score": 64,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 100,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2027-02-farm2fork-08": {
+     "score": 63,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 96,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-eic-2026-defence-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 37,
+     "factors": {},
+     "failedRules": 2
+    },
+    "eu-horizon-eic-2026-step": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 65,
+     "factors": {},
+     "failedRules": 2
+    },
+    "eu-horizon-hlth-2027-01-envhlth-02": {
+     "score": 67,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 204,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 100,
+      "timing": 100,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-infra-2027-dev-01-02": {
+     "score": 64,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 267,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 100,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-ju-eurohpc-2026-qti-13-01": {
+     "score": 67,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 57,
+     "factors": {
+      "elig": 90,
+      "fit": 8,
+      "size": 100,
+      "timing": 92,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-miss-2026-03-ocean-01": {
+     "score": 57,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 96,
+      "timing": 45,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-miss-2027-01-clima-02": {
+     "score": 60,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 365,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 72,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-miss-2027-04-cit-03": {
+     "score": 63,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 381,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 96,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-msca-2027-cofund-01-01": {
+     "score": 57,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 197,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 50,
+      "timing": 100,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-neb-2027-01-business-01": {
+     "score": 63,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 436,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 96,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-03-widening-01": {
+     "score": 56,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 3,
+     "factors": {
+      "elig": 90,
+      "fit": 18,
+      "size": 58,
+      "timing": 45,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-gender-prize-01": {
+     "score": 56,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 72
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-gender-prize-02": {
+     "score": 56,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 72
+     },
+     "failedRules": 0
+    },
+    "eu-i3-2026-inv2a": {
+     "score": 58,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 52,
+     "factors": {
+      "elig": 90,
+      "fit": 6,
+      "size": 50,
+      "timing": 92,
+      "feas": 35
+     },
+     "failedRules": 0
+    },
+    "eu-life-2026-sap-clima-gov": {
+     "score": 55,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 1,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 56
+     },
+     "failedRules": 0
+    }
+   }
+  },
+  {
+   "name": "small energy firm, eu_experience=false, consortium false",
+   "profile": {
+    "company": "Zöld Bt.",
+    "employees": 45,
+    "region": "HU31",
+    "county": "Borsod-Abaúj-Zemplén",
+    "industryId": "energy",
+    "teaor": "35",
+    "closed_business_years": 6,
+    "goals": [
+     "energy",
+     "environment",
+     "circular"
+    ],
+    "investment_value": 120000000,
+    "funding_pref": [
+     "non_refundable",
+     "EU"
+    ],
+    "eu_experience": false
+   },
+   "answers": {
+    "consortium_ready": false
+   },
+   "results": {
+    "eu-cef-dig-2026-cable-repair-capacities-works": {
+     "score": 62,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 17,
+     "factors": {
+      "elig": 100,
+      "fit": 23,
+      "size": 50,
+      "timing": 72,
+      "feas": 33
+     },
+     "failedRules": 0
+    },
+    "eu-cef-e-2026-pci-pmi-studies": {
+     "score": 65,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 50,
+      "size": 50,
+      "timing": 45,
+      "feas": 33
+     },
+     "failedRules": 0
+    },
+    "eu-cef-e-2026-pci-pmi-works": {
+     "score": 65,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 50,
+      "size": 50,
+      "timing": 45,
+      "feas": 33
+     },
+     "failedRules": 0
+    },
+    "eu-cerv-2026-daphne-prevention": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 45,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-digital-eccc-2027-deploy-cyber-11-ai4sme": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 115,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-edf-2026-da-acc-airdef-eatmi": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {},
+     "failedRules": 2
+    },
+    "eu-edf-2026-da-air-sps": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {},
+     "failedRules": 2
+    },
+    "eu-edf-2026-da-air-stfs": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {},
+     "failedRules": 2
+    },
+    "eu-edf-2026-ra-simtrain-msai": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {},
+     "failedRules": 2
+    },
+    "eu-erasmus-edu-2022-eche-cert-fp": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 127,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-esc-humaid-2021-qual-label-fp": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 1,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-euba-euaa-2026-asylumcaselaw": {
+     "score": 65,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 36,
+      "size": 50,
+      "timing": 45,
+      "feas": 63
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cid-2027-01-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 359,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cid-2027-01-02": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 359,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl2-2026-01-democracy-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 2,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl2-2026-01-democracy-07": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 2,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl2-2026-01-transfo-05": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 2,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl2-2027-01-democracy-08": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 367,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl2-2027-01-transfo-06": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 367,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl3-2026-01-infra-03": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 45,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl3-2027-01-fct-03": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 409,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl4-2027-01-mat-prod-06": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 134,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl4-2027-04-data-09": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 178,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl4-2027-space-03-71": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 346,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl5-2026-11-d3-14": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 71,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl5-2027-02-d3-10": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 191,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl5-2027-03-d5-18": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 205,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl5-2027-07-d3-11": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 436,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl6-2026-01-circbio-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 2,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl6-2026-04-governance-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 66,
+     "factors": {},
+     "failedRules": 2
+    },
+    "eu-horizon-cl6-2027-01-circbio-03": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 366,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl6-2027-02-climate-02": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 367,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl6-2027-02-farm2fork-08": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 367,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-eic-2026-defence-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 37,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-eic-2026-step": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 65,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-hlth-2027-01-envhlth-02": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 204,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-infra-2027-dev-01-02": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 267,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-ju-eurohpc-2026-qti-13-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 57,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-miss-2026-03-ocean-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 2,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-miss-2027-01-clima-02": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 365,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-miss-2027-04-cit-03": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 381,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-msca-2027-cofund-01-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 197,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-neb-2027-01-business-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 436,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-widera-2026-03-widening-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 3,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-widera-2026-gender-prize-01": {
+     "score": 57,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 4,
+      "size": 50,
+      "timing": 45,
+      "feas": 66
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-gender-prize-02": {
+     "score": 57,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 4,
+      "size": 50,
+      "timing": 45,
+      "feas": 66
+     },
+     "failedRules": 0
+    },
+    "eu-i3-2026-inv2a": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 52,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-life-2026-sap-clima-gov": {
+     "score": 64,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 1,
+     "factors": {
+      "elig": 100,
+      "fit": 37,
+      "size": 50,
+      "timing": 45,
+      "feas": 50
+     },
+     "failedRules": 0
+    }
+   },
+   "details": {
+    "en": {
+     "eu-cef-dig-2026-cable-repair-capacities-works": {
+      "elig": [
+       "Eligibility",
+       "2 of 2 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: not classified. Your goals: energy, environment, circular."
+      ],
+      "size": [
+       "Funding size",
+       "The call does not publish a contribution range, so this factor is scored neutrally."
+      ],
+      "timing": [
+       "Timing",
+       "17 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "50% own contribution, 5 required annexes."
+      ]
+     },
+     "eu-cef-e-2026-pci-pmi-studies": {
+      "elig": [
+       "Eligibility",
+       "2 of 2 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: energy, it. Your goals: energy, environment, circular."
+      ],
+      "size": [
+       "Funding size",
+       "The call does not publish a contribution range, so this factor is scored neutrally."
+      ],
+      "timing": [
+       "Timing",
+       "9 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "50% own contribution, 5 required annexes."
+      ]
+     },
+     "eu-cef-e-2026-pci-pmi-works": {
+      "elig": [
+       "Eligibility",
+       "2 of 2 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: energy, it. Your goals: energy, environment, circular."
+      ],
+      "size": [
+       "Funding size",
+       "The call does not publish a contribution range, so this factor is scored neutrally."
+      ],
+      "timing": [
+       "Timing",
+       "9 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "50% own contribution, 5 required annexes."
+      ]
+     },
+     "eu-euba-euaa-2026-asylumcaselaw": {
+      "elig": [
+       "Eligibility",
+       "2 of 2 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: not classified. Your goals: energy, environment, circular."
+      ],
+      "size": [
+       "Funding size",
+       "The call does not publish a contribution range, so this factor is scored neutrally."
+      ],
+      "timing": [
+       "Timing",
+       "9 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "20% own contribution, 5 required annexes."
+      ]
+     },
+     "eu-horizon-widera-2026-gender-prize-01": {
+      "elig": [
+       "Eligibility",
+       "2 of 2 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: social. Your goals: energy, environment, circular."
+      ],
+      "size": [
+       "Funding size",
+       "The call does not publish a contribution range, so this factor is scored neutrally."
+      ],
+      "timing": [
+       "Timing",
+       "8 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "0% own contribution, 6 required annexes."
+      ]
+     },
+     "eu-horizon-widera-2026-gender-prize-02": {
+      "elig": [
+       "Eligibility",
+       "2 of 2 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: social. Your goals: energy, environment, circular."
+      ],
+      "size": [
+       "Funding size",
+       "The call does not publish a contribution range, so this factor is scored neutrally."
+      ],
+      "timing": [
+       "Timing",
+       "8 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "0% own contribution, 6 required annexes."
+      ]
+     },
+     "eu-life-2026-sap-clima-gov": {
+      "elig": [
+       "Eligibility",
+       "2 of 2 hard criteria satisfied by your profile."
+      ],
+      "fit": [
+       "Project fit",
+       "Call themes: training, environment, social. Your goals: energy, environment, circular."
+      ],
+      "size": [
+       "Funding size",
+       "The call does not publish a contribution range, so this factor is scored neutrally."
+      ],
+      "timing": [
+       "Timing",
+       "1 days remain until the deadline."
+      ],
+      "feas": [
+       "Feasibility",
+       "40% own contribution, 6 required annexes."
+      ]
+     }
+    },
+    "hu": {
+     "eu-cef-dig-2026-cable-repair-capacities-works": {
+      "elig": [
+       "Jogosultság",
+       "2 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: nincs besorolva. A te céljaid: energy, environment, circular."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+      ],
+      "timing": [
+       "Időzítés",
+       "17 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "50% önerő, 5 kötelező melléklet."
+      ]
+     },
+     "eu-cef-e-2026-pci-pmi-studies": {
+      "elig": [
+       "Jogosultság",
+       "2 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: energy, it. A te céljaid: energy, environment, circular."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+      ],
+      "timing": [
+       "Időzítés",
+       "9 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "50% önerő, 5 kötelező melléklet."
+      ]
+     },
+     "eu-cef-e-2026-pci-pmi-works": {
+      "elig": [
+       "Jogosultság",
+       "2 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: energy, it. A te céljaid: energy, environment, circular."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+      ],
+      "timing": [
+       "Időzítés",
+       "9 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "50% önerő, 5 kötelező melléklet."
+      ]
+     },
+     "eu-euba-euaa-2026-asylumcaselaw": {
+      "elig": [
+       "Jogosultság",
+       "2 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: nincs besorolva. A te céljaid: energy, environment, circular."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+      ],
+      "timing": [
+       "Időzítés",
+       "9 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "20% önerő, 5 kötelező melléklet."
+      ]
+     },
+     "eu-horizon-widera-2026-gender-prize-01": {
+      "elig": [
+       "Jogosultság",
+       "2 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: social. A te céljaid: energy, environment, circular."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+      ],
+      "timing": [
+       "Időzítés",
+       "8 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "0% önerő, 6 kötelező melléklet."
+      ]
+     },
+     "eu-horizon-widera-2026-gender-prize-02": {
+      "elig": [
+       "Jogosultság",
+       "2 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: social. A te céljaid: energy, environment, circular."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+      ],
+      "timing": [
+       "Időzítés",
+       "8 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "0% önerő, 6 kötelező melléklet."
+      ]
+     },
+     "eu-life-2026-sap-clima-gov": {
+      "elig": [
+       "Jogosultság",
+       "2 kötelező feltételből 2 teljesül a cégprofilod alapján."
+      ],
+      "fit": [
+       "Projekt-illeszkedés",
+       "A felhívás témái: training, environment, social. A te céljaid: energy, environment, circular."
+      ],
+      "size": [
+       "Támogatás mérete",
+       "A felhívás nem közöl támogatási sávot, ezért ez a tényező semleges értéket kap."
+      ],
+      "timing": [
+       "Időzítés",
+       "1 nap van a beadási határidőig."
+      ],
+      "feas": [
+       "Megvalósíthatóság",
+       "40% önerő, 6 kötelező melléklet."
+      ]
+     }
+    }
+   }
+  },
+  {
+   "name": "startup, 0 closed years, tiny project",
+   "profile": {
+    "company": "Start Kft.",
+    "employees": 2,
+    "county": "Pest",
+    "industryId": "it",
+    "teaor": "62",
+    "closed_business_years": 0,
+    "goals": [
+     "it"
+    ],
+    "investment_value": 2000000,
+    "funding_pref": [
+     "non_refundable"
+    ]
+   },
+   "answers": {},
+   "results": {
+    "eu-cef-dig-2026-cable-repair-capacities-works": {
+     "score": 59,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 17,
+     "factors": {
+      "elig": 100,
+      "fit": 7,
+      "size": 50,
+      "timing": 72,
+      "feas": 39
+     },
+     "failedRules": 0
+    },
+    "eu-cef-e-2026-pci-pmi-studies": {
+     "score": 64,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 42,
+      "size": 50,
+      "timing": 45,
+      "feas": 39
+     },
+     "failedRules": 0
+    },
+    "eu-cef-e-2026-pci-pmi-works": {
+     "score": 63,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 41,
+      "size": 50,
+      "timing": 45,
+      "feas": 39
+     },
+     "failedRules": 0
+    },
+    "eu-cerv-2026-daphne-prevention": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 45,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-digital-eccc-2027-deploy-cyber-11-ai4sme": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 115,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-edf-2026-da-acc-airdef-eatmi": {
+     "score": 50,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 93,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 33
+     },
+     "failedRules": 0
+    },
+    "eu-edf-2026-da-air-sps": {
+     "score": 50,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 93,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 33
+     },
+     "failedRules": 0
+    },
+    "eu-edf-2026-da-air-stfs": {
+     "score": 50,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 93,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 33
+     },
+     "failedRules": 0
+    },
+    "eu-edf-2026-ra-simtrain-msai": {
+     "score": 51,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 93,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 47
+     },
+     "failedRules": 0
+    },
+    "eu-erasmus-edu-2022-eche-cert-fp": {
+     "score": 65,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 127,
+     "factors": {
+      "elig": 90,
+      "fit": 20,
+      "size": 50,
+      "timing": 100,
+      "feas": 57
+     },
+     "failedRules": 0
+    },
+    "eu-esc-humaid-2021-qual-label-fp": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 1,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-euba-euaa-2026-asylumcaselaw": {
+     "score": 61,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 20,
+      "size": 50,
+      "timing": 45,
+      "feas": 69
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cid-2027-01-01": {
+     "score": 51,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 359,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 26,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cid-2027-01-02": {
+     "score": 51,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 359,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 26,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2026-01-democracy-01": {
+     "score": 48,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 34,
+      "timing": 45,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2026-01-democracy-07": {
+     "score": 48,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 34,
+      "timing": 45,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2026-01-transfo-05": {
+     "score": 48,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 34,
+      "timing": 45,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2027-01-democracy-08": {
+     "score": 53,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 34,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2027-01-transfo-06": {
+     "score": 53,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 34,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl3-2026-01-infra-03": {
+     "score": 65,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 45,
+     "factors": {
+      "elig": 90,
+      "fit": 50,
+      "size": 26,
+      "timing": 92,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl3-2027-01-fct-03": {
+     "score": 53,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 409,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 34,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl4-2027-01-mat-prod-06": {
+     "score": 56,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 134,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 34,
+      "timing": 100,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl4-2027-04-data-09": {
+     "score": 60,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 178,
+     "factors": {
+      "elig": 90,
+      "fit": 27,
+      "size": 26,
+      "timing": 100,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl4-2027-space-03-71": {
+     "score": 53,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 346,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 34,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2026-11-d3-14": {
+     "score": 52,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 71,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 26,
+      "timing": 92,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2027-02-d3-10": {
+     "score": 53,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 191,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 26,
+      "timing": 100,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2027-03-d5-18": {
+     "score": 53,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 205,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 26,
+      "timing": 100,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2027-07-d3-11": {
+     "score": 51,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 436,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 26,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2026-01-circbio-01": {
+     "score": 45,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 26,
+      "timing": 45,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2026-04-governance-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 66,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl6-2027-01-circbio-03": {
+     "score": 53,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 366,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 34,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2027-02-climate-02": {
+     "score": 53,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 34,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2027-02-farm2fork-08": {
+     "score": 52,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 26,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-eic-2026-defence-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 37,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-eic-2026-step": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 65,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-hlth-2027-01-envhlth-02": {
+     "score": 56,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 204,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 34,
+      "timing": 100,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-infra-2027-dev-01-02": {
+     "score": 65,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 267,
+     "factors": {
+      "elig": 90,
+      "fit": 46,
+      "size": 34,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-ju-eurohpc-2026-qti-13-01": {
+     "score": 63,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 57,
+     "factors": {
+      "elig": 90,
+      "fit": 35,
+      "size": 34,
+      "timing": 92,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-miss-2026-03-ocean-01": {
+     "score": 45,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 26,
+      "timing": 45,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-miss-2027-01-clima-02": {
+     "score": 54,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 365,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 34,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-miss-2027-04-cit-03": {
+     "score": 51,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 381,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 26,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-msca-2027-cofund-01-01": {
+     "score": 57,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 197,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 50,
+      "timing": 100,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-neb-2027-01-business-01": {
+     "score": 51,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 436,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 26,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-03-widening-01": {
+     "score": 49,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 3,
+     "factors": {
+      "elig": 90,
+      "fit": 7,
+      "size": 34,
+      "timing": 45,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-gender-prize-01": {
+     "score": 56,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 72
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-gender-prize-02": {
+     "score": 56,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 72
+     },
+     "failedRules": 0
+    },
+    "eu-i3-2026-inv2a": {
+     "score": 56,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 52,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 50,
+      "timing": 92,
+      "feas": 35
+     },
+     "failedRules": 0
+    },
+    "eu-life-2026-sap-clima-gov": {
+     "score": 55,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 1,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 56
+     },
+     "failedRules": 0
+    }
+   }
+  },
+  {
+   "name": "research org",
+   "profile": {
+    "company": "Kutató Nonprofit",
+    "employees": 60,
+    "county": "Csongrád-Csanád",
+    "orgType": "research",
+    "industryId": "rnd",
+    "teaor": "72",
+    "closed_business_years": 9,
+    "goals": [
+     "research",
+     "it"
+    ],
+    "investment_value": 250000000,
+    "funding_pref": [
+     "non_refundable"
+    ]
+   },
+   "answers": {},
+   "results": {
+    "eu-cef-dig-2026-cable-repair-capacities-works": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 17,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-cef-e-2026-pci-pmi-studies": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-cef-e-2026-pci-pmi-works": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-cerv-2026-daphne-prevention": {
+     "score": 64,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 45,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 92,
+      "feas": 73
+     },
+     "failedRules": 0
+    },
+    "eu-digital-eccc-2027-deploy-cyber-11-ai4sme": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 115,
+     "factors": {},
+     "failedRules": 2
+    },
+    "eu-edf-2026-da-acc-airdef-eatmi": {
+     "score": 50,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 93,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 33
+     },
+     "failedRules": 0
+    },
+    "eu-edf-2026-da-air-sps": {
+     "score": 50,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 93,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 33
+     },
+     "failedRules": 0
+    },
+    "eu-edf-2026-da-air-stfs": {
+     "score": 50,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 93,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 33
+     },
+     "failedRules": 0
+    },
+    "eu-edf-2026-ra-simtrain-msai": {
+     "score": 51,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 93,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 47
+     },
+     "failedRules": 0
+    },
+    "eu-erasmus-edu-2022-eche-cert-fp": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 127,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-esc-humaid-2021-qual-label-fp": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 1,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-euba-euaa-2026-asylumcaselaw": {
+     "score": 62,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 24,
+      "size": 50,
+      "timing": 45,
+      "feas": 69
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cid-2027-01-01": {
+     "score": 56,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 359,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 58,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cid-2027-01-02": {
+     "score": 56,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 359,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 58,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2026-01-democracy-01": {
+     "score": 59,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 5,
+      "size": 100,
+      "timing": 45,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2026-01-democracy-07": {
+     "score": 59,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 5,
+      "size": 100,
+      "timing": 45,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2026-01-transfo-05": {
+     "score": 60,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 9,
+      "size": 100,
+      "timing": 45,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2027-01-democracy-08": {
+     "score": 64,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 90,
+      "fit": 5,
+      "size": 100,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2027-01-transfo-06": {
+     "score": 66,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 90,
+      "fit": 9,
+      "size": 100,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl3-2026-01-infra-03": {
+     "score": 76,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 45,
+     "factors": {
+      "elig": 90,
+      "fit": 52,
+      "size": 96,
+      "timing": 92,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl3-2027-01-fct-03": {
+     "score": 64,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 409,
+     "factors": {
+      "elig": 90,
+      "fit": 5,
+      "size": 100,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl4-2027-01-mat-prod-06": {
+     "score": 67,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 134,
+     "factors": {
+      "elig": 90,
+      "fit": 5,
+      "size": 100,
+      "timing": 100,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl4-2027-04-data-09": {
+     "score": 72,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 178,
+     "factors": {
+      "elig": 90,
+      "fit": 32,
+      "size": 96,
+      "timing": 100,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl4-2027-space-03-71": {
+     "score": 61,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 346,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 83,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2026-11-d3-14": {
+     "score": 64,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 71,
+     "factors": {
+      "elig": 90,
+      "fit": 5,
+      "size": 96,
+      "timing": 92,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2027-02-d3-10": {
+     "score": 65,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 191,
+     "factors": {
+      "elig": 90,
+      "fit": 5,
+      "size": 96,
+      "timing": 100,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2027-03-d5-18": {
+     "score": 65,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 205,
+     "factors": {
+      "elig": 90,
+      "fit": 5,
+      "size": 96,
+      "timing": 100,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2027-07-d3-11": {
+     "score": 63,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 436,
+     "factors": {
+      "elig": 90,
+      "fit": 5,
+      "size": 96,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2026-01-circbio-01": {
+     "score": 57,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 5,
+      "size": 96,
+      "timing": 45,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2026-04-governance-01": {
+     "score": 53,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 66,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 38,
+      "timing": 92,
+      "feas": 22
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2027-01-circbio-03": {
+     "score": 64,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 366,
+     "factors": {
+      "elig": 90,
+      "fit": 5,
+      "size": 100,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2027-02-climate-02": {
+     "score": 64,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 90,
+      "fit": 5,
+      "size": 100,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2027-02-farm2fork-08": {
+     "score": 63,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 90,
+      "fit": 5,
+      "size": 96,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-eic-2026-defence-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 37,
+     "factors": {},
+     "failedRules": 2
+    },
+    "eu-horizon-eic-2026-step": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 65,
+     "factors": {},
+     "failedRules": 2
+    },
+    "eu-horizon-hlth-2027-01-envhlth-02": {
+     "score": 67,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 204,
+     "factors": {
+      "elig": 90,
+      "fit": 5,
+      "size": 100,
+      "timing": 100,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-infra-2027-dev-01-02": {
+     "score": 76,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 267,
+     "factors": {
+      "elig": 90,
+      "fit": 52,
+      "size": 100,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-ju-eurohpc-2026-qti-13-01": {
+     "score": 69,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 57,
+     "factors": {
+      "elig": 90,
+      "fit": 34,
+      "size": 70,
+      "timing": 92,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-miss-2026-03-ocean-01": {
+     "score": 57,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 5,
+      "size": 96,
+      "timing": 45,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-miss-2027-01-clima-02": {
+     "score": 64,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 365,
+     "factors": {
+      "elig": 90,
+      "fit": 5,
+      "size": 100,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-miss-2027-04-cit-03": {
+     "score": 63,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 381,
+     "factors": {
+      "elig": 90,
+      "fit": 5,
+      "size": 96,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-msca-2027-cofund-01-01": {
+     "score": 57,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 197,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 50,
+      "timing": 100,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-neb-2027-01-business-01": {
+     "score": 63,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 436,
+     "factors": {
+      "elig": 90,
+      "fit": 5,
+      "size": 96,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-03-widening-01": {
+     "score": 57,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 3,
+     "factors": {
+      "elig": 90,
+      "fit": 20,
+      "size": 61,
+      "timing": 45,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-gender-prize-01": {
+     "score": 56,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 72
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-gender-prize-02": {
+     "score": 56,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 72
+     },
+     "failedRules": 0
+    },
+    "eu-i3-2026-inv2a": {
+     "score": 56,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 52,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 50,
+      "timing": 92,
+      "feas": 35
+     },
+     "failedRules": 0
+    },
+    "eu-life-2026-sap-clima-gov": {
+     "score": 56,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 1,
+     "factors": {
+      "elig": 100,
+      "fit": 6,
+      "size": 50,
+      "timing": 45,
+      "feas": 56
+     },
+     "failedRules": 0
+    }
+   }
+  },
+  {
+   "name": "agri firm",
+   "profile": {
+    "company": "Agro Kft.",
+    "employees": 18,
+    "county": "Bács-Kiskun",
+    "industryId": "agri",
+    "teaor": "01",
+    "closed_business_years": 5,
+    "goals": [
+     "agri",
+     "environment"
+    ],
+    "investment_value": 40000000,
+    "funding_pref": [
+     "non_refundable"
+    ]
+   },
+   "answers": {},
+   "results": {
+    "eu-cef-dig-2026-cable-repair-capacities-works": {
+     "score": 59,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 17,
+     "factors": {
+      "elig": 100,
+      "fit": 7,
+      "size": 50,
+      "timing": 72,
+      "feas": 39
+     },
+     "failedRules": 0
+    },
+    "eu-cef-e-2026-pci-pmi-studies": {
+     "score": 53,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 39
+     },
+     "failedRules": 0
+    },
+    "eu-cef-e-2026-pci-pmi-works": {
+     "score": 53,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 39
+     },
+     "failedRules": 0
+    },
+    "eu-cerv-2026-daphne-prevention": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 45,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-digital-eccc-2027-deploy-cyber-11-ai4sme": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 115,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-edf-2026-da-acc-airdef-eatmi": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-edf-2026-da-air-sps": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-edf-2026-da-air-stfs": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-edf-2026-ra-simtrain-msai": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-erasmus-edu-2022-eche-cert-fp": {
+     "score": 65,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 127,
+     "factors": {
+      "elig": 90,
+      "fit": 20,
+      "size": 50,
+      "timing": 100,
+      "feas": 57
+     },
+     "failedRules": 0
+    },
+    "eu-esc-humaid-2021-qual-label-fp": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 1,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-euba-euaa-2026-asylumcaselaw": {
+     "score": 61,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 20,
+      "size": 50,
+      "timing": 45,
+      "feas": 69
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cid-2027-01-01": {
+     "score": 65,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 359,
+     "factors": {
+      "elig": 90,
+      "fit": 46,
+      "size": 40,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cid-2027-01-02": {
+     "score": 59,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 359,
+     "factors": {
+      "elig": 90,
+      "fit": 23,
+      "size": 40,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2026-01-democracy-01": {
+     "score": 52,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 62,
+      "timing": 45,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2026-01-democracy-07": {
+     "score": 52,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 62,
+      "timing": 45,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2026-01-transfo-05": {
+     "score": 52,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 62,
+      "timing": 45,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2027-01-democracy-08": {
+     "score": 58,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 62,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2027-01-transfo-06": {
+     "score": 58,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 62,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl3-2026-01-infra-03": {
+     "score": 57,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 45,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 55,
+      "timing": 92,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl3-2027-01-fct-03": {
+     "score": 59,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 409,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 73,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl4-2027-01-mat-prod-06": {
+     "score": 58,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 134,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 50,
+      "timing": 100,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl4-2027-04-data-09": {
+     "score": 56,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 178,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 40,
+      "timing": 100,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl4-2027-space-03-71": {
+     "score": 55,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 346,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 44,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2026-11-d3-14": {
+     "score": 61,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 71,
+     "factors": {
+      "elig": 90,
+      "fit": 27,
+      "size": 43,
+      "timing": 92,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2027-02-d3-10": {
+     "score": 66,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 191,
+     "factors": {
+      "elig": 90,
+      "fit": 33,
+      "size": 55,
+      "timing": 100,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2027-03-d5-18": {
+     "score": 56,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 205,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 40,
+      "timing": 100,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2027-07-d3-11": {
+     "score": 60,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 436,
+     "factors": {
+      "elig": 90,
+      "fit": 27,
+      "size": 41,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2026-01-circbio-01": {
+     "score": 60,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 46,
+      "size": 48,
+      "timing": 45,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2026-04-governance-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 66,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl6-2027-01-circbio-03": {
+     "score": 67,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 366,
+     "factors": {
+      "elig": 90,
+      "fit": 42,
+      "size": 56,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2027-02-climate-02": {
+     "score": 65,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 90,
+      "fit": 35,
+      "size": 51,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2027-02-farm2fork-08": {
+     "score": 55,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 90,
+      "fit": 4,
+      "size": 43,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-eic-2026-defence-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 37,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-eic-2026-step": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 65,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-hlth-2027-01-envhlth-02": {
+     "score": 68,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 204,
+     "factors": {
+      "elig": 90,
+      "fit": 42,
+      "size": 44,
+      "timing": 100,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-infra-2027-dev-01-02": {
+     "score": 57,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 267,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 56,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-ju-eurohpc-2026-qti-13-01": {
+     "score": 56,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 57,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 44,
+      "timing": 92,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-miss-2026-03-ocean-01": {
+     "score": 60,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 90,
+      "fit": 50,
+      "size": 43,
+      "timing": 45,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-miss-2027-01-clima-02": {
+     "score": 67,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 365,
+     "factors": {
+      "elig": 90,
+      "fit": 30,
+      "size": 73,
+      "timing": 84,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-miss-2027-04-cit-03": {
+     "score": 59,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 381,
+     "factors": {
+      "elig": 90,
+      "fit": 23,
+      "size": 41,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-msca-2027-cofund-01-01": {
+     "score": 57,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 197,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 50,
+      "timing": 100,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-neb-2027-01-business-01": {
+     "score": 61,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 436,
+     "factors": {
+      "elig": 90,
+      "fit": 23,
+      "size": 52,
+      "timing": 84,
+      "feas": 30
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-03-widening-01": {
+     "score": 62,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 3,
+     "factors": {
+      "elig": 90,
+      "fit": 18,
+      "size": 100,
+      "timing": 45,
+      "feas": 42
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-gender-prize-01": {
+     "score": 56,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 72
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-gender-prize-02": {
+     "score": 56,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 0,
+      "size": 50,
+      "timing": 45,
+      "feas": 72
+     },
+     "failedRules": 0
+    },
+    "eu-i3-2026-inv2a": {
+     "score": 56,
+     "verdict": "INSUFFICIENT_DATA",
+     "blocked": false,
+     "estimated": true,
+     "daysLeft": 52,
+     "factors": {
+      "elig": 90,
+      "fit": 0,
+      "size": 50,
+      "timing": 92,
+      "feas": 35
+     },
+     "failedRules": 0
+    },
+    "eu-life-2026-sap-clima-gov": {
+     "score": 63,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 1,
+     "factors": {
+      "elig": 100,
+      "fit": 33,
+      "size": 50,
+      "timing": 45,
+      "feas": 56
+     },
+     "failedRules": 0
+    }
+   }
+  },
+  {
+   "name": "per-call answer scope",
+   "profile": null,
+   "answers": {
+    "eu-life-2026-sap-env-gov:de_minimis_ok": false,
+    "de_minimis_ok": true,
+    "consortium_ready": true,
+    "eu_experience": false
+   },
+   "results": {
+    "eu-cef-dig-2026-cable-repair-capacities-works": {
+     "score": 63,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 17,
+     "factors": {
+      "elig": 100,
+      "fit": 23,
+      "size": 50,
+      "timing": 72,
+      "feas": 39
+     },
+     "failedRules": 0
+    },
+    "eu-cef-e-2026-pci-pmi-studies": {
+     "score": 64,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 45,
+      "size": 50,
+      "timing": 45,
+      "feas": 39
+     },
+     "failedRules": 0
+    },
+    "eu-cef-e-2026-pci-pmi-works": {
+     "score": 64,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 45,
+      "size": 50,
+      "timing": 45,
+      "feas": 39
+     },
+     "failedRules": 0
+    },
+    "eu-cerv-2026-daphne-prevention": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 45,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-digital-eccc-2027-deploy-cyber-11-ai4sme": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 115,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-edf-2026-da-acc-airdef-eatmi": {
+     "score": 55,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 5,
+      "size": 50,
+      "timing": 45,
+      "feas": 41
+     },
+     "failedRules": 0
+    },
+    "eu-edf-2026-da-air-sps": {
+     "score": 55,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 5,
+      "size": 50,
+      "timing": 45,
+      "feas": 41
+     },
+     "failedRules": 0
+    },
+    "eu-edf-2026-da-air-stfs": {
+     "score": 55,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 5,
+      "size": 50,
+      "timing": 45,
+      "feas": 41
+     },
+     "failedRules": 0
+    },
+    "eu-edf-2026-ra-simtrain-msai": {
+     "score": 56,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 5,
+      "size": 50,
+      "timing": 45,
+      "feas": 55
+     },
+     "failedRules": 0
+    },
+    "eu-erasmus-edu-2022-eche-cert-fp": {
+     "score": 73,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 127,
+     "factors": {
+      "elig": 100,
+      "fit": 36,
+      "size": 50,
+      "timing": 100,
+      "feas": 65
+     },
+     "failedRules": 0
+    },
+    "eu-esc-humaid-2021-qual-label-fp": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 1,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-euba-euaa-2026-asylumcaselaw": {
+     "score": 65,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 9,
+     "factors": {
+      "elig": 100,
+      "fit": 36,
+      "size": 50,
+      "timing": 45,
+      "feas": 69
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cid-2027-01-01": {
+     "score": 58,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 359,
+     "factors": {
+      "elig": 100,
+      "fit": 3,
+      "size": 40,
+      "timing": 84,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cid-2027-01-02": {
+     "score": 64,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 359,
+     "factors": {
+      "elig": 100,
+      "fit": 26,
+      "size": 40,
+      "timing": 84,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2026-01-democracy-01": {
+     "score": 56,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 100,
+      "fit": 3,
+      "size": 54,
+      "timing": 45,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2026-01-democracy-07": {
+     "score": 56,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 100,
+      "fit": 3,
+      "size": 54,
+      "timing": 45,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2026-01-transfo-05": {
+     "score": 56,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 100,
+      "fit": 3,
+      "size": 54,
+      "timing": 45,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2027-01-democracy-08": {
+     "score": 61,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 100,
+      "fit": 3,
+      "size": 54,
+      "timing": 84,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl2-2027-01-transfo-06": {
+     "score": 72,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 100,
+      "fit": 45,
+      "size": 54,
+      "timing": 84,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl3-2026-01-infra-03": {
+     "score": 72,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 45,
+     "factors": {
+      "elig": 100,
+      "fit": 49,
+      "size": 48,
+      "timing": 92,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl3-2027-01-fct-03": {
+     "score": 63,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 409,
+     "factors": {
+      "elig": 100,
+      "fit": 3,
+      "size": 62,
+      "timing": 84,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl4-2027-01-mat-prod-06": {
+     "score": 74,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 134,
+     "factors": {
+      "elig": 100,
+      "fit": 49,
+      "size": 45,
+      "timing": 100,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl4-2027-04-data-09": {
+     "score": 67,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 178,
+     "factors": {
+      "elig": 100,
+      "fit": 30,
+      "size": 40,
+      "timing": 100,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl4-2027-space-03-71": {
+     "score": 60,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 346,
+     "factors": {
+      "elig": 100,
+      "fit": 3,
+      "size": 44,
+      "timing": 84,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2026-11-d3-14": {
+     "score": 59,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 71,
+     "factors": {
+      "elig": 100,
+      "fit": 3,
+      "size": 40,
+      "timing": 92,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2027-02-d3-10": {
+     "score": 62,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 191,
+     "factors": {
+      "elig": 100,
+      "fit": 3,
+      "size": 48,
+      "timing": 100,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2027-03-d5-18": {
+     "score": 61,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 205,
+     "factors": {
+      "elig": 100,
+      "fit": 3,
+      "size": 40,
+      "timing": 100,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl5-2027-07-d3-11": {
+     "score": 65,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 436,
+     "factors": {
+      "elig": 100,
+      "fit": 30,
+      "size": 40,
+      "timing": 84,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2026-01-circbio-01": {
+     "score": 53,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 100,
+      "fit": 3,
+      "size": 42,
+      "timing": 45,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2026-04-governance-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 66,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-cl6-2027-01-circbio-03": {
+     "score": 61,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 366,
+     "factors": {
+      "elig": 100,
+      "fit": 3,
+      "size": 49,
+      "timing": 84,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2027-02-climate-02": {
+     "score": 60,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 100,
+      "fit": 3,
+      "size": 46,
+      "timing": 84,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-cl6-2027-02-farm2fork-08": {
+     "score": 58,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 367,
+     "factors": {
+      "elig": 100,
+      "fit": 3,
+      "size": 40,
+      "timing": 84,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-eic-2026-defence-01": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 37,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-eic-2026-step": {
+     "score": null,
+     "verdict": "NOT_ELIGIBLE",
+     "blocked": true,
+     "estimated": false,
+     "daysLeft": 65,
+     "factors": {},
+     "failedRules": 1
+    },
+    "eu-horizon-hlth-2027-01-envhlth-02": {
+     "score": 62,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 204,
+     "factors": {
+      "elig": 100,
+      "fit": 3,
+      "size": 44,
+      "timing": 100,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-infra-2027-dev-01-02": {
+     "score": 71,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 267,
+     "factors": {
+      "elig": 100,
+      "fit": 45,
+      "size": 49,
+      "timing": 84,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-ju-eurohpc-2026-qti-13-01": {
+     "score": 70,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 57,
+     "factors": {
+      "elig": 100,
+      "fit": 37,
+      "size": 44,
+      "timing": 92,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-miss-2026-03-ocean-01": {
+     "score": 64,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 2,
+     "factors": {
+      "elig": 100,
+      "fit": 49,
+      "size": 40,
+      "timing": 45,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-miss-2027-01-clima-02": {
+     "score": 70,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 365,
+     "factors": {
+      "elig": 100,
+      "fit": 33,
+      "size": 62,
+      "timing": 84,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-miss-2027-04-cit-03": {
+     "score": 64,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 381,
+     "factors": {
+      "elig": 100,
+      "fit": 26,
+      "size": 40,
+      "timing": 84,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-msca-2027-cofund-01-01": {
+     "score": 63,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 197,
+     "factors": {
+      "elig": 100,
+      "fit": 5,
+      "size": 50,
+      "timing": 100,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-neb-2027-01-business-01": {
+     "score": 65,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 436,
+     "factors": {
+      "elig": 100,
+      "fit": 26,
+      "size": 46,
+      "timing": 84,
+      "feas": 38
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-03-widening-01": {
+     "score": 68,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 3,
+     "factors": {
+      "elig": 100,
+      "fit": 25,
+      "size": 100,
+      "timing": 45,
+      "feas": 50
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-gender-prize-01": {
+     "score": 57,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 4,
+      "size": 50,
+      "timing": 45,
+      "feas": 72
+     },
+     "failedRules": 0
+    },
+    "eu-horizon-widera-2026-gender-prize-02": {
+     "score": 57,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 8,
+     "factors": {
+      "elig": 100,
+      "fit": 4,
+      "size": 50,
+      "timing": 45,
+      "feas": 72
+     },
+     "failedRules": 0
+    },
+    "eu-i3-2026-inv2a": {
+     "score": 75,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 52,
+     "factors": {
+      "elig": 100,
+      "fit": 59,
+      "size": 50,
+      "timing": 92,
+      "feas": 43
+     },
+     "failedRules": 0
+    },
+    "eu-life-2026-sap-clima-gov": {
+     "score": 56,
+     "verdict": "CONDITIONAL",
+     "blocked": false,
+     "estimated": false,
+     "daysLeft": 1,
+     "factors": {
+      "elig": 100,
+      "fit": 4,
+      "size": 50,
+      "timing": 45,
+      "feas": 56
+     },
+     "failedRules": 0
+    }
+   }
+  }
+ ]
+}

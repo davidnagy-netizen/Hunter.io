@@ -1,0 +1,5984 @@
+[
+ {
+  "id": "eu-cef-dig-2026-cable-repair-capacities-works",
+  "title": "Submarine Cable Repair Capacities - Works",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Connecting Europe Facility",
+  "status": "open",
+  "deadline": "2026-10-08",
+  "intensity": 0.5,
+  "fundingMin": null,
+  "fundingMax": null,
+  "partnerShare": null,
+  "consortium": {
+   "required": false,
+   "minPartners": 1,
+   "minCountries": 1
+  },
+  "smeFit": 0.3,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [],
+  "goalScores": {
+   "digitalization": 7,
+   "cybersecurity": 4,
+   "machinery": 4,
+   "mobility": 1,
+   "environment": 1,
+   "defence": 4,
+   "social": 1,
+   "ai": 5,
+   "it": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms",
+   "Part B — Technical description and implementation plan",
+   "Member State agreement / letter of support",
+   "Cost-benefit analysis and maturity documentation",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "large",
+     "public",
+     "sme"
+    ],
+    "label_hu": "Pályázhat: large, public, sme",
+    "label_en": "Eligible applicant types: large, public, sme"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   }
+  ],
+  "soft": [
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   }
+  ],
+  "sectors": []
+ },
+ {
+  "id": "eu-cef-e-2026-pci-pmi-studies",
+  "title": "Electricity, Gas, Smart Grids, Hydrogen and CO₂ networks - Studies",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Connecting Europe Facility",
+  "status": "open",
+  "deadline": "2026-09-30",
+  "intensity": 0.5,
+  "fundingMin": null,
+  "fundingMax": null,
+  "partnerShare": null,
+  "consortium": {
+   "required": false,
+   "minPartners": 1,
+   "minCountries": 1
+  },
+  "smeFit": 0.35,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "energy",
+   "it"
+  ],
+  "goalScores": {
+   "digitalization": 6,
+   "it": 12,
+   "cybersecurity": 1,
+   "energy": 28.5,
+   "building": 1,
+   "rnd": 1,
+   "environment": 4,
+   "ai": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms",
+   "Part B — Technical description and implementation plan",
+   "Member State agreement / letter of support",
+   "Cost-benefit analysis and maturity documentation",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "large",
+     "public",
+     "sme"
+    ],
+    "label_hu": "Pályázhat: large, public, sme",
+    "label_en": "Eligible applicant types: large, public, sme"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "energy",
+     "it"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "energy"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   }
+  ],
+  "sectors": [
+   "energy"
+  ]
+ },
+ {
+  "id": "eu-cef-e-2026-pci-pmi-works",
+  "title": "Electricity, Gas, Smart Grids, Hydrogen and CO₂ networks - Works",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Connecting Europe Facility",
+  "status": "open",
+  "deadline": "2026-09-30",
+  "intensity": 0.5,
+  "fundingMin": null,
+  "fundingMax": null,
+  "partnerShare": null,
+  "consortium": {
+   "required": false,
+   "minPartners": 1,
+   "minCountries": 1
+  },
+  "smeFit": 0.3,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "energy",
+   "it"
+  ],
+  "goalScores": {
+   "digitalization": 6,
+   "it": 15,
+   "cybersecurity": 3,
+   "energy": 43.5,
+   "building": 1,
+   "innovation": 3,
+   "training": 1,
+   "environment": 4,
+   "ai": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms",
+   "Part B — Technical description and implementation plan",
+   "Member State agreement / letter of support",
+   "Cost-benefit analysis and maturity documentation",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "large",
+     "public",
+     "sme"
+    ],
+    "label_hu": "Pályázhat: large, public, sme",
+    "label_en": "Eligible applicant types: large, public, sme"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "energy",
+     "it"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "energy"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   }
+  ],
+  "sectors": [
+   "energy"
+  ]
+ },
+ {
+  "id": "eu-cerv-2026-daphne-prevention",
+  "title": "Preventing gender-based violence",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Citizens, Equality, Rights and Values Programme",
+  "status": "open",
+  "deadline": "2026-11-05",
+  "intensity": 0.9,
+  "fundingMin": null,
+  "fundingMax": null,
+  "partnerShare": null,
+  "consortium": {
+   "required": false,
+   "minPartners": 1,
+   "minCountries": 1
+  },
+  "smeFit": 0.1,
+  "highAdmin": false,
+  "awardsFunding": true,
+  "goals": [
+   "social"
+  ],
+  "goalScores": {
+   "defence": 2.5,
+   "social": 19.5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms",
+   "Part B — Technical description",
+   "Detailed budget table",
+   "Participant registration (PIC) and legal entity validation",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "ngo",
+     "public",
+     "university",
+     "research"
+    ],
+    "label_hu": "Pályázhat: ngo, public, university, research",
+    "label_en": "Eligible applicant types: ngo, public, university, research"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "social"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "education"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   }
+  ],
+  "sectors": [
+   "education"
+  ]
+ },
+ {
+  "id": "eu-digital-eccc-2027-deploy-cyber-11-ai4sme",
+  "title": "Strengthening cybersecurity capacities of European SMEs  with cybersecure AI-powered solutions",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Digital Europe Programme",
+  "status": "open",
+  "deadline": "2027-01-14",
+  "intensity": 0.5,
+  "fundingMin": 1092840000,
+  "fundingMax": 1821400000,
+  "partnerShare": null,
+  "consortium": {
+   "required": false,
+   "minPartners": 1,
+   "minCountries": 1
+  },
+  "smeFit": 1,
+  "highAdmin": false,
+  "awardsFunding": true,
+  "goals": [
+   "cybersecurity",
+   "ai",
+   "training",
+   "innovation"
+  ],
+  "goalScores": {
+   "digitalization": 5.5,
+   "it": 2,
+   "ai": 35.5,
+   "cybersecurity": 54.5,
+   "machinery": 1,
+   "building": 2.5,
+   "rnd": 5,
+   "innovation": 12,
+   "training": 26,
+   "culture": 3.5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms",
+   "Part B — Technical description",
+   "Detailed budget table",
+   "Participant registration (PIC) and legal entity validation",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme"
+    ],
+    "label_hu": "Pályázhat: sme",
+    "label_en": "Eligible applicant types: sme"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 1092840000,
+    "label_hu": "A projekt mérete legalább 1093 M Ft (a felhívás alsó támogatási határa, egyedüli pályázó)",
+    "label_en": "Project size of at least 1093M HUF (the call's lower funding threshold for a single applicant)"
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "cybersecurity",
+     "ai",
+     "training",
+     "innovation"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "it"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   }
+  ],
+  "sectors": [
+   "it"
+  ]
+ },
+ {
+  "id": "eu-edf-2026-da-acc-airdef-eatmi",
+  "title": "High-end endo-atmospheric interception",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – European Defence Fund",
+  "status": "open",
+  "deadline": "2026-09-29",
+  "intensity": 0.65,
+  "fundingMin": null,
+  "fundingMax": null,
+  "partnerShare": null,
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.5,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "defence"
+  ],
+  "goalScores": {
+   "digitalization": 1,
+   "rnd": 1,
+   "defence": 13
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms",
+   "Part B — Technical description",
+   "Detailed budget table",
+   "Participant registration (PIC) and legal entity validation",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "manufacturing",
+     "it",
+     "services"
+    ],
+    "label_hu": "Védelmi ipari képesség szükséges (EDF)",
+    "label_en": "Defence-sector capability required (EDF)"
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "defence"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   }
+  ],
+  "sectors": []
+ },
+ {
+  "id": "eu-edf-2026-da-air-sps",
+  "title": "Self-protection systems",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – European Defence Fund",
+  "status": "open",
+  "deadline": "2026-09-29",
+  "intensity": 0.65,
+  "fundingMin": null,
+  "fundingMax": null,
+  "partnerShare": null,
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.5,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "defence"
+  ],
+  "goalScores": {
+   "export": 1,
+   "defence": 8
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms",
+   "Part B — Technical description",
+   "Detailed budget table",
+   "Participant registration (PIC) and legal entity validation",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "manufacturing",
+     "it",
+     "services"
+    ],
+    "label_hu": "Védelmi ipari képesség szükséges (EDF)",
+    "label_en": "Defence-sector capability required (EDF)"
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "defence"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   }
+  ],
+  "sectors": []
+ },
+ {
+  "id": "eu-edf-2026-da-air-stfs",
+  "title": "Smart technologies for next generation fighter systems",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – European Defence Fund",
+  "status": "open",
+  "deadline": "2026-09-29",
+  "intensity": 0.65,
+  "fundingMin": null,
+  "fundingMax": null,
+  "partnerShare": null,
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.5,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "defence"
+  ],
+  "goalScores": {
+   "it": 1,
+   "defence": 10
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms",
+   "Part B — Technical description",
+   "Detailed budget table",
+   "Participant registration (PIC) and legal entity validation",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "manufacturing",
+     "it",
+     "services"
+    ],
+    "label_hu": "Védelmi ipari képesség szükséges (EDF)",
+    "label_en": "Defence-sector capability required (EDF)"
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "defence"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   }
+  ],
+  "sectors": []
+ },
+ {
+  "id": "eu-edf-2026-ra-simtrain-msai",
+  "title": "Modelling & simulation supported AI framework for military decision-making and training",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – European Defence Fund",
+  "status": "open",
+  "deadline": "2026-09-29",
+  "intensity": 1,
+  "fundingMin": null,
+  "fundingMax": null,
+  "partnerShare": null,
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.5,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "defence"
+  ],
+  "goalScores": {
+   "digitalization": 1,
+   "ai": 6,
+   "rnd": 2.5,
+   "training": 4,
+   "defence": 15
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms",
+   "Part B — Technical description",
+   "Detailed budget table",
+   "Participant registration (PIC) and legal entity validation",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "manufacturing",
+     "it",
+     "services"
+    ],
+    "label_hu": "Védelmi ipari képesség szükséges (EDF)",
+    "label_en": "Defence-sector capability required (EDF)"
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "defence"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   }
+  ],
+  "sectors": []
+ },
+ {
+  "id": "eu-erasmus-edu-2022-eche-cert-fp",
+  "title": "Erasmus Charter for Higher Education",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Erasmus+",
+  "status": "open",
+  "deadline": "2027-01-26",
+  "intensity": 0.8,
+  "fundingMin": null,
+  "fundingMax": null,
+  "partnerShare": null,
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.3,
+  "highAdmin": false,
+  "awardsFunding": true,
+  "goals": [],
+  "goalScores": {
+   "training": 3
+  },
+  "described": false,
+  "docs": [
+   "Part A — Administrative forms",
+   "Part B — Technical description",
+   "Detailed budget table",
+   "Participant registration (PIC) and legal entity validation",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "university",
+     "ngo",
+     "public",
+     "sme"
+    ],
+    "label_hu": "Pályázhat: university, ngo, public, sme",
+    "label_en": "Eligible applicant types: university, ngo, public, sme"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   }
+  ],
+  "sectors": []
+ },
+ {
+  "id": "eu-esc-humaid-2021-qual-label-fp",
+  "title": "Quality Label Humanitarian Aid - Full Procedure",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – European Solidarity Corps",
+  "status": "open",
+  "deadline": "2026-09-22",
+  "intensity": 0,
+  "fundingMin": null,
+  "fundingMax": null,
+  "partnerShare": null,
+  "consortium": {
+   "required": false,
+   "minPartners": 1,
+   "minCountries": 1
+  },
+  "smeFit": 0.05,
+  "highAdmin": false,
+  "awardsFunding": false,
+  "goals": [
+   "social",
+   "employment",
+   "training"
+  ],
+  "goalScores": {
+   "digitalization": 2,
+   "cybersecurity": 3,
+   "rnd": 2,
+   "employment": 10,
+   "training": 9,
+   "mobility": 3,
+   "health": 3,
+   "environment": 1,
+   "culture": 1,
+   "social": 22
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms",
+   "Part B — Technical description",
+   "Detailed budget table",
+   "Participant registration (PIC) and legal entity validation",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: ngo, public",
+    "label_en": "Eligible applicant types: ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "social",
+     "employment",
+     "training"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "education",
+     "services"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   }
+  ],
+  "sectors": [
+   "education",
+   "services"
+  ]
+ },
+ {
+  "id": "eu-euba-euaa-2026-asylumcaselaw",
+  "title": "Research and analysis of jurisprudence on international protection and registration in the EUAA Case Law Database (Asylum case law collection)",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – EU Bodies and Agencies",
+  "status": "open",
+  "deadline": "2026-09-30",
+  "intensity": 0.8,
+  "fundingMin": null,
+  "fundingMax": null,
+  "partnerShare": null,
+  "consortium": {
+   "required": false,
+   "minPartners": 1,
+   "minCountries": 1
+  },
+  "smeFit": 0.3,
+  "highAdmin": false,
+  "awardsFunding": true,
+  "goals": [],
+  "goalScores": {
+   "rnd": 4.5,
+   "export": 4.5
+  },
+  "described": false,
+  "docs": [
+   "Part A — Administrative forms",
+   "Part B — Technical description",
+   "Detailed budget table",
+   "Participant registration (PIC) and legal entity validation",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   }
+  ],
+  "soft": [
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   }
+  ],
+  "sectors": []
+ },
+ {
+  "id": "eu-horizon-cid-2027-01-01",
+  "title": "R&I in Support of the Clean Industrial Deal: Decarbonisation of energy intensive industries (IA) (Processes4Planet and Clean Steel partnerships)",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "forthcoming",
+  "deadline": "2027-09-15",
+  "intensity": 0.7,
+  "fundingMin": 5464200000,
+  "fundingMax": 9107000000,
+  "partnerShare": {
+   "minHuf": 546420000,
+   "typicalHuf": 1092840000,
+   "maxHuf": 2276750000,
+   "basis": "Estimated share of the 9107M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.85,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "energy",
+   "environment"
+  ],
+  "goalScores": {
+   "cybersecurity": 1,
+   "machinery": 7,
+   "energy": 35,
+   "building": 1,
+   "rnd": 3,
+   "innovation": 7,
+   "circular": 7,
+   "environment": 11,
+   "culture": 1,
+   "social": 1,
+   "ai": 5,
+   "digitalization": 5,
+   "it": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "energy",
+     "environment"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "energy"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 546420000,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "energy"
+  ]
+ },
+ {
+  "id": "eu-horizon-cid-2027-01-02",
+  "title": "R&I in Support of the Clean Industrial Deal: Clean Technologies for Climate Action",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "forthcoming",
+  "deadline": "2027-09-15",
+  "intensity": 0.7,
+  "fundingMin": 5464200000,
+  "fundingMax": 9107000000,
+  "partnerShare": {
+   "minHuf": 546420000,
+   "typicalHuf": 1092840000,
+   "maxHuf": 2276750000,
+   "basis": "Estimated share of the 9107M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.85,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "energy",
+   "environment",
+   "machinery",
+   "innovation",
+   "mobility"
+  ],
+  "goalScores": {
+   "it": 6,
+   "cybersecurity": 1,
+   "machinery": 13,
+   "energy": 29,
+   "rnd": 3,
+   "innovation": 10,
+   "export": 1,
+   "circular": 7,
+   "mobility": 9,
+   "environment": 14,
+   "social": 1,
+   "ai": 5,
+   "digitalization": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "energy",
+     "environment",
+     "machinery",
+     "innovation",
+     "mobility"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "energy"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 546420000,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "energy"
+  ]
+ },
+ {
+  "id": "eu-horizon-cl2-2026-01-democracy-01",
+  "title": "Tackling gender-based violence against politically active women and LGBTIQ people",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "open",
+  "deadline": "2026-09-23",
+  "intensity": 1,
+  "fundingMin": 1274980000,
+  "fundingMax": 1457120000,
+  "partnerShare": {
+   "minHuf": 87427200,
+   "typicalHuf": 174854400,
+   "maxHuf": 364280000,
+   "basis": "Estimated share of the 1457M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.55,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "social"
+  ],
+  "goalScores": {
+   "digitalization": 6,
+   "it": 6,
+   "rnd": 3,
+   "environment": 2,
+   "culture": 4.5,
+   "social": 50.5,
+   "ai": 5,
+   "employment": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Detailed budget table for the lump sum (mandatory annex)",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "social"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "education"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 87427200,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "education"
+  ]
+ },
+ {
+  "id": "eu-horizon-cl2-2026-01-democracy-07",
+  "title": "Supporting post-conflict democracy and reconstruction",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "open",
+  "deadline": "2026-09-23",
+  "intensity": 1,
+  "fundingMin": 1274980000,
+  "fundingMax": 1457120000,
+  "partnerShare": {
+   "minHuf": 87427200,
+   "typicalHuf": 174854400,
+   "maxHuf": 364280000,
+   "basis": "Estimated share of the 1457M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.55,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "social"
+  ],
+  "goalScores": {
+   "it": 6,
+   "cybersecurity": 1,
+   "rnd": 5.5,
+   "innovation": 1,
+   "export": 10.5,
+   "culture": 4.5,
+   "social": 49,
+   "ai": 5,
+   "digitalization": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Detailed budget table for the lump sum (mandatory annex)",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "social"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "education"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 87427200,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "education"
+  ]
+ },
+ {
+  "id": "eu-horizon-cl2-2026-01-transfo-05",
+  "title": "Contribution of basic skills to productivity, innovation, competitiveness and economic growth",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "open",
+  "deadline": "2026-09-23",
+  "intensity": 1,
+  "fundingMin": 1092840000,
+  "fundingMax": 1457120000,
+  "partnerShare": {
+   "minHuf": 87427200,
+   "typicalHuf": 174854400,
+   "maxHuf": 364280000,
+   "basis": "Estimated share of the 1457M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.55,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "training"
+  ],
+  "goalScores": {
+   "digitalization": 6,
+   "ai": 6,
+   "cybersecurity": 1,
+   "rnd": 3,
+   "innovation": 6,
+   "employment": 6,
+   "training": 16,
+   "export": 1,
+   "culture": 1.5,
+   "social": 7,
+   "it": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Detailed budget table for the lump sum (mandatory annex)",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "training"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "services",
+     "education"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 87427200,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "services",
+   "education"
+  ]
+ },
+ {
+  "id": "eu-horizon-cl2-2027-01-democracy-08",
+  "title": "Global Human Rights and EU values",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "forthcoming",
+  "deadline": "2027-09-23",
+  "intensity": 1,
+  "fundingMin": 1274980000,
+  "fundingMax": 1457120000,
+  "partnerShare": {
+   "minHuf": 87427200,
+   "typicalHuf": 174854400,
+   "maxHuf": 364280000,
+   "basis": "Estimated share of the 1457M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.55,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "social",
+   "export"
+  ],
+  "goalScores": {
+   "it": 6,
+   "cybersecurity": 1,
+   "machinery": 1,
+   "rnd": 5.5,
+   "innovation": 1,
+   "export": 22,
+   "culture": 1.5,
+   "social": 44,
+   "ai": 5,
+   "digitalization": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "social",
+     "export"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "trade",
+     "education"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 87427200,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "trade",
+   "education"
+  ]
+ },
+ {
+  "id": "eu-horizon-cl2-2027-01-transfo-06",
+  "title": "Closing the learning gap: uncovering causes and effective policy interventions for declining youth skills in mathematics, reading, and science",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "forthcoming",
+  "deadline": "2027-09-23",
+  "intensity": 1,
+  "fundingMin": 1092840000,
+  "fundingMax": 1457120000,
+  "partnerShare": {
+   "minHuf": 87427200,
+   "typicalHuf": 174854400,
+   "maxHuf": 364280000,
+   "basis": "Estimated share of the 1457M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.55,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "training",
+   "digitalization"
+  ],
+  "goalScores": {
+   "digitalization": 8,
+   "rnd": 3,
+   "innovation": 1,
+   "training": 17,
+   "export": 3,
+   "environment": 1,
+   "culture": 1.5,
+   "ai": 5,
+   "social": 5,
+   "it": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "training",
+     "digitalization"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "services",
+     "education"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 87427200,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "services",
+   "education"
+  ]
+ },
+ {
+  "id": "eu-horizon-cl3-2026-01-infra-03",
+  "title": "Targeted innovative capabilities for the resilience of critical entities to natural and human-induced disasters, including hybrid scenarios",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "open",
+  "deadline": "2026-11-05",
+  "intensity": 0.7,
+  "fundingMin": 1639260000,
+  "fundingMax": 1639260000,
+  "partnerShare": {
+   "minHuf": 98355600,
+   "typicalHuf": 196711200,
+   "maxHuf": 409815000,
+   "basis": "Estimated share of the 1639M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.85,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "cybersecurity",
+   "it"
+  ],
+  "goalScores": {
+   "digitalization": 6,
+   "it": 15.5,
+   "cybersecurity": 16,
+   "rnd": 7,
+   "innovation": 5,
+   "export": 4,
+   "mobility": 1,
+   "health": 2.5,
+   "social": 2,
+   "ai": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Detailed budget table for the lump sum (mandatory annex)",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "cybersecurity",
+     "it"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "it"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 98355600,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "it"
+  ]
+ },
+ {
+  "id": "eu-horizon-cl3-2027-01-fct-03",
+  "title": "Open topic on enhanced prevention, detection and deterrence of societal issues related to various forms of crime",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "forthcoming",
+  "deadline": "2027-11-04",
+  "intensity": 1,
+  "fundingMin": 1092840000,
+  "fundingMax": 1092840000,
+  "partnerShare": {
+   "minHuf": 65570400,
+   "typicalHuf": 131140800,
+   "maxHuf": 273210000,
+   "basis": "Estimated share of the 1093M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.55,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "social",
+   "cybersecurity",
+   "rnd"
+  ],
+  "goalScores": {
+   "cybersecurity": 8,
+   "building": 1,
+   "rnd": 8,
+   "innovation": 5,
+   "training": 7,
+   "environment": 1,
+   "social": 20,
+   "employment": 5,
+   "ai": 5,
+   "digitalization": 5,
+   "it": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "social",
+     "cybersecurity",
+     "rnd"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "education"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 65570400,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "education"
+  ]
+ },
+ {
+  "id": "eu-horizon-cl4-2027-01-mat-prod-06",
+  "title": "Circular innovative advanced materials: facilitating the transition from design to markets (RIA) (Innovative Advanced Materials for the EU and Made in Europe partnerships)",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "forthcoming",
+  "deadline": "2027-02-02",
+  "intensity": 1,
+  "fundingMin": 1821400000,
+  "fundingMax": 2367820000,
+  "partnerShare": {
+   "minHuf": 142069200,
+   "typicalHuf": 284138400,
+   "maxHuf": 591955000,
+   "basis": "Estimated share of the 2368M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.55,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "machinery",
+   "innovation"
+  ],
+  "goalScores": {
+   "digitalization": 7,
+   "it": 6,
+   "ai": 6,
+   "machinery": 48,
+   "energy": 3,
+   "building": 2,
+   "rnd": 5,
+   "innovation": 13,
+   "circular": 6
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "machinery",
+     "innovation"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "manufacturing"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 142069200,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "manufacturing"
+  ]
+ },
+ {
+  "id": "eu-horizon-cl4-2027-04-data-09",
+  "title": "Energy efficiency and sustainability of AI data processing in Data Centres (IA)",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "forthcoming",
+  "deadline": "2027-03-18",
+  "intensity": 0.7,
+  "fundingMin": 3642800000,
+  "fundingMax": 3642800000,
+  "partnerShare": {
+   "minHuf": 218568000,
+   "typicalHuf": 437136000,
+   "maxHuf": 910700000,
+   "basis": "Estimated share of the 3643M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.85,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "energy",
+   "rnd",
+   "it",
+   "ai"
+  ],
+  "goalScores": {
+   "digitalization": 6.5,
+   "it": 11,
+   "ai": 11,
+   "cybersecurity": 1,
+   "machinery": 3,
+   "energy": 33,
+   "building": 3,
+   "rnd": 13,
+   "innovation": 3,
+   "circular": 5,
+   "environment": 1,
+   "electronics": 3
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "energy",
+     "rnd",
+     "it",
+     "ai"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "energy"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 218568000,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "energy"
+  ]
+ },
+ {
+  "id": "eu-horizon-cl4-2027-space-03-71",
+  "title": "Quantum Space Gravimetry topic",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "forthcoming",
+  "deadline": "2027-09-02",
+  "intensity": 1,
+  "fundingMin": 5099920000,
+  "fundingMax": 5464200000,
+  "partnerShare": {
+   "minHuf": 327852000,
+   "typicalHuf": 655704000,
+   "maxHuf": 1366050000,
+   "basis": "Estimated share of the 5464M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.55,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "space",
+   "electronics",
+   "rnd"
+  ],
+  "goalScores": {
+   "digitalization": 7,
+   "cybersecurity": 1,
+   "machinery": 1,
+   "rnd": 9,
+   "innovation": 1,
+   "export": 2,
+   "environment": 4,
+   "space": 19.5,
+   "electronics": 12,
+   "social": 4,
+   "ai": 5,
+   "it": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "space",
+     "electronics",
+     "rnd"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "transport"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 327852000,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "transport"
+  ]
+ },
+ {
+  "id": "eu-horizon-cl5-2026-11-d3-14",
+  "title": "Improved system design for innovative PV applications (EUPI-PV Partnership)",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "open",
+  "deadline": "2026-12-01",
+  "intensity": 0.7,
+  "fundingMin": 2732100000,
+  "fundingMax": 2732100000,
+  "partnerShare": {
+   "minHuf": 163926000,
+   "typicalHuf": 327852000,
+   "maxHuf": 683025000,
+   "basis": "Estimated share of the 2732M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.85,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "energy",
+   "environment",
+   "innovation",
+   "rnd"
+  ],
+  "goalScores": {
+   "it": 6,
+   "cybersecurity": 1,
+   "machinery": 6,
+   "energy": 19.5,
+   "rnd": 9,
+   "innovation": 11,
+   "export": 5,
+   "agriculture": 4,
+   "mobility": 1,
+   "environment": 15,
+   "defence": 3,
+   "social": 6,
+   "digitalization": 5,
+   "ai": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Detailed budget table for the lump sum (mandatory annex)",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "energy",
+     "environment",
+     "innovation",
+     "rnd"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "energy"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 163926000,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "energy"
+  ]
+ },
+ {
+  "id": "eu-horizon-cl5-2027-02-d3-10",
+  "title": "Renewable Energy Valleys in Africa to increase energy security and energy access in Africa",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "forthcoming",
+  "deadline": "2027-03-31",
+  "intensity": 0.7,
+  "fundingMin": 1639260000,
+  "fundingMax": 1639260000,
+  "partnerShare": {
+   "minHuf": 98355600,
+   "typicalHuf": 196711200,
+   "maxHuf": 409815000,
+   "basis": "Estimated share of the 1639M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.85,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "energy",
+   "employment",
+   "environment"
+  ],
+  "goalScores": {
+   "cybersecurity": 5,
+   "machinery": 4,
+   "energy": 42.5,
+   "rnd": 9,
+   "innovation": 1,
+   "employment": 13,
+   "training": 1,
+   "export": 8,
+   "agriculture": 7,
+   "circular": 7,
+   "health": 1,
+   "environment": 13,
+   "social": 3,
+   "digitalization": 5,
+   "it": 5,
+   "ai": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "energy",
+     "employment",
+     "environment"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "energy"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 98355600,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "energy"
+  ]
+ },
+ {
+  "id": "eu-horizon-cl5-2027-03-d5-18",
+  "title": "Enhanced electric operation and battery durability (ZEWT Partnership)",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "forthcoming",
+  "deadline": "2027-04-14",
+  "intensity": 0.7,
+  "fundingMin": 3642800000,
+  "fundingMax": 3642800000,
+  "partnerShare": {
+   "minHuf": 218568000,
+   "typicalHuf": 437136000,
+   "maxHuf": 910700000,
+   "basis": "Estimated share of the 3643M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.85,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "energy",
+   "mobility"
+  ],
+  "goalScores": {
+   "it": 7,
+   "cybersecurity": 1,
+   "machinery": 4,
+   "energy": 33,
+   "rnd": 2,
+   "innovation": 6,
+   "training": 3,
+   "export": 5,
+   "mobility": 13,
+   "culture": 1,
+   "space": 3,
+   "digitalization": 5,
+   "ai": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "energy",
+     "mobility"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "energy"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 218568000,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "energy"
+  ]
+ },
+ {
+  "id": "eu-horizon-cl5-2027-07-d3-11",
+  "title": "Demonstration of hydropower technologies for efficient and forward-looking refurbishment of existing hydropower plants",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "forthcoming",
+  "deadline": "2027-12-01",
+  "intensity": 0.7,
+  "fundingMin": 3096380000,
+  "fundingMax": 3096380000,
+  "partnerShare": {
+   "minHuf": 185782800,
+   "typicalHuf": 371565600,
+   "maxHuf": 774095000,
+   "basis": "Estimated share of the 3096M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.85,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "environment",
+   "energy",
+   "digitalization",
+   "ai"
+  ],
+  "goalScores": {
+   "digitalization": 8,
+   "it": 6,
+   "ai": 8,
+   "cybersecurity": 2,
+   "machinery": 3,
+   "energy": 9.5,
+   "rnd": 2,
+   "innovation": 3,
+   "export": 3,
+   "mobility": 2,
+   "environment": 11
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "environment",
+     "energy",
+     "digitalization",
+     "ai"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "energy"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 185782800,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "energy"
+  ]
+ },
+ {
+  "id": "eu-horizon-cl6-2026-01-circbio-01",
+  "title": "Improving circularity of multilayer flexible plastic food contact packaging",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "open",
+  "deadline": "2026-09-23",
+  "intensity": 0.7,
+  "fundingMin": 1821400000,
+  "fundingMax": 2185680000,
+  "partnerShare": {
+   "minHuf": 131140800,
+   "typicalHuf": 262281600,
+   "maxHuf": 546420000,
+   "basis": "Estimated share of the 2186M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.85,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "circular",
+   "environment"
+  ],
+  "goalScores": {
+   "digitalization": 8,
+   "ai": 6,
+   "rnd": 8,
+   "innovation": 2.5,
+   "agriculture": 14.5,
+   "circular": 78,
+   "environment": 22.5,
+   "social": 3,
+   "it": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Detailed budget table for the lump sum (mandatory annex)",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "circular",
+     "environment"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "waste"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 131140800,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "waste"
+  ]
+ },
+ {
+  "id": "eu-horizon-cl6-2026-04-governance-01",
+  "title": "Additional activities for the European Partnership of Agriculture of Data",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "open",
+  "deadline": "2026-11-26",
+  "intensity": 0.5,
+  "fundingMin": 21856800000,
+  "fundingMax": 21856800000,
+  "partnerShare": {
+   "minHuf": 1311408000,
+   "typicalHuf": 2622816000,
+   "maxHuf": 5464200000,
+   "basis": "Estimated share of the 21857M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.15,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "agriculture",
+   "digitalization",
+   "rnd"
+  ],
+  "goalScores": {
+   "digitalization": 13.5,
+   "cybersecurity": 2.5,
+   "rnd": 9,
+   "innovation": 2,
+   "training": 7.5,
+   "export": 7,
+   "agriculture": 19,
+   "environment": 1,
+   "space": 7.5,
+   "social": 3,
+   "it": 5,
+   "ai": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "research",
+     "university",
+     "public"
+    ],
+    "label_hu": "Pályázhat: research, university, public",
+    "label_en": "Eligible applicant types: research, university, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "agriculture",
+     "digitalization",
+     "rnd"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "agriculture"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 1311408000,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "agriculture"
+  ]
+ },
+ {
+  "id": "eu-horizon-cl6-2027-01-circbio-03",
+  "title": "Developing novel recycling technologies for complex plastic materials applying biotech solutions",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "forthcoming",
+  "deadline": "2027-09-22",
+  "intensity": 1,
+  "fundingMin": 1821400000,
+  "fundingMax": 1821400000,
+  "partnerShare": {
+   "minHuf": 109284000,
+   "typicalHuf": 218568000,
+   "maxHuf": 455350000,
+   "basis": "Estimated share of the 1821M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.55,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "circular",
+   "environment"
+  ],
+  "goalScores": {
+   "it": 6,
+   "machinery": 6,
+   "energy": 4,
+   "building": 2,
+   "rnd": 2,
+   "innovation": 9.5,
+   "agriculture": 3,
+   "circular": 68.5,
+   "mobility": 3,
+   "environment": 20.5,
+   "biotech": 14.5,
+   "digitalization": 5,
+   "ai": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "circular",
+     "environment"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "waste"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 109284000,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "waste"
+  ]
+ },
+ {
+  "id": "eu-horizon-cl6-2027-02-climate-02",
+  "title": "Strengthening evidence-based policies for the resilience of European agriculture and forestry and related supply chains against crises and systemic risks",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "forthcoming",
+  "deadline": "2027-09-23",
+  "intensity": 1,
+  "fundingMin": 2185680000,
+  "fundingMax": 2185680000,
+  "partnerShare": {
+   "minHuf": 131140800,
+   "typicalHuf": 262281600,
+   "maxHuf": 546420000,
+   "basis": "Estimated share of the 2186M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.55,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "agriculture",
+   "environment",
+   "cybersecurity"
+  ],
+  "goalScores": {
+   "digitalization": 6,
+   "cybersecurity": 11,
+   "rnd": 3,
+   "export": 10,
+   "agriculture": 49,
+   "health": 1,
+   "environment": 17.5,
+   "space": 1,
+   "biotech": 1,
+   "social": 7,
+   "it": 5,
+   "ai": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "agriculture",
+     "environment",
+     "cybersecurity"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "agriculture"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 131140800,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "agriculture"
+  ]
+ },
+ {
+  "id": "eu-horizon-cl6-2027-02-farm2fork-08",
+  "title": "AI-powered foodome characterization",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "forthcoming",
+  "deadline": "2027-09-23",
+  "intensity": 0.7,
+  "fundingMin": 2841384000,
+  "fundingMax": 2841384000,
+  "partnerShare": {
+   "minHuf": 170483040,
+   "typicalHuf": 340966080,
+   "maxHuf": 710346000,
+   "basis": "Estimated share of the 2841M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.85,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "ai",
+   "rnd",
+   "agriculture"
+  ],
+  "goalScores": {
+   "ai": 22.5,
+   "machinery": 1,
+   "rnd": 10.5,
+   "innovation": 2,
+   "export": 2,
+   "agriculture": 8,
+   "digitalization": 5,
+   "it": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "ai",
+     "rnd",
+     "agriculture"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "it",
+     "agriculture"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 170483040,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "it",
+   "agriculture"
+  ]
+ },
+ {
+  "id": "eu-horizon-eic-2026-defence-01",
+  "title": "EIC defence call",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "open",
+  "deadline": "2026-10-28",
+  "intensity": 0,
+  "fundingMin": 3642800000,
+  "fundingMax": 10928400000,
+  "partnerShare": null,
+  "consortium": {
+   "required": false,
+   "minPartners": 1,
+   "minCountries": 1
+  },
+  "smeFit": 0.7,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [],
+  "goalScores": {
+   "defence": 7
+  },
+  "described": false,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Business plan and financial projections",
+   "Company registration and SME self-declaration",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme"
+    ],
+    "label_hu": "Pályázhat: sme",
+    "label_en": "Eligible applicant types: sme"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 3642800000,
+    "label_hu": "A projekt mérete legalább 3643 M Ft (a felhívás alsó támogatási határa, egyedüli pályázó)",
+    "label_en": "Project size of at least 3643M HUF (the call's lower funding threshold for a single applicant)"
+   }
+  ],
+  "soft": [
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   }
+  ],
+  "sectors": []
+ },
+ {
+  "id": "eu-horizon-eic-2026-step",
+  "title": "EIC STEP Scale Up",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "open",
+  "deadline": "2026-11-25",
+  "intensity": 0,
+  "fundingMin": 3642800000,
+  "fundingMax": 10928400000,
+  "partnerShare": null,
+  "consortium": {
+   "required": false,
+   "minPartners": 1,
+   "minCountries": 1
+  },
+  "smeFit": 0.7,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "electronics"
+  ],
+  "goalScores": {
+   "digitalization": 1,
+   "machinery": 4,
+   "employment": 3,
+   "export": 1,
+   "electronics": 8
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Business plan and financial projections",
+   "Company registration and SME self-declaration",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme"
+    ],
+    "label_hu": "Pályázhat: sme",
+    "label_en": "Eligible applicant types: sme"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 3642800000,
+    "label_hu": "A projekt mérete legalább 3643 M Ft (a felhívás alsó támogatási határa, egyedüli pályázó)",
+    "label_en": "Project size of at least 3643M HUF (the call's lower funding threshold for a single applicant)"
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "electronics"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "manufacturing"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   }
+  ],
+  "sectors": [
+   "manufacturing"
+  ]
+ },
+ {
+  "id": "eu-horizon-hlth-2027-01-envhlth-02",
+  "title": "Integrating climate-related exposures into the human exposome and characterising its changes in response to climate change",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "forthcoming",
+  "deadline": "2027-04-13",
+  "intensity": 1,
+  "fundingMin": 3642800000,
+  "fundingMax": 4007080000,
+  "partnerShare": {
+   "minHuf": 240424800,
+   "typicalHuf": 480849600,
+   "maxHuf": 1001770000,
+   "basis": "Estimated share of the 4007M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.55,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "health",
+   "environment"
+  ],
+  "goalScores": {
+   "ai": 10,
+   "cybersecurity": 1,
+   "energy": 1,
+   "rnd": 8,
+   "innovation": 2,
+   "training": 1,
+   "export": 4,
+   "health": 46,
+   "environment": 17,
+   "biotech": 3,
+   "social": 8,
+   "employment": 5,
+   "digitalization": 5,
+   "it": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "health",
+     "environment"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "health"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 240424800,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "health"
+  ]
+ },
+ {
+  "id": "eu-horizon-infra-2027-dev-01-02",
+  "title": "Consolidation of the research infrastructure landscape – development of complementarities, synergies and/or integration between a set of pan-European research infrastructures",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "forthcoming",
+  "deadline": "2027-06-15",
+  "intensity": 1,
+  "fundingMin": 728560000,
+  "fundingMax": 1821400000,
+  "partnerShare": {
+   "minHuf": 109284000,
+   "typicalHuf": 218568000,
+   "maxHuf": 455350000,
+   "basis": "Estimated share of the 1821M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.55,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "rnd",
+   "it"
+  ],
+  "goalScores": {
+   "it": 11,
+   "rnd": 12.5,
+   "employment": 2,
+   "export": 1,
+   "social": 1,
+   "digitalization": 5,
+   "ai": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "rnd",
+     "it"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "it"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 109284000,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "it"
+  ]
+ },
+ {
+  "id": "eu-horizon-ju-eurohpc-2026-qti-13-01",
+  "title": "Quantum-Testing Infrastructure for Quantum Technologies",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "open",
+  "deadline": "2026-11-17",
+  "intensity": 1,
+  "fundingMin": 6921320000,
+  "fundingMax": 7285600000,
+  "partnerShare": {
+   "minHuf": 437136000,
+   "typicalHuf": 874272000,
+   "maxHuf": 1821400000,
+   "basis": "Estimated share of the 7286M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.55,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "electronics",
+   "rnd",
+   "it"
+  ],
+  "goalScores": {
+   "digitalization": 2,
+   "it": 8.5,
+   "machinery": 3,
+   "rnd": 12,
+   "export": 2,
+   "environment": 3,
+   "electronics": 18
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "electronics",
+     "rnd",
+     "it"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "it",
+     "manufacturing"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 437136000,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "it",
+   "manufacturing"
+  ]
+ },
+ {
+  "id": "eu-horizon-miss-2026-03-ocean-01",
+  "title": "Large-scale demonstration for mapping the distribution and condition of marine habitats to implement the Nature Restoration Regulation",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "open",
+  "deadline": "2026-09-23",
+  "intensity": 0.7,
+  "fundingMin": 2549960000,
+  "fundingMax": 2823170000,
+  "partnerShare": {
+   "minHuf": 169390200,
+   "typicalHuf": 338780400,
+   "maxHuf": 705792500,
+   "basis": "Estimated share of the 2823M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.85,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "environment",
+   "digitalization"
+  ],
+  "goalScores": {
+   "digitalization": 15,
+   "cybersecurity": 1,
+   "rnd": 7.5,
+   "innovation": 1,
+   "export": 1,
+   "environment": 43.5,
+   "space": 3,
+   "biotech": 2.5,
+   "it": 5,
+   "ai": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "environment",
+     "digitalization"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "energy",
+     "agriculture",
+     "waste"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 169390200,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "energy",
+   "agriculture",
+   "waste"
+  ]
+ },
+ {
+  "id": "eu-horizon-miss-2027-01-clima-02",
+  "title": "Researching and applying the potential of Artificial Intelligence to foster climate resilience at the regional and local levels",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "forthcoming",
+  "deadline": "2027-09-21",
+  "intensity": 1,
+  "fundingMin": 1092840000,
+  "fundingMax": 1092840000,
+  "partnerShare": {
+   "minHuf": 65570400,
+   "typicalHuf": 131140800,
+   "maxHuf": 273210000,
+   "basis": "Estimated share of the 1093M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.55,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "ai",
+   "environment",
+   "digitalization"
+  ],
+  "goalScores": {
+   "digitalization": 10,
+   "it": 7,
+   "ai": 35,
+   "cybersecurity": 5,
+   "energy": 1,
+   "building": 1,
+   "innovation": 1,
+   "training": 4,
+   "agriculture": 3,
+   "circular": 5,
+   "environment": 18.5,
+   "culture": 1,
+   "social": 1
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "ai",
+     "environment",
+     "digitalization"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "it"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 65570400,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "it"
+  ]
+ },
+ {
+  "id": "eu-horizon-miss-2027-04-cit-03",
+  "title": "Inclusive and climate resilient multimodal passenger hubs enhancing modal shift towards sustainable transport and shared mobility",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "forthcoming",
+  "deadline": "2027-10-07",
+  "intensity": 0.7,
+  "fundingMin": 3278520000,
+  "fundingMax": 3278520000,
+  "partnerShare": {
+   "minHuf": 196711200,
+   "typicalHuf": 393422400,
+   "maxHuf": 819630000,
+   "basis": "Estimated share of the 3279M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.85,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "mobility",
+   "environment",
+   "social",
+   "digitalization",
+   "energy"
+  ],
+  "goalScores": {
+   "digitalization": 10,
+   "it": 6,
+   "ai": 6,
+   "cybersecurity": 4,
+   "energy": 8.5,
+   "building": 6,
+   "rnd": 2,
+   "innovation": 2,
+   "agriculture": 1,
+   "mobility": 34,
+   "health": 1,
+   "environment": 32,
+   "social": 11,
+   "culture": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "mobility",
+     "environment",
+     "social",
+     "digitalization",
+     "energy"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "transport"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 196711200,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "transport"
+  ]
+ },
+ {
+  "id": "eu-horizon-msca-2027-cofund-01-01",
+  "title": "MSCA COFUND 2027",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "forthcoming",
+  "deadline": "2027-04-06",
+  "intensity": 0.7,
+  "fundingMin": null,
+  "fundingMax": null,
+  "partnerShare": null,
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.6,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "rnd"
+  ],
+  "goalScores": {
+   "digitalization": 2,
+   "ai": 4,
+   "rnd": 11,
+   "innovation": 4,
+   "employment": 3,
+   "training": 4,
+   "export": 4,
+   "culture": 1,
+   "social": 2
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "rnd"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   }
+  ],
+  "sectors": []
+ },
+ {
+  "id": "eu-horizon-neb-2027-01-business-01",
+  "title": "Mass customisation of offsite manufactured modular construction components to transform the existing built environment",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "forthcoming",
+  "deadline": "2027-12-01",
+  "intensity": 0.7,
+  "fundingMin": 1821400000,
+  "fundingMax": 1821400000,
+  "partnerShare": {
+   "minHuf": 109284000,
+   "typicalHuf": 218568000,
+   "maxHuf": 455350000,
+   "basis": "Estimated share of the 1821M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.85,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "building",
+   "culture",
+   "social",
+   "machinery",
+   "environment"
+  ],
+  "goalScores": {
+   "machinery": 16.5,
+   "energy": 3,
+   "building": 55,
+   "rnd": 1,
+   "innovation": 4.5,
+   "training": 1,
+   "circular": 2,
+   "environment": 15,
+   "culture": 27,
+   "space": 1,
+   "social": 18.5,
+   "digitalization": 5,
+   "it": 5,
+   "ai": 5,
+   "employment": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "building",
+     "culture",
+     "social",
+     "machinery",
+     "environment"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "construction"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 109284000,
+    "weight": 0.3
+   }
+  ],
+  "sectors": [
+   "construction"
+  ]
+ },
+ {
+  "id": "eu-horizon-widera-2026-03-widening-01",
+  "title": "Hop-On Facility",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "open",
+  "deadline": "2026-09-24",
+  "intensity": 1,
+  "fundingMin": 72856000,
+  "fundingMax": 218568000,
+  "partnerShare": {
+   "minHuf": 13114080,
+   "typicalHuf": 26228160,
+   "maxHuf": 54642000,
+   "basis": "Estimated share of the 219M HUF project grant for one partner in a consortium of at least 3."
+  },
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 3
+  },
+  "smeFit": 0.55,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [],
+  "goalScores": {
+   "building": 6.5,
+   "rnd": 2,
+   "social": 1,
+   "digitalization": 5,
+   "it": 5,
+   "ai": 5
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 3 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 3 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 3 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 3 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   },
+   {
+    "field": "investment_value",
+    "op": ">=",
+    "value": 13114080,
+    "weight": 0.3
+   }
+  ],
+  "sectors": []
+ },
+ {
+  "id": "eu-horizon-widera-2026-gender-prize-01",
+  "title": "Sustainable Gender Equality Champions",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "open",
+  "deadline": "2026-09-29",
+  "intensity": 1,
+  "fundingMin": null,
+  "fundingMax": null,
+  "partnerShare": null,
+  "consortium": {
+   "required": false,
+   "minPartners": 1,
+   "minCountries": 1
+  },
+  "smeFit": 0.5,
+  "highAdmin": false,
+  "awardsFunding": false,
+  "goals": [
+   "social"
+  ],
+  "goalScores": {
+   "rnd": 4,
+   "innovation": 2,
+   "training": 1,
+   "social": 31
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "social"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "education"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   }
+  ],
+  "sectors": [
+   "education"
+  ]
+ },
+ {
+  "id": "eu-horizon-widera-2026-gender-prize-02",
+  "title": "Newcomer Gender Equality Champions",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Horizon Europe",
+  "status": "open",
+  "deadline": "2026-09-29",
+  "intensity": 1,
+  "fundingMin": null,
+  "fundingMax": null,
+  "partnerShare": null,
+  "consortium": {
+   "required": false,
+   "minPartners": 1,
+   "minCountries": 1
+  },
+  "smeFit": 0.5,
+  "highAdmin": false,
+  "awardsFunding": false,
+  "goals": [
+   "social"
+  ],
+  "goalScores": {
+   "rnd": 4,
+   "innovation": 2,
+   "training": 1,
+   "social": 31
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms (submitted in the Funding & Tenders Portal)",
+   "Part B — Technical description (page limit set by the call)",
+   "Estimated budget per work package and partner",
+   "Participant registration (PIC) and legal entity validation",
+   "Ethics self-assessment",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "social"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "education"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   }
+  ],
+  "sectors": [
+   "education"
+  ]
+ },
+ {
+  "id": "eu-i3-2026-inv2a",
+  "title": "I3-2026-INV2a - Interregional Innovation Investments Strand 2a",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Interregional Innovation Investments Instrument",
+  "status": "open",
+  "deadline": "2026-11-12",
+  "intensity": 0.7,
+  "fundingMin": null,
+  "fundingMax": null,
+  "partnerShare": null,
+  "consortium": {
+   "required": true,
+   "minPartners": 3,
+   "minCountries": 2
+  },
+  "smeFit": 0.9,
+  "highAdmin": true,
+  "awardsFunding": true,
+  "goals": [
+   "innovation",
+   "machinery"
+  ],
+  "goalScores": {
+   "digitalization": 5,
+   "cybersecurity": 3,
+   "machinery": 10,
+   "building": 1,
+   "rnd": 4,
+   "innovation": 43,
+   "employment": 3,
+   "training": 8,
+   "export": 2,
+   "health": 2,
+   "environment": 6.5,
+   "social": 3
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms",
+   "Part B — Technical description",
+   "Detailed budget table",
+   "Participant registration (PIC) and legal entity validation",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   },
+   {
+    "field": "consortium_ready",
+    "op": "==",
+    "value": true,
+    "label_hu": "Konzorcium szükséges: min. 3 független szervezet 2 különböző tagállamból",
+    "label_en": "Consortium required: at least 3 independent entities from 2 different Member States",
+    "quiz": {
+     "q_hu": "Ez a felhívás legalább 3 partneres, 2 országot átfogó konzorciumot kíván. Van vagy építhető ilyen partnerséged?",
+     "q_en": "This call requires a consortium of at least 3 partners across 2 countries. Do you have — or can you build — such a partnership?",
+     "opts": [
+      {
+       "t_hu": "Igen, van partnerhálózatom",
+       "t_en": "Yes, I have partners",
+       "v": true
+      },
+      {
+       "t_hu": "Nem, csak egyedül pályáznék",
+       "t_en": "No, I would apply alone",
+       "v": false
+      },
+      {
+       "t_hu": "Nem tudom",
+       "t_en": "I don't know",
+       "v": null
+      }
+     ]
+    }
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "innovation",
+     "machinery"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "manufacturing"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   }
+  ],
+  "sectors": [
+   "manufacturing"
+  ]
+ },
+ {
+  "id": "eu-life-2026-sap-clima-gov",
+  "title": "Climate Governance and Information",
+  "sourceSystem": "EU_FUNDING_TENDERS",
+  "program": "EU – Programme for the Environment and Climate Action",
+  "status": "open",
+  "deadline": "2026-09-22",
+  "intensity": 0.6,
+  "fundingMin": null,
+  "fundingMax": null,
+  "partnerShare": null,
+  "consortium": {
+   "required": false,
+   "minPartners": 1,
+   "minCountries": 1
+  },
+  "smeFit": 0.65,
+  "highAdmin": false,
+  "awardsFunding": true,
+  "goals": [
+   "training",
+   "environment",
+   "social"
+  ],
+  "goalScores": {
+   "machinery": 1,
+   "energy": 2,
+   "building": 3,
+   "training": 9,
+   "environment": 8.5,
+   "social": 8
+  },
+  "described": true,
+  "docs": [
+   "Part A — Administrative forms",
+   "Part B — Technical description of the action",
+   "Part C — Project-specific KPI table",
+   "Detailed budget and financial capacity documents",
+   "Declaration of honour by each beneficiary",
+   "Last closed annual accounts (financial capacity check)"
+  ],
+  "hard": [
+   {
+    "field": "orgType",
+    "op": "in",
+    "value": [
+     "sme",
+     "large",
+     "research",
+     "university",
+     "ngo",
+     "public"
+    ],
+    "label_hu": "Pályázhat: sme, large, research, university, ngo, public",
+    "label_en": "Eligible applicant types: sme, large, research, university, ngo, public"
+   },
+   {
+    "field": "country",
+    "op": "in",
+    "value": [
+     "HU"
+    ],
+    "label_hu": "Magyarországon bejegyzett jogi személy (EU tagállam)",
+    "label_en": "Legal entity established in Hungary (EU Member State)"
+   }
+  ],
+  "soft": [
+   {
+    "field": "goals",
+    "op": "includes_any",
+    "value": [
+     "training",
+     "environment",
+     "social"
+    ],
+    "weight": 0.5
+   },
+   {
+    "field": "sector",
+    "op": "in",
+    "value": [
+     "education",
+     "services"
+    ],
+    "weight": 0.3
+   },
+   {
+    "field": "funding_pref",
+    "op": "includes_any",
+    "value": [
+     "EU"
+    ],
+    "weight": 0.2
+   }
+  ],
+  "sectors": [
+   "education",
+   "services"
+  ]
+ }
+]
