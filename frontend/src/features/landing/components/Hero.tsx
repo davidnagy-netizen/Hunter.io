@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import "../i18n";
+import { useMagneticHover } from "../hooks/useMagneticHover";
 import { HeroPreviewCard } from "./HeroPreviewCard";
 import { Kicker } from "./Kicker";
 import { landingCtaClasses } from "./landingCta";
@@ -28,6 +29,7 @@ export function Hero() {
   const { t } = useTranslation("landing");
   const reducedMotion = usePrefersReducedMotion();
   const [shown, setShown] = useState(reducedMotion);
+  const ctaRef = useMagneticHover<HTMLAnchorElement>();
 
   useEffect(() => {
     if (reducedMotion) return;
@@ -88,6 +90,7 @@ export function Hero() {
           ].join(" ")}
         >
           <Link
+            ref={ctaRef}
             to="/assess"
             className={["group", landingCtaClasses()].join(" ")}
           >
@@ -111,13 +114,18 @@ export function Hero() {
         </p>
       </div>
 
+      {/*
+        `pointer-events-none` + `-auto` on the card itself: this wrapper's `md:-mt-16` pulls it up
+        over the CTA row above, and being later in the DOM, its own (invisible, full-width) box was
+        winning the hit-test over the bottom half of the CTA button even though nothing is drawn there.
+      */}
       <div
         className={[
-          "mt-10 flex justify-start md:-mt-16 md:justify-end",
+          "pointer-events-none mt-10 flex justify-start md:-mt-16 md:justify-end",
           stage(180),
         ].join(" ")}
       >
-        <HeroPreviewCard />
+        <HeroPreviewCard className="pointer-events-auto" />
       </div>
     </section>
   );

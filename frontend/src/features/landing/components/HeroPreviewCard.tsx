@@ -19,7 +19,7 @@ const BASE_TILT = "rotate(-1.4deg)";
  * The ring draws itself in on mount (via `CircularProgress`'s own transition)
  * instead of appearing static, the one time this mounts.
  */
-export function HeroPreviewCard() {
+export function HeroPreviewCard({ className = "" }: { className?: string }) {
   const { t } = useTranslation("landing");
   const { date } = useFormat();
   const reducedMotion = usePrefersReducedMotion();
@@ -50,7 +50,7 @@ export function HeroPreviewCard() {
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       style={{ transform: reducedMotion ? undefined : BASE_TILT }}
-      className="w-72 bg-surface p-5 text-text shadow-[0_36px_80px_-32px_rgba(0,0,0,0.5)] transition-transform duration-300 ease-out"
+      className={["w-72 bg-surface p-5 text-text shadow-[0_36px_80px_-32px_rgba(0,0,0,0.5)] transition-transform duration-300 ease-out", className].filter(Boolean).join(" ")}
     >
       <div className="flex items-start justify-between gap-3">
         <div>

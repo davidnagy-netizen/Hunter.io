@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Reveal } from "@/shared/components";
+import { GsapReveal } from "./GsapReveal";
 import { Section } from "./Section";
 import "../i18n";
 
@@ -13,9 +13,9 @@ export function HowItWorks() {
   const { t } = useTranslation("landing");
   const items = t("how.items", { returnObjects: true }) as { title: string; text: string }[];
   return (
-    <Reveal>
+    <GsapReveal>
       <Section id="how" kicker={t("how.kicker")} title={t("how.title")} className="py-16" tone="dark">
-        <div className="mt-6">
+        <GsapReveal className="mt-6" stagger={0.12}>
           {items.map((item, i) => (
             <div key={item.title} className="grid grid-cols-[110px_1fr] gap-8 border-t py-10 last:border-b md:grid-cols-[170px_1fr]" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
               <div className="-ml-1.5 font-display text-[64px] font-bold leading-none tracking-[-0.04em] text-white/14 md:text-[132px]">
@@ -27,8 +27,8 @@ export function HowItWorks() {
               </div>
             </div>
           ))}
-        </div>
+        </GsapReveal>
       </Section>
-    </Reveal>
+    </GsapReveal>
   );
 }

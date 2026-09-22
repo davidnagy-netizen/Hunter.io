@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Reveal } from "@/shared/components";
+import { GsapReveal } from "./GsapReveal";
 import { Section } from "./Section";
 import "../i18n";
 
@@ -8,9 +8,9 @@ export function Sources() {
   const { t } = useTranslation("landing");
   const chips = t("sources.chips", { returnObjects: true }) as string[];
   return (
-    <Reveal>
+    <GsapReveal>
       <Section kicker={t("sources.kicker")} title={t("sources.title")} subtitle={t("sources.sub")} className="py-16">
-        <div className="mt-6 flex flex-wrap gap-2">
+        <GsapReveal className="mt-6 flex flex-wrap gap-2" stagger={0.05}>
           {chips.map((chip) => (
             <span
               key={chip}
@@ -20,8 +20,8 @@ export function Sources() {
               {chip}
             </span>
           ))}
-        </div>
+        </GsapReveal>
       </Section>
-    </Reveal>
+    </GsapReveal>
   );
 }
