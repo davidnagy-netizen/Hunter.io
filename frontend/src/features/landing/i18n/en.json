@@ -6,15 +6,28 @@
     "openApp": "Open the app"
   },
   "hero": {
+    "kicker": "Rule-based funding intelligence",
     "line1": "Don't go looking for grants.",
     "line2": "Fundor finds them for you.",
-    "lead": "For Hungarian manufacturing and service SMEs: based on your company profile we find, rank and clearly explain the funding that's actually relevant — from official sources only.",
+    "lead": "For Hungarian manufacturing and service SMEs: based on your company profile we find, rank and clearly explain the funding that's actually relevant — <b>exclusively from official sources</b>.",
     "cta": "See what I'm eligible for",
+    "ctaNote": "Free, no registration · about 2 minutes",
     "register": "Create a company account"
   },
   "trustStrip": {
     "label": "Official sources:",
     "names": "EU Funding & Tenders · palyazat.gov.hu · kap.gov.hu"
+  },
+  "proof": {
+    "oldCaption": "open calls in a traditional grant monitor",
+    "newCaption": "genuinely fit the example company — according to Fundor",
+    "scoreCaption": "example Fundor Score for the best match"
+  },
+  "statement": {
+    "word1": "Deterministic.",
+    "word2": "Rule-based.",
+    "word3": "Explained.",
+    "sub": "Every score traces back to a specific rule — never a guess, never an AI hunch."
   },
   "preview": {
     "program": "GINOP Plus",
@@ -113,6 +126,10 @@
           "reason": "— the 30M HUF project is below the 50M HUF minimum"
         }
       ]
+    },
+    "bridge": {
+      "text": "Is this your company's situation? See <b>in 2 minutes</b> what you're eligible for — based on your own company profile.",
+      "cta": "Start the assessment"
     }
   },
   "how": {
@@ -145,6 +162,7 @@
     ]
   },
   "price": {
+    "kicker": "Start now",
     "title": "5,990 HUF/month for a system that watches for you",
     "note": "Funding conditions are defined by the official call. Outcomes are not guaranteed.",
     "amount": "5,990 HUF",

@@ -1,16 +1,18 @@
-import { Navigate } from "react-router";
 import { useCurrentUser } from "@/features/authentication/hooks/useAuth";
 import { homePathFor } from "@/features/authentication/lib/homePath";
 import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
+import { Navigate } from "react-router";
+import "../i18n";
 import { ComparisonSection } from "./ComparisonSection";
 import { Hero } from "./Hero";
 import { HowItWorks } from "./HowItWorks";
 import { LandingFooter } from "./LandingFooter";
 import { LandingHeader } from "./LandingHeader";
 import { PriceTeaser } from "./PriceTeaser";
+import { ProofStats } from "./ProofStats";
 import { Sources } from "./Sources";
+import { Statement } from "./Statement";
 import { TrustStrip } from "./TrustStrip";
-import "../i18n";
 
 /**
  * The public front door: the pitch, a worked example, and two ways in — the
@@ -19,28 +21,55 @@ import "../i18n";
  * who already built a profile gets an "open the app" link instead (see
  * `LandingHeader`), so they are never trapped away from it.
  *
- * A thin shell on purpose: every section below is its own component, so the
- * page itself is just the redirect guard and the order they appear in.
+ * A thin shell on purpose: every section below is its own component. What
+ * lives here beyond the redirect guard is the page's three chapters — large
+ * dark/light/dark fields, not a striped alternation of every section — each
+ * a shared background the sections inside render onto rather than owning
+ * their own. `Section`'s `tone` prop keeps a section's kicker/title/subtitle
+ * colors matched to whichever chapter it's in.
+ *
+ * `LandingHeader` sits outside every chapter, not nested in the first one —
+ * `position: sticky` only stays stuck for as long as its own parent is on
+ * screen, so nesting it inside chapter one made it scroll away with that
+ * chapter instead of staying pinned for the whole page.
+ *
+ * The root itself carries the hero's dark background, not `bg-paper` — the
+ * header is a normal child of this root, so whatever color the root paints
+ * is what shows through the header before any scrolling happens (there's no
+ * overlap/stacking trick that changes that). The light chapter (`<main>`)
+ * gets its own explicit light background to override the dark root for its
+ * own span of the page, and the footer needs the same override.
  */
 export function LandingPage() {
   const user = useCurrentUser();
   const { profile } = useCompanyProfile();
 
   // An administrator has no use for a company profile, so they go straight to the console.
-  if (user && (user.role === "admin" || profile)) return <Navigate to={homePathFor(user)} replace />;
+  if (user && (user.role === "admin" || profile))
+    return <Navigate to={homePathFor(user)} replace />;
 
   return (
-    <div className="min-h-screen bg-paper">
+    <div className="min-h-screen bg-gradient-to-br from-ink via-ink-2 to-ink-3 text-white">
       <LandingHeader />
-      <Hero />
-      <TrustStrip />
-      <main>
+
+      <div>
+        <Hero />
+        <TrustStrip />
+        <ProofStats />
+      </div>
+
+      <main className="bg-paper text-text">
         <ComparisonSection />
-        <HowItWorks />
         <Sources />
-        <PriceTeaser />
       </main>
-      <LandingFooter />
+
+      <div className="bg-ink">
+        <Statement />
+        <HowItWorks />
+        <PriceTeaser />
+      </div>
+
+      <LandingFooter className="bg-paper text-muted" />
     </div>
   );
 }

@@ -8,7 +8,7 @@ describe("HowItWorks", () => {
     renderWithProviders(<HowItWorks />);
     expect(document.getElementById("how")).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(/három lépés|three steps/i);
-    expect(screen.getByText("1")).toBeInTheDocument();
-    expect(screen.getByText("3")).toBeInTheDocument();
+    expect(screen.getByText("01")).toBeInTheDocument();
+    expect(screen.getByText("03")).toBeInTheDocument();
   });
 });

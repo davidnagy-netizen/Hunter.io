@@ -6,15 +6,28 @@
     "openApp": "Az alkalmazás megnyitása"
   },
   "hero": {
+    "kicker": "Szabályalapú támogatási intelligencia",
     "line1": "Ne te keresd a pályázatot.",
     "line2": "A Fundor megtalálja neked.",
-    "lead": "Magyar gyártó és szolgáltató KKV-knak: a cégprofilod alapján megkeressük, rangsoroljuk és érthetően indokoljuk a rád illő támogatásokat — kizárólag hivatalos forrásokból.",
+    "lead": "Magyar gyártó és szolgáltató KKV-knak: a cégprofilod alapján megkeressük, rangsoroljuk és érthetően indokoljuk a rád illő támogatásokat — <b>kizárólag hivatalos forrásokból</b>.",
     "cta": "Megnézem, mire vagyok jogosult",
+    "ctaNote": "Ingyenes, regisztráció nélkül · kb. 2 perc",
     "register": "Cégfiók létrehozása"
   },
   "trustStrip": {
     "label": "Hivatalos források:",
     "names": "EU Funding & Tenders · palyazat.gov.hu · kap.gov.hu"
+  },
+  "proof": {
+    "oldCaption": "nyílt felhívás egy hagyományos pályázatfigyelőben",
+    "newCaption": "illik valóban a példacéghez — a Fundor szerint",
+    "scoreCaption": "példa Fundor Score a legjobb találatra"
+  },
+  "statement": {
+    "word1": "Determinisztikus.",
+    "word2": "Szabályalapú.",
+    "word3": "Indokolt.",
+    "sub": "Minden pontszám egy konkrét szabályra vezethető vissza — nem becslés, nem AI-találgatás."
   },
   "preview": {
     "program": "GINOP Plusz",
@@ -113,6 +126,10 @@
           "reason": "— a 30 M Ft projekt a min. 50 M Ft alatt van"
         }
       ]
+    },
+    "bridge": {
+      "text": "Ez a te céged helyzete? Nézd meg <b>2 perc alatt</b>, mire vagy jogosult — a saját cégprofilod alapján.",
+      "cta": "Indítom a felmérést"
     }
   },
   "how": {
@@ -145,6 +162,7 @@
     ]
   },
   "price": {
+    "kicker": "Kezdd most",
     "title": "5 990 Ft / hó egy rendszerért, ami helyetted figyel",
     "note": "A támogatás feltételeit a hivatalos felhívás határozza meg. Az eredmény nem garantált.",
     "amount": "5 990 Ft",

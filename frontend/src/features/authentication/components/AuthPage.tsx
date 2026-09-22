@@ -1,14 +1,13 @@
+import { useOnboardingDraftStore } from "@/features/profile/store/onboardingDraftStore";
+import { LanguageToggle, Logo, Panel } from "@/shared/components";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router";
-import { LanguageToggle, Panel } from "@/shared/components";
-import { useOnboardingDraftStore } from "@/features/profile/store/onboardingDraftStore";
 import { useMeQuery } from "../api/auth.queries";
+import "../i18n";
+import { homePathFor } from "../lib/homePath";
 import type { AuthUser, Taxpayer } from "../types/auth.types";
 import { LoginForm } from "./LoginForm";
 import { RegisterForm } from "./RegisterForm";
-import { homePathFor } from "../lib/homePath";
-import "../i18n";
-import { BRAND } from "@/shared/brand";
 
 export type AuthMode = "login" | "register";
 
@@ -22,7 +21,11 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
   // `/app` sends a visitor without a profile on to the wizard.
   const handleRegistered = (taxpayer: Taxpayer) => {
     const { draft, setDraft } = useOnboardingDraftStore.getState();
-    setDraft({ ...draft, company: taxpayer.companyName, taxNumber: taxpayer.taxNumber });
+    setDraft({
+      ...draft,
+      company: taxpayer.companyName,
+      taxNumber: taxpayer.taxNumber,
+    });
     navigate("/app");
   };
   const handleSignedIn = (user: AuthUser) => navigate(homePathFor(user));
@@ -31,7 +34,7 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
     <div className="flex min-h-screen items-center justify-center bg-paper p-6">
       <div className="w-full max-w-md">
         <div className="mb-4 flex items-center justify-between">
-          <span className="font-display text-lg font-semibold text-ink">{BRAND.wordmark}</span>
+          <Logo onClick={() => navigate("/", { replace: true })} />
           <LanguageToggle />
         </div>
 
@@ -39,7 +42,9 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
           <h1 className="font-display text-xl font-semibold text-text">
             {isRegister ? t("register.title") : t("login.title")}
           </h1>
-          <p className="mt-1 text-sm text-muted">{isRegister ? t("register.subtitle") : t("login.subtitle")}</p>
+          <p className="mt-1 text-sm text-muted">
+            {isRegister ? t("register.subtitle") : t("login.subtitle")}
+          </p>
 
           <div className="mt-4 flex rounded-md border border-line-strong p-1">
             <Link
@@ -76,7 +81,10 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
             />
           ) : null}
 
-          <Link to="/" className="mt-4 block text-center text-sm text-muted hover:text-text">
+          <Link
+            to="/"
+            className="mt-4 block text-center text-sm text-muted hover:text-text"
+          >
             {t("backToHome")}
           </Link>
         </Panel>

@@ -52,13 +52,16 @@ describe("LandingPage", () => {
     expect(screen.getAllByText(/5\s?990|5,990/).length).toBeGreaterThanOrEqual(2); // PriceTeaser
     expect(screen.getByText(/mvp prototípus|mvp prototype/i)).toBeInTheDocument(); // LandingFooter
 
-    // Sections stay in the intended attention → understanding → trust → desire → action order.
+    // Sections stay in the intended attention → understanding+trust → mechanism → action order:
+    // Comparison and Sources share the page's light chapter (the proof and where it comes from,
+    // together); How it works sits in the closing dark chapter, right before the price/CTA — the
+    // mechanism leading into action, not stranded between the worked example and its sources.
     const compareIdx = indexOf(/nem pályázatlista|not a grant list/i);
-    const howIdx = indexOf(/három lépés|three steps/i);
     const sourcesIdx = indexOf(/az adat onnan jön|the data comes from/i);
+    const howIdx = indexOf(/három lépés|three steps/i);
     expect(compareIdx).toBeGreaterThan(-1);
-    expect(howIdx).toBeGreaterThan(compareIdx);
-    expect(sourcesIdx).toBeGreaterThan(howIdx);
+    expect(sourcesIdx).toBeGreaterThan(compareIdx);
+    expect(howIdx).toBeGreaterThan(sourcesIdx);
   });
 
   it("sends a signed-in account with a profile straight to its matches", async () => {

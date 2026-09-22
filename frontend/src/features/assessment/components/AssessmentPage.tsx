@@ -1,13 +1,20 @@
+import { useCurrentUser } from "@/features/authentication/hooks/useAuth";
+import { homePathFor } from "@/features/authentication/lib/homePath";
+import "@/features/profile/i18n";
+import { useOnboardingDraftStore } from "@/features/profile/store/onboardingDraftStore";
+import { useMetaQuery } from "@/shared/api/meta.queries";
+import {
+  Button,
+  ChipButton,
+  LanguageToggle,
+  Logo,
+  MatchingLoader,
+  SelectField,
+} from "@/shared/components";
+import { useLang } from "@/shared/hooks/useFormat";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, useNavigate } from "react-router";
-import { Button, ChipButton, LanguageToggle, Logo, MatchingLoader, SelectField } from "@/shared/components";
-import { useMetaQuery } from "@/shared/api/meta.queries";
-import { useLang } from "@/shared/hooks/useFormat";
-import { useCurrentUser } from "@/features/authentication/hooks/useAuth";
-import { homePathFor } from "@/features/authentication/lib/homePath";
-import { useOnboardingDraftStore } from "@/features/profile/store/onboardingDraftStore";
-import { useAssessmentPreview } from "../hooks/useAssessmentPreview";
 import {
   QUESTIONS,
   buildDraft,
@@ -16,9 +23,9 @@ import {
   type AssessmentAnswers,
   type AssessmentQuestion,
 } from "../domain/questions";
-import { AssessmentResult } from "./AssessmentResult";
-import "@/features/profile/i18n";
+import { useAssessmentPreview } from "../hooks/useAssessmentPreview";
 import "../i18n";
+import { AssessmentResult } from "./AssessmentResult";
 
 function QuestionBody({
   question,
@@ -79,7 +86,9 @@ function QuestionBody({
             selected={answers.industryId === industry.id}
             onClick={() => onChange({ industryId: industry.id })}
           >
-            {t(`profile:industries.${industry.id}`, { defaultValue: industry.label })}
+            {t(`profile:industries.${industry.id}`, {
+              defaultValue: industry.label,
+            })}
           </ChipButton>
         ))}
       </div>
@@ -95,7 +104,13 @@ function QuestionBody({
           <ChipButton
             key={goal.id}
             selected={on}
-            onClick={() => onChange({ goals: on ? selected.filter((g) => g !== goal.id) : [...selected, goal.id] })}
+            onClick={() =>
+              onChange({
+                goals: on
+                  ? selected.filter((g) => g !== goal.id)
+                  : [...selected, goal.id],
+              })
+            }
           >
             {lang === "en" ? goal.label_en || goal.label : goal.label}
           </ChipButton>
@@ -126,7 +141,10 @@ export function AssessmentPage() {
   const regions = meta.data?.reference.regions;
   const industries = meta.data?.reference.industries;
   const profile = useMemo(
-    () => (submitted && regions && industries ? buildScoringProfile(answers, { regions, industries }) : null),
+    () =>
+      submitted && regions && industries
+        ? buildScoringProfile(answers, { regions, industries })
+        : null,
     [submitted, answers, regions, industries],
   );
   const preview = useAssessmentPreview(profile);
@@ -156,7 +174,8 @@ export function AssessmentPage() {
           preview={preview.data}
           previewFailed={preview.isError}
           onContinue={() => {
-            if (regions && industries) setDraft(buildDraft(answers, { regions, industries }));
+            if (regions && industries)
+              setDraft(buildDraft(answers, { regions, industries }));
             navigate("/onboarding");
           }}
         />
@@ -178,16 +197,27 @@ export function AssessmentPage() {
         </div>
 
         <div className="mb-1 h-1.5 w-full overflow-hidden rounded-full bg-line">
-          <div className="h-full bg-gold transition-[width]" style={{ width: `${Math.round((stepIndex / QUESTIONS.length) * 100)}%` }} />
+          <div
+            className="h-full bg-gold transition-[width]"
+            style={{
+              width: `${Math.round((stepIndex / QUESTIONS.length) * 100)}%`,
+            }}
+          />
         </div>
         <p className="mb-4 text-xs text-muted">
           {t("progress")} · {stepIndex + 1}/{QUESTIONS.length} · {t("approx")}
         </p>
 
-        <h1 className="font-display text-2xl font-semibold text-ink">{t(`questions.${question.id}`)}</h1>
+        <h1 className="font-display text-2xl font-semibold text-ink">
+          {t(`questions.${question.id}`)}
+        </h1>
         <p className="mb-5 mt-1 text-sm text-muted">{t("sub")}</p>
 
-        <QuestionBody question={question} answers={answers} onChange={(patch) => setAnswers((a) => ({ ...a, ...patch }))} />
+        <QuestionBody
+          question={question}
+          answers={answers}
+          onChange={(patch) => setAnswers((a) => ({ ...a, ...patch }))}
+        />
 
         <div className="mt-8 flex gap-3">
           {stepIndex > 0 ? (
@@ -198,7 +228,9 @@ export function AssessmentPage() {
           <Button
             className="flex-1"
             disabled={!isAnswered(question, answers) || (last && !meta.data)}
-            onClick={() => (last ? setSubmitted(true) : setStepIndex((i) => i + 1))}
+            onClick={() =>
+              last ? setSubmitted(true) : setStepIndex((i) => i + 1)
+            }
           >
             {last ? t("actions.result") : t("actions.next")}
           </Button>
