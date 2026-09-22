@@ -29,34 +29,36 @@ beforeEach(() => {
 });
 afterEach(() => useLocalProfileStore.getState().clear());
 
+/**
+ * A thin shell now that every section is its own component (see each
+ * section's own test file for its content: `Hero`, `LandingHeader`,
+ * `TrustStrip`, `ComparisonSection`, `HowItWorks`, `Sources`, `PriceTeaser`).
+ * What belongs here is what only exists at the assembled-page level: every
+ * section actually renders, in order, and the signed-in redirect guard.
+ */
 describe("LandingPage", () => {
-  it("leads with the pitch and offers the free assessment and account creation", () => {
+  it("assembles every section, in order, for an anonymous visitor", () => {
     renderLanding();
+    const headings = screen.getAllByRole("heading");
+    const order = headings.map((h) => h.textContent);
+    const indexOf = (pattern: RegExp) => order.findIndex((text) => pattern.test(text ?? ""));
+
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(/ne te keresd a pályázatot|don't go looking for grants/i);
-    expect(screen.getByRole("link", { name: /megnézem, mire vagyok jogosult|see what i'm eligible for/i })).toHaveAttribute("href", "/assess");
-    expect(screen.getByRole("link", { name: /cégfiók létrehozása|create a company account/i })).toHaveAttribute("href", "/register");
-    expect(screen.getByRole("link", { name: /^belépés$|^sign in$/i })).toHaveAttribute("href", "/login");
-  });
+    // palyazat.gov.hu appears once in TrustStrip and again in Sources' full list — both present is the point.
+    expect(screen.getAllByText(/palyazat\.gov\.hu/).length).toBeGreaterThanOrEqual(2);
+    expect(screen.getByText("549")).toBeInTheDocument(); // ComparisonSection
+    expect(document.getElementById("how")).toBeInTheDocument(); // HowItWorks
+    expect(screen.getAllByText(/kap\.gov\.hu/).length).toBeGreaterThanOrEqual(2); // TrustStrip + Sources
+    expect(screen.getAllByText(/5\s?990|5,990/).length).toBeGreaterThanOrEqual(2); // PriceTeaser
+    expect(screen.getByText(/mvp prototípus|mvp prototype/i)).toBeInTheDocument(); // LandingFooter
 
-  it("carries the hero image with alt text, and the worked example", () => {
-    renderLanding();
-    expect(screen.getByRole("img", { name: /vállalati csapat|corporate team/i })).toHaveAttribute("src", "/hero.jpg");
-    expect(screen.getAllByText(/GINOP/).length).toBeGreaterThan(0);
-    expect(screen.getByText("549")).toBeInTheDocument();
-  });
-
-  it("offers every section's content: how it works, sources and the price", () => {
-    renderLanding();
-    expect(screen.getAllByRole("heading", { level: 2 })).toHaveLength(4);
-    // The monthly price is stated in the heading and again in the price box.
-    expect(screen.getAllByText(/5\s?990|5,990/).length).toBeGreaterThanOrEqual(2);
-  });
-
-  it("for an anonymous visitor who already built a profile, offers 'open the app' instead of trapping them", () => {
-    useLocalProfileStore.getState().setProfile(DEMO_PROFILE);
-    renderLanding();
-    expect(screen.getByRole("link", { name: /az alkalmazás megnyitása|open the app/i })).toHaveAttribute("href", "/app");
-    expect(screen.queryByRole("link", { name: /^belépés$|^sign in$/i })).not.toBeInTheDocument();
+    // Sections stay in the intended attention → understanding → trust → desire → action order.
+    const compareIdx = indexOf(/nem pályázatlista|not a grant list/i);
+    const howIdx = indexOf(/három lépés|three steps/i);
+    const sourcesIdx = indexOf(/az adat onnan jön|the data comes from/i);
+    expect(compareIdx).toBeGreaterThan(-1);
+    expect(howIdx).toBeGreaterThan(compareIdx);
+    expect(sourcesIdx).toBeGreaterThan(howIdx);
   });
 
   it("sends a signed-in account with a profile straight to its matches", async () => {

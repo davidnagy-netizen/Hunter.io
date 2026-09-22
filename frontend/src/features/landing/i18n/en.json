@@ -6,15 +6,15 @@
     "openApp": "Open the app"
   },
   "hero": {
-    "eyebrow": "Rule-based funding intelligence",
     "line1": "Don't go looking for grants.",
     "line2": "Fundor finds them for you.",
-    "lead": "Based on your company profile we find, rank and clearly present the relevant funding — from official sources.",
+    "lead": "For Hungarian manufacturing and service SMEs: based on your company profile we find, rank and clearly explain the funding that's actually relevant — from official sources only.",
     "cta": "See what I'm eligible for",
-    "register": "Create a company account",
-    "trust": "Official sources:",
-    "trustNames": "EU Funding & Tenders · palyazat.gov.hu · kap.gov.hu",
-    "imageAlt": "Corporate team after a successful grant application"
+    "register": "Create a company account"
+  },
+  "trustStrip": {
+    "label": "Official sources:",
+    "names": "EU Funding & Tenders · palyazat.gov.hu · kap.gov.hu"
   },
   "preview": {
     "program": "GINOP Plus",

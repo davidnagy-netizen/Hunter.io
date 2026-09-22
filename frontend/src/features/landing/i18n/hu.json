@@ -6,15 +6,15 @@
     "openApp": "Az alkalmazás megnyitása"
   },
   "hero": {
-    "eyebrow": "Szabályalapú pályázatkeresés",
     "line1": "Ne te keresd a pályázatot.",
     "line2": "A Fundor megtalálja neked.",
-    "lead": "A cégprofilod alapján megkeressük, rangsoroljuk és érthetően bemutatjuk a releváns támogatásokat — hivatalos forrásokból.",
+    "lead": "Magyar gyártó és szolgáltató KKV-knak: a cégprofilod alapján megkeressük, rangsoroljuk és érthetően indokoljuk a rád illő támogatásokat — kizárólag hivatalos forrásokból.",
     "cta": "Megnézem, mire vagyok jogosult",
-    "register": "Cégfiók létrehozása",
-    "trust": "Hivatalos források:",
-    "trustNames": "EU Funding & Tenders · palyazat.gov.hu · kap.gov.hu",
-    "imageAlt": "Vállalati csapat egy sikeres pályázat után"
+    "register": "Cégfiók létrehozása"
+  },
+  "trustStrip": {
+    "label": "Hivatalos források:",
+    "names": "EU Funding & Tenders · palyazat.gov.hu · kap.gov.hu"
   },
   "preview": {
     "program": "GINOP Plusz",
