@@ -69,7 +69,7 @@ class ScoringParityTest extends TestCase
     {
         $case = self::load('expected.json')['cases'][$index];
         $profile = $this->profileFor($case);
-        $scoring = new Scoring();
+        $scoring = new Scoring;
 
         foreach (self::load('catalog.json') as $call) {
             $expected = $case['results'][$call['id']];
@@ -96,7 +96,7 @@ class ScoringParityTest extends TestCase
     {
         $case = self::load('expected.json')['cases'][$index];
         $profile = $this->profileFor($case);
-        $scoring = new Scoring();
+        $scoring = new Scoring;
         $checked = 0;
 
         foreach (self::load('catalog.json') as $call) {
@@ -113,12 +113,12 @@ class ScoringParityTest extends TestCase
                 }
             }
         }
-        $this->assertGreaterThan(50, $checked, "the check must not pass by comparing nothing");
+        $this->assertGreaterThan(50, $checked, 'the check must not pass by comparing nothing');
     }
 
     public function test_an_answered_consortium_question_changes_feasibility_the_way_a_profile_value_does(): void
     {
-        $scoring = new Scoring();
+        $scoring = new Scoring;
         $profile = app(Profiles::class)->demo();
         $call = collect(self::load('catalog.json'))->first(fn ($c) => ($c['consortium']['required'] ?? false) && ! $c['highAdmin'] && $c['intensity'] > 0);
         $this->assertNotNull($call, 'the fixture has a consortium call');
@@ -136,7 +136,7 @@ class ScoringParityTest extends TestCase
 
     public function test_the_grant_calculator_is_project_value_times_intensity_capped_by_the_ceiling(): void
     {
-        $scoring = new Scoring();
+        $scoring = new Scoring;
         $call = ['id' => 'x', 'deadline' => '2026-12-31', 'intensity' => 0.8, 'highAdmin' => false, 'awardsFunding' => true, 'goals' => [], 'hard' => [], 'soft' => [],
             'docs' => [], 'consortium' => ['required' => false], 'fundingMin' => 0, 'fundingMax' => 0, 'partnerShare' => null, 'described' => true];
         $profile = ['investment_value' => 30_000_000, 'goals' => []];

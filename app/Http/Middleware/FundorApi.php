@@ -26,7 +26,7 @@ class FundorApi
                     throw new ApiError('JSON_REQUIRED', 415);
                 }
             }
-            $token = $request->cookie('hunter_session');
+            $token = $request->cookie('fundor_session');
             $session = is_string($token) ? DB::table('api_sessions')->where('token_hash', hash('sha256', $token))->where('expires_at', '>', now())->first() : null;
             $user = $session ? User::find($session->user_id) : null;
             if ($user?->disabled) {
@@ -34,10 +34,14 @@ class FundorApi
                 throw new ApiError('ACCOUNT_DISABLED', 403);
             }
             $request->setUserResolver(fn () => $user);
+            if ($user?->verification_required && ! $user->hasVerifiedEmail()
+                && ! $request->is('api/auth/*', 'api/v1/account', 'api/v1/account/*')) {
+                throw new ApiError('EMAIL_VERIFICATION_REQUIRED', 403);
+            }
             $response = $next($request);
             if ($session && ! in_array($request->path(), ['api/auth/login', 'api/auth/register', 'api/auth/logout'])) {
                 DB::table('api_sessions')->where('token_hash', $session->token_hash)->update(['expires_at' => now()->addMinutes(config('fundor.session_minutes'))]);
-                $response->headers->setCookie(cookie('hunter_session', $token, config('fundor.session_minutes'), '/', null, config('fundor.cookie_secure'), true, false, 'lax'));
+                $response->headers->setCookie(cookie('fundor_session', $token, config('fundor.session_minutes'), '/', null, config('fundor.cookie_secure'), true, false, 'lax'));
             }
         } catch (ApiError $e) {
             $response = response()->json(['error' => $e->getMessage(), 'code' => $e->errorCode], $e->status);

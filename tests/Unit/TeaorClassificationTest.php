@@ -27,8 +27,8 @@ class TeaorClassificationTest extends TestCase
      */
     public function test_teaor_classification_mapping(): void
     {
-        $this->assertEquals('6201', $this->service->resolveTeaor08To25('62.01'));
-        $this->assertEquals('2562', $this->service->resolveTeaor08To25('2562'));
+        $this->assertEquals('6210', $this->service->resolveTeaor08To25('62.01'));
+        $this->assertEquals('2553', $this->service->resolveTeaor08To25('2562'));
     }
 
     /**

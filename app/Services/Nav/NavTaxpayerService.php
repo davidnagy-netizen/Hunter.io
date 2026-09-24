@@ -5,158 +5,136 @@ declare(strict_types=1);
 namespace App\Services\Nav;
 
 use App\DTOs\TaxpayerData;
-use Illuminate\Support\Facades\Cache;
+use App\Rules\HungarianTaxNumberRule;
+use App\Services\Api\ApiError;
+use DOMDocument;
+use DOMXPath;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
-/**
- * Service Class: NAV Online Invoice API Taxpayer Lookup (`queryTaxpayer`).
- *
- * Reference: CR-03 Section 4.3 - Official NAV Integration & Anti-Bulk Harvesting Rules.
- *
- * Architecture Notes:
- * 1. Scraping ceginformacio.hu or kavosz.hu is STRICTLY PROHIBITED.
- * 2. Official taxpayer information is retrieved via the NAV Online Invoice API `queryTaxpayer` operation.
- * 3. Mass harvesting is prohibited: lookups are strictly on-demand per registering user.
- * 4. Responses are cached locally to minimize external calls and prevent rate limiting.
- */
+/** CR-03: on-demand NAV v3 XML exchange. No fabricated fallback or shared identity cache. */
 class NavTaxpayerService
 {
-    /**
-     * Default timeout for external NAV API requests in seconds.
-     */
-    private const TIMEOUT_SECONDS = 5;
-
-    /**
-     * Cache duration for resolved taxpayer records (24 hours).
-     */
-    private const CACHE_TTL_HOURS = 24;
-
-    /**
-     * Look up official taxpayer details by base or full Hungarian tax number.
-     *
-     * Educational Step-by-Step for Junior Developers:
-     * Step 1: Normalize tax number into base 8-digit identification number.
-     * Step 2: Check local cache to avoid redundant external network roundtrips.
-     * Step 3: Query the NAV Online Invoice queryTaxpayer endpoint via Laravel Http.
-     * Step 4: Parse XML/JSON response and transform into an immutable TaxpayerData DTO.
-     * Step 5: Cache and return the normalized DTO.
-     *
-     * @param  string  $taxNumber  8-digit base or 11-digit formatted tax number.
-     * @return TaxpayerData Resolved taxpayer details.
-     *
-     * @throws \RuntimeException When NAV is unreachable or returns an invalid taxpayer response.
-     */
+    /** Query a valid identifier. @throws ApiError when NAV cannot verify the identity. */
     public function queryTaxpayer(string $taxNumber): TaxpayerData
     {
-        // Step 1: Normalize tax number to 8-digit base code
-        $digits = preg_replace('/\D/', '', $taxNumber) ?? '';
-        $baseTax = substr($digits, 0, 8);
-
-        if (strlen($baseTax) !== 8) {
-            throw new \InvalidArgumentException(__('A megadott adószám formátuma érvénytelen (8 számjegy szükséges).'));
+        if (! HungarianTaxNumberRule::valid($taxNumber)) {
+            throw new ApiError('INVALID_REQUEST');
         }
+        $base = substr(str_replace('-', '', $taxNumber), 0, 8);
+        foreach (['login', 'password', 'tax_number', 'signature_key', 'software_id', 'developer_name', 'developer_contact'] as $key) {
+            if (! config("nav.$key")) {
+                throw new ApiError('NAV_UNAVAILABLE', 503);
+            }
+        }
+        $url = rtrim((string) config('nav.base_url'), '/');
+        if (! in_array($url, ['https://api-test.onlineszamla.nav.gov.hu/invoiceService/v3', 'https://api.onlineszamla.nav.gov.hu/invoiceService/v3'], true)) {
+            throw new ApiError('NAV_UNAVAILABLE', 503);
+        }
+        for ($attempt = 0; $attempt < 3; $attempt++) {
+            if ($attempt > 0) {
+                usleep(250_000 * (2 ** ($attempt - 1)));
+            }
+            try {
+                $response = Http::connectTimeout(3)->timeout(10)->withoutRedirecting()
+                    ->withBody($this->requestXml($base, 'F'.Str::upper(Str::random(29)), now('UTC')->format('Y-m-d\\TH:i:s.v\\Z')), 'application/xml')
+                    ->accept('application/xml')->post($url.'/queryTaxpayer');
+            } catch (ConnectionException) {
+                continue;
+            }
+            if ($response->status() === 429 || $response->serverError()) {
+                continue;
+            }
+            if (! $response->successful()) {
+                throw new ApiError('NAV_UNAVAILABLE', 503);
+            }
 
-        // Step 2: Anti-bulk harvesting & caching layer (cached per authenticated organization/session)
-        $cacheKey = "nav_taxpayer_{$baseTax}";
-
-        return Cache::remember($cacheKey, now()->addHours(self::CACHE_TTL_HOURS), function () use ($baseTax, $digits) {
-            return $this->fetchFromNavApi($baseTax, $digits);
-        });
+            return $this->parse($response->body(), $base);
+        }
+        throw new ApiError('NAV_UNAVAILABLE', 503);
     }
 
-    /**
-     * Perform the actual HTTP request to NAV or provide a standard fallback when offline/demo.
-     *
-     * @param  string  $baseTax  8-digit base tax number.
-     * @param  string  $fullDigits  Full digits representation if available.
-     */
-    protected function fetchFromNavApi(string $baseTax, string $fullDigits): TaxpayerData
+    /** Deterministic builder supports independent authentication-vector testing. */
+    public function requestXml(string $base, string $requestId, string $timestamp): string
     {
-        $baseUrl = config('services.nav.base_url', env('NAV_BASE_URL'));
-        $vatCode = strlen($fullDigits) >= 9 ? $fullDigits[8] : '2';
-        $countyCode = strlen($fullDigits) >= 11 ? substr($fullDigits, 9, 2) : '42';
+        $document = new DOMDocument('1.0', 'UTF-8');
+        $api = 'http://schemas.nav.gov.hu/OSA/3.0/api';
+        $common = 'http://schemas.nav.gov.hu/NTCA/1.0/common';
+        $root = $document->appendChild($document->createElementNS($api, 'QueryTaxpayerRequest'));
+        $append = function ($parent, string $name, string $value, string $namespace) use ($document) {
+            $element = $document->createElementNS($namespace, $name);
+            $element->appendChild($document->createTextNode($value));
+            $parent->appendChild($element);
 
-        // When external NAV configuration is present, query the external Online Invoice endpoint
-        if (! empty($baseUrl)) {
-            try {
-                // Step 3: Issue on-demand queryTaxpayer request
-                $response = Http::timeout(self::TIMEOUT_SECONDS)
-                    ->acceptJson()
-                    ->get("{$baseUrl}/queryTaxpayer", [
-                        'taxNumber' => $baseTax,
-                    ]);
+            return $element;
+        };
+        $header = $append($root, 'common:header', '', $common);
+        foreach (['requestId' => $requestId, 'timestamp' => $timestamp, 'requestVersion' => '3.0', 'headerVersion' => '1.0'] as $key => $value) {
+            $append($header, 'common:'.$key, $value, $common);
+        }
+        $user = $append($root, 'common:user', '', $common);
+        $append($user, 'common:login', (string) config('nav.login'), $common);
+        $append($user, 'common:passwordHash', strtoupper(hash('sha512', (string) config('nav.password'))), $common)->setAttribute('cryptoType', 'SHA-512');
+        $append($user, 'common:taxNumber', (string) config('nav.tax_number'), $common);
+        // NAV signs ID + UTC timestamp (digits through seconds) + technical signature key.
+        $stamp = substr(preg_replace('/[^0-9]/', '', $timestamp), 0, 14);
+        $signature = strtoupper(hash('sha3-512', $requestId.$stamp.config('nav.signature_key')));
+        $append($user, 'common:requestSignature', $signature, $common)->setAttribute('cryptoType', 'SHA3-512');
+        $software = $append($root, 'software', '', $api);
+        foreach (['softwareId' => config('nav.software_id'), 'softwareName' => 'Fundor', 'softwareOperation' => 'ONLINE_SERVICE', 'softwareMainVersion' => '1.0', 'softwareDevName' => config('nav.developer_name'), 'softwareDevContact' => config('nav.developer_contact')] as $key => $value) {
+            $append($software, $key, (string) $value, $api);
+        }
+        $append($root, 'taxNumber', $base, $api);
 
-                if ($response->successful()) {
-                    $data = $response->json();
+        return $document->saveXML();
+    }
 
-                    // Step 4: Parse response payload
-                    return new TaxpayerData(
-                        taxNumber: "{$baseTax}-{$vatCode}-{$countyCode}",
-                        companyName: (string) ($data['taxpayerName'] ?? $data['companyName'] ?? 'Ismeretlen Vállalkozás Kft.'),
-                        shortName: $data['taxpayerShortName'] ?? null,
-                        vatCode: $vatCode,
-                        countyCode: $countyCode,
-                        postalCode: (string) ($data['taxpayerAddress']['postalCode'] ?? '1054'),
-                        city: (string) ($data['taxpayerAddress']['city'] ?? 'Budapest'),
-                        streetAddress: (string) ($data['taxpayerAddress']['streetName'] ?? 'Szabadság tér 1.'),
-                        status: (string) ($data['taxpayerValidity'] ?? 'VALID'),
-                        incorporationDate: $data['incorporationDate'] ?? null
-                    );
-                }
-
-                if ($response->status() === 404) {
-                    throw new \RuntimeException(__('A megadott adószámmal nem található regisztrált adózó a NAV nyilvántartásában.'));
-                }
-            } catch (\Exception $e) {
-                Log::warning("NAV API queryTaxpayer exception for {$baseTax}: {$e->getMessage()}");
-                if ($e instanceof \RuntimeException) {
-                    throw $e;
-                }
+    /** Map headquarters only; branches are not the registered seat. */
+    private function parse(string $xml, string $base): TaxpayerData
+    {
+        if (strlen($xml) > 1_000_000 || stripos($xml, '<!DOCTYPE') !== false || stripos($xml, '<!ENTITY') !== false) {
+            throw new ApiError('NAV_INVALID_RESPONSE', 502);
+        }
+        $doc = new DOMDocument;
+        $previous = libxml_use_internal_errors(true);
+        try {
+            if (! $doc->loadXML($xml, LIBXML_NONET)) {
+                throw new ApiError('NAV_INVALID_RESPONSE', 502);
+            }
+        } finally {
+            libxml_clear_errors();
+            libxml_use_internal_errors($previous);
+        }
+        $xpath = new DOMXPath($doc);
+        $xpath->registerNamespace('a', 'http://schemas.nav.gov.hu/OSA/3.0/api');
+        $xpath->registerNamespace('c', 'http://schemas.nav.gov.hu/NTCA/1.0/common');
+        $xpath->registerNamespace('b', 'http://schemas.nav.gov.hu/OSA/3.0/base');
+        $get = fn (string $path): ?string => ($v = trim($xpath->evaluate('string('.$path.')'))) !== '' ? $v : null;
+        if ($get('/a:QueryTaxpayerResponse/c:result/c:funcCode') !== 'OK') {
+            throw new ApiError('NAV_UNAVAILABLE', 503);
+        }
+        $valid = $get('/a:QueryTaxpayerResponse/a:taxpayerValidity');
+        if (in_array($valid, ['false', '0'], true)) {
+            throw new ApiError('TAXPAYER_NOT_FOUND', 404);
+        }
+        $prefix = '/a:QueryTaxpayerResponse/a:taxpayerData';
+        $name = $get($prefix.'/a:taxpayerName');
+        $id = $get($prefix.'/a:taxNumberDetail/b:taxpayerId');
+        $vat = $get($prefix.'/a:taxNumberDetail/b:vatCode');
+        $county = $get($prefix.'/a:taxNumberDetail/b:countyCode');
+        if (! in_array($valid, ['true', '1'], true) || ! $name || $id !== $base || ! preg_match('/^[0-9]$/D', $vat ?? '') || ! preg_match('/^[0-9]{2}$/D', $county ?? '')) {
+            throw new ApiError('NAV_INVALID_RESPONSE', 502);
+        }
+        $path = $prefix.'/a:taxpayerAddressList/a:taxpayerAddressItem[a:taxpayerAddressType="HQ"]/a:taxpayerAddress';
+        $address = null;
+        if ($xpath->query($path)->length) {
+            $address = [];
+            foreach (['country_code' => 'countryCode', 'postal_code' => 'postalCode', 'city' => 'city', 'street' => 'streetName', 'public_place_category' => 'publicPlaceCategory', 'house_number' => 'number', 'county' => 'region', 'building' => 'building', 'staircase' => 'staircase', 'floor' => 'floor', 'door' => 'door'] as $key => $nav) {
+                $address[$key] = $get($path.'/b:'.$nav);
             }
         }
 
-        // Default deterministic enterprise resolution for local development & testing
-        return $this->resolveFallbackTaxpayer($baseTax, $vatCode, $countyCode);
-    }
-
-    /**
-     * Resolve deterministic taxpayer data for development and testing environments.
-     *
-     * @param  string  $baseTax  8-digit base tax number.
-     * @param  string  $vatCode  VAT classification digit.
-     * @param  string  $countyCode  Regional county seat code.
-     */
-    private function resolveFallbackTaxpayer(string $baseTax, string $vatCode, string $countyCode): TaxpayerData
-    {
-        // Demonstration enterprise matching the reference specification (Alfa Gyártó Kft.)
-        if ($baseTax === '12345674' || $baseTax === '12345678') {
-            return new TaxpayerData(
-                taxNumber: "{$baseTax}-{$vatCode}-{$countyCode}",
-                companyName: 'Alfa Gyártó és Kereskedelmi Kft.',
-                shortName: 'Alfa Gyártó Kft.',
-                vatCode: $vatCode,
-                countyCode: $countyCode,
-                postalCode: '2100',
-                city: 'Gödöllő',
-                streetAddress: 'Páter Károly u. 1.',
-                status: 'VALID',
-                incorporationDate: '2018-04-15'
-            );
-        }
-
-        // Generic mock resolution
-        return new TaxpayerData(
-            taxNumber: "{$baseTax}-{$vatCode}-{$countyCode}",
-            companyName: "Magyar Vállalkozás {$baseTax} Kft.",
-            shortName: "Vállalkozás {$baseTax} Kft.",
-            vatCode: $vatCode,
-            countyCode: $countyCode,
-            postalCode: '1054',
-            city: 'Budapest',
-            streetAddress: 'Kossuth Lajos tér 1.',
-            status: 'VALID',
-            incorporationDate: '2020-01-01'
-        );
+        return new TaxpayerData("$id-$vat-$county", $name, $get($prefix.'/a:taxpayerShortName'), $get($prefix.'/a:vatGroupMembership'), $address, $get($prefix.'/a:incorporation') ?? 'UNKNOWN');
     }
 }

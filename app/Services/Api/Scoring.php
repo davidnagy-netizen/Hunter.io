@@ -54,12 +54,19 @@ class Scoring
         }
 
         $en = $lang === 'en';
-        $field = fn ($key) => $answers[$o['id'].':'.$key] ?? $answers[$key] ?? $p[$key] ?? null;
+        $field = fn ($key) => in_array($key, ['revenue', 'exact_revenue', 'annual_revenue'], true)
+            ? ($p['exact_revenue'] ?? null)
+            : ($answers[$o['id'].':'.$key] ?? $answers[$key] ?? $p[$key] ?? null);
         $checks = [];
         $questions = [];
         foreach ($o['hard'] as $rule) {
             $value = $field($rule['field']);
             $status = $this->rule($value, $rule['op'], $rule['value']);
+            // A new 3+ selection proves three years, but cannot prove four or more.
+            if ($rule['field'] === 'closed_business_years' && ($p['metrics_complete'] ?? false)
+                && $value === 3 && $rule['op'] === '>=' && $rule['value'] > 3) {
+                $status = 'unknown';
+            }
             $label = $rule['label_'.$lang] ?? $rule['label'] ?? $rule['field'];
             $checks[] = ['field' => $rule['field'], 'label' => $label, 'status' => $status, 'yourValue' => $value, 'required' => $rule['value'], 'operator' => $rule['op']];
             if ($status === 'unknown') {

@@ -1,4 +1,5 @@
 /node_modules
+/.pnpm-store/
 /public/build
 /public/spa
 /public/hot

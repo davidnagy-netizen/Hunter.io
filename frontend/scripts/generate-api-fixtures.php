@@ -24,15 +24,19 @@ $_ENV['SESSION_DRIVER'] = 'array';
 
 require $root.'/vendor/autoload.php';
 $app = require $root.'/bootstrap/app.php';
-$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+$kernel = $app->make(Kernel::class);
 $kernel->bootstrap();
-Illuminate\Support\Carbon::setTestNow(Illuminate\Support\Carbon::parse('2026-09-21 12:00:00', 'UTC'));
-Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+Carbon::setTestNow(Carbon::parse('2026-09-21 12:00:00', 'UTC'));
+Artisan::call('migrate', ['--force' => true]);
 
 use App\Models\Opportunity;
 use App\Models\User;
 use App\Services\Api\CatalogRefresh;
+use App\Services\Api\Profiles;
+use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
@@ -79,7 +83,7 @@ config(['fundor.catalog_feed_url' => 'https://feed.example/catalog.json']);
 Http::fake(['feed.example/*' => Http::response(['opportunities' => $calls])]);
 app(CatalogRefresh::class)->run();
 
-$demo = app(App\Services\Api\Profiles::class)->demo();
+$demo = app(Profiles::class)->demo();
 $sub = $account('subscriber', 'user', true);
 $free = $account('free');
 $call('POST', '/profile', ['profile' => $demo, 'source' => 'fixture'], $sub);

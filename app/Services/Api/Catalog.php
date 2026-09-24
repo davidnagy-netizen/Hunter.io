@@ -29,7 +29,7 @@ class Catalog
             'hard' => $o->hard_rules ?? [], 'soft' => $o->soft_rules ?? [], 'fundingMin' => (float) $o->funding_min,
             'fundingMax' => (float) $o->funding_max, 'sourceRef' => $o->source_reference, 'sourceUrl' => $o->source_url,
             'highAdmin' => $o->high_admin, 'curated' => $o->curated, 'isNew' => $o->is_new, 'docs' => $o->docs ?? [],
-            'status' => $o->status]) + ['summary' => '', 'programShort' => $o->program, 'awardsFunding' => true,
+            'status' => $o->status, 'instrument_type' => $o->instrument_type->value]) + ['summary' => '', 'programShort' => $o->program, 'awardsFunding' => true,
                 'consortium' => ['required' => false], 'partnerShare' => null, 'applicantTypes' => [], 'sectors' => []];
     }
 
@@ -43,7 +43,7 @@ class Catalog
 
     public function rows(array $state, string $lang = 'hu', bool $forthcoming = false): array
     {
-        return Opportunity::whereIn('status', $forthcoming ? ['open', 'forthcoming'] : ['open'])->orderBy('code')->get()->map(function ($model) use ($state, $lang) {
+        return Opportunity::where('instrument_type', 'grant')->whereIn('status', $forthcoming ? ['open', 'forthcoming'] : ['open'])->orderBy('code')->get()->map(function ($model) use ($state, $lang) {
             $o = $this->opportunity($model);
 
             return array_replace($o, $this->scoring->score($o, $state['profile'], $state['answers'], $lang));
@@ -77,7 +77,7 @@ class Catalog
 
     public function find(string $id): Opportunity
     {
-        return Opportunity::where('code', $id)->whereIn('status', ['open', 'forthcoming'])->first() ?? throw new ApiError('NO_SUCH_OPPORTUNITY', 404);
+        return Opportunity::where('instrument_type', 'grant')->where('code', $id)->whereIn('status', ['open', 'forthcoming'])->first() ?? throw new ApiError('NO_SUCH_OPPORTUNITY', 404);
     }
 
     public function stats(array $rows): array

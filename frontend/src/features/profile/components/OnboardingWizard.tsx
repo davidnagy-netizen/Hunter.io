@@ -1,405 +1,85 @@
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useQueryClient } from "@tanstack/react-query";
+import { Navigate, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
-import { Button, ChipButton, LanguageToggle, Panel, SelectField, TextField } from "@/shared/components";
+import { Button, Panel, TextField } from "@/shared/components";
+import { useMeQuery } from "@/features/authentication/api/auth.queries";
 import { useMetaQuery } from "@/shared/api/meta.queries";
-import type { Region } from "@/shared/types/reference.types";
 import { useCompanyProfile } from "../hooks/useCompanyProfile";
-import { useOnboardingDraftStore } from "../store/onboardingDraftStore";
-import { companyProfileSchema, STEP_FIELDS, type CompanyProfileFormValues } from "../schemas/profile.schemas";
-import "../i18n";
-import { BRAND } from "@/shared/brand";
+import { CompanyMetricsFields } from "./CompanyMetricsFields";
+import { metricsSchema } from "../schemas/metrics.schema";
+import type { CompanyMetrics } from "../types/metrics.types";
+import type { CompanyProfile } from "../types/profile.types";
 
-const STEPS = ["intro", "company", "activity", "goals", "investment", "setup"] as const;
-type Step = (typeof STEPS)[number];
-
-const CLOSED_YEARS_OPTIONS = [0, 1, 4] as const;
-const FUNDING_PREF_KEYS = ["non_refundable", "loan_ok", "EU", "HU"] as const;
-
-function regionForCounty(county: string, regions: Region[]): string | undefined {
-  return regions.find((r) => r.counties.includes(county))?.code;
+/** Existing accounts complete company metrics; project context remains editable separately. */
+export function OnboardingWizard() {
+  const me = useMeQuery();
+  const { profile, isLoading } = useCompanyProfile();
+  if (me.isLoading || isLoading) return null;
+  if (!me.data?.user) return <Navigate to="/register" replace />;
+  if (me.data.user.emailVerified === false) return <Navigate to="/verify-email" replace />;
+  return <ProfileEditor key={me.data.user.id} profile={profile} />;
 }
 
-const DEFAULT_VALUES: Partial<CompanyProfileFormValues> = {
-  goals: [],
-  funding_pref: ["non_refundable"],
-};
-
-export function OnboardingWizard() {
-  const { t, i18n } = useTranslation(["profile", "errors"]);
-  const isEnglish = i18n.language === "en";
-  const navigate = useNavigate();
+/** Server data initializes the editor once; background refetches cannot erase typing. */
+function ProfileEditor({ profile }: { profile: CompanyProfile | null }) {
+  const { i18n } = useTranslation();
+  const en = i18n.language.startsWith("en");
+  const { saveProfile, isSaving } = useCompanyProfile();
+  const queryClient = useQueryClient();
   const meta = useMetaQuery();
-  const { profile, saveProfile, loadDemo, isSaving, saveError } = useCompanyProfile();
-  const draft = useOnboardingDraftStore((state) => state.draft);
-  const clearDraft = useOnboardingDraftStore((state) => state.clear);
-  const [stepIndex, setStepIndex] = useState(0);
-  const step: Step = STEPS[stepIndex];
-
-  const form = useForm<CompanyProfileFormValues>({
-    resolver: zodResolver(companyProfileSchema),
-    // Saved profile wins over a draft, which wins over the blank defaults.
-    defaultValues: { ...DEFAULT_VALUES, ...draft, ...profile },
+  const navigate = useNavigate();
+  const [metrics, setMetrics] = useState<Partial<CompanyMetrics>>({
+    legal_form: profile?.legal_form, headcount: profile?.headcount ?? profile?.employees,
+    revenue_band: profile?.revenue_band, exact_revenue: profile?.exact_revenue ?? null,
+    teaor_code: profile?.teaor_code, county_code: profile?.county_code,
+    closed_business_years: profile?.closed_business_years,
   });
-  const { control, register, handleSubmit, trigger, watch, setValue, formState } = form;
-  const errors = formState.errors;
-
-  const regions = meta.data?.reference.regions ?? [];
-  const industries = meta.data?.reference.industries ?? [];
-  const goals = meta.data?.reference.goals ?? [];
-  const revBands = meta.data?.reference.revBands ?? [];
-  const orgTypes = meta.data?.reference.orgTypes ?? [];
-
-  const employees = watch("employees");
-  const region = watch("region");
-  // A company confirmed against NAV at registration keeps its official name: it is read, never typed.
-  const taxNumber = watch("taxNumber");
-
-  async function goNext() {
-    if (step === "intro") {
-      setStepIndex(1);
-      return;
+  const [goals, setGoals] = useState(profile?.goals ?? []);
+  const [investment, setInvestment] = useState(profile?.investment_value ? String(profile.investment_value) : "");
+  const [projectName, setProjectName] = useState(profile?.projectName ?? "");
+  const [error, setError] = useState("");
+  const [step, setStep] = useState(1);
+  async function save() {
+    const parsed = metricsSchema.safeParse(metrics);
+    if (!parsed.success) { setError(en ? "Complete the company fields." : "Töltse ki a vállalkozás adatait."); setStep(1); return; }
+    if (investment && (!Number.isFinite(Number(investment)) || Number(investment) < 0)) {
+      setError(en ? "Enter a valid investment amount." : "Érvényes beruházási összeget adjon meg."); return;
     }
-    const valid = await trigger(STEP_FIELDS[step as keyof typeof STEP_FIELDS]);
-    if (!valid) return;
-    if (stepIndex === STEPS.length - 1) {
-      await handleSubmit(onFinish)();
-    } else {
-      setStepIndex((i) => i + 1);
-    }
+    try {
+      await saveProfile({
+        ...profile, ...parsed.data, metrics_complete: true,
+        company: profile?.company ?? "", employees: parsed.data.headcount,
+        county: profile?.county ?? "", industryId: profile?.industryId ?? "",
+        teaor: parsed.data.teaor_code, goals, investment_value: investment ? Number(investment) : 0,
+        projectName, funding_pref: profile?.funding_pref ?? [],
+      });
+      await queryClient.invalidateQueries({ queryKey: ["auth"] });
+      navigate("/app");
+    } catch { setError(en ? "Could not save. Please check the fields and retry." : "A mentés nem sikerült. Ellenőrizze a mezőket."); }
   }
-
-  function goBack() {
-    setStepIndex((i) => Math.max(0, i - 1));
-  }
-
-  async function onFinish(values: CompanyProfileFormValues) {
-    const initials = (values.company || "C")
-      .split(/\s+/)
-      .slice(0, 2)
-      .map((w) => w[0])
-      .join("")
-      .toUpperCase();
-    await saveProfile({ ...values, initials, country: "HU" });
-    clearDraft();
-    navigate("/app");
-  }
-
-  async function handleLoadDemo() {
-    const demo = await loadDemo();
-    form.reset({ ...DEFAULT_VALUES, ...demo });
-    setStepIndex(1);
-  }
-
-  const progressPct = Math.round((stepIndex / (STEPS.length - 1)) * 100);
-
-  return (
-    <div className="flex min-h-screen flex-col bg-paper p-6">
-      <div className="mx-auto flex w-full max-w-lg flex-1 flex-col">
-        <div className="mb-4 flex items-center justify-between">
-          <span className="font-display text-lg font-semibold text-ink">{BRAND.wordmark}</span>
-          <div className="flex items-center gap-3">
-            <LanguageToggle />
-            <Button variant="ghost" size="sm" onClick={() => navigate("/")}>
-              {t("profile:actions.exit")}
-            </Button>
-          </div>
-        </div>
-
-        <div className="mb-1 h-1.5 w-full overflow-hidden rounded-full bg-line">
-          <div className="h-full bg-gold transition-[width]" style={{ width: `${progressPct}%` }} />
-        </div>
-        <p className="mb-4 text-xs text-muted">
-          {t("profile:progress")} · {stepIndex + 1}/{STEPS.length}
-        </p>
-
-        <Panel>
-          <h1 className="font-display text-xl font-semibold text-text">{t(`profile:steps.${step}.title`)}</h1>
-          <p className="mt-1 text-sm text-muted">{t(`profile:steps.${step}.subtitle`)}</p>
-
-          <div className="mt-5">
-            {step === "intro" && (
-              <div className="flex flex-col gap-4">
-                <div
-                  className="rounded-md bg-gold-bg p-3 text-sm text-gold-deep"
-                  dangerouslySetInnerHTML={{ __html: t("profile:demoBanner") }}
-                />
-                <div className="flex flex-wrap gap-3">
-                  <Button variant="dark" onClick={handleLoadDemo} disabled={isSaving}>
-                    {t("profile:actions.loadDemo")}
-                  </Button>
-                  <Button variant="ghost" onClick={() => setStepIndex(1)}>
-                    {t("profile:actions.fillMyself")}
-                  </Button>
-                </div>
-              </div>
-            )}
-
-            {step === "company" && (
-              <div className="flex flex-col gap-4">
-                <TextField
-                  label={t("profile:fields.company")}
-                  {...register("company")}
-                  readOnly={Boolean(taxNumber)}
-                  labelHint={taxNumber ? t("profile:fields.verified", { taxNumber }) : undefined}
-                  error={errors.company && t(errors.company.message as string)}
-                />
-                <TextField
-                  label={t("profile:fields.employees")}
-                  type="number"
-                  {...register("employees", { valueAsNumber: true })}
-                  error={errors.employees && t(errors.employees.message as string)}
-                />
-                <Controller
-                  control={control}
-                  name="county"
-                  render={({ field }) => (
-                    <SelectField
-                      label={t("profile:fields.county")}
-                      value={field.value ?? ""}
-                      onChange={(e) => {
-                        field.onChange(e.target.value);
-                        setValue("region", regionForCounty(e.target.value, regions));
-                      }}
-                      error={errors.county && t(errors.county.message as string)}
-                    >
-                      <option value="">{t("profile:fields.county")}</option>
-                      {regions.map((r) =>
-                        r.counties.map((c) => (
-                          <option key={c} value={c}>
-                            {c}
-                            {r.code !== "HU11" ? ` — ${r.name}` : ""}
-                          </option>
-                        )),
-                      )}
-                    </SelectField>
-                  )}
-                />
-                {region ? (
-                  <p className="text-xs text-muted">
-                    {t("profile:fields.regionCode")}: {region} · {regions.find((r) => r.code === region)?.name}
-                  </p>
-                ) : null}
-
-                <div>
-                  <span className="mb-1.5 block text-sm font-medium text-text">{t("profile:fields.closedYears")}</span>
-                  <Controller
-                    control={control}
-                    name="closed_business_years"
-                    render={({ field }) => (
-                      <div className="flex flex-wrap gap-2">
-                        {CLOSED_YEARS_OPTIONS.map((v) => (
-                          <ChipButton key={v} selected={field.value === v} onClick={() => field.onChange(v)}>
-                            {t(`profile:closedYearsOptions.${v === 0 ? "none" : v === 1 ? "one" : "twoOrMore"}`)}
-                          </ChipButton>
-                        ))}
-                      </div>
-                    )}
-                  />
-                  {errors.closed_business_years ? (
-                    <p role="alert" className="mt-1 text-xs text-red">
-                      {t(errors.closed_business_years.message as string)}
-                    </p>
-                  ) : null}
-                </div>
-
-                <SelectField label={t("profile:fields.revBand")} labelHint={t("profile:fields.optional")} {...register("revBand")}>
-                  <option value="">{t("profile:fields.revBand")}</option>
-                  {revBands.map((b) => (
-                    <option key={b} value={b}>
-                      {b}
-                    </option>
-                  ))}
-                </SelectField>
-              </div>
-            )}
-
-            {step === "activity" && (
-              <div>
-                <span className="mb-1.5 block text-sm font-medium text-text">{t("profile:fields.industry")}</span>
-                <Controller
-                  control={control}
-                  name="industryId"
-                  render={({ field }) => (
-                    <div className="flex flex-wrap gap-2">
-                      {industries.map((ind) => (
-                        <ChipButton
-                          key={ind.id}
-                          selected={field.value === ind.id}
-                          onClick={() => {
-                            field.onChange(ind.id);
-                            setValue("teaor", ind.teaor);
-                          }}
-                        >
-                          {t(`profile:industries.${ind.id}`, { defaultValue: ind.label })}
-                        </ChipButton>
-                      ))}
-                    </div>
-                  )}
-                />
-                {errors.industryId ? (
-                  <p role="alert" className="mt-1 text-xs text-red">
-                    {t(errors.industryId.message as string)}
-                  </p>
-                ) : null}
-              </div>
-            )}
-
-            {step === "goals" && (
-              <Controller
-                control={control}
-                name="goals"
-                render={({ field }) => (
-                  <div className="flex flex-wrap gap-2">
-                    {goals.map((g) => {
-                      const selected = field.value.includes(g.id);
-                      return (
-                        <ChipButton
-                          key={g.id}
-                          selected={selected}
-                          onClick={() =>
-                            field.onChange(selected ? field.value.filter((x) => x !== g.id) : [...field.value, g.id])
-                          }
-                        >
-                          {isEnglish ? g.label_en || g.label : g.label}
-                        </ChipButton>
-                      );
-                    })}
-                  </div>
-                )}
-              />
-            )}
-
-            {step === "investment" && (
-              <div className="flex flex-col gap-4">
-                <TextField label={t("profile:fields.projectName")} {...register("projectName")} />
-                <TextField
-                  label={t("profile:fields.investmentValue")}
-                  type="number"
-                  {...register("investment_value", { valueAsNumber: true })}
-                  error={errors.investment_value && t(errors.investment_value.message as string)}
-                />
-                <div>
-                  <span className="mb-1.5 block text-sm font-medium text-text">{t("profile:fields.fundingPref")}</span>
-                  <Controller
-                    control={control}
-                    name="funding_pref"
-                    render={({ field }) => (
-                      <div className="flex flex-wrap gap-2">
-                        {FUNDING_PREF_KEYS.map((key) => {
-                          const selected = field.value.includes(key);
-                          return (
-                            <ChipButton
-                              key={key}
-                              selected={selected}
-                              onClick={() =>
-                                field.onChange(
-                                  selected ? field.value.filter((x) => x !== key) : [...field.value, key],
-                                )
-                              }
-                            >
-                              {t(`profile:fundingPrefOptions.${key}`)}
-                            </ChipButton>
-                          );
-                        })}
-                      </div>
-                    )}
-                  />
-                </div>
-              </div>
-            )}
-
-            {step === "setup" && (
-              <div className="flex flex-col gap-5">
-                <div>
-                  <span className="mb-1.5 block text-sm font-medium text-text">{t("profile:fields.orgType")}</span>
-                  <Controller
-                    control={control}
-                    name="orgType"
-                    render={({ field }) => (
-                      <div className="flex flex-wrap gap-2">
-                        {orgTypes.map((o) => (
-                          <ChipButton key={o.id} selected={field.value === o.id} onClick={() => field.onChange(o.id)}>
-                            {isEnglish ? o.label_en : o.label_hu}
-                          </ChipButton>
-                        ))}
-                      </div>
-                    )}
-                  />
-                  {employees > 0 ? (
-                    <p className="mt-1.5 text-xs text-muted">
-                      {t(employees <= 249 ? "profile:orgTypeHintSme" : "profile:orgTypeHintLarge", { count: employees })}
-                    </p>
-                  ) : null}
-                </div>
-
-                <div>
-                  <span className="mb-1.5 block text-sm font-medium text-text">{t("profile:fields.consortiumReady")}</span>
-                  <Controller
-                    control={control}
-                    name="consortium_ready"
-                    render={({ field }) => (
-                      <div className="flex flex-wrap gap-2">
-                        <ChipButton selected={field.value === true} onClick={() => field.onChange(true)}>
-                          {t("profile:haveOrCanBuildPartners")}
-                        </ChipButton>
-                        <ChipButton selected={field.value === false} onClick={() => field.onChange(false)}>
-                          {t("profile:onlyAlone")}
-                        </ChipButton>
-                      </div>
-                    )}
-                  />
-                  <p className="mt-1.5 text-xs text-muted">{t("profile:consortiumHint")}</p>
-                  {errors.consortium_ready ? (
-                    <p role="alert" className="mt-1 text-xs text-red">
-                      {t(errors.consortium_ready.message as string)}
-                    </p>
-                  ) : null}
-                </div>
-
-                <div>
-                  <span className="mb-1.5 block text-sm font-medium text-text">{t("profile:fields.euExperience")}</span>
-                  <Controller
-                    control={control}
-                    name="eu_experience"
-                    render={({ field }) => (
-                      <div className="flex flex-wrap gap-2">
-                        <ChipButton selected={field.value === true} onClick={() => field.onChange(true)}>
-                          {t("profile:yes")}
-                        </ChipButton>
-                        <ChipButton selected={field.value === false} onClick={() => field.onChange(false)}>
-                          {t("profile:notYet")}
-                        </ChipButton>
-                      </div>
-                    )}
-                  />
-                </div>
-              </div>
-            )}
-          </div>
-
-          {saveError ? (
-            <p role="alert" className="mt-4 text-sm text-red">
-              {t("profile:toasts.saveFailed")}
-            </p>
-          ) : null}
-
-          {step !== "intro" ? (
-            <div className="mt-6 flex gap-3">
-              {stepIndex > 0 ? (
-                <Button variant="ghost" onClick={goBack}>
-                  {t("profile:actions.back")}
-                </Button>
-              ) : null}
-              <Button variant="gold" className="flex-1" onClick={goNext} disabled={isSaving}>
-                {isSaving ? t("profile:actions.saving") : stepIndex === STEPS.length - 1 ? t("profile:actions.finish") : t("profile:actions.next")}
-              </Button>
-            </div>
-          ) : null}
-        </Panel>
-      </div>
-    </div>
-  );
+  return <main className="mx-auto max-w-lg p-6"><Panel>
+    <h1 className="text-xl font-semibold">{step === 1 ? (en ? "Company profile" : "Vállalkozás adatai") : (en ? "Project context" : "Projektkörnyezet")}</h1>
+    {profile?.company && <p>{profile.company}</p>}
+    {step === 1 ? <>
+      <CompanyMetricsFields value={metrics} onChange={setMetrics} />
+      <Button onClick={() => {
+        if (metricsSchema.safeParse(metrics).success) { setStep(2); setError(""); }
+        else setError(en ? "Complete all company fields." : "Töltse ki a vállalkozás összes adatát.");
+      }}>{en ? "Continue" : "Tovább"}</Button>
+    </> : <div className="flex flex-col gap-4">
+      <p>{en ? "Project details are optional here and can be completed for each evaluation." : "A projektadatok itt opcionálisak; az értékeléshez később kiegészíthetők."}</p>
+      <TextField label={en ? "Project name" : "Projekt neve"} value={projectName} onChange={e => setProjectName(e.target.value)} />
+      <TextField label={en ? "Planned investment (HUF)" : "Tervezett beruházás (Ft)"} type="number" min="0" value={investment} onChange={e => setInvestment(e.target.value)} />
+      <fieldset><legend>{en ? "Development goals" : "Fejlesztési célok"}</legend>
+        {meta.data?.reference.goals.map(goal => <label className="block" key={goal.id}>
+          <input type="checkbox" checked={goals.includes(goal.id)} onChange={e => setGoals(current => e.target.checked ? [...current, goal.id] : current.filter(id => id !== goal.id))} />
+          {en ? goal.label_en || goal.label : goal.label}
+        </label>)}
+      </fieldset>
+      <Button disabled={isSaving} onClick={save}>{en ? "Save profile" : "Profil mentése"}</Button>
+      <Button variant="ghost" onClick={() => setStep(1)}>{en ? "Back" : "Vissza"}</Button>
+    </div>}
+    {error && <p role="alert">{error}</p>}
+  </Panel></main>;
 }

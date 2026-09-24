@@ -12,7 +12,7 @@ class Profiles
 {
     private const MAP = ['company' => 'company_name', 'initials' => 'initials', 'employees' => 'employees',
         'region' => 'region_code', 'county' => 'county', 'industryId' => 'industry_id', 'teaor' => 'teaor_code',
-        'revBand' => 'revenue_band', 'closed_business_years' => 'closed_business_years', 'goals' => 'goals',
+        'revBand' => 'legacy_revenue_band', 'closed_business_years' => 'closed_business_years', 'goals' => 'goals',
         'investment_value' => 'planned_investment_value', 'projectName' => 'project_name', 'funding_pref' => 'funding_preferences',
         'de_minimis_ok' => 'de_minimis_ok', 'consortium_ready' => 'consortium_ready', 'eu_experience' => 'eu_experience',
         'country' => 'country', 'orgType' => 'org_type'];
@@ -33,12 +33,12 @@ class Profiles
     public function normalize(array $p): array
     {
         Validator::make($p, ['company' => 'sometimes|string|max:255', 'employees' => 'sometimes|integer|min:0',
-            'county' => 'sometimes|string|max:100', 'industryId' => 'sometimes|string|max:50',
+            'county' => 'sometimes|nullable|string|max:100', 'industryId' => 'sometimes|nullable|string|max:50',
             'closed_business_years' => 'sometimes|integer|min:0', 'investment_value' => 'sometimes|numeric|min:0|max:9999999999999',
             'goals' => 'sometimes|array', 'goals.*' => 'string', 'funding_pref' => 'sometimes|array', 'funding_pref.*' => 'string',
             'orgType' => 'sometimes|in:sme,large,research,university,ngo,public', 'teaor' => 'sometimes|string|max:10',
             'initials' => 'sometimes|string|max:10', 'region' => 'sometimes|string|max:10', 'country' => 'sometimes|string|max:10',
-            'revBand' => 'sometimes|string|max:100', 'projectName' => 'sometimes|string|max:255',
+            'revBand' => 'sometimes|nullable|string|max:100', 'projectName' => 'sometimes|nullable|string|max:255',
             'de_minimis_ok' => 'sometimes|boolean', 'consortium_ready' => 'sometimes|boolean', 'eu_experience' => 'sometimes|boolean'])->validate();
         $p += ['company' => '', 'employees' => 0, 'county' => '', 'industryId' => '', 'closed_business_years' => 0,
             'goals' => [], 'investment_value' => 0, 'funding_pref' => [], 'country' => 'HU'];
@@ -76,7 +76,8 @@ class Profiles
     public function demo(): array
     {
         return $this->normalize(['company' => 'Alfa Gyártó Kft.', 'initials' => 'AG', 'employees' => 28, 'county' => 'Pest',
-            'industryId' => 'manuf', 'teaor' => '28', 'revBand' => '500 M–1 Mrd Ft', 'closed_business_years' => 4,
+            'legal_form' => 'kft', 'headcount' => 28, 'revenue_band' => 3, 'exact_revenue' => null, 'county_code' => '13', 'teaor_code' => '2829',
+            'industryId' => 'manuf', 'teaor' => '2829', 'revBand' => '', 'closed_business_years' => 4,
             'goals' => ['digitalization', 'it', 'machinery'], 'investment_value' => 30000000, 'funding_pref' => ['non_refundable', 'EU', 'HU']]);
     }
 
@@ -93,11 +94,29 @@ class Profiles
             }
         }
 
+        foreach (['legal_form', 'headcount', 'revenue_band', 'exact_revenue', 'teaor_code', 'county_code', 'metrics_complete'] as $key) {
+            $p[$key] = $row->$key;
+        }
+        if ($row->nav_identity) {
+            $p['company'] = $row->nav_identity['company_name'];
+            $p['taxNumber'] = $row->nav_identity['tax_number'];
+        }
+
         return $this->normalize($p);
     }
 
     public function save(User $u, array $p, string $source, string $event = 'profile.saved'): array
     {
+        // Canonical metrics control their aliases; read-only NAV identity cannot be overwritten.
+        $metrics = app(CompanyMetrics::class)->validate($p);
+        $identity = $u->companyProfile?->nav_identity;
+        if ($identity) {
+            $p['company'] = $identity['company_name'];
+            $p['taxNumber'] = $identity['tax_number'];
+        }
+        $p = array_replace($p, $metrics, ['employees' => (int) $metrics['headcount'],
+            'teaor' => $metrics['teaor_code'], 'county' => CompanyMetrics::COUNTIES[$metrics['county_code']],
+            'metrics_complete' => true]);
         $p = $this->normalize($p);
 
         return $this->accounts->mutate($u, function (&$s) use ($u, $p, $source, $event) {
@@ -116,10 +135,18 @@ class Profiles
             }
             $model = $u->companyProfile()->first() ?? new CompanyProfile(['user_id' => $u->id]);
             $model->fill($columns);
-            $model->setAttribute('api_extra', json_encode(array_diff_key($p, self::MAP), JSON_THROW_ON_ERROR));
+            $model->fill(array_intersect_key($p, array_flip(['legal_form', 'headcount', 'revenue_band', 'exact_revenue', 'teaor_code', 'county_code', 'metrics_complete'])));
+            $model->legacy_teaor_code ??= '';
+            if (($p['legal_form'] ?? null) === 'ev' && $u->companyProfile?->nav_identity) {
+                $model->company_name = 'Egyéni vállalkozó';
+            }
+            $model->setAttribute('api_extra', json_encode(array_diff_key($p, self::MAP, array_flip(['taxNumber'])), JSON_THROW_ON_ERROR));
             $model->save();
             $version = count($s['versions']) + 1;
-            array_unshift($s['versions'], ['version' => $version, 'at' => now()->toISOString(), 'source' => $source, 'changed' => $changed, 'profile' => $p]);
+            // Identity is already held in an encrypted column; history contains metrics only.
+            $historyProfile = array_diff_key($p, array_flip(['company', 'taxNumber']));
+            $changed = array_values(array_filter($changed, fn ($change) => ! in_array($change['field'], ['company', 'taxNumber'], true)));
+            array_unshift($s['versions'], ['version' => $version, 'at' => now()->toISOString(), 'source' => $source, 'changed' => $changed, 'profile' => $historyProfile]);
             array_unshift($s['activity'], ['at' => now()->toISOString(), 'type' => $event, 'version' => $version]);
 
             return ['success' => true, 'profile' => $p, 'version' => $version, 'changed' => $changed];

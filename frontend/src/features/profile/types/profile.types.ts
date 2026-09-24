@@ -1,5 +1,12 @@
 /** Mirrors the shape `src/engine/profile.js#normalizeProfile` accepts and fills in. */
 export interface CompanyProfile {
+  legal_form?: import("./metrics.types").CompanyMetrics["legal_form"];
+  headcount?: number;
+  revenue_band?: number;
+  exact_revenue?: string | null;
+  teaor_code?: string;
+  county_code?: string;
+  metrics_complete?: boolean;
   company: string;
   /** The company's NAV-verified tax number (`xxxxxxxx-y-zz`), set at registration; kept by the server as an extra field. */
   taxNumber?: string;

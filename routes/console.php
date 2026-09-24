@@ -1,5 +1,8 @@
 <?php
 
+// Expired signup capabilities contain no taxpayer payload and have no further purpose.
+Schedule::call(fn () => DB::table('signup_sessions')->where('expires_at', '<=', now())->delete())->hourly();
+
 /**
  * Console Routes Definition.
  *
@@ -10,6 +13,8 @@
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schedule;
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());

@@ -7,7 +7,7 @@ import huErrors from "./locales/hu/errors.json";
 const contract = import.meta.glob<string>("../../../../openapi.yaml", { query: "?raw", import: "default", eager: true });
 
 function documentedErrorCodes(): string[] {
-  const text = Object.values(contract)[0] ?? "";
+  const text = (Object.values(contract)[0] ?? "").replace(/\r\n/g, "\n");
   const block = text.match(/\n {4}ErrorCode:\n[\s\S]*?\n {6}enum:\n((?: {8}- [A-Z_]+\n)+)/);
   return block ? [...block[1].matchAll(/- ([A-Z_]+)/g)].map((m) => m[1]) : [];
 }

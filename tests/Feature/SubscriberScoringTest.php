@@ -38,7 +38,7 @@ class SubscriberScoringTest extends TestCase
         $token = bin2hex(random_bytes(32));
         DB::table('api_sessions')->insert(['token_hash' => hash('sha256', $token), 'user_id' => $u->id, 'expires_at' => now()->addDays(7)]);
 
-        return $this->withCredentials()->withUnencryptedCookie('hunter_session', $token);
+        return $this->withCredentials()->withUnencryptedCookie('fundor_session', $token);
     }
 
     private function account(string $name, string $role = 'user', bool $subscribed = false): User

@@ -37,6 +37,19 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        // 3. Seed Test User Account
+        User::firstOrCreate(
+            ['username' => 'b'],
+            [
+                'name' => 'test-user',
+                'email' => 'b@b.com',
+                'password' => Hash::make('b'),
+                'role' => 'user',
+                'subscription_plan' => 'pro',
+                'subscription_expires_at' => now()->addYears(1),
+            ]
+        );
+
         // 3. Seed Demo SME User & Company Profile (Alfa Gyártó Kft.)
         $demoUser = User::firstOrCreate(
             ['username' => 'demo_sme'],
@@ -57,11 +70,18 @@ class DatabaseSeeder extends Seeder
                 'company_name' => 'Alfa Gyártó Kft.',
                 'initials' => 'AG',
                 'employees' => 28,
+                'headcount' => 28,
+                'legal_form' => 'kft',
                 'region_code' => 'HU12',
                 'county' => 'Pest',
+                'county_code' => '13',
                 'industry_id' => 'manuf',
-                'teaor_code' => '28',
-                'revenue_band' => '500 M–1 Mrd Ft',
+                'teaor_code' => '2829',
+                'legacy_teaor_code' => '28',
+                'revenue_band' => 3,
+                'legacy_revenue_band' => '500 M–1 Mrd Ft',
+                'exact_revenue' => null,
+                'metrics_complete' => true,
                 'closed_business_years' => 4,
                 'goals' => ['digitalization', 'it', 'machinery'],
                 'planned_investment_value' => 30000000,

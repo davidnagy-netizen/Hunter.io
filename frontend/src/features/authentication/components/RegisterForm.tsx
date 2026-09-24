@@ -1,181 +1,105 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { useTranslation } from "react-i18next";
 import { Button, TextField } from "@/shared/components";
-import { useTranslatedApiError } from "@/shared/api/useTranslatedApiError";
+import { CompanyMetricsFields } from "@/features/profile/components/CompanyMetricsFields";
+import { metricsSchema } from "@/features/profile/schemas/metrics.schema";
+import type { CompanyMetrics } from "@/features/profile/types/metrics.types";
 import { useRegisterMutation, useTaxpayerLookupMutation } from "../api/auth.queries";
-import { formatTaxNumber } from "../lib/taxNumber";
-import {
-  registerSchema,
-  suggestUsername,
-  usernameSchema,
-  type RegisterFormValues,
-  type UsernameFormValues,
-} from "../schemas/auth.schemas";
+import { formatTaxNumber, isValidTaxNumber } from "../lib/taxNumber";
 import type { Taxpayer } from "../types/auth.types";
+import { registerSchema as credentialsSchema, type RegisterFormValues as Credentials } from "../schemas/auth.schemas";
 import "../i18n";
 
-export interface RegisterFormProps {
-  /** Called once the account exists and the visitor is signed in, with the company they confirmed. */
-  onSuccess?: (taxpayer: Taxpayer) => void;
+/** Credentials and consents deliberately never enter browser storage. */
+export interface RegisterFormProps { onSuccess?: (taxpayer: Taxpayer) => void }
+const STORAGE_KEY = "fundor-registration-v2";
+
+/** Restore only explicitly allowlisted noncredential fields from this tab. */
+function restoreDraft(): { taxNumber: string; metrics: Partial<CompanyMetrics> } {
+  try {
+    const parsed: unknown = JSON.parse(sessionStorage.getItem(STORAGE_KEY) ?? "{}");
+    const result = z.object({ taxNumber: z.string().optional(), metrics: metricsSchema.partial().optional() }).safeParse(parsed);
+    return { taxNumber: result.success ? result.data.taxNumber ?? "" : "", metrics: result.success ? result.data.metrics ?? {} : {} };
+  } catch { return { taxNumber: "", metrics: {} }; }
 }
 
-function Checkbox({ label, error, ...rest }: { label: React.ReactNode; error?: string } & React.InputHTMLAttributes<HTMLInputElement>) {
-  return (
-    <div>
-      <label className="flex cursor-pointer items-start gap-2 text-sm text-text">
-        <input type="checkbox" className="mt-0.5 size-4 shrink-0" aria-invalid={error ? true : undefined} {...rest} />
-        <span>{label}</span>
-      </label>
-      {error ? (
-        <p role="alert" className="mt-1 text-xs text-red">
-          {error}
-        </p>
-      ) : null}
-    </div>
-  );
-}
-
-/**
- * Registration in two short steps (CR-03). Step 1 asks for email, password and
- * tax number, and looks the company up at NAV. Step 2 shows what NAV returned
- * read-only — the visitor confirms their company, they never type its name —
- * and creates the account. The company profile is completed afterwards in the
- * onboarding wizard.
- */
+/** CR-03: tax identity → metrics → credentials, with an expiring server-issued receipt. */
 export function RegisterForm({ onSuccess }: RegisterFormProps) {
-  const { t } = useTranslation(["authentication", "errors"]);
-  const [step1, setStep1] = useState<RegisterFormValues | null>(null);
+  const { i18n } = useTranslation();
+  const en = i18n.language.startsWith("en");
+  const [draft] = useState(restoreDraft);
+  const [taxNumber, setTaxNumber] = useState(draft.taxNumber);
+  const [metrics, setMetrics] = useState<Partial<CompanyMetrics>>({ exact_revenue: null, ...draft.metrics });
+  const [step, setStep] = useState(1);
   const [taxpayer, setTaxpayer] = useState<Taxpayer | null>(null);
-
-  const details = useForm<RegisterFormValues>({
-    resolver: zodResolver(registerSchema),
-    defaultValues: { email: "", password: "", taxNumber: "", acceptTerms: false, marketingOptIn: false },
-  });
-  const usernameForm = useForm<UsernameFormValues>({ resolver: zodResolver(usernameSchema), defaultValues: { username: "" } });
-
+  const [error, setError] = useState("");
+  const requestVersion = useRef(0);
   const lookup = useTaxpayerLookupMutation();
-  const registerAccount = useRegisterMutation();
-  const lookupError = useTranslatedApiError(lookup.error);
-  const registerError = useTranslatedApiError(registerAccount.error);
-
-  const findCompany = (values: RegisterFormValues) => {
-    lookup.mutate(values.taxNumber.trim(), {
-      onSuccess: (found) => {
-        setStep1(values);
-        setTaxpayer(found);
-        usernameForm.reset({ username: suggestUsername(values.email) });
-      },
-    });
-  };
-
-  const createAccount = ({ username }: UsernameFormValues) => {
-    if (!step1 || !taxpayer) return;
-    registerAccount.mutate(
-      { username, password: step1.password, company: taxpayer.companyName, email: step1.email },
-      { onSuccess: () => onSuccess?.(taxpayer) },
-    );
-  };
-
-  if (step1 && taxpayer) {
-    const active = taxpayer.status === "VALID";
-    return (
-      <form onSubmit={usernameForm.handleSubmit(createAccount)} className="flex flex-col gap-4" noValidate>
-        <section aria-labelledby="taxpayer-heading" className="rounded-md border border-line bg-paper p-4">
-          <h2 id="taxpayer-heading" className="text-sm font-semibold text-text">
-            {t("authentication:confirm.title")}
-          </h2>
-          <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
-            <dt className="text-muted">{t("authentication:confirm.name")}</dt>
-            <dd className="font-medium text-text">{taxpayer.companyName}</dd>
-            <dt className="text-muted">{t("authentication:confirm.taxNumber")}</dt>
-            <dd className="text-text">{formatTaxNumber(taxpayer.taxNumber)}</dd>
-            <dt className="text-muted">{t("authentication:confirm.address")}</dt>
-            <dd className="text-text">{taxpayer.fullAddress}</dd>
-          </dl>
-          {!active ? (
-            <p role="alert" className="mt-3 text-sm text-red">
-              {t("authentication:confirm.notActive", { status: taxpayer.status })}
-            </p>
-          ) : null}
-        </section>
-
-        <TextField
-          label={t("authentication:fields.username")}
-          autoComplete="username"
-          error={usernameForm.formState.errors.username && t(usernameForm.formState.errors.username.message as string)}
-          {...usernameForm.register("username")}
-        />
-
-        {registerError ? (
-          <p role="alert" className="text-sm text-red">
-            {registerError}
-          </p>
-        ) : null}
-        <Button type="submit" variant="gold" block disabled={!active || registerAccount.isPending}>
-          {registerAccount.isPending ? t("authentication:actions.submitting") : t("authentication:actions.confirmCompany")}
-        </Button>
-        <button
-          type="button"
-          className="text-sm font-medium text-gold-deep"
-          onClick={() => {
-            setStep1(null);
-            setTaxpayer(null);
-            registerAccount.reset();
-          }}
-        >
-          {t("authentication:actions.changeTaxNumber")}
-        </button>
-      </form>
-    );
+  const registration = useRegisterMutation();
+  const { register, handleSubmit, formState: { errors } } = useForm<Credentials>({
+    resolver: zodResolver(credentialsSchema),
+    defaultValues: { name: "", email: "", password: "", password_confirmation: "", accept_terms: false, accept_privacy: false, marketing_opt_in: false },
+  });
+  function persist(number: string, facts: Partial<CompanyMetrics>) {
+    try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ taxNumber: number, metrics: facts })); } catch { /* Storage may be disabled; in-memory navigation still works. */ }
   }
-
-  const { register, handleSubmit, formState } = details;
-  const errors = formState.errors;
-  return (
-    <form onSubmit={handleSubmit(findCompany)} className="flex flex-col gap-4" noValidate>
-      <TextField
-        label={t("authentication:fields.email")}
-        type="email"
-        autoComplete="email"
-        error={errors.email && t(errors.email.message as string)}
-        {...register("email")}
-      />
-      <TextField
-        label={t("authentication:fields.password")}
-        type="password"
-        autoComplete="new-password"
-        error={errors.password && t(errors.password.message as string)}
-        {...register("password")}
-      />
-      <TextField
-        label={t("authentication:fields.taxNumber")}
-        labelHint={t("authentication:fields.taxNumberHint")}
-        inputMode="numeric"
-        autoComplete="off"
-        error={errors.taxNumber && t(errors.taxNumber.message as string)}
-        {...register("taxNumber")}
-      />
-      <p className="-mt-2 text-xs text-muted">{t("authentication:fields.taxNumberHelp")}</p>
-
-      <div className="flex flex-col gap-2">
-        <Checkbox
-          label={t("authentication:consent.terms")}
-          error={errors.acceptTerms && t(errors.acceptTerms.message as string)}
-          {...register("acceptTerms")}
-        />
-        <Checkbox label={t("authentication:consent.marketing")} {...register("marketingOptIn")} />
-      </div>
-
-      {lookupError ? (
-        <p role="alert" className="text-sm text-red">
-          {lookupError}
-        </p>
-      ) : null}
-      <Button type="submit" variant="gold" block disabled={lookup.isPending}>
-        {lookup.isPending ? t("authentication:actions.looking") : t("authentication:actions.findCompany")}
-      </Button>
-    </form>
-  );
+  function changeTax(raw: string) {
+    requestVersion.current++;
+    const value = formatTaxNumber(raw);
+    setTaxNumber(value); setTaxpayer(null); setError(""); persist(value, metrics);
+  }
+  async function findCompany() {
+    const version = ++requestVersion.current;
+    setError("");
+    try {
+      const found = await lookup.mutateAsync(taxNumber.trim());
+      if (version === requestVersion.current) setTaxpayer(found);
+    } catch { if (version === requestVersion.current) setError(en ? "NAV verification is unavailable. Please retry." : "A NAV ellenőrzés nem sikerült. Kérjük, próbálja újra."); }
+  }
+  async function finish(credentials: Credentials) {
+    const parsed = metricsSchema.safeParse(metrics);
+    if (!taxpayer?.verificationReceipt || !parsed.success) return;
+    setError("");
+    try {
+      await registration.mutateAsync({ ...credentials, verification_receipt: taxpayer.verificationReceipt, metrics: parsed.data });
+      sessionStorage.removeItem(STORAGE_KEY);
+      onSuccess?.(taxpayer);
+    } catch { setError(en ? "Registration failed. Check your details; if verification expired, repeat the tax lookup." : "A regisztráció nem sikerült. Ellenőrizze adatait; lejárt ellenőrzés esetén ismételje meg az adókeresést."); }
+  }
+  return <div className="flex flex-col gap-4">
+    <p aria-live="polite">{en ? "Step" : "Lépés"} {step}/3</p>
+    {step === 1 && <>
+      <TextField label={en ? "Tax number" : "Adószám"} value={taxNumber} onChange={e => changeTax(e.target.value)} inputMode="numeric"
+        error={taxNumber && !isValidTaxNumber(taxNumber) ? (en ? "Invalid or incomplete tax number." : "Érvénytelen vagy hiányos adószám.") : undefined} />
+      <Button onClick={findCompany} disabled={!isValidTaxNumber(taxNumber) || lookup.isPending}>{lookup.isPending ? (en ? "Searching…" : "Keresés…") : (en ? "Find company" : "Cég keresése")}</Button>
+      {taxpayer && <section aria-label={en ? "Verified company" : "Ellenőrzött vállalkozás"} className="rounded border border-line p-3">
+        <p>{taxpayer.companyName}</p><p>{taxpayer.shortName}</p><p>{taxpayer.taxNumber}</p>
+        <p>{taxpayer.fullAddress || (en ? "NAV did not provide a headquarters address." : "A NAV nem adott meg székhelycímet.")}</p>
+      </section>}
+      <Button disabled={!taxpayer} onClick={() => setStep(2)}>{en ? "Confirm and continue" : "Megerősítés és tovább"}</Button>
+    </>}
+    {step === 2 && <>
+      <CompanyMetricsFields value={metrics} onChange={value => { setMetrics(value); persist(taxNumber, value); }} />
+      <Button onClick={() => {
+        if (metricsSchema.safeParse(metrics).success) { setError(""); setStep(3); }
+        else setError(en ? "Complete all company fields with valid values." : "Töltse ki érvényesen a vállalkozás összes adatát.");
+      }}>{en ? "Continue" : "Tovább"}</Button>
+    </>}
+    {step === 3 && <form onSubmit={handleSubmit(finish)} className="flex flex-col gap-4" noValidate>
+      <TextField label={en ? "Contact name" : "Kapcsolattartó neve"} autoComplete="name" {...register("name")} error={errors.name?.message} />
+      <TextField label="Email" type="email" autoComplete="email" {...register("email")} error={errors.email?.message} />
+      <TextField label={en ? "Password (at least 12 characters)" : "Jelszó (legalább 12 karakter)"} type="password" autoComplete="new-password" {...register("password")} error={errors.password?.message} />
+      <TextField label={en ? "Confirm password" : "Jelszó megerősítése"} type="password" autoComplete="new-password" {...register("password_confirmation")} error={errors.password_confirmation?.message} />
+      <label><input type="checkbox" {...register("accept_terms")} /> {en ? "I accept the Terms of Service" : "Elfogadom az Általános Szerződési Feltételeket"}</label>
+      <label><input type="checkbox" {...register("accept_privacy")} /> {en ? "I acknowledge the Privacy Notice" : "Tudomásul veszem az Adatkezelési tájékoztatót"}</label>
+      <label><input type="checkbox" {...register("marketing_opt_in")} />{en ? "Receive funding opportunity updates" : "Kérek pályázati és finanszírozási értesítéseket"}</label>
+      {(errors.accept_terms || errors.accept_privacy) && <p role="alert">{en ? "Accept the terms and acknowledge the privacy notice separately." : "Az ÁSZF és az adatkezelési tájékoztató külön elfogadása szükséges."}</p>}
+      <Button type="submit" disabled={registration.isPending}>{en ? "Create account" : "Fiók létrehozása"}</Button>
+    </form>}
+    {step > 1 && <Button variant="ghost" onClick={() => { setStep(step - 1); setError(""); }}>{en ? "Back" : "Vissza"}</Button>}
+    {error && <p role="alert" className="text-red">{error}</p>}
+  </div>;
 }

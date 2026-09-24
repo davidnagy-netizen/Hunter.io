@@ -7,6 +7,7 @@
  * These routes are assigned the "api" middleware group.
  */
 
+use App\Http\Controllers\Api\AccountPrivacyController;
 use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CatalogController;
@@ -16,15 +17,29 @@ use App\Http\Controllers\Api\LeadController;
 use App\Http\Controllers\Api\NavTaxpayerController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Middleware\FundorApi;
+use App\Services\Api\CompanyMetrics;
+use App\Services\Sector\TeaorService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(FundorApi::class)->group(function () {
     Route::get('/health', HealthController::class)->name('api.health');
     Route::post('/nav/taxpayer', [NavTaxpayerController::class, 'lookup'])->name('api.nav.taxpayer');
+    Route::post('/v1/taxpayer/lookup', [NavTaxpayerController::class, 'lookup']);
+    Route::get('/v1/sectors/search', function (Request $request, TeaorService $sectors) {
+        $request->validate(['query' => 'nullable|string|max:100']);
+
+        return response()->json(['data' => $sectors->search((string) $request->query('query', ''))]);
+    })->middleware('throttle:60,1');
+    Route::get('/v1/onboarding/options', fn () => response()->json(['counties' => CompanyMetrics::COUNTIES, 'legal_forms' => CompanyMetrics::LEGAL_FORMS]));
     Route::get('/auth/me', [AuthController::class, 'me']);
     Route::post('/auth/register', [AuthController::class, 'register']);
     Route::post('/auth/login', [AuthController::class, 'login']);
     Route::post('/auth/logout', [AuthController::class, 'logout']);
+    Route::post('/auth/verification/resend', [AccountPrivacyController::class, 'resend'])->middleware('throttle:3,1');
+    Route::get('/auth/verify/{id}/{hash}', [AccountPrivacyController::class, 'verify'])->middleware(['signed', 'throttle:10,1'])->name('verification.verify');
+    Route::get('/v1/account/export', [AccountPrivacyController::class, 'export']);
+    Route::delete('/v1/account', [AccountPrivacyController::class, 'erase'])->middleware('throttle:5,1');
     Route::get('/profile', [ProfileController::class, 'show']);
     Route::post('/profile', [ProfileController::class, 'save']);
     Route::post('/profile/load-demo', [ProfileController::class, 'demo']);

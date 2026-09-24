@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import { AssessmentPage } from "@/features/assessment/components/AssessmentPage";
 import { LandingPage } from "@/features/landing/components/LandingPage";
 import { AuthPage } from "@/features/authentication/components/AuthPage";
+import { VerifyEmailPage } from "@/features/authentication/components/VerifyEmailPage";
 import { OnboardingWizard } from "@/features/profile/components/OnboardingWizard";
 import { ProfilePage } from "@/features/profile/components/ProfilePage";
 import { DashboardPage } from "@/features/opportunities/components/DashboardPage";
@@ -33,6 +34,7 @@ import { RequireProfile } from "@/app/layout/RequireProfile";
  * exporting its own route objects once there are enough of them to warrant it.
  */
 export const router = createBrowserRouter([
+  { path: "/verify-email", element: <VerifyEmailPage /> },
   {
     path: "/",
     element: <LandingPage />,

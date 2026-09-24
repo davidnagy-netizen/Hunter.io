@@ -67,7 +67,7 @@ class Accounts
 
     public function entitlements(?User $u): array
     {
-        $full = $u && ! $u->disabled && $u->hasActiveSubscription();
+        $full = $u && ! $u->disabled && (! $u->verification_required || $u->hasVerifiedEmail()) && $u->hasActiveSubscription();
 
         return ['tier' => ! $u ? 'anonymous' : ($u->isAdmin() ? 'admin' : ($full ? 'subscriber' : 'registered')),
             'maxResults' => $full ? null : 0, 'explanations' => (bool) $full, 'calculator' => (bool) $full,
@@ -89,6 +89,8 @@ class Accounts
     public function user(User $u): array
     {
         return ['id' => (string) $u->id, 'username' => $u->username, 'email' => $u->email, 'company' => $u->company,
+            'emailVerified' => ! $u->verification_required || $u->hasVerifiedEmail(),
+            'metricsComplete' => (bool) $u->companyProfile?->metrics_complete,
             'role' => $u->role, 'createdAt' => $u->created_at->toISOString(), 'lastLoginAt' => $u->last_login_at?->toISOString(),
             'disabled' => $u->disabled, 'subscription' => $this->subscription($u), 'entitlements' => $this->entitlements($u),
             'hasProfile' => $u->companyProfile()->exists()];

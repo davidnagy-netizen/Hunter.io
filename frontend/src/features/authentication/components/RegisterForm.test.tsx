@@ -1,180 +1,100 @@
-import { screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { renderWithProviders } from "@/test/renderWithProviders";
+import { httpClient } from "@/shared/api/httpClient";
 import { authApi } from "../api/auth.api";
 import { taxpayerApi } from "../api/taxpayer.api";
-import { RegisterForm } from "./RegisterForm";
 import type { AuthUser, Taxpayer } from "../types/auth.types";
+import { RegisterForm } from "./RegisterForm";
 
-vi.mock("../api/auth.api", () => ({ authApi: { login: vi.fn(), register: vi.fn(), logout: vi.fn(), me: vi.fn() } }));
+vi.mock("../api/auth.api", () => ({ authApi: { register: vi.fn(), me: vi.fn() } }));
 vi.mock("../api/taxpayer.api", () => ({ taxpayerApi: { lookup: vi.fn() } }));
+vi.mock("@/shared/api/httpClient", () => ({ httpClient: { get: vi.fn() } }));
 
-const TAXPAYER: Taxpayer = {
-  taxNumber: "12345674-2-42",
-  companyName: "Alfa Gyártó és Kereskedelmi Kft.",
-  shortName: "Alfa Gyártó Kft.",
-  postalCode: "2100",
-  city: "Gödöllő",
-  streetAddress: "Páter Károly u. 1.",
-  fullAddress: "2100 Gödöllő Páter Károly u. 1.",
-  status: "VALID",
-  incorporationDate: "2018-04-15",
-};
+const taxpayer: Taxpayer = { taxNumber: "12345676-2-42", companyName: "Verified Company", shortName: "Verified",
+  postalCode: "1117", city: "Budapest", streetAddress: "Alíz utca 2.", fullAddress: "1117 Budapest Alíz utca 2.",
+  status: "VALID", incorporationDate: null, verificationReceipt: "encrypted-receipt" };
+const metrics = { legal_form: "kft", headcount: 0, revenue_band: 2, exact_revenue: null, county_code: "13", teaor_code: "6210", closed_business_years: 2 };
 
-const find = () => screen.getByRole("button", { name: /cég keresése|find my company/i });
-const email = () => screen.getByLabelText(/e-mail|email/i);
-const password = () => screen.getByLabelText(/jelszó|password/i);
-const taxNumber = () => screen.getByLabelText(/adószám|tax number/i);
-const terms = () => screen.getByRole("checkbox", { name: /általános szerződési|terms of service/i });
-const marketing = () => screen.getByRole("checkbox", { name: /hírlevelet|newsletters/i });
+beforeEach(() => {
+  vi.clearAllMocks(); sessionStorage.clear();
+  vi.mocked(taxpayerApi.lookup).mockResolvedValue(taxpayer);
+  vi.mocked(authApi.register).mockResolvedValue({ success: true, user: {} as AuthUser });
+  vi.mocked(httpClient.get).mockImplementation(async url => ({ data: url === "/v1/onboarding/options" ? { counties: { "01": "Budapest", "13": "Pest" } } : { data: [{ code: "6210", label: "Számítógépes programozás" }] } }));
+});
 
-async function fillStep1(user: ReturnType<typeof userEvent.setup>, over: { tax?: string; consent?: boolean } = {}) {
-  await user.type(email(), "info@alfa.hu");
-  await user.type(password(), "s3cret1");
-  await user.type(taxNumber(), over.tax ?? "12345674-2-42");
-  if (over.consent !== false) await user.click(terms());
+async function lookupCompany(user: ReturnType<typeof userEvent.setup>) {
+  fireEvent.change(screen.getByLabelText(/adószám|tax number/i), { target: { value: "12345676242" } });
+  await user.click(screen.getByRole("button", { name: /cég keresése|find company/i }));
+  await screen.findByText("Verified Company");
+}
+async function credentialsStep(user: ReturnType<typeof userEvent.setup>) {
+  await lookupCompany(user);
+  await user.click(screen.getByRole("button", { name: /megerősítés és tovább|confirm and continue/i }));
+  await user.click(screen.getByRole("button", { name: /^tovább$|^continue$/i }));
 }
 
-describe("RegisterForm", () => {
-  beforeEach(() => {
-    vi.mocked(authApi.register).mockReset();
-    vi.mocked(taxpayerApi.lookup).mockReset();
-  });
-
-  it("asks for three things — email, password, tax number — and starts with both consents unticked", () => {
+describe("Rev-2 registration", () => {
+  it("starts with tax identity only and blocks invalid checksums", () => {
     renderWithProviders(<RegisterForm />);
-    expect(screen.queryByLabelText(/cégnév|company name/i)).not.toBeInTheDocument();
-    expect(terms()).not.toBeChecked();
-    expect(marketing()).not.toBeChecked();
-  });
-
-  it("keeps the two consents separate", async () => {
-    const user = userEvent.setup();
-    renderWithProviders(<RegisterForm />);
-    await user.click(marketing());
-    expect(marketing()).toBeChecked();
-    expect(terms()).not.toBeChecked();
-  });
-
-  it("refuses to look anything up without the terms consent, a valid email, password and tax number", async () => {
-    const user = userEvent.setup();
-    renderWithProviders(<RegisterForm />);
-    await user.type(email(), "nope");
-    await user.type(password(), "abc");
-    await user.type(taxNumber(), "12345675");
-    await user.click(find());
-
-    expect(await screen.findByText(/az e-mail cím nem érvényes|email address isn't valid/i)).toBeInTheDocument();
-    expect(screen.getByText(/legalább 4 karakter|at least 4 characters/i)).toBeInTheDocument();
-    expect(screen.getByText(/érvényes magyar adószámot|valid hungarian tax number/i)).toBeInTheDocument();
-    expect(screen.getAllByRole("alert").length).toBeGreaterThanOrEqual(4); // …and the missing consent
+    expect(screen.queryByLabelText(/email/i)).not.toBeInTheDocument();
+    fireEvent.change(screen.getByLabelText(/adószám|tax number/i), { target: { value: "12345674" } });
+    expect(screen.getByRole("button", { name: /cég keresése|find company/i })).toBeDisabled();
     expect(taxpayerApi.lookup).not.toHaveBeenCalled();
   });
-
-  it("does not look the company up when only the consent is missing", async () => {
-    const user = userEvent.setup();
-    renderWithProviders(<RegisterForm />);
-    await fillStep1(user, { consent: false });
-    await user.click(find());
+  it("formats digits and invalidates verified identity when the tax number changes", async () => {
+    const user = userEvent.setup(); renderWithProviders(<RegisterForm />);
+    await lookupCompany(user);
+    expect(screen.getByLabelText(/adószám|tax number/i)).toHaveValue("12345676-2-42");
+    fireEvent.change(screen.getByLabelText(/adószám|tax number/i), { target: { value: "10000001" } });
+    expect(screen.queryByText("Verified Company")).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /megerősítés és tovább|confirm and continue/i })).toBeDisabled();
+  });
+  it("ignores a stale response after the user changes the identifier", async () => {
+    let resolve: (value: Taxpayer) => void = () => {};
+    vi.mocked(taxpayerApi.lookup).mockImplementation(() => new Promise<Taxpayer>(done => { resolve = done; }));
+    const user = userEvent.setup(); renderWithProviders(<RegisterForm />);
+    fireEvent.change(screen.getByLabelText(/adószám|tax number/i), { target: { value: "12345676" } });
+    await user.click(screen.getByRole("button", { name: /cég keresése|find company/i }));
+    fireEvent.change(screen.getByLabelText(/adószám|tax number/i), { target: { value: "10000001" } });
+    await act(async () => resolve(taxpayer));
+    expect(screen.queryByText("Verified Company")).not.toBeInTheDocument();
+  });
+  it("requires fresh lookup after reload and keeps all three consents unchecked", async () => {
+    sessionStorage.setItem("fundor-registration-v2", JSON.stringify({ taxNumber: "12345676", metrics }));
+    const user = userEvent.setup(); renderWithProviders(<RegisterForm />);
+    expect(screen.getByRole("button", { name: /megerősítés és tovább|confirm and continue/i })).toBeDisabled();
+    await credentialsStep(user);
+    for (const checkbox of screen.getAllByRole("checkbox")) expect(checkbox).not.toBeChecked();
+    await user.click(screen.getByRole("checkbox", { name: /értesítéseket|updates/i }));
+    expect(screen.getByRole("checkbox", { name: /általános|terms/i })).not.toBeChecked();
+    expect(screen.getByRole("checkbox", { name: /adatkezelési|privacy/i })).not.toBeChecked();
+  });
+  it("submits metrics and the receipt without storing credentials or client company identity", async () => {
+    sessionStorage.setItem("fundor-registration-v2", JSON.stringify({ metrics }));
+    const onSuccess = vi.fn(); const user = userEvent.setup(); renderWithProviders(<RegisterForm onSuccess={onSuccess} />);
+    await credentialsStep(user);
+    fireEvent.change(screen.getByLabelText(/kapcsolattartó|contact name/i), { target: { value: "Test User" } });
+    fireEvent.change(screen.getByLabelText("Email"), { target: { value: "user@example.com" } });
+    fireEvent.change(screen.getByLabelText(/jelszó \(legalább|password \(at least/i), { target: { value: "correct-horse-battery" } });
+    fireEvent.change(screen.getByLabelText(/jelszó megerősítése|confirm password/i), { target: { value: "correct-horse-battery" } });
+    expect(sessionStorage.getItem("fundor-registration-v2")).not.toContain("correct-horse-battery");
+    await user.click(screen.getByRole("checkbox", { name: /általános|terms/i }));
+    await user.click(screen.getByRole("checkbox", { name: /adatkezelési|privacy/i }));
+    await user.click(screen.getByRole("button", { name: /fiók létrehozása|create account/i }));
+    await waitFor(() => expect(authApi.register).toHaveBeenCalledWith(expect.objectContaining({ verification_receipt: "encrypted-receipt", metrics, marketing_opt_in: false })));
+    expect(vi.mocked(authApi.register).mock.calls[0]?.[0]).not.toHaveProperty("company");
+    await waitFor(() => expect(onSuccess).toHaveBeenCalledWith(taxpayer));
+    expect(sessionStorage.getItem("fundor-registration-v2")).toBeNull();
+  });
+  it("preserves input and allows retry after NAV failure", async () => {
+    vi.mocked(taxpayerApi.lookup).mockRejectedValueOnce(new Error("timeout"));
+    const user = userEvent.setup(); renderWithProviders(<RegisterForm />);
+    fireEvent.change(screen.getByLabelText(/adószám|tax number/i), { target: { value: "12345676" } });
+    await user.click(screen.getByRole("button", { name: /cég keresése|find company/i }));
     expect(await screen.findByRole("alert")).toBeInTheDocument();
-    expect(taxpayerApi.lookup).not.toHaveBeenCalled();
-  });
-
-  it("shows what NAV returned read-only, and creates the account with that company name", async () => {
-    vi.mocked(taxpayerApi.lookup).mockResolvedValue(TAXPAYER);
-    vi.mocked(authApi.register).mockResolvedValue({ success: true, user: {} as AuthUser });
-    const onSuccess = vi.fn();
-    const user = userEvent.setup();
-    renderWithProviders(<RegisterForm onSuccess={onSuccess} />);
-
-    await fillStep1(user);
-    await user.click(find());
-
-    expect(await screen.findByText(TAXPAYER.companyName)).toBeInTheDocument();
-    expect(screen.getByText(TAXPAYER.fullAddress)).toBeInTheDocument();
-    expect(taxpayerApi.lookup).toHaveBeenCalledWith("12345674-2-42");
-    // The company is confirmed, not typed: there is no field to edit its name.
-    expect(screen.queryByRole("textbox", { name: /cégnév|company name/i })).not.toBeInTheDocument();
-
-    await user.click(screen.getByRole("button", { name: /ez az én cégem|this is my company/i }));
-    await waitFor(() =>
-      expect(authApi.register).toHaveBeenCalledWith({
-        username: "info",
-        password: "s3cret1",
-        company: TAXPAYER.companyName,
-        email: "info@alfa.hu",
-      }),
-    );
-    await waitFor(() => expect(onSuccess).toHaveBeenCalledWith(TAXPAYER));
-  });
-
-  it("prefills the username from the email and lets the visitor change it", async () => {
-    vi.mocked(taxpayerApi.lookup).mockResolvedValue(TAXPAYER);
-    vi.mocked(authApi.register).mockResolvedValue({ success: true, user: {} as AuthUser });
-    const user = userEvent.setup();
-    renderWithProviders(<RegisterForm />);
-    await fillStep1(user);
-    await user.click(find());
-
-    const username = await screen.findByLabelText(/felhasználónév|username/i);
-    expect(username).toHaveValue("info");
-    await user.clear(username);
-    await user.type(username, "alfa-gyarto");
-    await user.click(screen.getByRole("button", { name: /ez az én cégem|this is my company/i }));
-    await waitFor(() => expect(authApi.register).toHaveBeenCalledWith(expect.objectContaining({ username: "alfa-gyarto" })));
-  });
-
-  it("says why when NAV does not know the number, and stays on step 1 with what was typed", async () => {
-    vi.mocked(taxpayerApi.lookup).mockRejectedValue({
-      isAxiosError: true,
-      response: { status: 422, data: { error: "Nem található.", code: "TAXPAYER_LOOKUP_FAILED" } },
-    });
-    const user = userEvent.setup();
-    renderWithProviders(<RegisterForm />);
-    await fillStep1(user);
-    await user.click(find());
-
-    expect(await screen.findByText(/nem sikerült ellenőrizni|couldn't verify/i)).toBeInTheDocument();
-    expect(taxNumber()).toHaveValue("12345674-2-42");
-    expect(authApi.register).not.toHaveBeenCalled();
-  });
-
-  it("does not let a company NAV lists as inactive register", async () => {
-    vi.mocked(taxpayerApi.lookup).mockResolvedValue({ ...TAXPAYER, status: "DELETED" });
-    const user = userEvent.setup();
-    renderWithProviders(<RegisterForm />);
-    await fillStep1(user);
-    await user.click(find());
-
-    expect(await screen.findByText(/„DELETED”|"DELETED"/)).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /ez az én cégem|this is my company/i })).toBeDisabled();
-  });
-
-  it("goes back to step 1 to change the tax number, keeping the rest", async () => {
-    vi.mocked(taxpayerApi.lookup).mockResolvedValue(TAXPAYER);
-    const user = userEvent.setup();
-    renderWithProviders(<RegisterForm />);
-    await fillStep1(user);
-    await user.click(find());
-    await user.click(await screen.findByRole("button", { name: /másik adószámot|different tax number/i }));
-
-    expect(taxNumber()).toHaveValue("12345674-2-42");
-    expect(email()).toHaveValue("info@alfa.hu");
-  });
-
-  it("shows the server's translated error when the username is already taken", async () => {
-    vi.mocked(taxpayerApi.lookup).mockResolvedValue(TAXPAYER);
-    vi.mocked(authApi.register).mockRejectedValue({
-      isAxiosError: true,
-      response: { status: 409, data: { error: "Ez a felhasználónév már foglalt.", code: "USERNAME_TAKEN" } },
-    });
-    const user = userEvent.setup();
-    renderWithProviders(<RegisterForm />);
-    await fillStep1(user);
-    await user.click(find());
-    await user.click(await screen.findByRole("button", { name: /ez az én cégem|this is my company/i }));
-
-    expect(await screen.findByText(/már foglalt|already taken/i)).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: /cég keresése|find company/i }));
+    expect(await screen.findByText("Verified Company")).toBeInTheDocument();
   });
 });

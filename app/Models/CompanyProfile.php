@@ -46,6 +46,8 @@ class CompanyProfile extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'legal_form', 'headcount', 'revenue_band', 'exact_revenue', 'county_code',
+        'legacy_revenue_band', 'legacy_teaor_code', 'nav_identity', 'tax_base_hash', 'metrics_complete',
         'user_id',
         'company_name',
         'initials',
@@ -75,6 +77,11 @@ class CompanyProfile extends Model
     protected function casts(): array
     {
         return [
+            'headcount' => 'integer',
+            'revenue_band' => 'integer',
+            'exact_revenue' => 'decimal:2',
+            'nav_identity' => 'encrypted:array',
+            'metrics_complete' => 'boolean',
             'employees' => 'integer',
             'closed_business_years' => 'integer',
             'planned_investment_value' => 'decimal:2',

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -28,7 +29,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
@@ -38,6 +39,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'verification_required', 'email_verified_at',
         'name',
         'username',
         'email',
@@ -68,6 +70,7 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
+            'verification_required' => 'boolean',
             'email_verified_at' => 'datetime',
             'subscription_expires_at' => 'datetime',
             'last_login_at' => 'datetime',

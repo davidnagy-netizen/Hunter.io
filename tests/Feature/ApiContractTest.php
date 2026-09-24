@@ -9,11 +9,13 @@ use App\Services\Api\Profiles;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Tests\Support\RegistersVerifiedCompany;
 use Tests\TestCase;
 
 class ApiContractTest extends TestCase
 {
     use RefreshDatabase;
+    use RegistersVerifiedCompany;
 
     private function account(string $name = 'alice', string $role = 'user'): User
     {
@@ -25,7 +27,7 @@ class ApiContractTest extends TestCase
         $token = bin2hex(random_bytes(32));
         DB::table('api_sessions')->insert(['token_hash' => hash('sha256', $token), 'user_id' => $u->id, 'expires_at' => now()->addDays(7)]);
 
-        return $this->withCredentials()->withUnencryptedCookie('hunter_session', $token);
+        return $this->withCredentials()->withUnencryptedCookie('fundor_session', $token);
     }
 
     private function opportunity(): Opportunity
@@ -50,9 +52,10 @@ class ApiContractTest extends TestCase
         $call('POST', '/search', ['profile' => $p]);
         $call('GET', '/opportunities/private-call');
         $leadId = $call('POST', '/leads', ['email' => 'snapshot@example.com', 'consent' => true], 201)->json('id');
-        $call('POST', '/auth/register', ['username' => 'snapshot', 'password' => '1234'], 201);
-        $call('POST', '/auth/login', ['username' => 'snapshot', 'password' => '1234']);
-        $u = User::where('username', 'snapshot')->first();
+        $call('POST', '/auth/register', $this->signupPayload('snapshot@example.com'), 201);
+        $call('POST', '/auth/login', ['username' => 'snapshot@example.com', 'password' => 'correct-horse-battery']);
+        $u = User::where('email', 'snapshot@example.com')->first();
+        $u->markEmailAsVerified();
         $this->apiSession($u);
         $call('GET', '/profile');
         $call('POST', '/profile/load-demo');
@@ -93,17 +96,17 @@ class ApiContractTest extends TestCase
     public function test_registration_cookie_login_logout_and_errors(): void
     {
         $this->getJson('/api/auth/me')->assertOk()->assertJsonPath('user', null)->assertJsonPath('entitlements.tier', 'anonymous')->assertJsonMissingPath('adminSeed');
-        $this->postJson('/api/auth/register', ['username' => 'ab', 'password' => '1234'])->assertStatus(400)->assertJsonPath('code', 'INVALID_USERNAME');
-        $this->postJson('/api/auth/register', ['username' => 'alice', 'password' => '123'])->assertStatus(400)->assertJsonPath('code', 'WEAK_PASSWORD');
-        $r = $this->postJson('/api/auth/register', ['username' => 'alice', 'password' => '1234']);
-        $r->assertCreated()->assertJsonPath('user.username', 'alice')->assertJsonPath('user.disabled', false)->assertJsonMissingPath('user.password')->assertCookie('hunter_session');
-        $token = $r->getCookie('hunter_session', false)->getValue();
+        $this->postJson('/api/auth/register', ['username' => 'ab', 'password' => '1234'])->assertStatus(400)->assertJsonPath('code', 'INVALID_REQUEST');
+        $this->postJson('/api/auth/register', ['username' => 'alice', 'password' => '123'])->assertStatus(400)->assertJsonPath('code', 'INVALID_REQUEST');
+        $r = $this->postJson('/api/auth/register', $this->signupPayload());
+        $r->assertCreated()->assertJsonPath('user.email', 'alice@example.com')->assertJsonPath('user.disabled', false)->assertJsonMissingPath('user.password')->assertCookie('fundor_session');
+        $token = $r->getCookie('fundor_session', false)->getValue();
         $this->assertDatabaseHas('api_sessions', ['token_hash' => hash('sha256', $token)]);
-        $this->withCredentials()->withUnencryptedCookie('hunter_session', $token)->getJson('/api/auth/me')->assertJsonPath('user.username', 'alice');
-        $this->postJson('/api/auth/logout')->assertOk()->assertCookieExpired('hunter_session');
+        $this->withCredentials()->withUnencryptedCookie('fundor_session', $token)->getJson('/api/auth/me')->assertJsonPath('user.email', 'alice@example.com');
+        $this->postJson('/api/auth/logout')->assertOk()->assertCookieExpired('fundor_session');
         $this->getJson('/api/auth/me')->assertJsonPath('user', null);
         $this->postJson('/api/auth/login', ['username' => 'alice', 'password' => 'bad'])->assertUnauthorized()->assertJsonPath('code', 'BAD_CREDENTIALS');
-        $this->postJson('/api/auth/login', ['username' => 'alice', 'password' => '1234'])->assertOk();
+        $this->postJson('/api/auth/login', ['username' => 'alice@example.com', 'password' => 'correct-horse-battery'])->assertOk();
     }
 
     public function test_csrf_and_anonymous_writes_are_rejected(): void
@@ -128,7 +131,7 @@ class ApiContractTest extends TestCase
         $this->opportunity();
         $p = app(Profiles::class)->demo();
         $this->apiSession($a)->postJson('/api/profile', ['profile' => $p])->assertOk()->assertJsonPath('version', 1)->assertJsonPath('changed', []);
-        $p['employees'] = 42;
+        $p['headcount'] = 42;
         $p['customField'] = 'preserved';
         $this->postJson('/api/profile', ['profile' => $p])->assertOk()->assertJsonPath('version', 2);
         $this->getJson('/api/profile/history')->assertOk()->assertJsonCount(2, 'versions')->assertJsonPath('current.customField', 'preserved');
@@ -171,7 +174,7 @@ class ApiContractTest extends TestCase
         $this->postJson('/api/leads', $data + ['company' => 'Company'])->assertOk()->assertJsonPath('updated', true);
         $this->assertDatabaseCount('leads', 1);
         $this->assertDatabaseHas('leads', ['readiness_score' => 100, 'company' => 'Company']);
-        $this->postJson('/api/auth/register', ['username' => 'lead', 'password' => '1234', 'email' => 'lead@example.com'])->assertCreated();
+        $this->postJson('/api/auth/register', $this->signupPayload('lead@example.com'))->assertCreated();
         $this->assertNotNull(Lead::first()->user_id);
     }
 

@@ -27,6 +27,8 @@ export interface SubscriptionSummary {
 
 /** Mirrors `publicUser()` in `server/auth.js` — never includes a password hash. */
 export interface AuthUser {
+  emailVerified?: boolean;
+  metricsComplete?: boolean;
   id: string;
   username: string;
   email: string | null;
@@ -75,14 +77,21 @@ export interface LoginPayload {
 }
 
 export interface RegisterPayload {
-  username: string;
+  name: string;
   password: string;
-  company?: string;
-  email?: string;
+  password_confirmation: string;
+  email: string;
+  verification_receipt: string;
+  accept_terms: boolean;
+  accept_privacy: boolean;
+  marketing_opt_in: boolean;
+  metrics: import("@/features/profile/types/metrics.types").CompanyMetrics;
 }
 
 /** The official record NAV holds for a tax number (`POST /api/nav/taxpayer`). */
 export interface Taxpayer {
+  verificationReceipt?: string;
+  expiresAt?: string;
   taxNumber: string;
   companyName: string;
   /** The trading name; equals `companyName` when NAV has none. */
