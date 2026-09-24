@@ -17,11 +17,13 @@ describe("Hero", () => {
     expect(secondary.className).not.toContain("bg-gold");
   });
 
-  it("carries no stock photography — the score preview is the hero's visual", () => {
-    // Not screen.queryByRole("img"): the score ring legitimately uses role="img" for its
-    // accessible label — a real <img> element is the thing being ruled out here.
+  it("keeps the photo panel decorative — the score preview is the hero's real content", () => {
+    // The backdrop photo is `alt=""` (and `aria-hidden` on its wrapper): purely a visual, never
+    // competing with the score preview card, which carries the actual product content.
     const { container } = renderWithProviders(<Hero />);
-    expect(container.querySelector("img")).toBeNull();
+    const images = container.querySelectorAll("img");
+    expect(images.length).toBeGreaterThan(0);
+    for (const img of images) expect(img).toHaveAttribute("alt", "");
     expect(screen.getByText(/GINOP/)).toBeInTheDocument();
   });
 });

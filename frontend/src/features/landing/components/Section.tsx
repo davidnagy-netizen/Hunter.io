@@ -27,7 +27,12 @@ export interface SectionProps {
 export function Section({ id, kicker, title, subtitle, children, className = "", tone = "light" }: SectionProps) {
   const dark = tone === "dark";
   return (
-    <section id={id} className={["mx-auto max-w-5xl px-6", className].filter(Boolean).join(" ")}>
+    <section
+      id={id}
+      // scroll-mt only matters for a section a visitor can jump to directly (an `id` target) —
+      // it clears the sticky header so the jump doesn't land the title underneath it.
+      className={["mx-auto max-w-5xl px-6", id ? "scroll-mt-24 md:scroll-mt-28" : "", className].filter(Boolean).join(" ")}
+    >
       {kicker ? <Kicker tone={tone}>{kicker}</Kicker> : null}
       {title ? (
         <h2

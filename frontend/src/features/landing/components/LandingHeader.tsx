@@ -1,5 +1,6 @@
 import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
 import { ArrowIcon, LanguageToggle, Logo } from "@/shared/components";
+import { usePrefersReducedMotion } from "@/shared/hooks/usePrefersReducedMotion";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
@@ -22,6 +23,7 @@ export function LandingHeader() {
   const { t } = useTranslation("landing");
   const { profile } = useCompanyProfile();
   const [isSolid, setIsSolid] = useState(false);
+  const reducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     const onScroll = () => setIsSolid(window.scrollY > 20);
@@ -48,6 +50,14 @@ export function LandingHeader() {
           </Link>
           <a
             href="#how"
+            onClick={(e) => {
+              // Intercepted so this can be `smooth` on its own, scoped to this one jump, rather
+              // than a global `scroll-behavior: smooth` that would also apply to the signed-in
+              // app's own scroll-into-view calls (a validation-error jump, say) where an animated
+              // scroll would read as slower, not nicer.
+              e.preventDefault();
+              document.getElementById("how")?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+            }}
             className="text-white/70 tracking-[-0.011em] transition-colors hover:text-white"
           >
             {t("nav.how")}

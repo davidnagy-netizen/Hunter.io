@@ -3,6 +3,7 @@ import { homePathFor } from "@/features/authentication/lib/homePath";
 import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
 import { Navigate } from "react-router";
 import "../i18n";
+import comparisonBackdrop from "../assets/comparison-blueprints.jpg";
 import { ChapterSeam } from "./ChapterSeam";
 import { ComparisonSection } from "./ComparisonSection";
 import { Hero } from "./Hero";
@@ -11,6 +12,7 @@ import { LandingFooter } from "./LandingFooter";
 import { LandingHeader } from "./LandingHeader";
 import { PriceTeaser } from "./PriceTeaser";
 import { ProofStats } from "./ProofStats";
+import { ScrollProgressBar } from "./ScrollProgressBar";
 import { Sources } from "./Sources";
 import { Statement } from "./Statement";
 import { TrustStrip } from "./TrustStrip";
@@ -70,7 +72,8 @@ export function LandingPage() {
     return <Navigate to={homePathFor(user)} replace />;
 
   return (
-    <div className="min-h-screen bg-ink text-white">
+    <div className="landing-page min-h-screen bg-ink text-white">
+      <ScrollProgressBar />
       <LandingHeader />
 
       <div className="bg-gradient-to-br from-ink via-ink-2 to-ink-3">
@@ -81,7 +84,18 @@ export function LandingPage() {
 
       <ChapterSeam from={COLOR_INK_3} to={COLOR_PAPER} />
 
-      <main className="bg-paper text-text">
+      <main className="relative isolate overflow-hidden bg-paper text-text">
+        {/*
+         * The light chapter's own texture — literal blueprint documents, the same motif the
+         * dark chapters carry as a drawn grid, here as a photo instead. Most of this chapter is
+         * covered by the comparison table's own opaque panels (the gold/red tints, the white
+         * score cards), so this only ever shows through in the whitespace around them — strong
+         * enough there to actually read as a texture, not just in theory.
+         */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+          <img src={comparisonBackdrop} alt="" className="h-full w-full object-cover opacity-[0.16] grayscale" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,var(--color-paper)_0%,rgba(245,247,250,0.55)_18%,rgba(245,247,250,0.55)_82%,var(--color-paper)_100%)]" />
+        </div>
         <ComparisonSection />
         <Sources />
       </main>

@@ -5,7 +5,9 @@ import { TrustStrip } from "./TrustStrip";
 
 describe("TrustStrip", () => {
   it("names the official sources", () => {
+    // Two matches, not one: the marquee track holds two back-to-back copies of the content so
+    // the scroll loop is seamless (see TrustStrip's own comment on this).
     renderWithProviders(<TrustStrip />);
-    expect(screen.getByText(/palyazat\.gov\.hu/)).toBeInTheDocument();
+    expect(screen.getAllByText(/palyazat\.gov\.hu/).length).toBe(2);
   });
 });
