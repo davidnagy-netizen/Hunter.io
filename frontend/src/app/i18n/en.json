@@ -1,6 +1,7 @@
 {
   "shell": {
     "signOut": "Sign out",
+    "viewProfile": "View company profile",
     "signIn": "Sign in",
     "notSignedIn": "Not signed in",
     "free": "free",

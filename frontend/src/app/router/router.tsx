@@ -3,6 +3,7 @@ import { AssessmentPage } from "@/features/assessment/components/AssessmentPage"
 import { LandingPage } from "@/features/landing/components/LandingPage";
 import { AuthPage } from "@/features/authentication/components/AuthPage";
 import { OnboardingWizard } from "@/features/profile/components/OnboardingWizard";
+import { ProfilePage } from "@/features/profile/components/ProfilePage";
 import { DashboardPage } from "@/features/opportunities/components/DashboardPage";
 import { OpportunitiesPage } from "@/features/opportunities/components/OpportunitiesPage";
 import { OpportunityDetailPage } from "@/features/opportunities/components/OpportunityDetailPage";
@@ -67,6 +68,7 @@ export const router = createBrowserRouter([
       { path: "calendar", element: <CalendarPage /> },
       { path: "saved", element: <SavedPage /> },
       { path: "plus", element: <PlusPage /> },
+      { path: "profile", element: <ProfilePage /> },
     ],
   },
   {

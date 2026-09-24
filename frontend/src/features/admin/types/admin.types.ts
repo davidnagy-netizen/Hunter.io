@@ -1,4 +1,5 @@
 import type { AuthUser, Plan } from "@/features/authentication/types/auth.types";
+import type { CompanyProfile } from "@/features/profile/types/profile.types";
 
 /** One line of the activity log. `store.recordActivity` spreads whatever detail the action had, so only `at` and `type` are guaranteed. */
 export interface AdminActivityEntry {
@@ -100,6 +101,8 @@ export interface ProfileVersionEntry {
 /** Response of `GET /api/admin/history?userId=`. */
 export interface AdminUserHistory {
   user: AuthUser;
+  /** The profile's live state, not a version snapshot — `null` if this account never saved one. */
+  current: CompanyProfile | null;
   versions: ProfileVersionEntry[];
   subscriptions: SubscriptionLogEntry[];
   activity: AdminActivityEntry[];

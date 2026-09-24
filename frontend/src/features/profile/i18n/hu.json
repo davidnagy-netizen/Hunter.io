@@ -7,8 +7,14 @@
     "investment": { "title": "Tervezett beruházás", "subtitle": "A támogatás mértékét és a méret-illeszkedést ebből számoljuk." },
     "setup": { "title": "Hogyan pályáznál?", "subtitle": "Az európai felhívások nagy része konzorciumot kíván — ez dönti el, mi elérhető számodra." }
   },
+  "page": {
+    "title": "Cégprofil",
+    "subtitle": "Amit a Fundornak megadtál — ez alapján párosítunk és pontozunk minden felhívást.",
+    "edit": "Szerkesztés"
+  },
   "fields": {
     "company": "Cégnév",
+    "taxNumber": "Adószám",
     "verified": "NAV-ellenőrzött · {{taxNumber}}",
     "employees": "Alkalmazottak száma",
     "county": "Megye / megvalósítási helyszín",

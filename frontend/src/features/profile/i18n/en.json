@@ -7,8 +7,14 @@
     "investment": { "title": "Planned investment", "subtitle": "We calculate the funding amount and size fit from this." },
     "setup": { "title": "How would you apply?", "subtitle": "Most European calls require a consortium — this decides what's available to you." }
   },
+  "page": {
+    "title": "Company profile",
+    "subtitle": "What you told Fundor — used to match and score every call.",
+    "edit": "Edit"
+  },
   "fields": {
     "company": "Company name",
+    "taxNumber": "Tax number",
     "verified": "verified by NAV · {{taxNumber}}",
     "employees": "Number of employees",
     "county": "County / project location",

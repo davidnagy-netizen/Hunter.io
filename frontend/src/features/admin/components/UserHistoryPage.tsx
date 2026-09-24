@@ -4,6 +4,7 @@ import { BackIcon, PageHead, Panel, QueryStatus } from "@/shared/components";
 import { useFormat } from "@/shared/hooks/useFormat";
 import { useTranslatedApiError } from "@/shared/api/useTranslatedApiError";
 import { SubscriptionBadge } from "@/features/authentication/components/SubscriptionBadge";
+import { ProfileSummary } from "@/features/profile/components/ProfileSummary";
 import { useAdminUserHistoryQuery } from "../api/admin.queries";
 import { ActivityFeed } from "./ActivityFeed";
 import { ProfileChanges } from "./ProfileChanges";
@@ -38,6 +39,10 @@ export function UserHistoryPage() {
           <div className="-mt-4">
             <SubscriptionBadge subscription={data.user.subscription} />
           </div>
+
+          <Panel title={t("history.profile.title")}>
+            {data.current ? <ProfileSummary profile={data.current} /> : <p className="text-sm text-muted">{t("history.profile.empty")}</p>}
+          </Panel>
 
           <Panel title={t("history.subscriptions.title")}>
             {data.subscriptions.length ? (

@@ -1,6 +1,7 @@
 {
   "shell": {
     "signOut": "Kijelentkezés",
+    "viewProfile": "Cégprofil megtekintése",
     "signIn": "Belépés",
     "notSignedIn": "Nem vagy bejelentkezve",
     "free": "ingyenes",

@@ -1,4 +1,5 @@
 import { screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Route, Routes } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { renderWithProviders } from "@/test/renderWithProviders";
@@ -71,6 +72,25 @@ describe("AppShell", () => {
     expect(within(group).getByRole("link", { name: /ügyfélnézet|client view/i })).toHaveAttribute("href", "/app");
     expect(within(group).getByRole("link", { name: /^admin$/i })).toHaveAttribute("href", "/admin");
     expect(screen.getByText(/fiókok és előfizetések kezelése|managing accounts and subscriptions/i)).toBeInTheDocument();
+  });
+
+  it("goes to the company profile when the account block is clicked", async () => {
+    me("user");
+    const user = userEvent.setup();
+    renderWithProviders(
+      <Routes>
+        <Route element={<AppShell nav={NAV} workspace="app" />}>
+          <Route path="/admin" element={<p>page body</p>} />
+          <Route path="/app/profile" element={<p>profile page</p>} />
+        </Route>
+      </Routes>,
+      { route: "/admin" },
+    );
+    await screen.findByText("page body");
+
+    await user.click(await screen.findByText("someone"));
+
+    expect(await screen.findByText("profile page")).toBeInTheDocument();
   });
 
   it("does not show the switch to anyone else", async () => {

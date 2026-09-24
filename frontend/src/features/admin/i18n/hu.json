@@ -72,6 +72,10 @@
   },
   "history": {
     "back": "Vissza a felhasználókhoz",
+    "profile": {
+      "title": "Jelenlegi cégprofil",
+      "empty": "Ez a fiók még nem mentett cégprofilt."
+    },
     "subscriptions": {
       "title": "Előfizetési előzmények",
       "empty": "Még nem kapott hozzáférést.",

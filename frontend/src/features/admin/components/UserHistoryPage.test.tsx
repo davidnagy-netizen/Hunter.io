@@ -34,6 +34,18 @@ beforeEach(() => {
   vi.mocked(metaApi.get).mockResolvedValue(META);
   vi.mocked(adminApi.history).mockResolvedValue({
     user: makeUser({ id: "u1", username: "kata" }),
+    // Distinct from the version diff's own before/after values below (28→45, digitalization, 60M)
+    // so assertions on either the summary or the diff can each find a unique match.
+    current: {
+      company: "Alfa Gyártó Kft.",
+      employees: 12,
+      county: "Pest",
+      industryId: "manuf",
+      closed_business_years: 4,
+      goals: [],
+      investment_value: 15_000_000,
+      funding_pref: ["non_refundable"],
+    },
     subscriptions: [
       { at: "2026-09-12T10:00:00.000Z", action: "granted", by: "admin", plan: "monthly", days: 30, note: "wire transfer" },
       { at: "2026-09-11T10:00:00.000Z", action: "revoked", by: "admin" },
@@ -63,6 +75,19 @@ describe("UserHistoryPage", () => {
     expect(adminApi.history).toHaveBeenCalledWith("u1");
   });
 
+  it("shows the account's current profile, not just its version diffs", async () => {
+    renderPage();
+    expect(await screen.findByText("Alfa Gyártó Kft.")).toBeInTheDocument();
+    expect(screen.getByText("12")).toBeInTheDocument();
+    expect(screen.getByText(/15 M Ft|15M HUF/)).toBeInTheDocument();
+  });
+
+  it("says there's no saved profile for an account that never onboarded", async () => {
+    vi.mocked(adminApi.history).mockResolvedValue({ user: makeUser(), current: null, subscriptions: [], versions: [], activity: [] });
+    renderPage();
+    expect(await screen.findByText(/még nem mentett cégprofilt|hasn't saved a company profile/i)).toBeInTheDocument();
+  });
+
   it("logs what was granted and revoked, with who and why", async () => {
     renderPage();
     expect(await screen.findByText(/megadva|granted/i, { selector: "b" })).toBeInTheDocument();
@@ -88,7 +113,7 @@ describe("UserHistoryPage", () => {
   });
 
   it("says so for an account with no history yet", async () => {
-    vi.mocked(adminApi.history).mockResolvedValue({ user: makeUser(), subscriptions: [], versions: [], activity: [] });
+    vi.mocked(adminApi.history).mockResolvedValue({ user: makeUser(), current: null, subscriptions: [], versions: [], activity: [] });
     renderPage();
     expect(await screen.findByText(/még nem kapott hozzáférést|never had access/i)).toBeInTheDocument();
     expect(screen.getByText(/nincs mentett profil|no saved profile/i)).toBeInTheDocument();

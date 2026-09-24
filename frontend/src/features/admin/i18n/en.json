@@ -72,6 +72,10 @@
   },
   "history": {
     "back": "Back to users",
+    "profile": {
+      "title": "Current company profile",
+      "empty": "This account hasn't saved a company profile yet."
+    },
     "subscriptions": {
       "title": "Subscription history",
       "empty": "Never had access.",
