@@ -64,3 +64,109 @@ body {
   color: var(--color-text);
   font-family: var(--font-sans);
 }
+
+/*
+ * Landing-only font swap: the marketing page's own display/mono pairing.
+ * Space Grotesk + Space Mono is the same combination almost every
+ * Framer/AI-template hero ships with, so the signed-in app keeps them
+ * (--font-display/--font-mono above) while the landing page overrides both
+ * custom properties for its own subtree only — same scoping idea as
+ * --radius-control below.
+ */
+.landing-page {
+  --font-display: "Bricolage Grotesque", "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Space Mono", "SF Mono", ui-monospace, monospace;
+}
+
+/* The hero's photo panel: a slow, continuous drift so the image reads as
+ * alive rather than a static poster. Kept out of Tailwind's inline arbitrary
+ * values since @keyframes can't be declared there. */
+@keyframes kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.07);
+  }
+}
+
+/* The hero photo's scan line — a thin band sweeping top to bottom, on repeat: the visual for
+ * "a rule-based engine is reading this", not decoration for its own sake. Fades in/out at each
+ * end of its pass instead of cutting straight to the next loop. */
+@keyframes scanline {
+  0% {
+    top: -2%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* The hero photo's profile-field tags: one shared keyframe, three copies at staggered
+ * `animation-delay`s (0s, -1.5s, -3s — a third of the 4.5s cycle each) so they light up one
+ * after another as the scan line above sweeps past their own height, instead of all fading in
+ * and out in lockstep. */
+@keyframes tag-reveal {
+  0%,
+  88%,
+  100% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+  }
+  8%,
+  22% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  32% {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.96);
+  }
+}
+
+/* TrustStrip's marquee: the track holds two copies of the same content back to back, so
+ * translating exactly -50% loops seamlessly into the second copy. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/*
+ * HowItWorks' step numerals: a plain Tailwind color utility (e.g. `text-gold`) toggled by
+ * GSAP's `toggleClass` would fight `text-white/14` on specificity ties decided by generation
+ * order, not intent. A dedicated class with `.is-active` one level more specific settles it
+ * outright.
+ */
+.step-number {
+  color: rgba(255, 255, 255, 0.14);
+  transition: color 0.5s ease-out;
+}
+.step-number.is-active {
+  color: var(--color-gold);
+}
+
+/* The small icon beside each HowItWorks title — dims to match the resting numeral, lights up
+ * gold in lockstep with it (same `is-active` toggle, same `ScrollTrigger`). */
+.step-icon {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.35);
+  transition:
+    background-color 0.5s ease-out,
+    color 0.5s ease-out;
+}
+.step-icon.is-active {
+  background: rgba(217, 154, 43, 0.16);
+  color: var(--color-gold);
+}
