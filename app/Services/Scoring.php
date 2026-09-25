@@ -49,7 +49,7 @@ class Scoring
         // Reference: CR-02 Section 4.2 - Strict Scoring Separation
         // Non-repayable grants award free capital, whereas subsidised loans are debt obligations.
         // Debt instruments must evaluate interest subsidies/cost of capital saved rather than grant award formulas.
-        if (isset($o['instrument_type']) && in_array($o['instrument_type'], ['subsidised_loan', 'guarantee'], true)) {
+        if (($o['instrument_type'] ?? 'grant') !== 'grant') {
             throw new \InvalidArgumentException('Subsidised loans and debt instruments cannot be evaluated using grant award scoring algorithms (CR-02).');
         }
 

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exceptions\ApiError;
 use App\Models\Opportunity;
 use App\Services\Accounts;
-use App\Exceptions\ApiError;
 use App\Services\Catalog;
+use App\Services\CatalogSearch;
 use App\Services\Profiles;
 use App\Services\Scoring;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class CatalogController
         if ($meta['eurHuf'] === null) {
             unset($meta['eurHuf']);
         }
-        $programmes = Opportunity::distinct()->pluck('program')->mapWithKeys(fn ($v) => [$v => $v]);
+        $programmes = Opportunity::grants()->distinct()->pluck('program')->mapWithKeys(fn ($v) => [$v => $v]);
 
         return response()->json(['catalog' => Opportunity::exists() ? $meta + ['counts' => ['total' => Opportunity::count(), 'open' => Opportunity::open()->count(), 'forthcoming' => Opportunity::where('status', 'forthcoming')->count()]] : null,
             'reference' => $this->profiles->reference(), 'labels' => ['programmes' => (object) $programmes->all(), 'actions' => (object) []],
@@ -105,11 +106,12 @@ class CatalogController
         return response()->json(['success' => true, 'key' => $key, 'value' => $value, 'opportunity' => $this->accounts->entitlements($u)['explanations'] ? $full : $this->catalog->locked($full)]);
     }
 
-    public function search(Request $r, \App\Services\CatalogSearch $search)
+    public function search(Request $r, CatalogSearch $search)
     {
         $r->validate(['page' => 'sometimes|integer|min:1', 'pageSize' => 'sometimes|integer|min:1|max:100', 'q' => 'sometimes|nullable|string|max:500',
             'sort' => 'sometimes|nullable|in:-score,deadline,-budget', 'deadlineFrom' => 'sometimes|date_format:Y-m-d', 'deadlineTo' => 'sometimes|date_format:Y-m-d']);
         $state = $this->profiles->resolve($r);
+
         return response()->json($search->search($state, $r->all(), $r->query(), $r->user(), $r->isMethod('POST')));
     }
 }

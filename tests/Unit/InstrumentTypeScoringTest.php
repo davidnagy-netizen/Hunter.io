@@ -32,7 +32,8 @@ class InstrumentTypeScoringTest extends TestCase
         $this->assertFalse(InstrumentType::SUBSIDISED_LOAN->isGrant());
 
         $this->assertTrue(InstrumentType::GUARANTEE->isDebtInstrument());
-        $this->assertTrue(InstrumentType::COMBINED->isGrant());
+        $this->assertFalse(InstrumentType::COMBINED->isGrant());
+        $this->assertTrue(InstrumentType::COMBINED->isDebtInstrument());
     }
 
     /**

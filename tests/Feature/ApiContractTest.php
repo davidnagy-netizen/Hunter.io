@@ -220,7 +220,7 @@ class ApiContractTest extends TestCase
         $admin = $this->account('admin', 'admin');
         $this->apiSession($admin)->postJson('/api/refresh')->assertStatus(503)->assertJsonPath('code', 'REFRESH_UNAVAILABLE');
         config(['fundor.catalog_feed_url' => 'https://feed.example/catalog']);
-        Http::fake(['feed.example/*' => Http::sequence()->push(['opportunities' => []])->push(['opportunities' => [['id' => 'new', 'title' => 'New', 'program' => 'EU', 'deadline' => '2027-01-01', 'intensity' => .5, 'goals' => [], 'hard' => []]]])]);
+        Http::fake(['feed.example/*' => Http::sequence()->push(['opportunities' => []])->push(['opportunities' => [['id' => 'new', 'instrument_type' => 'grant', 'title' => 'New', 'program' => 'EU', 'deadline' => '2027-01-01', 'intensity' => .5, 'goals' => [], 'hard' => []]]])]);
         $this->postJson('/api/refresh')->assertStatus(502)->assertJsonPath('ok', false);
         $this->assertDatabaseHas('opportunities', ['code' => $o->code, 'status' => 'open']);
         $this->postJson('/api/refresh')->assertOk()->assertJsonPath('ok', true);

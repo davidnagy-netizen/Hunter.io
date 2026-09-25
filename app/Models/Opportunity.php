@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * Class Opportunity
@@ -66,6 +67,8 @@ class Opportunity extends Model
         'effective_from_date',
         'source_document_reference',
         'last_verified_date',
+        'manual_reviewed_by',
+        'loan_terms',
     ];
 
     /**
@@ -95,6 +98,26 @@ class Opportunity extends Model
         ];
     }
 
+    protected static function booted(): void
+    {
+        static::saving(function (Opportunity $opportunity) {
+            $opportunity->instrument_type ??= InstrumentType::GRANT;
+            if ($opportunity->instrument_type->isDebtInstrument()) {
+                Validator::make(array_replace($opportunity->getAttributes(), [
+                    'effective_from_date' => $opportunity->effective_from_date?->toDateString(),
+                    'last_verified_date' => $opportunity->last_verified_date?->toDateString(),
+                ]), [
+                    'effective_from_date' => 'required|date_format:Y-m-d',
+                    'source_document_reference' => 'required|string|max:255',
+                    'last_verified_date' => 'required|date_format:Y-m-d|before_or_equal:today',
+                    'manual_reviewed_by' => 'required|string|max:255',
+                    'loan_terms' => 'required|string',
+                    'curated' => 'required|accepted',
+                ])->validate();
+            }
+        });
+    }
+
     /**
      * Scope a query to only include open funding opportunities.
      *
@@ -116,7 +139,6 @@ class Opportunity extends Model
     {
         return $query->whereIn('instrument_type', [
             InstrumentType::GRANT->value,
-            InstrumentType::COMBINED->value,
         ]);
     }
 
@@ -131,31 +153,32 @@ class Opportunity extends Model
         return $query->whereIn('instrument_type', [
             InstrumentType::SUBSIDISED_LOAN->value,
             InstrumentType::GUARANTEE->value,
+            InstrumentType::COMBINED->value,
         ]);
     }
 
     /**
      * Check if this opportunity is a loan product.
      *
-     * @return bool True if this is a subsidised loan or guarantee.
+     * @return bool True if this instrument contains a debt obligation.
      */
     public function isLoan(): bool
     {
         return $this->instrument_type instanceof InstrumentType
             ? $this->instrument_type->isDebtInstrument()
-            : in_array($this->instrument_type, [InstrumentType::SUBSIDISED_LOAN->value, InstrumentType::GUARANTEE->value], true);
+            : in_array($this->instrument_type, [InstrumentType::SUBSIDISED_LOAN->value, InstrumentType::GUARANTEE->value, InstrumentType::COMBINED->value], true);
     }
 
     /**
      * Check if this opportunity is a non-repayable grant.
      *
-     * @return bool True if this is a grant or combined product.
+     * @return bool True only for a standalone grant.
      */
     public function isGrant(): bool
     {
         return $this->instrument_type instanceof InstrumentType
             ? $this->instrument_type->isGrant()
-            : in_array($this->instrument_type, [InstrumentType::GRANT->value, InstrumentType::COMBINED->value], true);
+            : $this->instrument_type === InstrumentType::GRANT->value;
     }
 
     /**

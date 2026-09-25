@@ -56,6 +56,7 @@ class SubscriberScoringTest extends TestCase
         $calls = json_decode(file_get_contents(__DIR__.'/../Fixtures/scoring/catalog.json'), true);
         foreach ($calls as &$call) {
             $call['status'] = 'open';
+            $call['instrument_type'] = 'grant';
         }
         config(['fundor.catalog_feed_url' => 'https://feed.example/catalog.json']);
         Http::fake(['feed.example/*' => Http::response(['opportunities' => $calls])]);

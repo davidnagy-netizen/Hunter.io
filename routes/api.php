@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\CatalogController;
 use App\Http\Controllers\Api\CrmController;
 use App\Http\Controllers\Api\HealthController;
 use App\Http\Controllers\Api\LeadController;
+use App\Http\Controllers\Api\LoanController;
 use App\Http\Controllers\Api\NavTaxpayerController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Middleware\FundorApi;
@@ -46,6 +47,7 @@ Route::middleware(FundorApi::class)->group(function () {
     Route::get('/profile/history', [ProfileController::class, 'history']);
     Route::post('/profile/restore', [ProfileController::class, 'restore']);
     Route::get('/meta', [CatalogController::class, 'meta']);
+    Route::get('/loans', LoanController::class);
     Route::match(['get', 'post'], '/catalog', [CatalogController::class, 'index']);
     Route::match(['get', 'post'], '/search', [CatalogController::class, 'search']);
     // The existing listing URL uses the same paywall as the catalog.

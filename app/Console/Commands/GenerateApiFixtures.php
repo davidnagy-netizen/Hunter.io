@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Services\CatalogRefresh;
 use App\Services\Profiles;
 use Illuminate\Console\Command;
+use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -29,6 +30,7 @@ class GenerateApiFixtures extends Command
     {
         if (app()->isProduction()) {
             $this->error('Fixture generation is unavailable in production.');
+
             return self::FAILURE;
         }
         $settings = [
@@ -57,6 +59,7 @@ class GenerateApiFixtures extends Command
             $out = $this->option('output') ?: resource_path('js/test/fixtures/api');
             File::ensureDirectoryExists($out);
             $this->record($out);
+
             return self::SUCCESS;
         } finally {
             DB::purge('fundor_fixture_generation');
@@ -71,8 +74,8 @@ class GenerateApiFixtures extends Command
     private function record(string $out): void
     {
         $root = base_path();
-        $http = app()->make(\Illuminate\Contracts\Http\Kernel::class);
-        
+        $http = app()->make(Kernel::class);
+
         /** Calls the API like a browser on the same origin would. */
         $call = function (string $method, string $uri, ?array $body = null, ?string $token = null) use ($http): array {
             $request = Request::create('http://localhost/api'.$uri, $method, [], $token ? ['fundor_session' => $token] : [], [], [
@@ -83,10 +86,10 @@ class GenerateApiFixtures extends Command
             if ($response->getStatusCode() >= 400) {
                 throw new \RuntimeException("FAILED $method $uri -> {$response->getStatusCode()} {$response->getContent()}");
             }
-        
+
             return json_decode($response->getContent(), true, flags: JSON_THROW_ON_ERROR);
         };
-        
+
         $account = function (string $name, string $role = 'user', bool $subscribed = false): string {
             $u = User::create(['name' => $name, 'username' => $name, 'email' => $name.'@example.test', 'password' => bin2hex(random_bytes(16)), 'role' => $role, 'company' => 'Alfa Gyártó Kft.']);
             if ($subscribed) {
@@ -94,32 +97,33 @@ class GenerateApiFixtures extends Command
             }
             $token = bin2hex(random_bytes(32));
             DB::table('api_sessions')->insert(['token_hash' => hash('sha256', $token), 'user_id' => $u->id, 'expires_at' => now()->addDays(7)]);
-        
+
             return $token;
         };
-        
+
         $save = function (string $name, array $data) use ($out): void {
             file_put_contents("$out/$name.json", json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)."\n");
             $this->line("  $name.json");
         };
-        
+
         // 1. Load the calls (all 48, then keep 12 that cover the cases the screens branch on).
         $calls = json_decode(file_get_contents($root.'/tests/Fixtures/scoring/catalog.json'), true);
         foreach ($calls as &$c) {
             $c['status'] = 'open';
+            $c['instrument_type'] = 'grant';
         }
         unset($c);
         config(['fundor.catalog_feed_url' => 'https://feed.example/catalog.json']);
         Http::fake(['feed.example/*' => Http::response(['opportunities' => $calls]),
             '*queryTaxpayer' => Http::response(file_get_contents(base_path('tests/Fixtures/nav/taxpayer.xml')), 200, ['Content-Type' => 'application/xml'])]);
         app(CatalogRefresh::class)->run();
-        
+
         $demo = app(Profiles::class)->demo();
         $sub = $account('subscriber', 'user', true);
         $free = $account('free');
         $call('POST', '/profile', ['profile' => $demo, 'source' => 'fixture'], $sub);
         $call('POST', '/profile', ['profile' => $demo, 'source' => 'fixture'], $free);
-        
+
         $rows = collect($call('GET', '/catalog?lang=en', null, $sub)['opportunities'])->keyBy('id');
         $chosen = [];
         $take = function (callable $filter, int $n) use (&$chosen, $rows): void {
@@ -142,7 +146,7 @@ class GenerateApiFixtures extends Command
         $take(fn ($r) => ! $r['blocked'], 12);
         $chosen = array_slice($chosen, 0, 12);
         Opportunity::whereNotIn('code', $chosen)->delete();
-        
+
         // 2. Record.
         $this->info("Writing fixtures to $out");
         $catalogHu = $call('GET', '/catalog?lang=hu', null, $sub);
@@ -172,6 +176,6 @@ class GenerateApiFixtures extends Command
         $save('me.subscriber', $call('GET', '/auth/me', null, $sub));
         $save('_meta', ['generatedBy' => 'php artisan fundor:generate-api-fixtures', 'referenceDate' => '2026-09-21', 'company' => $demo['company'],
             'callIds' => $chosen, 'ids' => $ids, 'note' => 'Recorded from the running API on an in-memory database. Regenerate instead of editing.']);
-        
+
     }
 }

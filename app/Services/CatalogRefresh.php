@@ -3,13 +3,13 @@
 namespace App\Services;
 
 use App\Exceptions\ApiError;
-
+use App\Integrations\Catalog\CatalogFeedClient;
 use App\Models\Opportunity;
 use Illuminate\Support\Facades\DB;
 
 class CatalogRefresh
 {
-    public function __construct(private \App\Integrations\Catalog\CatalogFeedClient $feed) {}
+    public function __construct(private CatalogFeedClient $feed) {}
 
     public function status(): array
     {
@@ -32,17 +32,17 @@ class CatalogRefresh
                 foreach ($payload['opportunities'] as $o) {
                     $model = Opportunity::firstOrNew(['code' => $o['id']]);
                     // Curated records are maintained locally and cannot be overwritten by a feed.
-                    if ($model->exists && $model->curated) {
+                    if ($model->exists && ($model->curated || $model->isLoan())) {
                         continue;
                     }
-                    $model->fill(['title' => $o['title'], 'program' => $o['program'], 'deadline' => $o['deadline'], 'intensity' => $o['intensity'],
+                    $model->fill(['instrument_type' => 'grant', 'title' => $o['title'], 'program' => $o['program'], 'deadline' => $o['deadline'], 'intensity' => $o['intensity'],
                         'goals' => $o['goals'], 'hard_rules' => $o['hard'], 'soft_rules' => $o['soft'] ?? [], 'funding_min' => $o['fundingMin'] ?? 0,
                         'funding_max' => $o['fundingMax'] ?? 0, 'source_reference' => $o['sourceRef'] ?? $o['id'], 'source_url' => $o['sourceUrl'] ?? null,
                         'docs' => $o['docs'] ?? [], 'high_admin' => $o['highAdmin'] ?? false, 'status' => $o['status'] ?? 'open']);
                     $model->setAttribute('api_extra', json_encode($o, JSON_THROW_ON_ERROR));
                     $model->save();
                 }
-                Opportunity::where('curated', false)->whereNotIn('code', array_column($payload['opportunities'], 'id'))->update(['status' => 'closed']);
+                Opportunity::grants()->where('curated', false)->whereNotIn('code', array_column($payload['opportunities'], 'id'))->update(['status' => 'closed']);
             });
             $status['runs'] = ($status['runs'] ?? 0) + 1;
             $status['lastSuccessAt'] = now()->toISOString();
