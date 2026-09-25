@@ -1,5 +1,5 @@
 import type { Industry, Region } from "@/shared/types/reference.types";
-import type { CompanyProfile } from "@/features/profile/types/profile.types";
+import type { CompanyProfile } from "@/shared/types/profile.types";
 
 export interface ChoiceOption {
   /** i18n key under `assessment:options.<question>.<key>`. */

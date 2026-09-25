@@ -1,10 +1,10 @@
-import { useLogoutMutation } from "@/features/authentication/api/auth.queries";
+import { useLogoutMutation } from "@/shared/api/auth.queries";
 import {
   useCurrentUser,
   useIsAdmin,
   useIsSubscriber,
-} from "@/features/authentication/hooks/useAuth";
-import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
+} from "@/shared/hooks/useAuth";
+import { useCompanyProfile } from "@/shared/hooks/useCompanyProfile";
 import { ExitIcon, LanguageToggle, Logo } from "@/shared/components";
 import type { NavItem } from "@/shared/types/navigation.types";
 import { useTranslation } from "react-i18next";

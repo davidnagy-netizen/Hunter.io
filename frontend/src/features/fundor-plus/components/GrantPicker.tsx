@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Badge, Panel } from "@/shared/components";
-import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
+import type { ScoredOpportunity } from "@/shared/types/scoring.types";
 import "../i18n";
 
 /** The calls that fit this company, best first. Pick one to work on. */

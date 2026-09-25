@@ -1,9 +1,9 @@
 import { PageHead, Panel } from "@/shared/components";
 import { useTranslation } from "react-i18next";
-import { useCompanyProfile } from "../hooks/useCompanyProfile";
+import { useCompanyProfile } from "@/shared/hooks/useCompanyProfile";
 import "../i18n";
 import { ProfileHistoryPanel } from "./ProfileHistoryPanel";
-import { ProfileSummary } from "./ProfileSummary";
+import { ProfileSummary } from "@/shared/components/ProfileSummary";
 
 /**
  * The company's own view of what it told Fundor — every field the onboarding

@@ -2,14 +2,14 @@ import { screen } from "@testing-library/react";
 import { Route, Routes } from "react-router";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { renderWithProviders } from "@/test/renderWithProviders";
-import { authApi } from "@/features/authentication/api/auth.api";
-import { useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
-import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
-import { useLocalProfileStore } from "@/features/profile/store/localProfileStore";
+import { authApi } from "@/shared/api/auth.api";
+import { useIsAuthenticated } from "@/shared/hooks/useAuth";
+import { DEMO_PROFILE } from "@/shared/data/demoProfile";
+import { useLocalProfileStore } from "@/shared/store/localProfileStore";
 import { RequireProfile } from "./RequireProfile";
 
-vi.mock("@/features/authentication/api/auth.api", () => ({ authApi: { me: vi.fn(), login: vi.fn(), register: vi.fn(), logout: vi.fn() } }));
-vi.mock("@/features/authentication/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn() }));
+vi.mock("@/shared/api/auth.api", () => ({ authApi: { me: vi.fn(), login: vi.fn(), register: vi.fn(), logout: vi.fn() } }));
+vi.mock("@/shared/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn() }));
 
 afterEach(() => useLocalProfileStore.getState().clear());
 

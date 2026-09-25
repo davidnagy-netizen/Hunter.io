@@ -1,5 +1,5 @@
-import type { CompanyProfile } from "@/features/profile/types/profile.types";
-import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
+import type { CompanyProfile } from "@/shared/types/profile.types";
+import type { ScoredOpportunity } from "@/shared/types/scoring.types";
 
 /** The real numbers a draft is built from — nothing here is invented; a missing value stays missing. */
 export interface DraftFigures {

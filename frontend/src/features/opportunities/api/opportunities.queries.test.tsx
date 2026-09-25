@@ -3,19 +3,19 @@ import { act, renderHook, waitFor } from "@testing-library/react";
 import type { ReactNode } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createTestQueryClient } from "@/test/renderWithProviders";
-import { authApi } from "@/features/authentication/api/auth.api";
-import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
-import { useLocalProfileStore } from "@/features/profile/store/localProfileStore";
-import { profileApi } from "@/features/profile/api/profile.api";
+import { authApi } from "@/shared/api/auth.api";
+import { DEMO_PROFILE } from "@/shared/data/demoProfile";
+import { useLocalProfileStore } from "@/shared/store/localProfileStore";
+import { profileApi } from "@/shared/api/profile.api";
 import { useUiStore } from "@/shared/store/uiStore";
-import { useSaveProfileMutation } from "@/features/profile/api/profile.queries";
+import { useSaveProfileMutation } from "@/shared/api/profile.queries";
 import { opportunitiesApi } from "./opportunities.api";
 import { useCatalog, useSearchQuery } from "./opportunities.queries";
 import { EMPTY_SEARCH } from "../domain/searchState";
 
-vi.mock("@/features/authentication/api/auth.api", () => ({ authApi: { me: vi.fn(), login: vi.fn(), register: vi.fn(), logout: vi.fn() } }));
-vi.mock("@/features/profile/api/profile.api", () => ({ profileApi: { get: vi.fn(), save: vi.fn(), loadDemo: vi.fn(), history: vi.fn(), restore: vi.fn() } }));
-vi.mock("@/features/scoring/api/answers.api", () => ({ answersApi: { save: vi.fn() } }));
+vi.mock("@/shared/api/auth.api", () => ({ authApi: { me: vi.fn(), login: vi.fn(), register: vi.fn(), logout: vi.fn() } }));
+vi.mock("@/shared/api/profile.api", () => ({ profileApi: { get: vi.fn(), save: vi.fn(), loadDemo: vi.fn(), history: vi.fn(), restore: vi.fn() } }));
+vi.mock("@/shared/api/answers.api", () => ({ answersApi: { save: vi.fn() } }));
 vi.mock("./opportunities.api", () => ({
   opportunitiesApi: { catalog: vi.fn(), catalogFor: vi.fn(), search: vi.fn(), searchFor: vi.fn(), detail: vi.fn(), toggleSaved: vi.fn() },
 }));

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Button, TextField } from "@/shared/components";
 import { useTranslatedApiError } from "@/shared/api/useTranslatedApiError";
-import type { CompanyProfile } from "@/features/profile/types/profile.types";
+import type { CompanyProfile } from "@/shared/types/profile.types";
 import { useSubmitLeadMutation } from "../api/leads.queries";
 import type { AssessmentAnswers } from "../domain/questions";
 import { leadSchema, type LeadFormValues } from "../schemas/lead.schema";

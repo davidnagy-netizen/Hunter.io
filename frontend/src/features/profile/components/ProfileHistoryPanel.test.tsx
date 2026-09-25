@@ -2,15 +2,15 @@ import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { renderWithProviders } from "@/test/renderWithProviders";
-import { useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
-import { profileApi } from "../api/profile.api";
+import { useIsAuthenticated } from "@/shared/hooks/useAuth";
+import { profileApi } from "@/shared/api/profile.api";
 import { ProfileHistoryPanel } from "./ProfileHistoryPanel";
 
-vi.mock("@/features/authentication/hooks/useAuth", () => ({
+vi.mock("@/shared/hooks/useAuth", () => ({
   useIsAuthenticated: vi.fn(),
 }));
 
-vi.mock("../api/profile.api", () => ({
+vi.mock("@/shared/api/profile.api", () => ({
   profileApi: {
     get: vi.fn(),
     save: vi.fn(),

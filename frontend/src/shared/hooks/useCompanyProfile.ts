@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
+import { useIsAuthenticated } from "@/shared/hooks/useAuth";
 import { useServerProfileQuery, useSaveProfileMutation, useLoadDemoProfileMutation } from "../api/profile.queries";
 import { useLocalProfileStore } from "../store/localProfileStore";
 import { DEMO_PROFILE } from "../data/demoProfile";

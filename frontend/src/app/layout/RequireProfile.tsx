@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { Navigate } from "react-router";
-import { useMeQuery } from "@/features/authentication/api/auth.queries";
-import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
+import { useMeQuery } from "@/shared/api/auth.queries";
+import { useCompanyProfile } from "@/shared/hooks/useCompanyProfile";
 
 /**
  * The app screens are meaningless without a company profile (everything is

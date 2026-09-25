@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { useFormat } from "@/shared/hooks/useFormat";
-import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
+import type { ScoredOpportunity } from "@/shared/types/scoring.types";
 import { deadlineTone, isUrgent } from "../domain/calendar";
 import "../i18n";
 

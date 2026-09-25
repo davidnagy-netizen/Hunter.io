@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Button, CircularProgress, LockIcon } from "@/shared/components";
 import { TeaserCard } from "@/features/opportunities/components/TeaserCard";
-import type { CompanyProfile } from "@/features/profile/types/profile.types";
+import type { CompanyProfile } from "@/shared/types/profile.types";
 import { readinessBand, readinessScore } from "../domain/readiness";
 import type { AssessmentAnswers } from "../domain/questions";
 import type { AssessmentPreview } from "../hooks/useAssessmentPreview";

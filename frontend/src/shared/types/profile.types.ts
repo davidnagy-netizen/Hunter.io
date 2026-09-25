@@ -1,6 +1,6 @@
 /** Mirrors the shape `src/engine/profile.js#normalizeProfile` accepts and fills in. */
 export interface CompanyProfile {
-  legal_form?: import("./metrics.types").CompanyMetrics["legal_form"];
+  legal_form?: import("@/features/authentication/types/metrics.types").CompanyMetrics["legal_form"];
   headcount?: number;
   revenue_band?: number;
   exact_revenue?: string | null;

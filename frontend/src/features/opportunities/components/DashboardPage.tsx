@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
+import { useCompanyProfile } from "@/shared/hooks/useCompanyProfile";
 import { RELEVANT_SCORE } from "../domain/shortlist";
 import { useOpportunitiesData } from "../hooks/useOpportunitiesData";
 import { CatalogStatus } from "./CatalogStatus";

@@ -3,10 +3,10 @@ import { Link } from "react-router";
 import { Badge, Button, Panel } from "@/shared/components";
 import { useFormat } from "@/shared/hooks/useFormat";
 import { useTranslatedApiError } from "@/shared/api/useTranslatedApiError";
-import { SubscriptionBadge } from "@/features/authentication/components/SubscriptionBadge";
-import type { Plan } from "@/features/authentication/types/auth.types";
+import { SubscriptionBadge } from "@/shared/components/SubscriptionBadge";
+import type { Plan } from "@/shared/types/auth.types";
 import { usePatchUserMutation } from "../api/admin.queries";
-import type { AdminUser } from "../types/admin.types";
+import type { AdminUser } from "@/shared/types/admin.types";
 import { GrantForm } from "./GrantForm";
 import "../i18n";
 

@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Button, TextField } from "@/shared/components";
 import { useTranslatedApiError } from "@/shared/api/useTranslatedApiError";
-import { useLoginMutation } from "../api/auth.queries";
+import { useLoginMutation } from "@/shared/api/auth.queries";
 import { loginSchema, type LoginFormValues } from "../schemas/auth.schemas";
-import type { AuthUser } from "../types/auth.types";
+import type { AuthUser } from "@/shared/types/auth.types";
 import "../i18n";
 
 export interface LoginFormProps {

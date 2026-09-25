@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Panel } from "@/shared/components";
 import { useFormat } from "@/shared/hooks/useFormat";
 import { GrantForm } from "@/features/admin/components/GrantForm";
-import type { Plan } from "@/features/authentication/types/auth.types";
+import type { Plan } from "@/shared/types/auth.types";
 import { useInvalidateCrm } from "../api/crm.queries";
 import type { CrmContact } from "../types/crm.types";
 import "../i18n";

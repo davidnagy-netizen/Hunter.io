@@ -1,12 +1,12 @@
 import { screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { renderWithProviders } from "@/test/renderWithProviders";
-import { useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
-import { useLocalProfileStore } from "@/features/profile/store/localProfileStore";
-import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
+import { useIsAuthenticated } from "@/shared/hooks/useAuth";
+import { useLocalProfileStore } from "@/shared/store/localProfileStore";
+import { DEMO_PROFILE } from "@/shared/data/demoProfile";
 import { LandingHeader } from "./LandingHeader";
 
-vi.mock("@/features/authentication/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn() }));
+vi.mock("@/shared/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn() }));
 
 describe("LandingHeader", () => {
   it("offers sign in and the free-assessment link for a visitor with no profile yet", () => {

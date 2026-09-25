@@ -1,4 +1,4 @@
-import { authKeys } from "@/features/authentication/api/auth.queries";
+import { authKeys } from "@/shared/api/auth.queries";
 import { opportunitiesKeys } from "@/shared/api/opportunitiesKeys";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { CompanyProfile } from "../types/profile.types";

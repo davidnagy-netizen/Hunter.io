@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
+import type { ScoredOpportunity } from "@/shared/types/scoring.types";
 import type { CardModel } from "../domain/cardModel";
 import { useRuleValueFormatter } from "../hooks/useRuleValueFormatter";
 import { OpportunityCardView } from "./OpportunityCardView";

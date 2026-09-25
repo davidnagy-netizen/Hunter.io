@@ -85,7 +85,7 @@ export interface RegisterPayload {
   accept_terms: boolean;
   accept_privacy: boolean;
   marketing_opt_in: boolean;
-  metrics: import("@/features/profile/types/metrics.types").CompanyMetrics;
+  metrics: import("@/features/authentication/types/metrics.types").CompanyMetrics;
 }
 
 /** The official record NAV holds for a tax number (`POST /api/nav/taxpayer`). */

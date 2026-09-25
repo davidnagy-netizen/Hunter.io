@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Navigate } from "react-router";
-import { useMeQuery } from "@/features/authentication/api/auth.queries";
+import { useMeQuery } from "@/shared/api/auth.queries";
 
 /**
  * The admin console is for administrators. Waits for the session to resolve

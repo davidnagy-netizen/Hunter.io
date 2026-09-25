@@ -1,5 +1,5 @@
 import { httpClient } from "@/shared/api/httpClient";
-import type { CompanyProfile } from "@/features/profile/types/profile.types";
+import type { CompanyProfile } from "@/shared/types/profile.types";
 import type { AssessmentAnswers } from "../domain/questions";
 
 export interface LeadPayload {

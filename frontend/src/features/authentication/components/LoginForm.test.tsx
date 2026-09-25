@@ -2,11 +2,11 @@ import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { renderWithProviders } from "@/test/renderWithProviders";
-import { authApi } from "../api/auth.api";
+import { authApi } from "@/shared/api/auth.api";
 import { LoginForm } from "./LoginForm";
-import type { AuthUser } from "../types/auth.types";
+import type { AuthUser } from "@/shared/types/auth.types";
 
-vi.mock("../api/auth.api", () => ({
+vi.mock("@/shared/api/auth.api", () => ({
   authApi: {
     login: vi.fn(),
     register: vi.fn(),

@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Badge } from "@/shared/components";
 import type { SubscriptionSummary } from "../types/auth.types";
-import "../i18n";
+import "@/features/authentication/i18n";
 
 /** "Trial · 3 days" / "Active · 28 days" / "No subscription" — the account's access level at a glance. */
 export function SubscriptionBadge({ subscription }: { subscription: Pick<SubscriptionSummary, "status" | "active" | "daysLeft"> }) {

@@ -2,11 +2,11 @@ import { screen } from "@testing-library/react";
 import { Route, Routes } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { renderWithProviders } from "@/test/renderWithProviders";
-import { authApi } from "@/features/authentication/api/auth.api";
-import type { MeResponse } from "@/features/authentication/types/auth.types";
+import { authApi } from "@/shared/api/auth.api";
+import type { MeResponse } from "@/shared/types/auth.types";
 import { RequireAdmin } from "./RequireAdmin";
 
-vi.mock("@/features/authentication/api/auth.api", () => ({ authApi: { me: vi.fn(), login: vi.fn(), register: vi.fn(), logout: vi.fn() } }));
+vi.mock("@/shared/api/auth.api", () => ({ authApi: { me: vi.fn(), login: vi.fn(), register: vi.fn(), logout: vi.fn() } }));
 
 const me = (user: { role: "admin" | "user" } | null) =>
   vi.mocked(authApi.me).mockResolvedValue({ user, entitlements: { tier: "anonymous" }, plans: [], adminSeed: {} } as unknown as MeResponse);

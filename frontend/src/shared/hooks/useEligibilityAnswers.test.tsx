@@ -4,17 +4,17 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import type { ReactNode } from "react";
 import { createTestQueryClient } from "@/test/renderWithProviders";
 import { detailOf } from "@/test/apiFixtures";
-import { useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
-import { profileKeys } from "@/features/profile/api/profile.queries";
-import { profileApi } from "@/features/profile/api/profile.api";
-import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
-import type { GetProfileResponse } from "@/features/profile/types/profile.types";
+import { useIsAuthenticated } from "@/shared/hooks/useAuth";
+import { profileKeys } from "@/shared/api/profile.queries";
+import { profileApi } from "@/shared/api/profile.api";
+import { DEMO_PROFILE } from "@/shared/data/demoProfile";
+import type { GetProfileResponse } from "@/shared/types/profile.types";
 import { opportunitiesKeys } from "@/shared/api/opportunitiesKeys";
 import { answersApi } from "../api/answers.api";
 import { useEligibilityAnswers } from "./useEligibilityAnswers";
 
-vi.mock("@/features/authentication/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn() }));
-vi.mock("@/features/profile/api/profile.api", () => ({
+vi.mock("@/shared/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn() }));
+vi.mock("@/shared/api/profile.api", () => ({
   profileApi: { get: vi.fn(), save: vi.fn(), loadDemo: vi.fn(), history: vi.fn(), restore: vi.fn() },
 }));
 vi.mock("../api/answers.api", () => ({ answersApi: { save: vi.fn() } }));

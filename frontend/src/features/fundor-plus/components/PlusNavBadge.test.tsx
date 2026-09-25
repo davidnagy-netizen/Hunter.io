@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { useIsSubscriber } from "@/features/authentication/hooks/useAuth";
+import { useIsSubscriber } from "@/shared/hooks/useAuth";
 import { PlusNavBadge } from "./PlusNavBadge";
 
-vi.mock("@/features/authentication/hooks/useAuth", () => ({ useIsSubscriber: vi.fn() }));
+vi.mock("@/shared/hooks/useAuth", () => ({ useIsSubscriber: vi.fn() }));
 
 beforeEach(() => vi.mocked(useIsSubscriber).mockReturnValue(false));
 

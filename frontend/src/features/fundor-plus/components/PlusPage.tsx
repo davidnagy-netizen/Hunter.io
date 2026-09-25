@@ -1,4 +1,4 @@
-import { useIsSubscriber } from "@/features/authentication/hooks/useAuth";
+import { useIsSubscriber } from "@/shared/hooks/useAuth";
 import { PlusLockScreen } from "./PlusLockScreen";
 import { PlusWorkspace } from "./PlusWorkspace";
 

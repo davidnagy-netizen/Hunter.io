@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { LockIcon } from "@/shared/components";
-import { useIsSubscriber } from "@/features/authentication/hooks/useAuth";
+import { useIsSubscriber } from "@/shared/hooks/useAuth";
 import "../i18n";
 
 /** "PLUS" for someone who has access, a lock for someone who doesn't — read from the real entitlements. */

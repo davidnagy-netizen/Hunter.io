@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { useFormat } from "@/shared/hooks/useFormat";
 import { useGoalLabel } from "@/shared/hooks/useGoalLabel";
-import { describeValue } from "../domain/profileChanges";
+import { describeValue } from "../lib/profileChanges";
 import type { ProfileVersionChange } from "../types/admin.types";
-import "../i18n";
+import "@/features/admin/i18n";
 
 /** "Employees: 28 → 45" lines for one profile version. Goal ids are shown by name. */
 export function ProfileChanges({ changes }: { changes: ProfileVersionChange[] }) {

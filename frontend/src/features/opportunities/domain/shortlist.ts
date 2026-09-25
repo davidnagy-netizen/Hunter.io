@@ -1,4 +1,4 @@
-import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
+import type { ScoredOpportunity } from "@/shared/types/scoring.types";
 
 /**
  * Orders the server's scored catalog for display: qualifying calls by score

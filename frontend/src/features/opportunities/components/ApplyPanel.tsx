@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { ExternalIcon, Panel } from "@/shared/components";
 import { useFormat } from "@/shared/hooks/useFormat";
-import type { Opportunity } from "@/features/scoring/types/scoring.types";
+import type { Opportunity } from "@/shared/types/scoring.types";
 import { applyLinks, isCuratedReference } from "../domain/applyLinks";
 import "../i18n";
 

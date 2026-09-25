@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { ChipButton } from "@/shared/components";
 import { useEligibilityAnswers } from "../hooks/useEligibilityAnswers";
 import type { AnswerMap, EligibilityQuestionDef, QuizOption } from "../types/scoring.types";
-import "../i18n";
+import "@/shared/i18n/scoring";
 
 function optionLabel(option: QuizOption, english: boolean) {
   return (english ? option.t_en : option.t_hu) ?? "";

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Badge, Button, Panel } from "@/shared/components";
-import type { CompanyProfile } from "@/features/profile/types/profile.types";
-import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
+import type { CompanyProfile } from "@/shared/types/profile.types";
+import type { ScoredOpportunity } from "@/shared/types/scoring.types";
 import { draftToText } from "../domain/draft";
 import { useDraftChapters } from "../hooks/useDraftChapters";
 import "../i18n";

@@ -1,4 +1,4 @@
-import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
+import type { ScoredOpportunity } from "@/shared/types/scoring.types";
 import { URGENT_DAYS } from "./shortlist";
 
 export interface CalendarMonth {

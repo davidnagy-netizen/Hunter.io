@@ -3,7 +3,7 @@ import { useMetaQuery } from "@/shared/api/meta.queries";
 import { useFormat } from "@/shared/hooks/useFormat";
 import { useGoalLabel } from "@/shared/hooks/useGoalLabel";
 import type { CompanyProfile } from "../types/profile.types";
-import "../i18n";
+import "@/features/profile/i18n";
 
 const CLOSED_YEARS_KEY: Record<number, string> = { 0: "none", 1: "one" };
 

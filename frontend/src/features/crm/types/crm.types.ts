@@ -1,6 +1,6 @@
-import type { CompanyProfile } from "@/features/profile/types/profile.types";
-import type { Plan } from "@/features/authentication/types/auth.types";
-import type { ProfileVersionChange, ProfileVersionEntry, SubscriptionLogEntry } from "@/features/admin/types/admin.types";
+import type { CompanyProfile } from "@/shared/types/profile.types";
+import type { Plan } from "@/shared/types/auth.types";
+import type { ProfileVersionChange, ProfileVersionEntry, SubscriptionLogEntry } from "@/shared/types/admin.types";
 
 /** Mirrors `server/crm.js`. */
 export type Lifecycle = "lead" | "registered" | "trial" | "subscriber" | "expired";

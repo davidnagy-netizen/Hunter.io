@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { profileKeys } from "@/features/profile/api/profile.queries";
-import type { GetProfileResponse } from "@/features/profile/types/profile.types";
+import { profileKeys } from "@/shared/api/profile.queries";
+import type { GetProfileResponse } from "@/shared/types/profile.types";
 import { opportunitiesApi } from "./opportunities.api";
 
 /** Toggles a saved call on the server, flipping it in the cached profile response first so the UI responds at once. */

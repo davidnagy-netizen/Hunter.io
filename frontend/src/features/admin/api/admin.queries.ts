@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { metaKeys } from "@/shared/api/meta.queries";
 import { opportunitiesKeys } from "@/features/opportunities/api/opportunities.queries";
 import { adminApi } from "./admin.api";
-import type { GrantPayload, UserPatchPayload } from "../types/admin.types";
+import type { GrantPayload, UserPatchPayload } from "@/shared/types/admin.types";
 
 export const adminKeys = {
   all: ["admin"] as const,

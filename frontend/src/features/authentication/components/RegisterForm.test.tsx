@@ -3,13 +3,13 @@ import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { renderWithProviders } from "@/test/renderWithProviders";
 import { httpClient } from "@/shared/api/httpClient";
-import { authApi } from "../api/auth.api";
-import { taxpayerApi } from "../api/taxpayer.api";
-import type { AuthUser, Taxpayer } from "../types/auth.types";
+import { authApi } from "@/shared/api/auth.api";
+import { taxpayerApi } from "@/shared/api/taxpayer.api";
+import type { AuthUser, Taxpayer } from "@/shared/types/auth.types";
 import { RegisterForm } from "./RegisterForm";
 
-vi.mock("../api/auth.api", () => ({ authApi: { register: vi.fn(), me: vi.fn() } }));
-vi.mock("../api/taxpayer.api", () => ({ taxpayerApi: { lookup: vi.fn() } }));
+vi.mock("@/shared/api/auth.api", () => ({ authApi: { register: vi.fn(), me: vi.fn() } }));
+vi.mock("@/shared/api/taxpayer.api", () => ({ taxpayerApi: { lookup: vi.fn() } }));
 vi.mock("@/shared/api/httpClient", () => ({ httpClient: { get: vi.fn() } }));
 
 const taxpayer: Taxpayer = { taxNumber: "12345676-2-42", companyName: "Verified Company", shortName: "Verified",

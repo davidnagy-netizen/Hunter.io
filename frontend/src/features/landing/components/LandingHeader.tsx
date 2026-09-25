@@ -1,4 +1,4 @@
-import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
+import { useCompanyProfile } from "@/shared/hooks/useCompanyProfile";
 import { ArrowIcon, LanguageToggle, Logo } from "@/shared/components";
 import { usePrefersReducedMotion } from "@/shared/hooks/usePrefersReducedMotion";
 import { useEffect, useState } from "react";

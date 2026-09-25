@@ -1,4 +1,4 @@
-import type { EligibilityStatus, ScoreBand } from "@/features/scoring/types/scoring.types";
+import type { EligibilityStatus, ScoreBand } from "@/shared/types/scoring.types";
 
 /**
  * What `OpportunityCardView` needs, independent of where the call came from:

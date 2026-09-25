@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { Button } from "@/shared/components";
-import { useIsAuthenticated, useIsSubscriber } from "@/features/authentication/hooks/useAuth";
+import { useIsAuthenticated, useIsSubscriber } from "@/shared/hooks/useAuth";
 import "../i18n";
 
 export function UpsellBlock({ lockedCount }: { lockedCount: number }) {

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { EligibilityQuestion } from "@/features/scoring/components/EligibilityQuestion";
-import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
+import { EligibilityQuestion } from "@/shared/components/EligibilityQuestion";
+import type { ScoredOpportunity } from "@/shared/types/scoring.types";
 import { useRuleValueFormatter } from "../hooks/useRuleValueFormatter";
 import { CheckLine } from "./CheckLine";
 import "../i18n";

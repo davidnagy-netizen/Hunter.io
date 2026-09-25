@@ -1,7 +1,7 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
-import { useMeQuery } from "@/features/authentication/api/auth.queries";
-import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
+import { useIsAuthenticated } from "@/shared/hooks/useAuth";
+import { useMeQuery } from "@/shared/api/auth.queries";
+import { useCompanyProfile } from "@/shared/hooks/useCompanyProfile";
 import { opportunitiesKeys } from "@/shared/api/opportunitiesKeys";
 import { useLang } from "@/shared/hooks/useFormat";
 import { opportunitiesApi } from "./opportunities.api";

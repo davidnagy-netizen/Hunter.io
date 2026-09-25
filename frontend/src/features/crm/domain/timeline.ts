@@ -1,4 +1,4 @@
-import type { ProfileVersionChange } from "@/features/admin/types/admin.types";
+import type { ProfileVersionChange } from "@/shared/types/admin.types";
 import type { TimelineEntry } from "../types/crm.types";
 
 export type TimelineLabel =

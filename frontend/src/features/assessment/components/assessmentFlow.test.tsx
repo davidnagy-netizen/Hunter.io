@@ -3,14 +3,14 @@ import userEvent from "@testing-library/user-event";
 import { Route, Routes } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { renderWithProviders } from "@/test/renderWithProviders";
-import { useCurrentUser, useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
+import { useCurrentUser, useIsAuthenticated } from "@/shared/hooks/useAuth";
 import { opportunitiesApi } from "@/features/opportunities/api/opportunities.api";
-import { useOnboardingDraftStore } from "@/features/profile/store/onboardingDraftStore";
+import { useOnboardingDraftStore } from "@/shared/store/onboardingDraftStore";
 import { metaApi } from "@/shared/api/meta.api";
 import { leadsApi } from "../api/leads.api";
 import { AssessmentPage } from "./AssessmentPage";
 
-vi.mock("@/features/authentication/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn(), useCurrentUser: vi.fn() }));
+vi.mock("@/shared/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn(), useCurrentUser: vi.fn() }));
 vi.mock("@/shared/api/meta.api", () => ({ metaApi: { get: vi.fn() } }));
 vi.mock("@/features/opportunities/api/opportunities.api", () => ({
   opportunitiesApi: { catalog: vi.fn(), catalogFor: vi.fn(), search: vi.fn(), searchFor: vi.fn(), detail: vi.fn(), toggleSaved: vi.fn() },

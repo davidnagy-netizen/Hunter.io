@@ -3,17 +3,17 @@ import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { detailOf } from "@/test/apiFixtures";
 import { renderWithProviders } from "@/test/renderWithProviders";
-import { useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
-import { profileApi } from "@/features/profile/api/profile.api";
-import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
+import { useIsAuthenticated } from "@/shared/hooks/useAuth";
+import { profileApi } from "@/shared/api/profile.api";
+import { DEMO_PROFILE } from "@/shared/data/demoProfile";
 import { answersApi } from "../api/answers.api";
 import { EligibilityBadge } from "./EligibilityBadge";
 import { EligibilityQuestion } from "./EligibilityQuestion";
 import { FundorScoreRing } from "./FundorScoreRing";
 import { ScoreBreakdown } from "./ScoreBreakdown";
 
-vi.mock("@/features/authentication/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn() }));
-vi.mock("@/features/profile/api/profile.api", () => ({
+vi.mock("@/shared/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn() }));
+vi.mock("@/shared/api/profile.api", () => ({
   profileApi: { get: vi.fn(), save: vi.fn(), loadDemo: vi.fn(), history: vi.fn(), restore: vi.fn() },
 }));
 vi.mock("../api/answers.api", () => ({ answersApi: { save: vi.fn() } }));

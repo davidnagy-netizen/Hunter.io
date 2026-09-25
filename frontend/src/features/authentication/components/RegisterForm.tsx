@@ -4,12 +4,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useTranslation } from "react-i18next";
 import { Button, TextField } from "@/shared/components";
-import { CompanyMetricsFields } from "@/features/profile/components/CompanyMetricsFields";
-import { metricsSchema } from "@/features/profile/schemas/metrics.schema";
-import type { CompanyMetrics } from "@/features/profile/types/metrics.types";
-import { useRegisterMutation, useTaxpayerLookupMutation } from "../api/auth.queries";
-import { formatTaxNumber, isValidTaxNumber } from "../lib/taxNumber";
-import type { Taxpayer } from "../types/auth.types";
+import { CompanyMetricsFields } from "@/features/authentication/components/CompanyMetricsFields";
+import { metricsSchema } from "@/features/authentication/schemas/metrics.schema";
+import type { CompanyMetrics } from "@/features/authentication/types/metrics.types";
+import { useRegisterMutation, useTaxpayerLookupMutation } from "@/shared/api/auth.queries";
+import { formatTaxNumber, isValidTaxNumber } from "@/utils/validators/taxNumber";
+import type { Taxpayer } from "@/shared/types/auth.types";
 import { registerSchema as credentialsSchema, type RegisterFormValues as Credentials } from "../schemas/auth.schemas";
 import "../i18n";
 

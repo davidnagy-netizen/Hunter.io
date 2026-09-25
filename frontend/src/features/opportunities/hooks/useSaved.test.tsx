@@ -3,16 +3,16 @@ import { act, renderHook, waitFor } from "@testing-library/react";
 import type { ReactNode } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { createTestQueryClient } from "@/test/renderWithProviders";
-import { useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
-import { profileApi } from "@/features/profile/api/profile.api";
-import { profileKeys } from "@/features/profile/api/profile.queries";
-import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
+import { useIsAuthenticated } from "@/shared/hooks/useAuth";
+import { profileApi } from "@/shared/api/profile.api";
+import { profileKeys } from "@/shared/api/profile.queries";
+import { DEMO_PROFILE } from "@/shared/data/demoProfile";
 import { opportunitiesApi } from "../api/opportunities.api";
 import { useLocalSavedStore } from "../store/localSavedStore";
 import { useSaved } from "./useSaved";
 
-vi.mock("@/features/authentication/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn() }));
-vi.mock("@/features/profile/api/profile.api", () => ({ profileApi: { get: vi.fn(), save: vi.fn(), loadDemo: vi.fn(), history: vi.fn(), restore: vi.fn() } }));
+vi.mock("@/shared/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn() }));
+vi.mock("@/shared/api/profile.api", () => ({ profileApi: { get: vi.fn(), save: vi.fn(), loadDemo: vi.fn(), history: vi.fn(), restore: vi.fn() } }));
 vi.mock("../api/opportunities.api", () => ({ opportunitiesApi: { catalog: vi.fn(), catalogFor: vi.fn(), toggleSaved: vi.fn() } }));
 
 afterEach(() => {

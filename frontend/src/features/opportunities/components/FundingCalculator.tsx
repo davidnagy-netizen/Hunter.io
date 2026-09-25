@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { TextField } from "@/shared/components";
 import { useFormat } from "@/shared/hooks/useFormat";
-import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
+import type { ScoredOpportunity } from "@/shared/types/scoring.types";
 import "../i18n";
 
 /**

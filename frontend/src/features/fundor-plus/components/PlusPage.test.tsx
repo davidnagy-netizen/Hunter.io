@@ -3,17 +3,17 @@ import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { subscriberCatalog } from "@/test/apiFixtures";
 import { renderWithProviders } from "@/test/renderWithProviders";
-import { useIsAuthenticated, useIsSubscriber } from "@/features/authentication/hooks/useAuth";
+import { useIsAuthenticated, useIsSubscriber } from "@/shared/hooks/useAuth";
 import { useCatalog } from "@/features/opportunities/api/opportunities.queries";
-import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
-import { useLocalProfileStore } from "@/features/profile/store/localProfileStore";
+import { DEMO_PROFILE } from "@/shared/data/demoProfile";
+import { useLocalProfileStore } from "@/shared/store/localProfileStore";
 import { formatHuf } from "@/shared/lib/format";
 import { metaApi } from "@/shared/api/meta.api";
 import { useUiStore } from "@/shared/store/uiStore";
 import { useDocChecksStore } from "../store/docChecksStore";
 import { PlusPage } from "./PlusPage";
 
-vi.mock("@/features/authentication/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn(), useIsSubscriber: vi.fn() }));
+vi.mock("@/shared/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn(), useIsSubscriber: vi.fn() }));
 vi.mock("@/shared/api/meta.api", () => ({ metaApi: { get: vi.fn() } }));
 vi.mock("@/features/opportunities/api/opportunities.queries", () => ({
   useCatalog: vi.fn(),

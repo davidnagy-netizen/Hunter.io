@@ -1,5 +1,5 @@
-import type { Entitlements } from "@/features/authentication/types/auth.types";
-import type { Opportunity, EligibilityStatus, ScoreBand, ScoredOpportunity } from "@/features/scoring/types/scoring.types";
+import type { Entitlements } from "@/shared/types/auth.types";
+import type { Opportunity, EligibilityStatus, ScoreBand, ScoredOpportunity } from "@/shared/types/scoring.types";
 
 /**
  * What a visitor without a subscription gets in place of an opportunity: a

@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { opportunitiesApi } from "@/features/opportunities/api/opportunities.api";
 import type { Teaser } from "@/features/opportunities/types/opportunities.types";
 import { useLang } from "@/shared/hooks/useFormat";
-import type { CompanyProfile } from "@/features/profile/types/profile.types";
+import type { CompanyProfile } from "@/shared/types/profile.types";
 
 export interface AssessmentPreview {
   /** How many calls this profile qualifies for — the server's own count. */

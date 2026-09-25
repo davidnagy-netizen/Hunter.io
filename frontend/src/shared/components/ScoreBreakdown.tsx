@@ -1,7 +1,7 @@
 import { useId, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { FactorExplanation } from "../types/scoring.types";
-import "../i18n";
+import "@/shared/i18n/scoring";
 
 /**
  * The five weighted factors behind a score, each expandable into the

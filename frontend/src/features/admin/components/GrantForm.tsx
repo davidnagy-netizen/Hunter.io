@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Button, SelectField, TextField } from "@/shared/components";
 import { useLang } from "@/shared/hooks/useFormat";
 import { useTranslatedApiError } from "@/shared/api/useTranslatedApiError";
-import type { Plan } from "@/features/authentication/types/auth.types";
+import type { Plan } from "@/shared/types/auth.types";
 import { useGrantSubscriptionMutation, useRevokeSubscriptionMutation } from "../api/admin.queries";
 import { grantSchema, type GrantFormValues } from "../schemas/grant.schema";
 import "../i18n";

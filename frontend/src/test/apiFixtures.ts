@@ -6,7 +6,7 @@
  * instead of hand-written shapes, so they can't drift from what the API sends.
  */
 import type { CatalogResponse, FullCatalogResponse, GatedCatalogResponse } from "@/features/opportunities/types/opportunities.types";
-import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
+import type { ScoredOpportunity } from "@/shared/types/scoring.types";
 import catalogGated from "./fixtures/api/catalog.gated.json";
 import catalogEn from "./fixtures/api/catalog.subscriber.en.json";
 import catalogHu from "./fixtures/api/catalog.subscriber.hu.json";

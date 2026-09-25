@@ -2,16 +2,16 @@ import { screen } from "@testing-library/react";
 import { Route, Routes } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { renderWithProviders } from "@/test/renderWithProviders";
-import { authApi } from "@/features/authentication/api/auth.api";
-import { useCurrentUser, useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
-import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
-import { useLocalProfileStore } from "@/features/profile/store/localProfileStore";
-import { profileApi } from "@/features/profile/api/profile.api";
+import { authApi } from "@/shared/api/auth.api";
+import { useCurrentUser, useIsAuthenticated } from "@/shared/hooks/useAuth";
+import { DEMO_PROFILE } from "@/shared/data/demoProfile";
+import { useLocalProfileStore } from "@/shared/store/localProfileStore";
+import { profileApi } from "@/shared/api/profile.api";
 import { LandingPage } from "./LandingPage";
 
-vi.mock("@/features/authentication/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn(), useCurrentUser: vi.fn() }));
-vi.mock("@/features/authentication/api/auth.api", () => ({ authApi: { me: vi.fn(), login: vi.fn(), register: vi.fn(), logout: vi.fn() } }));
-vi.mock("@/features/profile/api/profile.api", () => ({ profileApi: { get: vi.fn(), save: vi.fn(), loadDemo: vi.fn(), history: vi.fn(), restore: vi.fn() } }));
+vi.mock("@/shared/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn(), useCurrentUser: vi.fn() }));
+vi.mock("@/shared/api/auth.api", () => ({ authApi: { me: vi.fn(), login: vi.fn(), register: vi.fn(), logout: vi.fn() } }));
+vi.mock("@/shared/api/profile.api", () => ({ profileApi: { get: vi.fn(), save: vi.fn(), loadDemo: vi.fn(), history: vi.fn(), restore: vi.fn() } }));
 
 const renderLanding = () =>
   renderWithProviders(

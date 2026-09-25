@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Panel } from "@/shared/components";
 import { useFormat } from "@/shared/hooks/useFormat";
 import { useGoalLabel } from "@/shared/hooks/useGoalLabel";
-import type { CompanyProfile } from "@/features/profile/types/profile.types";
+import type { CompanyProfile } from "@/shared/types/profile.types";
 import "../i18n";
 
 function Fact({ label, children }: { label: string; children: React.ReactNode }) {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Badge, PageHead, QueryStatus } from "@/shared/components";
-import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
+import { useCompanyProfile } from "@/shared/hooks/useCompanyProfile";
 import { useOpportunitiesData } from "@/features/opportunities/hooks/useOpportunitiesData";
 import { DocumentChecklist } from "./DocumentChecklist";
 import { DraftPanel } from "./DraftPanel";

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { subscriberCatalog } from "@/test/apiFixtures";
-import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
+import type { ScoredOpportunity } from "@/shared/types/scoring.types";
 import { deadlineTone, groupByMonth, isUrgent, upcomingDeadlines } from "./calendar";
 
 const make = (id: string, deadline: string, daysLeft: number, score = 70, bandKey: "strong" | "relevant" = "relevant"): ScoredOpportunity =>

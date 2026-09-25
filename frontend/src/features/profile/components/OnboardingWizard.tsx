@@ -3,13 +3,13 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Navigate, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { Button, Panel, TextField } from "@/shared/components";
-import { useMeQuery } from "@/features/authentication/api/auth.queries";
+import { useMeQuery } from "@/shared/api/auth.queries";
 import { useMetaQuery } from "@/shared/api/meta.queries";
-import { useCompanyProfile } from "../hooks/useCompanyProfile";
-import { CompanyMetricsFields } from "./CompanyMetricsFields";
-import { metricsSchema } from "../schemas/metrics.schema";
-import type { CompanyMetrics } from "../types/metrics.types";
-import type { CompanyProfile } from "../types/profile.types";
+import { useCompanyProfile } from "@/shared/hooks/useCompanyProfile";
+import { CompanyMetricsFields } from "@/features/authentication/components/CompanyMetricsFields";
+import { metricsSchema } from "@/features/authentication/schemas/metrics.schema";
+import type { CompanyMetrics } from "@/features/authentication/types/metrics.types";
+import type { CompanyProfile } from "@/shared/types/profile.types";
 
 /** Existing accounts complete company metrics; project context remains editable separately. */
 export function OnboardingWizard() {

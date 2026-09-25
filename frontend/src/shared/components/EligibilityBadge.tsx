@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Badge, type BadgeTone } from "@/shared/components";
 import type { EligibilityStatus } from "../types/scoring.types";
-import "../i18n";
+import "@/shared/i18n/scoring";
 
 /** The mapping `shared/components/Badge` deliberately doesn't own: verdict → tone. */
 const VERDICT_TONE: Record<EligibilityStatus, BadgeTone> = {

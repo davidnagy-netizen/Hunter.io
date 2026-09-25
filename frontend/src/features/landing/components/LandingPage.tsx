@@ -1,6 +1,6 @@
-import { useCurrentUser } from "@/features/authentication/hooks/useAuth";
-import { homePathFor } from "@/features/authentication/lib/homePath";
-import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
+import { useCurrentUser } from "@/shared/hooks/useAuth";
+import { homePathFor } from "@/shared/lib/homePath";
+import { useCompanyProfile } from "@/shared/hooks/useCompanyProfile";
 import { Navigate } from "react-router";
 import "../i18n";
 import comparisonBackdrop from "../assets/comparison-blueprints.jpg";

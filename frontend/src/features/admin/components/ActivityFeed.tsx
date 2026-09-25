@@ -1,6 +1,6 @@
 import { useFormat } from "@/shared/hooks/useFormat";
-import { useActivityLabel } from "../hooks/useActivityLabel";
-import type { AdminActivityEntry } from "../types/admin.types";
+import { useActivityLabel } from "@/shared/hooks/useActivityLabel";
+import type { AdminActivityEntry } from "@/shared/types/admin.types";
 import "../i18n";
 
 /**

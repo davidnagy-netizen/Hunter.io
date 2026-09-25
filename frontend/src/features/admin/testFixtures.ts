@@ -1,5 +1,5 @@
-import type { AuthUser, Plan } from "@/features/authentication/types/auth.types";
-import type { AdminOverview, AdminUser } from "./types/admin.types";
+import type { AuthUser, Plan } from "@/shared/types/auth.types";
+import type { AdminOverview, AdminUser } from "@/shared/types/admin.types";
 
 export const PLANS: Plan[] = [
   { id: "trial", label_hu: "5 napos próba", label_en: "5-day trial", days: 5, status: "trial" },

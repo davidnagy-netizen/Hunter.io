@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { CircularProgress } from "@/shared/components";
-import { BAND_COLOR } from "../domain/bandStyle";
+import { BAND_COLOR } from "@/utils/scoring/bandStyle";
 import type { ScoreBand } from "../types/scoring.types";
-import "../i18n";
+import "@/shared/i18n/scoring";
 
 export interface FundorScoreRingProps {
   /** `null` for a blocked (NOT_ELIGIBLE) call — those are never scored. */

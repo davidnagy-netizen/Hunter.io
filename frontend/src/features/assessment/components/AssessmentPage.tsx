@@ -1,7 +1,7 @@
-import { useCurrentUser } from "@/features/authentication/hooks/useAuth";
-import { homePathFor } from "@/features/authentication/lib/homePath";
+import { useCurrentUser } from "@/shared/hooks/useAuth";
+import { homePathFor } from "@/shared/lib/homePath";
 import "@/features/profile/i18n";
-import { useOnboardingDraftStore } from "@/features/profile/store/onboardingDraftStore";
+import { useOnboardingDraftStore } from "@/shared/store/onboardingDraftStore";
 import { useMetaQuery } from "@/shared/api/meta.queries";
 import {
   Button,

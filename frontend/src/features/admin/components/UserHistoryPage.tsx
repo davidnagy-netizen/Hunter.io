@@ -3,11 +3,11 @@ import { Link, useParams } from "react-router";
 import { BackIcon, PageHead, Panel, QueryStatus } from "@/shared/components";
 import { useFormat } from "@/shared/hooks/useFormat";
 import { useTranslatedApiError } from "@/shared/api/useTranslatedApiError";
-import { SubscriptionBadge } from "@/features/authentication/components/SubscriptionBadge";
-import { ProfileSummary } from "@/features/profile/components/ProfileSummary";
+import { SubscriptionBadge } from "@/shared/components/SubscriptionBadge";
+import { ProfileSummary } from "@/shared/components/ProfileSummary";
 import { useAdminUserHistoryQuery } from "../api/admin.queries";
 import { ActivityFeed } from "./ActivityFeed";
-import { ProfileChanges } from "./ProfileChanges";
+import { ProfileChanges } from "@/shared/components/ProfileChanges";
 import "../i18n";
 
 /** One account's subscription log, profile versions and activity — everything an operator needs to answer "what happened here?". */

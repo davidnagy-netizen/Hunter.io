@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { LockIcon } from "@/shared/components";
 import { useFormat } from "@/shared/hooks/useFormat";
-import { BAND_COLOR } from "@/features/scoring/domain/bandStyle";
+import { BAND_COLOR } from "@/utils/scoring/bandStyle";
 import type { Teaser } from "../types/opportunities.types";
 import "../i18n";
 

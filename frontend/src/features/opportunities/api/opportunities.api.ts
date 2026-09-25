@@ -1,6 +1,6 @@
 import { httpClient } from "@/shared/api/httpClient";
-import type { CompanyProfile } from "@/features/profile/types/profile.types";
-import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
+import type { CompanyProfile } from "@/shared/types/profile.types";
+import type { ScoredOpportunity } from "@/shared/types/scoring.types";
 import type { CatalogResponse, SaveOpportunityResponse, SearchResponse } from "../types/opportunities.types";
 
 export const opportunitiesApi = {

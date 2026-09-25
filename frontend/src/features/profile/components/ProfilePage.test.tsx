@@ -1,17 +1,17 @@
 import { screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { renderWithProviders } from "@/test/renderWithProviders";
-import { useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
+import { useIsAuthenticated } from "@/shared/hooks/useAuth";
 import { metaApi } from "@/shared/api/meta.api";
 import type { MetaResponse } from "@/shared/types/reference.types";
-import { profileApi } from "../api/profile.api";
+import { profileApi } from "@/shared/api/profile.api";
 import { ProfilePage } from "./ProfilePage";
 
-vi.mock("@/features/authentication/hooks/useAuth", () => ({
+vi.mock("@/shared/hooks/useAuth", () => ({
   useIsAuthenticated: vi.fn(),
 }));
 
-vi.mock("../api/profile.api", () => ({
+vi.mock("@/shared/api/profile.api", () => ({
   profileApi: {
     get: vi.fn(),
     save: vi.fn(),

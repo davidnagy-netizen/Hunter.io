@@ -1,4 +1,4 @@
-import type { Plan } from "@/features/authentication/types/auth.types";
+import type { Plan } from "@/shared/types/auth.types";
 import type { Lang } from "@/shared/lib/format";
 
 /** A plan's display name in the given language; an id the plan list doesn't know is shown as-is. */

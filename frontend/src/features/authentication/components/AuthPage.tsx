@@ -1,10 +1,10 @@
 import { LanguageToggle, Logo, Panel } from "@/shared/components";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router";
-import { useMeQuery } from "../api/auth.queries";
+import { useMeQuery } from "@/shared/api/auth.queries";
 import "../i18n";
-import { homePathFor } from "../lib/homePath";
-import type { AuthUser } from "../types/auth.types";
+import { homePathFor } from "@/shared/lib/homePath";
+import type { AuthUser } from "@/shared/types/auth.types";
 import { LoginForm } from "./LoginForm";
 import { RegisterForm } from "./RegisterForm";
 

@@ -1,6 +1,6 @@
 import { useCallback } from "react";
-import { useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
-import { useServerProfileQuery } from "@/features/profile/api/profile.queries";
+import { useIsAuthenticated } from "@/shared/hooks/useAuth";
+import { useServerProfileQuery } from "@/shared/api/profile.queries";
 import { useToggleSavedMutation } from "../api/saved.queries";
 import { useLocalSavedStore } from "../store/localSavedStore";
 

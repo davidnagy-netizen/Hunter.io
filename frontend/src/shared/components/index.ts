@@ -35,3 +35,12 @@ export { MatchingLoader } from "./MatchingLoader";
 export type { MatchingLoaderProps } from "./MatchingLoader";
 
 export { Reveal } from "./Reveal";
+
+export { SubscriptionBadge } from "./SubscriptionBadge";
+export { EligibilityBadge } from "./EligibilityBadge";
+export { EligibilityQuestion } from "./EligibilityQuestion";
+export { FundorScoreRing } from "./FundorScoreRing";
+export type { FundorScoreRingProps } from "./FundorScoreRing";
+export { ScoreBreakdown } from "./ScoreBreakdown";
+export { ProfileSummary } from "./ProfileSummary";
+export { ProfileChanges } from "./ProfileChanges";

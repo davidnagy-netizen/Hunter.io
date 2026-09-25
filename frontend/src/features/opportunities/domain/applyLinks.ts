@@ -1,4 +1,4 @@
-import type { Opportunity } from "@/features/scoring/types/scoring.types";
+import type { Opportunity } from "@/shared/types/scoring.types";
 
 const EU_PORTAL = "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home";
 const HU_PORTAL = "https://www.palyazat.gov.hu/";

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { CompanyProfile } from "@/features/profile/types/profile.types";
+import type { CompanyProfile } from "@/shared/types/profile.types";
 import { draftFigures, draftToText } from "./draft";
 import { docKey } from "./documents";
 

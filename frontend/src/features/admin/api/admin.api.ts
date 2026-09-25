@@ -6,8 +6,8 @@ import type {
   GrantPayload,
   RefreshResponse,
   UserPatchPayload,
-} from "../types/admin.types";
-import type { AuthUser } from "@/features/authentication/types/auth.types";
+} from "@/shared/types/admin.types";
+import type { AuthUser } from "@/shared/types/auth.types";
 
 interface UserResponse {
   success: true;

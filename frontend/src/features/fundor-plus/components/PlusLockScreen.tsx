@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { LockIcon, PageHead, Panel, buttonClasses } from "@/shared/components";
-import { useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
+import { useIsAuthenticated } from "@/shared/hooks/useAuth";
 import "../i18n";
 
 interface Feature {

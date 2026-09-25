@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { ArrowIcon } from "@/shared/components";
 import { DeadlineRow } from "./DeadlineRow";
 import { upcomingDeadlines } from "../domain/calendar";
-import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
+import type { ScoredOpportunity } from "@/shared/types/scoring.types";
 import "../i18n";
 
 /** The dashboard's short list of what closes next, with a way into the full calendar. */

@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router";
 import { Badge, Button, Dialog } from "@/shared/components";
 import { useFormat } from "@/shared/hooks/useFormat";
 import { useTranslatedApiError } from "@/shared/api/useTranslatedApiError";
-import { SubscriptionBadge } from "@/features/authentication/components/SubscriptionBadge";
+import { SubscriptionBadge } from "@/shared/components/SubscriptionBadge";
 import { useDeleteLeadMutation } from "../api/crm.queries";
 import type { CrmContact, Vocabulary } from "../types/crm.types";
 import { LifecycleBadge } from "./LifecycleBadge";

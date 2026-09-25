@@ -2,14 +2,14 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { renderHook, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { createTestQueryClient } from "@/test/renderWithProviders";
-import { useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
+import { useIsAuthenticated } from "@/shared/hooks/useAuth";
 import { profileApi } from "../api/profile.api";
 import { useLocalProfileStore } from "../store/localProfileStore";
 import { DEMO_PROFILE } from "../data/demoProfile";
 import { useCompanyProfile } from "./useCompanyProfile";
 import type { ReactNode } from "react";
 
-vi.mock("@/features/authentication/hooks/useAuth", () => ({
+vi.mock("@/shared/hooks/useAuth", () => ({
   useIsAuthenticated: vi.fn(),
 }));
 

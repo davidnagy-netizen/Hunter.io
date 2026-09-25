@@ -3,16 +3,16 @@ import userEvent from "@testing-library/user-event";
 import { Route, Routes } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { renderWithProviders } from "@/test/renderWithProviders";
-import { authApi } from "@/features/authentication/api/auth.api";
-import { profileApi } from "@/features/profile/api/profile.api";
-import type { MeResponse } from "@/features/authentication/types/auth.types";
+import { authApi } from "@/shared/api/auth.api";
+import { profileApi } from "@/shared/api/profile.api";
+import type { MeResponse } from "@/shared/types/auth.types";
 import { GridIcon } from "@/shared/components";
 import type { NavItem } from "@/shared/types/navigation.types";
 import "@/features/admin/i18n";
 import { AppShell } from "./AppShell";
 
-vi.mock("@/features/authentication/api/auth.api", () => ({ authApi: { me: vi.fn(), login: vi.fn(), register: vi.fn(), logout: vi.fn() } }));
-vi.mock("@/features/profile/api/profile.api", () => ({ profileApi: { get: vi.fn(), save: vi.fn(), loadDemo: vi.fn(), history: vi.fn(), restore: vi.fn() } }));
+vi.mock("@/shared/api/auth.api", () => ({ authApi: { me: vi.fn(), login: vi.fn(), register: vi.fn(), logout: vi.fn() } }));
+vi.mock("@/shared/api/profile.api", () => ({ profileApi: { get: vi.fn(), save: vi.fn(), loadDemo: vi.fn(), history: vi.fn(), restore: vi.fn() } }));
 
 const NAV: NavItem[] = [
   { to: "/admin", labelKey: "nav.overview", namespace: "admin", icon: GridIcon, end: true },

@@ -4,11 +4,11 @@ import { Route, Routes } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { CALL, answeredConsortium, detailOf, subscriberCatalog } from "@/test/apiFixtures";
 import { renderWithProviders } from "@/test/renderWithProviders";
-import { useIsAuthenticated, useIsSubscriber } from "@/features/authentication/hooks/useAuth";
+import { useIsAuthenticated, useIsSubscriber } from "@/shared/hooks/useAuth";
 import { metaApi } from "@/shared/api/meta.api";
-import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
-import { useLocalProfileStore } from "@/features/profile/store/localProfileStore";
-import { useEligibilityAnswers } from "@/features/scoring/hooks/useEligibilityAnswers";
+import { DEMO_PROFILE } from "@/shared/data/demoProfile";
+import { useLocalProfileStore } from "@/shared/store/localProfileStore";
+import { useEligibilityAnswers } from "@/shared/hooks/useEligibilityAnswers";
 import { formatHuf } from "@/shared/lib/format";
 import { useLocalSavedStore } from "../store/localSavedStore";
 import { useCatalog, useOpportunityDetailQuery } from "../api/opportunities.queries";
@@ -17,8 +17,8 @@ import { DashboardPage } from "./DashboardPage";
 import { OpportunitiesPage } from "./OpportunitiesPage";
 import { OpportunityDetailPage } from "./OpportunityDetailPage";
 
-vi.mock("@/features/authentication/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn(), useIsSubscriber: vi.fn() }));
-vi.mock("@/features/scoring/hooks/useEligibilityAnswers", () => ({ useEligibilityAnswers: vi.fn() }));
+vi.mock("@/shared/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn(), useIsSubscriber: vi.fn() }));
+vi.mock("@/shared/hooks/useEligibilityAnswers", () => ({ useEligibilityAnswers: vi.fn() }));
 vi.mock("@/shared/api/meta.api", () => ({ metaApi: { get: vi.fn() } }));
 vi.mock("../api/opportunities.queries", () => ({
   useCatalog: vi.fn(),

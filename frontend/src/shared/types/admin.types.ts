@@ -1,5 +1,5 @@
-import type { AuthUser, Plan } from "@/features/authentication/types/auth.types";
-import type { CompanyProfile } from "@/features/profile/types/profile.types";
+import type { AuthUser, Plan } from "@/shared/types/auth.types";
+import type { CompanyProfile } from "@/shared/types/profile.types";
 
 /** One line of the activity log. `store.recordActivity` spreads whatever detail the action had, so only `at` and `type` are guaranteed. */
 export interface AdminActivityEntry {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Navigate } from "react-router";
 import { useTranslation } from "react-i18next";
-import { useMeQuery, useLogoutMutation } from "../api/auth.queries";
+import { useMeQuery, useLogoutMutation } from "@/shared/api/auth.queries";
 import { httpClient } from "@/shared/api/httpClient";
 import { Button, Panel } from "@/shared/components";
 

@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { Panel } from "@/shared/components";
 import { useFormat } from "@/shared/hooks/useFormat";
-import { ProfileChanges } from "@/features/admin/components/ProfileChanges";
-import { useActivityLabel } from "@/features/admin/hooks/useActivityLabel";
+import { ProfileChanges } from "@/shared/components/ProfileChanges";
+import { useActivityLabel } from "@/shared/hooks/useActivityLabel";
 import { timelineDetail, timelineLabel } from "../domain/timeline";
 import type { TimelineEntry } from "../types/crm.types";
 import "../i18n";

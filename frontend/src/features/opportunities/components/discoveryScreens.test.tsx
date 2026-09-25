@@ -3,10 +3,10 @@ import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { CALL, subscriberCatalog } from "@/test/apiFixtures";
 import { renderWithProviders } from "@/test/renderWithProviders";
-import { useIsAuthenticated, useIsSubscriber } from "@/features/authentication/hooks/useAuth";
+import { useIsAuthenticated, useIsSubscriber } from "@/shared/hooks/useAuth";
 import { metaApi } from "@/shared/api/meta.api";
-import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
-import { useLocalProfileStore } from "@/features/profile/store/localProfileStore";
+import { DEMO_PROFILE } from "@/shared/data/demoProfile";
+import { useLocalProfileStore } from "@/shared/store/localProfileStore";
 import { useLocalSavedStore } from "../store/localSavedStore";
 import { useCatalog, useSearchQuery } from "../api/opportunities.queries";
 import type { SearchResponse, SearchRow, Teaser } from "../types/opportunities.types";
@@ -15,7 +15,7 @@ import { DashboardPage } from "./DashboardPage";
 import { SavedPage } from "./SavedPage";
 import { SearchPage } from "./SearchPage";
 
-vi.mock("@/features/authentication/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn(), useIsSubscriber: vi.fn() }));
+vi.mock("@/shared/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn(), useIsSubscriber: vi.fn() }));
 vi.mock("@/shared/api/meta.api", () => ({ metaApi: { get: vi.fn() } }));
 vi.mock("../api/opportunities.queries", () => ({
   useCatalog: vi.fn(),

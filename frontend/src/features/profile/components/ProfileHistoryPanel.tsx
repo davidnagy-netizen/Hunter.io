@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Button, Panel } from "@/shared/components";
-import { useIsAuthenticated } from "@/features/authentication/hooks/useAuth";
-import { useProfileHistoryQuery, useRestoreProfileMutation } from "../api/profile.queries";
+import { useIsAuthenticated } from "@/shared/hooks/useAuth";
+import { useProfileHistoryQuery, useRestoreProfileMutation } from "@/shared/api/profile.queries";
 import "../i18n";
 
 function fmtWhen(iso: string, lang: string) {
