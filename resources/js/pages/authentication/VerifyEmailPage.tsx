@@ -16,14 +16,16 @@ export function VerifyEmailPage() {
   if (!me.data?.user) return <Navigate to="/login" replace />;
   if (me.data.user.emailVerified) return <Navigate to="/app" replace />;
   return <main className="mx-auto max-w-lg p-6"><Panel>
-    <h1>{en ? "Verify your email" : "Erősítse meg e-mail-címét"}</h1>
-    <p>{en ? "Open the verification link in your email in this browser." : "Nyissa meg az e-mailben kapott megerősítő linket ebben a böngészőben."}</p>
-    <Button onClick={async () => {
-      try { await httpClient.post("/auth/verification/resend"); setMessage(en ? "Email queued." : "A levél küldése folyamatban."); }
-      catch { setMessage(en ? "Please wait before retrying." : "Kérjük, várjon az újraküldés előtt."); }
-    }}>{en ? "Resend email" : "Levél újraküldése"}</Button>
-    <Button variant="ghost" onClick={() => me.refetch()}>{en ? "Check verification" : "Megerősítés ellenőrzése"}</Button>
-    <Button variant="ghost" onClick={() => logout.mutate()}>{en ? "Log out" : "Kijelentkezés"}</Button>
-    <p role="status">{message}</p>
+    <h1 className="font-display text-xl font-semibold text-text">{en ? "Verify your email" : "Erősítse meg e-mail-címét"}</h1>
+    <p className="mt-1 text-sm text-muted">{en ? "Open the verification link in your email in this browser." : "Nyissa meg az e-mailben kapott megerősítő linket ebben a böngészőben."}</p>
+    <div className="mt-5 flex flex-col gap-2">
+      <Button onClick={async () => {
+        try { await httpClient.post("/auth/verification/resend"); setMessage(en ? "Email queued." : "A levél küldése folyamatban."); }
+        catch { setMessage(en ? "Please wait before retrying." : "Kérjük, várjon az újraküldés előtt."); }
+      }}>{en ? "Resend email" : "Levél újraküldése"}</Button>
+      <Button variant="ghost" onClick={() => me.refetch()}>{en ? "Check verification" : "Megerősítés ellenőrzése"}</Button>
+      <Button variant="ghost" onClick={() => logout.mutate()}>{en ? "Log out" : "Kijelentkezés"}</Button>
+    </div>
+    {message ? <p role="status" className="mt-3 text-sm text-muted">{message}</p> : null}
   </Panel></main>;
 }

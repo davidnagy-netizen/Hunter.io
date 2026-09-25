@@ -70,14 +70,16 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
     } catch { setError(en ? "Registration failed. Check your details; if verification expired, repeat the tax lookup." : "A regisztráció nem sikerült. Ellenőrizze adatait; lejárt ellenőrzés esetén ismételje meg az adókeresést."); }
   }
   return <div className="flex flex-col gap-4">
-    <p aria-live="polite">{en ? "Step" : "Lépés"} {step}/3</p>
+    <p aria-live="polite" className="text-sm text-muted">{en ? "Step" : "Lépés"} {step}/3</p>
     {step === 1 && <>
       <TextField label={en ? "Tax number" : "Adószám"} value={taxNumber} onChange={e => changeTax(e.target.value)} inputMode="numeric"
         error={taxNumber && !isValidTaxNumber(taxNumber) ? (en ? "Invalid or incomplete tax number." : "Érvénytelen vagy hiányos adószám.") : undefined} />
       <Button onClick={findCompany} disabled={!isValidTaxNumber(taxNumber) || lookup.isPending}>{lookup.isPending ? (en ? "Searching…" : "Keresés…") : (en ? "Find company" : "Cég keresése")}</Button>
-      {taxpayer && <section aria-label={en ? "Verified company" : "Ellenőrzött vállalkozás"} className="rounded border border-line p-3">
-        <p>{taxpayer.companyName}</p><p>{taxpayer.shortName}</p><p>{taxpayer.taxNumber}</p>
-        <p>{taxpayer.fullAddress || (en ? "NAV did not provide a headquarters address." : "A NAV nem adott meg székhelycímet.")}</p>
+      {taxpayer && <section aria-label={en ? "Verified company" : "Ellenőrzött vállalkozás"} className="flex flex-col gap-1 rounded-md border border-line-strong bg-paper p-3 text-sm">
+        <p className="font-medium text-text">{taxpayer.companyName}</p>
+        <p className="text-muted">{taxpayer.shortName}</p>
+        <p className="text-muted">{taxpayer.taxNumber}</p>
+        <p className="text-muted">{taxpayer.fullAddress || (en ? "NAV did not provide a headquarters address." : "A NAV nem adott meg székhelycímet.")}</p>
       </section>}
       <Button disabled={!taxpayer} onClick={() => setStep(2)}>{en ? "Confirm and continue" : "Megerősítés és tovább"}</Button>
     </>}
@@ -93,13 +95,21 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
       <TextField label="Email" type="email" autoComplete="email" {...register("email")} error={errors.email?.message} />
       <TextField label={en ? "Password (at least 12 characters)" : "Jelszó (legalább 12 karakter)"} type="password" autoComplete="new-password" {...register("password")} error={errors.password?.message} />
       <TextField label={en ? "Confirm password" : "Jelszó megerősítése"} type="password" autoComplete="new-password" {...register("password_confirmation")} error={errors.password_confirmation?.message} />
-      <label><input type="checkbox" {...register("accept_terms")} /> {en ? "I accept the Terms of Service" : "Elfogadom az Általános Szerződési Feltételeket"}</label>
-      <label><input type="checkbox" {...register("accept_privacy")} /> {en ? "I acknowledge the Privacy Notice" : "Tudomásul veszem az Adatkezelési tájékoztatót"}</label>
-      <label><input type="checkbox" {...register("marketing_opt_in")} />{en ? "Receive funding opportunity updates" : "Kérek pályázati és finanszírozási értesítéseket"}</label>
-      {(errors.accept_terms || errors.accept_privacy) && <p role="alert">{en ? "Accept the terms and acknowledge the privacy notice separately." : "Az ÁSZF és az adatkezelési tájékoztató külön elfogadása szükséges."}</p>}
+      <div className="flex flex-col gap-2">
+        <label className="flex items-center gap-2 text-sm text-text">
+          <input type="checkbox" className="accent-gold" {...register("accept_terms")} /> {en ? "I accept the Terms of Service" : "Elfogadom az Általános Szerződési Feltételeket"}
+        </label>
+        <label className="flex items-center gap-2 text-sm text-text">
+          <input type="checkbox" className="accent-gold" {...register("accept_privacy")} /> {en ? "I acknowledge the Privacy Notice" : "Tudomásul veszem az Adatkezelési tájékoztatót"}
+        </label>
+        <label className="flex items-center gap-2 text-sm text-text">
+          <input type="checkbox" className="accent-gold" {...register("marketing_opt_in")} /> {en ? "Receive funding opportunity updates" : "Kérek pályázati és finanszírozási értesítéseket"}
+        </label>
+      </div>
+      {(errors.accept_terms || errors.accept_privacy) && <p role="alert" className="text-sm text-red">{en ? "Accept the terms and acknowledge the privacy notice separately." : "Az ÁSZF és az adatkezelési tájékoztató külön elfogadása szükséges."}</p>}
       <Button type="submit" disabled={registration.isPending}>{en ? "Create account" : "Fiók létrehozása"}</Button>
     </form>}
     {step > 1 && <Button variant="ghost" onClick={() => { setStep(step - 1); setError(""); }}>{en ? "Back" : "Vissza"}</Button>}
-    {error && <p role="alert" className="text-red">{error}</p>}
+    {error && <p role="alert" className="text-sm text-red">{error}</p>}
   </div>;
 }

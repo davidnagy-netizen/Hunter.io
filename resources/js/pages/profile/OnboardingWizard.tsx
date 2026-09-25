@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Navigate, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
-import { Button, Panel, TextField } from "@/components/index";
+import { Button, ChipButton, Panel, TextField } from "@/components/index";
 import { useMeQuery } from "@/features/authentication/api/auth.queries";
 import { useMetaQuery } from "@/api/meta.queries";
 import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
@@ -60,27 +60,33 @@ function ProfileEditor({ profile, user }: { profile: CompanyProfile | null; user
     } catch { setError(en ? "Could not save. Please check the fields and retry." : "A mentés nem sikerült. Ellenőrizze a mezőket."); }
   }
   return <main className="mx-auto max-w-lg p-6"><Panel>
-    <h1 className="text-xl font-semibold">{step === 1 ? (en ? "Company profile" : "Vállalkozás adatai") : (en ? "Project context" : "Projektkörnyezet")}</h1>
-    {companyName && <p className="mb-2 text-sm text-muted">{companyName}</p>}
-    {step === 1 ? <>
+    <h1 className="font-display text-xl font-semibold text-text">{step === 1 ? (en ? "Company profile" : "Vállalkozás adatai") : (en ? "Project context" : "Projektkörnyezet")}</h1>
+    {companyName && <p className="mt-1 text-sm text-muted">{companyName}</p>}
+    {step === 1 ? <div className="mt-5 flex flex-col gap-4">
       <CompanyMetricsFields value={metrics} onChange={setMetrics} />
       <Button onClick={() => {
         if (metricsSchema.safeParse(metrics).success) { setStep(2); setError(""); }
         else setError(en ? "Complete all company fields." : "Töltse ki a vállalkozás összes adatát.");
       }}>{en ? "Continue" : "Tovább"}</Button>
-    </> : <div className="flex flex-col gap-4">
-      <p>{en ? "Project details are optional here and can be completed for each evaluation." : "A projektadatok itt opcionálisak; az értékeléshez később kiegészíthetők."}</p>
+    </div> : <div className="mt-5 flex flex-col gap-4">
+      <p className="text-sm text-muted">{en ? "Project details are optional here and can be completed for each evaluation." : "A projektadatok itt opcionálisak; az értékeléshez később kiegészíthetők."}</p>
       <TextField label={en ? "Project name" : "Projekt neve"} value={projectName} onChange={e => setProjectName(e.target.value)} />
       <TextField label={en ? "Planned investment (HUF)" : "Tervezett beruházás (Ft)"} type="number" min="0" value={investment} onChange={e => setInvestment(e.target.value)} />
-      <fieldset><legend>{en ? "Development goals" : "Fejlesztési célok"}</legend>
-        {meta.data?.reference.goals.map(goal => <label className="block" key={goal.id}>
-          <input type="checkbox" checked={goals.includes(goal.id)} onChange={e => setGoals(current => e.target.checked ? [...current, goal.id] : current.filter(id => id !== goal.id))} />
-          {en ? goal.label_en || goal.label : goal.label}
-        </label>)}
+      <fieldset className="flex flex-col gap-1.5">
+        <legend className="text-sm font-medium text-text">{en ? "Development goals" : "Fejlesztési célok"}</legend>
+        <div className="flex flex-wrap gap-2">
+          {meta.data?.reference.goals.map(goal => {
+            const on = goals.includes(goal.id);
+            return <ChipButton key={goal.id} selected={on}
+              onClick={() => setGoals(current => on ? current.filter(id => id !== goal.id) : [...current, goal.id])}>
+              {en ? goal.label_en || goal.label : goal.label}
+            </ChipButton>;
+          })}
+        </div>
       </fieldset>
       <Button disabled={isSaving} onClick={save}>{en ? "Save profile" : "Profil mentése"}</Button>
       <Button variant="ghost" onClick={() => setStep(1)}>{en ? "Back" : "Vissza"}</Button>
     </div>}
-    {error && <p role="alert">{error}</p>}
+    {error && <p role="alert" className="mt-4 text-sm text-red">{error}</p>}
   </Panel></main>;
 }
