@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Notifications\VerifyAccountEmail;
-use App\Services\Api\Accounts;
-use App\Services\Api\ApiError;
-use App\Services\Api\Profiles;
+use App\Services\Accounts;
+use App\Exceptions\ApiError;
+use App\Services\Profiles;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -56,24 +55,14 @@ class AccountPrivacyController
         ])->header('Content-Disposition', 'attachment; filename="fundor-personal-data.json"');
     }
 
-    public function erase(Request $r)
+    public function erase(Request $r, \App\Actions\Accounts\EraseAccount $action)
     {
         $u = $this->accounts->requireUser($r);
         $r->validate(['password' => 'required|string']);
         if (! Hash::check($r->input('password'), $u->password)) {
             throw new ApiError('BAD_CREDENTIALS', 403);
         }
-        DB::transaction(function () use ($u) {
-            foreach ($u->leads as $lead) {
-                DB::table('api_crm_records')->where('subject_id', 'lead:'.$lead->id)->delete();
-                $lead->delete();
-            }
-            DB::table('api_crm_records')->where('subject_id', (string) $u->id)->delete();
-            DB::table('sessions')->where('user_id', $u->id)->delete();
-            DB::table('password_reset_tokens')->where('email', $u->email)->delete();
-            $u->delete();
-        });
-        Cache::forget('nav-owner:'.$u->id);
+        $action->execute($u);
 
         return response()->json(['success' => true])->withoutCookie('fundor_session')->withoutCookie('fundor_signup');
     }

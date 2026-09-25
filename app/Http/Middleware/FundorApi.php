@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\User;
-use App\Services\Api\ApiError;
+use App\Exceptions\ApiError;
 use Closure;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

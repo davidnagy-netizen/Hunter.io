@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Opportunity;
-use App\Services\Api\Accounts;
-use App\Services\Api\ApiError;
-use App\Services\Api\Catalog;
-use App\Services\Api\Profiles;
-use App\Services\Api\Scoring;
+use App\Services\Accounts;
+use App\Exceptions\ApiError;
+use App\Services\Catalog;
+use App\Services\Profiles;
+use App\Services\Scoring;
 use Illuminate\Http\Request;
 
 class CatalogController
@@ -105,112 +105,11 @@ class CatalogController
         return response()->json(['success' => true, 'key' => $key, 'value' => $value, 'opportunity' => $this->accounts->entitlements($u)['explanations'] ? $full : $this->catalog->locked($full)]);
     }
 
-    public function search(Request $r)
+    public function search(Request $r, \App\Services\CatalogSearch $search)
     {
         $r->validate(['page' => 'sometimes|integer|min:1', 'pageSize' => 'sometimes|integer|min:1|max:100', 'q' => 'sometimes|nullable|string|max:500',
             'sort' => 'sometimes|nullable|in:-score,deadline,-budget', 'deadlineFrom' => 'sometimes|date_format:Y-m-d', 'deadlineTo' => 'sometimes|date_format:Y-m-d']);
         $state = $this->profiles->resolve($r);
-        $personalized = $r->boolean('personalized', true);
-        if (! $personalized) {
-            $state['profile'] = [];
-        }
-        $rows = $this->catalog->rows($state, $r->query('lang', 'hu'), true);
-        $q = trim((string) $r->query('q', ''));
-        $terms = preg_split('/[^\p{L}\p{N}]+/u', mb_strtolower($q), -1, PREG_SPLIT_NO_EMPTY);
-        $docs = array_map(fn ($o) => preg_split('/[^\p{L}\p{N}]+/u', mb_strtolower(implode(' ', [$o['title'], $o['program'], $o['id'], $o['summary'] ?? '', strip_tags($o['description'] ?? '')])), -1, PREG_SPLIT_NO_EMPTY), $rows);
-        $average = count($docs) ? max(1, array_sum(array_map('count', $docs)) / count($docs)) : 1;
-        foreach ($rows as $i => &$row) {
-            $freq = array_count_values($docs[$i]);
-            $row['relevance'] = 0;
-            foreach ($terms as $term) {
-                $df = count(array_filter($docs, fn ($d) => in_array($term, $d, true)));
-                $tf = $freq[$term] ?? 0;
-                if ($tf) {
-                    $row['relevance'] += log(1 + (count($docs) - $df + .5) / ($df + .5)) * $tf * 2.2 / ($tf + 1.2 * (.25 + .75 * count($docs[$i]) / $average));
-                }
-            }
-        }
-        unset($row);
-        $rows = array_values(array_filter($rows, function ($o) use ($r, $terms) {
-            if ($terms && $o['relevance'] <= 0) {
-                return false;
-            }
-            if ($r->boolean('awardsFunding', true) && ! $o['awardsFunding']) {
-                return false;
-            }
-            foreach (['program' => 'programShort', 'actionCode' => 'actionCode', 'goals' => 'goals', 'sectors' => 'sectors', 'orgType' => 'applicantTypes'] as $param => $key) {
-                $raw = $r->query($param);
-                if ($raw !== null && $raw !== '') {
-                    $wanted = is_array($raw) ? $raw : explode(',', $raw);
-                    if (! array_intersect($wanted, (array) ($o[$key] ?? []))) {
-                        return false;
-                    }
-                }
-            }
-            if ($r->filled('consortium') && (($o['consortium']['required'] ?? false) !== ($r->query('consortium') === 'required'))) {
-                return false;
-            }
-            if ($r->boolean('eligibleOnly') && $o['blocked']) {
-                return false;
-            }
-            if ($r->filled('minScore') && ($o['score'] === null || $o['score'] < $r->integer('minScore'))) {
-                return false;
-            }
-            if ($r->filled('deadlineFrom') && $o['deadline'] < $r->query('deadlineFrom')) {
-                return false;
-            }
-            if ($r->filled('deadlineTo') && $o['deadline'] > $r->query('deadlineTo')) {
-                return false;
-            }
-            if ($r->filled('budgetMin') && $o['fundingMax'] < (float) $r->query('budgetMin')) {
-                return false;
-            }
-            if ($r->filled('budgetMax') && $o['fundingMin'] > (float) $r->query('budgetMax')) {
-                return false;
-            }
-
-            return ! $r->filled('minIntensity') || $o['intensity'] >= (float) $r->query('minIntensity');
-        }));
-        $facets = [];
-        foreach (['program' => 'programShort', 'actionCode' => 'actionCode', 'goals' => 'goals', 'sectors' => 'sectors', 'orgType' => 'applicantTypes', 'consortium' => 'consortium'] as $facet => $field) {
-            $counts = [];
-            foreach ($rows as $o) {
-                foreach ($field === 'consortium' ? [($o['consortium']['required'] ?? false) ? 'required' : 'solo'] : array_unique((array) ($o[$field] ?? [])) as $v) {
-                    if ($v !== '') {
-                        $counts[$v] = ($counts[$v] ?? 0) + 1;
-                    }
-                }
-            }
-            $facets[$facet] = array_map(fn ($v, $count) => ['value' => (string) $v, 'count' => $count], array_keys($counts), array_values($counts));
-        }
-        $sort = $r->query('sort') ?? '';
-        usort($rows, fn ($a, $b) => (match ($sort) {
-            '-score' => ($b['score'] ?? -1) <=> ($a['score'] ?? -1), 'deadline' => $a['deadline'] <=> $b['deadline'], '-budget' => $b['fundingMax'] <=> $a['fundingMax'], default => $b['relevance'] <=> $a['relevance']
-        }) ?: strcmp($a['id'], $b['id']));
-        $total = count($rows);
-        $page = $r->integer('page', 1);
-        $size = $r->integer('pageSize', 20);
-        $rows = array_slice($rows, ($page - 1) * $size, $size);
-        $ent = $this->accounts->entitlements($r->user());
-        $results = [];
-        foreach ($rows as $i => $o) {
-            if (! $personalized) {
-                $o['score'] = null;
-                $o['band'] = null;
-                $o['estimated'] = false;
-                $o['blocked'] = false;
-                $o['verdict'] = null;
-                $o['blockedReasons'] = [];
-            }
-            $results[] = $ent['explanations'] ? $this->catalog->trim($o) : $this->catalog->teaser($o, ($page - 1) * $size + $i);
-        }
-        if ($r->user() && $q !== '') {
-            $this->accounts->activity($r->user(), 'search', ['q' => $q]);
-        }
-
-        return response()->json(['query' => $q, 'total' => $total, 'page' => $page, 'pageSize' => $size, 'sort' => $sort,
-            'personalized' => $personalized, 'profileUsed' => $personalized && $state['profile'] ? array_intersect_key($state['profile'], array_flip(['company', 'orgType', 'goals'])) + ['fromRequest' => $r->isMethod('POST')] : null,
-            'account' => $r->user() ? ['username' => $r->user()->username, 'tier' => $ent['tier']] : null,
-            'entitlements' => $ent, 'facets' => (object) $facets, 'results' => $results, 'lockedCount' => $ent['explanations'] ? 0 : count($results)]);
+        return response()->json($search->search($state, $r->all(), $r->query(), $r->user(), $r->isMethod('POST')));
     }
 }

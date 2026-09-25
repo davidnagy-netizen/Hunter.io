@@ -57,7 +57,7 @@
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -c \"#93c5fd,#fb7185\" \"php artisan serve --host=127.0.0.1 --port=8000\" \"npm --prefix frontend run dev\" --names=\"api,web\""
+            "npx concurrently -c \"#93c5fd,#fb7185\" \"php artisan serve --host=127.0.0.1 --port=8000\" \"npm run dev\" --names=\"api,web\""
         ]
     },
     "extra": {

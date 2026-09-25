@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\Services\Api\Profiles;
-use App\Services\Api\Scoring;
+use App\Services\Profiles;
+use App\Services\Scoring;
 use Illuminate\Support\Carbon;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;

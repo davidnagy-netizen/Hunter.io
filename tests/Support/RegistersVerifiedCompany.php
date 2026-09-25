@@ -2,7 +2,7 @@
 
 namespace Tests\Support;
 
-use App\Services\Api\Profiles;
+use App\Services\Profiles;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Notification;
 
@@ -19,14 +19,7 @@ trait RegistersVerifiedCompany
 
     protected function navXml(): string
     {
-        return '<QueryTaxpayerResponse xmlns="http://schemas.nav.gov.hu/OSA/3.0/api" xmlns:c="http://schemas.nav.gov.hu/NTCA/1.0/common" xmlns:b="http://schemas.nav.gov.hu/OSA/3.0/base">
-            <c:result><c:funcCode>OK</c:funcCode></c:result><taxpayerValidity>true</taxpayerValidity>
-            <taxpayerData><taxpayerName>Teszt &amp; Társ Kft.</taxpayerName><taxpayerShortName>Teszt Kft.</taxpayerShortName>
-            <taxNumberDetail><b:taxpayerId>12345676</b:taxpayerId><b:vatCode>2</b:vatCode><b:countyCode>42</b:countyCode></taxNumberDetail>
-            <incorporation>ORGANIZATION</incorporation><vatGroupMembership>10000001</vatGroupMembership>
-            <taxpayerAddressList><taxpayerAddressItem><taxpayerAddressType>HQ</taxpayerAddressType><taxpayerAddress>
-            <b:countryCode>HU</b:countryCode><b:postalCode>1117</b:postalCode><b:city>Budapest</b:city><b:streetName>Alíz</b:streetName><b:publicPlaceCategory>utca</b:publicPlaceCategory><b:number>2.</b:number>
-            </taxpayerAddress></taxpayerAddressItem></taxpayerAddressList></taxpayerData></QueryTaxpayerResponse>';
+        return file_get_contents(base_path('tests/Fixtures/nav/taxpayer.xml'));
     }
 
     protected function signupPayload(string $email = 'alice@example.com'): array

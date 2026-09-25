@@ -7,7 +7,7 @@
  * health check endpoints, and exception handling for the application.
  */
 
-use App\Services\Api\ApiError;
+use App\Exceptions\ApiError;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;

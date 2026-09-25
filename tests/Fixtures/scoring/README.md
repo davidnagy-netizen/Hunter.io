@@ -8,7 +8,7 @@ backend replaces) produced for 8 different companies and answer sets on those ca
 score, verdict, blocked/estimated flags, days left, the five factor values, and (for two companies) every factor's
 label and explanation text in Hungarian and English.
 
-`tests/Unit/ScoringParityTest.php` requires `App\Services\Api\Scoring` (with `Profiles::normalize`) to reproduce all of
+`tests/Unit/ScoringParityTest.php` requires `App\Services\Scoring` (with `Profiles::normalize`) to reproduce all of
 it. Until this existed the PHP scorer disagreed with the prototype (wrong sector codes, empty explanations); the
 prototype engine has since been retired, so this is the record of what "right" was.
 

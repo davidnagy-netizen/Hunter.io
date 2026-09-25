@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Models\Lead;
 use App\Models\Opportunity;
 use App\Models\User;
-use App\Services\Api\Accounts;
-use App\Services\Api\ApiError;
-use App\Services\Api\Catalog;
-use App\Services\Api\CatalogRefresh;
-use App\Services\Api\Profiles;
+use App\Services\Accounts;
+use App\Exceptions\ApiError;
+use App\Services\Catalog;
+use App\Services\CatalogRefresh;
+use App\Services\Profiles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -108,6 +108,8 @@ class AdminController
     {
         $this->accounts->requireUser($r, true);
 
-        return $this->refresh->run();
+        $result = $this->refresh->run();
+
+        return response()->json($result, $result['ok'] ? 200 : 502);
     }
 }

@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use App\Models\Lead;
 use App\Models\Opportunity;
 use App\Models\User;
-use App\Services\Api\Profiles;
+use App\Services\Profiles;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;

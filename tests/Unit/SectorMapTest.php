@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Services\Api\Profiles;
+use App\Services\Profiles;
 use App\Services\Sector\SectorMap;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;

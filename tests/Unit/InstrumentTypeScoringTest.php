@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit;
 
 use App\Enums\InstrumentType;
-use App\Services\Api\Scoring;
+use App\Services\Scoring;
 use Tests\TestCase;
 
 /**

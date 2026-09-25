@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\Models\User;
-use App\Services\Nav\NavTaxpayerService;
+use App\Integrations\NAV\NavClient;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Cache;
@@ -79,7 +79,7 @@ class NavTaxpayerLookupTest extends TestCase
     public function test_signature_uses_utc_timestamp_and_xml_escapes_metadata(): void
     {
         config(['nav.developer_name' => 'A & B']);
-        $xml = app(NavTaxpayerService::class)->requestXml('12345676', 'request123', '2026-09-24T01:02:03.456Z');
+        $xml = app(NavClient::class)->requestXml('12345676', 'request123', '2026-09-24T01:02:03.456Z');
         $this->assertStringContainsString(strtoupper(hash('sha3-512', 'request12320260924010203sign-key')), $xml);
         $this->assertStringContainsString('A &amp; B', $xml);
         $this->assertStringContainsString(strtoupper(hash('sha512', 'test-secret')), $xml);

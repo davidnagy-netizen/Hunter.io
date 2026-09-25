@@ -4,17 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Lead;
 use App\Models\User;
-use App\Notifications\VerifyAccountEmail;
-use App\Services\Api\Accounts;
-use App\Services\Api\ApiError;
-use App\Services\Api\CompanyMetrics;
-use App\Services\Api\Profiles;
-use App\Services\Nav\SignupVerification;
-use Illuminate\Database\UniqueConstraintViolationException;
+use App\Services\Accounts;
+use App\Exceptions\ApiError;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -29,7 +22,7 @@ class AuthController
             'entitlements' => $this->accounts->entitlements($r->user()), 'plans' => $this->accounts->plans()]);
     }
 
-    public function register(Request $r)
+    public function register(Request $r, \App\Actions\Company\RegisterCompany $action)
     {
         $data = $r->validate([
             'name' => 'required|string|max:255', 'email' => 'required|email|max:200',
@@ -38,37 +31,7 @@ class AuthController
             'accept_terms' => 'required|accepted', 'accept_privacy' => 'required|accepted',
             'marketing_opt_in' => 'sometimes|boolean', 'metrics' => 'required|array',
         ]);
-        $metrics = app(CompanyMetrics::class)->validate($data['metrics']);
-        $email = mb_strtolower(trim($data['email']));
-        try {
-            $u = DB::transaction(function () use ($r, $data, $metrics, $email) {
-                $identity = app(SignupVerification::class)->consume($r);
-                if ($identity['incorporation'] === 'SELF_EMPLOYED' && $metrics['legal_form'] !== 'ev') {
-                    throw new ApiError('LEGAL_FORM_MISMATCH', 422);
-                }
-                $u = User::create(['username' => 'f_'.bin2hex(random_bytes(12)), 'name' => $data['name'],
-                    'email' => $email, 'password' => $data['password'], 'role' => 'user',
-                    'verification_required' => true, 'last_login_at' => now()]);
-                app(Profiles::class)->save($u, $metrics + ['company' => $metrics['legal_form'] === 'ev' ? 'Egyéni vállalkozó' : $identity['company_name'],
-                    'industryId' => '', 'revBand' => '', 'goals' => [], 'funding_pref' => []], 'registration');
-                $u->companyProfile()->update([
-                    'nav_identity' => Crypt::encryptString(json_encode($identity, JSON_THROW_ON_ERROR)),
-                    'tax_base_hash' => hash_hmac('sha256', substr($identity['tax_number'], 0, 8), config('app.key')),
-                    // Sole-trader identity is exclusively in the encrypted NAV payload.
-                    'company_name' => $metrics['legal_form'] === 'ev' ? 'Egyéni vállalkozó' : $identity['company_name'],
-                ]);
-                DB::table('account_consents')->insert(['user_id' => $u->id, 'document_version' => 'rev2-2026-09',
-                    'terms' => true, 'privacy' => true, 'marketing' => $data['marketing_opt_in'] ?? false, 'accepted_at' => now()]);
-                $this->accounts->activity($u, 'account.created');
-                Lead::whereRaw('LOWER(email) = ?', [$email])->whereNull('user_id')->update(['user_id' => $u->id]);
-
-                return $u;
-            });
-        } catch (UniqueConstraintViolationException) {
-            throw new ApiError('EMAIL_TAKEN', 409);
-        }
-        // Queue after commit: mail transport failure must not roll back an already-created account.
-        $u->notify(new VerifyAccountEmail);
+        $u = $action->execute($data, $r->cookie('fundor_signup'));
 
         return $this->session($r, $u->fresh(), 201)->withoutCookie('fundor_signup');
     }

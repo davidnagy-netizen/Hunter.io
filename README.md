@@ -202,7 +202,7 @@ Fundor provides bilingual capabilities with runtime locale switching and environ
 
 ## Directory Layout
 
-The backend is a JSON API under `/api`; the user interface is the React app in `frontend/`, built into `public/spa/`
+The backend is a JSON API under `/api`; the user interface is the React app in `resources/js/`, built into `public/spa/`
 and served by one Laravel route. There are no Blade pages.
 
 ```text
@@ -228,7 +228,7 @@ and served by one Laravel route. There are no Blade pages.
 │   └── Models/                             # CompanyProfile, Lead, Opportunity, User
 ├── config/fundor.php                       # Product settings (plans, EUR/HUF, feed URL, SPA index path)
 ├── database/                               # Migrations and the OpportunitySeeder (demo calls; creates no accounts)
-├── frontend/                               # The React app (see frontend/README.md); builds to public/spa
+├── frontend/                               # The React app (see docs/frontend.md); builds to public/spa
 ├── openapi.yaml                            # The API contract — single source of truth
 ├── docs/FRONTEND-API.md                    # Setup notes and examples for the contract
 ├── routes/
@@ -292,7 +292,7 @@ php artisan test --filter=ScoringParityTest
 php artisan test --filter=SubscriberScoringTest
 
 # The frontend's tests (they read ../openapi.yaml and the recorded API responses)
-npm --prefix frontend test
+npm test
 ```
 
 ---

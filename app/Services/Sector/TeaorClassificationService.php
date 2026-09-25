@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Sector;
 
-use App\Services\Api\CompanyMetrics;
+use App\Services\CompanyMetrics;
 
 /** Compatibility facade. Fundor revenue bands do not establish statutory SME status. */
 class TeaorClassificationService

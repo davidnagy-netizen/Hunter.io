@@ -17,7 +17,7 @@ use App\Http\Controllers\Api\LeadController;
 use App\Http\Controllers\Api\NavTaxpayerController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Middleware\FundorApi;
-use App\Services\Api\CompanyMetrics;
+use App\Services\CompanyMetrics;
 use App\Services\Sector\TeaorService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;

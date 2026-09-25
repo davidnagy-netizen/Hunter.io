@@ -73,7 +73,7 @@ class SpaFallbackTest extends TestCase
 
     public function test_a_missing_build_says_how_to_make_one_instead_of_a_blank_page(): void
     {
-        $this->get('/')->assertStatus(503)->assertSee('npm --prefix frontend', false);
+        $this->get('/')->assertStatus(503)->assertSee('npm ci', false);
     }
 
     public function test_only_reads_are_answered_with_the_page(): void

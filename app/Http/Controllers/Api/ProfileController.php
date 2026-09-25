@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Services\Api\Accounts;
-use App\Services\Api\ApiError;
-use App\Services\Api\CatalogRefresh;
-use App\Services\Api\Profiles;
+use App\Services\Accounts;
+use App\Exceptions\ApiError;
+use App\Services\CatalogRefresh;
+use App\Services\Profiles;
 use Illuminate\Http\Request;
 
 class ProfileController
