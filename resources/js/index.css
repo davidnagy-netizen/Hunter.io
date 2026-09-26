@@ -50,11 +50,8 @@
   --shadow-card: 0 1px 2px rgba(16, 23, 38, 0.04), 0 8px 24px -12px rgba(16, 23, 38, 0.14);
   --shadow-card-lg: 0 2px 4px rgba(16, 23, 38, 0.05), 0 24px 48px -20px rgba(16, 23, 38, 0.28);
 
-  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
-  /* Added for the landing redesign's kickers/labels — a deliberate, "engineered" technical
-   * voice next to the display face, not a generic sans. Pairs with --font-display's "Space"
-   * family on purpose. */
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
   --font-mono: "Space Mono", "SF Mono", ui-monospace, monospace;
 }
 
@@ -66,15 +63,11 @@ body {
 }
 
 /*
- * Landing-only font swap: the marketing page's own display/mono pairing.
- * Space Grotesk + Space Mono is the same combination almost every
- * Framer/AI-template hero ships with, so the signed-in app keeps them
- * (--font-display/--font-mono above) while the landing page overrides both
- * custom properties for its own subtree only — same scoping idea as
- * --radius-control below.
+ * Landing-only mono accent for its kickers/labels — a deliberate, "engineered" technical voice
+ * next to the shared --font-display, not a generic sans. Same scoping idea as --radius-control
+ * below: this custom property only overrides for the landing page's own subtree.
  */
 .landing-page {
-  --font-display: "Bricolage Grotesque", "Space Grotesk", "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "Space Mono", "SF Mono", ui-monospace, monospace;
 }
 

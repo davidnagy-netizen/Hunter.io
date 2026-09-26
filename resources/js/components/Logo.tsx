@@ -1,5 +1,6 @@
 import { BRAND } from "../brand";
-import { TargetIcon } from "./icons";
+
+const LOGO_URL = `${import.meta.env.BASE_URL}fundor.svg`;
 
 interface Logo {
   dark?: boolean;
@@ -15,9 +16,7 @@ export function Logo({ dark = false, onClick }: Logo) {
         dark ? "text-white" : "text-ink",
       ].join(" ")}
     >
-      <span className="flex size-8 items-center justify-center rounded-md bg-ink-2 text-gold">
-        <TargetIcon size={20} />
-      </span>
+      <img src={LOGO_URL} alt="" className="size-8" />
       <span className="flex flex-col leading-none">
         <span className="font-display text-base font-semibold tracking-wide">
           {BRAND.wordmark}

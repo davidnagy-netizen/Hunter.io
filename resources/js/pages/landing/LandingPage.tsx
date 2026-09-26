@@ -16,6 +16,7 @@ import { ScrollProgressBar } from "@/features/landing/components/ScrollProgressB
 import { Sources } from "@/features/landing/components/Sources";
 import { Statement } from "@/features/landing/components/Statement";
 import { TrustStrip } from "@/features/landing/components/TrustStrip";
+import { useLenisScroll } from "@/features/landing/hooks/useLenisScroll";
 
 // The chapter colors `ChapterSeam` bridges between — kept as named
 // constants rather than re-reading them from CSS, since a seam needs the
@@ -62,8 +63,14 @@ const COLOR_PAPER = "#f5f7fa";
  * produce — its `from`/`to` must match each neighbor's own resolved edge
  * color exactly (chapter one's gradient *ends* at ink-3, so that's the
  * color to hand the seam, not the root's own ink).
+ *
+ * `useLenisScroll` smooths native scroll for the whole page — set up once
+ * here, not per-component, since every scroll-driven effect below (the
+ * coin drop, the chapter seams, the hero's own parallax) reads scroll
+ * position, and they need to be reading the *same*, one, smoothed value.
  */
 export function LandingPage() {
+  useLenisScroll();
   const user = useCurrentUser();
   const { profile } = useCompanyProfile();
 

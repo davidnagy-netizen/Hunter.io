@@ -17,13 +17,10 @@ describe("Hero", () => {
     expect(secondary.className).not.toContain("bg-gold");
   });
 
-  it("keeps the photo panel decorative — the score preview is the hero's real content", () => {
-    // The backdrop photo is `alt=""` (and `aria-hidden` on its wrapper): purely a visual, never
-    // competing with the score preview card, which carries the actual product content.
+  it("mounts a 3D scene alongside the pitch — decorative, never the only content", () => {
+    // The coin scene is a <canvas>, so it carries no text of its own for assistive tech; the
+    // heading/CTA assertions above are what prove the hero's actual content still renders.
     const { container } = renderWithProviders(<Hero />);
-    const images = container.querySelectorAll("img");
-    expect(images.length).toBeGreaterThan(0);
-    for (const img of images) expect(img).toHaveAttribute("alt", "");
-    expect(screen.getByText(/GINOP/)).toBeInTheDocument();
+    expect(container.querySelector("canvas")).toBeInTheDocument();
   });
 });
