@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
 import { formatTaxNumber, isValidTaxNumber } from '@/lib/taxNumber';
 import type { LandingCopy } from '../../data/landingContent';
+import { AnimatedSplitBar } from './AnimatedProgressBar';
 
 type TabId = 'grants' | 'loans' | 'nav';
 
@@ -134,10 +135,13 @@ export function FeatureTabs({ copy }: { copy: LandingCopy['features'] }) {
                     <span>Támogatási arány</span>
                     <span>50% támogatás / 50% saját erő</span>
                   </div>
-                  <div className="h-3 w-full rounded-full bg-[#E6E4DF] overflow-hidden flex" aria-hidden="true">
-                    <div className="h-full bg-[#FE7743] w-1/2" />
-                    <div className="h-full bg-[#273F4F] w-1/2" />
-                  </div>
+                  <AnimatedSplitBar
+                    className="h-3 w-full rounded-full bg-[#E6E4DF] overflow-hidden flex"
+                    segments={[
+                      { value: 50, className: 'bg-[#FE7743]' },
+                      { value: 50, className: 'bg-[#273F4F]' },
+                    ]}
+                  />
                   <div className="mt-2 flex items-center justify-between text-[11px] text-[#687984]">
                     <span>Vissza nem térítendő forrás</span>
                     <span>Megvalósítási idő: {copy.grants.timeline}</span>

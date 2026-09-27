@@ -4,6 +4,8 @@ import { homePathFor } from '@/features/authentication/lib/homePath';
 import { useCompanyProfile } from '@/features/profile/hooks/useCompanyProfile';
 import { useUiStore } from '@/store/uiStore';
 import { landingContent } from '../../../../src/data/landingContent';
+import { GsapReveal } from '../../../../src/components/landing/GsapReveal';
+import { useLenisScroll } from '../../../../src/components/landing/hooks/useLenisScroll';
 import { LandingNavbar } from '../../../../src/components/landing/LandingNavbar';
 import { HeroSection } from '../../../../src/components/landing/HeroSection';
 import { FeatureTabs } from '../../../../src/components/landing/FeatureTabs';
@@ -25,6 +27,7 @@ export function LandingPage() {
   const { profile } = useCompanyProfile();
   const lang = useUiStore(state => state.lang);
   const copy = landingContent[lang];
+  useLenisScroll();
 
   if (user && (user.role === 'admin' || profile))
     return <Navigate to={homePathFor(user)} replace />;
@@ -34,16 +37,16 @@ export function LandingPage() {
     <LandingNavbar copy={copy.nav} hasProfile={Boolean(profile)} />
     <main id="landing-main" tabIndex={-1}>
       <HeroSection copy={copy.hero} />
-      <FeatureTabs copy={copy.features} />
-      <StatCounter copy={copy.stats} lang={lang} />
-      <EntrepreneurBanner copy={copy.entrepreneur} />
-      <ValueProposition copy={copy.value} disclaimer={copy.disclaimer} />
-      <QuickActionBar copy={copy.quickAction} />
-      <UseCases copy={copy.useCases} />
-      <EditorialJourney copy={copy.journey} />
-      <CaseStudyCarousel copy={copy.cases} />
-      <PlanCards copy={copy.plans} hasProfile={Boolean(profile)} disclaimer={copy.disclaimer} />
-      <FaqSection copy={copy.faq} />
+      <GsapReveal><FeatureTabs copy={copy.features} /></GsapReveal>
+      <GsapReveal><StatCounter copy={copy.stats} lang={lang} /></GsapReveal>
+      <GsapReveal><EntrepreneurBanner copy={copy.entrepreneur} /></GsapReveal>
+      <GsapReveal><ValueProposition copy={copy.value} disclaimer={copy.disclaimer} /></GsapReveal>
+      <GsapReveal><QuickActionBar copy={copy.quickAction} /></GsapReveal>
+      <GsapReveal><UseCases copy={copy.useCases} /></GsapReveal>
+      <GsapReveal><EditorialJourney copy={copy.journey} /></GsapReveal>
+      <GsapReveal><CaseStudyCarousel copy={copy.cases} /></GsapReveal>
+      <GsapReveal><PlanCards copy={copy.plans} hasProfile={Boolean(profile)} disclaimer={copy.disclaimer} /></GsapReveal>
+      <GsapReveal><FaqSection copy={copy.faq} /></GsapReveal>
     </main>
     <Footer copy={copy.footer} disclaimer={copy.disclaimer} />
   </div>;

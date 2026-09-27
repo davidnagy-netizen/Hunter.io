@@ -1,5 +1,6 @@
 import { Binary, ShieldCheck, Scale, Check, AlertCircle } from 'lucide-react';
 import type { LandingCopy } from '../../data/landingContent';
+import { AnimatedProgressBar } from './AnimatedProgressBar';
 
 /**
  * Details algorithmic scoring criteria, TEÁOR classification, and explicit grant-versus-loan separation.
@@ -102,9 +103,12 @@ export function ValueProposition({
                   <span>{isHu ? 'Fundor Readiness Score (Adatok teljessége)' : 'Fundor Readiness Score (Data completeness)'}</span>
                   <span className="font-mono text-[#161616]">92%</span>
                 </div>
-                <div className="h-2.5 w-full rounded-full bg-[#E6E4DF] overflow-hidden" role="progressbar" aria-valuenow={92} aria-valuemin={0} aria-valuemax={100} aria-label={isHu ? 'Adatok teljessége' : 'Data completeness'}>
-                  <div className="h-full rounded-full bg-[#FE7743]" style={{ width: '92%' }} />
-                </div>
+                <AnimatedProgressBar
+                  value={92}
+                  className="h-2.5 w-full rounded-full bg-[#E6E4DF] overflow-hidden"
+                  fillClassName="bg-[#FE7743]"
+                  ariaLabel={isHu ? 'Adatok teljessége' : 'Data completeness'}
+                />
               </div>
 
               {/* Criteria Weighting Breakdown */}
@@ -114,9 +118,12 @@ export function ValueProposition({
                     <span>{isHu ? 'Tevékenységi fókusz (TEÁOR’25 egyezés)' : 'Activity focus (TEÁOR’25 match)'}</span>
                     <span className="font-mono text-[#687984]">40% súly • 95% illeszkedés</span>
                   </div>
-                  <div className="h-2 w-full rounded-full bg-[#F7F6F4] overflow-hidden">
-                    <div className="h-full rounded-full bg-[#FE7743]" style={{ width: '95%' }} />
-                  </div>
+                  <AnimatedProgressBar
+                    value={95}
+                    className="h-2 w-full rounded-full bg-[#F7F6F4] overflow-hidden"
+                    fillClassName="bg-[#FE7743]"
+                    ariaLabel={isHu ? 'Tevékenységi fókusz illeszkedés' : 'Activity focus match'}
+                  />
                 </div>
 
                 <div>
@@ -124,9 +131,12 @@ export function ValueProposition({
                     <span>{isHu ? 'Pénzügyi stabilitás (Lezárt évek és mérleg)' : 'Financial stability (Closed years & balance)'}</span>
                     <span className="font-mono text-[#687984]">30% súly • 85% illeszkedés</span>
                   </div>
-                  <div className="h-2 w-full rounded-full bg-[#F7F6F4] overflow-hidden">
-                    <div className="h-full rounded-full bg-[#273F4F]" style={{ width: '85%' }} />
-                  </div>
+                  <AnimatedProgressBar
+                    value={85}
+                    className="h-2 w-full rounded-full bg-[#F7F6F4] overflow-hidden"
+                    fillClassName="bg-[#273F4F]"
+                    ariaLabel={isHu ? 'Pénzügyi stabilitás illeszkedés' : 'Financial stability match'}
+                  />
                 </div>
 
                 <div>
@@ -134,9 +144,12 @@ export function ValueProposition({
                     <span>{isHu ? 'Régiós prioritás (Telephely konvergencia)' : 'Regional priority (Convergence location)'}</span>
                     <span className="font-mono text-[#687984]">30% súly • 80% illeszkedés</span>
                   </div>
-                  <div className="h-2 w-full rounded-full bg-[#F7F6F4] overflow-hidden">
-                    <div className="h-full rounded-full bg-[#273F4F]" style={{ width: '80%' }} />
-                  </div>
+                  <AnimatedProgressBar
+                    value={80}
+                    className="h-2 w-full rounded-full bg-[#F7F6F4] overflow-hidden"
+                    fillClassName="bg-[#273F4F]"
+                    ariaLabel={isHu ? 'Régiós prioritás illeszkedés' : 'Regional priority match'}
+                  />
                 </div>
               </div>
             </div>

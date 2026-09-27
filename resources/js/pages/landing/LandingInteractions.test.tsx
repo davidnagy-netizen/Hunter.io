@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { act, fireEvent, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { renderWithProviders } from '@/test/renderWithProviders';
@@ -147,7 +147,7 @@ describe('LandingInteractions', () => {
   });
 
   describe('CaseStudyCarousel interactions', () => {
-    it('advances, wraps, and updates active slide without autoplay', async () => {
+    it('advances, wraps, and updates active slide via manual controls', async () => {
       const user = userEvent.setup();
       renderWithProviders(<CaseStudyCarousel copy={hu.cases} />);
 
@@ -170,6 +170,37 @@ describe('LandingInteractions', () => {
       await user.click(prevBtn);
       expect(screen.getByText(slides[slides.length - 1].title)).toBeInTheDocument();
       expect(screen.getByRole('status')).toHaveTextContent(`${slides.length} / ${slides.length}`);
+    });
+
+    it('autoplays on an interval and pauses while hovered', () => {
+      vi.useFakeTimers();
+      try {
+        const { container } = renderWithProviders(<CaseStudyCarousel copy={hu.cases} />);
+        const slides = hu.cases.slides;
+        const section = container.querySelector('section')!;
+
+        expect(screen.getByText(slides[0].title)).toBeInTheDocument();
+
+        act(() => {
+          vi.advanceTimersByTime(6000);
+        });
+        expect(screen.getByText(slides[1].title)).toBeInTheDocument();
+
+        fireEvent.mouseEnter(section);
+        act(() => {
+          vi.advanceTimersByTime(6000);
+        });
+        // Hovered: the timer that would advance to slide 3 never fires.
+        expect(screen.getByText(slides[1].title)).toBeInTheDocument();
+
+        fireEvent.mouseLeave(section);
+        act(() => {
+          vi.advanceTimersByTime(6000);
+        });
+        expect(screen.getByText(slides[2 % slides.length].title)).toBeInTheDocument();
+      } finally {
+        vi.useRealTimers();
+      }
     });
   });
 });
