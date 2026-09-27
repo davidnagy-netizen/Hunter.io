@@ -28,13 +28,13 @@ export function LandingNavbar({ copy, hasProfile }: { copy: LandingCopy['nav']; 
 
 
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-[#E6E4DF] bg-[#FFFFFF]/95 backdrop-blur-md">
       <nav aria-label={copy.label} className="landing-wrap flex flex-wrap items-center justify-between min-h-[72px] py-2">
-        <a href="https://fundor.hu" className="flex items-center gap-3 py-1 font-semibold text-slate-900 no-underline focus-visible:rounded-lg">
+        <a href="https://fundor.hu" className="flex items-center gap-3 py-1 font-semibold text-[#161616] no-underline focus-visible:rounded-lg">
           <img src={`${import.meta.env.BASE_URL}fundor.svg`} alt="" className="h-8 w-8" />
           <span className="flex flex-col leading-none">
-            <span className="text-2xl tracking-tight font-extrabold text-slate-950">{copy.brand}</span>
-            <span className="text-sm font-medium text-slate-500 mt-0.5">{copy.domain}</span>
+            <span className="text-2xl tracking-tight font-extrabold text-[#161616]">{copy.brand}</span>
+            <span className="text-sm font-medium text-[#687984] mt-0.5">{copy.domain}</span>
           </span>
         </a>
 
@@ -43,7 +43,7 @@ export function LandingNavbar({ copy, hasProfile }: { copy: LandingCopy['nav']; 
             <a
               key={link.href}
               href={link.href}
-              className="text-[17px] font-semibold text-slate-800 transition-colors hover:text-blue-700 focus-visible:rounded-md"
+              className="text-[17px] font-semibold text-[#273F4F] transition-colors hover:text-[#FE7743] focus-visible:rounded-md"
             >
               {link.label}
             </a>
@@ -73,7 +73,7 @@ export function LandingNavbar({ copy, hasProfile }: { copy: LandingCopy['nav']; 
             aria-expanded={open}
             aria-controls={menuId}
             onClick={() => setOpen((prev) => !prev)}
-            className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-slate-300 p-2 text-slate-700 hover:bg-slate-100 focus-visible:ring-2 focus-visible:ring-blue-700"
+            className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-[#D9D8D5] p-2 text-[#273F4F] hover:bg-[#F7F6F4] focus-visible:ring-2 focus-visible:ring-[#FE7743]"
           >
             {open ? <X size={20} aria-hidden /> : <Menu size={20} aria-hidden />}
             <span className="ml-1 text-base font-medium">{copy.menu}</span>
@@ -81,18 +81,18 @@ export function LandingNavbar({ copy, hasProfile }: { copy: LandingCopy['nav']; 
         </div>
 
         {open && (
-          <div id={menuId} className="mt-2 flex w-full flex-col gap-3 border-t border-slate-200 pt-4 pb-3 lg:hidden">
+          <div id={menuId} className="mt-2 flex w-full flex-col gap-3 border-t border-[#E6E4DF] pt-4 pb-3 lg:hidden">
             {copy.links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="flex min-h-[44px] items-center text-lg font-medium text-slate-800 hover:text-blue-700"
+                className="flex min-h-[44px] items-center text-lg font-medium text-[#273F4F] hover:text-[#FE7743]"
               >
                 {link.label}
               </a>
             ))}
-            <div className="mt-2 flex flex-col gap-2 border-t border-slate-100 pt-3">
+            <div className="mt-2 flex flex-col gap-2 border-t border-[#E6E4DF] pt-3">
               {hasProfile ? (
                 <Link to="/app" onClick={() => setOpen(false)} className="landing-cta landing-cta-secondary w-full">
                   {copy.app}
