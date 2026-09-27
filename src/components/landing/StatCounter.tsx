@@ -17,27 +17,25 @@ export function StatCounter({ copy, lang }: { copy: LandingCopy['stats']; lang: 
     : null;
 
   return (
-    <section className="border-t border-slate-200/80 bg-slate-50/60 py-10 sm:py-16 lg:py-20">
-      <div className="landing-canvas relative overflow-hidden rounded-[28px] sm:rounded-[36px] lg:rounded-[40px] border border-blue-200/70 bg-[#eaf2fd] p-8 sm:p-14 lg:p-20 text-slate-950 shadow-sm">
+    <section className="border-t border-[#E6E4DF] bg-[#FFFFFF] py-10 sm:py-16 lg:py-20">
+      <div className="landing-canvas landing-canvas-data relative overflow-hidden rounded-[28px] sm:rounded-[36px] lg:rounded-[40px] border border-[#202F38] bg-[#273F4F] p-8 sm:p-14 lg:p-20 text-[#EFEEEA] shadow-sm">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
           {/* Left Column: Oversized Market Metrics (50%) */}
           <div className="flex flex-col items-start lg:col-span-6">
-            <span className="text-xs font-mono font-bold tracking-widest text-blue-800 uppercase mb-3 inline-block">
+            <span className="text-xs font-mono font-bold tracking-widest text-[#D4D9DC] uppercase mb-3 inline-block">
               {copy.eyebrow}
             </span>
-            <h2 className="text-slate-950 font-bold tracking-tight">{copy.title}</h2>
-            <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl">{copy.note}</p>
-
+            <h2 className="text-[#EFEEEA] font-bold tracking-tight">{copy.title}</h2>
+            <p className="mt-3 text-sm sm:text-base text-[#D4D9DC] leading-relaxed max-w-xl">{copy.note}</p>
             {/* High-impact two-metric national coverage panel */}
             <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 items-start w-full">
               {/* Metric 1: Catalogue Total */}
               <div className="flex min-h-[140px] flex-col justify-start">
                 {isLoading && !data && (
-                  <div role="status" className="text-xl font-bold text-slate-700">
+                  <div role="status" className="text-xl font-bold text-[#D4D9DC]">
                     {copy.loading}
                   </div>
                 )}
-
                 {isError && !data && (
                   <div className="flex flex-col items-start gap-3">
                     <p role="alert" className="text-sm font-bold text-rose-700">
@@ -56,27 +54,26 @@ export function StatCounter({ copy, lang }: { copy: LandingCopy['stats']; lang: 
                 )}
 
                 {!isLoading && !isError && !hasValidCount && (
-                  <p className="text-lg font-semibold text-slate-700">{copy.empty}</p>
+                  <p className="text-lg font-semibold text-[#D4D9DC]">{copy.empty}</p>
                 )}
 
                 {hasValidCount && (
                   <div>
-                    <div className="catalogue-number text-slate-950 font-extrabold tracking-tighter">
+                    <div className="catalogue-number text-[#EFEEEA] font-extrabold tracking-tighter">
                       {formattedCount}
                     </div>
-                    <div className="mt-3 text-lg sm:text-xl font-bold text-slate-900 tracking-tight">{copy.label}</div>
-                    <div className="mt-1 text-xs font-medium text-slate-600">{copy.source}</div>
+                    <div className="mt-3 text-lg sm:text-xl font-bold text-[#EFEEEA] tracking-tight">{copy.label}</div>
+                    <div className="mt-1 text-xs font-medium text-[#D4D9DC]">{copy.source}</div>
                   </div>
                 )}
-
                 {isError && data && (
                   <div className="mt-4 flex items-center gap-3">
-                    <span className="text-xs font-medium text-amber-900">{copy.refreshError}</span>
+                    <span className="text-xs font-medium text-[#FEA07B]">{copy.refreshError}</span>
                     <button
                       type="button"
                       onClick={() => refetch()}
                       disabled={isFetching}
-                      className="text-xs font-bold text-blue-700 hover:underline"
+                      className="text-xs font-bold text-[#FE7743] hover:underline"
                     >
                       {copy.retry}
                     </button>
@@ -86,14 +83,14 @@ export function StatCounter({ copy, lang }: { copy: LandingCopy['stats']; lang: 
 
               {/* Metric 2: Monumental '4' Priority Regions */}
               {copy.highlightStat && copy.highlightLabel && (
-                <div className="flex flex-col justify-start border-t sm:border-t-0 sm:border-l border-blue-200/80 pt-6 sm:pt-0 sm:pl-6">
-                  <div className="text-7xl sm:text-8xl lg:text-9xl font-black text-blue-700 leading-none">
+                <div className="flex flex-col justify-start border-t sm:border-t-0 sm:border-l border-[#687984]/50 pt-6 sm:pt-0 sm:pl-6">
+                  <div className="text-7xl sm:text-8xl lg:text-9xl font-black text-[#FE7743] leading-none">
                     {copy.highlightStat}
                   </div>
-                  <div className="mt-3 text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
+                  <div className="mt-3 text-lg sm:text-xl font-bold text-[#EFEEEA] tracking-tight">
                     {copy.highlightLabel}
                   </div>
-                  <div className="mt-1 text-xs font-medium text-slate-600">
+                  <div className="mt-1 text-xs font-medium text-[#BEC5CA]">
                     {lang === 'hu' ? 'Kiemelt támogatási övezetek' : 'Priority convergence zones'}
                   </div>
                 </div>
@@ -105,9 +102,9 @@ export function StatCounter({ copy, lang }: { copy: LandingCopy['stats']; lang: 
               {copy.regions && copy.regions.map((region) => (
                 <span
                   key={region}
-                  className="inline-flex items-center rounded-full bg-white/90 border border-blue-200/80 px-3.5 py-1.5 text-xs font-bold text-slate-800 shadow-2xs"
+                  className="inline-flex items-center rounded-full bg-[#202F38] border border-[#687984] px-3.5 py-1.5 text-xs font-bold text-[#EFEEEA] shadow-2xs"
                 >
-                  <span className="h-1.5 w-1.5 rounded-full bg-blue-600 mr-2" aria-hidden="true" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#FE7743] mr-2" aria-hidden="true" />
                   {region}
                 </span>
               ))}
@@ -120,13 +117,13 @@ export function StatCounter({ copy, lang }: { copy: LandingCopy['stats']; lang: 
               <svg viewBox="0 0 500 400" className="w-full drop-shadow-lg" aria-hidden="true">
                 <defs>
                   <radialGradient id="globeGrad" cx="40%" cy="40%" r="60%">
-                    <stop offset="0%" stopColor="#ffffff" />
-                    <stop offset="60%" stopColor="#e2ecf9" />
-                    <stop offset="100%" stopColor="#bfdbfe" />
+                    <stop offset="0%" stopColor="#202F38" />
+                    <stop offset="60%" stopColor="#273F4F" />
+                    <stop offset="100%" stopColor="#1E2A32" />
                   </radialGradient>
                   <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#1d4ed8" />
-                    <stop offset="100%" stopColor="#059669" />
+                    <stop offset="0%" stopColor="#FE7743" />
+                    <stop offset="100%" stopColor="#FEA07B" />
                   </linearGradient>
                   <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
                     <feGaussianBlur stdDeviation="4" result="blur" />
@@ -134,32 +131,32 @@ export function StatCounter({ copy, lang }: { copy: LandingCopy['stats']; lang: 
                   </filter>
                 </defs>
                 {/* Sphere background */}
-                <circle cx="250" cy="200" r="160" fill="url(#globeGrad)" stroke="#93c5fd" strokeWidth="1.5" />
+                <circle cx="250" cy="200" r="160" fill="url(#globeGrad)" stroke="#687984" strokeWidth="1.5" strokeOpacity="0.6" />
                 {/* Meridians and parallels */}
-                <ellipse cx="250" cy="200" rx="160" ry="55" fill="none" stroke="#60a5fa" strokeWidth="1" strokeDasharray="3 3" opacity="0.5" />
-                <ellipse cx="250" cy="200" rx="160" ry="110" fill="none" stroke="#60a5fa" strokeWidth="1" strokeDasharray="3 3" opacity="0.5" />
-                <ellipse cx="250" cy="200" rx="60" ry="160" fill="none" stroke="#60a5fa" strokeWidth="1" strokeDasharray="3 3" opacity="0.5" />
-                <ellipse cx="250" cy="200" rx="115" ry="160" fill="none" stroke="#60a5fa" strokeWidth="1" strokeDasharray="3 3" opacity="0.5" />
-                <line x1="90" y1="200" x2="410" y2="200" stroke="#3b82f6" strokeWidth="1.5" opacity="0.4" />
-                <line x1="250" y1="40" x2="250" y2="360" stroke="#3b82f6" strokeWidth="1.5" opacity="0.4" />
+                <ellipse cx="250" cy="200" rx="160" ry="55" fill="none" stroke="#EFEEEA" strokeWidth="1" strokeDasharray="3 3" opacity="0.2" />
+                <ellipse cx="250" cy="200" rx="160" ry="110" fill="none" stroke="#EFEEEA" strokeWidth="1" strokeDasharray="3 3" opacity="0.2" />
+                <ellipse cx="250" cy="200" rx="60" ry="160" fill="none" stroke="#EFEEEA" strokeWidth="1" strokeDasharray="3 3" opacity="0.2" />
+                <ellipse cx="250" cy="200" rx="115" ry="160" fill="none" stroke="#EFEEEA" strokeWidth="1" strokeDasharray="3 3" opacity="0.2" />
+                <line x1="90" y1="200" x2="410" y2="200" stroke="#687984" strokeWidth="1.5" opacity="0.4" />
+                <line x1="250" y1="40" x2="250" y2="360" stroke="#687984" strokeWidth="1.5" opacity="0.4" />
                 {/* Regional connection arcs and nodes */}
                 <path d="M 160 170 Q 250 80 340 160" fill="none" stroke="url(#arcGrad)" strokeWidth="3.5" filter="url(#glow)" />
                 <path d="M 190 250 Q 270 160 350 230" fill="none" stroke="url(#arcGrad)" strokeWidth="2.5" strokeDasharray="5 5" />
-                <path d="M 170 140 Q 230 240 320 250" fill="none" stroke="#1d4ed8" strokeWidth="2.5" opacity="0.85" />
+                <path d="M 170 140 Q 230 240 320 250" fill="none" stroke="#FE7743" strokeWidth="2.5" opacity="0.9" />
                 {/* Network nodes */}
-                <circle cx="160" cy="170" r="7" fill="#1d4ed8" />
-                <circle cx="160" cy="170" r="3" fill="#ffffff" />
-                <circle cx="340" cy="160" r="8" fill="#059669" />
-                <circle cx="340" cy="160" r="3.5" fill="#ffffff" />
-                <circle cx="190" cy="250" r="6" fill="#1d4ed8" />
-                <circle cx="350" cy="230" r="6" fill="#059669" />
-                <circle cx="250" cy="130" r="5" fill="#0f172a" />
-                <circle cx="320" cy="250" r="7" fill="#1e40af" />
-                <circle cx="250" cy="200" r="9" fill="#1d4ed8" />
-                <circle cx="250" cy="200" r="4" fill="#ffffff" />
+                <circle cx="160" cy="170" r="7" fill="#FE7743" />
+                <circle cx="160" cy="170" r="3" fill="#EFEEEA" />
+                <circle cx="340" cy="160" r="8" fill="#FE7743" />
+                <circle cx="340" cy="160" r="3.5" fill="#EFEEEA" />
+                <circle cx="190" cy="250" r="6" fill="#FEA07B" />
+                <circle cx="350" cy="230" r="6" fill="#FEA07B" />
+                <circle cx="250" cy="130" r="5" fill="#EFEEEA" />
+                <circle cx="320" cy="250" r="7" fill="#FE7743" />
+                <circle cx="250" cy="200" r="9" fill="#FE7743" />
+                <circle cx="250" cy="200" r="4" fill="#EFEEEA" />
               </svg>
             </div>
-            <p className="mt-4 max-w-md text-center text-xs font-medium leading-relaxed text-slate-600">{copy.region}</p>
+            <p className="mt-4 max-w-md text-center text-xs font-medium leading-relaxed text-[#BEC5CA]">{copy.region}</p>
           </div>
         </div>
       </div>
