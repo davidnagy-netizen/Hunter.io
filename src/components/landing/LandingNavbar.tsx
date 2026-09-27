@@ -1,9 +1,16 @@
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { Menu, X } from "lucide-react";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type MouseEvent } from "react";
 import { Link } from "react-router";
 import type { LandingCopy } from "../../data/landingContent";
 import { ScrollTrigger } from "./lib/gsap";
+import { scrollToHash } from "./hooks/useLenisScroll";
+
+function handleAnchorClick(e: MouseEvent<HTMLAnchorElement>, href: string) {
+  if (!href.startsWith("#")) return;
+  e.preventDefault();
+  scrollToHash(href);
+}
 
 export function LandingNavbar({
   copy,
@@ -76,6 +83,7 @@ export function LandingNavbar({
             <a
               key={link.href}
               href={link.href}
+              onClick={(e) => handleAnchorClick(e, link.href)}
               className="landing-nav-link text-[17px] font-semibold text-brand-slate transition-colors hover:text-brand-orange focus-visible:rounded-md"
             >
               {link.label}
@@ -132,7 +140,10 @@ export function LandingNavbar({
               <a
                 key={link.href}
                 href={link.href}
-                onClick={() => setOpen(false)}
+                onClick={(e) => {
+                  setOpen(false);
+                  handleAnchorClick(e, link.href);
+                }}
                 className="flex min-h-11 items-center text-lg font-medium text-brand-slate hover:text-brand-orange"
               >
                 {link.label}
