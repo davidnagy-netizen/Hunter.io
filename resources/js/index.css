@@ -7,10 +7,14 @@
  * utilities (bg-gold, text-muted, rounded-lg, shadow-card, font-display, ...).
  */
 @theme {
+  --color-brand-orange: #FE7743;
+  --color-brand-cream: #EFEEEA;
+  --color-brand-slate: #273F4F;
+  --color-brand-ink: #161616;
+
   --color-ink: #0e1726;
   --color-ink-2: #16233a;
   --color-ink-3: #1e3050;
-
   --color-paper: #f5f7fa;
   --color-surface: #ffffff;
   --color-surface-2: #fbfcfd;
