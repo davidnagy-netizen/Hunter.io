@@ -1,5 +1,5 @@
-import { Link } from 'react-router';
-import type { LandingCopy } from '../../data/landingContent';
+import { Link } from "react-router";
+import type { LandingCopy } from "../../data/landingContent";
 
 /**
  * Concludes the public interface with navigational anchors, legal-document dispatch channels, and mandatory disclosures.
@@ -9,7 +9,7 @@ export function Footer({
   copy,
   disclaimer,
 }: {
-  copy: LandingCopy['footer'];
+  copy: LandingCopy["footer"];
   disclaimer: string;
 }) {
   return (
@@ -22,11 +22,15 @@ export function Footer({
               <img
                 src={`${import.meta.env.BASE_URL}fundor.svg`}
                 alt=""
-                className="h-8 w-8 brightness-0 invert"
+                className="size-10"
               />
               <div className="flex flex-col leading-none">
-                <span className="text-xl font-extrabold tracking-tight text-[#EFEEEA]">{copy.brand}</span>
-                <span className="text-xs font-medium text-[#939FA7] mt-1">{copy.domain}</span>
+                <span className="text-xl font-extrabold tracking-tight text-[#EFEEEA]">
+                  {copy.brand}
+                </span>
+                <span className="text-xs font-medium text-[#939FA7] mt-1">
+                  {copy.domain}
+                </span>
               </div>
             </div>
             <p className="mt-5 max-w-md text-xs sm:text-[13px] leading-relaxed text-[#939FA7] font-medium">
@@ -42,7 +46,7 @@ export function Footer({
             <ul className="mt-4 space-y-2.5 text-sm font-medium">
               {copy.links.map((link) => (
                 <li key={link.href}>
-                  {link.href.startsWith('#') ? (
+                  {link.href.startsWith("#") ? (
                     <a
                       href={link.href}
                       className="inline-block py-1 text-[#BEC5CA] transition-colors hover:text-[#FE7743] focus-visible:text-[#EFEEEA] focus-visible:outline-none focus-visible:underline"
@@ -105,7 +109,9 @@ export function Footer({
 
         <div className="mt-16 border-t border-[#EFEEEA]/10 pt-8 text-xs font-medium text-[#687984] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <p>{copy.copyright}</p>
-          <p className="text-[#687984]">Fundor Intelligence Systems • Budapest</p>
+          <p className="text-[#687984]">
+            Fundor Intelligence Systems • Budapest
+          </p>
         </div>
       </div>
     </footer>

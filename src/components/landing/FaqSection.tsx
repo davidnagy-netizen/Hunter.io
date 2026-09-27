@@ -1,11 +1,87 @@
-import { useState } from 'react';
+import { useId, useLayoutEffect, useRef, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import comparisonBlueprints from '@/features/landing/assets/comparison-blueprints.jpg';
+import { usePrefersReducedMotion } from '@/composables/usePrefersReducedMotion';
 import type { LandingCopy } from '../../data/landingContent';
+import { gsap } from './lib/gsap';
+
+type FaqQuestion = LandingCopy['faq']['questions'][number];
+
+/**
+ * A native `<details>` snaps open/closed with no way to hook a transition into that — the browser
+ * toggles its layout in one frame. This swaps it for a button + height-animated panel that looks
+ * and behaves the same (same `aria-expanded` contract) but eases the reveal instead of popping it.
+ */
+function FaqItem({ item, copy }: { item: FaqQuestion; copy: LandingCopy['faq'] }) {
+  const [open, setOpen] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
+  const panelId = useId();
+  const reducedMotion = usePrefersReducedMotion();
+
+  useLayoutEffect(() => {
+    const panel = panelRef.current;
+    const inner = innerRef.current;
+    if (!panel || !inner) return;
+
+    if (reducedMotion) {
+      panel.style.height = open ? 'auto' : '0px';
+      panel.style.opacity = open ? '1' : '0';
+      return;
+    }
+
+    // Measuring `inner`'s natural height works even while `panel` clips it to 0: `offsetHeight`
+    // is intrinsic to the element, unaffected by an ancestor's `overflow`/`height`.
+    const targetHeight = open ? inner.offsetHeight : 0;
+    gsap.to(panel, {
+      height: targetHeight,
+      opacity: open ? 1 : 0,
+      duration: 0.35,
+      ease: 'power2.out',
+      onComplete: () => {
+        // Left at a fixed height, a later window resize or copy change couldn't grow the panel;
+        // `auto` lets it reflow naturally once the opening animation itself no longer needs a
+        // fixed pixel value to animate toward.
+        if (open) panel.style.height = 'auto';
+      },
+    });
+  }, [open, reducedMotion]);
+
+  return (
+    <div className="group rounded-2xl border border-[#E6E4DF] bg-[#FFFFFF] p-6 transition-all hover:border-[#D9D8D5] hover:shadow-xs">
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls={panelId}
+        onClick={() => setOpen((prev) => !prev)}
+        className="flex min-h-[60px] w-full cursor-pointer list-none items-center justify-between gap-4 text-left text-base sm:text-lg font-bold text-[#161616] focus-visible:rounded-lg focus-visible:ring-2 focus-visible:ring-[#FE7743]"
+      >
+        <span>{item.question}</span>
+        <ChevronDown
+          size={22}
+          className={`shrink-0 text-[#273F4F] transition-transform duration-200 ${open ? 'rotate-180 text-[#FE7743]' : ''}`}
+          aria-hidden="true"
+        />
+      </button>
+      <div ref={panelRef} id={panelId} style={{ height: 0, opacity: 0, overflow: 'hidden' }}>
+        <div ref={innerRef} className="mt-4 border-t border-[#E6E4DF] pt-4 text-sm sm:text-base leading-relaxed text-[#273F4F]">
+          <p>{item.answer}</p>
+          {item.privacyLink && (
+            <div className="mt-4">
+              <a href={copy.privacyHref} className="landing-link text-xs font-bold underline">
+                {copy.privacy}
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 /**
  * Answers essential procedural questions on tax lookups, funding categories, and data safety.
- * Native accessible disclosure elements paired with authentic planning blueprints and readiness criteria.
+ * Accessible disclosure panels paired with authentic planning blueprints and readiness criteria.
  */
 export function FaqSection({ copy }: { copy: LandingCopy['faq'] }) {
   const [imgFailed, setImgFailed] = useState(false);
@@ -64,29 +140,7 @@ export function FaqSection({ copy }: { copy: LandingCopy['faq'] }) {
           {/* FAQ Accordion Column (7 cols) */}
           <div className="space-y-4 lg:col-span-7">
             {copy.questions.map((item) => (
-              <details
-                key={item.question}
-                className="group rounded-2xl border border-[#E6E4DF] bg-[#FFFFFF] p-6 transition-all hover:border-[#D9D8D5] hover:shadow-xs"
-              >
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-base sm:text-lg font-bold text-[#161616] focus-visible:rounded-lg focus-visible:ring-2 focus-visible:ring-[#FE7743]">
-                  <span>{item.question}</span>
-                  <ChevronDown
-                    size={22}
-                    className="shrink-0 text-[#273F4F] transition-transform duration-200 group-open:rotate-180 group-open:text-[#FE7743]"
-                    aria-hidden="true"
-                  />
-                </summary>
-                <div className="mt-4 border-t border-[#E6E4DF] pt-4 text-sm sm:text-base leading-relaxed text-[#273F4F]">
-                  <p>{item.answer}</p>
-                  {item.privacyLink && (
-                    <div className="mt-4">
-                      <a href={copy.privacyHref} className="landing-link text-xs font-bold underline">
-                        {copy.privacy}
-                      </a>
-                    </div>
-                  )}
-                </div>
-              </details>
+              <FaqItem key={item.question} item={item} copy={copy} />
             ))}
           </div>
         </div>
