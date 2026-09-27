@@ -1,19 +1,81 @@
-import { RotateCw } from 'lucide-react';
-import { useMetaQuery } from '@/api/meta.queries';
-import type { SupportedLanguage } from '@/i18n/i18n';
-import type { LandingCopy } from '../../data/landingContent';
+import { useMetaQuery } from "@/api/meta.queries";
+import { usePrefersReducedMotion } from "@/composables/usePrefersReducedMotion";
+import type { SupportedLanguage } from "@/i18n/i18n";
+import { RotateCw } from "lucide-react";
+import { useLayoutEffect, useRef } from "react";
+import type { LandingCopy } from "../../data/landingContent";
+import { gsap } from "./lib/gsap";
 
-/**
- * Renders verified catalogue availability totals and a static dimensional network graphic.
- * Sourced strictly from live catalogue metadata without animated counters or fabricated regional coverage.
- */
-export function StatCounter({ copy, lang }: { copy: LandingCopy['stats']; lang: SupportedLanguage }) {
+export function StatCounter({
+  copy,
+  lang,
+}: {
+  copy: LandingCopy["stats"];
+  lang: SupportedLanguage;
+}) {
   const { data, isLoading, isError, refetch, isFetching } = useMetaQuery();
+  const svgRef = useRef<SVGSVGElement>(null);
+  const reducedMotion = usePrefersReducedMotion();
+
+  useLayoutEffect(() => {
+    const svg = svgRef.current;
+    if (!svg || reducedMotion) return;
+
+    const body = svg.querySelector(".stat-globe-body");
+    const pulseArc = svg.querySelector(".stat-globe-arc-pulse");
+    const flowArcs = svg.querySelectorAll(".stat-globe-arc-flow");
+    const nodes = svg.querySelectorAll(".stat-globe-node");
+
+    const ctx = gsap.context(() => {
+      if (body) {
+        gsap.to(body, {
+          rotation: 360,
+          svgOrigin: "250 200",
+          duration: 60,
+          repeat: -1,
+          ease: "none",
+        });
+      }
+      if (pulseArc) {
+        gsap.to(pulseArc, {
+          strokeWidth: 4.8,
+          duration: 1.6,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+      }
+      if (flowArcs.length) {
+        gsap.to(flowArcs, {
+          strokeDashoffset: -20,
+          duration: 1.4,
+          repeat: -1,
+          ease: "none",
+        });
+      }
+      if (nodes.length) {
+        gsap.to(nodes, {
+          attr: {
+            r: (_i: number, target: SVGCircleElement) =>
+              Number(target.getAttribute("r")) * 1.35,
+          },
+          duration: 1.3,
+          repeat: -1,
+          yoyo: true,
+          stagger: 0.15,
+          ease: "sine.inOut",
+        });
+      }
+    }, svg);
+
+    return () => ctx.revert();
+  }, [reducedMotion]);
 
   const total = data?.catalog?.counts?.total;
-  const hasValidCount = typeof total === 'number' && Number.isInteger(total) && total >= 0;
+  const hasValidCount =
+    typeof total === "number" && Number.isInteger(total) && total >= 0;
   const formattedCount = hasValidCount
-    ? new Intl.NumberFormat(lang === 'hu' ? 'hu-HU' : 'en-GB').format(total)
+    ? new Intl.NumberFormat(lang === "hu" ? "hu-HU" : "en-GB").format(total)
     : null;
 
   return (
@@ -25,14 +87,21 @@ export function StatCounter({ copy, lang }: { copy: LandingCopy['stats']; lang: 
             <span className="text-xs font-mono font-bold tracking-widest text-[#D4D9DC] uppercase mb-3 inline-block">
               {copy.eyebrow}
             </span>
-            <h2 className="text-[#EFEEEA] font-bold tracking-tight">{copy.title}</h2>
-            <p className="mt-3 text-sm sm:text-base text-[#D4D9DC] leading-relaxed max-w-xl">{copy.note}</p>
+            <h2 className="text-[#EFEEEA] font-bold tracking-tight">
+              {copy.title}
+            </h2>
+            <p className="mt-3 text-sm sm:text-base text-[#D4D9DC] leading-relaxed max-w-xl">
+              {copy.note}
+            </p>
             {/* High-impact two-metric national coverage panel */}
             <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 items-start w-full">
               {/* Metric 1: Catalogue Total */}
               <div className="flex min-h-[140px] flex-col justify-start">
                 {isLoading && !data && (
-                  <div role="status" className="text-xl font-bold text-[#D4D9DC]">
+                  <div
+                    role="status"
+                    className="text-xl font-bold text-[#D4D9DC]"
+                  >
                     {copy.loading}
                   </div>
                 )}
@@ -47,14 +116,20 @@ export function StatCounter({ copy, lang }: { copy: LandingCopy['stats']; lang: 
                       disabled={isFetching}
                       className="landing-cta landing-cta-secondary text-xs font-semibold"
                     >
-                      <RotateCw size={14} className={isFetching ? 'animate-spin' : ''} aria-hidden="true" />
+                      <RotateCw
+                        size={14}
+                        className={isFetching ? "animate-spin" : ""}
+                        aria-hidden="true"
+                      />
                       <span>{copy.retry}</span>
                     </button>
                   </div>
                 )}
 
                 {!isLoading && !isError && !hasValidCount && (
-                  <p className="text-lg font-semibold text-[#D4D9DC]">{copy.empty}</p>
+                  <p className="text-lg font-semibold text-[#D4D9DC]">
+                    {copy.empty}
+                  </p>
                 )}
 
                 {hasValidCount && (
@@ -62,13 +137,19 @@ export function StatCounter({ copy, lang }: { copy: LandingCopy['stats']; lang: 
                     <div className="catalogue-number text-[#EFEEEA] font-extrabold tracking-tighter">
                       {formattedCount}
                     </div>
-                    <div className="mt-3 text-lg sm:text-xl font-bold text-[#EFEEEA] tracking-tight">{copy.label}</div>
-                    <div className="mt-1 text-xs font-medium text-[#D4D9DC]">{copy.source}</div>
+                    <div className="mt-3 text-lg sm:text-xl font-bold text-[#EFEEEA] tracking-tight">
+                      {copy.label}
+                    </div>
+                    <div className="mt-1 text-xs font-medium text-[#D4D9DC]">
+                      {copy.source}
+                    </div>
                   </div>
                 )}
                 {isError && data && (
                   <div className="mt-4 flex items-center gap-3">
-                    <span className="text-xs font-medium text-[#FEA07B]">{copy.refreshError}</span>
+                    <span className="text-xs font-medium text-[#FEA07B]">
+                      {copy.refreshError}
+                    </span>
                     <button
                       type="button"
                       onClick={() => refetch()}
@@ -91,7 +172,9 @@ export function StatCounter({ copy, lang }: { copy: LandingCopy['stats']; lang: 
                     {copy.highlightLabel}
                   </div>
                   <div className="mt-1 text-xs font-medium text-[#BEC5CA]">
-                    {lang === 'hu' ? 'Kiemelt támogatási övezetek' : 'Priority convergence zones'}
+                    {lang === "hu"
+                      ? "Kiemelt támogatási övezetek"
+                      : "Priority convergence zones"}
                   </div>
                 </div>
               )}
@@ -99,64 +182,215 @@ export function StatCounter({ copy, lang }: { copy: LandingCopy['stats']; lang: 
 
             {/* Regional Focus Pills */}
             <div className="mt-8 flex flex-wrap items-center gap-2">
-              {copy.regions && copy.regions.map((region) => (
-                <span
-                  key={region}
-                  className="inline-flex items-center rounded-full bg-[#202F38] border border-[#687984] px-3.5 py-1.5 text-xs font-bold text-[#EFEEEA] shadow-2xs"
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#FE7743] mr-2" aria-hidden="true" />
-                  {region}
-                </span>
-              ))}
+              {copy.regions &&
+                copy.regions.map((region) => (
+                  <span
+                    key={region}
+                    className="inline-flex items-center rounded-full bg-[#202F38] border border-[#687984] px-3.5 py-1.5 text-xs font-bold text-[#EFEEEA] shadow-2xs"
+                  >
+                    <span
+                      className="h-1.5 w-1.5 rounded-full bg-[#FE7743] mr-2"
+                      aria-hidden="true"
+                    />
+                    {region}
+                  </span>
+                ))}
             </div>
           </div>
 
           {/* Right Column: Expansive Regional Network Infographic (50%) */}
           <div className="flex flex-col items-center lg:col-span-6 relative">
             <div className="w-full max-w-[540px]">
-              <svg viewBox="0 0 500 400" className="w-full drop-shadow-lg" aria-hidden="true">
+              <svg
+                ref={svgRef}
+                viewBox="0 0 500 400"
+                className="w-full drop-shadow-lg"
+                aria-hidden="true"
+              >
                 <defs>
                   <radialGradient id="globeGrad" cx="40%" cy="40%" r="60%">
                     <stop offset="0%" stopColor="#202F38" />
                     <stop offset="60%" stopColor="#273F4F" />
                     <stop offset="100%" stopColor="#1E2A32" />
                   </radialGradient>
-                  <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <linearGradient
+                    id="arcGrad"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
                     <stop offset="0%" stopColor="#FE7743" />
                     <stop offset="100%" stopColor="#FEA07B" />
                   </linearGradient>
-                  <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                  <filter
+                    id="glow"
+                    x="-20%"
+                    y="-20%"
+                    width="140%"
+                    height="140%"
+                  >
                     <feGaussianBlur stdDeviation="4" result="blur" />
-                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    <feComposite
+                      in="SourceGraphic"
+                      in2="blur"
+                      operator="over"
+                    />
                   </filter>
                 </defs>
-                {/* Sphere background */}
-                <circle cx="250" cy="200" r="160" fill="url(#globeGrad)" stroke="#687984" strokeWidth="1.5" strokeOpacity="0.6" />
-                {/* Meridians and parallels */}
-                <ellipse cx="250" cy="200" rx="160" ry="55" fill="none" stroke="#EFEEEA" strokeWidth="1" strokeDasharray="3 3" opacity="0.2" />
-                <ellipse cx="250" cy="200" rx="160" ry="110" fill="none" stroke="#EFEEEA" strokeWidth="1" strokeDasharray="3 3" opacity="0.2" />
-                <ellipse cx="250" cy="200" rx="60" ry="160" fill="none" stroke="#EFEEEA" strokeWidth="1" strokeDasharray="3 3" opacity="0.2" />
-                <ellipse cx="250" cy="200" rx="115" ry="160" fill="none" stroke="#EFEEEA" strokeWidth="1" strokeDasharray="3 3" opacity="0.2" />
-                <line x1="90" y1="200" x2="410" y2="200" stroke="#687984" strokeWidth="1.5" opacity="0.4" />
-                <line x1="250" y1="40" x2="250" y2="360" stroke="#687984" strokeWidth="1.5" opacity="0.4" />
-                {/* Regional connection arcs and nodes */}
-                <path d="M 160 170 Q 250 80 340 160" fill="none" stroke="url(#arcGrad)" strokeWidth="3.5" filter="url(#glow)" />
-                <path d="M 190 250 Q 270 160 350 230" fill="none" stroke="url(#arcGrad)" strokeWidth="2.5" strokeDasharray="5 5" />
-                <path d="M 170 140 Q 230 240 320 250" fill="none" stroke="#FE7743" strokeWidth="2.5" opacity="0.9" />
-                {/* Network nodes */}
-                <circle cx="160" cy="170" r="7" fill="#FE7743" />
+                {/* Sphere + lat/long grid: rotates together as one spinning body */}
+                <g className="stat-globe-body">
+                  <circle
+                    cx="250"
+                    cy="200"
+                    r="160"
+                    fill="url(#globeGrad)"
+                    stroke="#687984"
+                    strokeWidth="1.5"
+                    strokeOpacity="0.6"
+                  />
+                  <ellipse
+                    cx="250"
+                    cy="200"
+                    rx="160"
+                    ry="55"
+                    fill="none"
+                    stroke="#EFEEEA"
+                    strokeWidth="1"
+                    strokeDasharray="3 3"
+                    opacity="0.2"
+                  />
+                  <ellipse
+                    cx="250"
+                    cy="200"
+                    rx="160"
+                    ry="110"
+                    fill="none"
+                    stroke="#EFEEEA"
+                    strokeWidth="1"
+                    strokeDasharray="3 3"
+                    opacity="0.2"
+                  />
+                  <ellipse
+                    cx="250"
+                    cy="200"
+                    rx="60"
+                    ry="160"
+                    fill="none"
+                    stroke="#EFEEEA"
+                    strokeWidth="1"
+                    strokeDasharray="3 3"
+                    opacity="0.2"
+                  />
+                  <ellipse
+                    cx="250"
+                    cy="200"
+                    rx="115"
+                    ry="160"
+                    fill="none"
+                    stroke="#EFEEEA"
+                    strokeWidth="1"
+                    strokeDasharray="3 3"
+                    opacity="0.2"
+                  />
+                  <line
+                    x1="90"
+                    y1="200"
+                    x2="410"
+                    y2="200"
+                    stroke="#687984"
+                    strokeWidth="1.5"
+                    opacity="0.4"
+                  />
+                  <line
+                    x1="250"
+                    y1="40"
+                    x2="250"
+                    y2="360"
+                    stroke="#687984"
+                    strokeWidth="1.5"
+                    opacity="0.4"
+                  />
+                </g>
+                {/* Regional connection arcs — fixed in place on top of the spinning globe, so the
+                    network they represent stays legible while the sphere turns underneath */}
+                <path
+                  className="stat-globe-arc-pulse"
+                  d="M 160 170 Q 250 80 340 160"
+                  fill="none"
+                  stroke="url(#arcGrad)"
+                  strokeWidth="3.5"
+                  filter="url(#glow)"
+                />
+                <path
+                  className="stat-globe-arc-flow"
+                  d="M 190 250 Q 270 160 350 230"
+                  fill="none"
+                  stroke="url(#arcGrad)"
+                  strokeWidth="2.5"
+                  strokeDasharray="5 5"
+                />
+                <path
+                  className="stat-globe-arc-flow"
+                  d="M 170 140 Q 230 240 320 250"
+                  fill="none"
+                  stroke="#FE7743"
+                  strokeWidth="2.5"
+                  strokeDasharray="6 4"
+                  opacity="0.9"
+                />
+                {/* Network nodes — the colored ones breathe; their static white cores don't */}
+                <circle
+                  className="stat-globe-node"
+                  cx="160"
+                  cy="170"
+                  r="7"
+                  fill="#FE7743"
+                />
                 <circle cx="160" cy="170" r="3" fill="#EFEEEA" />
-                <circle cx="340" cy="160" r="8" fill="#FE7743" />
+                <circle
+                  className="stat-globe-node"
+                  cx="340"
+                  cy="160"
+                  r="8"
+                  fill="#FE7743"
+                />
                 <circle cx="340" cy="160" r="3.5" fill="#EFEEEA" />
-                <circle cx="190" cy="250" r="6" fill="#FEA07B" />
-                <circle cx="350" cy="230" r="6" fill="#FEA07B" />
+                <circle
+                  className="stat-globe-node"
+                  cx="190"
+                  cy="250"
+                  r="6"
+                  fill="#FEA07B"
+                />
+                <circle
+                  className="stat-globe-node"
+                  cx="350"
+                  cy="230"
+                  r="6"
+                  fill="#FEA07B"
+                />
                 <circle cx="250" cy="130" r="5" fill="#EFEEEA" />
-                <circle cx="320" cy="250" r="7" fill="#FE7743" />
-                <circle cx="250" cy="200" r="9" fill="#FE7743" />
+                <circle
+                  className="stat-globe-node"
+                  cx="320"
+                  cy="250"
+                  r="7"
+                  fill="#FE7743"
+                />
+                <circle
+                  className="stat-globe-node"
+                  cx="250"
+                  cy="200"
+                  r="9"
+                  fill="#FE7743"
+                />
                 <circle cx="250" cy="200" r="4" fill="#EFEEEA" />
               </svg>
             </div>
-            <p className="mt-4 max-w-md text-center text-xs font-medium leading-relaxed text-[#BEC5CA]">{copy.region}</p>
+            <p className="mt-4 max-w-md text-center text-xs font-medium leading-relaxed text-[#BEC5CA]">
+              {copy.region}
+            </p>
           </div>
         </div>
       </div>
