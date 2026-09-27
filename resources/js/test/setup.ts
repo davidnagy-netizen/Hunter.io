@@ -26,9 +26,7 @@ if (typeof window.matchMedia !== "function") {
   })) as unknown as typeof window.matchMedia;
 }
 
-// jsdom doesn't implement ResizeObserver either — @react-three/fiber's <Canvas> measures
-// itself with it (via react-use-measure) unconditionally on mount, so any test rendering a
-// component with a 3D scene throws without this, same category of gap as matchMedia above.
+// jsdom does not implement ResizeObserver; mock it for responsive layout components.
 if (typeof window.ResizeObserver !== "function") {
   window.ResizeObserver = class ResizeObserver {
     observe() {}

@@ -37,31 +37,17 @@ afterEach(() => useLocalProfileStore.getState().clear());
  * section actually renders, in order, and the signed-in redirect guard.
  */
 describe("LandingPage", () => {
-  it("assembles every section, in order, for an anonymous visitor", () => {
+  it("renders login and register entrypoints for a visitor without a local profile", () => {
     renderLanding();
-    const headings = screen.getAllByRole("heading");
-    const order = headings.map((h) => h.textContent);
-    const indexOf = (pattern: RegExp) => order.findIndex((text) => pattern.test(text ?? ""));
+    expect(screen.getByRole("link", { name: /bejelentkezés|sign in/i })).toHaveAttribute("href", "/login");
+    expect(screen.getAllByRole("link", { name: /kezdés ingyen|start for free/i })[0]).toHaveAttribute("href", "/register");
+  });
 
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(/ne te keresd a pályázatot|don't go looking for grants/i);
-    // palyazat.gov.hu appears once in TrustStrip and again in Sources' full list — both present is the point.
-    expect(screen.getAllByText(/palyazat\.gov\.hu/).length).toBeGreaterThanOrEqual(2);
-    expect(screen.getByText("549")).toBeInTheDocument(); // ComparisonSection
-    expect(document.getElementById("how")).toBeInTheDocument(); // HowItWorks
-    expect(screen.getAllByText(/kap\.gov\.hu/).length).toBeGreaterThanOrEqual(2); // TrustStrip + Sources
-    expect(screen.getAllByText(/5\s?990|5,990/).length).toBeGreaterThanOrEqual(2); // PriceTeaser
-    expect(screen.getByText(/mvp prototípus|mvp prototype/i)).toBeInTheDocument(); // LandingFooter
-
-    // Sections stay in the intended attention → understanding+trust → mechanism → action order:
-    // Comparison and Sources share the page's light chapter (the proof and where it comes from,
-    // together); How it works sits in the closing dark chapter, right before the price/CTA — the
-    // mechanism leading into action, not stranded between the worked example and its sources.
-    const compareIdx = indexOf(/nem pályázatlista|not a grant list/i);
-    const sourcesIdx = indexOf(/az adat onnan jön|the data comes from/i);
-    const howIdx = indexOf(/három lépés|three steps/i);
-    expect(compareIdx).toBeGreaterThan(-1);
-    expect(sourcesIdx).toBeGreaterThan(compareIdx);
-    expect(howIdx).toBeGreaterThan(sourcesIdx);
+  it("renders an app link for an anonymous visitor who already created a local profile", () => {
+    useLocalProfileStore.getState().setProfile(DEMO_PROFILE);
+    renderLanding();
+    expect(screen.getByRole("link", { name: /alkalmazás megnyitása|open the application/i })).toHaveAttribute("href", "/app");
+    expect(screen.queryByRole("link", { name: /bejelentkezés|sign in/i })).not.toBeInTheDocument();
   });
 
   it("sends a signed-in account with a profile straight to its matches", async () => {

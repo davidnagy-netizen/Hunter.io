@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { httpClient } from "@/api/httpClient";
 import { ChipButton, SelectField, TextField } from "@/components";
 import type { CompanyMetrics } from "../types/metrics.types";
+import { REVENUE_BANDS } from "../data/revenueBands";
 import "../i18n";
 
 /** Shared registration/profile editor. Sector selection always stores a KSH code. */
@@ -34,7 +35,6 @@ export function CompanyMetricsFields({ value, onChange }: {
   // Same visual contract as TextField/SelectField's own input classes, for the one control
   // (the TEÁOR combobox) that isn't a drop-in fit for either shared component.
   const comboboxClass = "rounded-md border border-line-strong bg-white px-3 py-2 text-sm text-text focus:outline focus:outline-2 focus:outline-offset-1 focus:outline-gold";
-  const bands = ["< 50M Ft", "50M – < 200M Ft", "200M – < 800M Ft", "800M – < 4 Mrd Ft", "4 – 20 Mrd Ft", "> 20 Mrd Ft"];
   return <div className="flex flex-col gap-4">
     <SelectField label={en ? "Legal form" : "Jogi forma"} value={value.legal_form ?? ""} onChange={e => set("legal_form", e.target.value as CompanyMetrics["legal_form"])} required>
       <option value="">{en ? "Select" : "Válasszon"}</option>
@@ -75,7 +75,7 @@ export function CompanyMetricsFields({ value, onChange }: {
     </div>
     <fieldset className="flex flex-col gap-1.5">
       <legend className="text-sm font-medium text-text">{en ? "Annual net revenue band" : "Éves nettó árbevétel sávja"}</legend>
-      <div className="flex flex-wrap gap-2">{bands.map((label, index) => (
+      <div className="flex flex-wrap gap-2">{REVENUE_BANDS.map((label, index) => (
         <ChipButton key={label} type="button" selected={value.revenue_band === index + 1} onClick={() => set("revenue_band", index + 1)}>{label}</ChipButton>
       ))}</div>
     </fieldset>
