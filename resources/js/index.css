@@ -5,52 +5,91 @@
  * Design tokens ported from the legacy app's stylesheet (public/css/app.css).
  * Tailwind v4 reads `@theme` as the source of truth and generates matching
  * utilities (bg-gold, text-muted, rounded-lg, shadow-card, font-display, ...).
+ *
+ * Single source of truth: every literal hex value lives in the `--color-brand-*`
+ * block below. Everything else — the app's own `gold`/`ink`/`paper`/`text`/status
+ * names, used throughout resources/js, and every landing component under src/ —
+ * is a `var()` alias onto one of those. Retinting the product is a one-file edit
+ * here; nothing outside this file should ever hardcode a color again.
  */
 @theme {
+  /* ---- Canonical brand palette (the only literals in the whole app) ---- */
   --color-brand-orange: #FE7743;
-  --color-brand-cream: #EFEEEA;
+  --color-brand-orange-deep: #E76D3F;
+  --color-brand-orange-active: #D0643A;
+  --color-brand-orange-soft: #FEA07B;
+  --color-brand-orange-bg: #FFF1EC;
+
   --color-brand-slate: #273F4F;
+  --color-brand-slate-2: #202F38;
+  --color-brand-slate-3: #1E2A32;
+
   --color-brand-ink: #161616;
+  --color-brand-cream: #EFEEEA;
+  --color-brand-paper: #FAFAF9;
+  --color-brand-surface-muted: #F7F6F4;
 
-  --color-ink: #0e1726;
-  --color-ink-2: #16233a;
-  --color-ink-3: #1e3050;
-  --color-paper: #f5f7fa;
-  --color-surface: #ffffff;
-  --color-surface-2: #fbfcfd;
+  --color-brand-line: #E6E4DF;
+  --color-brand-line-strong: #D9D8D5;
 
-  --color-line: #e3e8ef;
-  --color-line-strong: #cdd5e0;
+  --color-brand-muted: #687984;
+  --color-brand-muted-2: #939FA7;
+  --color-brand-muted-3: #BEC5CA;
+  --color-brand-muted-4: #D4D9DC;
 
-  --color-text: #16202e;
-  --color-muted: #64707f;
-  --color-muted-2: #8a94a6;
+  /* Status hues warmed to sit next to the orange/slate/cream palette instead of
+     the old cool-toned set — still functionally green/amber/red/blue, just tinted
+     to match. */
+  --color-brand-green: #4F8F5E;
+  --color-brand-green-bg: #EEF5EC;
+  --color-brand-amber: #C9762E;
+  --color-brand-amber-bg: #FBF0E4;
+  --color-brand-red: #C1443D;
+  --color-brand-red-bg: #FBEAE8;
+  --color-brand-blue: #4A6FA0;
+  --color-brand-blue-bg: #EAEFF5;
 
-  --color-gold: #d99a2b;
-  --color-gold-deep: #b87c15;
-  --color-gold-bg: #fbf2de;
+  /* ---- App-facing semantic names (aliases; landing uses the brand-* names
+     directly, the rest of resources/js uses these) ---- */
+  --color-ink: var(--color-brand-slate);
+  --color-ink-2: var(--color-brand-slate-2);
+  --color-ink-3: var(--color-brand-slate-3);
+  --color-paper: var(--color-brand-paper);
+  --color-surface: #FFFFFF;
+  --color-surface-2: #FDFCFC;
 
-  --color-green: #199268;
-  --color-green-bg: #e4f4ec;
+  --color-line: var(--color-brand-line);
+  --color-line-strong: var(--color-brand-line-strong);
 
-  --color-amber: #dd8331;
-  --color-amber-bg: #fbeedf;
+  --color-text: var(--color-brand-ink);
+  --color-muted: var(--color-brand-muted);
+  --color-muted-2: var(--color-brand-muted-2);
 
-  --color-red: #ca4a4a;
-  --color-red-bg: #fae7e7;
+  --color-gold: var(--color-brand-orange);
+  --color-gold-deep: var(--color-brand-orange-deep);
+  --color-gold-bg: var(--color-brand-orange-bg);
 
-  --color-slate: #8a94a6;
-  --color-slate-bg: #eef1f5;
+  --color-green: var(--color-brand-green);
+  --color-green-bg: var(--color-brand-green-bg);
 
-  --color-blue: #2e6bd6;
-  --color-blue-bg: #e7effb;
+  --color-amber: var(--color-brand-amber);
+  --color-amber-bg: var(--color-brand-amber-bg);
+
+  --color-red: var(--color-brand-red);
+  --color-red-bg: var(--color-brand-red-bg);
+
+  --color-slate: var(--color-brand-muted-2);
+  --color-slate-bg: var(--color-brand-surface-muted);
+
+  --color-blue: var(--color-brand-blue);
+  --color-blue-bg: var(--color-brand-blue-bg);
 
   --radius-sm: 10px;
   --radius-md: 14px;
   --radius-lg: 20px;
 
-  --shadow-card: 0 1px 2px rgba(16, 23, 38, 0.04), 0 8px 24px -12px rgba(16, 23, 38, 0.14);
-  --shadow-card-lg: 0 2px 4px rgba(16, 23, 38, 0.05), 0 24px 48px -20px rgba(16, 23, 38, 0.28);
+  --shadow-card: 0 1px 2px rgba(22, 22, 22, 0.04), 0 8px 24px -12px rgba(22, 22, 22, 0.14);
+  --shadow-card-lg: 0 2px 4px rgba(22, 22, 22, 0.05), 0 24px 48px -20px rgba(22, 22, 22, 0.28);
 
   --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
@@ -63,4 +102,3 @@ body {
   color: var(--color-text);
   font-family: var(--font-sans);
 }
-

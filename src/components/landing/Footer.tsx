@@ -13,7 +13,7 @@ export function Footer({
   disclaimer: string;
 }) {
   return (
-    <footer className="landing-footer-surface border-t border-[#EFEEEA]/10 bg-[#161616] text-[#939FA7]">
+    <footer className="landing-footer-surface border-t border-brand-cream/10 bg-brand-ink text-brand-muted-2">
       <div className="landing-wrap py-16 sm:py-20 lg:py-24">
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-10">
           {/* Brand & Disclaimer Column (5 cols) */}
@@ -25,22 +25,22 @@ export function Footer({
                 className="size-10"
               />
               <div className="flex flex-col leading-none">
-                <span className="text-xl font-extrabold tracking-tight text-[#EFEEEA]">
+                <span className="text-xl font-extrabold tracking-tight text-brand-cream">
                   {copy.brand}
                 </span>
-                <span className="text-xs font-medium text-[#939FA7] mt-1">
+                <span className="text-xs font-medium text-brand-muted-2 mt-1">
                   {copy.domain}
                 </span>
               </div>
             </div>
-            <p className="mt-5 max-w-md text-xs sm:text-[13px] leading-relaxed text-[#939FA7] font-medium">
+            <p className="mt-5 max-w-md text-xs sm:text-[13px] leading-relaxed text-brand-muted-2 font-medium">
               {disclaimer}
             </p>
           </div>
 
           {/* Product Anchors (2 cols) */}
           <div className="lg:col-span-2 lg:col-start-7">
-            <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#EFEEEA]">
+            <div className="text-xs font-mono font-bold uppercase tracking-wider text-brand-cream">
               {copy.productTitle}
             </div>
             <ul className="mt-4 space-y-2.5 text-sm font-medium">
@@ -49,14 +49,14 @@ export function Footer({
                   {link.href.startsWith("#") ? (
                     <a
                       href={link.href}
-                      className="inline-block py-1 text-[#BEC5CA] transition-colors hover:text-[#FE7743] focus-visible:text-[#EFEEEA] focus-visible:outline-none focus-visible:underline"
+                      className="inline-block py-1 text-brand-muted-3 transition-colors hover:text-brand-orange focus-visible:text-brand-cream focus-visible:outline-none focus-visible:underline"
                     >
                       {link.label}
                     </a>
                   ) : (
                     <Link
                       to={link.href}
-                      className="inline-block py-1 text-[#BEC5CA] transition-colors hover:text-[#FE7743] focus-visible:text-[#EFEEEA] focus-visible:outline-none focus-visible:underline"
+                      className="inline-block py-1 text-brand-muted-3 transition-colors hover:text-brand-orange focus-visible:text-brand-cream focus-visible:outline-none focus-visible:underline"
                     >
                       {link.label}
                     </Link>
@@ -68,14 +68,14 @@ export function Footer({
 
           {/* Legal Document Requests (2 cols) */}
           <div className="lg:col-span-2">
-            <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#EFEEEA]">
+            <div className="text-xs font-mono font-bold uppercase tracking-wider text-brand-cream">
               {copy.legalTitle}
             </div>
             <ul className="mt-4 space-y-2.5 text-sm font-medium">
               <li>
                 <a
                   href={copy.termsHref}
-                  className="inline-block py-1 text-[#BEC5CA] transition-colors hover:text-[#FE7743] focus-visible:text-[#EFEEEA] focus-visible:outline-none focus-visible:underline"
+                  className="inline-block py-1 text-brand-muted-3 transition-colors hover:text-brand-orange focus-visible:text-brand-cream focus-visible:outline-none focus-visible:underline"
                 >
                   {copy.terms}
                 </a>
@@ -83,7 +83,7 @@ export function Footer({
               <li>
                 <a
                   href={copy.privacyHref}
-                  className="inline-block py-1 text-[#BEC5CA] transition-colors hover:text-[#FE7743] focus-visible:text-[#EFEEEA] focus-visible:outline-none focus-visible:underline"
+                  className="inline-block py-1 text-brand-muted-3 transition-colors hover:text-brand-orange focus-visible:text-brand-cream focus-visible:outline-none focus-visible:underline"
                 >
                   {copy.privacy}
                 </a>
@@ -93,13 +93,13 @@ export function Footer({
 
           {/* Legal / Document Contact (2 cols) */}
           <div className="lg:col-span-2">
-            <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#EFEEEA]">
+            <div className="text-xs font-mono font-bold uppercase tracking-wider text-brand-cream">
               {copy.contactTitle}
             </div>
             <div className="mt-4 text-sm">
               <a
                 href={`mailto:${copy.email}`}
-                className="font-semibold text-[#BEC5CA] underline underline-offset-4 hover:text-[#FE7743] focus-visible:text-[#EFEEEA]"
+                className="font-semibold text-brand-muted-3 underline underline-offset-4 hover:text-brand-orange focus-visible:text-brand-cream"
               >
                 {copy.email}
               </a>
@@ -107,9 +107,9 @@ export function Footer({
           </div>
         </div>
 
-        <div className="mt-16 border-t border-[#EFEEEA]/10 pt-8 text-xs font-medium text-[#687984] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="mt-16 border-t border-brand-cream/10 pt-8 text-xs font-medium text-brand-muted flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <p>{copy.copyright}</p>
-          <p className="text-[#687984]">
+          <p className="text-brand-muted">
             Fundor Intelligence Systems • Budapest
           </p>
         </div>

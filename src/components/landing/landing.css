@@ -1,79 +1,13 @@
-:root {
-  /* Core Brand Colors */
-  --brand-orange: #FE7743;
-  --brand-cream: #EFEEEA;
-  --brand-slate: #273F4F;
-  --brand-ink: #161616;
-
-  /* Primary Orange Scale */
-  --primary-50: #FFF1EC;
-  --primary-100: #FFE4D9;
-  --primary-200: #FFD6C7;
-  --primary-300: #FEBBA1;
-  --primary-400: #FEA07B;
-  --primary-500: #FE7743;
-  --primary-600: #E76D3F;
-  --primary-700: #D0643A;
-  --primary-800: #B85A36;
-  --primary-900: #A15031;
-
-  /* Slate Scale */
-  --slate-50: #E9ECED;
-  --slate-100: #D4D9DC;
-  --slate-200: #BEC5CA;
-  --slate-300: #939FA7;
-  --slate-400: #687984;
-  --slate-500: #273F4F;
-  --slate-600: #253B49;
-  --slate-700: #22333E;
-  --slate-800: #202F38;
-  --slate-900: #1E2A32;
-
-  /* Warm Neutrals & Surfaces */
-  --surface-white: #FFFFFF;
-  --surface-softest: #FDFCFC;
-  --surface-soft: #FAFAF9;
-  --surface-muted: #F7F6F4;
-  --surface-warm: #EFEEEA;
-  --border-soft: #E6E4DF;
-  --border-default: #D9D8D5;
-  --border-strong: #C4C3C0;
-
-  /* Text Roles */
-  --text-primary: #161616;
-  --text-secondary: #273F4F;
-  --text-muted: #687984;
-  --text-on-dark: #EFEEEA;
-  --text-on-primary: #161616;
-
-  /* Interaction & Actions */
-  --action-primary: #FE7743;
-  --action-primary-hover: #E76D3F;
-  --action-primary-active: #D0643A;
-  --action-secondary: #273F4F;
-  --action-secondary-hover: #22333E;
-  --focus-ring: #FE7743;
-
-  /* Landing semantic aliases */
-  --landing-primary: var(--brand-orange);
-  --landing-primary-hover: var(--action-primary-hover);
-  --landing-primary-subtle: var(--primary-50);
-  --landing-primary-border: var(--primary-300);
-  --landing-surface: var(--surface-white);
-  --landing-surface-subtle: var(--surface-soft);
-  --landing-surface-muted: var(--surface-muted);
-  --landing-border: var(--border-soft);
-  --landing-border-strong: var(--border-default);
-  --landing-text-primary: var(--text-primary);
-  --landing-text-secondary: var(--text-secondary);
-  --landing-text-muted: var(--text-muted);
-}
-
+/*
+ * No local color variables here — every color below resolves through the canonical
+ * `--color-brand-*` tokens defined once in resources/js/index.css, so retinting the
+ * product never requires touching this file.
+ */
 
 .landing-page {
   font-size: 1.125rem;
-  color: var(--landing-text-primary);
-  background: #ffffff;
+  color: var(--color-brand-ink);
+  background: var(--color-surface);
   font-family: var(--font-sans);
   line-height: 1.6;
   overflow-wrap: anywhere;
@@ -143,41 +77,41 @@
 }
 
 .landing-page .landing-canvas-hero {
-  background: var(--surface-warm);
-  border: 1px solid var(--border-default);
+  background: var(--color-brand-cream);
+  border: 1px solid var(--color-brand-line-strong);
 }
 
 .landing-page .landing-canvas-data {
-  background: var(--brand-slate);
-  border: 1px solid var(--slate-800);
-  color: var(--text-on-dark);
+  background: var(--color-brand-slate);
+  border: 1px solid var(--color-brand-slate-2);
+  color: var(--color-brand-cream);
 }
 
 .landing-page .landing-canvas-photo {
-  background: var(--brand-ink);
-  color: var(--text-on-dark);
+  background: var(--color-brand-ink);
+  color: var(--color-brand-cream);
   overflow: hidden;
 }
 
 .landing-page .landing-canvas-conversion {
-  background: var(--brand-slate);
-  color: var(--text-on-dark);
-  border: 1px solid var(--slate-800);
+  background: var(--color-brand-slate);
+  color: var(--color-brand-cream);
+  border: 1px solid var(--color-brand-slate-2);
 }
 
 .landing-page .landing-canvas-blueprint {
-  background: var(--surface-muted);
-  border: 1px solid var(--border-soft);
+  background: var(--color-brand-surface-muted);
+  border: 1px solid var(--color-brand-line);
 }
 
 .landing-page .landing-canvas-plans {
-  background: var(--surface-warm);
-  border: 1px solid var(--border-default);
+  background: var(--color-brand-cream);
+  border: 1px solid var(--color-brand-line-strong);
 }
 
 .landing-page .landing-footer-surface {
-  background: var(--brand-ink);
-  color: var(--slate-300);
+  background: var(--color-brand-ink);
+  color: var(--color-brand-muted-2);
   border-top: 1px solid rgba(239, 238, 234, 0.1);
 }
 
@@ -189,16 +123,16 @@
   font-weight: 650;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--brand-slate);
-  background: var(--surface-white);
-  border: 1px solid var(--border-default);
+  color: var(--color-brand-slate);
+  background: var(--color-surface);
+  border: 1px solid var(--color-brand-line-strong);
   border-radius: 9999px;
   padding: 0.375rem 1rem;
   user-select: none;
 }
 .landing-card {
-  background: var(--surface-white);
-  border: 1px solid var(--border-soft);
+  background: var(--color-surface);
+  border: 1px solid var(--color-brand-line);
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 0 1px 3px 0 rgba(22, 22, 22, 0.04);
@@ -212,8 +146,8 @@
 }
 
 .landing-card-elevated {
-  background: var(--surface-white);
-  border: 1px solid var(--border-default);
+  background: var(--color-surface);
+  border: 1px solid var(--color-brand-line-strong);
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 0 10px 30px -10px rgba(39, 63, 79, 0.08), 0 4px 6px -2px rgba(39, 63, 79, 0.03);
@@ -227,8 +161,8 @@
 }
 
 .landing-card-highlight {
-  background: var(--primary-50);
-  border: 1px solid var(--brand-orange);
+  background: var(--color-brand-orange-bg);
+  border: 1px solid var(--color-brand-orange);
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 0 1px 3px 0 rgba(22, 22, 22, 0.04);
@@ -242,23 +176,23 @@
 }
 
 .landing-card-dark {
-  background: var(--brand-ink);
-  border: 1px solid var(--brand-slate);
-  color: var(--text-on-dark);
+  background: var(--color-brand-ink);
+  border: 1px solid var(--color-brand-slate);
+  color: var(--color-brand-cream);
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.25);
 }
 
 .landing-card-dark :is(h1, h2, h3, h4) {
-  color: var(--text-on-dark) !important;
+  color: var(--color-brand-cream) !important;
 }
 
 .landing-page .landing-canvas-photo :is(h1, h2, h3),
 .landing-page .landing-canvas-conversion :is(h1, h2, h3),
-.landing-page [class*="bg-[#161616]"] :is(h1, h2, h3),
-.landing-page [class*="bg-[#273F4F]"] :is(h1, h2, h3) {
-  color: var(--text-on-dark) !important;
+.landing-page [class*="bg-brand-ink"] :is(h1, h2, h3),
+.landing-page [class*="bg-brand-slate"] :is(h1, h2, h3) {
+  color: var(--color-brand-cream) !important;
 }
 
 @media (min-width: 640px) {
@@ -274,10 +208,10 @@
   gap: 0.5rem;
   min-height: 54px;
   padding: 0.875rem 1.875rem;
-  border: 1px solid var(--action-primary);
+  border: 1px solid var(--color-brand-orange);
   border-radius: 0.75rem;
-  background: var(--action-primary);
-  color: var(--text-on-primary);
+  background: var(--color-brand-orange);
+  color: var(--color-brand-ink);
   font-size: 1.0625rem;
   font-weight: 650;
   text-align: center;
@@ -287,16 +221,19 @@
 }
 
 .landing-page .landing-cta:hover {
-  background: var(--action-primary-hover);
-  border-color: var(--action-primary-hover);
-  color: var(--text-on-primary);
+  background: var(--color-brand-orange-deep);
+  border-color: var(--color-brand-orange-deep);
+  color: var(--color-brand-ink);
 }
 
 .landing-page .landing-cta:active {
-  background: var(--action-primary-active);
-  border-color: var(--action-primary-active);
+  background: var(--color-brand-orange-active);
+  border-color: var(--color-brand-orange-active);
 }
 
+/* A slow breathing ring around the page's one or two primary conversion CTAs (hero, navbar) —
+   deliberately not applied to every `.landing-cta` instance, since those also mark in-context
+   actions (tab panels, carousel cards) where a pulsing button everywhere would just be noise. */
 @keyframes landing-cta-glow {
   0%, 100% { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 0 0 0 rgba(254, 119, 67, 0.45); }
   50% { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 0 0 9px rgba(254, 119, 67, 0); }
@@ -322,32 +259,32 @@
   font-size: 1.0625rem;
   font-weight: 600;
   background: transparent;
-  border: 1px solid var(--brand-slate);
-  color: var(--brand-slate);
+  border: 1px solid var(--color-brand-slate);
+  color: var(--color-brand-slate);
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.02);
   transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
 }
 
 .landing-page .landing-cta-secondary:hover {
-  background: var(--brand-slate);
-  border-color: var(--brand-slate);
-  color: var(--text-on-dark);
+  background: var(--color-brand-slate);
+  border-color: var(--color-brand-slate);
+  color: var(--color-brand-cream);
 }
 
 .landing-page .landing-canvas-data .landing-cta-secondary,
 .landing-page .landing-canvas-photo .landing-cta-secondary,
 .landing-page .landing-canvas-conversion .landing-cta-secondary,
 .landing-page .landing-card-dark .landing-cta-secondary {
-  border-color: var(--brand-cream);
-  color: var(--brand-cream);
+  border-color: var(--color-brand-cream);
+  color: var(--color-brand-cream);
 }
 
 .landing-page .landing-canvas-data .landing-cta-secondary:hover,
 .landing-page .landing-canvas-photo .landing-cta-secondary:hover,
 .landing-page .landing-canvas-conversion .landing-cta-secondary:hover,
 .landing-page .landing-card-dark .landing-cta-secondary:hover {
-  background: var(--brand-cream);
-  color: var(--brand-ink);
+  background: var(--color-brand-cream);
+  color: var(--color-brand-ink);
 }
 
 .landing-page .landing-nav-link {
@@ -363,7 +300,7 @@
   bottom: 0;
   height: 2px;
   border-radius: 1px;
-  background: var(--brand-orange);
+  background: var(--color-brand-orange);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 250ms ease;
@@ -378,20 +315,20 @@
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  color: var(--brand-slate);
+  color: var(--color-brand-slate);
   text-decoration: underline;
   text-underline-offset: 4px;
   font-weight: 500;
 }
 
 .landing-page .landing-link:hover {
-  color: var(--brand-orange);
+  color: var(--color-brand-orange);
 }
 
 .landing-page :is(a, button, input, summary, [tabindex]):focus-visible {
-  outline: 3px solid var(--focus-ring);
+  outline: 3px solid var(--color-brand-orange);
   outline-offset: 2px;
-  box-shadow: 0 0 0 2px var(--surface-white);
+  box-shadow: 0 0 0 2px var(--color-surface);
 }
 
 .landing-page button, .landing-page summary {
@@ -402,24 +339,24 @@
   min-height: 48px;
   min-width: 0;
   width: 100%;
-  border: 1px solid var(--border-default);
+  border: 1px solid var(--color-brand-line-strong);
   border-radius: 0.75rem;
   padding: 0.75rem 1rem;
-  background: var(--surface-white);
-  color: var(--text-primary);
+  background: var(--color-surface);
+  color: var(--color-brand-ink);
   font-size: 0.9375rem;
 }
 
 .landing-page input[aria-invalid="true"] {
-  border-color: #b91c1c;
+  border-color: var(--color-brand-red);
 }
 
 .landing-page input::placeholder {
-  color: var(--text-muted);
+  color: var(--color-brand-muted);
 }
 
 .landing-page .landing-language {
-  border-color: var(--border-default);
+  border-color: var(--color-brand-line-strong);
   overflow: visible;
 }
 
@@ -427,13 +364,13 @@
   min-width: 44px;
   min-height: 44px;
   border-radius: 0.5rem;
-  color: var(--text-secondary);
+  color: var(--color-brand-slate);
   font-weight: 500;
 }
 
 .landing-page .landing-language button[aria-pressed="true"] {
-  background: var(--brand-slate);
-  color: var(--text-on-dark);
+  background: var(--color-brand-slate);
+  color: var(--color-brand-cream);
 }
 
 .landing-page .landing-skip {
@@ -442,8 +379,8 @@
   left: 1rem;
   z-index: 50;
   transform: translateY(-200%);
-  background: var(--brand-orange);
-  color: var(--brand-ink);
+  background: var(--color-brand-orange);
+  color: var(--color-brand-ink);
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   font-weight: 650;
@@ -458,7 +395,7 @@
   font-weight: 800;
   line-height: 0.95;
   letter-spacing: -0.045em;
-  color: var(--brand-orange);
+  color: var(--color-brand-orange);
 }
 
 .landing-page .landing-globe {

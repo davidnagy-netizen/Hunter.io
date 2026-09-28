@@ -48,23 +48,23 @@ function FaqItem({ item, copy }: { item: FaqQuestion; copy: LandingCopy['faq'] }
   }, [open, reducedMotion]);
 
   return (
-    <div className="group rounded-2xl border border-[#E6E4DF] bg-[#FFFFFF] p-6 transition-all hover:border-[#D9D8D5] hover:shadow-xs">
+    <div className="group rounded-2xl border border-brand-line bg-surface p-6 transition-all hover:border-brand-line-strong hover:shadow-xs">
       <button
         type="button"
         aria-expanded={open}
         aria-controls={panelId}
         onClick={() => setOpen((prev) => !prev)}
-        className="flex min-h-[60px] w-full cursor-pointer list-none items-center justify-between gap-4 text-left text-base sm:text-lg font-bold text-[#161616] focus-visible:rounded-lg focus-visible:ring-2 focus-visible:ring-[#FE7743]"
+        className="flex min-h-[60px] w-full cursor-pointer list-none items-center justify-between gap-4 text-left text-base sm:text-lg font-bold text-brand-ink focus-visible:rounded-lg focus-visible:ring-2 focus-visible:ring-brand-orange"
       >
         <span>{item.question}</span>
         <ChevronDown
           size={22}
-          className={`shrink-0 text-[#273F4F] transition-transform duration-200 ${open ? 'rotate-180 text-[#FE7743]' : ''}`}
+          className={`shrink-0 text-brand-slate transition-transform duration-200 ${open ? 'rotate-180 text-brand-orange' : ''}`}
           aria-hidden="true"
         />
       </button>
       <div ref={panelRef} id={panelId} style={{ height: 0, opacity: 0, overflow: 'hidden' }}>
-        <div ref={innerRef} className="mt-4 border-t border-[#E6E4DF] pt-4 text-sm sm:text-base leading-relaxed text-[#273F4F]">
+        <div ref={innerRef} className="mt-4 border-t border-brand-line pt-4 text-sm sm:text-base leading-relaxed text-brand-slate">
           <p>{item.answer}</p>
           {item.privacyLink && (
             <div className="mt-4">
@@ -87,19 +87,19 @@ export function FaqSection({ copy }: { copy: LandingCopy['faq'] }) {
   const [imgFailed, setImgFailed] = useState(false);
 
   return (
-    <section className="border-t border-[#E6E4DF] bg-[#FFFFFF] py-20 sm:py-28 lg:py-32">
+    <section className="border-t border-brand-line bg-surface py-20 sm:py-28 lg:py-32">
       <div className="landing-wrap">
         <div className="max-w-3xl">
-          <span className="text-xs font-mono font-bold tracking-widest text-[#273F4F] uppercase mb-3 sm:mb-4 inline-block">
+          <span className="text-xs font-mono font-bold tracking-widest text-brand-slate uppercase mb-3 sm:mb-4 inline-block">
             {copy.title.includes('Kérdések') ? 'TUDNIVALÓK & GYAKORI KÉRDÉSEK' : 'FREQUENTLY ASKED QUESTIONS'}
           </span>
-          <h2 className="text-[#161616] font-bold tracking-tight">{copy.title}</h2>
+          <h2 className="text-brand-ink font-bold tracking-tight">{copy.title}</h2>
         </div>
 
         <div className="mt-14 grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16">
           {/* Preview & Blueprint Column (5 cols) */}
           <div className="space-y-6 lg:col-span-5">
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl bg-[#F7F6F4] shadow-md border border-[#D9D8D5]">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl bg-brand-surface-muted shadow-md border border-brand-line-strong">
               {!imgFailed ? (
                 <img
                   src={comparisonBlueprints}
@@ -112,7 +112,7 @@ export function FaqSection({ copy }: { copy: LandingCopy['faq'] }) {
                 <div
                   role="img"
                   aria-label={copy.alt}
-                  className="flex h-full w-full items-center justify-center p-8 text-center text-sm text-[#687984]"
+                  className="flex h-full w-full items-center justify-center p-8 text-center text-sm text-brand-muted"
                 >
                   <span>{copy.imageError}</span>
                 </div>
@@ -120,15 +120,15 @@ export function FaqSection({ copy }: { copy: LandingCopy['faq'] }) {
             </div>
 
             {copy.previewItems && (
-              <div className="landing-card-elevated rounded-3xl border border-[#E6E4DF] bg-[#F7F6F4] p-6 sm:p-7 shadow-xs">
-                <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#273F4F]">
+              <div className="landing-card-elevated rounded-3xl border border-brand-line bg-brand-surface-muted p-6 sm:p-7 shadow-xs">
+                <div className="text-xs font-mono font-bold uppercase tracking-wider text-brand-slate">
                   {copy.previewSubtitle}
                 </div>
-                <h3 className="text-lg font-bold text-[#161616] mt-1.5">{copy.previewTitle}</h3>
-                <ul className="mt-4 space-y-2.5 text-xs sm:text-sm text-[#273F4F] font-medium">
+                <h3 className="text-lg font-bold text-brand-ink mt-1.5">{copy.previewTitle}</h3>
+                <ul className="mt-4 space-y-2.5 text-xs sm:text-sm text-brand-slate font-medium">
                   {copy.previewItems.map((item) => (
                     <li key={item} className="flex items-center gap-2.5">
-                      <span className="h-1.5 w-1.5 rounded-full bg-[#FE7743] shrink-0" aria-hidden="true" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-brand-orange shrink-0" aria-hidden="true" />
                       <span>{item}</span>
                     </li>
                   ))}

@@ -57,22 +57,22 @@ export function FeatureTabs({ copy }: { copy: LandingCopy['features'] }) {
   };
 
   return (
-    <section id="palyazatok" className="border-t border-[#E6E4DF] bg-[#FFFFFF] py-16 sm:py-24 lg:py-28">
+    <section id="palyazatok" className="border-t border-brand-line bg-surface py-16 sm:py-24 lg:py-28">
       <div className="landing-wrap">
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-14">
           {/* Left Column: Narrative & Navigation (45%) */}
           <div className="lg:col-span-5">
-            <span className="text-xs font-mono font-bold tracking-widest text-[#273F4F] uppercase mb-3 sm:mb-4 inline-block">
+            <span className="text-xs font-mono font-bold tracking-widest text-brand-slate uppercase mb-3 sm:mb-4 inline-block">
               {copy.eyebrow}
             </span>
-            <h2 className="text-[#161616] font-bold tracking-tight">{copy.title}</h2>
-            <p className="mt-4 text-base sm:text-lg text-[#273F4F] leading-relaxed">{copy.intro}</p>
+            <h2 className="text-brand-ink font-bold tracking-tight">{copy.title}</h2>
+            <p className="mt-4 text-base sm:text-lg text-brand-slate leading-relaxed">{copy.intro}</p>
 
             {/* Interactive Tab List */}
             <div
               role="tablist"
               aria-label={copy.tablist}
-              className="mt-8 flex flex-col gap-2 rounded-2xl bg-[#F7F6F4] p-2 border border-[#E6E4DF]"
+              className="mt-8 flex flex-col gap-2 rounded-2xl bg-brand-surface-muted p-2 border border-brand-line"
             >
               {tabIds.map((id, index) => {
                 const isSelected = activeTab === id;
@@ -91,14 +91,14 @@ export function FeatureTabs({ copy }: { copy: LandingCopy['features'] }) {
                     onKeyDown={(e) => handleKeyDown(e, index)}
                     className={`flex items-center justify-between rounded-xl px-4 py-3.5 text-left text-sm sm:text-[15px] font-semibold transition-all focus-visible:rounded-lg ${
                       isSelected
-                        ? 'bg-[#273F4F] text-[#EFEEEA] shadow-sm'
-                        : 'text-[#273F4F] hover:bg-[#FFFFFF] hover:text-[#161616]'
+                        ? 'bg-brand-slate text-brand-cream shadow-sm'
+                        : 'text-brand-slate hover:bg-surface hover:text-brand-ink'
                     }`}
                   >
                     <span>{copy.tabs[index]}</span>
                     <span
                       className={`h-2 w-2 rounded-full transition-colors ${
-                        isSelected ? 'bg-[#FE7743]' : 'bg-[#D9D8D5]'
+                        isSelected ? 'bg-brand-orange' : 'bg-brand-line-strong'
                       }`}
                       aria-hidden="true"
                     />
@@ -114,35 +114,35 @@ export function FeatureTabs({ copy }: { copy: LandingCopy['features'] }) {
                 role="tabpanel"
                 id="panel-grants"
                 aria-labelledby="tab-grants"
-                className="landing-card-elevated rounded-3xl border border-[#D9D8D5] bg-[#FFFFFF] p-6 sm:p-10 shadow-lg"
+                className="landing-card-elevated rounded-3xl border border-brand-line-strong bg-surface p-6 sm:p-10 shadow-lg"
               >
-                <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#E6E4DF] pb-5">
+                <div className="flex flex-wrap items-center justify-between gap-4 border-b border-brand-line pb-5">
                   <div>
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#273F4F]">{copy.tabs[0]}</span>
-                    <h3 className="mt-1 text-2xl font-bold text-[#161616]">{copy.grants.title}</h3>
+                    <span className="text-xs font-bold uppercase tracking-wider text-brand-slate">{copy.tabs[0]}</span>
+                    <h3 className="mt-1 text-2xl font-bold text-brand-ink">{copy.grants.title}</h3>
                   </div>
-                  <div className="rounded-xl bg-[#FFF1EC] border border-[#FE7743] px-4 py-2 text-right">
-                    <div className="text-xs font-semibold text-[#273F4F]">{copy.grants.metric.label}</div>
-                    <div className="text-base font-extrabold text-[#161616]">{copy.grants.metric.value}</div>
+                  <div className="rounded-xl bg-brand-orange-bg border border-brand-orange px-4 py-2 text-right">
+                    <div className="text-xs font-semibold text-brand-slate">{copy.grants.metric.label}</div>
+                    <div className="text-base font-extrabold text-brand-ink">{copy.grants.metric.value}</div>
                   </div>
                 </div>
 
-                <p className="mt-5 text-base leading-relaxed text-[#273F4F]">{copy.grants.text}</p>
+                <p className="mt-5 text-base leading-relaxed text-brand-slate">{copy.grants.text}</p>
 
                 {/* Own Contribution Ratio Illustration */}
-                <div className="mt-6 rounded-2xl bg-[#F7F6F4] p-4 border border-[#E6E4DF]">
-                  <div className="flex items-center justify-between text-xs font-semibold text-[#161616] mb-2">
+                <div className="mt-6 rounded-2xl bg-brand-surface-muted p-4 border border-brand-line">
+                  <div className="flex items-center justify-between text-xs font-semibold text-brand-ink mb-2">
                     <span>Támogatási arány</span>
                     <span>50% támogatás / 50% saját erő</span>
                   </div>
                   <AnimatedSplitBar
-                    className="h-3 w-full rounded-full bg-[#E6E4DF] overflow-hidden flex"
+                    className="h-3 w-full rounded-full bg-brand-line overflow-hidden flex"
                     segments={[
-                      { value: 50, className: 'bg-[#FE7743]' },
-                      { value: 50, className: 'bg-[#273F4F]' },
+                      { value: 50, className: 'bg-brand-orange' },
+                      { value: 50, className: 'bg-brand-slate' },
                     ]}
                   />
-                  <div className="mt-2 flex items-center justify-between text-[11px] text-[#687984]">
+                  <div className="mt-2 flex items-center justify-between text-[11px] text-brand-muted">
                     <span>Vissza nem térítendő forrás</span>
                     <span>Megvalósítási idő: {copy.grants.timeline}</span>
                   </div>
@@ -150,18 +150,18 @@ export function FeatureTabs({ copy }: { copy: LandingCopy['features'] }) {
 
                 {/* Eligibility Criteria List */}
                 <div className="mt-6">
-                  <div className="text-xs font-bold uppercase tracking-wider text-[#273F4F]">{copy.grants.previewTitle}</div>
+                  <div className="text-xs font-bold uppercase tracking-wider text-brand-slate">{copy.grants.previewTitle}</div>
                   <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {copy.grants.fields.map((field) => (
-                      <div key={field} className="flex items-center gap-2 rounded-xl bg-[#F7F6F4] px-3.5 py-2.5 border border-[#E6E4DF] text-xs font-semibold text-[#161616]">
-                        <span className="h-2 w-2 rounded-full bg-[#FE7743] shrink-0" aria-hidden="true" />
+                      <div key={field} className="flex items-center gap-2 rounded-xl bg-brand-surface-muted px-3.5 py-2.5 border border-brand-line text-xs font-semibold text-brand-ink">
+                        <span className="h-2 w-2 rounded-full bg-brand-orange shrink-0" aria-hidden="true" />
                         <span>{field}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="mt-8 border-t border-[#E6E4DF] pt-6">
+                <div className="mt-8 border-t border-brand-line pt-6">
                   <Link to="/assess" className="landing-cta">
                     {copy.grants.action}
                   </Link>
@@ -174,28 +174,28 @@ export function FeatureTabs({ copy }: { copy: LandingCopy['features'] }) {
                 role="tabpanel"
                 id="panel-loans"
                 aria-labelledby="tab-loans"
-                className="landing-card-elevated rounded-3xl border border-[#D9D8D5] bg-[#FFFFFF] p-6 sm:p-10 shadow-lg"
+                className="landing-card-elevated rounded-3xl border border-brand-line-strong bg-surface p-6 sm:p-10 shadow-lg"
               >
-                <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#E6E4DF] pb-5">
+                <div className="flex flex-wrap items-center justify-between gap-4 border-b border-brand-line pb-5">
                   <div>
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#273F4F]">{copy.tabs[1]}</span>
-                    <h3 className="mt-1 text-2xl font-bold text-[#161616]">{copy.loans.title}</h3>
+                    <span className="text-xs font-bold uppercase tracking-wider text-brand-slate">{copy.tabs[1]}</span>
+                    <h3 className="mt-1 text-2xl font-bold text-brand-ink">{copy.loans.title}</h3>
                   </div>
-                  <div className="rounded-xl bg-[#EFEEEA] border border-[#D9D8D5] px-4 py-2 text-right">
-                    <div className="text-xs font-semibold text-[#273F4F]">{copy.loans.metric.label}</div>
-                    <div className="text-base font-extrabold text-[#161616]">{copy.loans.metric.value}</div>
+                  <div className="rounded-xl bg-brand-cream border border-brand-line-strong px-4 py-2 text-right">
+                    <div className="text-xs font-semibold text-brand-slate">{copy.loans.metric.label}</div>
+                    <div className="text-base font-extrabold text-brand-ink">{copy.loans.metric.value}</div>
                   </div>
                 </div>
 
-                <p className="mt-5 text-base leading-relaxed text-[#273F4F]">{copy.loans.text}</p>
+                <p className="mt-5 text-base leading-relaxed text-brand-slate">{copy.loans.text}</p>
 
                 {/* Principal vs Interest Subsidy Comparison */}
-                <div className="mt-6 rounded-2xl bg-[#F7F6F4] p-4 border border-[#E6E4DF]">
-                  <div className="text-xs font-bold uppercase tracking-wider text-[#273F4F] mb-3">{copy.loans.previewTitle}</div>
+                <div className="mt-6 rounded-2xl bg-brand-surface-muted p-4 border border-brand-line">
+                  <div className="text-xs font-bold uppercase tracking-wider text-brand-slate mb-3">{copy.loans.previewTitle}</div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {copy.loans.fields.map((field) => (
-                      <div key={field} className="flex items-center gap-2 rounded-xl bg-[#FFFFFF] px-3.5 py-2.5 border border-[#D9D8D5] text-xs font-semibold text-[#161616]">
-                        <span className="h-2 w-2 rounded-full bg-[#273F4F] shrink-0" aria-hidden="true" />
+                      <div key={field} className="flex items-center gap-2 rounded-xl bg-surface px-3.5 py-2.5 border border-brand-line-strong text-xs font-semibold text-brand-ink">
+                        <span className="h-2 w-2 rounded-full bg-brand-slate shrink-0" aria-hidden="true" />
                         <span>{field}</span>
                       </div>
                     ))}
@@ -203,12 +203,12 @@ export function FeatureTabs({ copy }: { copy: LandingCopy['features'] }) {
                 </div>
 
                 {/* Unpaywalled Regulatory Warning Box */}
-                <div className="mt-6 rounded-2xl border border-[#D9D8D5] bg-[#EFEEEA] p-4 text-xs font-medium text-[#273F4F] leading-relaxed">
-                  <div className="font-bold text-[#161616] mb-1">MNB jogi állásfoglalásig érvényes korlátozás</div>
+                <div className="mt-6 rounded-2xl border border-brand-line-strong bg-brand-cream p-4 text-xs font-medium text-brand-slate leading-relaxed">
+                  <div className="font-bold text-brand-ink mb-1">MNB jogi állásfoglalásig érvényes korlátozás</div>
                   {copy.loans.gate}
                 </div>
 
-                <div className="mt-8 border-t border-[#E6E4DF] pt-6">
+                <div className="mt-8 border-t border-brand-line pt-6">
                   <a href="#hitelek" className="landing-cta landing-cta-secondary">
                     {copy.loans.action}
                   </a>
@@ -221,31 +221,31 @@ export function FeatureTabs({ copy }: { copy: LandingCopy['features'] }) {
                 role="tabpanel"
                 id="panel-nav"
                 aria-labelledby="tab-nav"
-                className="landing-card-elevated rounded-3xl border border-[#D9D8D5] bg-[#FFFFFF] p-6 sm:p-10 shadow-lg"
+                className="landing-card-elevated rounded-3xl border border-brand-line-strong bg-surface p-6 sm:p-10 shadow-lg"
               >
-                <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#E6E4DF] pb-5">
+                <div className="flex flex-wrap items-center justify-between gap-4 border-b border-brand-line pb-5">
                   <div>
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#273F4F]">{copy.tabs[2]}</span>
-                    <h3 className="mt-1 text-2xl font-bold text-[#161616]">{copy.nav.title}</h3>
+                    <span className="text-xs font-bold uppercase tracking-wider text-brand-slate">{copy.tabs[2]}</span>
+                    <h3 className="mt-1 text-2xl font-bold text-brand-ink">{copy.nav.title}</h3>
                   </div>
-                  <span className="inline-flex items-center rounded-lg bg-[#FFF1EC] border border-[#FE7743] px-3 py-1.5 text-xs font-bold text-[#161616]">
+                  <span className="inline-flex items-center rounded-lg bg-brand-orange-bg border border-brand-orange px-3 py-1.5 text-xs font-bold text-brand-ink">
                     {copy.nav.local}
                   </span>
                 </div>
 
-                <p className="mt-5 text-base leading-relaxed text-[#273F4F]">{copy.nav.text}</p>
+                <p className="mt-5 text-base leading-relaxed text-brand-slate">{copy.nav.text}</p>
 
                 {/* Local CDV Verification Form */}
                 <form onSubmit={handleTaxSubmit} className="mt-6 space-y-4">
                   <div>
                     <div className="flex items-center justify-between">
-                      <label htmlFor={inputId} className="text-sm font-bold text-[#161616]">
+                      <label htmlFor={inputId} className="text-sm font-bold text-brand-ink">
                         {copy.nav.taxLabel}
                       </label>
                       <button
                         type="button"
                         onClick={handleLoadSample}
-                        className="text-xs font-bold text-[#273F4F] hover:text-[#FE7743] hover:underline"
+                        className="text-xs font-bold text-brand-slate hover:text-brand-orange hover:underline"
                       >
                         {copy.nav.sample}
                       </button>
@@ -265,7 +265,7 @@ export function FeatureTabs({ copy }: { copy: LandingCopy['features'] }) {
                       placeholder="12345678-1-23"
                       className="mt-1.5"
                     />
-                    <div id={feedbackId} className="mt-1.5 text-xs text-[#687984]">
+                    <div id={feedbackId} className="mt-1.5 text-xs text-brand-muted">
                       {copy.nav.helper}
                     </div>
                   </div>
@@ -276,41 +276,41 @@ export function FeatureTabs({ copy }: { copy: LandingCopy['features'] }) {
 
                   <div role="status" aria-live="polite" className="min-h-[2.5rem]">
                     {validated && isTaxEmpty && (
-                      <div className="flex items-start gap-2 rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs text-amber-900">
-                        <AlertCircle size={16} className="mt-0.5 shrink-0 text-amber-700" aria-hidden="true" />
+                      <div className="flex items-start gap-2 rounded-xl border border-amber bg-amber-bg p-3 text-xs text-amber">
+                        <AlertCircle size={16} className="mt-0.5 shrink-0 text-amber" aria-hidden="true" />
                         <span>{copy.nav.required}</span>
                       </div>
                     )}
                     {validated && !isTaxEmpty && !isTaxValid && (
-                      <div className="flex items-start gap-2 rounded-xl border border-rose-300 bg-rose-50 p-3 text-xs text-rose-900">
-                        <AlertCircle size={16} className="mt-0.5 shrink-0 text-rose-700" aria-hidden="true" />
+                      <div className="flex items-start gap-2 rounded-xl border border-red bg-red-bg p-3 text-xs text-red">
+                        <AlertCircle size={16} className="mt-0.5 shrink-0 text-red" aria-hidden="true" />
                         <span>{copy.nav.invalid}</span>
                       </div>
                     )}
                     {validated && isTaxValid && (
-                      <div className="flex items-start gap-2 rounded-xl border border-[#FE7743] bg-[#FFF1EC] p-3 text-xs text-[#161616] font-medium">
-                        <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-[#273F4F]" aria-hidden="true" />
+                      <div className="flex items-start gap-2 rounded-xl border border-brand-orange bg-brand-orange-bg p-3 text-xs text-brand-ink font-medium">
+                        <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-brand-slate" aria-hidden="true" />
                         <span>{copy.nav.valid}</span>
                       </div>
                     )}
                   </div>
 
-                  <div className="rounded-2xl bg-[#F7F6F4] p-4 border border-[#E6E4DF]">
-                    <label className="text-xs font-bold text-[#273F4F]">{copy.nav.companyLabel}</label>
+                  <div className="rounded-2xl bg-brand-surface-muted p-4 border border-brand-line">
+                    <label className="text-xs font-bold text-brand-slate">{copy.nav.companyLabel}</label>
                     {companyName ? (
-                      <div className="mt-2 rounded-xl border border-[#D9D8D5] bg-[#FFFFFF] p-3.5">
-                        <div className="text-sm font-bold text-[#161616]">{companyName}</div>
-                        <div className="mt-0.5 text-xs text-[#687984]">{copy.nav.sampleNote}</div>
+                      <div className="mt-2 rounded-xl border border-brand-line-strong bg-surface p-3.5">
+                        <div className="text-sm font-bold text-brand-ink">{companyName}</div>
+                        <div className="mt-0.5 text-xs text-brand-muted">{copy.nav.sampleNote}</div>
                       </div>
                     ) : (
-                      <div className="mt-2 rounded-xl border border-dashed border-[#D9D8D5] p-3.5 text-xs text-[#687984]">
+                      <div className="mt-2 rounded-xl border border-dashed border-brand-line-strong p-3.5 text-xs text-brand-muted">
                         {copy.nav.companyEmpty}
                       </div>
                     )}
                   </div>
                 </form>
 
-                <div className="mt-8 border-t border-[#E6E4DF] pt-6">
+                <div className="mt-8 border-t border-brand-line pt-6">
                   <Link to="/register" className="landing-link font-semibold">
                     {copy.nav.action}
                   </Link>

@@ -13,7 +13,7 @@ interface AnimatedProgressBarProps {
 export function AnimatedProgressBar({
   value,
   className,
-  fillClassName = "bg-[#FE7743]",
+  fillClassName = "bg-brand-orange",
   ariaLabel,
   duration = 1,
 }: AnimatedProgressBarProps) {

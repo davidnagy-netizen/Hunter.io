@@ -79,18 +79,18 @@ export function StatCounter({
     : null;
 
   return (
-    <section className="border-t border-[#E6E4DF] bg-[#FFFFFF] py-10 sm:py-16 lg:py-20">
-      <div className="landing-canvas landing-canvas-data relative overflow-hidden rounded-[28px] sm:rounded-[36px] lg:rounded-[40px] border border-[#202F38] bg-[#273F4F] p-8 sm:p-14 lg:p-20 text-[#EFEEEA] shadow-sm">
+    <section className="border-t border-brand-line bg-surface py-10 sm:py-16 lg:py-20">
+      <div className="landing-canvas landing-canvas-data relative overflow-hidden rounded-[28px] sm:rounded-[36px] lg:rounded-[40px] border border-brand-slate-2 bg-brand-slate p-8 sm:p-14 lg:p-20 text-brand-cream shadow-sm">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
           {/* Left Column: Oversized Market Metrics (50%) */}
           <div className="flex flex-col items-start lg:col-span-6">
-            <span className="text-xs font-mono font-bold tracking-widest text-[#D4D9DC] uppercase mb-3 inline-block">
+            <span className="text-xs font-mono font-bold tracking-widest text-brand-muted-4 uppercase mb-3 inline-block">
               {copy.eyebrow}
             </span>
-            <h2 className="text-[#EFEEEA] font-bold tracking-tight">
+            <h2 className="text-brand-cream font-bold tracking-tight">
               {copy.title}
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-[#D4D9DC] leading-relaxed max-w-xl">
+            <p className="mt-3 text-sm sm:text-base text-brand-muted-4 leading-relaxed max-w-xl">
               {copy.note}
             </p>
             {/* High-impact two-metric national coverage panel */}
@@ -100,14 +100,14 @@ export function StatCounter({
                 {isLoading && !data && (
                   <div
                     role="status"
-                    className="text-xl font-bold text-[#D4D9DC]"
+                    className="text-xl font-bold text-brand-muted-4"
                   >
                     {copy.loading}
                   </div>
                 )}
                 {isError && !data && (
                   <div className="flex flex-col items-start gap-3">
-                    <p role="alert" className="text-sm font-bold text-rose-700">
+                    <p role="alert" className="text-sm font-bold text-red">
                       {copy.error}
                     </p>
                     <button
@@ -127,34 +127,34 @@ export function StatCounter({
                 )}
 
                 {!isLoading && !isError && !hasValidCount && (
-                  <p className="text-lg font-semibold text-[#D4D9DC]">
+                  <p className="text-lg font-semibold text-brand-muted-4">
                     {copy.empty}
                   </p>
                 )}
 
                 {hasValidCount && (
                   <div>
-                    <div className="catalogue-number text-[#EFEEEA] font-extrabold tracking-tighter">
+                    <div className="catalogue-number text-brand-cream font-extrabold tracking-tighter">
                       {formattedCount}
                     </div>
-                    <div className="mt-3 text-lg sm:text-xl font-bold text-[#EFEEEA] tracking-tight">
+                    <div className="mt-3 text-lg sm:text-xl font-bold text-brand-cream tracking-tight">
                       {copy.label}
                     </div>
-                    <div className="mt-1 text-xs font-medium text-[#D4D9DC]">
+                    <div className="mt-1 text-xs font-medium text-brand-muted-4">
                       {copy.source}
                     </div>
                   </div>
                 )}
                 {isError && data && (
                   <div className="mt-4 flex items-center gap-3">
-                    <span className="text-xs font-medium text-[#FEA07B]">
+                    <span className="text-xs font-medium text-brand-orange-soft">
                       {copy.refreshError}
                     </span>
                     <button
                       type="button"
                       onClick={() => refetch()}
                       disabled={isFetching}
-                      className="text-xs font-bold text-[#FE7743] hover:underline"
+                      className="text-xs font-bold text-brand-orange hover:underline"
                     >
                       {copy.retry}
                     </button>
@@ -164,14 +164,14 @@ export function StatCounter({
 
               {/* Metric 2: Monumental '4' Priority Regions */}
               {copy.highlightStat && copy.highlightLabel && (
-                <div className="flex flex-col justify-start border-t sm:border-t-0 sm:border-l border-[#687984]/50 pt-6 sm:pt-0 sm:pl-6">
-                  <div className="text-7xl sm:text-8xl lg:text-9xl font-black text-[#FE7743] leading-none">
+                <div className="flex flex-col justify-start border-t sm:border-t-0 sm:border-l border-brand-muted/50 pt-6 sm:pt-0 sm:pl-6">
+                  <div className="text-7xl sm:text-8xl lg:text-9xl font-black text-brand-orange leading-none">
                     {copy.highlightStat}
                   </div>
-                  <div className="mt-3 text-lg sm:text-xl font-bold text-[#EFEEEA] tracking-tight">
+                  <div className="mt-3 text-lg sm:text-xl font-bold text-brand-cream tracking-tight">
                     {copy.highlightLabel}
                   </div>
-                  <div className="mt-1 text-xs font-medium text-[#BEC5CA]">
+                  <div className="mt-1 text-xs font-medium text-brand-muted-3">
                     {lang === "hu"
                       ? "Kiemelt támogatási övezetek"
                       : "Priority convergence zones"}
@@ -186,10 +186,10 @@ export function StatCounter({
                 copy.regions.map((region) => (
                   <span
                     key={region}
-                    className="inline-flex items-center rounded-full bg-[#202F38] border border-[#687984] px-3.5 py-1.5 text-xs font-bold text-[#EFEEEA] shadow-2xs"
+                    className="inline-flex items-center rounded-full bg-brand-slate-2 border border-brand-muted px-3.5 py-1.5 text-xs font-bold text-brand-cream shadow-2xs"
                   >
                     <span
-                      className="h-1.5 w-1.5 rounded-full bg-[#FE7743] mr-2"
+                      className="h-1.5 w-1.5 rounded-full bg-brand-orange mr-2"
                       aria-hidden="true"
                     />
                     {region}
@@ -209,9 +209,9 @@ export function StatCounter({
               >
                 <defs>
                   <radialGradient id="globeGrad" cx="40%" cy="40%" r="60%">
-                    <stop offset="0%" stopColor="#202F38" />
-                    <stop offset="60%" stopColor="#273F4F" />
-                    <stop offset="100%" stopColor="#1E2A32" />
+                    <stop offset="0%" stopColor="var(--color-brand-slate-2)" />
+                    <stop offset="60%" stopColor="var(--color-brand-slate)" />
+                    <stop offset="100%" stopColor="var(--color-brand-slate-3)" />
                   </radialGradient>
                   <linearGradient
                     id="arcGrad"
@@ -220,8 +220,8 @@ export function StatCounter({
                     x2="100%"
                     y2="100%"
                   >
-                    <stop offset="0%" stopColor="#FE7743" />
-                    <stop offset="100%" stopColor="#FEA07B" />
+                    <stop offset="0%" stopColor="var(--color-brand-orange)" />
+                    <stop offset="100%" stopColor="var(--color-brand-orange-soft)" />
                   </linearGradient>
                   <filter
                     id="glow"
@@ -245,7 +245,7 @@ export function StatCounter({
                     cy="200"
                     r="160"
                     fill="url(#globeGrad)"
-                    stroke="#687984"
+                    stroke="var(--color-brand-muted)"
                     strokeWidth="1.5"
                     strokeOpacity="0.6"
                   />
@@ -255,7 +255,7 @@ export function StatCounter({
                     rx="160"
                     ry="55"
                     fill="none"
-                    stroke="#EFEEEA"
+                    stroke="var(--color-brand-cream)"
                     strokeWidth="1"
                     strokeDasharray="3 3"
                     opacity="0.2"
@@ -266,7 +266,7 @@ export function StatCounter({
                     rx="160"
                     ry="110"
                     fill="none"
-                    stroke="#EFEEEA"
+                    stroke="var(--color-brand-cream)"
                     strokeWidth="1"
                     strokeDasharray="3 3"
                     opacity="0.2"
@@ -277,7 +277,7 @@ export function StatCounter({
                     rx="60"
                     ry="160"
                     fill="none"
-                    stroke="#EFEEEA"
+                    stroke="var(--color-brand-cream)"
                     strokeWidth="1"
                     strokeDasharray="3 3"
                     opacity="0.2"
@@ -288,7 +288,7 @@ export function StatCounter({
                     rx="115"
                     ry="160"
                     fill="none"
-                    stroke="#EFEEEA"
+                    stroke="var(--color-brand-cream)"
                     strokeWidth="1"
                     strokeDasharray="3 3"
                     opacity="0.2"
@@ -298,7 +298,7 @@ export function StatCounter({
                     y1="200"
                     x2="410"
                     y2="200"
-                    stroke="#687984"
+                    stroke="var(--color-brand-muted)"
                     strokeWidth="1.5"
                     opacity="0.4"
                   />
@@ -307,7 +307,7 @@ export function StatCounter({
                     y1="40"
                     x2="250"
                     y2="360"
-                    stroke="#687984"
+                    stroke="var(--color-brand-muted)"
                     strokeWidth="1.5"
                     opacity="0.4"
                   />
@@ -334,7 +334,7 @@ export function StatCounter({
                   className="stat-globe-arc-flow"
                   d="M 170 140 Q 230 240 320 250"
                   fill="none"
-                  stroke="#FE7743"
+                  stroke="var(--color-brand-orange)"
                   strokeWidth="2.5"
                   strokeDasharray="6 4"
                   opacity="0.9"
@@ -345,50 +345,50 @@ export function StatCounter({
                   cx="160"
                   cy="170"
                   r="7"
-                  fill="#FE7743"
+                  fill="var(--color-brand-orange)"
                 />
-                <circle cx="160" cy="170" r="3" fill="#EFEEEA" />
+                <circle cx="160" cy="170" r="3" fill="var(--color-brand-cream)" />
                 <circle
                   className="stat-globe-node"
                   cx="340"
                   cy="160"
                   r="8"
-                  fill="#FE7743"
+                  fill="var(--color-brand-orange)"
                 />
-                <circle cx="340" cy="160" r="3.5" fill="#EFEEEA" />
+                <circle cx="340" cy="160" r="3.5" fill="var(--color-brand-cream)" />
                 <circle
                   className="stat-globe-node"
                   cx="190"
                   cy="250"
                   r="6"
-                  fill="#FEA07B"
+                  fill="var(--color-brand-orange-soft)"
                 />
                 <circle
                   className="stat-globe-node"
                   cx="350"
                   cy="230"
                   r="6"
-                  fill="#FEA07B"
+                  fill="var(--color-brand-orange-soft)"
                 />
-                <circle cx="250" cy="130" r="5" fill="#EFEEEA" />
+                <circle cx="250" cy="130" r="5" fill="var(--color-brand-cream)" />
                 <circle
                   className="stat-globe-node"
                   cx="320"
                   cy="250"
                   r="7"
-                  fill="#FE7743"
+                  fill="var(--color-brand-orange)"
                 />
                 <circle
                   className="stat-globe-node"
                   cx="250"
                   cy="200"
                   r="9"
-                  fill="#FE7743"
+                  fill="var(--color-brand-orange)"
                 />
-                <circle cx="250" cy="200" r="4" fill="#EFEEEA" />
+                <circle cx="250" cy="200" r="4" fill="var(--color-brand-cream)" />
               </svg>
             </div>
-            <p className="mt-4 max-w-md text-center text-xs font-medium leading-relaxed text-[#BEC5CA]">
+            <p className="mt-4 max-w-md text-center text-xs font-medium leading-relaxed text-brand-muted-3">
               {copy.region}
             </p>
           </div>

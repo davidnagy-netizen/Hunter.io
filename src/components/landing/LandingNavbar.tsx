@@ -51,7 +51,7 @@ export function LandingNavbar({
       className={[
         "sticky top-0 z-40 border-b backdrop-blur-md transition-colors duration-300",
         scrolled
-          ? "border-[#E6E4DF] bg-surface/50 shadow-sm"
+          ? "border-brand-line bg-surface/50 shadow-sm"
           : "border-transparent bg-surface/50",
       ].join(" ")}
     >
@@ -72,7 +72,7 @@ export function LandingNavbar({
             <span className="text-2xl tracking-tight font-extrabold text-brand-ink">
               {copy.brand}
             </span>
-            <span className="text-sm font-medium text-[#687984] mt-0.5">
+            <span className="text-sm font-medium text-brand-muted mt-0.5">
               {copy.domain}
             </span>
           </span>
@@ -120,7 +120,7 @@ export function LandingNavbar({
             aria-expanded={open}
             aria-controls={menuId}
             onClick={() => setOpen((prev) => !prev)}
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-[#D9D8D5] p-2 text-brand-slate hover:bg-[#F7F6F4] focus-visible:ring-2 focus-visible:ring-brand-orange"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-brand-line-strong p-2 text-brand-slate hover:bg-brand-surface-muted focus-visible:ring-2 focus-visible:ring-brand-orange"
           >
             {open ? (
               <X size={20} aria-hidden />
@@ -134,7 +134,7 @@ export function LandingNavbar({
         {open && (
           <div
             id={menuId}
-            className="mt-2 flex w-full flex-col gap-3 border-t border-[#E6E4DF] pt-4 pb-3 lg:hidden"
+            className="mt-2 flex w-full flex-col gap-3 border-t border-brand-line pt-4 pb-3 lg:hidden"
           >
             {copy.links.map((link) => (
               <a
@@ -149,7 +149,7 @@ export function LandingNavbar({
                 {link.label}
               </a>
             ))}
-            <div className="mt-2 flex flex-col gap-2 border-t border-[#E6E4DF] pt-3">
+            <div className="mt-2 flex flex-col gap-2 border-t border-brand-line pt-3">
               {hasProfile ? (
                 <Link
                   to="/app"
