@@ -10,11 +10,10 @@ Frontend integration: [API setup and examples](docs/FRONTEND-API.md) · [OpenAPI
 > *(Don't go looking for grants. Fundor finds them for you.)*
 
 [![PHP Version](https://img.shields.io/badge/PHP-8.2%2B-777BB4?style=flat-square&logo=php&logoColor=white)](https://php.net)
-[![Laravel Framework](https://img.shields.io/badge/Laravel-11%20%2F%2013-FF2D20?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
-[![License: Proprietary](https://img.shields.io/badge/License-Proprietary%20%7C%20All%20Rights%20Reserved-CA4A4A?style=flat-square)](#-license--intellectual-property-protection)
-[![Interface](https://img.shields.io/badge/Bilingual-Hungarian%20%7C%20English-199268?style=flat-square)](#-bilingual-architecture-hu--en)
-[![Scoring Engine](https://img.shields.io/badge/Engine-Deterministic-0E1726?style=flat-square)](#-core-algorithms--scoring-engine)
-[![WCAG AA](https://img.shields.io/badge/Accessibility-WCAG%20AA%20Compliant-0E7550?style=flat-square)](#-design-system--color-tokens)
+[![Laravel Framework](https://img.shields.io/badge/Laravel-12%20%2F%2013-FF2D20?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
+[![License: Proprietary](https://img.shields.io/badge/License-Proprietary%20%7C%20All%20Rights%20Reserved-CA4A4A?style=flat-square)](#license--intellectual-property-protection)
+[![Interface](https://img.shields.io/badge/Bilingual-Hungarian%20%7C%20English-199268?style=flat-square)](#bilingual-architecture-hu--en)
+[![Scoring Engine](https://img.shields.io/badge/Engine-Deterministic-0E1726?style=flat-square)](#core-algorithms--scoring-engine)
 
 </div>
 
@@ -91,21 +90,24 @@ graph TD
 
 ## Design System & Color Tokens
 
-The visual design language follows an authoritative modern grotesk editorial aesthetic, strictly verified against **WCAG AA contrast standards** (minimum 4.5:1 ratio for normal text and 3:1 for large graphical components):
+The landing page and application share Tailwind v4 tokens in `resources/js/index.css`.
+Landing styles in `src/components/landing/landing.css` use the same brand palette.
 
-| Token | Hex | Role & Application | Contrast Ratio |
-|---|---|---|---|
-| `--ink` | `#0E1726` | Deep navy background, dark hero cards, primary typography | 17.96:1 on white (AAA) |
-| `--gold` | `#D99A2B` | Hunter Gold brand accent, primary CTA button surfaces, score rings | 7.36:1 with dark text (AA) |
-| `--gold-deep` | `#8D5E06` | Accessible dark gold for text links and category tags | 5.62:1 on white (AA) |
-| `--paper` | `#F5F7FA` | Subtle surface wash for dashboard containers and cards | Neutral base |
-| `--green` | `#199268` | `ELIGIBLE` status badge, grant funding value displays | 5.71:1 on white (AA) |
-| `--amber` | `#DD8331` | `CONDITIONAL` status badge, warning indicators | 5.02:1 on white (AA) |
-| `--red` | `#CA4A4A` | `NOT_ELIGIBLE` status badge, explicit exclusion reasons | 4.88:1 on white (AA) |
-| `--slate` | `#8A94A6` | `INSUFFICIENT_DATA` status badge, muted captions | 5.66:1 on white (AA) |
+| Token | Hex | Role |
+|---|---|---|
+| `--color-brand-orange` | `#FE7743` | Primary actions and brand accents |
+| `--color-brand-slate` | `#273F4F` | Dark panels and secondary actions |
+| `--color-brand-ink` | `#161616` | Primary text, footer and Fundor Plus surfaces |
+| `--color-brand-cream` | `#EFEEEA` | Warm backgrounds and text on dark surfaces |
+| `--color-brand-paper` | `#FAFAF9` | Application background |
+| `--color-brand-green` | `#4F8F5E` | Eligible status |
+| `--color-brand-amber` | `#C9762E` | Conditional status |
+| `--color-brand-red` | `#C1443D` | Not eligible status |
+| `--color-brand-muted-2` | `#939FA7` | Insufficient data status |
 
-- **Display Typography:** `Space Grotesk` (tight tracking `-0.025em`, weights 600, 700) for numeric badges and display headlines.
-- **Body Typography:** `Inter` (weights 400, 500, 600) for tabular data and legal descriptions.
+Existing semantic tokens such as `--color-gold`, `--color-ink` and `--color-paper` alias the
+brand tokens, keeping application screens aligned with the landing page. Typography uses
+**Plus Jakarta Sans** for body and display text and **Space Mono** for monospace text.
 
 ---
 
@@ -118,10 +120,10 @@ The rule engine assesses declarative criteria (`{field, operator, value}`) and e
 
 | Verdict | Semantic Color | Meaning |
 |---|---|---|
-| `ELIGIBLE` | Green (`#199268`) | All hard criteria pass. Project size, region, TEÁOR code, and business history match. |
-| `CONDITIONAL` | Amber (`#DD8331`) | Core criteria pass, but external conditions apply (e.g. de minimis certificate, co-financing proof). |
-| `INSUFFICIENT_DATA` | Slate (`#8A94A6`) | Required information is unknown. The system questions the user rather than guessing. |
-| `NOT_ELIGIBLE` | Red (`#CA4A4A`) | At least one hard gate fails. The call is immediately ruled out with specific legal grounds. |
+| `ELIGIBLE` | Green (`#4F8F5E`) | All hard criteria pass. Project size, region, TEÁOR code, and business history match. |
+| `CONDITIONAL` | Amber (`#C9762E`) | Core criteria pass, but external conditions apply (e.g. de minimis certificate, co-financing proof). |
+| `INSUFFICIENT_DATA` | Slate (`#939FA7`) | Required information is unknown. The system questions the user rather than guessing. |
+| `NOT_ELIGIBLE` | Red (`#C1443D`) | At least one hard gate fails. The call is immediately ruled out with specific legal grounds. |
 
 ### 2. Five-Factor Relevance Formula
 
@@ -143,60 +145,37 @@ $$\text{Fundor Score} = 0.35 \times \text{Eligibility} + 0.25 \times \text{Proje
 
 ---
 
-## Worked Comparison Demonstration
+## Landing Page
 
-The landing page features a complete worked comparison using realistic Hungarian SME parameters:
+The public `/` route composes its sections in `resources/js/pages/landing/LandingPage.tsx`,
+with components and styles in `src/components/landing/` and Hungarian/English copy in
+`src/data/landingContent.ts`.
 
-- **Demo Profile:** Alfa Gyártó Kft. (28 employees, Pest county, TEÁOR 28 Machinery Manufacturing, 30M HUF investment).
-- **Ranked Matches:**
-  1. **Széchenyi Terv Plusz (Score: 95):** 10–100M HUF range, 50% intensity. *Fully eligible.*
-  2. **GINOP Plusz (Score: 87):** 5–30M HUF range, 50% intensity. *Conditional: requires de minimis verification.*
-  3. **DIMOP Plusz (Score: 87):** 8–25M HUF range, 60% intensity. *Conditional: requires IT audit.*
-- **Excluded Calls (With Explicit Justification):**
-  1. **TOP Plusz (Site Development):** *Excluded.* Pest county is excluded by territorial eligibility rules.
-  2. **KAP (Agricultural Modernization):** *Excluded.* Non-agricultural primary code (TEÁOR 28 fails the 50% agro-revenue threshold).
-  3. **EIC Accelerator (Deeptech):** *Excluded.* 30M HUF project falls below the 50M HUF minimum project floor.
+- Hero with a locally validated tax-number entry and an illustrative funding preview.
+- Feature tabs, catalogue statistics, entrepreneur banner, value proposition and quick actions.
+- Use cases, an editorial journey, case-study carousel, Free/Fundor Plus plans, animated FAQ and footer.
+- Sticky navigation with section scrolling, mobile menu and language selection.
+- GSAP/ScrollTrigger animations for reveals, counters and progress bars; Lenis smooth scrolling.
+  The scroll hook and section reveals respect reduced-motion preferences and clean up on unmount.
+
+Preview scores and case studies are illustrative; catalogue counts are fetched from the API,
+with loading, unavailable and retry states. Landing tax-number validation checks the local CDV
+checksum without making a NAV request. Informational disclaimers remain visible in page content
+and the footer. Signed-in users with a company profile go to their application home;
+administrators go to the admin console.
 
 ---
 
 ## Bilingual Architecture (HU / EN)
 
-Fundor provides bilingual capabilities with runtime locale switching and environment-aware defaults:
+The React interface defaults to Hungarian (`hu`) in both development and production.
+The language toggle updates the Zustand UI store and i18next, persisting the choice in
+local storage under `fundor-rewrite-ui`.
 
-```
-                  ┌─────────────────────────────────┐
-                  │          HTTP Request           │
-                  └────────────────┬────────────────┘
-                                   │
-                                   ▼
-                  ┌─────────────────────────────────┐
-                  │    App\Http\Middleware\SetLocale │
-                  └────────────────┬────────────────┘
-                                   │
-          ┌────────────────────────┴────────────────────────┐
-          ▼                                                 ▼
-   [Local / Preview]                              [Production / Deployed]
-   Default: English ('en')                        Default: Hungarian ('hu')
-          │                                                 │
-          └────────────────────────┬────────────────────────┘
-                                   │
-                                   ▼
-                  ┌─────────────────────────────────┐
-                  │     User Session Override?      │
-                  │  (via language toggle /locale)  │
-                  └────────────────┬────────────────┘
-                                   │
-                                   ▼
-                  ┌─────────────────────────────────┐
-                  │     app()->setLocale($lang)     │
-                  │    Loads lang/en.json or hu     │
-                  └─────────────────────────────────┘
-```
-
-- **Local Preview Mode:** Automatically defaults to **English (`en`)** on first visit.
-- **Production Mode:** Automatically defaults to **Hungarian (`hu`)** when deployed (`APP_ENV=production`).
-- **User Control:** Users can change languages via the header toggle (`Magyar` / `English`) at any point.
-- **Translation Catalogs:** 370+ keys defined in `lang/en.json` and `lang/hu.json`.
+- Landing copy: `src/data/landingContent.ts`.
+- Shared translations: `resources/js/i18n/locales/`.
+- Feature translations: `resources/js/features/*/i18n/` and `resources/js/app/i18n/`.
+- Language initialization and fallback: `resources/js/i18n/i18n.ts`.
 
 ---
 
@@ -220,15 +199,18 @@ and served by one Laravel route. There are no Blade pages.
 │   │   ├── Middleware/FundorApi.php        # JSON-body rule and same-origin (CSRF) rule
 │   │   └── Requests/ValidateTaxpayerRequest.php   # Tax number shape + check digit
 │   ├── Services/
-│   │   ├── Api/Scoring.php                 # THE scorer: eligibility verdict + five-factor score + explanations
-│   │   ├── Api/Catalog.php                 # Scored catalog, teasers, locked detail (the paywall)
-│   │   ├── Api/{Accounts,Profiles,Crm,CatalogRefresh}.php
-│   │   ├── Nav/NavTaxpayerService.php      # NAV queryTaxpayer (on demand, cached)
+│   │   ├── Scoring.php                     # THE scorer: eligibility verdict + five-factor score + explanations
+│   │   ├── Catalog.php                     # Scored catalog, teasers, locked detail (the paywall)
+│   │   ├── {Accounts,Profiles,Crm,CatalogRefresh}.php
 │   │   └── Sector/                         # TEÁOR → sector map, statutory revenue bands
 │   └── Models/                             # CompanyProfile, Lead, Opportunity, User
 ├── config/fundor.php                       # Product settings (plans, EUR/HUF, feed URL, SPA index path)
 ├── database/                               # Migrations and the OpportunitySeeder (demo calls; creates no accounts)
-├── frontend/                               # The React app (see docs/frontend.md); builds to public/spa
+├── resources/js/                           # React application, routes, shared components and design tokens
+├── resources/static/                       # Static assets copied into public/spa
+├── src/components/landing/                  # Landing sections, animation hooks and styles
+├── src/data/landingContent.ts               # Hungarian and English landing copy
+├── package.json                            # Frontend commands run from the repository root
 ├── openapi.yaml                            # The API contract — single source of truth
 ├── docs/FRONTEND-API.md                    # Setup notes and examples for the contract
 ├── routes/
@@ -268,7 +250,8 @@ php artisan serve --host=127.0.0.1 --port=8000
 ### Frontend
 
 ```bash
-cd frontend && npm ci
+# Run from the repository root
+npm ci
 npm run dev        # http://localhost:5173 with hot reload; proxies /api to 127.0.0.1:8000
 # or
 npm run build      # writes public/spa; then open http://127.0.0.1:8000 — Laravel serves it
@@ -291,8 +274,13 @@ php artisan test
 php artisan test --filter=ScoringParityTest
 php artisan test --filter=SubscriberScoringTest
 
-# The frontend's tests (they read ../openapi.yaml and the recorded API responses)
+# Frontend checks (run from the repository root)
 npm test
+npm run typecheck
+npm run lint
+
+# Focused landing and language-toggle regression tests
+npm test -- resources/js/pages/landing resources/js/components/LanguageToggle.test.tsx
 ```
 
 ---

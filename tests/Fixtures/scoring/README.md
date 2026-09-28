@@ -1,23 +1,25 @@
 # Scoring golden fixtures
 
-`catalog.json` — 48 real EU funding calls (trimmed to the fields scoring reads), chosen to cover every branch of the
-formulas (consortium, partner share, no funding range, high admin burden, no documents, not "described", non-funding).
+`catalog.json` contains 48 real EU funding calls, trimmed to the fields scoring reads, covering
+consortium requirements, partner share, missing funding ranges, high administrative burden,
+missing documents, undescribed calls and non-funding opportunities.
 
-`expected.json` — what the **prototype's JavaScript engine** (`hunterScore` / `explainScore`, from the Node app this
-backend replaces) produced for 8 different companies and answer sets on those calls, at reference date 2026-09-21:
-score, verdict, blocked/estimated flags, days left, the five factor values, and (for two companies) every factor's
-label and explanation text in Hungarian and English.
+`expected.json` records the retired prototype engine's results for 8 companies and answer sets
+at reference date 2026-09-21: score, verdict, blocked/estimated flags, days left, five factor
+values and, for two companies, factor labels and explanations in Hungarian and English.
 
-`tests/Unit/ScoringParityTest.php` requires `App\Services\Scoring` (with `Profiles::normalize`) to reproduce all of
-it. Until this existed the PHP scorer disagreed with the prototype (wrong sector codes, empty explanations); the
-prototype engine has since been retired, so this is the record of what "right" was.
+`tests/Unit/ScoringParityTest.php` checks `App\Services\Scoring` with `Profiles::normalize`
+against these expectations, with the clock fixed to the reference date. Run from the repository root:
 
-One deliberate difference from the prototype is baked in: `consortium_ready` given as an *answer* (a per-call answer,
-else a global one, else the profile) affects feasibility. The prototype read only the profile, so an answered question
-did not move the score. `generate.mjs` applies the same rule so the fixture encodes the intended behaviour.
+```bash
+php artisan test --filter=ScoringParityTest
+```
 
-Regenerate (needs the prototype's `src/engine` and `src/data`, e.g. from git history of the frontend's
-`vendor/engine-src/`):
+One deliberate correction is captured: `consortium_ready` uses a per-call answer first,
+then a global answer, then the profile. The prototype originally read only the profile.
 
-    ENGINE_DIR=<dir with engine/ and data/> OUT_DIR=tests/Fixtures/scoring \
-    SRC_CATALOG=<catalog.json with an "opportunities" array> PROFILES=<profiles.json> node generate.mjs
+The landing-page refresh and shared color tokens do not change these scoring expectations.
+Illustrative landing scores are presentation content in `src/data/landingContent.ts`, not golden fixtures.
+
+The historical fixture generator is no longer included. Preserve these files as regression
+baselines; change expectations only alongside a reviewed scoring-rule change and its Laravel tests.
