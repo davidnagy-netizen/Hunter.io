@@ -25,3 +25,12 @@ if (typeof window.matchMedia !== "function") {
     onchange: null,
   })) as unknown as typeof window.matchMedia;
 }
+
+// jsdom does not implement ResizeObserver; mock it for responsive layout components.
+if (typeof window.ResizeObserver !== "function") {
+  window.ResizeObserver = class ResizeObserver {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  };
+}

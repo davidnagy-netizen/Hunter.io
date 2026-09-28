@@ -1,60 +1,98 @@
 @import "tailwindcss";
+@source "../../src";
 
 /*
  * Design tokens ported from the legacy app's stylesheet (public/css/app.css).
  * Tailwind v4 reads `@theme` as the source of truth and generates matching
  * utilities (bg-gold, text-muted, rounded-lg, shadow-card, font-display, ...).
+ *
+ * Single source of truth: every literal hex value lives in the `--color-brand-*`
+ * block below. Everything else — the app's own `gold`/`ink`/`paper`/`text`/status
+ * names, used throughout resources/js, and every landing component under src/ —
+ * is a `var()` alias onto one of those. Retinting the product is a one-file edit
+ * here; nothing outside this file should ever hardcode a color again.
  */
 @theme {
-  --color-ink: #0e1726;
-  --color-ink-2: #16233a;
-  --color-ink-3: #1e3050;
+  /* ---- Canonical brand palette (the only literals in the whole app) ---- */
+  --color-brand-orange: #FE7743;
+  --color-brand-orange-deep: #E76D3F;
+  --color-brand-orange-active: #D0643A;
+  --color-brand-orange-soft: #FEA07B;
+  --color-brand-orange-bg: #FFF1EC;
 
-  --color-paper: #f5f7fa;
-  --color-surface: #ffffff;
-  --color-surface-2: #fbfcfd;
+  --color-brand-slate: #273F4F;
+  --color-brand-slate-2: #202F38;
+  --color-brand-slate-3: #1E2A32;
 
-  --color-line: #e3e8ef;
-  --color-line-strong: #cdd5e0;
+  --color-brand-ink: #161616;
+  --color-brand-cream: #EFEEEA;
+  --color-brand-paper: #FAFAF9;
+  --color-brand-surface-muted: #F7F6F4;
 
-  --color-text: #16202e;
-  --color-muted: #64707f;
-  --color-muted-2: #8a94a6;
+  --color-brand-line: #E6E4DF;
+  --color-brand-line-strong: #D9D8D5;
 
-  --color-gold: #d99a2b;
-  --color-gold-deep: #b87c15;
-  --color-gold-bg: #fbf2de;
+  --color-brand-muted: #687984;
+  --color-brand-muted-2: #939FA7;
+  --color-brand-muted-3: #BEC5CA;
+  --color-brand-muted-4: #D4D9DC;
 
-  --color-green: #199268;
-  --color-green-bg: #e4f4ec;
+  /* Status hues warmed to sit next to the orange/slate/cream palette instead of
+     the old cool-toned set — still functionally green/amber/red/blue, just tinted
+     to match. */
+  --color-brand-green: #4F8F5E;
+  --color-brand-green-bg: #EEF5EC;
+  --color-brand-amber: #C9762E;
+  --color-brand-amber-bg: #FBF0E4;
+  --color-brand-red: #C1443D;
+  --color-brand-red-bg: #FBEAE8;
+  --color-brand-blue: #4A6FA0;
+  --color-brand-blue-bg: #EAEFF5;
 
-  --color-amber: #dd8331;
-  --color-amber-bg: #fbeedf;
+  /* ---- App-facing semantic names (aliases; landing uses the brand-* names
+     directly, the rest of resources/js uses these) ---- */
+  --color-ink: var(--color-brand-slate);
+  --color-ink-2: var(--color-brand-slate-2);
+  --color-ink-3: var(--color-brand-slate-3);
+  --color-paper: var(--color-brand-paper);
+  --color-surface: #FFFFFF;
+  --color-surface-2: #FDFCFC;
 
-  --color-red: #ca4a4a;
-  --color-red-bg: #fae7e7;
+  --color-line: var(--color-brand-line);
+  --color-line-strong: var(--color-brand-line-strong);
 
-  --color-slate: #8a94a6;
-  --color-slate-bg: #eef1f5;
+  --color-text: var(--color-brand-ink);
+  --color-muted: var(--color-brand-muted);
+  --color-muted-2: var(--color-brand-muted-2);
 
-  --color-blue: #2e6bd6;
-  --color-blue-bg: #e7effb;
+  --color-gold: var(--color-brand-orange);
+  --color-gold-deep: var(--color-brand-orange-deep);
+  --color-gold-bg: var(--color-brand-orange-bg);
+
+  --color-green: var(--color-brand-green);
+  --color-green-bg: var(--color-brand-green-bg);
+
+  --color-amber: var(--color-brand-amber);
+  --color-amber-bg: var(--color-brand-amber-bg);
+
+  --color-red: var(--color-brand-red);
+  --color-red-bg: var(--color-brand-red-bg);
+
+  --color-slate: var(--color-brand-muted-2);
+  --color-slate-bg: var(--color-brand-surface-muted);
+
+  --color-blue: var(--color-brand-blue);
+  --color-blue-bg: var(--color-brand-blue-bg);
 
   --radius-sm: 10px;
   --radius-md: 14px;
   --radius-lg: 20px;
-  /* Landing-only: the marketing page's own "sharp surfaces, rounding only on controls" call —
-   * deliberately sharper than --radius-md so it doesn't change the rest of the app's buttons. */
-  --radius-control: 3px;
 
-  --shadow-card: 0 1px 2px rgba(16, 23, 38, 0.04), 0 8px 24px -12px rgba(16, 23, 38, 0.14);
-  --shadow-card-lg: 0 2px 4px rgba(16, 23, 38, 0.05), 0 24px 48px -20px rgba(16, 23, 38, 0.28);
+  --shadow-card: 0 1px 2px rgba(22, 22, 22, 0.04), 0 8px 24px -12px rgba(22, 22, 22, 0.14);
+  --shadow-card-lg: 0 2px 4px rgba(22, 22, 22, 0.05), 0 24px 48px -20px rgba(22, 22, 22, 0.28);
 
-  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
-  /* Added for the landing redesign's kickers/labels — a deliberate, "engineered" technical
-   * voice next to the display face, not a generic sans. Pairs with --font-display's "Space"
-   * family on purpose. */
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
   --font-mono: "Space Mono", "SF Mono", ui-monospace, monospace;
 }
 
@@ -63,110 +101,4 @@ body {
   background: var(--color-paper);
   color: var(--color-text);
   font-family: var(--font-sans);
-}
-
-/*
- * Landing-only font swap: the marketing page's own display/mono pairing.
- * Space Grotesk + Space Mono is the same combination almost every
- * Framer/AI-template hero ships with, so the signed-in app keeps them
- * (--font-display/--font-mono above) while the landing page overrides both
- * custom properties for its own subtree only — same scoping idea as
- * --radius-control below.
- */
-.landing-page {
-  --font-display: "Bricolage Grotesque", "Space Grotesk", "Inter", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", "Space Mono", "SF Mono", ui-monospace, monospace;
-}
-
-/* The hero's photo panel: a slow, continuous drift so the image reads as
- * alive rather than a static poster. Kept out of Tailwind's inline arbitrary
- * values since @keyframes can't be declared there. */
-@keyframes kenburns {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.07);
-  }
-}
-
-/* The hero photo's scan line — a thin band sweeping top to bottom, on repeat: the visual for
- * "a rule-based engine is reading this", not decoration for its own sake. Fades in/out at each
- * end of its pass instead of cutting straight to the next loop. */
-@keyframes scanline {
-  0% {
-    top: -2%;
-    opacity: 0;
-  }
-  12% {
-    opacity: 1;
-  }
-  88% {
-    opacity: 1;
-  }
-  100% {
-    top: 100%;
-    opacity: 0;
-  }
-}
-
-/* The hero photo's profile-field tags: one shared keyframe, three copies at staggered
- * `animation-delay`s (0s, -1.5s, -3s — a third of the 4.5s cycle each) so they light up one
- * after another as the scan line above sweeps past their own height, instead of all fading in
- * and out in lockstep. */
-@keyframes tag-reveal {
-  0%,
-  88%,
-  100% {
-    opacity: 0;
-    transform: translateY(6px) scale(0.96);
-  }
-  8%,
-  22% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-  32% {
-    opacity: 0;
-    transform: translateY(-4px) scale(0.96);
-  }
-}
-
-/* TrustStrip's marquee: the track holds two copies of the same content back to back, so
- * translating exactly -50% loops seamlessly into the second copy. */
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-/*
- * HowItWorks' step numerals: a plain Tailwind color utility (e.g. `text-gold`) toggled by
- * GSAP's `toggleClass` would fight `text-white/14` on specificity ties decided by generation
- * order, not intent. A dedicated class with `.is-active` one level more specific settles it
- * outright.
- */
-.step-number {
-  color: rgba(255, 255, 255, 0.14);
-  transition: color 0.5s ease-out;
-}
-.step-number.is-active {
-  color: var(--color-gold);
-}
-
-/* The small icon beside each HowItWorks title — dims to match the resting numeral, lights up
- * gold in lockstep with it (same `is-active` toggle, same `ScrollTrigger`). */
-.step-icon {
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.35);
-  transition:
-    background-color 0.5s ease-out,
-    color 0.5s ease-out;
-}
-.step-icon.is-active {
-  background: rgba(217, 154, 43, 0.16);
-  color: var(--color-gold);
 }

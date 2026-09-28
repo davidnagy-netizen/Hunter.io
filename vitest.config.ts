@@ -14,7 +14,7 @@ export default mergeConfig(
       coverage: {
         provider: 'v8',
         reporter: ['text', 'html'],
-        include: ['js/**/*.{ts,tsx}'],
+        include: ['js/**/*.{ts,tsx}', '../src/**/*.{ts,tsx}'],
         exclude: ['js/**/*.d.ts', 'js/main.tsx', 'js/test/**'],
       },
     },

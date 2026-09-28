@@ -1,0 +1,425 @@
+/*
+ * No local color variables here — every color below resolves through the canonical
+ * `--color-brand-*` tokens defined once in resources/js/index.css, so retinting the
+ * product never requires touching this file.
+ */
+
+.landing-page {
+  font-size: 1.125rem;
+  color: var(--color-brand-ink);
+  background: var(--color-surface);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.landing-page :is(h1, h2, h3) {
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+  color: inherit;
+}
+
+.landing-page h1 {
+  font-size: clamp(3rem, 5.5vw, 4.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  font-weight: 750;
+}
+
+.landing-page h2 {
+  font-size: clamp(2.5rem, 3.8vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+.landing-page .landing-feature-heading {
+  font-size: clamp(2.25rem, 3.8vw, 3.25rem);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+.landing-page h3 {
+  font-size: clamp(1.5rem, 2.5vw, 2.15rem);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  font-weight: 650;
+}
+
+.landing-page .landing-wrap {
+  width: 100%;
+  max-width: 85rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+.landing-page .landing-canvas {
+  width: calc(100% - 1.5rem);
+  max-width: 90rem;
+  margin-inline: auto;
+  border-radius: 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .landing-page .landing-canvas {
+    width: calc(100% - 2.5rem);
+    border-radius: 2.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .landing-page .landing-canvas {
+    width: calc(100% - 3rem);
+    border-radius: 2.5rem;
+  }
+}
+
+.landing-page .landing-canvas-hero {
+  background: var(--color-brand-cream);
+  border: 1px solid var(--color-brand-line-strong);
+}
+
+.landing-page .landing-canvas-data {
+  background: var(--color-brand-slate);
+  border: 1px solid var(--color-brand-slate-2);
+  color: var(--color-brand-cream);
+}
+
+.landing-page .landing-canvas-photo {
+  background: var(--color-brand-ink);
+  color: var(--color-brand-cream);
+  overflow: hidden;
+}
+
+.landing-page .landing-canvas-conversion {
+  background: var(--color-brand-slate);
+  color: var(--color-brand-cream);
+  border: 1px solid var(--color-brand-slate-2);
+}
+
+.landing-page .landing-canvas-blueprint {
+  background: var(--color-brand-surface-muted);
+  border: 1px solid var(--color-brand-line);
+}
+
+.landing-page .landing-canvas-plans {
+  background: var(--color-brand-cream);
+  border: 1px solid var(--color-brand-line-strong);
+}
+
+.landing-page .landing-footer-surface {
+  background: var(--color-brand-ink);
+  color: var(--color-brand-muted-2);
+  border-top: 1px solid rgba(239, 238, 234, 0.1);
+}
+
+.landing-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-brand-slate);
+  background: var(--color-surface);
+  border: 1px solid var(--color-brand-line-strong);
+  border-radius: 9999px;
+  padding: 0.375rem 1rem;
+  user-select: none;
+}
+.landing-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-brand-line);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px 0 rgba(22, 22, 22, 0.04);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .landing-card {
+    padding: 2rem;
+  }
+}
+
+.landing-card-elevated {
+  background: var(--color-surface);
+  border: 1px solid var(--color-brand-line-strong);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px -10px rgba(39, 63, 79, 0.08), 0 4px 6px -2px rgba(39, 63, 79, 0.03);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .landing-card-elevated {
+    padding: 2rem;
+  }
+}
+
+.landing-card-highlight {
+  background: var(--color-brand-orange-bg);
+  border: 1px solid var(--color-brand-orange);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px 0 rgba(22, 22, 22, 0.04);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .landing-card-highlight {
+    padding: 2rem;
+  }
+}
+
+.landing-card-dark {
+  background: var(--color-brand-ink);
+  border: 1px solid var(--color-brand-slate);
+  color: var(--color-brand-cream);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.25);
+}
+
+.landing-card-dark :is(h1, h2, h3, h4) {
+  color: var(--color-brand-cream) !important;
+}
+
+.landing-page .landing-canvas-photo :is(h1, h2, h3),
+.landing-page .landing-canvas-conversion :is(h1, h2, h3),
+.landing-page [class*="bg-brand-ink"] :is(h1, h2, h3),
+.landing-page [class*="bg-brand-slate"] :is(h1, h2, h3) {
+  color: var(--color-brand-cream) !important;
+}
+
+@media (min-width: 640px) {
+  .landing-card-dark {
+    padding: 2rem;
+  }
+}
+
+.landing-page .landing-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 54px;
+  padding: 0.875rem 1.875rem;
+  border: 1px solid var(--color-brand-orange);
+  border-radius: 0.75rem;
+  background: var(--color-brand-orange);
+  color: var(--color-brand-ink);
+  font-size: 1.0625rem;
+  font-weight: 650;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.landing-page .landing-cta:hover {
+  background: var(--color-brand-orange-deep);
+  border-color: var(--color-brand-orange-deep);
+  color: var(--color-brand-ink);
+}
+
+.landing-page .landing-cta:active {
+  background: var(--color-brand-orange-active);
+  border-color: var(--color-brand-orange-active);
+}
+
+/* A slow breathing ring around the page's one or two primary conversion CTAs (hero, navbar) —
+   deliberately not applied to every `.landing-cta` instance, since those also mark in-context
+   actions (tab panels, carousel cards) where a pulsing button everywhere would just be noise. */
+@keyframes landing-cta-glow {
+  0%, 100% { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 0 0 0 rgba(254, 119, 67, 0.45); }
+  50% { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 0 0 9px rgba(254, 119, 67, 0); }
+}
+
+.landing-page .landing-cta-highlight {
+  animation: landing-cta-glow 2.4s ease-in-out infinite;
+}
+
+.landing-page .landing-cta-highlight:hover {
+  animation-play-state: paused;
+}
+
+.landing-page .landing-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 54px;
+  padding: 0.875rem 1.875rem;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  background: transparent;
+  border: 1px solid var(--color-brand-slate);
+  color: var(--color-brand-slate);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+.landing-page .landing-cta-secondary:hover {
+  background: var(--color-brand-slate);
+  border-color: var(--color-brand-slate);
+  color: var(--color-brand-cream);
+}
+
+.landing-page .landing-canvas-data .landing-cta-secondary,
+.landing-page .landing-canvas-photo .landing-cta-secondary,
+.landing-page .landing-canvas-conversion .landing-cta-secondary,
+.landing-page .landing-card-dark .landing-cta-secondary {
+  border-color: var(--color-brand-cream);
+  color: var(--color-brand-cream);
+}
+
+.landing-page .landing-canvas-data .landing-cta-secondary:hover,
+.landing-page .landing-canvas-photo .landing-cta-secondary:hover,
+.landing-page .landing-canvas-conversion .landing-cta-secondary:hover,
+.landing-page .landing-card-dark .landing-cta-secondary:hover {
+  background: var(--color-brand-cream);
+  color: var(--color-brand-ink);
+}
+
+.landing-page .landing-nav-link {
+  position: relative;
+  padding-bottom: 3px;
+}
+
+.landing-page .landing-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--color-brand-orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 250ms ease;
+}
+
+.landing-page .landing-nav-link:hover::after,
+.landing-page .landing-nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.landing-page .landing-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--color-brand-slate);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-weight: 500;
+}
+
+.landing-page .landing-link:hover {
+  color: var(--color-brand-orange);
+}
+
+.landing-page :is(a, button, input, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--color-brand-orange);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--color-surface);
+}
+
+.landing-page button, .landing-page summary {
+  cursor: pointer;
+}
+
+.landing-page input {
+  min-height: 48px;
+  min-width: 0;
+  width: 100%;
+  border: 1px solid var(--color-brand-line-strong);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-surface);
+  color: var(--color-brand-ink);
+  font-size: 0.9375rem;
+}
+
+.landing-page input[aria-invalid="true"] {
+  border-color: var(--color-brand-red);
+}
+
+.landing-page input::placeholder {
+  color: var(--color-brand-muted);
+}
+
+.landing-page .landing-language {
+  border-color: var(--color-brand-line-strong);
+  overflow: visible;
+}
+
+.landing-page .landing-language button {
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 0.5rem;
+  color: var(--color-brand-slate);
+  font-weight: 500;
+}
+
+.landing-page .landing-language button[aria-pressed="true"] {
+  background: var(--color-brand-slate);
+  color: var(--color-brand-cream);
+}
+
+.landing-page .landing-skip {
+  position: absolute;
+  top: 0.5rem;
+  left: 1rem;
+  z-index: 50;
+  transform: translateY(-200%);
+  background: var(--color-brand-orange);
+  color: var(--color-brand-ink);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 650;
+}
+
+.landing-page .landing-skip:focus {
+  transform: none;
+}
+
+.landing-page .catalogue-number {
+  font-size: clamp(4.5rem, 9vw, 8rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  color: var(--color-brand-orange);
+}
+
+.landing-page .landing-globe {
+  width: 100%;
+  max-width: 32rem;
+  margin-inline: auto;
+}
+
+@media (min-width: 640px) {
+  .landing-page .landing-wrap {
+    padding-inline: 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .landing-page .landing-wrap {
+    padding-inline: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-page *, .landing-page *::before, .landing-page *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
