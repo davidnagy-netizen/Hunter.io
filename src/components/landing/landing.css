@@ -786,8 +786,16 @@
 }
 
 @media (max-width: 680px) {
-  .landing-hero-float {
-    display: none;
+  /* `zoom` (not `transform: scale`) so the shrink also shrinks the layout box: the floats are
+   * absolutely positioned off the phone's edges, and a `transform` alone leaves the pre-shrink
+   * box reserved, so the visual gets smaller but the empty space around it doesn't. */
+  .landing-hero-visual {
+    max-width: 100%;
+    aspect-ratio: auto;
+    height: auto;
+  }
+  .landing-hero-phone {
+    zoom: 0.62;
   }
 }
 
