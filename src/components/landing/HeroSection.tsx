@@ -1,8 +1,8 @@
-import { Check, Clock } from "lucide-react";
+import { Check } from "lucide-react";
 import { Link } from "react-router";
 import type { LandingCopy } from "../../data/landingContent";
-import { AnimatedProgressBar } from "./AnimatedProgressBar";
 import { GsapReveal } from "./GsapReveal";
+import { HeroVisual } from "./HeroVisual";
 
 /**
  * Presents Fundor's grant pre-screening value proposition and illustrative product previews.
@@ -89,130 +89,9 @@ export function HeroSection({ copy }: { copy: LandingCopy["hero"] }) {
             </div>
           </GsapReveal>
 
-          {/* Right Column: Substantial Financial Intelligence Interface */}
+          {/* Right Column: animated matches-app preview (Lottie, with a static phone mockup fallback) */}
           <GsapReveal className="lg:col-span-6 xl:col-span-5 relative">
-            <div className="mb-2.5 flex items-center justify-between text-xs text-brand-muted">
-              <span className="font-semibold text-brand-slate flex items-center gap-1.5">
-                <span
-                  className="h-2 w-2 rounded-full bg-brand-orange inline-block"
-                  aria-hidden="true"
-                />
-                {copy.dashboard}
-              </span>
-              <span>{copy.preview}</span>
-            </div>
-
-            <div className="landing-card-elevated relative rounded-2xl border border-brand-line-strong bg-surface p-5 sm:p-7 shadow-lg">
-              {/* Window Controls & URL bar */}
-              <div className="flex items-center justify-between border-b border-brand-line pb-3.5 mb-4">
-                <div className="flex items-center gap-1.5" aria-hidden="true">
-                  <div className="h-2.5 w-2.5 rounded-full bg-brand-line-strong" />
-                  <div className="h-2.5 w-2.5 rounded-full bg-brand-line-strong" />
-                  <div className="h-2.5 w-2.5 rounded-full bg-brand-line-strong" />
-                </div>
-                <div className="rounded-md bg-brand-surface-muted px-3 py-1 text-[11px] font-mono font-medium text-brand-muted border border-brand-line">
-                  fundor.hu/app/pre-screen
-                </div>
-                <span className="inline-flex items-center rounded-md bg-brand-orange-bg px-2 py-0.5 text-xs font-semibold text-brand-ink border border-brand-orange">
-                  {copy.brand}
-                </span>
-              </div>
-
-              {/* Profile Inputs Mock */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
-                <div className="rounded-xl bg-brand-surface-muted p-3 border border-brand-line">
-                  <div className="text-brand-muted font-medium">
-                    {copy.profileMock.sizeLabel}
-                  </div>
-                  <div className="font-bold text-brand-ink mt-0.5">
-                    {copy.profileMock.sizeValue}
-                  </div>
-                </div>
-                <div className="rounded-xl bg-brand-surface-muted p-3 border border-brand-line">
-                  <div className="text-brand-muted font-medium">
-                    {copy.profileMock.goalLabel}
-                  </div>
-                  <div className="font-bold text-brand-ink mt-0.5">
-                    {copy.profileMock.goalValue}
-                  </div>
-                </div>
-                <div className="sm:col-span-2 rounded-xl bg-brand-surface-muted p-3 border border-brand-line">
-                  <div className="text-brand-muted font-medium">
-                    {copy.category}
-                  </div>
-                  <div className="font-bold text-brand-ink mt-0.5">
-                    {copy.grant}
-                  </div>
-                </div>
-              </div>
-
-              {/* Primary Score Evaluation Module */}
-              <div className="mt-4 rounded-xl border border-brand-orange bg-brand-orange-bg p-4 sm:p-5">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-xs font-bold uppercase tracking-wider text-brand-slate">
-                      {copy.score}
-                    </div>
-                    <div className="mt-0.5 text-3xl sm:text-4xl font-extrabold text-brand-ink tracking-tight">
-                      {copy.scoreValue}
-                    </div>
-                  </div>
-                  <span className="inline-flex items-center rounded-full bg-brand-slate px-3 py-1 text-xs font-bold text-brand-cream">
-                    {copy.statusLabel}
-                  </span>
-                </div>
-                <div className="mt-2 text-xs font-medium text-brand-slate">
-                  {copy.scoreNote}
-                </div>
-              </div>
-
-              {/* Secondary Readiness Progress */}
-              <div className="mt-3.5 rounded-xl border border-brand-line-strong bg-brand-paper p-3.5 text-xs">
-                <div className="flex items-center justify-between font-semibold text-brand-ink mb-1.5">
-                  <span>{copy.readiness}</span>
-                  <span className="font-bold text-brand-slate">
-                    {copy.metrics.readinessScore}
-                  </span>
-                </div>
-                <AnimatedProgressBar
-                  value={parseInt(copy.metrics.readinessScore, 10)}
-                  className="h-2 w-full rounded-full bg-brand-line overflow-hidden"
-                  fillClassName="bg-brand-orange"
-                  ariaLabel={copy.readiness}
-                />
-                <p className="mt-2 leading-relaxed text-brand-slate">
-                  {copy.readinessNote}
-                </p>
-              </div>
-
-              {/* Overlapping Contextual Chips */}
-              <div className="mt-4 flex flex-wrap items-center gap-2">
-                <div className="inline-flex items-center gap-1.5 rounded-lg border border-brand-line-strong bg-brand-surface-muted px-3 py-1.5 text-xs font-semibold text-brand-ink shadow-2xs">
-                  <span
-                    className="h-1.5 w-1.5 rounded-full bg-brand-orange"
-                    aria-hidden="true"
-                  />
-                  <span>
-                    {copy.metrics.matchCount} {copy.metrics.matchLabel}
-                  </span>
-                </div>
-                <div className="inline-flex items-center gap-1.5 rounded-lg border border-brand-line-strong bg-brand-surface-muted px-3 py-1.5 text-xs font-semibold text-brand-slate">
-                  <Clock
-                    size={13}
-                    className="text-brand-muted shrink-0"
-                    aria-hidden="true"
-                  />
-                  <span>
-                    {copy.metrics.timeEstimate} {copy.metrics.timeLabel}
-                  </span>
-                </div>
-              </div>
-
-              {/* Eligibility Disclosure */}
-              <div className="mt-4 border-t border-brand-line pt-3 text-[11px] leading-normal text-brand-muted">
-                {copy.amount}
-              </div>
-            </div>
+            <HeroVisual copy={copy.visual} />
           </GsapReveal>
         </div>
 

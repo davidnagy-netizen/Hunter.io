@@ -404,6 +404,393 @@
   margin-inline: auto;
 }
 
+/*
+ * Hero right-side visual: an intro-then-loop Lottie animation, with the phone mockup below
+ * it as the always-present static fallback (kept in the DOM, not conditionally mounted, so
+ * there's no layout jump if the animation fails or loads late). `landing-hero-visual` pins an
+ * aspect ratio so the column keeps its size once JS decides which child actually shows.
+ */
+.landing-hero-visual {
+  position: relative;
+  width: 100%;
+  max-width: 26rem;
+  aspect-ratio: 520 / 760;
+  margin-inline: auto;
+}
+
+.landing-hero-lottie {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+}
+
+.landing-hero-lottie svg {
+  overflow: visible;
+}
+
+.landing-hero-lottie.is-active {
+  visibility: visible;
+}
+
+.landing-hero-phone {
+  position: relative;
+  width: 300px;
+  margin-inline: auto;
+}
+
+.landing-hero-phone-frame {
+  background: linear-gradient(160deg, var(--color-brand-slate-2), var(--color-brand-ink));
+  border-radius: 46px;
+  padding: 10px;
+  box-shadow: var(--shadow-card-lg);
+  border: 1px solid var(--color-brand-slate-3);
+  position: relative;
+  z-index: 2;
+}
+
+.landing-hero-phone-screen {
+  background: var(--color-brand-surface-muted);
+  border-radius: 37px;
+  overflow: hidden;
+  position: relative;
+  height: 596px;
+  display: flex;
+  flex-direction: column;
+}
+
+.landing-hero-island {
+  position: absolute;
+  top: 11px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92px;
+  height: 25px;
+  background: var(--color-brand-ink);
+  border-radius: 999px;
+  z-index: 6;
+}
+
+.landing-hero-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 24px 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--color-brand-ink);
+}
+
+.landing-hero-status .sig {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.landing-hero-app-head {
+  padding: 8px 20px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.landing-hero-app-head .t {
+  font-weight: 800;
+  font-size: 17px;
+  color: var(--color-brand-ink);
+  letter-spacing: -0.02em;
+}
+
+.landing-hero-app-head .pill {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-brand-orange-deep);
+  background: var(--color-brand-orange-bg);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.landing-hero-app-body {
+  flex: 1;
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  overflow: hidden;
+}
+
+.landing-hero-match-card {
+  background: var(--color-surface);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 6px 20px rgba(22, 22, 22, 0.07);
+}
+
+.landing-hero-mc-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.landing-hero-mc-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-brand-muted-2);
+}
+
+.landing-hero-mc-title {
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--color-brand-ink);
+  margin-top: 3px;
+  line-height: 1.2;
+}
+
+.landing-hero-mc-amount {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--color-brand-orange-deep);
+  margin-top: 6px;
+}
+
+.landing-hero-mc-ring {
+  width: 58px;
+  height: 58px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.landing-hero-mc-ring svg {
+  transform: rotate(-90deg);
+}
+
+.landing-hero-mc-ring .n {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 17px;
+  color: var(--color-brand-ink);
+}
+
+.landing-hero-mc-band {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-brand-green);
+  background: var(--color-brand-green-bg);
+  padding: 3px 9px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.landing-hero-mc-factors {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.landing-hero-mc-factor .fr {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11.5px;
+  margin-bottom: 4px;
+}
+
+.landing-hero-mc-factor .fr span:first-child {
+  color: var(--color-brand-muted);
+}
+
+.landing-hero-mc-factor .fr span:last-child {
+  font-weight: 700;
+  color: var(--color-brand-ink);
+}
+
+.landing-hero-mc-bar {
+  height: 5px;
+  background: var(--color-brand-cream);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.landing-hero-mc-bar i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-brand-orange-deep), var(--color-brand-orange));
+}
+
+.landing-hero-more-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-brand-muted-2);
+  padding: 2px 4px;
+}
+
+.landing-hero-match-row {
+  background: var(--color-surface);
+  border-radius: 14px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  box-shadow: 0 3px 10px rgba(22, 22, 22, 0.05);
+}
+
+.landing-hero-match-row .mr-ic {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--color-brand-orange-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--color-brand-orange-deep);
+}
+
+.landing-hero-match-row .mr-ic svg {
+  width: 17px;
+  height: 17px;
+}
+
+.landing-hero-match-row .mr-t {
+  flex: 1;
+  min-width: 0;
+}
+
+.landing-hero-match-row .mr-t b {
+  display: block;
+  font-size: 12.5px;
+  color: var(--color-brand-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 700;
+}
+
+.landing-hero-match-row .mr-t span {
+  font-size: 11px;
+  color: var(--color-brand-muted);
+}
+
+.landing-hero-match-row .mr-score {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--color-brand-orange-deep);
+  background: var(--color-brand-orange-bg);
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.landing-hero-app-tabs {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 11px 10px 17px;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-brand-line-strong);
+}
+
+.landing-hero-app-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--color-brand-muted-2);
+}
+
+.landing-hero-app-tab svg {
+  width: 20px;
+  height: 20px;
+}
+
+.landing-hero-app-tab.active {
+  color: var(--color-brand-orange-deep);
+}
+
+.landing-hero-float {
+  position: absolute;
+  background: var(--color-surface);
+  border: 1px solid var(--color-brand-line);
+  border-radius: 14px;
+  padding: 11px 14px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 4;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-brand-ink);
+}
+
+.landing-hero-float .ic {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.landing-hero-float .ic svg {
+  width: 17px;
+  height: 17px;
+}
+
+.landing-hero-float small {
+  display: block;
+  font-weight: 500;
+  color: var(--color-brand-muted-2);
+  font-size: 11px;
+}
+
+.landing-hero-float.hf-1 {
+  top: 40px;
+  left: -48px;
+  animation: landing-hero-float 5s ease-in-out infinite;
+}
+
+.landing-hero-float.hf-2 {
+  bottom: 120px;
+  right: -42px;
+  animation: landing-hero-float 5s ease-in-out 0.8s infinite;
+}
+
+.landing-hero-float.hf-3 {
+  bottom: 26px;
+  left: -34px;
+  animation: landing-hero-float 5s ease-in-out 1.6s infinite;
+}
+
+@keyframes landing-hero-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+
+@media (max-width: 680px) {
+  .landing-hero-float {
+    display: none;
+  }
+}
+
 @media (min-width: 640px) {
   .landing-page .landing-wrap {
     padding-inline: 1.75rem;
