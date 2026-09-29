@@ -1,4 +1,9 @@
 {
+  "logout": {
+    "question": "Biztosan ki szeretnél jelentkezni?",
+    "confirm": "Kijelentkezés",
+    "cancel": "Mégse"
+  },
   "login": {
     "title": "Belépés",
     "subtitle": "Lépj be a cégfiókoddal, hogy lásd a személyre szabott találataidat."

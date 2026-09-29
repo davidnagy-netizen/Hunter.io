@@ -1,3 +1,4 @@
+@import "sweetalert2/dist/sweetalert2.min.css";
 @import "tailwindcss";
 @source "../../src";
 
@@ -101,4 +102,46 @@ body {
   background: var(--color-paper);
   color: var(--color-text);
   font-family: var(--font-sans);
+}
+
+/* SweetAlert2 brand harmonization */
+.swal2-container {
+  font-family: var(--font-sans);
+  z-index: 99999 !important;
+}
+.swal2-popup,
+.swal2-container .swal2-popup,
+div:where(.swal2-container) div:where(.swal2-popup) {
+  display: grid !important;
+  border-radius: var(--radius-md) !important;
+  background: var(--color-surface) !important;
+  color: var(--color-text) !important;
+  box-shadow: var(--shadow-card-lg) !important;
+  font-family: var(--font-sans) !important;
+}
+.swal2-title {
+  color: var(--color-text) !important;
+  font-family: var(--font-display) !important;
+}
+.swal2-html-container {
+  color: var(--color-muted) !important;
+}
+.swal2-styled.swal2-confirm {
+  background-color: var(--color-gold) !important;
+  border-radius: var(--radius-sm) !important;
+  font-weight: 500 !important;
+}
+.swal2-styled.swal2-confirm:hover {
+  background-color: var(--color-gold-deep) !important;
+}
+.swal2-styled.swal2-cancel {
+  background-color: transparent !important;
+  color: var(--color-muted) !important;
+  border: 1px solid var(--color-line-strong) !important;
+  border-radius: var(--radius-sm) !important;
+  font-weight: 500 !important;
+}
+.swal2-styled.swal2-cancel:hover {
+  background-color: var(--color-paper) !important;
+  color: var(--color-text) !important;
 }

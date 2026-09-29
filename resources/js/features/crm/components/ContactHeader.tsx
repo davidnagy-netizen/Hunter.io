@@ -72,20 +72,21 @@ export function ContactHeader({ backTarget, contact, vocabulary, labels, onMove 
       ) : null}
 
       {confirmingDelete ? (
-        <Dialog title={t("contact.deleteDialog.title")} onClose={() => setConfirmingDelete(false)}>
+        <Dialog title={t("contact.deleteDialog.title")} icon="warning" onClose={() => setConfirmingDelete(false)}>
           <p className="text-sm text-muted">{t("contact.deleteDialog.body")}</p>
           {deleteError ? (
             <p role="alert" className="mt-2 text-xs text-red">
               {deleteError}
             </p>
           ) : null}
-          <div className="mt-4 flex justify-end gap-2">
-            <Button variant="ghost" size="sm" onClick={() => setConfirmingDelete(false)}>
+          <div className="swal2-actions mt-4 flex justify-end gap-2">
+            <Button variant="ghost" size="sm" className="swal2-cancel" onClick={() => setConfirmingDelete(false)}>
               {t("contact.deleteDialog.cancel")}
             </Button>
             <Button
               variant="danger"
               size="sm"
+              className="swal2-confirm"
               disabled={deleteLead.isPending}
               onClick={() => deleteLead.mutate(contact.id, { onSuccess: () => navigate(backTarget) })}
             >

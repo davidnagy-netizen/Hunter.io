@@ -19,8 +19,8 @@ export function DocumentChecklist({ oppId, docs }: { oppId: string; docs: string
             return (
               <li key={key}>
                 <label className="flex cursor-pointer items-start gap-2">
-                  <input type="checkbox" checked={Boolean(checks[key])} onChange={() => toggle(key)} className="mt-0.5 size-4" />
-                  <span>{doc}</span>
+                  <input type="checkbox" checked={Boolean(checks[key])} onChange={() => toggle(key)} className="mt-0.5 size-4 shrink-0" />
+                  <span className="min-w-0 [overflow-wrap:anywhere]">{doc}</span>
                 </label>
               </li>
             );

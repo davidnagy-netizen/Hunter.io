@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Navigate } from "react-router";
 import { useTranslation } from "react-i18next";
-import { useMeQuery, useLogoutMutation } from "@/features/authentication/api/auth.queries";
+import { useMeQuery } from "@/features/authentication/api/auth.queries";
+import { LogoutButton } from "@/features/authentication/components/LogoutButton";
 import { httpClient } from "@/api/httpClient";
 import { Button, Panel } from "@/components/index";
 
 /** Verification remains accessible before granting access to platform features. */
 export function VerifyEmailPage() {
   const me = useMeQuery();
-  const logout = useLogoutMutation();
   const { i18n } = useTranslation();
   const en = i18n.language.startsWith("en");
   const [message, setMessage] = useState("");
@@ -24,7 +24,7 @@ export function VerifyEmailPage() {
         catch { setMessage(en ? "Please wait before retrying." : "Kérjük, várjon az újraküldés előtt."); }
       }}>{en ? "Resend email" : "Levél újraküldése"}</Button>
       <Button variant="ghost" onClick={() => me.refetch()}>{en ? "Check verification" : "Megerősítés ellenőrzése"}</Button>
-      <Button variant="ghost" onClick={() => logout.mutate()}>{en ? "Log out" : "Kijelentkezés"}</Button>
+      <LogoutButton className="rounded-md px-4 py-2 text-sm hover:bg-paper focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold" />
     </div>
     {message ? <p role="status" className="mt-3 text-sm text-muted">{message}</p> : null}
   </Panel></main>;

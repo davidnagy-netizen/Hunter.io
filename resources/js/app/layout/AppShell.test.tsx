@@ -1,4 +1,4 @@
-import { screen, within } from "@testing-library/react";
+import { screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Route, Routes } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
@@ -10,6 +10,7 @@ import { GridIcon } from "@/components";
 import type { NavItem } from "@/types/navigation.types";
 import "@/features/admin/i18n";
 import { AppShell } from "./AppShell";
+import { useUiStore } from "@/store/uiStore";
 
 vi.mock("@/features/authentication/api/auth.api", () => ({ authApi: { me: vi.fn(), login: vi.fn(), register: vi.fn(), logout: vi.fn() } }));
 vi.mock("@/features/profile/api/profile.api", () => ({ profileApi: { get: vi.fn(), save: vi.fn(), loadDemo: vi.fn(), history: vi.fn(), restore: vi.fn() } }));
@@ -33,12 +34,15 @@ function renderShell(workspace: "app" | "admin") {
       <Route element={<AppShell nav={NAV} workspace={workspace} />}>
         <Route path="/admin" element={<p>page body</p>} />
       </Route>
+      <Route path="/" element={<p>landing page</p>} />
     </Routes>,
     { route: "/admin" },
   );
 }
 
 beforeEach(() => {
+  useUiStore.getState().setLang("hu");
+  vi.mocked(authApi.logout).mockReset();
   vi.mocked(profileApi.get).mockResolvedValue({ profile: null, answers: {}, saved: [], demoProfile: {} as never, versions: 0 });
 });
 
@@ -56,6 +60,71 @@ function renderWithBadgedItem() {
 }
 
 describe("AppShell", () => {
+  it.each([
+    ["en", "Are you sure you want to log out?", "Cancel", 0],
+    ["hu", "Biztosan ki szeretnél jelentkezni?", "Mégse", 1],
+  ] as const)("confirms logout in %s and cancels without ending the session", async (lang, question, cancel, index) => {
+    me("user");
+    useUiStore.getState().setLang(lang);
+    const user = userEvent.setup();
+    renderShell("app");
+    const buttons = await screen.findAllByRole("button", { name: /log out|kijelentkezés/i });
+    await user.click(buttons[index]);
+    const dialog = await screen.findByRole("dialog", { name: question });
+    expect(authApi.logout).not.toHaveBeenCalled();
+    await user.click(within(dialog).getByRole("button", { name: cancel }));
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(authApi.logout).not.toHaveBeenCalled();
+    expect(buttons[index]).toHaveFocus();
+    await user.click(buttons[index]);
+    await user.keyboard("{Escape}");
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(authApi.logout).not.toHaveBeenCalled();
+  });
+
+  it.each(["user", "admin"] as const)("offers mobile logout for a signed-in %s", async (role) => {
+    me(role);
+    renderShell(role === "admin" ? "admin" : "app");
+    expect(await within(screen.getByRole("banner")).findByRole("button", { name: /log out|sign out|kijelentkezés/i })).toBeEnabled();
+  });
+
+  it("hides mobile logout from guests", async () => {
+    vi.mocked(authApi.me).mockResolvedValue({ user: null, entitlements: { tier: "anonymous" }, plans: [] } as unknown as MeResponse);
+    renderShell("app");
+    await screen.findByRole("button", { name: /sign in|belépés/i });
+    expect(within(screen.getByRole("banner")).queryByRole("button", { name: /log out|sign out|kijelentkezés/i })).not.toBeInTheDocument();
+  });
+
+  it("disables mobile logout while pending and redirects home after success", async () => {
+    me("user");
+    let complete!: (value: { success: true }) => void;
+    vi.mocked(authApi.logout).mockReturnValue(new Promise((resolve) => { complete = resolve; }));
+    const user = userEvent.setup();
+    renderShell("app");
+    const button = await within(screen.getByRole("banner")).findByRole("button", { name: /log out|sign out|kijelentkezés/i });
+    await user.click(button);
+    await user.click(within(screen.getByRole("dialog")).getByRole("button", { name: /log out|kijelentkezés/i }));
+    expect(button).toBeDisabled();
+    await user.click(button);
+    expect(authApi.logout).toHaveBeenCalledTimes(1);
+    complete({ success: true });
+    expect(await screen.findByText("landing page")).toBeInTheDocument();
+  });
+
+  it("keeps the page and allows retry when mobile logout fails", async () => {
+    me("user");
+    vi.mocked(authApi.logout).mockRejectedValue(new Error("Logout unavailable"));
+    const user = userEvent.setup();
+    renderShell("app");
+    const header = within(screen.getByRole("banner"));
+    const button = await header.findByRole("button", { name: /log out|sign out|kijelentkezés/i });
+    await user.click(button);
+    await user.click(within(screen.getByRole("dialog")).getByRole("button", { name: /log out|kijelentkezés/i }));
+    expect(await header.findByRole("alert")).toHaveTextContent("Logout unavailable");
+    expect(screen.getByText("page body")).toBeInTheDocument();
+    await waitFor(() => expect(button).toBeEnabled());
+  });
+
   it("renders exactly the nav entries it is given, and the routed page", async () => {
     me("admin");
     renderShell("admin");

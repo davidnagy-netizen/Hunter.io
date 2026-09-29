@@ -1,11 +1,11 @@
-import { useLogoutMutation } from "@/features/authentication/api/auth.queries";
+import { LogoutButton } from "@/features/authentication/components/LogoutButton";
 import {
   useCurrentUser,
   useIsAdmin,
   useIsSubscriber,
 } from "@/features/authentication/hooks/useAuth";
 import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
-import { ExitIcon, LanguageToggle, Logo } from "@/components";
+import { LanguageToggle, Logo } from "@/components";
 import type { NavItem } from "@/types/navigation.types";
 import { useTranslation } from "react-i18next";
 import { NavLink, Outlet, useNavigate } from "react-router";
@@ -19,7 +19,6 @@ function AccountBlock() {
   const user = useCurrentUser();
   const isAdmin = useIsAdmin();
   const isSubscriber = useIsSubscriber();
-  const logout = useLogoutMutation();
   const { profile } = useCompanyProfile();
 
   const initials =
@@ -71,17 +70,7 @@ function AccountBlock() {
         </span>
       </div>
 
-      <button
-        type="button"
-        title={t("shell.signOut")}
-        aria-label={t("shell.signOut")}
-        className="rounded p-1.5 text-white/60 hover:bg-white/10 hover:text-white"
-        onClick={() =>
-          logout.mutate(undefined, { onSuccess: () => navigate("/") })
-        }
-      >
-        <ExitIcon />
-      </button>
+      <LogoutButton iconOnly className="rounded p-1.5 text-white/60 hover:bg-white/10 hover:text-white" onSuccess={() => navigate("/")} />
     </div>
   );
 }
@@ -145,6 +134,8 @@ export interface AppShellProps {
 
 export function AppShell({ nav, workspace }: AppShellProps) {
   const { t } = useTranslation();
+  const user = useCurrentUser();
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-paper">
@@ -180,13 +171,18 @@ export function AppShell({ nav, workspace }: AppShellProps) {
         <AccountBlock />
       </aside>
 
-      <div className="flex items-center justify-between bg-ink px-4 py-3 md:hidden print:hidden">
+      <header className="flex flex-wrap items-center justify-between gap-3 bg-ink px-4 py-3 md:hidden print:hidden">
         <Logo dark />
-        <div className="flex items-center gap-2">
+        <div className="ml-auto flex max-w-full flex-wrap items-center justify-end gap-2">
           <MobileWorkspaceLink workspace={workspace} />
-          <LanguageToggle tone="dark" />
+          <div className="flex shrink-0 items-center gap-2">
+            <LanguageToggle tone="dark" className="[&_button]:min-h-11 [&_button]:min-w-11" />
+            {user ? (
+              <LogoutButton iconOnly onSuccess={() => navigate("/")} className="flex size-11 shrink-0 items-center justify-center rounded-full border border-white/30 text-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white disabled:opacity-50" />
+            ) : null}
+          </div>
         </div>
-      </div>
+      </header>
 
       <main className="px-4 pb-24 pt-6 md:ml-60 md:px-10 md:py-10 print:m-0 print:p-0">
         <div className="mx-auto max-w-4xl">

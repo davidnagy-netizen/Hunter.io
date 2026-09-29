@@ -9,7 +9,7 @@ export function LostReasonDialog({ onConfirm, onCancel }: { onConfirm: (reason: 
   const [reason, setReason] = useState("");
 
   return (
-    <Dialog title={t("lostDialog.title")} onClose={onCancel}>
+    <Dialog title={t("lostDialog.title")} icon="question" onClose={onCancel}>
       <form
         onSubmit={(event) => {
           event.preventDefault();
@@ -24,14 +24,14 @@ export function LostReasonDialog({ onConfirm, onCancel }: { onConfirm: (reason: 
             onChange={(event) => setReason(event.target.value)}
             maxLength={300}
             rows={3}
-            className="rounded-md border border-line-strong px-3 py-2 text-sm font-normal"
+            className="swal2-textarea rounded-md border border-line-strong px-3 py-2 text-sm font-normal"
           />
         </label>
-        <div className="flex justify-end gap-2">
-          <Button type="button" variant="ghost" size="sm" onClick={onCancel}>
+        <div className="swal2-actions flex justify-end gap-2">
+          <Button type="button" variant="ghost" size="sm" className="swal2-cancel" onClick={onCancel}>
             {t("lostDialog.cancel")}
           </Button>
-          <Button type="submit" variant="danger" size="sm">
+          <Button type="submit" variant="danger" size="sm" className="swal2-confirm">
             {t("lostDialog.confirm")}
           </Button>
         </div>

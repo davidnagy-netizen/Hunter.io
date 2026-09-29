@@ -23,8 +23,8 @@ export function GrantPicker({ options, selectedId, onSelect }: { options: Scored
                   selected ? "border-ink bg-ink text-white" : "border-line-strong bg-transparent text-text hover:bg-paper",
                 ].join(" ")}
               >
-                <span className="min-w-0 truncate">{opp.title}</span>
-                {opp.score != null ? <Badge tone="green">{opp.score}</Badge> : null}
+                <span className="min-w-0 flex-1 [overflow-wrap:anywhere]">{opp.title}</span>
+                {opp.score != null ? <Badge tone="green" className="shrink-0 whitespace-nowrap">{opp.score}</Badge> : null}
               </button>
             </li>
           );

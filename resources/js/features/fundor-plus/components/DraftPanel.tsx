@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Badge, Button, Panel } from "@/components";
+import { showToast } from "@/lib/sweetalert";
 import type { CompanyProfile } from "@/features/profile/types/profile.types";
 import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
 import { draftToText } from "../domain/draft";
@@ -24,19 +25,28 @@ export function DraftPanel({ profile, opp }: { profile: CompanyProfile; opp: Sco
     try {
       await navigator.clipboard.writeText(draftToText(notice, chapters));
       setCopy("copied");
+      showToast({ title: t("workspace.copied") || "Copied to clipboard", icon: "success" });
     } catch {
       setCopy("failed");
+      showToast({ title: t("workspace.copyFailed") || "Copy failed", icon: "error" });
     }
   };
 
   return (
-    <Panel>
+    <Panel className="min-w-0 [overflow-wrap:anywhere]">
       <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
           <Badge tone="blue">{opp.program}</Badge>
           <h2 className="mt-1 font-display text-xl font-semibold text-ink">{opp.title}</h2>
         </div>
-        <Button size="sm" onClick={() => setGenerated(true)} className="print:hidden">
+        <Button
+          size="sm"
+          onClick={() => {
+            setGenerated(true);
+            showToast({ title: t("workspace.previewActive") || "Draft generated (demo)", icon: "success" });
+          }}
+          className="print:hidden"
+        >
           {t("workspace.generate")}
         </Button>
       </div>

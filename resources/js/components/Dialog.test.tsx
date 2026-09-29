@@ -45,4 +45,15 @@ describe("Dialog", () => {
     expect(opener).toHaveFocus();
     opener.remove();
   });
+
+  it("renders with SweetAlert2 classes and icon", () => {
+    const { container } = render(
+      <Dialog title="Question?" icon="question" onClose={() => {}}>
+        <p>body</p>
+      </Dialog>,
+    );
+    expect(container.querySelector(".swal2-container")).toBeInTheDocument();
+    expect(container.querySelector(".swal2-popup")).toBeInTheDocument();
+    expect(container.querySelector(".swal2-question")).toBeInTheDocument();
+  });
 });

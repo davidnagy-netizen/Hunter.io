@@ -1,4 +1,9 @@
 {
+  "logout": {
+    "question": "Are you sure you want to log out?",
+    "confirm": "Log out",
+    "cancel": "Cancel"
+  },
   "login": {
     "title": "Sign in",
     "subtitle": "Sign in with your company account to see your personalised matches."
