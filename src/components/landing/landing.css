@@ -36,6 +36,15 @@
   font-weight: 700;
 }
 
+/* Phones and tablets only (below 1024px): the 2.5rem floor above made every h2 40px there — bigger than the 32px hero h1.
+   28px on phones, then the same 3.8vw slope, so an h2 stays smaller than the h1 at every width.
+   Desktop (1024px and up) still uses the rule above, unchanged. */
+@media (max-width: 1023.98px) {
+  .landing-page h2 {
+    font-size: clamp(1.75rem, 3.8vw, 2.5rem);
+  }
+}
+
 .landing-page .landing-feature-heading {
   font-size: clamp(2.25rem, 3.8vw, 3.25rem);
   line-height: 1.12;
