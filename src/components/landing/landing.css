@@ -52,6 +52,15 @@
   font-weight: 700;
 }
 
+/* Phones and tablets only (below 1024px): the 2.25rem floor above made these h3 headings 36px there — bigger than the
+   h1 (32px) and h2 (28px). 24px on phones and a gentler 3vw slope keep them below the h2 at every width.
+   Must stay after the rule above (same specificity). Desktop (1024px and up) still uses that rule, unchanged. */
+@media (max-width: 1023.98px) {
+  .landing-page .landing-feature-heading {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+  }
+}
+
 .landing-page h3 {
   font-size: clamp(1.5rem, 2.5vw, 2.15rem);
   line-height: 1.2;
