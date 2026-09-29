@@ -140,6 +140,10 @@
       "openOfficial": "Irány a hivatalos felhívás",
       "noLink": "Nincs közvetlen link"
     },
+    "consult": {
+      "text": "Segítség kell a pályázathoz? Konzultálj velünk – hívj minket:",
+      "call": "Hívás: {{phone}}"
+    },
     "actions": {
       "save": "Elmentem",
       "saved": "✓ Elmentve"

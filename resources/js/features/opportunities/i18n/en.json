@@ -140,6 +140,10 @@
       "openOfficial": "Open the official call",
       "noLink": "No direct link available"
     },
+    "consult": {
+      "text": "Need help with this application? Consult with us – call us:",
+      "call": "Call {{phone}}"
+    },
     "actions": {
       "save": "Save",
       "saved": "✓ Saved"

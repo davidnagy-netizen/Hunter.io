@@ -14,6 +14,7 @@ import { ApplyPanel } from "@/features/opportunities/components/ApplyPanel";
 import { CatalogStatus } from "@/features/opportunities/components/CatalogStatus";
 import { CheckLine } from "@/features/opportunities/components/CheckLine";
 import { ConsortiumPanel } from "@/features/opportunities/components/ConsortiumPanel";
+import { ConsultPanel } from "@/features/opportunities/components/ConsultPanel";
 import { FundingCalculator } from "@/features/opportunities/components/FundingCalculator";
 import { WhyBlocks } from "@/features/opportunities/components/WhyBlocks";
 import "@/features/opportunities/i18n/index";
@@ -198,6 +199,8 @@ export function OpportunityDetailPage() {
               <span className="flex-1 self-center text-center text-sm text-muted">{t("detail.apply.noLink")}</span>
             )}
           </div>
+          {/* Consultation line, right under the apply section, for every grant. */}
+          <ConsultPanel />
         </div>
       )}
       <SourceNote opp={opp} />
