@@ -6,7 +6,18 @@ import huCommon from "./locales/hu/common.json";
 import enCommon from "./locales/en/common.json";
 
 export type SupportedLanguage = "hu" | "en";
-export const DEFAULT_LANGUAGE: SupportedLanguage = "hu";
+export const DEFAULT_LANGUAGE: SupportedLanguage = "en";
+
+function detectDefaultLanguage(): SupportedLanguage {
+  try {
+    // ponytail: time zone approximates location; use IP country if geographic accuracy is needed.
+    return Intl.DateTimeFormat().resolvedOptions().timeZone === "Europe/Budapest"
+      ? "hu"
+      : DEFAULT_LANGUAGE;
+  } catch {
+    return DEFAULT_LANGUAGE;
+  }
+}
 
 /**
  * Read synchronously so i18next initializes with the right language before
@@ -18,13 +29,13 @@ export const DEFAULT_LANGUAGE: SupportedLanguage = "hu";
 function readPersistedLanguage(): SupportedLanguage {
   try {
     const raw = localStorage.getItem("fundor-rewrite-ui");
-    if (!raw) return DEFAULT_LANGUAGE;
-    const parsed = JSON.parse(raw);
+    const parsed = raw ? JSON.parse(raw) : null;
     const lang = parsed?.state?.lang;
-    return lang === "en" ? "en" : DEFAULT_LANGUAGE;
+    if (lang === "en" || lang === "hu") return lang;
   } catch {
-    return DEFAULT_LANGUAGE;
+    // Storage can be unavailable or contain invalid JSON; use the detected default.
   }
+  return detectDefaultLanguage();
 }
 
 void i18next.use(initReactI18next).init({

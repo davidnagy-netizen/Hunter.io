@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { i18next, type SupportedLanguage, DEFAULT_LANGUAGE } from "@/i18n/i18n";
+import { i18next, type SupportedLanguage } from "@/i18n/i18n";
 
 interface UiState {
   lang: SupportedLanguage;
@@ -20,12 +20,13 @@ interface UiState {
 export const useUiStore = create<UiState>()(
   persist(
     (set) => ({
-      lang: DEFAULT_LANGUAGE,
+      lang: i18next.language === "hu" ? "hu" : "en",
       setLang: (lang) => {
         void i18next.changeLanguage(lang);
         set({ lang });
       },
     }),
-    { name: "fundor-rewrite-ui" },
+    // i18next already reads and validates the saved language before this store is created.
+    { name: "fundor-rewrite-ui", skipHydration: true },
   ),
 );

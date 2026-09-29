@@ -2,6 +2,9 @@ import "@testing-library/jest-dom/vitest";
 import { cleanup } from "@testing-library/react";
 import { afterEach } from "vitest";
 
+// Component tests use Hungarian copy regardless of the machine's time zone.
+localStorage.setItem("fundor-rewrite-ui", JSON.stringify({ state: { lang: "hu" }, version: 0 }));
+
 // React Testing Library doesn't unmount components between tests on its own.
 afterEach(() => {
   cleanup();
