@@ -285,8 +285,9 @@ things that would otherwise only live in a chat transcript.
 
 ### 2026-09-29 — `loans` (CR-02): the loan information page
 The backend already served `GET /api/loans` (see [`cr02-testing.md`](cr02-testing.md)); this is its screen, at
-`/app/loans`, with its own entry in the client nav just before Fundor Plus — never mixed into the grant lists, because a
-loan is debt and its principal is not funding.
+`/app/loans`, with its own entry in the client nav directly under Grants (moved there at the client's request, same
+day; it first sat just before Fundor Plus) — never mixed into the grant lists, because a loan is debt and its principal
+is not funding.
 
 - **Without Fundor Plus:** how many current, reviewed products exist and of which kind (the server's category labels and
   counts), a line saying the count is of the catalog, not the company's eligibility, and the lock text. A visitor with
@@ -306,8 +307,8 @@ loan is debt and its principal is not funding.
   along the way, not changed: the committed grant fixtures already differ from what the backend records today.
 - **Mobile bottom bar: seven entries.** Measured in headless Chrome (Plus Jakarta Sans, 11 px): with the full labels,
   "Dashboard", "Pályázatok" and "Kedvencek" truncate at every width up to 414 px. The developer chose short bar-only
-  labels (`shortLabelKey`): HU *Főoldal · Keresés · Pályázat · Naptár · Mentett · Hitelek · Plus*, EN *Home · Search ·
-  Grants · Calendar · Saved · Loans · Plus*. Checked in the running app: nothing truncates at 375 px in either language
+  labels (`shortLabelKey`): HU *Főoldal · Keresés · Pályázat · Hitelek · Naptár · Mentett · Plus*, EN *Home · Search ·
+  Grants · Loans · Calendar · Saved · Plus*. Checked in the running app: nothing truncates at 375 px in either language
   or at 360 px in Hungarian; at 360 px in English "Calendar" is clipped (before this change "Dashboard" was, there).
   The sidebar keeps the full labels.
 - Shared: `BankIcon`. 10 new tests.
