@@ -1,0 +1,21 @@
+{
+  "nav": {
+    "loans": "Loans"
+  },
+  "title": "Subsidised loans",
+  "subtitle": "Repayable funding, kept apart from grants. A loan's principal is not a grant: the benefit can be the interest subsidy and easier access.",
+  "empty": "There is no current, reviewed loan product in the catalog right now.",
+  "locked": {
+    "count_one": "{{count}} reviewed loan product in the catalog",
+    "count_other": "{{count}} reviewed loan products in the catalog",
+    "note": "This counts the catalog, not your company's eligibility.",
+    "body": "Each product's terms, validity and source document are available with {{tier}}. Access is granted by an administrator for now — no payment gateway is connected yet.",
+    "cta": "Create a company account"
+  },
+  "card": {
+    "effectiveFrom": "Effective from",
+    "deadline": "Deadline",
+    "lastVerified": "Last verified",
+    "source": "Source document"
+  }
+}

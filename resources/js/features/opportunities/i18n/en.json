@@ -1,10 +1,13 @@
 {
   "nav": {
     "dashboard": "Dashboard",
+    "dashboardShort": "Home",
     "opportunities": "Grants",
+    "opportunitiesShort": "Grants",
     "search": "Search",
     "calendar": "Calendar",
-    "saved": "Saved"
+    "saved": "Saved",
+    "savedShort": "Saved"
   },
   "loading": "Loading…",
   "error": "The catalog is unavailable: {{message}}",

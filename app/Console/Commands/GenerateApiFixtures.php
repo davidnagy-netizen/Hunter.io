@@ -174,6 +174,21 @@ class GenerateApiFixtures extends Command
         $save('save.toggle', $call('POST', "/opportunities/{$ids['plain']}/save", [], $sub));
         $save('profile.subscriber', $call('GET', '/profile', null, $sub));
         $save('me.subscriber', $call('GET', '/auth/me', null, $sub));
+
+        // CR-02 loans are added after every grant recording above, so none of those fixtures changes. Synthetic, never real products.
+        $loan = fn (string $code, string $type, string $title) => Opportunity::create([
+            'code' => $code, 'instrument_type' => $type, 'title' => $title, 'program' => 'Synthetic fixture — not a real programme',
+            'deadline' => '2027-12-31', 'status' => 'open', 'effective_from_date' => '2026-09-01', 'last_verified_date' => '2026-09-21',
+            'source_document_reference' => 'SYNTHETIC FIXTURE — no official document', 'source_reference' => 'SYNTHETIC FIXTURE',
+            'loan_terms' => "Synthetic fixture terms.\nNo financial offer.", 'manual_reviewed_by' => 'Fixture generator',
+            'curated' => true, 'funding_min' => 0, 'funding_max' => 0, 'intensity' => 0,
+        ]);
+        $loan('fixture-guarantee', 'guarantee', 'Synthetic fixture guarantee — not a real product');
+        $loan('fixture-loan', 'subsidised_loan', 'Synthetic fixture loan — not a real product');
+        $save('loans.gated.hu', $call('GET', '/loans?lang=hu', null, $free));
+        $save('loans.gated.en', $call('GET', '/loans?lang=en', null, $free));
+        $save('loans.plus.hu', $call('GET', '/loans?lang=hu', null, $sub));
+        $save('loans.plus.en', $call('GET', '/loans?lang=en', null, $sub));
         $save('_meta', ['generatedBy' => 'php artisan fundor:generate-api-fixtures', 'referenceDate' => '2026-09-21', 'company' => $demo['company'],
             'callIds' => $chosen, 'ids' => $ids, 'note' => 'Recorded from the running API on an in-memory database. Regenerate instead of editing.']);
 

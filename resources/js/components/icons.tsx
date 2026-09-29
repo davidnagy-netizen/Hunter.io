@@ -33,6 +33,9 @@ export const SearchIcon = (p: IconProps) => (
 export const CalendarIcon = (p: IconProps) => (
   <svg {...base(p)}><rect x="3.5" y="5" width="17" height="16" rx="2.5" /><path d="M3.5 9.5h17M8 3v4M16 3v4" /></svg>
 );
+export const BankIcon = (p: IconProps) => (
+  <svg {...base(p)}><path d="M3 9l9-5 9 5H3z" /><path d="M5.5 11.5v6M10 11.5v6M14 11.5v6M18.5 11.5v6M3 20.5h18" /></svg>
+);
 export const StarIcon = (p: IconProps) => (
   <svg {...base(p)}><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 17l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9L12 3.5z" /></svg>
 );

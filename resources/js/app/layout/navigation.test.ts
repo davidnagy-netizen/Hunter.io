@@ -12,6 +12,10 @@ describe("workspace navigation", () => {
     expect(last.badge).toBeDefined();
   });
 
+  it("gives loans an entry of their own, apart from the grant screens, just before Fundor Plus", () => {
+    expect(APP_NAV.at(-2)!.to).toBe("/app/loans");
+  });
+
   it("keeps the client workspace free of admin entries", () => {
     expect(APP_NAV.some((item) => item.to.startsWith("/admin"))).toBe(false);
   });

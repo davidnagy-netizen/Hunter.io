@@ -2,7 +2,7 @@
 
 The backend supports manually reviewed loan records and a separate, unranked informational catalog at `GET /api/loans`. Credit recommendations, personalized eligibility and interest-subsidy/cost-of-capital evaluation remain **unimplemented and blocked pending the formal MNB legal opinion**, as required by AGENTS.md. There is no environment switch to bypass this gate. A follow-up implementation must use the approved legal scope and documented product calculation rules.
 
-Free visitors and free accounts receive only available counts and category badges, not product identities or terms. `eligibleCount` is deliberately `null`: available products are not a claim of eligibility. Active Fundor Plus accounts (and existing administrator entitlements) receive manually reviewed terms and provenance. The response never includes a grant score or treats principal as a funding benefit. Expired subscriptions lose access. The React entry point shows the HU/EN regulatory notice outside authentication and subscription gates; no loan browsing page has been added.
+Free visitors and free accounts receive only available counts and category badges, not product identities or terms. `eligibleCount` is deliberately `null`: available products are not a claim of eligibility. Active Fundor Plus accounts (and existing administrator entitlements) receive manually reviewed terms and provenance. The response never includes a grant score or treats principal as a funding benefit. Expired subscriptions lose access. The React entry point shows the HU/EN regulatory notice outside authentication and subscription gates. The loan information page is `/app/loans`, its own nav entry, never mixed into the grant screens: without Fundor Plus it shows the count and categories; with Fundor Plus, each record's terms, effective-from date, deadline, last-verified date and source reference. It shows no score, ranking or calculator.
 
 ## Automated checks
 
@@ -54,7 +54,7 @@ The command reads only a local file and never fetches URLs. It refuses to overwr
 
 4. Open `/api/loans?lang=en` on the backend origin without login: expect `gated: true`, `loans: []`, `availableCount: 1` if this is the only active record, a category count, the disclaimer, and `evaluationStatus: BLOCKED_PENDING_MNB_LEGAL_OPINION`.
 5. Log into a verified Fundor Plus account on the same origin and request that URL again: expect the terms and all three provenance fields in `loans`. A free/expired account still gets no details. `GET /api/opportunities/local-test-loan` must return 404 even for Plus; grant catalog/search must omit it.
-6. Check the website before login and after login: the regulatory notice must appear in both languages, regardless of subscription.
+6. Check the website before login and after login: the regulatory notice must appear in both languages, regardless of subscription. Open `/app/loans` in the dev server: a free account sees `1` product and its category but no title or terms; the Plus account sees the synthetic record's terms, dates and source reference.
 7. Repeat the import with a missing source reference, future verification date, or without the confirmation flag: it must fail. Close the synthetic record by reimporting with `status: closed` when done.
 
 ## Feed and deployment changes

@@ -5,6 +5,7 @@
  * `openapi.yaml` by `fixtures/api/contract.test.ts`. Tests build on these
  * instead of hand-written shapes, so they can't drift from what the API sends.
  */
+import type { FullLoanCatalog, GatedLoanCatalog } from "@/features/loans/types/loans.types";
 import type { CatalogResponse, FullCatalogResponse, GatedCatalogResponse } from "@/features/opportunities/types/opportunities.types";
 import type { ScoredOpportunity } from "@/features/scoring/types/scoring.types";
 import catalogGated from "./fixtures/api/catalog.gated.json";
@@ -16,6 +17,10 @@ import consortiumHu from "./fixtures/api/detail.consortium.hu.json";
 import blockedEn from "./fixtures/api/detail.blocked.en.json";
 import blockedHu from "./fixtures/api/detail.blocked.hu.json";
 import plainHu from "./fixtures/api/detail.plain.hu.json";
+import loansGatedEn from "./fixtures/api/loans.gated.en.json";
+import loansGatedHu from "./fixtures/api/loans.gated.hu.json";
+import loansPlusEn from "./fixtures/api/loans.plus.en.json";
+import loansPlusHu from "./fixtures/api/loans.plus.hu.json";
 import meta from "./fixtures/api/_meta.json";
 
 type Lang = "hu" | "en";
@@ -44,6 +49,12 @@ export const detailOf = (kind: keyof typeof details, lang: Lang = "hu") => clone
 
 /** The consortium call after `consortium_ready` was answered "yes". */
 export const answeredConsortium = () => clone<ScoredOpportunity>(consortiumAnswered.opportunity);
+
+/** A registered, unsubscribed account's loan catalog: counts, categories and the disclaimer — no products. */
+export const gatedLoans = (lang: Lang = "hu") => clone<GatedLoanCatalog>(lang === "en" ? loansGatedEn : loansGatedHu);
+
+/** A Fundor Plus account's loan catalog: two synthetic reviewed records (a guarantee and a subsidised loan) with their provenance. */
+export const plusLoans = (lang: Lang = "hu") => clone<FullLoanCatalog>(lang === "en" ? loansPlusEn : loansPlusHu);
 
 /** A catalog row by id. */
 export const rowOf = (catalog: FullCatalogResponse, id: string) => {

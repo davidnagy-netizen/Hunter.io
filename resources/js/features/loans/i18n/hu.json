@@ -1,0 +1,21 @@
+{
+  "nav": {
+    "loans": "Hitelek"
+  },
+  "title": "Kedvezményes hitelek",
+  "subtitle": "Visszafizetendő források, a pályázatoktól külön. A hitel tőkeösszege nem támogatás: az előnyt a kamattámogatás és a könnyebb hozzáférés jelentheti.",
+  "empty": "Jelenleg nincs érvényes, ellenőrzött hiteltermék a katalógusban.",
+  "locked": {
+    "count_one": "{{count}} ellenőrzött hiteltermék a katalógusban",
+    "count_other": "{{count}} ellenőrzött hiteltermék a katalógusban",
+    "note": "A szám a katalógusra vonatkozik, nem a te céged jogosultságára.",
+    "body": "A termékek feltételei, hatálya és forrásdokumentuma {{tier}} előfizetéssel érhető el. A hozzáférést jelenleg adminisztrátor adja meg — fizetési átjáró még nem kapcsolódik.",
+    "cta": "Cégfiók létrehozása"
+  },
+  "card": {
+    "effectiveFrom": "Hatályos ettől",
+    "deadline": "Határidő",
+    "lastVerified": "Utoljára ellenőrizve",
+    "source": "Forrásdokumentum"
+  }
+}

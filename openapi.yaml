@@ -93,6 +93,8 @@ tags:
     description: Reference vocabularies (regions, industries, goals, labels).
   - name: Catalog
     description: Opportunities, search, detail, saved calls and eligibility answers. **Paywalled.**
+  - name: Loans
+    description: Subsidised loans, guarantees and combined products, kept separate from grants. Details are **paywalled**; the disclaimer is not.
   - name: Leads
     description: Public lead capture from the free assessment.
   - name: Admin
@@ -639,6 +641,31 @@ paths:
         '404':
           description: No such call.
           content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+
+  # ----------------------------------------------------------------- Loans
+  /loans:
+    get:
+      tags: [Loans]
+      operationId: getLoans
+      summary: Manually reviewed loan products, as information (CR-02)
+      description: |
+        Open loan, guarantee and combined records whose `effective_from_date` has started and whose `deadline` has not
+        passed. Kept apart from grants: loans never appear in `/catalog`, `/search` or `/opportunities/{id}`, and are
+        never scored or ranked. `evaluationStatus` stays `BLOCKED_PENDING_MNB_LEGAL_OPINION` and `eligibleCount` stays
+        `null` until the credit-intermediation legal opinion allows personalised evaluation.
+
+        **Fundor Plus** (`entitlements.explanations`, `gated: false`): every record's terms and provenance in `loans`.
+        **Everyone else** (`gated: true`): `loans` is empty; `availableCount` and `categories` still say what exists.
+        `disclaimer` is returned to every caller — it is never behind the paywall.
+      x-frontend: { used-by: [Loans] }
+      parameters:
+        - $ref: '#/components/parameters/Lang'
+      responses:
+        '200':
+          description: The loan catalog (full or gated).
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/LoanCatalog' }
 
   # ----------------------------------------------------------------- Leads
   /leads:
@@ -1879,6 +1906,43 @@ components:
       allOf:
         - { $ref: '#/components/schemas/Opportunity' }
         - { $ref: '#/components/schemas/ScoreFields' }
+
+    # ------------------------------------------------------------- loans
+    LoanCategory:
+      type: object
+      required: [type, label, count]
+      properties:
+        type: { type: string, enum: [subsidised_loan, guarantee, combined] }
+        label: { type: string, description: 'Worded in the requested language.' }
+        count: { type: integer, minimum: 1 }
+
+    LoanRecord:
+      type: object
+      description: One manually reviewed product. `terms` is plain text transcribed from the official Business Rules, not HTML.
+      required: [id, title, program, instrument_type, terms, deadline, effective_from_date, source_document_reference, last_verified_date]
+      properties:
+        id: { type: string }
+        title: { type: string }
+        program: { type: string }
+        instrument_type: { type: string, enum: [subsidised_loan, guarantee, combined] }
+        terms: { type: string }
+        deadline: { type: string, format: date }
+        effective_from_date: { type: string, format: date }
+        source_document_reference: { type: string }
+        last_verified_date: { type: string, format: date }
+
+    LoanCatalog:
+      type: object
+      required: [evaluationStatus, eligibleCount, availableCount, categories, gated, requiredTier, disclaimer, loans]
+      properties:
+        evaluationStatus: { type: string, enum: [BLOCKED_PENDING_MNB_LEGAL_OPINION] }
+        eligibleCount: { type: integer, nullable: true, enum: [null], description: 'Always `null`: an available product is not a claim of eligibility.' }
+        availableCount: { type: integer, minimum: 0 }
+        categories: { type: array, items: { $ref: '#/components/schemas/LoanCategory' } }
+        gated: { type: boolean }
+        requiredTier: { type: string, example: Fundor Plus }
+        disclaimer: { type: string, description: 'Worded in the requested language. Shown to every caller.' }
+        loans: { type: array, items: { $ref: '#/components/schemas/LoanRecord' }, description: 'Empty when `gated` is true.' }
 
     # ------------------------------------------------------------- leads
     LeadRequest:

@@ -1,0 +1,21 @@
+{
+    "evaluationStatus": "BLOCKED_PENDING_MNB_LEGAL_OPINION",
+    "eligibleCount": null,
+    "availableCount": 2,
+    "categories": [
+        {
+            "type": "guarantee",
+            "label": "Garancia / Kezességvállalás",
+            "count": 1
+        },
+        {
+            "type": "subsidised_loan",
+            "label": "Támogatott hitelkonstrukció",
+            "count": 1
+        }
+    ],
+    "gated": true,
+    "requiredTier": "Fundor Plus",
+    "disclaimer": "Az eredmények tájékoztató jellegű előszűrések, nem hitelajánlások. A hiteljogosultság értékelése és a hitelajánlások az MNB jogi állásfoglalásáig nem érhetők el.",
+    "loans": []
+}

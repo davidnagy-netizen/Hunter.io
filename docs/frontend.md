@@ -35,6 +35,7 @@ and cut over, its behavior should still match what those documents promise.
 | `admin` (overview, users, system) | ✅ done — unit-tested (65 tests); signed-in pass done by the developer, who reported it "all good" (2026-09-20) |
 | `crm` (pipeline, contacts, leads, insights, contact record) | ✅ done — unit-tested (127 tests); signed-in pass done by the developer, who reported it "all good" (2026-09-20) |
 | `fundor-plus` (demo) | ✅ done — unit-tested (29 tests); locked screen, nav and mobile bar checked in a browser as an anonymous visitor by the assistant; workspace: signed-in pass done by the developer, who reported it "all good" (2026-09-20) |
+| `loans` (CR-02 information page) | ✅ done — `/app/loans`: counts and categories without Fundor Plus, reviewed terms and provenance with it; never scored or ranked. Checked in a browser against recorded API responses (no backend); **not yet against the real backend with a real reviewed loan** — see the log |
 
 Served by the Laravel app (2026-09-21): `npm run build` writes to `../public/spa` and Laravel's fallback route serves
 it, replacing the backend's Blade/React pages. Every signed-in flow still needs a person to sign in and look — the
@@ -109,6 +110,7 @@ authentication → profile → scoring → opportunities → assessment
 authentication → admin   (+ opportunities, for its cache key only: a catalog refresh invalidates it)
 profile, opportunities → assessment;   authentication, profile → landing
 authentication, admin (GrantForm, ProfileChanges, activity names), profile (types only) → crm
+authentication → loans
 ```
 
 **Rules that keep this from rotting back into a components/hooks/utils dump:**
@@ -280,6 +282,41 @@ things that would otherwise only live in a chat transcript.
 > (`hunter-plus`, `HunterScoreRing`, `useHunterScore`, `hunter-rewrite-*`). The
 > current names are `fundor-plus`, `FundorScoreRing`, `useFundorScore`,
 > `fundor-rewrite-*`.
+
+### 2026-09-29 — `loans` (CR-02): the loan information page
+The backend already served `GET /api/loans` (see [`cr02-testing.md`](cr02-testing.md)); this is its screen, at
+`/app/loans`, with its own entry in the client nav just before Fundor Plus — never mixed into the grant lists, because a
+loan is debt and its principal is not funding.
+
+- **Without Fundor Plus:** how many current, reviewed products exist and of which kind (the server's category labels and
+  counts), a line saying the count is of the catalog, not the company's eligibility, and the lock text. A visitor with
+  no account also gets the register link; a signed-in free account gets nothing to click, as on the other gated screens.
+- **With Fundor Plus:** one card per record — type, programme, title, terms (plain text), effective-from date, deadline,
+  last-verified date and source document reference.
+- **Disclaimer:** not repeated on the page, at the developer's decision — the banner above every page
+  (`RegulatoryDisclaimer`) already shows the same sentence to every tier. The API's `disclaimer` field is not rendered.
+- **Not built, on purpose:** no score, ranking, eligibility or loan calculator — the backend blocks them until the MNB
+  legal opinion. The source reference is shown as text: the API sends no link to the Business Rules, so none is invented.
+- **The access tier is part of the query key.** A logout only refetches the session; without the tier, a Plus response
+  could be reused for whoever comes next. A test guards it and was checked to fail with the tier removed from the key.
+- **Contract:** `GET /loans` (`getLoans`) and `LoanCatalog`/`LoanRecord`/`LoanCategory` added to `openapi.yaml` (version
+  left at 2.3.0, as when `/nav/taxpayer` was added). Four recorded fixtures (`loans.gated.{hu,en}`, `loans.plus.{hu,en}`)
+  are validated by `contract.test.ts`. `fundor:generate-api-fixtures` now adds two synthetic records — a guarantee and a
+  subsidised loan, titled "not a real product" — after every other recording, so no existing fixture changes. Found
+  along the way, not changed: the committed grant fixtures already differ from what the backend records today.
+- **Mobile bottom bar: seven entries.** Measured in headless Chrome (Plus Jakarta Sans, 11 px): with the full labels,
+  "Dashboard", "Pályázatok" and "Kedvencek" truncate at every width up to 414 px. The developer chose short bar-only
+  labels (`shortLabelKey`): HU *Főoldal · Keresés · Pályázat · Naptár · Mentett · Hitelek · Plus*, EN *Home · Search ·
+  Grants · Calendar · Saved · Loans · Plus*. Checked in the running app: nothing truncates at 375 px in either language
+  or at 360 px in Hungarian; at 360 px in English "Calendar" is clipped (before this change "Dashboard" was, there).
+  The sidebar keeps the full labels.
+- Shared: `BankIcon`. 10 new tests.
+
+Verification status, stated plainly: tests, `tsc`, lint and the build pass on a clean frozen-lockfile install. In a
+browser, `/app/loans` was rendered by the Vite dev server with every `/api/*` request answered from the recorded
+fixtures — no backend, no account, no password — as a Plus account and as a free account, at 360, 375 and 1280 px, in
+both languages: no horizontal scroll, cards and the locked panel wrap. **Not verified:** the page against the real
+backend with a real, manually reviewed loan record; the anonymous register link is covered by a unit test only.
 
 ### 2026-09-21 — One app: served by Laravel, scored by the server, registration per CR-03
 Three decisions from the developer, all now built:

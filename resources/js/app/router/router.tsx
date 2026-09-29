@@ -11,6 +11,7 @@ import { OpportunityDetailPage } from "@/pages/opportunities/OpportunityDetailPa
 import { CalendarPage } from "@/pages/opportunities/CalendarPage";
 import { SavedPage } from "@/pages/opportunities/SavedPage";
 import { SearchPage } from "@/pages/opportunities/SearchPage";
+import { LoansPage } from "@/pages/loans/LoansPage";
 import { AdminOverviewPage } from "@/pages/admin/AdminOverviewPage";
 import { SystemPage } from "@/pages/admin/SystemPage";
 import { UserHistoryPage } from "@/pages/admin/UserHistoryPage";
@@ -69,6 +70,7 @@ export const router = createBrowserRouter([
       { path: "search", element: <SearchPage /> },
       { path: "calendar", element: <CalendarPage /> },
       { path: "saved", element: <SavedPage /> },
+      { path: "loans", element: <LoansPage /> },
       { path: "plus", element: <PlusPage /> },
       { path: "profile", element: <ProfilePage /> },
     ],

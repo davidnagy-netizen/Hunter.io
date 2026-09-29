@@ -1,10 +1,13 @@
 {
   "nav": {
     "dashboard": "Dashboard",
+    "dashboardShort": "Főoldal",
     "opportunities": "Pályázatok",
+    "opportunitiesShort": "Pályázat",
     "search": "Keresés",
     "calendar": "Naptár",
-    "saved": "Kedvencek"
+    "saved": "Kedvencek",
+    "savedShort": "Mentett"
   },
   "loading": "Betöltés…",
   "error": "A katalógus nem érhető el: {{message}}",

@@ -1,0 +1,44 @@
+{
+    "evaluationStatus": "BLOCKED_PENDING_MNB_LEGAL_OPINION",
+    "eligibleCount": null,
+    "availableCount": 2,
+    "categories": [
+        {
+            "type": "guarantee",
+            "label": "Guarantee Instrument",
+            "count": 1
+        },
+        {
+            "type": "subsidised_loan",
+            "label": "Subsidised Loan Facility",
+            "count": 1
+        }
+    ],
+    "gated": false,
+    "requiredTier": "Fundor Plus",
+    "disclaimer": "Outputs are informational pre-screenings, not credit recommendations. Loan eligibility and recommendations are unavailable pending the MNB legal opinion.",
+    "loans": [
+        {
+            "id": "fixture-guarantee",
+            "title": "Synthetic fixture guarantee — not a real product",
+            "program": "Synthetic fixture — not a real programme",
+            "instrument_type": "guarantee",
+            "terms": "Synthetic fixture terms.\nNo financial offer.",
+            "deadline": "2027-12-31",
+            "effective_from_date": "2026-09-01",
+            "source_document_reference": "SYNTHETIC FIXTURE — no official document",
+            "last_verified_date": "2026-09-21"
+        },
+        {
+            "id": "fixture-loan",
+            "title": "Synthetic fixture loan — not a real product",
+            "program": "Synthetic fixture — not a real programme",
+            "instrument_type": "subsidised_loan",
+            "terms": "Synthetic fixture terms.\nNo financial offer.",
+            "deadline": "2027-12-31",
+            "effective_from_date": "2026-09-01",
+            "source_document_reference": "SYNTHETIC FIXTURE — no official document",
+            "last_verified_date": "2026-09-21"
+        }
+    ]
+}
