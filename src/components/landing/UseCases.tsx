@@ -140,15 +140,16 @@ export function UseCases({ copy }: { copy: LandingCopy['useCases'] }) {
                               : 'bg-brand-paper hover:bg-brand-surface-muted text-brand-slate border-brand-line'
                           }`}
                         >
-                          <div className="flex items-center gap-2 truncate">
+                          {/* The band labels wrap rather than truncate: "20 milliárd Ft felett" must stay readable on phones. */}
+                          <div className="flex min-w-0 items-center gap-2">
                             <span
-                              className={`font-mono font-bold text-[11px] px-1.5 py-0.5 rounded ${
+                              className={`shrink-0 font-mono font-bold text-[11px] px-1.5 py-0.5 rounded ${
                                 isSelected ? 'bg-brand-slate text-brand-cream' : 'bg-brand-line text-brand-slate'
                               }`}
                             >
                               {bandNum}. {copy.bandLabel}
                             </span>
-                            <span className="truncate">{band}</span>
+                            <span>{band}</span>
                           </div>
                           {isLarge && (
                             <span
@@ -185,7 +186,7 @@ export function UseCases({ copy }: { copy: LandingCopy['useCases'] }) {
                     <Sparkles size={14} aria-hidden="true" />
                     <span>{result.title}</span>
                   </div>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-brand-slate-2 px-2.5 py-0.5 text-xs font-bold text-brand-cream border border-brand-muted">
+                  <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full bg-brand-slate-2 px-2.5 py-0.5 text-xs font-bold text-brand-cream border border-brand-muted">
                     <span className="h-1.5 w-1.5 rounded-full bg-brand-orange" aria-hidden="true" />
                     <span>{result.badge}</span>
                   </span>

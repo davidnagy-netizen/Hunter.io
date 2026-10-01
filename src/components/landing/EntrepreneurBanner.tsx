@@ -54,7 +54,7 @@ export function EntrepreneurBanner({ copy }: { copy: LandingCopy['entrepreneur']
 
               {/* Action Buttons */}
               <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Link to="/register" className="landing-cta">
+                <Link to="/assess" className="landing-cta">
                   {copy.action}
                 </Link>
               </div>
@@ -77,10 +77,11 @@ export function EntrepreneurBanner({ copy }: { copy: LandingCopy['entrepreneur']
               {copy.milestones.map((ms) => (
                 <div
                   key={ms.label}
-                  className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 rounded-2xl border border-brand-muted bg-brand-slate/90 p-4 sm:p-5 backdrop-blur-md shadow-xl transition-transform hover:translate-x-1"
+                  className="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-1 rounded-2xl border border-brand-muted bg-brand-slate/90 p-4 sm:p-5 backdrop-blur-md shadow-xl transition-transform hover:translate-x-1"
                 >
                   <span className="text-sm font-medium text-brand-muted-3">{ms.label}:</span>
-                  <span className="text-xl sm:text-2xl font-bold text-brand-cream tracking-tight">{ms.value}</span>
+                  {/* text-lg on phones keeps label and value on one line at 375px. */}
+                  <span className="text-lg sm:text-2xl font-bold text-brand-cream tracking-tight">{ms.value}</span>
                 </div>
               ))}
             </div>

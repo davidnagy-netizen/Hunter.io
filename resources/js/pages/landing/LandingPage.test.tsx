@@ -8,6 +8,7 @@ import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
 import { useLocalProfileStore } from "@/features/profile/store/localProfileStore";
 import { profileApi } from "@/features/profile/api/profile.api";
 import { LandingPage } from "@/pages/landing/LandingPage";
+import { useUiStore } from "@/store/uiStore";
 
 vi.mock("@/features/authentication/hooks/useAuth", () => ({ useIsAuthenticated: vi.fn(), useCurrentUser: vi.fn() }));
 vi.mock("@/features/authentication/api/auth.api", () => ({ authApi: { me: vi.fn(), login: vi.fn(), register: vi.fn(), logout: vi.fn() } }));
@@ -41,6 +42,17 @@ describe("LandingPage", () => {
     renderLanding();
     expect(screen.getByRole("link", { name: /bejelentkezés|sign in/i })).toHaveAttribute("href", "/login");
     expect(screen.getAllByRole("link", { name: /kezdés ingyen|start for free/i })[0]).toHaveAttribute("href", "/register");
+  });
+
+  it.each([
+    ["hu", "Megnézem az esélyeimet", "Vissza kell fizetni?", "Az Ön eredménye"],
+    ["en", "Show me my chances", "Must it be repaid?", "Your result"],
+  ] as const)("sends every chances CTA to the free check and keeps every section in %s", (lang, cta, tableRow, result) => {
+    useUiStore.getState().setLang(lang);
+    renderLanding();
+    for (const link of screen.getAllByRole("link", { name: cta })) expect(link).toHaveAttribute("href", "/assess");
+    expect(screen.getByText(tableRow)).toBeInTheDocument();
+    expect(screen.getByText(result)).toBeInTheDocument();
   });
 
   it("renders an app link for an anonymous visitor who already created a local profile", () => {

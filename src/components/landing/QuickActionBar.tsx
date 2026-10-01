@@ -34,7 +34,7 @@ export function QuickActionBar({ copy }: { copy: LandingCopy['quickAction'] }) {
 
             <div className="mt-8">
               <Link
-                to="/register"
+                to="/assess"
                 className="landing-cta"
               >
                 <span>{copy.action}</span>
@@ -78,9 +78,10 @@ export function QuickActionBar({ copy }: { copy: LandingCopy['quickAction'] }) {
                 <label className="text-xs font-semibold text-brand-muted-3 block mb-1.5">
                   {mock.taxLabel}
                 </label>
-                <div className="flex items-center justify-between rounded-xl bg-brand-slate-3 border border-brand-muted px-4 py-3 font-mono text-sm sm:text-base text-brand-cream">
-                  <span>12345678-1-23</span>
-                  <span className="inline-flex items-center gap-1 rounded-md bg-brand-slate px-2 py-0.5 text-xs font-semibold text-brand-cream border border-brand-orange">
+                {/* Neither the number nor the chip may wrap on phones ("Érvénye / s"). */}
+                <div className="flex items-center justify-between gap-2 rounded-xl bg-brand-slate-3 border border-brand-muted px-4 py-3 font-mono text-sm sm:text-base text-brand-cream">
+                  <span className="whitespace-nowrap">12345678-1-23</span>
+                  <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-md bg-brand-slate px-2 py-0.5 text-xs font-semibold text-brand-cream border border-brand-orange">
                     <Check size={12} className="text-brand-orange" aria-hidden="true" />
                     <span>{mock.valid}</span>
                   </span>

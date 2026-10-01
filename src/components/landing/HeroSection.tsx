@@ -53,7 +53,7 @@ export function HeroSection({ copy }: { copy: LandingCopy["hero"] }) {
 
             <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
               <Link
-                to="/register"
+                to="/assess"
                 className="landing-cta landing-cta-highlight"
               >
                 {copy.primary}
