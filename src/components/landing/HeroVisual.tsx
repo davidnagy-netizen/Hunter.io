@@ -135,7 +135,7 @@ export function HeroVisual({ copy }: { copy: LandingCopy["hero"]["visual"] }) {
               <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
             </svg>
           </div>
-          <div>{copy.float2Title}<small>{copy.float2Sub}</small></div>
+          <div>{copy.float2Title}{copy.float2Sub && <small>{copy.float2Sub}</small>}</div>
         </div>
         <div className="landing-hero-float hf-3">
           <div className="ic" style={{ background: "var(--color-brand-orange-bg)" }}>

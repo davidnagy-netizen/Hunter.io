@@ -36,6 +36,9 @@ export function Footer({
             <p className="mt-5 max-w-md text-xs sm:text-[13px] leading-relaxed text-brand-muted-2 font-medium">
               {disclaimer}
             </p>
+            <p className="mt-2 max-w-md text-xs sm:text-[13px] leading-relaxed text-brand-muted-2 font-medium">
+              {copy.illustrative}
+            </p>
           </div>
 
           {/* Product Anchors (2 cols) */}

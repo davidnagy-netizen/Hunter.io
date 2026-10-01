@@ -1,8 +1,8 @@
 import { useMetaQuery } from "@/api/meta.queries";
 import { usePrefersReducedMotion } from "@/composables/usePrefersReducedMotion";
-import type { SupportedLanguage } from "@/i18n/i18n";
 import { RotateCw } from "lucide-react";
 import { useLayoutEffect, useRef } from "react";
+import type { SupportedLanguage } from "@/i18n/i18n";
 import type { LandingCopy } from "../../data/landingContent";
 import { gsap } from "./lib/gsap";
 
@@ -170,11 +170,6 @@ export function StatCounter({
                   </div>
                   <div className="mt-3 text-lg sm:text-xl font-bold text-brand-cream tracking-tight">
                     {copy.highlightLabel}
-                  </div>
-                  <div className="mt-1 text-xs font-medium text-brand-muted-3">
-                    {lang === "hu"
-                      ? "Kiemelt támogatási övezetek"
-                      : "Priority convergence zones"}
                   </div>
                 </div>
               )}

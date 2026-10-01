@@ -9,7 +9,7 @@ import type { LandingCopy } from '../../data/landingContent';
  */
 export function UseCases({ copy }: { copy: LandingCopy['useCases'] }) {
   const [selectedBand, setSelectedBand] = useState<number>(3);
-  const isHu = copy.title.includes('Cégprofilból') || copy.action.includes('előszűrés');
+  const { profile, project, result } = copy;
 
   return (
     <section className="bg-surface py-14 sm:py-20 lg:py-24 border-t border-brand-line">
@@ -21,9 +21,7 @@ export function UseCases({ copy }: { copy: LandingCopy['useCases'] }) {
           </span>
           <h2 className="text-brand-ink font-bold tracking-tight">{copy.title}</h2>
           <p className="mt-4 text-base sm:text-lg text-brand-slate leading-relaxed">
-            {isHu
-              ? 'Interaktív előszűrési stúdió: határozza meg cégprofilját és jogszabályi árbevételi sávját a valós idejű pályázati alkalmasság megállapításához.'
-              : 'Interactive pre-screening studio: define your company profile and statutory revenue band to determine real-time grant suitability.'}
+            {copy.intro}
           </p>
         </div>
 
@@ -35,47 +33,47 @@ export function UseCases({ copy }: { copy: LandingCopy['useCases'] }) {
               <div>
                 <div className="flex items-center gap-2 text-xs font-mono font-bold text-brand-muted uppercase tracking-wider mb-4 pb-3 border-b border-brand-line">
                   <Building2 size={14} className="text-brand-slate" aria-hidden="true" />
-                  <span>01 / {isHu ? 'Vállalkozási profil' : 'Company profile'}</span>
+                  <span>{profile.title}</span>
                 </div>
 
                 <div className="space-y-3.5 text-xs sm:text-sm">
                   <div className="rounded-xl bg-brand-paper border border-brand-line p-3">
-                    <span className="text-[11px] font-semibold text-brand-muted block uppercase tracking-wider">
-                      {isHu ? 'Cégméret' : 'Company size'}
+                    <span className="text-[11px] font-semibold text-brand-muted block">
+                      {profile.size}
                     </span>
                     <span className="font-bold text-brand-ink mt-0.5 block">
-                      {isHu ? 'KKV (10–49 fő)' : 'SME (10–49 staff)'}
+                      {profile.sizeValue}
                     </span>
                   </div>
 
                   <div className="rounded-xl bg-brand-paper border border-brand-line p-3">
-                    <span className="text-[11px] font-semibold text-brand-muted block uppercase tracking-wider">
-                      {isHu ? 'Telephely régió' : 'Location region'}
+                    <span className="text-[11px] font-semibold text-brand-muted block">
+                      {profile.site}
                     </span>
                     <span className="font-bold text-brand-ink mt-0.5 block">
-                      {isHu ? 'Konvergencia régió' : 'Convergence region'}
+                      {profile.siteValue}
                     </span>
-                    <span className="text-[11px] text-brand-muted block">Dél-Alföld</span>
+                    <span className="text-[11px] text-brand-muted block">{profile.siteSub}</span>
                   </div>
 
                   <div className="rounded-xl bg-brand-paper border border-brand-line p-3">
-                    <span className="text-[11px] font-semibold text-brand-muted block uppercase tracking-wider">
-                      {isHu ? 'Főtevékenység' : 'Primary activity'}
+                    <span className="text-[11px] font-semibold text-brand-muted block">
+                      {profile.activity}
                     </span>
                     <span className="font-mono font-bold text-brand-slate text-xs mt-0.5 block">
-                      TEÁOR 6201
+                      {profile.activityValue}
                     </span>
                     <span className="text-[11px] text-brand-slate block">
-                      {isHu ? 'Egyedi szoftverfejlesztés' : 'Custom software'}
+                      {profile.activitySub}
                     </span>
                   </div>
 
                   <div className="rounded-xl bg-brand-paper border border-brand-line p-3">
-                    <span className="text-[11px] font-semibold text-brand-muted block uppercase tracking-wider">
-                      {isHu ? 'Működési múlt' : 'Operating history'}
+                    <span className="text-[11px] font-semibold text-brand-muted block">
+                      {profile.history}
                     </span>
                     <span className="font-bold text-brand-ink mt-0.5 block">
-                      {isHu ? '2+ lezárt üzleti év' : '2+ closed fiscal years'}
+                      {profile.historyValue}
                     </span>
                   </div>
                 </div>
@@ -83,7 +81,7 @@ export function UseCases({ copy }: { copy: LandingCopy['useCases'] }) {
 
               <div className="mt-6 pt-4 border-t border-brand-line text-xs font-semibold text-brand-slate flex items-center gap-1.5">
                 <Check size={14} className="text-brand-orange shrink-0" aria-hidden="true" />
-                <span>{isHu ? 'NAV-alapadatok megerősítve' : 'Taxpayer data confirmed'}</span>
+                <span>{profile.confirmed}</span>
               </div>
             </div>
           </div>
@@ -94,25 +92,25 @@ export function UseCases({ copy }: { copy: LandingCopy['useCases'] }) {
               <div>
                 <div className="flex items-center gap-2 text-xs font-mono font-bold text-brand-muted uppercase tracking-wider mb-4 pb-3 border-b border-brand-line">
                   <Layers size={14} className="text-brand-slate" aria-hidden="true" />
-                  <span>02 / {isHu ? 'Árbevételi sáv és beruházás' : 'Revenue band & project'}</span>
+                  <span>{project.title}</span>
                 </div>
 
                 {/* Investment goal summary */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">
                   <div className="rounded-xl bg-brand-paper border border-brand-line p-3 text-xs">
                     <span className="text-brand-muted block text-[11px]">
-                      {isHu ? 'Fejlesztési cél:' : 'Investment goal:'}
+                      {project.goal}
                     </span>
                     <span className="font-bold text-brand-ink mt-0.5 block">
-                      {isHu ? 'Technológiai fejlesztés' : 'Technology investment'}
+                      {project.goalValue}
                     </span>
                   </div>
                   <div className="rounded-xl bg-brand-orange-bg border border-brand-orange p-3 text-xs">
                     <span className="text-brand-slate block text-[11px] font-semibold">
-                      {isHu ? 'Önerő fedezet:' : 'Own contribution:'}
+                      {project.own}
                     </span>
                     <span className="font-bold text-brand-ink mt-0.5 block">
-                      {isHu ? '50% önerő igazolva' : '50% confirmed'}
+                      {project.ownValue}
                     </span>
                   </div>
                 </div>
@@ -120,10 +118,7 @@ export function UseCases({ copy }: { copy: LandingCopy['useCases'] }) {
                 {/* Statutory revenue band selector */}
                 <div className="mt-2">
                   <div className="flex items-center justify-between text-xs font-semibold text-brand-slate mb-2">
-                    <span>{copy.bandsTitle}</span>
-                    <span className="text-[11px] font-mono text-brand-muted">
-                      {isHu ? '2004. évi XXXIV. tv.' : 'Act XXXIV of 2004'}
-                    </span>
+                    <span title={copy.bandsHint}>{copy.bandsTitle}</span>
                   </div>
 
                   <div className="space-y-1.5" role="radiogroup" aria-label={copy.bandsTitle}>
@@ -188,11 +183,11 @@ export function UseCases({ copy }: { copy: LandingCopy['useCases'] }) {
                 <div className="flex items-center justify-between text-xs font-mono font-bold uppercase tracking-wider mb-4 pb-3 border-b border-brand-slate-2">
                   <div className="flex items-center gap-1.5 text-brand-orange-soft">
                     <Sparkles size={14} aria-hidden="true" />
-                    <span>03 / {isHu ? 'Előszűrési eredmény' : 'Screening result'}</span>
+                    <span>{result.title}</span>
                   </div>
                   <span className="inline-flex items-center gap-1 rounded-full bg-brand-slate-2 px-2.5 py-0.5 text-xs font-bold text-brand-cream border border-brand-muted">
                     <span className="h-1.5 w-1.5 rounded-full bg-brand-orange" aria-hidden="true" />
-                    <span>{isHu ? 'Erős jelölt' : 'Strong candidate'}</span>
+                    <span>{result.badge}</span>
                   </span>
                 </div>
 
@@ -202,24 +197,24 @@ export function UseCases({ copy }: { copy: LandingCopy['useCases'] }) {
                     87 <span className="text-xl font-bold text-brand-muted-3">/ 100</span>
                   </div>
                   <div className="mt-1 text-xs font-bold text-brand-muted-4">
-                    {isHu ? 'Algoritmikus Fundor Score' : 'Algorithmic Fundor Score'}
+                    {result.score}
                   </div>
                 </div>
 
                 {/* Matches & Time stats */}
                 <div className="mt-6 grid grid-cols-2 gap-3">
                   <div className="rounded-2xl bg-brand-slate-2 border border-brand-muted p-3.5 shadow-2xs">
-                    <div className="text-2xl font-black text-brand-cream">12</div>
+                    <div className="text-2xl font-black text-brand-cream">{result.matchCount}</div>
                     <div className="text-[11px] font-semibold text-brand-muted-3 mt-0.5">
-                      {isHu ? 'Pályázati lehetőség' : 'Matching grants'}
+                      {result.matchLabel}
                     </div>
                   </div>
                   <div className="rounded-2xl bg-brand-slate-2 border border-brand-muted p-3.5 shadow-2xs">
                     <div className="text-2xl font-black text-brand-cream">
-                      {isHu ? '3 perc' : '3 min'}
+                      {result.time}
                     </div>
                     <div className="text-[11px] font-semibold text-brand-muted-3 mt-0.5">
-                      {isHu ? 'Előszűrési idő' : 'Screening time'}
+                      {result.timeLabel}
                     </div>
                   </div>
                 </div>
@@ -227,11 +222,7 @@ export function UseCases({ copy }: { copy: LandingCopy['useCases'] }) {
                 {/* Category context card */}
                 <div className="mt-4 rounded-xl bg-brand-slate-2 border border-brand-muted p-3 text-xs text-brand-muted-4">
                   <div className="font-bold text-brand-cream mb-1">
-                    {selectedBand <= 2
-                      ? (isHu ? 'Induló és mikrovállalkozási profil' : 'Startup and microenterprise profile')
-                      : selectedBand <= 5
-                      ? (isHu ? 'Növekedési fázisban lévő KKV profil' : 'Growing SME profile')
-                      : (isHu ? 'Nagyvállalati nem-KKV kategória' : 'Large enterprise non-SME category')}
+                    {selectedBand <= 2 ? result.micro : selectedBand <= 5 ? result.growing : result.large}
                   </div>
                   <div className="text-[11px] leading-relaxed text-brand-muted-3">
                     {selectedBand <= 2
@@ -250,7 +241,7 @@ export function UseCases({ copy }: { copy: LandingCopy['useCases'] }) {
                   {copy.action}
                 </Link>
                 <p className="mt-2 text-center text-[11px] text-brand-muted-3 font-medium">
-                  {isHu ? 'Ingyenes előszűrés • Kötelezettségmentes' : 'Free pre-screening • No commitment'}
+                  {result.trust}
                 </p>
               </div>
             </div>

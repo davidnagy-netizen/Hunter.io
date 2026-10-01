@@ -96,9 +96,6 @@ export function CaseStudyCarousel({ copy }: { copy: LandingCopy["cases"] }) {
             <h2 className="text-brand-ink font-bold tracking-tight">
               {copy.title}
             </h2>
-            <p className="mt-2 text-sm sm:text-base font-medium text-brand-muted">
-              {copy.note}
-            </p>
           </div>
 
           {hasMultiple && (
@@ -162,10 +159,10 @@ export function CaseStudyCarousel({ copy }: { copy: LandingCopy["cases"] }) {
                 <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
                   <div className="rounded-xl bg-brand-slate-2 border border-brand-muted p-3 shadow-2xs">
                     <span className="text-brand-muted-3 block text-[11px]">
-                      {isHu ? "Támogatási keret" : "Funding envelope"}
+                      {copy.envelopeLabel}
                     </span>
                     <span className="font-bold text-brand-cream mt-0.5 block">
-                      {isHu ? "20M – 150M Ft" : "€50k – €400k"}
+                      {copy.envelope}
                     </span>
                   </div>
                   <div className="rounded-xl bg-brand-slate-2 border border-brand-muted p-3 shadow-2xs">
@@ -181,7 +178,7 @@ export function CaseStudyCarousel({ copy }: { copy: LandingCopy["cases"] }) {
                       {isHu ? "Felkészültség" : "Readiness"}
                     </span>
                     <span className="font-bold text-brand-cream mt-0.5 block">
-                      Standard KSH audit
+                      {isHu ? "NAV- és KSH-adatok alapján" : "Based on NAV and KSH data"}
                     </span>
                   </div>
                   <div className="rounded-xl bg-brand-slate-2 border border-brand-muted p-3 shadow-2xs">

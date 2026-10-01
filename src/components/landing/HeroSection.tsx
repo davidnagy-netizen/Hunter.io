@@ -45,6 +45,7 @@ export function HeroSection({ copy }: { copy: LandingCopy["hero"] }) {
             <span className="landing-eyebrow mb-4 sm:mb-5">{copy.eyebrow}</span>
             <h1 className="text-brand-ink font-bold tracking-tight max-w-[650px]">
               {copy.title}
+              <span className="mt-1 block text-brand-orange-deep">{copy.titleAccent}</span>
             </h1>
             <p className="mt-5 max-w-xl text-lg sm:text-xl text-brand-slate leading-relaxed">
               {copy.lead}
@@ -57,10 +58,8 @@ export function HeroSection({ copy }: { copy: LandingCopy["hero"] }) {
               >
                 {copy.primary}
               </Link>
-              <Link to="/assess" className="landing-cta landing-cta-secondary">
-                {copy.secondary}
-              </Link>
             </div>
+            <p className="mt-3 text-sm text-brand-muted">{copy.loanNote}</p>
 
             <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-base text-brand-slate font-medium">
               {copy.trustItems.map((item) => (
@@ -75,18 +74,16 @@ export function HeroSection({ copy }: { copy: LandingCopy["hero"] }) {
               ))}
             </div>
 
-            <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-brand-muted">
-              <span>{copy.microcopy}</span>
-              <span aria-hidden="true" className="text-brand-line-strong">
-                •
-              </span>
+            <p className="mt-4 text-sm text-brand-muted">
+              {copy.microcopy}
+              <span aria-hidden="true">&nbsp;·&nbsp;</span>
               <a
                 href={copy.privacyHref}
                 className="landing-link text-sm underline"
               >
                 {copy.privacy}
               </a>
-            </div>
+            </p>
           </GsapReveal>
 
           {/* Right Column: animated matches-app preview (Lottie, with a static phone mockup fallback) */}

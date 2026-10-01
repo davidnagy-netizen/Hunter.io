@@ -132,8 +132,8 @@ export function FeatureTabs({ copy }: { copy: LandingCopy['features'] }) {
                 {/* Own Contribution Ratio Illustration */}
                 <div className="mt-6 rounded-2xl bg-brand-surface-muted p-4 border border-brand-line">
                   <div className="flex items-center justify-between text-xs font-semibold text-brand-ink mb-2">
-                    <span>Támogatási arány</span>
-                    <span>50% támogatás / 50% saját erő</span>
+                    <span>{copy.grants.ratioLabel}</span>
+                    <span>{copy.grants.ratio}</span>
                   </div>
                   <AnimatedSplitBar
                     className="h-3 w-full rounded-full bg-brand-line overflow-hidden flex"
@@ -143,8 +143,8 @@ export function FeatureTabs({ copy }: { copy: LandingCopy['features'] }) {
                     ]}
                   />
                   <div className="mt-2 flex items-center justify-between text-[11px] text-brand-muted">
-                    <span>Vissza nem térítendő forrás</span>
-                    <span>Megvalósítási idő: {copy.grants.timeline}</span>
+                    <span>{copy.grants.noRepay}</span>
+                    <span>{copy.grants.timelineLabel}: {copy.grants.timeline}</span>
                   </div>
                 </div>
 
@@ -204,7 +204,7 @@ export function FeatureTabs({ copy }: { copy: LandingCopy['features'] }) {
 
                 {/* Unpaywalled Regulatory Warning Box */}
                 <div className="mt-6 rounded-2xl border border-brand-line-strong bg-brand-cream p-4 text-xs font-medium text-brand-slate leading-relaxed">
-                  <div className="font-bold text-brand-ink mb-1">MNB jogi állásfoglalásig érvényes korlátozás</div>
+                  <div className="font-bold text-brand-ink mb-1">{copy.loans.gateTitle}</div>
                   {copy.loans.gate}
                 </div>
 

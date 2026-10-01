@@ -9,11 +9,9 @@ import type { LandingCopy } from '../../data/landingContent';
 export function PlanCards({
   copy,
   hasProfile,
-  disclaimer,
 }: {
   copy: LandingCopy['plans'];
   hasProfile: boolean;
-  disclaimer: string;
 }) {
   return (
     <section id="fundor-plus" className="bg-surface py-12 sm:py-16 lg:py-20 border-t border-brand-line">
@@ -108,10 +106,7 @@ export function PlanCards({
         <div className="mt-12 rounded-3xl border border-brand-line-strong bg-surface p-6 sm:p-8 shadow-xs">
           <div className="flex items-start gap-3.5 text-xs leading-relaxed text-brand-muted sm:text-sm">
             <ShieldAlert size={20} className="mt-0.5 shrink-0 text-brand-slate" aria-hidden="true" />
-            <div>
-              <p className="font-medium text-brand-ink">{copy.loanPolicy}</p>
-              <p className="mt-2 text-xs text-brand-muted font-medium">{disclaimer}</p>
-            </div>
+            <p className="font-medium text-brand-ink">{copy.loanPolicy}</p>
           </div>
         </div>
       </div>

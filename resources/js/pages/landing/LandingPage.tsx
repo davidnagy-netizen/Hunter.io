@@ -40,12 +40,12 @@ export function LandingPage() {
       <GsapReveal><FeatureTabs copy={copy.features} /></GsapReveal>
       <GsapReveal><StatCounter copy={copy.stats} lang={lang} /></GsapReveal>
       <GsapReveal><EntrepreneurBanner copy={copy.entrepreneur} /></GsapReveal>
-      <GsapReveal><ValueProposition copy={copy.value} disclaimer={copy.disclaimer} /></GsapReveal>
+      <GsapReveal><ValueProposition copy={copy.value} /></GsapReveal>
       <GsapReveal><QuickActionBar copy={copy.quickAction} /></GsapReveal>
       <GsapReveal><UseCases copy={copy.useCases} /></GsapReveal>
       <GsapReveal><EditorialJourney copy={copy.journey} /></GsapReveal>
       <GsapReveal><CaseStudyCarousel copy={copy.cases} /></GsapReveal>
-      <GsapReveal><PlanCards copy={copy.plans} hasProfile={Boolean(profile)} disclaimer={copy.disclaimer} /></GsapReveal>
+      <GsapReveal><PlanCards copy={copy.plans} hasProfile={Boolean(profile)} /></GsapReveal>
       <GsapReveal><FaqSection copy={copy.faq} /></GsapReveal>
     </main>
     <Footer copy={copy.footer} disclaimer={copy.disclaimer} />

@@ -55,10 +55,7 @@ export function EntrepreneurBanner({ copy }: { copy: LandingCopy['entrepreneur']
               {/* Action Buttons */}
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link to="/register" className="landing-cta">
-                  {copy.registerAction || 'Adószám megadása'}
-                </Link>
-                <Link to="/assess" className="landing-cta landing-cta-secondary">
-                  {copy.action || 'Ingyenes előszűrés'}
+                  {copy.action}
                 </Link>
               </div>
 
@@ -77,26 +74,19 @@ export function EntrepreneurBanner({ copy }: { copy: LandingCopy['entrepreneur']
 
             {/* Right Panel: Floating Milestone Indicators (40%) */}
             <div className="lg:col-span-5 flex flex-col gap-3.5">
-              {copy.milestones && copy.milestones.map((ms, idx) => (
+              {copy.milestones.map((ms) => (
                 <div
                   key={ms.label}
-                  className="rounded-2xl border border-brand-muted bg-brand-slate/90 p-4 sm:p-5 backdrop-blur-md shadow-xl transition-transform hover:translate-x-1"
+                  className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 rounded-2xl border border-brand-muted bg-brand-slate/90 p-4 sm:p-5 backdrop-blur-md shadow-xl transition-transform hover:translate-x-1"
                 >
-                  <div className="flex items-center justify-between text-xs font-medium text-brand-muted-3">
-                    <span>{ms.label}</span>
-                    <span className="font-mono text-brand-orange-soft">0{idx + 1}</span>
-                  </div>
-                  <div className="mt-1 text-xl sm:text-2xl font-bold text-brand-cream tracking-tight flex items-center gap-2">
-                    {idx === 1 && <span className="h-2.5 w-2.5 rounded-full bg-brand-orange inline-block" aria-hidden="true" />}
-                    <span>{ms.value}</span>
-                  </div>
+                  <span className="text-sm font-medium text-brand-muted-3">{ms.label}:</span>
+                  <span className="text-xl sm:text-2xl font-bold text-brand-cream tracking-tight">{ms.value}</span>
                 </div>
               ))}
             </div>
           </div>
         </div>
       </div>
-      <p className="mt-4 text-center text-xs text-brand-muted leading-normal">{copy.note}</p>
     </section>
   );
 }

@@ -49,7 +49,6 @@ export function EditorialJourney({ copy }: { copy: LandingCopy['journey'] }) {
                   </span>
                   <div>
                     <span className="text-xs font-bold text-brand-cream block">{copy.badge}</span>
-                    <span className="text-[11px] font-mono text-brand-muted-3 block">KSH & NAV szabvány</span>
                   </div>
                 </div>
               </div>
