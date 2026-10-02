@@ -47,11 +47,13 @@ describe("formatDateTime", () => {
 describe("formatMoney", () => {
   it("writes the whole amount, not millions", () => {
     expect(formatMoney(5990, "en")).toBe("5,990 HUF");
-    expect(formatMoney(71880, "hu").replace(/\s/g, "")).toBe("71880Ft");
+    expect(formatMoney(9900, "hu")).toBe("9.900 Ft");
+    expect(formatMoney(71880, "hu")).toBe("71.880 Ft");
   });
 
   it("rounds to a whole forint and handles zero", () => {
     expect(formatMoney(5990.6, "en")).toBe("5,991 HUF");
     expect(formatMoney(0, "en")).toBe("0 HUF");
+    expect(formatMoney(0, "hu")).toBe("0 Ft");
   });
 });

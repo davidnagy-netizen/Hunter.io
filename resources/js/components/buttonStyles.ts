@@ -2,7 +2,7 @@ export type ButtonVariant = "gold" | "dark" | "ghost" | "ghost-light" | "danger"
 export type ButtonSize = "md" | "sm";
 
 const VARIANT_CLASSES: Record<ButtonVariant, string> = {
-  gold: "bg-gold text-white hover:bg-gold-deep focus-visible:outline-gold-deep",
+  gold: "bg-gold text-ink font-semibold hover:bg-gold-deep hover:text-ink active:bg-brand-orange-active focus-visible:outline-gold-deep",
   dark: "bg-ink text-white hover:bg-ink-2 focus-visible:outline-ink-2",
   ghost: "bg-transparent text-text border border-line-strong hover:bg-paper focus-visible:outline-line-strong",
   "ghost-light": "bg-white/10 text-white border border-white/30 hover:bg-white/20 focus-visible:outline-white",

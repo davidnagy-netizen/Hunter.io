@@ -11,7 +11,7 @@ import { HeroVisual } from "./HeroVisual";
 export function HeroSection({ copy }: { copy: LandingCopy["hero"] }) {
   return (
     <section className="relative overflow-hidden bg-surface py-6 sm:py-10 lg:py-14 border-b border-brand-line">
-      <div className="landing-canvas landing-canvas-hero relative overflow-hidden rounded-[28px] sm:rounded-[36px] lg:rounded-[40px] border border-brand-line-strong bg-brand-cream p-6 sm:p-10 lg:p-14 shadow-sm">
+      <div className="landing-canvas landing-canvas-hero relative overflow-hidden rounded-[28px] sm:rounded-[36px] lg:rounded-[40px] border border-brand-line-strong bg-slate-50 p-6 sm:p-10 lg:p-14 shadow-sm">
         {/* Subtle decorative grid network */}
         <svg
           aria-hidden="true"

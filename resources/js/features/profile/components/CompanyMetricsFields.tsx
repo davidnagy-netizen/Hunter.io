@@ -49,7 +49,7 @@ export function CompanyMetricsFields({ value, onChange }: {
     <div>
       <SelectField label={en ? "County of operation" : "Működés vármegyéje"} value={value.county_code ?? ""} onChange={e => set("county_code", e.target.value)} required>
         <option value="">{en ? "Select" : "Válasszon"}</option>
-        {Object.entries(options.data?.counties ?? {}).map(([code, label]) => <option key={code} value={code}>{label}{["01", "13"].includes(code) ? " — Közép-Magyarország" : ""}</option>)}
+        {Object.entries(options.data?.counties ?? {}).map(([code, label]) => <option key={code} value={code}>{label}{["01", "13"].includes(code) ? " - Közép-Magyarország" : ""}</option>)}
       </SelectField>
       <p className="mt-1.5 text-xs text-muted">{en ? "Regional restrictions depend on each funding call." : "A területi korlátozások pályázatonként eltérnek."}</p>
     </div>
@@ -67,7 +67,7 @@ export function CompanyMetricsFields({ value, onChange }: {
         }} />
       {open && <ul id={id + "-list"} role="listbox" className="rounded-md border border-line-strong bg-white py-1 shadow-card">
         {sectors.data?.map((sector, index) => <li key={sector.code} id={id + "-" + index} role="option" aria-selected={index === active}
-          onMouseDown={e => e.preventDefault()} onClick={() => choose(sector.code)} className="cursor-pointer px-3 py-2 text-sm text-text hover:bg-gold-bg">{sector.code} — {sector.label}</li>)}
+          onMouseDown={e => e.preventDefault()} onClick={() => choose(sector.code)} className="cursor-pointer px-3 py-2 text-sm text-text hover:bg-gold-bg">{sector.code} - {sector.label}</li>)}
       </ul>}
       {sectors.isFetching && <p role="status" className="text-xs text-muted">{en ? "Searching…" : "Keresés…"}</p>}
       {sectors.isError && <p role="alert" className="text-xs text-red">{en ? "Sector search unavailable." : "A tevékenységkereső nem érhető el."}</p>}

@@ -2,14 +2,14 @@
   "steps": {
     "intro": { "title": "Kezdjük a demóval", "subtitle": "Betöltünk egy kész mintacéget, vagy kitöltöd a sajátoddal." },
     "company": { "title": "A céged alapadatai", "subtitle": "Ezek határozzák meg a jogosultságot." },
-    "activity": { "title": "Tevékenység", "subtitle": "Iparág és TEÁOR — ez szűri a releváns programokat." },
+    "activity": { "title": "Tevékenység", "subtitle": "Iparág és TEÁOR: ez szűri a releváns programokat." },
     "goals": { "title": "Fejlesztési célok", "subtitle": "Mit szeretnél megvalósítani? Több is lehet." },
     "investment": { "title": "Tervezett beruházás", "subtitle": "A támogatás mértékét és a méret-illeszkedést ebből számoljuk." },
-    "setup": { "title": "Hogyan pályáznál?", "subtitle": "Az európai felhívások nagy része konzorciumot kíván — ez dönti el, mi elérhető számodra." }
+    "setup": { "title": "Hogyan pályáznál?", "subtitle": "Az európai felhívások nagy része konzorciumot kíván: ez dönti el, mi elérhető számodra." }
   },
   "page": {
     "title": "Cégprofil",
-    "subtitle": "Amit a Fundornak megadtál — ez alapján párosítunk és pontozunk minden felhívást.",
+    "subtitle": "Amit a Fundornak megadtál: ez alapján párosítunk és pontozunk minden felhívást.",
     "edit": "Szerkesztés"
   },
   "fields": {
@@ -69,7 +69,7 @@
     "subtitle": "Minden mentés új verzió. Bármelyik visszaállítható.",
     "empty": "Még nincs mentett verzió.",
     "firstSave": "Első mentés",
-    "signInRequired": "A profilelőzmények csak bejelentkezve érhetők el — anonim látogatóként a profilod csak ebben a böngészőben létezik."
+    "signInRequired": "A profilelőzmények csak bejelentkezve érhetők el: anonim látogatóként a profilod csak ebben a böngészőben létezik."
   },
   "validation": {
     "company": "Adj meg egy cégnevet.",

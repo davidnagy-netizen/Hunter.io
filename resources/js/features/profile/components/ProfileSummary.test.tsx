@@ -54,7 +54,7 @@ describe("ProfileSummary", () => {
 
     // Meta-dependent lookups (region/industry/orgType names) resolve after the reference
     // data loads — wait for the first, then the rest have already landed in the same render.
-    expect(await screen.findByText(/Pest — Pest megye/)).toBeInTheDocument();
+    expect(await screen.findByText(/Pest - Pest megye/)).toBeInTheDocument();
     expect(screen.getByText(/gyártás|manufacturing/i)).toBeInTheDocument();
     expect(screen.getByText(/digitalizáció|digitalisation/i)).toBeInTheDocument();
     expect(screen.getByText(/^kkv$|^sme$/i)).toBeInTheDocument();
@@ -77,5 +77,23 @@ describe("ProfileSummary", () => {
     expect(screen.getByText("Beta Kft.")).toBeInTheDocument();
     expect(screen.queryByText(/adószám|tax number/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/tervezett projektérték|planned project value/i)).not.toBeInTheDocument();
+  });
+
+  it("falls back to REVENUE_BANDS when exact_revenue is null and revenue_band is provided", () => {
+    vi.mocked(metaApi.get).mockResolvedValue(META);
+    const withBand: CompanyProfile = {
+      company: "Gamma Kft.",
+      employees: 12,
+      county: "Pest",
+      industryId: "manuf",
+      closed_business_years: 2,
+      goals: [],
+      revenue_band: 2,
+      exact_revenue: null,
+      investment_value: 0,
+      funding_pref: [],
+    };
+    renderWithProviders(<ProfileSummary profile={withBand} />);
+    expect(screen.getByText("50M – < 200M Ft")).toBeInTheDocument();
   });
 });

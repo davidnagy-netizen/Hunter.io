@@ -8,7 +8,7 @@
   "subtitle": "Pályázati sablonok böngészőben futó bemutatója (demó).",
   "notice": "Pályázati vázlat (demó): rögzített szövegsablon profil- és felhívásadatokkal, nem egyedi AI-generálás.",
   "lock": {
-    "headline": "Indítsd el a pályázatot — ne csak találd meg",
+    "headline": "Indítsd el a pályázatot: ne csak találd meg",
     "body": "A bemutató a katalógus dokumentumlistáját és rögzített szövegsablonokat mutatja meg. Nem egyedi AI-szövegírás.",
     "features": [
       {
@@ -28,7 +28,7 @@
         "text": "rögzített sablon, profil- és felhívásadatokkal"
       }
     ],
-    "access": "Aktív előfizetéssel érhető el. A hozzáférést jelenleg adminisztrátor adja meg — fizetési átjáró még nincs bekötve.",
+    "access": "Aktív előfizetéssel érhető el. A hozzáférést jelenleg adminisztrátor adja meg (fizetési átjáró még nincs bekötve).",
     "cta": "Cégfiók létrehozása"
   },
   "workspace": {
@@ -41,7 +41,7 @@
     "copy": "Vágólapra másolás",
     "print": "Nyomtatás / PDF mentés",
     "copied": "Vázlat másolva (demó).",
-    "copyFailed": "A másolás nem sikerült — jelöld ki a szöveget, és told át kézzel.",
+    "copyFailed": "A másolás nem sikerült. Jelöld ki a szöveget, és másold át kézzel.",
     "demoTag": "(demó)",
     "emptyTitle": "Még nincs felhívás, amin dolgozhatnál",
     "emptyBody": "Ha a katalógus betöltődött és van a profilodhoz illő felhívás, itt jelenik meg."

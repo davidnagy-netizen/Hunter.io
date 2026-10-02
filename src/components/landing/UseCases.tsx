@@ -179,14 +179,14 @@ export function UseCases({ copy }: { copy: LandingCopy['useCases'] }) {
 
           {/* Panel 3: Real-Time Eligibility Cockpit (4 cols / 33%) */}
           <div className="lg:col-span-4">
-            <div className="landing-card-elevated h-full rounded-3xl border border-brand-slate-2 bg-brand-slate text-brand-cream p-5 sm:p-6 flex flex-col justify-between shadow-md">
+            <div className="landing-card-elevated h-full rounded-3xl border border-brand-line-strong bg-slate-50 text-brand-ink p-5 sm:p-6 flex flex-col justify-between shadow-md">
               <div>
-                <div className="flex items-center justify-between text-xs font-mono font-bold uppercase tracking-wider mb-4 pb-3 border-b border-brand-slate-2">
-                  <div className="flex items-center gap-1.5 text-brand-orange-soft">
+                <div className="flex items-center justify-between text-xs font-mono font-bold uppercase tracking-wider mb-4 pb-3 border-b border-brand-line">
+                  <div className="flex items-center gap-1.5 text-brand-orange-deep">
                     <Sparkles size={14} aria-hidden="true" />
                     <span>{result.title}</span>
                   </div>
-                  <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full bg-brand-slate-2 px-2.5 py-0.5 text-xs font-bold text-brand-cream border border-brand-muted">
+                  <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full bg-white px-2.5 py-0.5 text-xs font-bold text-brand-ink border border-brand-line-strong">
                     <span className="h-1.5 w-1.5 rounded-full bg-brand-orange" aria-hidden="true" />
                     <span>{result.badge}</span>
                   </span>
@@ -194,38 +194,38 @@ export function UseCases({ copy }: { copy: LandingCopy['useCases'] }) {
 
                 {/* Score Showcase */}
                 <div className="mt-4 text-center sm:text-left">
-                  <div className="text-5xl font-black text-brand-orange tracking-tight">
-                    87 <span className="text-xl font-bold text-brand-muted-3">/ 100</span>
+                  <div className="text-5xl font-black text-brand-orange-deep tracking-tight">
+                    87 <span className="text-xl font-bold text-brand-slate">/ 100</span>
                   </div>
-                  <div className="mt-1 text-xs font-bold text-brand-muted-4">
+                  <div className="mt-1 text-xs font-bold text-brand-slate">
                     {result.score}
                   </div>
                 </div>
 
                 {/* Matches & Time stats */}
                 <div className="mt-6 grid grid-cols-2 gap-3">
-                  <div className="rounded-2xl bg-brand-slate-2 border border-brand-muted p-3.5 shadow-2xs">
-                    <div className="text-2xl font-black text-brand-cream">{result.matchCount}</div>
-                    <div className="text-[11px] font-semibold text-brand-muted-3 mt-0.5">
+                  <div className="rounded-2xl bg-white border border-brand-line-strong p-3.5 shadow-2xs">
+                    <div className="text-2xl font-black text-brand-ink">{result.matchCount}</div>
+                    <div className="text-[11px] font-semibold text-brand-slate mt-0.5">
                       {result.matchLabel}
                     </div>
                   </div>
-                  <div className="rounded-2xl bg-brand-slate-2 border border-brand-muted p-3.5 shadow-2xs">
-                    <div className="text-2xl font-black text-brand-cream">
+                  <div className="rounded-2xl bg-white border border-brand-line-strong p-3.5 shadow-2xs">
+                    <div className="text-2xl font-black text-brand-ink">
                       {result.time}
                     </div>
-                    <div className="text-[11px] font-semibold text-brand-muted-3 mt-0.5">
+                    <div className="text-[11px] font-semibold text-brand-slate mt-0.5">
                       {result.timeLabel}
                     </div>
                   </div>
                 </div>
 
                 {/* Category context card */}
-                <div className="mt-4 rounded-xl bg-brand-slate-2 border border-brand-muted p-3 text-xs text-brand-muted-4">
-                  <div className="font-bold text-brand-cream mb-1">
+                <div className="mt-4 rounded-xl bg-white border border-brand-line-strong p-3 text-xs text-brand-slate">
+                  <div className="font-bold text-brand-ink mb-1">
                     {selectedBand <= 2 ? result.micro : selectedBand <= 5 ? result.growing : result.large}
                   </div>
-                  <div className="text-[11px] leading-relaxed text-brand-muted-3">
+                  <div className="text-[11px] leading-relaxed text-brand-slate">
                     {selectedBand <= 2
                       ? copy.cards[0]?.text
                       : copy.cards[1]?.text}
@@ -234,14 +234,14 @@ export function UseCases({ copy }: { copy: LandingCopy['useCases'] }) {
               </div>
 
               {/* Direct CTA */}
-              <div className="mt-6 pt-4 border-t border-brand-slate-2">
+              <div className="mt-6 pt-4 border-t border-brand-line">
                 <Link
                   to="/assess"
                   className="landing-cta w-full text-center min-h-[52px] text-base font-semibold shadow-md"
                 >
                   {copy.action}
                 </Link>
-                <p className="mt-2 text-center text-[11px] text-brand-muted-3 font-medium">
+                <p className="mt-2 text-center text-[11px] text-brand-slate font-medium">
                   {result.trust}
                 </p>
               </div>

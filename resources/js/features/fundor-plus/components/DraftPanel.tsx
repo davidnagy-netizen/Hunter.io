@@ -28,7 +28,6 @@ export function DraftPanel({ profile, opp }: { profile: CompanyProfile; opp: Sco
       showToast({ title: t("workspace.copied") || "Copied to clipboard", icon: "success" });
     } catch {
       setCopy("failed");
-      showToast({ title: t("workspace.copyFailed") || "Copy failed", icon: "error" });
     }
   };
 

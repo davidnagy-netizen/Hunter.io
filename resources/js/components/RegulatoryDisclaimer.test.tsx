@@ -15,8 +15,8 @@ it("can be closed with its X button", async () => {
 it("shows the credit disclaimer without authentication in both languages", async () => {
   await i18n.changeLanguage("en");
   const view = render(<RegulatoryDisclaimer />);
-  expect(screen.getByRole("complementary")).toHaveTextContent("not credit recommendations");
+  expect(screen.getByRole("complementary")).toHaveTextContent("Fundor.hu does not qualify as a credit intermediary");
   await i18n.changeLanguage("hu");
   view.rerender(<RegulatoryDisclaimer />);
-  expect(screen.getByRole("complementary")).toHaveTextContent("nem hitelajánlások");
+  expect(screen.getByRole("complementary")).toHaveTextContent("A Fundor.hu nem minősül a Magyar Nemzeti Bank");
 });

@@ -73,7 +73,8 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
     <p aria-live="polite" className="text-sm text-muted">{en ? "Step" : "Lépés"} {step}/3</p>
     {step === 1 && <>
       <TextField label={en ? "Tax number" : "Adószám"} value={taxNumber} onChange={e => changeTax(e.target.value)} inputMode="numeric"
-        error={taxNumber && !isValidTaxNumber(taxNumber) ? (en ? "Invalid or incomplete tax number." : "Érvénytelen vagy hiányos adószám.") : undefined} />
+        placeholder={en ? "Enter the first 8 digits of your tax number" : "Adja meg adószáma első 8 számjegyét"}
+        error={taxNumber && !isValidTaxNumber(taxNumber) ? (en ? "Invalid tax number format." : "Érvénytelen adószám formátum") : undefined} />
       <Button onClick={findCompany} disabled={!isValidTaxNumber(taxNumber) || lookup.isPending}>{lookup.isPending ? (en ? "Searching…" : "Keresés…") : (en ? "Find company" : "Cég keresése")}</Button>
       {taxpayer && <section aria-label={en ? "Verified company" : "Ellenőrzött vállalkozás"} className="flex flex-col gap-1 rounded-md border border-line-strong bg-paper p-3 text-sm">
         <p className="font-medium text-text">{taxpayer.companyName}</p>

@@ -271,12 +271,12 @@ export function ValueProposition({ copy }: { copy: LandingCopy['value'] }) {
           <p className="mt-3 text-xs text-brand-muted">{loan.note}</p>
 
           {/* Prominent Unpaywalled Kavosz Gate Box */}
-          <div className="mt-8 rounded-2xl border border-brand-muted bg-brand-slate p-5 sm:p-6 text-xs sm:text-sm font-semibold leading-relaxed text-brand-cream">
+          <div className="mt-8 rounded-2xl border border-brand-line-strong bg-slate-50 p-5 sm:p-6 text-xs sm:text-sm font-semibold leading-relaxed text-brand-ink">
             <div className="flex items-start gap-3">
-              <AlertCircle size={18} className="text-brand-orange shrink-0 mt-0.5" aria-hidden="true" />
+              <AlertCircle size={18} className="text-brand-orange-deep shrink-0 mt-0.5" aria-hidden="true" />
               <div>
-                <span className="font-bold block mb-1 text-brand-cream">{loan.gateTitle}</span>
-                <span className="text-brand-muted-4">{copy.gate}</span>
+                <span className="font-bold block mb-1 text-brand-ink">{loan.gateTitle}</span>
+                <span className="text-brand-slate">{copy.gate}</span>
               </div>
             </div>
           </div>

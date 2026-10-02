@@ -2,14 +2,14 @@
   "steps": {
     "intro": { "title": "Let's start with the demo", "subtitle": "We load a ready-made example company, or you fill in your own." },
     "company": { "title": "Your company's core data", "subtitle": "These determine eligibility." },
-    "activity": { "title": "Activity", "subtitle": "Industry and TEÁOR code — this filters the relevant programmes." },
+    "activity": { "title": "Activity", "subtitle": "Industry and TEÁOR code: this filters the relevant programmes." },
     "goals": { "title": "Development goals", "subtitle": "What would you like to achieve? You can pick several." },
     "investment": { "title": "Planned investment", "subtitle": "We calculate the funding amount and size fit from this." },
-    "setup": { "title": "How would you apply?", "subtitle": "Most European calls require a consortium — this decides what's available to you." }
+    "setup": { "title": "How would you apply?", "subtitle": "Most European calls require a consortium: this decides what's available to you." }
   },
   "page": {
     "title": "Company profile",
-    "subtitle": "What you told Fundor — used to match and score every call.",
+    "subtitle": "What you told Fundor: used to match and score every call.",
     "edit": "Edit"
   },
   "fields": {
@@ -69,7 +69,7 @@
     "subtitle": "Every save is a version. Any of them can be restored.",
     "empty": "No versions saved yet.",
     "firstSave": "First save",
-    "signInRequired": "Profile history is only available when signed in — as an anonymous visitor your profile only exists in this browser."
+    "signInRequired": "Profile history is only available when signed in: as an anonymous visitor your profile only exists in this browser."
   },
   "validation": {
     "company": "Please enter a company name.",

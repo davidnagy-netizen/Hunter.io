@@ -97,19 +97,19 @@
 }
 
 .landing-page .landing-canvas-hero {
-  background: var(--color-brand-cream);
+  background: #f8fafc;
   border: 1px solid var(--color-brand-line-strong);
 }
 
 .landing-page .landing-canvas-data {
-  background: var(--color-brand-slate);
-  border: 1px solid var(--color-brand-slate-2);
-  color: var(--color-brand-cream);
+  background: #f8fafc;
+  border: 1px solid var(--color-brand-line);
+  color: var(--color-brand-ink);
 }
 
 .landing-page .landing-canvas-photo {
-  background: var(--color-brand-ink);
-  color: var(--color-brand-cream);
+  background: #f8fafc;
+  color: var(--color-brand-ink);
   overflow: hidden;
 }
 
@@ -125,7 +125,7 @@
 }
 
 .landing-page .landing-canvas-plans {
-  background: var(--color-brand-cream);
+  background: #f8fafc;
   border: 1px solid var(--color-brand-line-strong);
 }
 
@@ -208,7 +208,6 @@
   color: var(--color-brand-cream) !important;
 }
 
-.landing-page .landing-canvas-photo :is(h1, h2, h3),
 .landing-page .landing-canvas-conversion :is(h1, h2, h3),
 .landing-page [class*="bg-brand-ink"] :is(h1, h2, h3),
 .landing-page [class*="bg-brand-slate"] :is(h1, h2, h3) {
@@ -291,16 +290,12 @@
   color: var(--color-brand-cream);
 }
 
-.landing-page .landing-canvas-data .landing-cta-secondary,
-.landing-page .landing-canvas-photo .landing-cta-secondary,
 .landing-page .landing-canvas-conversion .landing-cta-secondary,
 .landing-page .landing-card-dark .landing-cta-secondary {
   border-color: var(--color-brand-cream);
   color: var(--color-brand-cream);
 }
 
-.landing-page .landing-canvas-data .landing-cta-secondary:hover,
-.landing-page .landing-canvas-photo .landing-cta-secondary:hover,
 .landing-page .landing-canvas-conversion .landing-cta-secondary:hover,
 .landing-page .landing-card-dark .landing-cta-secondary:hover {
   background: var(--color-brand-cream);
@@ -598,7 +593,8 @@
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 17px;
+  font-size: 11px;
+  white-space: nowrap;
   color: var(--color-brand-ink);
 }
 
@@ -800,6 +796,26 @@
   bottom: 26px;
   left: -34px;
   animation: landing-hero-float 5s ease-in-out 1.6s infinite;
+}
+
+@media (max-width: 640px) {
+  .landing-hero-float.hf-1 {
+    top: 20px;
+    left: 8px;
+    right: auto;
+    max-width: calc(100% - 16px);
+  }
+  .landing-hero-float.hf-2 {
+    bottom: 80px;
+    right: 8px;
+    left: auto;
+    max-width: calc(100% - 16px);
+  }
+  .landing-hero-float.hf-3 {
+    bottom: 16px;
+    left: 8px;
+    max-width: calc(100% - 16px);
+  }
 }
 
 @keyframes landing-hero-float {

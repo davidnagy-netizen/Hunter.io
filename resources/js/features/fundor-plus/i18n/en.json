@@ -8,7 +8,7 @@
   "subtitle": "A browser demo of application templates.",
   "notice": "Application draft (demo): a static template populated with profile and call fields, not custom AI generation.",
   "lock": {
-    "headline": "Start the application — don't just find it",
+    "headline": "Start the application: don't just find it",
     "body": "The demo shows the catalog's document list and fixed text templates. It is not custom AI writing.",
     "features": [
       {
@@ -28,7 +28,7 @@
         "text": "a fixed template filled with profile and call data"
       }
     ],
-    "access": "Available with an active subscription. Access is granted by an administrator for now — no payment gateway is connected yet.",
+    "access": "Available with an active subscription. Access is granted by an administrator for now (no payment gateway is connected yet).",
     "cta": "Create a company account"
   },
   "workspace": {
@@ -41,7 +41,7 @@
     "copy": "Copy to clipboard",
     "print": "Print / Save PDF",
     "copied": "Draft copied (demo).",
-    "copyFailed": "Couldn't copy — select the text and copy it by hand.",
+    "copyFailed": "Couldn't copy. Select the text and copy it by hand.",
     "demoTag": "(demo)",
     "emptyTitle": "No call to work on yet",
     "emptyBody": "Once the catalog has loaded and a call fits your profile, it appears here."

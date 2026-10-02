@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 import { AssessmentPage } from "@/pages/assessment/AssessmentPage";
 import { LandingPage } from "@/pages/landing/LandingPage";
 import { AuthPage } from "@/pages/authentication/AuthPage";
@@ -56,6 +56,9 @@ export const router = createBrowserRouter([
     path: "/onboarding",
     element: <OnboardingWizard />,
   },
+  { path: "/dashboard", element: <Navigate to="/app" replace /> },
+  { path: "/grants", element: <Navigate to="/app/opportunities" replace /> },
+  { path: "/search", element: <Navigate to="/app/search" replace /> },
   {
     path: "/app",
     element: (

@@ -4,7 +4,7 @@ const privacyHref = 'mailto:legal@fundor.hu?subject=Adatkezel%C3%A9si%20t%C3%A1j
 const termsHref = 'mailto:legal@fundor.hu?subject=%C3%81SZF%20k%C3%A9r%C3%A9se';
 const hu = {
   skipLink: 'Ugrás a tartalomhoz',
-  disclaimer: 'A Fundor tájékoztató előszűrést nyújt. Nem minősül hitelközvetítésnek, hitelajánlásnak vagy hatósági döntésnek.',
+  disclaimer: 'A Fundor.hu nem minősül a Magyar Nemzeti Bank (MNB) által felügyelt hitelközvetítőnek vagy pénzügyi tanácsadónak. A felületen megjelenített adatok, számítások és a Fundor Score kizárólag tájékoztató jellegű előszűrésnek minősülnek. A hiteljogosultság értékelése és a hitelajánlások az MNB jogi állásfoglalásáig nem érhetők el.',
   nav: {
     brand: BRAND.name, domain: BRAND.domain, label: 'Fő navigáció', menu: 'Menü',
     links: [{ label: 'Pályázatok', href: '#palyazatok' }, { label: 'Hitelek', href: '#hitelek' }, { label: 'Fundor Plus', href: '#fundor-plus' }, { label: 'Rólunk', href: '#rolunk' }],
@@ -15,21 +15,21 @@ const hu = {
     title: 'Megtaláljuk cége számára a legjobb pályázatot és hitelt.',
     titleAccent: 'Teljesen automatikusan.',
     lead: 'A Fundor folyamatosan figyeli a pályázatokat és a hiteleket, összeveti őket, és cége adatai alapján kiszámolja, mekkora eséllyel nyer.',
-    primary: 'Megnézem az esélyeimet',
+    primary: 'Előszűrés Indítása',
     trustItems: ['Ingyenes', '3 perc', 'Kötelezettség nélkül'],
     loanNote: 'A hitelekről szóló információ tájékoztató jellegű, nem hitelajánlás.',
     microcopy: 'Adatait biztonságosan kezeljük', privacy: 'Adatkezelési tájékoztató', privacyHref,
-    sources: ['NAV Online Számla', 'KSH TEÁOR’25', 'Hivatalos adatforrások'], sourcesNote: 'Hivatalos adatokkal dolgozunk',
+    sources: ['NAV Online Számla', 'KSH TEÁOR’25', 'Hivatalos adatforrások'], sourcesNote: 'Hivatalos NAV Online Számla kapcsolat • GDPR-konform • Ingyenes ellenőrzés',
     visual: {
       matchesLabel: 'Az Ön találatai', matchesCount: '6 illik a cégéhez',
       topTag: 'Legjobb találat', topTitle: 'Digitalizációs és technológiai támogatás', topAmount: 'Akár 20 millió Ft · vissza nem térítendő',
-      topScore: '87', topBand: 'Nagyon esélyes · Fundor Score',
+      topScore: '87 / 100', topBand: 'Kiváló Megfelelés · Fundor Score',
       factor1Label: 'Jogosultság', factor1Value: '95%', factor2Label: 'Illik a projektjéhez', factor2Value: '91%',
       moreLabel: 'További találatok',
       match2Title: 'Energiahatékonysági program', match2Amount: 'Akár 48 millió Ft', match2Score: '78',
       match3Title: 'K+F innovációs alap', match3Amount: 'Akár 36 millió Ft', match3Score: '72',
       tabMatches: 'Találatok', tabCalendar: 'Naptár', tabDocuments: 'Dokumentumok',
-      float1Title: 'Jogosultság ellenőrizve', float1Sub: 'a hivatalos kiírás alapján',
+      float1Title: 'Fundor Score: 87 / 100', float1Sub: '20 millió Ft',
       float2Title: 'Új lehetőség: 80 millió Ft', float2Sub: '',
       float3Title: 'Új pályázat illik a cégéhez', float3Sub: 'GINOP Plusz · most',
     },
@@ -86,7 +86,7 @@ const hu = {
     gate: 'A Kavosz-termékekre vonatkozó hitelajánlás jogi állásfoglalásig nem érhető el.',
   },
   quickAction: {
-    eyebrow: '', title: 'Kezdje az adószámmal — a többit mi intézzük', text: 'Az adószám alapján lekérjük a cégadatokat a NAV-tól. Önnek csak jóvá kell hagynia.', action: 'Megnézem az esélyeimet', stepsTitle: '3 lépés, kb. 3 perc', steps: ['Adószám megadása', 'Cégadatok jóváhagyása', 'Esélyek megtekintése'],
+    eyebrow: '', title: 'Kezdje az adószámmal: a többit mi intézzük', text: 'Az adószám alapján lekérjük a cégadatokat a NAV-tól. Önnek csak jóvá kell hagynia.', action: 'Megnézem az esélyeimet', stepsTitle: '3 lépés, kb. 3 perc', steps: ['Adószám megadása', 'Cégadatok jóváhagyása', 'Esélyek megtekintése'],
     mock: { source: 'NAV Online Számla', taxLabel: 'Adószám', valid: 'Érvényes', record: 'Cégadatok (minta)', name: 'Cégnév', seat: 'Székhely', activity: 'Főtevékenység', statusLabel: 'Állapot', statusValue: 'Indulhat a keresés' },
   },
   useCases: {
@@ -132,28 +132,28 @@ const hu = {
 
 const en: typeof hu = {
   skipLink: 'Skip to content',
-  disclaimer: 'Fundor provides informational pre-screening. It is not credit intermediation, a credit recommendation or an official decision.',
+  disclaimer: 'Fundor.hu does not qualify as a credit intermediary or financial advisor supervised by the National Bank of Hungary (MNB). Data, calculations, and the Fundor Score displayed are strictly informational pre-screenings. Credit recommendations and eligibility evaluations remain unavailable pending the formal MNB legal opinion.',
   nav: { brand: BRAND.name, domain: BRAND.domain, label: 'Main navigation', menu: 'Menu', links: [{ label: 'Grants', href: '#palyazatok' }, { label: 'Loans', href: '#hitelek' }, { label: 'Fundor Plus', href: '#fundor-plus' }, { label: 'About', href: '#rolunk' }], login: 'Sign in', app: 'Open the application', register: 'Start for free' },
   hero: {
     eyebrow: 'Grants and loans for SMEs',
     title: 'We find the best grant and loan for your company.',
     titleAccent: 'Fully automatically.',
     lead: 'Fundor keeps watching grants and loans, compares them, and calculates your chance of winning from your company data.',
-    primary: 'Show me my chances',
+    primary: 'Start Pre-Screening',
     trustItems: ['Free', '3 minutes', 'No commitment'],
     loanNote: 'Information about loans is for guidance only and is not a credit offer.',
     microcopy: 'We handle your data securely', privacy: 'Privacy notice', privacyHref,
-    sources: ['NAV Online Invoice', 'KSH TEÁOR’25', 'Official data sources'], sourcesNote: 'We work with official data',
+    sources: ['NAV Online Invoice', 'KSH TEÁOR’25', 'Official data sources'], sourcesNote: 'Official NAV Online Invoice connection • GDPR compliant • Free check',
     visual: {
       matchesLabel: 'Your matches', matchesCount: '6 fit your company',
       topTag: 'Top match', topTitle: 'Digitalisation & Technology Grant', topAmount: 'Up to HUF 20m · non-repayable',
-      topScore: '87', topBand: 'Very good chance · Fundor Score',
+      topScore: '87 / 100', topBand: 'Excellent Fit · Fundor Score',
       factor1Label: 'Eligibility', factor1Value: '95%', factor2Label: 'Fits your project', factor2Value: '91%',
       moreLabel: 'More matches',
       match2Title: 'Energy Efficiency Programme', match2Amount: 'Up to HUF 48m', match2Score: '78',
       match3Title: 'R&D Innovation Fund', match3Amount: 'Up to HUF 36m', match3Score: '72',
       tabMatches: 'Matches', tabCalendar: 'Calendar', tabDocuments: 'Documents',
-      float1Title: 'Eligibility checked', float1Sub: 'against the official call',
+      float1Title: 'Fundor Score: 87 / 100', float1Sub: '20 million HUF',
       float2Title: 'New opportunity: HUF 80m', float2Sub: '',
       float3Title: 'A new grant fits your company', float3Sub: 'GINOP Plusz · just now',
     },
@@ -210,7 +210,7 @@ const en: typeof hu = {
     gate: 'Credit recommendations for Kavosz products are unavailable pending a legal opinion.',
   },
   quickAction: {
-    eyebrow: '', title: 'Start with your tax number — we do the rest', text: 'We fetch your company data from NAV using your tax number. You only confirm it.', action: 'Show me my chances', stepsTitle: '3 steps, about 3 minutes', steps: ['Enter tax number', 'Confirm company data', 'See your chances'],
+    eyebrow: '', title: 'Start with your tax number: we do the rest', text: 'We fetch your company data from NAV using your tax number. You only confirm it.', action: 'Show me my chances', stepsTitle: '3 steps, about 3 minutes', steps: ['Enter tax number', 'Confirm company data', 'See your chances'],
     mock: { source: 'NAV Online Invoice', taxLabel: 'Tax number', valid: 'Valid', record: 'Company data (sample)', name: 'Company name', seat: 'Registered address', activity: 'Main activity', statusLabel: 'Status', statusValue: 'Ready to search' },
   },
   useCases: {
@@ -220,7 +220,7 @@ const en: typeof hu = {
     project: { title: 'Revenue and project goal', goal: 'Project goal', goalValue: 'Technology investment', own: 'Own funds', ownValue: '50% available' },
     result: { title: 'Your result', badge: 'Very good chance', score: 'Fundor Score', matchCount: '12', matchLabel: 'grants fit your company', time: '3 min', timeLabel: 'to your result', micro: 'Startup and microbusiness profile', growing: 'Growing SME', large: 'Large enterprise, not an SME', trust: 'Free · no commitment' },
     cards: [{ title: 'Startups and microbusinesses', text: 'Headcount, closed years, legal form, sector and location all matter. Startups are neither automatically eligible nor automatically excluded.' }, { title: 'Growing SMEs', text: 'We also check headcount and balance sheet for exact SME status.' }],
-    action: 'Show me my chances', bandsTitle: 'Annual revenue', bandsHint: 'Act XXXIV of 2004', bands: ['Under HUF 50m', 'HUF 50–200m', 'HUF 200–800m', 'HUF 800m – 4bn', 'HUF 4–20bn', 'Over HUF 20bn'], bandLabel: 'band', large: 'Large enterprise, not an SME', note: 'This grant needs your exact revenue — please enter it.',
+    action: 'Show me my chances', bandsTitle: 'Annual revenue', bandsHint: 'Act XXXIV of 2004', bands: ['Under HUF 50m', 'HUF 50–200m', 'HUF 200–800m', 'HUF 800m – 4bn', 'HUF 4–20bn', 'Over HUF 20bn'], bandLabel: 'band', large: 'Large enterprise, not an SME', note: 'This grant needs your exact revenue: please enter it.',
   },
   journey: {
     eyebrow: 'Delivery process',

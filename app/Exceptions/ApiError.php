@@ -18,6 +18,12 @@ class ApiError extends RuntimeException
             'EMAIL_REQUIRED' => 'E-mail cím szükséges.',
             'WEAK_PASSWORD' => 'A jelszó legalább 4 karakter legyen.',
             'USERNAME_TAKEN' => 'Ez a felhasználónév már foglalt.',
+            'TAXPAYER_NOT_FOUND' => 'A megadott adószámmal nem található adózó a NAV nyilvántartásában.',
+            'COMPANY_INACTIVE' => 'A vállalkozás jelenleg nem aktív a NAV nyilvántartásában.',
+            'TAX_SUBJECT_SUSPENDED' => 'Az adóalany adószáma fel van függesztve.',
+            'INSUFFICIENT_DATA' => 'A kért művelethez további cégadatok megadása szükséges.',
+            'PENDING_REVIEW' => 'A kérelem feldolgozás alatt áll.',
+            'INVALID_TAX_NUMBER' => 'Érvénytelen adószám formátum.',
             default => 'A kérés nem teljesíthető.',
         });
     }

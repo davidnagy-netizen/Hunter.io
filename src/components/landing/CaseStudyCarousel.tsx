@@ -135,64 +135,64 @@ export function CaseStudyCarousel({ copy }: { copy: LandingCopy["cases"] }) {
           <div className="lg:col-span-9">
             <div
               ref={cardRef}
-              className="h-full rounded-3xl border border-brand-slate-2 bg-brand-slate text-brand-cream p-6 sm:p-10 lg:p-12 shadow-sm relative overflow-hidden flex flex-col justify-between"
+              className="h-full rounded-3xl border border-brand-line bg-slate-50 text-brand-ink p-6 sm:p-10 lg:p-12 shadow-sm relative overflow-hidden flex flex-col justify-between"
             >
               <div>
                 <div className="flex flex-wrap items-center gap-3">
-                  <span className="inline-flex items-center rounded-lg bg-brand-slate-2 border border-brand-muted px-3 py-1.5 text-xs font-bold text-brand-cream">
+                  <span className="inline-flex items-center rounded-lg bg-white border border-brand-line-strong px-3 py-1.5 text-xs font-bold text-brand-ink shadow-2xs">
                     {currentSlide.category}
                   </span>
-                  <span className="text-xs font-mono font-bold text-brand-muted-3">
+                  <span className="text-xs font-mono font-bold text-brand-slate">
                     {String(currentIndex + 1).padStart(2, "0")}.{" "}
                     {copy.scenarioLabel}
                   </span>
                 </div>
 
-                <h3 className="mt-5 text-2xl sm:text-3xl lg:text-4xl font-bold text-brand-cream tracking-tight">
+                <h3 className="mt-5 text-2xl sm:text-3xl lg:text-4xl font-bold text-brand-ink tracking-tight">
                   {currentSlide.title}
                 </h3>
-                <p className="mt-4 text-base sm:text-lg leading-relaxed text-brand-muted-4 max-w-3xl">
+                <p className="mt-4 text-base sm:text-lg leading-relaxed text-brand-slate max-w-3xl">
                   {currentSlide.text}
                 </p>
 
                 {/* 4 Structured Indicator Chips */}
                 <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-                  <div className="rounded-xl bg-brand-slate-2 border border-brand-muted p-3 shadow-2xs">
-                    <span className="text-brand-muted-3 block text-[11px]">
+                  <div className="rounded-xl bg-white border border-brand-line-strong p-3 shadow-2xs">
+                    <span className="text-brand-slate block text-[11px]">
                       {copy.envelopeLabel}
                     </span>
-                    <span className="font-bold text-brand-cream mt-0.5 block">
+                    <span className="font-bold text-brand-ink mt-0.5 block">
                       {copy.envelope}
                     </span>
                   </div>
-                  <div className="rounded-xl bg-brand-slate-2 border border-brand-muted p-3 shadow-2xs">
-                    <span className="text-brand-muted-3 block text-[11px]">
+                  <div className="rounded-xl bg-white border border-brand-line-strong p-3 shadow-2xs">
+                    <span className="text-brand-slate block text-[11px]">
                       {isHu ? "Támogatási intenzitás" : "Funding intensity"}
                     </span>
-                    <span className="font-bold text-brand-orange mt-0.5 block">
+                    <span className="font-bold text-brand-orange-deep mt-0.5 block">
                       50% – 70%
                     </span>
                   </div>
-                  <div className="rounded-xl bg-brand-slate-2 border border-brand-muted p-3 shadow-2xs">
-                    <span className="text-brand-muted-3 block text-[11px]">
+                  <div className="rounded-xl bg-white border border-brand-line-strong p-3 shadow-2xs">
+                    <span className="text-brand-slate block text-[11px]">
                       {isHu ? "Felkészültség" : "Readiness"}
                     </span>
-                    <span className="font-bold text-brand-cream mt-0.5 block">
+                    <span className="font-bold text-brand-ink mt-0.5 block">
                       {isHu ? "NAV- és KSH-adatok alapján" : "Based on NAV and KSH data"}
                     </span>
                   </div>
-                  <div className="rounded-xl bg-brand-slate-2 border border-brand-muted p-3 shadow-2xs">
-                    <span className="text-brand-muted-3 block text-[11px]">
+                  <div className="rounded-xl bg-white border border-brand-line-strong p-3 shadow-2xs">
+                    <span className="text-brand-slate block text-[11px]">
                       {isHu ? "Átfutási idő" : "Timeline"}
                     </span>
-                    <span className="font-bold text-brand-cream mt-0.5 block">
+                    <span className="font-bold text-brand-ink mt-0.5 block">
                       {isHu ? "3–5 hónap" : "3–5 months"}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-8 border-t border-brand-slate-2 pt-6">
+              <div className="mt-8 border-t border-brand-line pt-6">
                 <Link to="/assess" className="landing-cta font-semibold">
                   {copy.action}
                 </Link>

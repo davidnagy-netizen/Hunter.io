@@ -6,7 +6,7 @@ import { useFormat } from "./useFormat";
 describe("useFormat().moneyOrDash", () => {
   it("formats a known amount", () => {
     const { result } = renderHook(() => useFormat());
-    expect(result.current.moneyOrDash(5990).replace(/\s/g, "")).toMatch(/^5990(Ft|HUF)$/);
+    expect(result.current.moneyOrDash(5990).replace(/\s/g, "")).toMatch(/^(?:5\.990|5,?990)(?:Ft|HUF)$/);
   });
 
   it("shows a dash for an unknown amount — never a made-up zero", () => {

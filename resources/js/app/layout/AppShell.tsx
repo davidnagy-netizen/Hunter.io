@@ -138,8 +138,8 @@ export function AppShell({ nav, workspace }: AppShellProps) {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-paper">
-      <aside className="fixed inset-y-0 left-0 hidden w-60 flex-col gap-6 bg-ink p-5 text-white md:flex print:hidden">
+    <div className="flex flex-1 flex-col bg-paper md:flex-row">
+      <aside className="hidden w-60 shrink-0 flex-col gap-6 bg-ink p-5 text-white md:sticky md:top-0 md:flex md:h-screen md:max-h-screen md:overflow-y-auto print:hidden">
         <Logo dark />
         <WorkspaceSwitch workspace={workspace} />
         <nav className="flex flex-1 flex-col gap-1">
@@ -171,7 +171,7 @@ export function AppShell({ nav, workspace }: AppShellProps) {
         <AccountBlock />
       </aside>
 
-      <header className="flex flex-wrap items-center justify-between gap-3 bg-ink px-4 py-3 md:hidden print:hidden">
+      <header className="sticky top-0 z-40 flex flex-wrap items-center justify-between gap-3 bg-ink px-4 py-3 md:hidden print:hidden">
         <Logo dark />
         <div className="ml-auto flex max-w-full flex-wrap items-center justify-end gap-2">
           <MobileWorkspaceLink workspace={workspace} />
@@ -184,13 +184,13 @@ export function AppShell({ nav, workspace }: AppShellProps) {
         </div>
       </header>
 
-      <main className="px-4 pb-24 pt-6 md:ml-60 md:px-10 md:py-10 print:m-0 print:p-0">
+      <main className="min-w-0 flex-1 px-4 pb-24 pt-6 md:px-10 md:py-10 print:m-0 print:p-0">
         <div className="mx-auto max-w-4xl">
           <Outlet />
         </div>
       </main>
 
-      <nav className="fixed inset-x-0 bottom-0 flex border-t border-line bg-surface py-2 md:hidden print:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-50 flex border-t border-line bg-surface py-2 md:hidden print:hidden">
         {nav.map((item) => (
           <NavLink
             key={item.to}

@@ -10,8 +10,10 @@ import "./index.css";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryProvider>
-      <RegulatoryDisclaimer />
-      <RouterProvider router={router} />
+      <div className="flex min-h-screen flex-col">
+        <RegulatoryDisclaimer />
+        <RouterProvider router={router} />
+      </div>
     </QueryProvider>
   </StrictMode>,
 );

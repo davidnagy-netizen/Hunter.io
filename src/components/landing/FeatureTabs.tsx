@@ -262,7 +262,7 @@ export function FeatureTabs({ copy }: { copy: LandingCopy['features'] }) {
                       onBlur={() => setValidated(true)}
                       aria-describedby={feedbackId}
                       aria-invalid={validated && (!isTaxValid || isTaxEmpty)}
-                      placeholder="12345678-1-23"
+                      placeholder="Adja meg adószáma első 8 számjegyét"
                       className="mt-1.5"
                     />
                     <div id={feedbackId} className="mt-1.5 text-xs text-brand-muted">

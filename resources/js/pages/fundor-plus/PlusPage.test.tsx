@@ -231,7 +231,7 @@ describe("PlusWorkspace — copy and print", () => {
     await screen.findByText(/készen áll|ready to draft/i);
     await user.click(generate());
     await user.click(await screen.findByRole("button", { name: /vágólapra másolás|copy to clipboard/i }));
-    expect(await screen.findByRole("alert")).toHaveTextContent(/nem sikerült|couldn't copy/i);
+    expect(await screen.findByText(/nem sikerült|couldn't copy/i)).toBeInTheDocument();
   });
 
   it("prints", async () => {

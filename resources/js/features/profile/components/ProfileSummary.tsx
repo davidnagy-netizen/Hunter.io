@@ -3,6 +3,7 @@ import { useMetaQuery } from "@/api/meta.queries";
 import { useFormat } from "@/composables/useFormat";
 import { useGoalLabel } from "@/composables/useGoalLabel";
 import type { CompanyProfile } from "../types/profile.types";
+import { REVENUE_BANDS } from "../data/revenueBands";
 import "../i18n";
 
 const CLOSED_YEARS_KEY: Record<number, string> = { 0: "none", 1: "one" };
@@ -47,9 +48,18 @@ export function ProfileSummary({ profile }: { profile: CompanyProfile }) {
       <Row label={t("fields.company")} value={profile.company} />
       <Row label={t("fields.taxNumber")} value={profile.taxNumber} />
       <Row label={t("fields.employees")} value={String(profile.employees)} />
-      <Row label={t("fields.county")} value={region ? `${profile.county} — ${region.name}` : profile.county} />
+      <Row label={t("fields.county")} value={region ? `${profile.county} - ${region.name}` : profile.county} />
       <Row label={t("fields.closedYears")} value={t(`closedYearsOptions.${closedYearsKey}`)} />
-      <Row label={t("fields.revBand")} value={profile.revBand} />
+      <Row
+        label={t("fields.revBand")}
+        value={
+          profile.exact_revenue
+            ? huf(Number(profile.exact_revenue))
+            : profile.revenue_band
+              ? REVENUE_BANDS[profile.revenue_band - 1]
+              : profile.revBand
+        }
+      />
       <Row
         label={t("fields.industry")}
         value={t(`industries.${profile.industryId}`, { defaultValue: industry?.label ?? profile.industryId })}
