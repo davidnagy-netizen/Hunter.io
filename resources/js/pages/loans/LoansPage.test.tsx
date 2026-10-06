@@ -85,6 +85,8 @@ describe("LoansPage — with Fundor Plus", () => {
     expect(guarantee.getByText("SYNTHETIC FIXTURE — no official document")).toBeInTheDocument();
     expect(within(cards[1]).getByText("Subsidised Loan Facility")).toBeInTheDocument();
     expect(screen.queryByText(/score/i)).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "How to apply for a loan" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Call +36 30 508 0569" })).toHaveAttribute("href", "tel:+36305080569");
     expect(loansApi.list).toHaveBeenCalledWith("en");
   });
 

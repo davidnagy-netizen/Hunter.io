@@ -17,5 +17,16 @@
     "deadline": "Határidő",
     "lastVerified": "Utoljára ellenőrizve",
     "source": "Forrásdokumentum"
+  },
+  "apply": {
+    "title": "Hogyan igényelhetsz hitelt",
+    "body": "Általános lépések, kizárólag tájékoztatásul. A Fundor nem közvetít hitelt és nem ad hiteltanácsot: a döntést a hitelező hozza meg a saját feltételei alapján.",
+    "steps": [
+      { "title": "Válassz terméket, és olvasd el a feltételeit", "body": "A termék kártyáján megnézheted a feltételeket, a határidőt és a forrásdokumentumot. Mindig a hivatalos termékleírás az irányadó." },
+      { "title": "Ellenőrizd az alapfeltételeket", "body": "A hitelezők jellemzően a cég működési idejét, a lezárt üzleti éveket és a köztartozásmentességet vizsgálják. Egyes termékekhez önerő vagy biztosíték is kell." },
+      { "title": "Készítsd elő a dokumentumokat", "body": "Általában: cégdokumentumok, az utolsó lezárt évek beszámolói, köztartozásmentességi igazolás és egy rövid leírás arról, mire kell a hitel (üzleti vagy beruházási terv)." },
+      { "title": "Igényeld a hivatalos csatornán", "body": "Az igénylést a termékleírásban megnevezett hitelezőnél vagy partnerbanknál nyújthatod be. A Fundor nem nyújt be igénylést." },
+      { "title": "Hitelbírálat és szerződés", "body": "A hitelező elbírálja az igénylést, és dönt. Jóváhagyás esetén megkötöd a hitelszerződést, és a folyósítás a feltételei szerint történik." }
+    ]
   }
 }

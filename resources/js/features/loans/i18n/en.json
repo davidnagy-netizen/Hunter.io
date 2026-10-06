@@ -17,5 +17,16 @@
     "deadline": "Deadline",
     "lastVerified": "Last verified",
     "source": "Source document"
+  },
+  "apply": {
+    "title": "How to apply for a loan",
+    "body": "General steps, for information only. Fundor does not arrange loans or give credit advice: the lender decides, on its own terms.",
+    "steps": [
+      { "title": "Pick a product and read its terms", "body": "Check the terms, the deadline and the source document on the product's card. The official product description is always the authority." },
+      { "title": "Check the basic conditions", "body": "Lenders typically look at how long your company has been operating, its closed business years and whether it is free of public debt. Some products also need own funds or collateral." },
+      { "title": "Prepare the documents", "body": "Usually: company documents, your latest closed annual reports, a certificate of no public debt and a short description of what the loan is for (business or investment plan)." },
+      { "title": "Apply through the official channel", "body": "Submit the application to the lender or partner bank named in the product's description. Fundor does not submit applications." },
+      { "title": "Credit assessment and contract", "body": "The lender assesses the application and decides. If it is approved, you sign the loan agreement and the amount is paid out under its terms." }
+    ]
   }
 }

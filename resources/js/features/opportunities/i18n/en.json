@@ -110,7 +110,7 @@
     },
     "calculator": {
       "title": "Grant calculator",
-      "subtitle": "From the project value in your profile and the funding intensity.",
+      "subtitle": "Enter a project value to see the expected funding and your own contribution.",
       "value": "Planned project value (HUF)",
       "intensity": "Funding intensity",
       "expected": "Expected funding",
@@ -118,13 +118,22 @@
       "hintShare": "The calculation is capped at your estimated partner share (about {{max}}), not the whole project grant.",
       "hintCeiling": "Funding is capped at the ceiling ({{max}}).",
       "hintNone": "The call does not publish a funding ceiling.",
-      "fromProfile": "The project value comes from your company profile. Change it there and the calculation updates.",
+      "fromProfile": "The project value starts from your company profile. You can try another amount here — it isn't saved; to change it for good, edit your profile.",
       "profileLink": "Open profile"
     },
     "documents": "Required documents",
     "apply": {
       "title": "How to apply",
       "body": "Submission happens in the funder's own system — Fundor points you there, and the call text is always the authority on the conditions.",
+      "steps": [
+        { "title": "Read the official call", "body": "Check who can apply, which costs are eligible, the funding intensity and the deadline. The call text is always the authority — the official links are below." },
+        { "title": "Plan the project and the budget", "body": "Decide what you will buy or develop, when, and at what cost. The part not covered by the grant is your own contribution, and it must be available." },
+        { "title": "Prepare the documents", "body": "Collect the annexes the call requires, your latest closed annual report, price quotes for the planned purchases and the declarations the call asks for." },
+        { "title": "Register in the submission system", "body": "Hungarian calls are submitted online in the system named in the call (usually EPTK, with Ügyfélkapu+ login); EU calls need an EU Login account and a PIC for your organisation. Register early — it can take days." },
+        { "title": "Submit before the deadline", "body": "Fill in the online form, attach the documents and submit. Don't leave it to the last day: the system can be slow, and late applications are not accepted." },
+        { "title": "Evaluation, decision and contract", "body": "The funder checks your application and may ask for missing information — reply within the given deadline. If you win, you sign a grant agreement, then carry out the project and report on it." }
+      ],
+      "linksTitle": "Official links",
       "officialPage": "Official call page",
       "officialSub": "{{ref}} — full text, annexes, FAQ",
       "submission": "Submission system — start a proposal",
@@ -141,8 +150,17 @@
       "noLink": "No direct link available"
     },
     "consult": {
-      "text": "Need help with this application? Consult with us – call us:",
-      "call": "Call {{phone}}"
+      "text": "Need help with your application? Consult with us – call us or fill in a contact form:",
+      "call": "Call {{phone}}",
+      "form": "Fill in a contact form",
+      "name": "Your name (optional)",
+      "email": "Email address",
+      "phone": "Phone (optional)",
+      "message": "Message (optional)",
+      "consent": "I agree to be contacted at the details above about my application.",
+      "submit": "Send",
+      "sending": "Sending…",
+      "done": "Thank you — we've received your message and will get back to you."
     },
     "actions": {
       "save": "Save",

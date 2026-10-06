@@ -6,11 +6,14 @@ export interface LeadPayload {
   email: string;
   company?: string;
   contactName?: string;
+  phone?: string;
+  note?: string;
   /** The server refuses a lead without explicit consent. */
   consent: true;
-  readiness: number;
-  answers: AssessmentAnswers;
-  profile: CompanyProfile;
+  /** Sent by the assessment; a plain contact request (`ConsultForm`) has none of these. */
+  readiness?: number;
+  answers?: AssessmentAnswers;
+  profile?: CompanyProfile;
 }
 
 export const leadsApi = {

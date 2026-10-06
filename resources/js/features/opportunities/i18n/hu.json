@@ -110,7 +110,7 @@
     },
     "calculator": {
       "title": "Támogatáskalkulátor",
-      "subtitle": "A profilodban megadott projektértékből és a támogatási intenzitásból.",
+      "subtitle": "Adj meg egy projektértéket, és megmutatjuk a várható támogatást és a szükséges önerőt.",
       "value": "Tervezett projektérték (Ft)",
       "intensity": "Támogatási intenzitás",
       "expected": "Várható támogatás",
@@ -118,13 +118,22 @@
       "hintShare": "A számítás a becsült partneri részesedéshez igazodik (kb. {{max}} felső határ), nem a teljes projektkerethez.",
       "hintCeiling": "A támogatás a keretösszegre ({{max}}) van korlátozva.",
       "hintNone": "A felhívás nem közöl támogatási felső határt.",
-      "fromProfile": "A projektérték a cégprofilodból származik. Módosítsd a profilodban, és a számítás frissül.",
+      "fromProfile": "A projektérték a cégprofilodból indul. Itt kipróbálhatsz más összeget is — ez nem mentődik el; véglegesen a profilodban módosíthatod.",
       "profileLink": "Profil megnyitása"
     },
     "documents": "Szükséges dokumentumok",
     "apply": {
       "title": "Hogyan pályázz",
       "body": "A beadás a kiíró hivatalos rendszerében történik — a Fundor ide irányít, a pontos feltételeket mindig a felhívás szövege adja.",
+      "steps": [
+        { "title": "Olvasd el a hivatalos felhívást", "body": "Nézd meg, ki pályázhat, mely költségek számolhatók el, mekkora a támogatási intenzitás és mikor a határidő. Mindig a felhívás szövege az irányadó — a hivatalos linkeket lent találod." },
+        { "title": "Tervezd meg a projektet és a költségvetést", "body": "Döntsd el, mit szeretnél beszerezni vagy fejleszteni, mikor és mennyiből. A támogatással nem fedezett rész az önerő, ennek rendelkezésre kell állnia." },
+        { "title": "Készítsd elő a dokumentumokat", "body": "Gyűjtsd össze a felhívásban kért mellékleteket, az utolsó lezárt évi beszámolót, a tervezett beszerzések árajánlatait és a szükséges nyilatkozatokat." },
+        { "title": "Regisztrálj a beadási rendszerben", "body": "A hazai pályázatokat a felhívásban megnevezett online rendszerben kell beadni (jellemzően EPTK, Ügyfélkapu+ belépéssel); az uniós pályázatokhoz EU Login fiók és a szervezet PIC-azonosítója kell. Regisztrálj időben, ez napokig is tarthat." },
+        { "title": "Add be a pályázatot a határidő előtt", "body": "Töltsd ki az online adatlapot, csatold a dokumentumokat, és küldd be. Ne hagyd az utolsó napra: a rendszer lassú lehet, és határidő után nem fogadnak be pályázatot." },
+        { "title": "Értékelés, döntés és szerződés", "body": "A támogató ellenőrzi a pályázatot, és hiánypótlást kérhet — erre a megadott határidőn belül válaszolj. Nyertes pályázat esetén támogatói szerződést kötsz, majd megvalósítod a projektet és beszámolsz róla." }
+      ],
+      "linksTitle": "Hivatalos linkek",
       "officialPage": "Hivatalos felhívás oldala",
       "officialSub": "{{ref}} — teljes szöveg, mellékletek, GYIK",
       "submission": "Beadási felület — pályázat indítása",
@@ -141,8 +150,17 @@
       "noLink": "Nincs közvetlen link"
     },
     "consult": {
-      "text": "Segítség kell a pályázathoz? Konzultálj velünk – hívj minket:",
-      "call": "Hívás: {{phone}}"
+      "text": "Segítség kell a pályázathoz? Konzultálj velünk – hívj minket, vagy töltsd ki a kapcsolatfelvételi űrlapot:",
+      "call": "Hívás: {{phone}}",
+      "form": "Kapcsolatfelvételi űrlap",
+      "name": "Neved (nem kötelező)",
+      "email": "E-mail cím",
+      "phone": "Telefonszám (nem kötelező)",
+      "message": "Üzenet (nem kötelező)",
+      "consent": "Hozzájárulok, hogy a megadott elérhetőségen megkeressetek a pályázatommal kapcsolatban.",
+      "submit": "Küldés",
+      "sending": "Küldés…",
+      "done": "Köszönjük — megkaptuk az üzenetedet, hamarosan jelentkezünk."
     },
     "actions": {
       "save": "Elmentem",

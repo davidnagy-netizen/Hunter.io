@@ -204,16 +204,21 @@ describe("OpportunityDetailPage", () => {
     expect(screen.queryByText(/hogyan pályázz|how to apply/i)).not.toBeInTheDocument();
   });
 
-  it("shows the grant the server calculated for the profile's project value, read-only", async () => {
+  it("starts from the profile's project value and recalculates for another amount", async () => {
     fullCatalog();
+    const user = userEvent.setup();
     renderDetail(CALL.plain);
 
     const calc = detailOf("plain").calculator!;
     const input = await screen.findByLabelText(/tervezett projektérték|planned project value/i);
-    expect(input).toHaveValue(formatHuf(calc.projectValueHuf, "hu"));
-    expect(input).toBeDisabled();
-    const out = screen.getByText(/várható támogatás|expected funding/i).closest("div")!;
-    expect(out.textContent).toContain(formatHuf(calc.grantHuf, "hu"));
+    expect(input).toHaveValue(calc.projectValueHuf);
+    const out = () => screen.getByText(/^(várható támogatás|expected funding)$/i).closest("div")!.textContent;
+    expect(out()).toContain(formatHuf(calc.grantHuf, "hu"));
+
+    await user.clear(input);
+    await user.type(input, "1000000");
+    const grant = Math.min(1_000_000 * calc.intensity, calc.ceilingHuf ?? Infinity);
+    expect(out()).toContain(formatHuf(grant, "hu"));
     expect(screen.getByRole("link", { name: /profil megnyitása|open profile/i })).toHaveAttribute("href", "/onboarding");
   });
 

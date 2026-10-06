@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { PageHead, Panel, QueryStatus } from "@/components";
+import { PageHead, Panel, QueryStatus, StepList, type Step } from "@/components";
+import { ConsultPanel } from "@/features/opportunities/components/ConsultPanel";
 import { LoanCard } from "@/features/loans/components/LoanCard";
 import { LoansLockedPanel } from "@/features/loans/components/LoansLockedPanel";
 import { useLoans } from "@/features/loans/hooks/useLoans";
@@ -29,7 +30,14 @@ export function LoansPage() {
           ) : data.gated ? (
             <LoansLockedPanel availableCount={data.availableCount} categories={data.categories} requiredTier={data.requiredTier} />
           ) : (
-            loans.map((loan) => <LoanCard key={loan.id} loan={loan} />)
+            <>
+              {loans.map((loan) => <LoanCard key={loan.id} loan={loan} />)}
+              {/* Information-only how-to and our contact line after the products, as on a grant's detail page. */}
+              <Panel title={t("apply.title")} subtitle={t("apply.body")}>
+                <StepList steps={t("apply.steps", { returnObjects: true }) as Step[]} />
+              </Panel>
+              <ConsultPanel />
+            </>
           )}
         </div>
       ) : null}

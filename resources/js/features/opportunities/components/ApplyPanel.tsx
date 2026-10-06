@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { ExternalIcon, Panel } from "@/components";
+import { ExternalIcon, Panel, StepList, type Step } from "@/components";
 import { useFormat } from "@/composables/useFormat";
 import type { Opportunity } from "@/features/scoring/types/scoring.types";
 import { applyLinks, isCuratedReference } from "../domain/applyLinks";
@@ -25,25 +25,36 @@ function LinkRow({ href, title, sub, primary = false }: { href: string; title: s
   );
 }
 
-/** Where to go, what to bring, by when. A curated reference entry says so instead of showing a made-up deep link. */
+function LinksTitle() {
+  const { t } = useTranslation("opportunities");
+  return <h3 className="mb-2 mt-6 text-sm font-semibold text-text">{t("detail.apply.linksTitle")}</h3>;
+}
+
+/**
+ * The application process step by step, then where to go and by when. A curated reference entry says so instead of
+ * showing a made-up deep link.
+ */
 export function ApplyPanel({ opp, daysLeft }: { opp: Opportunity; daysLeft: number }) {
   const { t } = useTranslation("opportunities");
   const { date } = useFormat();
   const links = applyLinks(opp);
+  const steps = t("detail.apply.steps", { returnObjects: true }) as Step[];
 
   if (isCuratedReference(links)) {
     return (
       <Panel title={t("detail.apply.title")}>
-        <p className="rounded-md bg-gold-bg p-3 text-sm text-gold-deep">{t("detail.apply.curatedNote")}</p>
-        <div className="mt-3">
-          <LinkRow href={links.portal} title={t("detail.apply.curatedPortal")} sub={t("detail.apply.curatedPortalSub")} />
-        </div>
+        <p className="mb-5 rounded-md bg-gold-bg p-3 text-sm text-gold-deep">{t("detail.apply.curatedNote")}</p>
+        <StepList steps={steps} />
+        <LinksTitle />
+        <LinkRow href={links.portal} title={t("detail.apply.curatedPortal")} sub={t("detail.apply.curatedPortalSub")} />
       </Panel>
     );
   }
 
   return (
     <Panel title={t("detail.apply.title")} subtitle={t("detail.apply.body")}>
+      <StepList steps={steps} />
+      <LinksTitle />
       <div className="flex flex-col gap-2">
         {links.official ? (
           <LinkRow

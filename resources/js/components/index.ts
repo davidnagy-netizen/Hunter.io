@@ -28,6 +28,8 @@ export type { DialogProps } from "./Dialog";
 
 export { Logo } from "./Logo";
 export { PageHead } from "./PageHead";
+export { StepList } from "./StepList";
+export type { Step } from "./StepList";
 export { QueryStatus } from "./QueryStatus";
 export * from "./icons";
 

@@ -1,5 +1,6 @@
-import { PageHead, Panel } from "@/components/index";
+import { PageHead, Panel, buttonClasses } from "@/components/index";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
 import "@/features/profile/i18n/index";
 import { ProfileHistoryPanel } from "@/features/profile/components/ProfileHistoryPanel";
@@ -24,6 +25,9 @@ export function ProfilePage() {
       ) : profile ? (
         <Panel>
           <ProfileSummary profile={profile} />
+          <Link to="/onboarding" className={buttonClasses({ variant: "ghost", className: "mt-5" })}>
+            {t("page.edit")}
+          </Link>
         </Panel>
       ) : null}
 
