@@ -172,7 +172,7 @@ export function AppShell({ nav, workspace }: AppShellProps) {
       </aside>
 
       <header className="sticky top-0 z-40 flex flex-wrap items-center justify-between gap-3 bg-ink px-4 py-3 md:hidden print:hidden">
-        <Logo dark />
+        <Logo dark iconOnly />
         <div className="ml-auto flex max-w-full flex-wrap items-center justify-end gap-2">
           <MobileWorkspaceLink workspace={workspace} />
           <div className="flex shrink-0 items-center gap-2">

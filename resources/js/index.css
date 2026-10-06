@@ -104,6 +104,17 @@ body {
   font-family: var(--font-sans);
 }
 
+/* iOS zooms in on any form control under 16px when it's focused and stays zoomed
+   after navigating (e.g. login -> /admin), cutting off the page. Phones only, so the
+   desktop keeps the smaller text-sm fields. Unlayered, so it wins over text-* utilities. */
+@media (max-width: 767px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
 /* SweetAlert2 brand harmonization */
 .swal2-container {
   font-family: var(--font-sans);

@@ -58,7 +58,7 @@ export function AdminOverviewPage() {
             </p>
           ) : null}
 
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <Panel title={t("overview.awaiting.title")} className={data.awaitingAccess.length ? "border-amber" : ""}>
               {data.awaitingAccess.length ? (
                 <ul className="divide-y divide-line">
