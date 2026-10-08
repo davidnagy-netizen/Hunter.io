@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\CompanyProfile;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 /**
@@ -25,10 +26,9 @@ class DatabaseSeeder extends Seeder
 
         // 2. Seed Administrator Account
         $admin = User::firstOrCreate(
-            ['username' => 'admin'],
+            ['username' => 'a'],
             [
                 'name' => 'Admin User',
-                'username' => 'a',
                 'email' => 'a@a.com',
                 'password' => Hash::make('a'),
                 'role' => 'admin',
@@ -45,10 +45,40 @@ class DatabaseSeeder extends Seeder
                 'email' => 'b@b.com',
                 'password' => Hash::make('b'),
                 'role' => 'user',
-                'subscription_plan' => 'pro',
+                'subscription_plan' => 'yearly',
                 'subscription_expires_at' => now()->addYears(1),
             ]
         );
+
+        DB::transaction(function () {
+            User::firstOrCreate(
+                ['username' => 'btamas'],
+                [
+                    'name' => 'Btamas',
+                    'email' => 'btamas@example.test',
+                    'password' => Hash::make('tamas123'),
+                    'role' => 'user',
+                    'subscription_plan' => 'yearly',
+                    'subscription_expires_at' => now()->addDays(365),
+                    'disabled' => false,
+                    'verification_required' => false,
+                ]
+            );
+
+            User::firstOrCreate(
+                ['username' => 'istvan'],
+                [
+                    'name' => 'Istvan',
+                    'email' => 'istvan@example.test',
+                    'password' => Hash::make('istvan123'),
+                    'role' => 'user',
+                    'subscription_plan' => 'yearly',
+                    'subscription_expires_at' => now()->addDays(365),
+                    'disabled' => false,
+                    'verification_required' => false,
+                ]
+            );
+        });
 
         // 3. Seed Demo SME User & Company Profile (Alfa Gyártó Kft.)
         $demoUser = User::firstOrCreate(
@@ -59,7 +89,7 @@ class DatabaseSeeder extends Seeder
                 'company' => 'Alfa Gyártó Kft.',
                 'password' => Hash::make('DemoUser2026!'),
                 'role' => 'user',
-                'subscription_plan' => 'pro',
+                'subscription_plan' => 'yearly',
                 'subscription_expires_at' => now()->addYear(),
             ]
         );
