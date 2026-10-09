@@ -3,6 +3,7 @@ import { AssessmentPage } from "@/pages/assessment/AssessmentPage";
 import { LandingPage } from "@/pages/landing/LandingPage";
 import { AuthPage } from "@/pages/authentication/AuthPage";
 import { VerifyEmailPage } from "@/pages/authentication/VerifyEmailPage";
+import { ForgotPasswordPage } from "@/pages/authentication/ForgotPasswordPage";
 import { OnboardingWizard } from "@/pages/profile/OnboardingWizard";
 import { ProfilePage } from "@/pages/profile/ProfilePage";
 import { DashboardPage } from "@/pages/opportunities/DashboardPage";
@@ -52,6 +53,7 @@ export const router = createBrowserRouter([
     path: "/register",
     element: <AuthPage mode="register" />,
   },
+  { path: "/forgot-password", element: <ForgotPasswordPage /> },
   {
     path: "/onboarding",
     element: <OnboardingWizard />,

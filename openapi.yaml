@@ -132,7 +132,10 @@ paths:
       description: |
         Creates the account, opens a session (sets the cookie) and, if a lead with the same `email` exists, marks that lead
         as converted. `password` must be ≥ 4 chars (see implementation requirements); `username` matches `^[a-zA-Z0-9._-]{3,32}$`.
+        The verification e-mail is written in `lang`.
       x-frontend: { used-by: [Register form] }
+      parameters:
+        - $ref: '#/components/parameters/Lang'
       requestBody:
         required: true
         content:
@@ -245,6 +248,82 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Success' }
+
+  /auth/verification/verify:
+    post:
+      tags: [Auth]
+      operationId: verifyEmail
+      security: [{ cookieAuth: [] }]
+      summary: Confirm the signed-in account's e-mail with the 6-digit code sent at registration (or by resend)
+      description: A code is valid for 10 minutes and works once; five wrong tries burn it. Already verified is a 200.
+      x-frontend: { used-by: [Verify email page] }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [code]
+              properties:
+                code: { type: string, minLength: 6, maxLength: 6, example: '042317' }
+      responses:
+        '200':
+          description: The e-mail is verified.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Success' } } }
+        '401': { $ref: '#/components/responses/LoginRequired' }
+        '422':
+          description: "`INVALID_CODE` — wrong, expired, used or burnt."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+
+  /auth/password/forgot:
+    post:
+      tags: [Auth]
+      operationId: forgotPassword
+      summary: E-mail a 6-digit password reset code
+      description: The same 200 whether or not the address has an account, so the answer does not reveal who is registered. The e-mail is written in `lang`.
+      x-frontend: { used-by: [Forgot password page] }
+      parameters:
+        - $ref: '#/components/parameters/Lang'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email: { type: string, format: email }
+      responses:
+        '200':
+          description: Accepted.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Success' } } }
+
+  /auth/password/reset:
+    post:
+      tags: [Auth]
+      operationId: resetPassword
+      summary: Set a new password with the e-mailed code
+      description: Signs the account out of every session; the user then signs in with the new password.
+      x-frontend: { used-by: [Forgot password page] }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, code, password, password_confirmation]
+              properties:
+                email: { type: string, format: email }
+                code: { type: string, minLength: 6, maxLength: 6 }
+                password: { type: string, format: password, minLength: 12, maxLength: 128 }
+                password_confirmation: { type: string, format: password }
+      responses:
+        '200':
+          description: The password is changed.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Success' } } }
+        '422':
+          description: "`INVALID_CODE` — wrong, expired, used or burnt, or no such account."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
 
   # --------------------------------------------------------------- Profile
   /profile:
@@ -1233,6 +1312,8 @@ components:
         - INVALID_USERNAME
         - WEAK_PASSWORD
         - WRONG_PASSWORD
+        - INVALID_CODE
+        - TOO_MANY_ATTEMPTS
         - NO_SUCH_OPPORTUNITY
         - FIELD_REQUIRED
         - NO_SUCH_VERSION

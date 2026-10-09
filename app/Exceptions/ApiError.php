@@ -17,6 +17,7 @@ class ApiError extends RuntimeException
             'INVALID_EMAIL' => 'Érvénytelen e-mail cím.',
             'EMAIL_REQUIRED' => 'E-mail cím szükséges.',
             'WEAK_PASSWORD' => 'A jelszó legalább 4 karakter legyen.',
+            'INVALID_CODE' => 'A kód hibás vagy lejárt. Kérj új kódot.',
             'USERNAME_TAKEN' => 'Ez a felhasználónév már foglalt.',
             'TAXPAYER_NOT_FOUND' => 'A megadott adószámmal nem található adózó a NAV nyilvántartásában.',
             'COMPANY_INACTIVE' => 'A vállalkozás jelenleg nem aktív a NAV nyilvántartásában.',

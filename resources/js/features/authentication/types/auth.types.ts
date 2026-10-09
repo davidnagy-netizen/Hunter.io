@@ -76,6 +76,13 @@ export interface LoginPayload {
   password: string;
 }
 
+export interface ResetPasswordPayload {
+  email: string;
+  code: string;
+  password: string;
+  password_confirmation: string;
+}
+
 export interface RegisterPayload {
   name: string;
   password: string;

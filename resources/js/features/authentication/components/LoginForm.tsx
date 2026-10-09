@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 import { Button, TextField } from "@/components";
 import { useTranslatedApiError } from "@/api/useTranslatedApiError";
 import { useLoginMutation } from "../api/auth.queries";
@@ -41,6 +42,9 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
         error={errors.password && t(errors.password.message as string)}
         {...register("password")}
       />
+      <Link to="/forgot-password" className="-mt-2 self-end text-sm font-medium text-gold-deep hover:underline">
+        {t("authentication:login.forgot")}
+      </Link>
       {apiErrorMessage ? (
         <p role="alert" className="text-sm text-red">
           {apiErrorMessage}

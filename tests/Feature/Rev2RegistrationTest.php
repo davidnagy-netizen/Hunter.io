@@ -8,7 +8,6 @@ use App\Services\CompanyMetrics;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\URL;
 use Tests\Support\RegistersVerifiedCompany;
 use Tests\TestCase;
 
@@ -29,7 +28,7 @@ class Rev2RegistrationTest extends TestCase
         $payload['company'] = 'Forged company';
         $payload['metrics']['exact_revenue'] = '200000000.00';
         $payload['metrics']['revenue_band'] = 1;
-        $response = $this->postJson('/api/auth/register', $payload)->assertCreated()->assertJsonPath('user.emailVerified', false);
+        $response = $this->postJson('/api/auth/register?lang=en', $payload)->assertCreated()->assertJsonPath('user.emailVerified', false);
         $user = User::first();
         Notification::assertSentTo($user, VerifyAccountEmail::class);
         $this->assertSame('Teszt & Társ Kft.', $user->companyProfile->nav_identity['company_name']);
@@ -38,8 +37,22 @@ class Rev2RegistrationTest extends TestCase
         $this->withUnencryptedCookie('fundor_session', $response->getCookie('fundor_session', false)->getValue());
         $this->getJson('/api/catalog')->assertForbidden()->assertJsonPath('code', 'EMAIL_VERIFICATION_REQUIRED');
         $this->postJson('/api/auth/verification/resend')->assertOk();
-        $url = URL::temporarySignedRoute('verification.verify', now()->addHour(), ['id' => $user->id, 'hash' => sha1($user->email)]);
-        $this->get($url)->assertRedirect('/app');
+        $codes = $locales = [];
+        Notification::assertSentTo($user, VerifyAccountEmail::class, function (VerifyAccountEmail $n) use (&$codes, &$locales) {
+            $codes[] = $n->code;
+            $locales[] = $n->locale;
+
+            return true;
+        });
+        $this->assertCount(2, $codes);
+        // Registered from the English site; the resend came without `lang`, so Hungarian.
+        $this->assertSame(['en', 'hu'], $locales);
+        $code = end($codes);
+        $this->assertMatchesRegularExpression('/^\d{6}$/', $code);
+        $this->postJson('/api/auth/verification/verify', ['code' => $code === '000000' ? '111111' : '000000'])
+            ->assertStatus(422)->assertJsonPath('code', 'INVALID_CODE');
+        $this->assertFalse($user->fresh()->hasVerifiedEmail());
+        $this->postJson('/api/auth/verification/verify', ['code' => $code])->assertOk();
         $this->assertTrue($user->fresh()->hasVerifiedEmail());
         $this->getJson('/api/catalog')->assertOk();
     }

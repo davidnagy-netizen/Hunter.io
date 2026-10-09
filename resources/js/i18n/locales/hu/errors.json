@@ -5,6 +5,8 @@
   "LOGIN_REQUIRED": "Bejelentkezés szükséges.",
   "ADMIN_REQUIRED": "Adminisztrátori jogosultság szükséges.",
   "WRONG_PASSWORD": "A jelenlegi jelszó nem megfelelő.",
+  "INVALID_CODE": "A kód hibás vagy lejárt. Kérj új kódot.",
+  "TOO_MANY_ATTEMPTS": "Túl sok próbálkozás. Várj egy percet, és próbáld újra.",
   "INVALID_USERNAME": "A felhasználónév 3–32 karakter, betű, szám, pont, kötőjel vagy aláhúzás lehet.",
   "WEAK_PASSWORD": "A jelszó legalább 4 karakter legyen.",
   "NO_SUCH_USER": "Nincs ilyen felhasználó.",

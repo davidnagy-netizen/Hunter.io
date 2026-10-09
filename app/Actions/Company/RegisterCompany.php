@@ -10,6 +10,7 @@ use App\Notifications\VerifyAccountEmail;
 use App\Exceptions\ApiError;
 use App\Services\Accounts;
 use App\Services\CompanyMetrics;
+use App\Services\EmailCodes;
 use App\Services\Profiles;
 use App\Services\Registration\SignupVerification;
 use Illuminate\Database\UniqueConstraintViolationException;
@@ -52,7 +53,7 @@ class RegisterCompany
             throw new ApiError('EMAIL_TAKEN', 409);
         }
         // Queue after commit: mail transport failure must not roll back an already-created account.
-        $u->notify(new VerifyAccountEmail);
+        $u->notify((new VerifyAccountEmail(app(EmailCodes::class)->issue('verify', (string) $u->id)))->locale($data['lang'] ?? 'hu'));
 
         return $u;
     }

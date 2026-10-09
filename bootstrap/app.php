@@ -12,6 +12,7 @@ use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
@@ -38,6 +39,10 @@ return Application::configure(basePath: dirname(__DIR__))
             }
             if ($e instanceof UniqueConstraintViolationException) {
                 return response()->json(['error' => 'Az adat már létezik.', 'code' => 'INVALID_REQUEST'], 409);
+            }
+            // A rate limit says so, rather than the generic answer. Every throttled route counts per minute.
+            if ($e instanceof ThrottleRequestsException) {
+                return response()->json(['error' => 'Túl sok próbálkozás. Várj egy percet, és próbáld újra.', 'code' => 'TOO_MANY_ATTEMPTS'], 429, $e->getHeaders());
             }
             $status = $e instanceof HttpExceptionInterface ? $e->getStatusCode() : 500;
 

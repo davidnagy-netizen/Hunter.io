@@ -6,7 +6,23 @@
   },
   "login": {
     "title": "Sign in",
-    "subtitle": "Sign in with your company account to see your personalised matches."
+    "subtitle": "Sign in with your company account to see your personalised matches.",
+    "forgot": "Forgot your password?"
+  },
+  "forgot": {
+    "title": "Forgot password",
+    "subtitle": "Enter the email address of your account and we'll send a 6-digit code to set a new password.",
+    "send": "Send code",
+    "sent": "If an account belongs to this email address, we've sent the code. It's valid for 10 minutes.",
+    "code": "6-digit code",
+    "newPassword": "New password",
+    "confirmPassword": "New password again",
+    "submit": "Change password",
+    "resend": "Send a new code",
+    "doneTitle": "Done, your password has changed",
+    "doneBody": "For your security we signed you out on every device. Sign in with your new password.",
+    "toLogin": "Go to sign in",
+    "backToLogin": "Back to sign in"
   },
   "register": {
     "title": "Create a company account",
@@ -58,6 +74,10 @@
   },
   "validation": {
     "terms": "To register you need to accept the terms and the privacy notice.",
-    "taxNumber": "Enter a valid Hungarian tax number (8 or 11 digits, with a correct check digit)."
+    "taxNumber": "Enter a valid Hungarian tax number (8 or 11 digits, with a correct check digit).",
+    "email": "Enter a valid email address.",
+    "code": "The code is 6 digits.",
+    "password": "The password must be at least 12 characters.",
+    "passwordMatch": "The two passwords don't match."
   }
 }

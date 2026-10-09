@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Api;
 use App\Notifications\VerifyAccountEmail;
 use App\Services\Accounts;
 use App\Exceptions\ApiError;
+use App\Services\EmailCodes;
 use App\Services\Profiles;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
@@ -18,28 +19,29 @@ class AccountPrivacyController
 {
     public function __construct(private Accounts $accounts) {}
 
-    public function resend(Request $r)
+    public function resend(Request $r, EmailCodes $codes)
     {
         $u = $this->accounts->requireUser($r);
         if (! $u->hasVerifiedEmail()) {
-            $u->notify(new VerifyAccountEmail);
+            $u->notify((new VerifyAccountEmail($codes->issue('verify', (string) $u->id)))->locale($r->query('lang') === 'en' ? 'en' : 'hu'));
         }
 
         return response()->json(['success' => true]);
     }
 
-    public function verify(Request $r, string $id, string $hash)
+    public function verify(Request $r, EmailCodes $codes)
     {
         $u = $this->accounts->requireUser($r);
-        if ((string) $u->id !== $id || ! hash_equals(sha1($u->getEmailForVerification()), $hash)) {
-            throw new ApiError('VERIFICATION_INVALID', 403);
-        }
+        $code = $r->validate(['code' => 'required|string|size:6'])['code'];
         if (! $u->hasVerifiedEmail()) {
+            if (! $codes->check('verify', (string) $u->id, $code)) {
+                throw new ApiError('INVALID_CODE', 422);
+            }
             $u->markEmailAsVerified();
             event(new Verified($u));
         }
 
-        return redirect('/app');
+        return response()->json(['success' => true]);
     }
 
     public function export(Request $r, Profiles $profiles)

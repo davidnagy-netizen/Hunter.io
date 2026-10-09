@@ -37,8 +37,11 @@ Route::middleware(FundorApi::class)->group(function () {
     Route::post('/auth/register', [AuthController::class, 'register']);
     Route::post('/auth/login', [AuthController::class, 'login']);
     Route::post('/auth/logout', [AuthController::class, 'logout']);
-    Route::post('/auth/verification/resend', [AccountPrivacyController::class, 'resend'])->middleware('throttle:3,1');
-    Route::get('/auth/verify/{id}/{hash}', [AccountPrivacyController::class, 'verify'])->middleware(['signed', 'throttle:10,1'])->name('verification.verify');
+    // The third throttle argument gives each e-mail code route its own counter (they would otherwise share one per IP).
+    Route::post('/auth/verification/resend', [AccountPrivacyController::class, 'resend'])->middleware('throttle:3,1,code-resend');
+    Route::post('/auth/verification/verify', [AccountPrivacyController::class, 'verify'])->middleware('throttle:10,1,code-verify');
+    Route::post('/auth/password/forgot', [AuthController::class, 'forgotPassword'])->middleware('throttle:3,1,password-forgot');
+    Route::post('/auth/password/reset', [AuthController::class, 'resetPassword'])->middleware('throttle:10,1,password-reset');
     Route::get('/v1/account/export', [AccountPrivacyController::class, 'export']);
     Route::delete('/v1/account', [AccountPrivacyController::class, 'erase'])->middleware('throttle:5,1');
     Route::get('/profile', [ProfileController::class, 'show']);

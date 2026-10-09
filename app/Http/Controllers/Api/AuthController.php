@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
+use App\Notifications\PasswordResetCode;
 use App\Services\Accounts;
+use App\Services\EmailCodes;
 use App\Exceptions\ApiError;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,7 +33,7 @@ class AuthController
             'accept_terms' => 'required|accepted', 'accept_privacy' => 'required|accepted',
             'marketing_opt_in' => 'sometimes|boolean', 'metrics' => 'required|array',
         ]);
-        $u = $action->execute($data, $r->cookie('fundor_signup'));
+        $u = $action->execute($data + ['lang' => $this->lang($r)], $r->cookie('fundor_signup'));
 
         return $this->session($r, $u->fresh(), 201)->withoutCookie('fundor_signup');
     }
@@ -50,6 +52,40 @@ class AuthController
         $this->accounts->activity($u, 'account.login');
 
         return $this->session($r, $u);
+    }
+
+    /** "Forgot password?": e-mails a code. The same answer whether or not the address has an account. */
+    public function forgotPassword(Request $r, EmailCodes $codes)
+    {
+        $email = mb_strtolower(trim($r->validate(['email' => 'required|email|max:200'])['email']));
+        $u = User::whereRaw('LOWER(email) = ?', [$email])->first();
+        if ($u && ! $u->disabled) {
+            $u->notify((new PasswordResetCode($codes->issue('password', (string) $u->id)))->locale($this->lang($r)));
+        }
+
+        return response()->json(['success' => true]);
+    }
+
+    /** Sets the new password with the e-mailed code and signs the account out everywhere. */
+    public function resetPassword(Request $r, EmailCodes $codes)
+    {
+        $data = $r->validate(['email' => 'required|email|max:200', 'code' => 'required|string|size:6',
+            'password' => 'required|string|min:12|max:128|confirmed']);
+        $u = User::whereRaw('LOWER(email) = ?', [mb_strtolower(trim($data['email']))])->first();
+        if (! $u || $u->disabled || ! $codes->check('password', (string) $u->id, $data['code'])) {
+            throw new ApiError('INVALID_CODE', 422);
+        }
+        $u->update(['password' => $data['password']]);
+        DB::table('api_sessions')->where('user_id', $u->id)->delete();
+        $this->accounts->activity($u, 'account.password_changed');
+
+        return response()->json(['success' => true]);
+    }
+
+    /** The site language the request came from (`?lang=`), which the e-mails it triggers are written in. */
+    private function lang(Request $r): string
+    {
+        return $r->query('lang') === 'en' ? 'en' : 'hu';
     }
 
     private function session(Request $r, User $u, int $status = 200)

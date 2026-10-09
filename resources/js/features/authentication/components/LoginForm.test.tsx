@@ -30,6 +30,11 @@ describe("LoginForm", () => {
     expect(authApi.login).not.toHaveBeenCalled();
   });
 
+  it("offers a way back in for a forgotten password", () => {
+    renderWithProviders(<LoginForm />);
+    expect(screen.getByRole("link", { name: /elfelejtetted a jelszavad|forgot your password/i })).toHaveAttribute("href", "/forgot-password");
+  });
+
   it("submits the entered credentials and calls onSuccess", async () => {
     const signedIn = { username: "demo", role: "user" } as AuthUser;
     vi.mocked(authApi.login).mockResolvedValue({ success: true, user: signedIn });

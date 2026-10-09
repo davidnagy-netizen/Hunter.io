@@ -1,7 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useLang } from "@/composables/useFormat";
 import { authApi } from "./auth.api";
 import { taxpayerApi } from "./taxpayer.api";
-import type { LoginPayload, RegisterPayload } from "../types/auth.types";
+import type { LoginPayload, RegisterPayload, ResetPasswordPayload } from "../types/auth.types";
 
 export const authKeys = {
   all: ["auth"] as const,
@@ -34,8 +35,9 @@ export function useLoginMutation() {
 
 export function useRegisterMutation() {
   const queryClient = useQueryClient();
+  const lang = useLang();
   return useMutation({
-    mutationFn: (payload: RegisterPayload) => authApi.register(payload),
+    mutationFn: (payload: RegisterPayload) => authApi.register(payload, lang),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: authKeys.me() }),
   });
 }
@@ -46,6 +48,24 @@ export function useLogoutMutation() {
     mutationFn: authApi.logout,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: authKeys.me() }),
   });
+}
+
+/** Confirms the e-mail with the code; the refreshed session then reports `emailVerified`. */
+export function useVerifyEmailMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (code: string) => authApi.verifyEmail(code),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: authKeys.me() }),
+  });
+}
+
+export function useForgotPasswordMutation() {
+  const lang = useLang();
+  return useMutation({ mutationFn: (email: string) => authApi.forgotPassword(email, lang) });
+}
+
+export function useResetPasswordMutation() {
+  return useMutation({ mutationFn: (payload: ResetPasswordPayload) => authApi.resetPassword(payload) });
 }
 
 /** Looks a company up by tax number for the registration form; nothing is cached or stored. */

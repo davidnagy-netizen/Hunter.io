@@ -83,7 +83,7 @@ describe("Rev-2 registration", () => {
     await user.click(screen.getByRole("checkbox", { name: /általános|terms/i }));
     await user.click(screen.getByRole("checkbox", { name: /adatkezelési|privacy/i }));
     await user.click(screen.getByRole("button", { name: /fiók létrehozása|create account/i }));
-    await waitFor(() => expect(authApi.register).toHaveBeenCalledWith(expect.objectContaining({ verification_receipt: "encrypted-receipt", metrics, marketing_opt_in: false })));
+    await waitFor(() => expect(authApi.register).toHaveBeenCalledWith(expect.objectContaining({ verification_receipt: "encrypted-receipt", metrics, marketing_opt_in: false }), expect.stringMatching(/^(hu|en)$/)));
     expect(vi.mocked(authApi.register).mock.calls[0]?.[0]).not.toHaveProperty("company");
     await waitFor(() => expect(onSuccess).toHaveBeenCalledWith(taxpayer));
     expect(sessionStorage.getItem("fundor-registration-v2")).toBeNull();

@@ -6,7 +6,23 @@
   },
   "login": {
     "title": "Belépés",
-    "subtitle": "Lépj be a cégfiókoddal, hogy lásd a személyre szabott találataidat."
+    "subtitle": "Lépj be a cégfiókoddal, hogy lásd a személyre szabott találataidat.",
+    "forgot": "Elfelejtetted a jelszavad?"
+  },
+  "forgot": {
+    "title": "Elfelejtett jelszó",
+    "subtitle": "Add meg a fiókodhoz tartozó e-mail-címet, és küldünk egy 6 jegyű kódot az új jelszó beállításához.",
+    "send": "Kód küldése",
+    "sent": "Ha ehhez az e-mail-címhez tartozik fiók, elküldtük a kódot. 10 percig érvényes.",
+    "code": "6 jegyű kód",
+    "newPassword": "Új jelszó",
+    "confirmPassword": "Új jelszó még egyszer",
+    "submit": "Jelszó módosítása",
+    "resend": "Új kód küldése",
+    "doneTitle": "Kész, megváltozott a jelszavad",
+    "doneBody": "Biztonsági okból minden eszközön kijelentkeztettünk. Lépj be az új jelszavaddal.",
+    "toLogin": "Tovább a belépéshez",
+    "backToLogin": "Vissza a belépéshez"
   },
   "register": {
     "title": "Cégfiók létrehozása",
@@ -58,6 +74,10 @@
   },
   "validation": {
     "terms": "A regisztrációhoz el kell fogadnod a feltételeket és az adatkezelési tájékoztatót.",
-    "taxNumber": "Adj meg érvényes magyar adószámot (8 vagy 11 jegyű, helyes ellenőrző számjeggyel)."
+    "taxNumber": "Adj meg érvényes magyar adószámot (8 vagy 11 jegyű, helyes ellenőrző számjeggyel).",
+    "email": "Adj meg érvényes e-mail-címet.",
+    "code": "A kód 6 számjegyből áll.",
+    "password": "A jelszó legalább 12 karakter legyen.",
+    "passwordMatch": "A két jelszó nem egyezik."
   }
 }

@@ -5,6 +5,8 @@
   "LOGIN_REQUIRED": "You need to sign in.",
   "ADMIN_REQUIRED": "Administrator access is required.",
   "WRONG_PASSWORD": "The current password is incorrect.",
+  "INVALID_CODE": "The code is wrong or has expired. Ask for a new code.",
+  "TOO_MANY_ATTEMPTS": "Too many attempts. Wait a minute and try again.",
   "INVALID_USERNAME": "A username is 3–32 characters: letters, digits, dot, hyphen or underscore.",
   "WEAK_PASSWORD": "The password must be at least 4 characters.",
   "NO_SUCH_USER": "No such user.",
