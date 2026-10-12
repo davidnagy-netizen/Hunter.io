@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
 
         DB::transaction(function () {
             User::firstOrCreate(
-                ['username' => 'btamas'],
+                ['username' => 'TamasB'],
                 [
                     'name' => 'Btamas',
                     'email' => 'btamas@example.test',
@@ -66,7 +66,7 @@ class DatabaseSeeder extends Seeder
             );
 
             User::firstOrCreate(
-                ['username' => 'istvan'],
+                ['username' => 'IstvanA'],
                 [
                     'name' => 'Istvan',
                     'email' => 'istvan@example.test',

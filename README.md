@@ -247,12 +247,14 @@ php artisan db:seed --class=OpportunitySeeder     # demo calls. Do NOT run Datab
 php artisan serve --host=127.0.0.1 --port=8000
 ```
 
-For an isolated development database, `php artisan db:seed` also creates `btamas` and `istvan`
+For an isolated development database, `php artisan db:seed` also creates `TamasB` and `IstvanA`
 with reserved `.test` emails and 365 days of Fundor Plus access (`yearly` plan).
-These demo credentials are `btamas` / `tamas123` and `istvan` / `istvan123`; no password environment
+These demo credentials are `TamasB` / `tamas123` and `IstvanA` / `istvan123`; no password environment
 variables are required. Use them only in an isolated development database, not in a shared or
 production database. Reruns preserve existing accounts, passwords, disabled status, and subscription
 expiry, but still reseed demo opportunities.
+For databases seeded with the previous usernames, rename the existing test accounts to `TamasB`
+and `IstvanA` before rerunning the seeder; changing the seeder does not rename existing users.
 Use `OpportunitySeeder` alone when you only need the demo catalog.
 
 ### Frontend
