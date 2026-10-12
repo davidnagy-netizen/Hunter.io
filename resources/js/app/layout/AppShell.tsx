@@ -66,7 +66,7 @@ function AccountBlock() {
       >
         <b className="block truncate">{user.username}</b>
         <span className="block truncate text-xs text-white/60">
-          {user.company ?? profile?.company} · {tier}
+          {profile?.company ?? user.company} · {tier}
         </span>
       </div>
 

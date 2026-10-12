@@ -34,6 +34,9 @@ export function UserCard({ user, plans }: { user: AdminUser; plans: Plan[] }) {
           <p className="text-xs text-muted">
             {t("users.registered")}: {dateTime(user.createdAt)} · {t("users.profileVersions", { count: user.profileVersions })}
           </p>
+          <p className="text-xs text-muted">
+            {t("users.companies", { count: user.companies?.length ?? 0, limit: user.profileLimit ?? 2 })}
+          </p>
         </div>
 
         <div className="flex flex-col items-end gap-1 text-xs text-muted">
@@ -72,6 +75,14 @@ export function UserCard({ user, plans }: { user: AdminUser; plans: Plan[] }) {
             {user.disabled ? t("users.enable") : t("users.disable")}
           </Button>
         ) : null}
+        <Button
+          size="sm"
+          variant="ghost"
+          disabled={patch.isPending}
+          onClick={() => patch.mutate({ userId: user.id, profileLimit: (user.profileLimit ?? 2) + 1 })}
+        >
+          {t("users.addProfileSlot")}
+        </Button>
         {patchError ? (
           <span role="alert" className="text-xs text-red">
             {patchError}

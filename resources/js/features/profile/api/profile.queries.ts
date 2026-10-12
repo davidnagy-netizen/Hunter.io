@@ -54,6 +54,23 @@ export function useSaveProfileMutation() {
   });
 }
 
+/** Another company means another profile, other scores and other saved calls: everything is refetched. */
+export function useCreateCompanyMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (profile: CompanyProfile) => profileApi.create(profile),
+    onSuccess: () => queryClient.invalidateQueries(),
+  });
+}
+
+export function useSwitchCompanyMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => profileApi.switchTo(id),
+    onSuccess: () => queryClient.invalidateQueries(),
+  });
+}
+
 export function useLoadDemoProfileMutation() {
   const queryClient = useQueryClient();
   return useMutation({

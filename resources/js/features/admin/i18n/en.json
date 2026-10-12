@@ -53,6 +53,8 @@
     "disabledBadge": "disabled",
     "registered": "Registered",
     "profileVersions": "{{count}} profile versions",
+    "companies": "Company profiles: {{count}} / {{limit}}",
+    "addProfileSlot": "+1 company profile (3000 Ft paid)",
     "validUntil": "until",
     "grantedBy": "granted by",
     "grant": {

@@ -157,7 +157,7 @@ class Scoring
         }
         $score = $blocked ? null : (int) round(100 * (.35 * $elig + .25 * $fit + .15 * $size + .15 * $timing + .10 * $feas));
         $bandKey = $score >= 85 ? 'strong' : ($score >= 70 ? 'relevant' : ($score >= 50 ? 'conditional' : 'low'));
-        $labels = ['strong' => ['Nagyon erős lehetőség', 'Very strong opportunity'], 'relevant' => ['Releváns lehetőség', 'Relevant opportunity'], 'conditional' => ['Feltételes lehetőség', 'Conditional opportunity'], 'low' => ['Alacsony relevancia', 'Low relevance']];
+        $labels = ['strong' => ['Legerősebb', 'Strongest'], 'relevant' => ['Releváns lehetőség', 'Relevant opportunity'], 'conditional' => ['Feltételes lehetőség', 'Conditional opportunity'], 'low' => ['Alacsony relevancia', 'Low relevance']];
         $ceiling = $o['partnerShare']['maxHuf'] ?? ($o['fundingMax'] ?: null);
         $grant = $ceiling === null ? $v * $o['intensity'] : min($v * $o['intensity'], $ceiling);
 

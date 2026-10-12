@@ -1,31 +1,40 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { Navigate, useNavigate } from "react-router";
+import { Navigate, useNavigate, useSearchParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import { Button, ChipButton, Panel, TextField } from "@/components/index";
 import { useMeQuery } from "@/features/authentication/api/auth.queries";
 import { useMetaQuery } from "@/api/meta.queries";
+import { useTranslatedApiError } from "@/api/useTranslatedApiError";
+import { useCreateCompanyMutation } from "@/features/profile/api/profile.queries";
 import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
 import { CompanyMetricsFields } from "@/features/profile/components/CompanyMetricsFields";
 import { metricsSchema } from "@/features/profile/schemas/metrics.schema";
 import type { CompanyMetrics } from "@/features/profile/types/metrics.types";
 import type { CompanyProfile } from "@/features/profile/types/profile.types";
 
-/** Existing accounts complete company metrics; project context remains editable separately. */
+/**
+ * Existing accounts complete company metrics; project context remains editable separately. `?new=1` adds another
+ * company to the account instead: an empty form with the company's name, saved as a new company profile.
+ */
 export function OnboardingWizard() {
   const me = useMeQuery();
   const { profile, isLoading } = useCompanyProfile();
+  const [params] = useSearchParams();
+  const isNew = params.get("new") === "1";
   if (me.isLoading || isLoading) return null;
   if (!me.data?.user) return <Navigate to="/register" replace />;
   if (me.data.user.emailVerified === false) return <Navigate to="/verify-email" replace />;
-  return <ProfileEditor key={me.data.user.id} profile={profile} user={me.data.user} />;
+  return <ProfileEditor key={`${me.data.user.id}-${isNew}`} profile={isNew ? null : profile} user={me.data.user} isNew={isNew} />;
 }
 
 /** Server data initializes the editor once; background refetches cannot erase typing. */
-function ProfileEditor({ profile, user }: { profile: CompanyProfile | null; user?: { company?: string | null; name?: string | null } }) {
+function ProfileEditor({ profile, user, isNew }: { profile: CompanyProfile | null; user?: { company?: string | null; name?: string | null }; isNew: boolean }) {
   const { i18n } = useTranslation();
   const en = i18n.language.startsWith("en");
   const { saveProfile, isSaving } = useCompanyProfile();
+  const createCompany = useCreateCompanyMutation();
+  const createError = useTranslatedApiError(createCompany.error);
   const queryClient = useQueryClient();
   const meta = useMetaQuery();
   const navigate = useNavigate();
@@ -38,7 +47,7 @@ function ProfileEditor({ profile, user }: { profile: CompanyProfile | null; user
   const [goals, setGoals] = useState(profile?.goals ?? []);
   const [investment, setInvestment] = useState(profile?.investment_value ? String(profile.investment_value) : "");
   const [projectName, setProjectName] = useState(profile?.projectName ?? "");
-  const companyName = profile?.company || user?.company || user?.name || "";
+  const [companyName, setCompanyName] = useState(isNew ? "" : profile?.company || user?.company || user?.name || "");
   const [error, setError] = useState("");
   const [step, setStep] = useState(1);
   async function save() {
@@ -47,25 +56,29 @@ function ProfileEditor({ profile, user }: { profile: CompanyProfile | null; user
     if (investment && (!Number.isFinite(Number(investment)) || Number(investment) < 0)) {
       setError(en ? "Enter a valid investment amount." : "Érvényes beruházási összeget adjon meg."); return;
     }
+    const next = {
+      ...profile, ...parsed.data, metrics_complete: true,
+      company: companyName.trim(), employees: parsed.data.headcount,
+      county: profile?.county ?? "", industryId: profile?.industryId ?? "",
+      teaor: parsed.data.teaor_code, goals, investment_value: investment ? Number(investment) : 0,
+      projectName, funding_pref: profile?.funding_pref ?? [],
+    };
     try {
-      await saveProfile({
-        ...profile, ...parsed.data, metrics_complete: true,
-        company: companyName, employees: parsed.data.headcount,
-        county: profile?.county ?? "", industryId: profile?.industryId ?? "",
-        teaor: parsed.data.teaor_code, goals, investment_value: investment ? Number(investment) : 0,
-        projectName, funding_pref: profile?.funding_pref ?? [],
-      });
+      if (isNew) await createCompany.mutateAsync(next);
+      else await saveProfile(next);
       await queryClient.invalidateQueries({ queryKey: ["auth"] });
       navigate("/app");
-    } catch { setError(en ? "Could not save. Please check the fields and retry." : "A mentés nem sikerült. Ellenőrizze a mezőket."); }
+    } catch { setError(isNew ? "" : en ? "Could not save. Please check the fields and retry." : "A mentés nem sikerült. Ellenőrizze a mezőket."); }
   }
   return <main className="mx-auto max-w-lg p-6"><Panel>
-    <h1 className="font-display text-xl font-semibold text-text">{step === 1 ? (en ? "Company profile" : "Vállalkozás adatai") : (en ? "Project context" : "Projektkörnyezet")}</h1>
-    {companyName && <p className="mt-1 text-sm text-muted">{companyName}</p>}
+    <h1 className="font-display text-xl font-semibold text-text">{step === 1 ? (isNew ? (en ? "New company" : "Új cég") : en ? "Company profile" : "Vállalkozás adatai") : (en ? "Project context" : "Projektkörnyezet")}</h1>
+    {companyName && !(isNew && step === 1) && <p className="mt-1 text-sm text-muted">{companyName}</p>}
     {step === 1 ? <div className="mt-5 flex flex-col gap-4">
+      {isNew && <TextField label={en ? "Company name" : "Cégnév"} value={companyName} onChange={e => setCompanyName(e.target.value)} maxLength={255} />}
       <CompanyMetricsFields value={metrics} onChange={setMetrics} />
       <Button onClick={() => {
-        if (metricsSchema.safeParse(metrics).success) { setStep(2); setError(""); }
+        if (isNew && !companyName.trim()) setError(en ? "Enter the company name." : "Adja meg a cég nevét.");
+        else if (metricsSchema.safeParse(metrics).success) { setStep(2); setError(""); }
         else setError(en ? "Complete all company fields." : "Töltse ki a vállalkozás összes adatát.");
       }}>{en ? "Continue" : "Tovább"}</Button>
     </div> : <div className="mt-5 flex flex-col gap-4">
@@ -84,9 +97,9 @@ function ProfileEditor({ profile, user }: { profile: CompanyProfile | null; user
           })}
         </div>
       </fieldset>
-      <Button disabled={isSaving} onClick={save}>{en ? "Save profile" : "Profil mentése"}</Button>
+      <Button disabled={isSaving || createCompany.isPending} onClick={save}>{en ? "Save profile" : "Profil mentése"}</Button>
       <Button variant="ghost" onClick={() => setStep(1)}>{en ? "Back" : "Vissza"}</Button>
     </div>}
-    {error && <p role="alert" className="mt-4 text-sm text-red">{error}</p>}
+    {(error || (isNew && createError)) && <p role="alert" className="mt-4 text-sm text-red">{error || createError}</p>}
   </Panel></main>;
 }

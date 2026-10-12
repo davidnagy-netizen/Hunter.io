@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
 import "@/features/profile/i18n/index";
+import { CompaniesPanel } from "@/features/profile/components/CompaniesPanel";
 import { ProfileHistoryPanel } from "@/features/profile/components/ProfileHistoryPanel";
 import { ProfileSummary } from "@/features/profile/components/ProfileSummary";
 
@@ -19,6 +20,8 @@ export function ProfilePage() {
   return (
     <div className="flex flex-col gap-6">
       <PageHead title={t("page.title")}>{t("page.subtitle")}</PageHead>
+
+      <CompaniesPanel />
 
       {isLoading ? (
         <p className="text-sm text-muted">…</p>

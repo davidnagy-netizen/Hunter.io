@@ -49,6 +49,7 @@ class AccountPrivacyController
         $u = $this->accounts->requireUser($r);
 
         return response()->json(['account' => $this->accounts->user($u), 'profile' => $profiles->current($u),
+            'companyProfiles' => $u->companyProfiles()->get(),
             'official_identity' => $u->companyProfile?->nav_identity,
             'history' => $this->accounts->state($u),
             'consents' => DB::table('account_consents')->where('user_id', $u->id)->get(),

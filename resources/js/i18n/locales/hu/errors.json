@@ -7,6 +7,8 @@
   "WRONG_PASSWORD": "A jelenlegi jelszó nem megfelelő.",
   "INVALID_CODE": "A kód hibás vagy lejárt. Kérj új kódot.",
   "TOO_MANY_ATTEMPTS": "Túl sok próbálkozás. Várj egy percet, és próbáld újra.",
+  "PROFILE_LIMIT_REACHED": "Elérted a cégprofilok számának korlátját. További cégprofil: egyszeri 3000 Ft.",
+  "NO_SUCH_PROFILE": "Nincs ilyen cégprofil.",
   "INVALID_USERNAME": "A felhasználónév 3–32 karakter, betű, szám, pont, kötőjel vagy aláhúzás lehet.",
   "WEAK_PASSWORD": "A jelszó legalább 4 karakter legyen.",
   "NO_SUCH_USER": "Nincs ilyen felhasználó.",

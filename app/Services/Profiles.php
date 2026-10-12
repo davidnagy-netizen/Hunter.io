@@ -108,11 +108,12 @@ class Profiles
         return $this->normalize($p);
     }
 
-    public function save(User $u, array $p, string $source, string $event = 'profile.saved'): array
+    /** `$newCompany` adds another company profile to the account (starting its own history) and switches to it. */
+    public function save(User $u, array $p, string $source, string $event = 'profile.saved', bool $newCompany = false): array
     {
         // Canonical metrics control their aliases; read-only NAV identity cannot be overwritten.
         $metrics = app(CompanyMetrics::class)->validate($p);
-        $identity = $u->companyProfile?->nav_identity;
+        $identity = $newCompany ? null : $u->companyProfile?->nav_identity;
         if ($identity) {
             $p['company'] = $identity['company_name'];
             $p['taxNumber'] = $identity['tax_number'];
@@ -124,8 +125,11 @@ class Profiles
             'metrics_complete' => true]);
         $p = $this->normalize($p);
 
-        return $this->accounts->mutate($u, function (&$s) use ($u, $p, $source, $event) {
-            $old = $this->current($u);
+        return $this->accounts->mutate($u, function (&$s) use ($u, $p, $source, $event, $newCompany) {
+            if ($newCompany) {
+                $s = array_replace($s, ['answers' => [], 'saved' => [], 'versions' => []]);
+            }
+            $old = $newCompany ? null : $this->current($u);
             $changed = [];
             if ($old) {
                 foreach (array_unique([...array_keys($old), ...array_keys($p)]) as $field) {
@@ -138,15 +142,18 @@ class Profiles
             foreach (self::MAP as $key => $column) {
                 $columns[$column] = $p[$key] ?? (in_array($key, ['initials', 'projectName', 'de_minimis_ok', 'consortium_ready', 'eu_experience']) ? null : '');
             }
-            $model = $u->companyProfile()->first() ?? new CompanyProfile(['user_id' => $u->id]);
+            $model = ($newCompany ? null : $u->companyProfile()->first()) ?? new CompanyProfile(['user_id' => $u->id]);
             $model->fill($columns);
             $model->fill(array_intersect_key($p, array_flip(['legal_form', 'headcount', 'revenue_band', 'exact_revenue', 'teaor_code', 'county_code', 'metrics_complete'])));
             $model->legacy_teaor_code ??= '';
-            if (($p['legal_form'] ?? null) === 'ev' && $u->companyProfile?->nav_identity) {
+            if (($p['legal_form'] ?? null) === 'ev' && $model->nav_identity) {
                 $model->company_name = 'Egyéni vállalkozó';
             }
             $model->setAttribute('api_extra', json_encode(array_diff_key($p, self::MAP, array_flip(['taxNumber'])), JSON_THROW_ON_ERROR));
             $model->save();
+            if ((string) $u->active_profile_id !== (string) $model->id) {
+                $u->forceFill(['active_profile_id' => $model->id])->save();
+            }
             $version = count($s['versions']) + 1;
             // Identity is already held in an encrypted column; history contains metrics only.
             $historyProfile = array_diff_key($p, array_flip(['company', 'taxNumber']));

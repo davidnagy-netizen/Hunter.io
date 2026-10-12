@@ -18,6 +18,8 @@ class ApiError extends RuntimeException
             'EMAIL_REQUIRED' => 'E-mail cím szükséges.',
             'WEAK_PASSWORD' => 'A jelszó legalább 4 karakter legyen.',
             'INVALID_CODE' => 'A kód hibás vagy lejárt. Kérj új kódot.',
+            'PROFILE_LIMIT_REACHED' => 'Elérted a cégprofilok számának korlátját. További cégprofil: egyszeri 3000 Ft.',
+            'NO_SUCH_PROFILE' => 'Nincs ilyen cégprofil.',
             'USERNAME_TAKEN' => 'Ez a felhasználónév már foglalt.',
             'TAXPAYER_NOT_FOUND' => 'A megadott adószámmal nem található adózó a NAV nyilvántartásában.',
             'COMPANY_INACTIVE' => 'A vállalkozás jelenleg nem aktív a NAV nyilvántartásában.',

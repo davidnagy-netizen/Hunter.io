@@ -111,6 +111,22 @@ describe("UsersPage", () => {
     await waitFor(() => expect(adminApi.patchUser).toHaveBeenCalledWith({ userId: "u1", disabled: true }));
   });
 
+  it("shows how many company profiles an account has, and adds one more once it is paid", async () => {
+    vi.mocked(adminApi.users).mockResolvedValue({
+      stats: { users: 1, admins: 0, activeSubscriptions: 0, sessions: 0, leads: 0 },
+      plans: PLANS,
+      users: [makeAdminUser({ id: "u1", username: "kata", companies: [{ id: "1", name: "A", active: true }, { id: "2", name: "B", active: false }], profileLimit: 2 })],
+    });
+    vi.mocked(adminApi.patchUser).mockResolvedValue({ success: true, user: makeUser() });
+    const user = userEvent.setup();
+    renderWithProviders(<UsersPage />);
+    await screen.findByText("kata", { selector: "b" });
+
+    expect(within(cardOf("kata")).getByText(/cégprofilok: 2 \/ 2|company profiles: 2 \/ 2/i)).toBeInTheDocument();
+    await user.click(within(cardOf("kata")).getByRole("button", { name: /\+1 cégprofil|\+1 company profile/i }));
+    await waitFor(() => expect(adminApi.patchUser).toHaveBeenCalledWith({ userId: "u1", profileLimit: 3 }));
+  });
+
   it("never offers to disable an administrator", async () => {
     renderWithProviders(<UsersPage />);
     await screen.findByText("admin", { selector: "b" });

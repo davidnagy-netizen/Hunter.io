@@ -40,6 +40,16 @@ export interface AuthUser {
   subscription: SubscriptionSummary;
   entitlements: Entitlements;
   hasProfile: boolean;
+  /** The account's company profiles, oldest first; `active` is the one being worked on. */
+  companies?: CompanyRef[];
+  /** How many company profiles the account may keep (2 free; an admin raises it after a paid extra). */
+  profileLimit?: number;
+}
+
+export interface CompanyRef {
+  id: string;
+  name: string;
+  active: boolean;
 }
 
 export interface Plan {

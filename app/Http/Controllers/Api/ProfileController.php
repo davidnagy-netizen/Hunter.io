@@ -29,6 +29,29 @@ class ProfileController
         return response()->json($this->profiles->save($u, $r->input('profile'), $r->input('source', 'profile form')));
     }
 
+    /** Adds another company profile and switches to it. Two are free; an admin raises `profile_limit` once a further one (3000 Ft) is paid. */
+    public function create(Request $r)
+    {
+        $u = $this->accounts->requireUser($r);
+        $r->validate(['profile' => 'required|array', 'profile.company' => 'required|string|max:255']);
+        if ($u->companyProfiles()->count() >= $u->profile_limit) {
+            throw new ApiError('PROFILE_LIMIT_REACHED', 403);
+        }
+
+        return response()->json($this->profiles->save($u, $r->input('profile'), 'company added', 'profile.created', true), 201);
+    }
+
+    /** Works on another of the account's company profiles: scoring, saved calls, answers and history follow it. */
+    public function switch(Request $r)
+    {
+        $u = $this->accounts->requireUser($r);
+        $id = $r->validate(['id' => 'required|string'])['id'];
+        $profile = $u->companyProfiles()->whereKey($id)->first() ?? throw new ApiError('NO_SUCH_PROFILE', 404);
+        $u->forceFill(['active_profile_id' => $profile->id])->save();
+
+        return response()->json(['success' => true, 'user' => $this->accounts->user($u->fresh())]);
+    }
+
     public function demo()
     {
         return response()->json(['success' => true, 'profile' => $this->profiles->demo()]);

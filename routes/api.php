@@ -46,6 +46,8 @@ Route::middleware(FundorApi::class)->group(function () {
     Route::delete('/v1/account', [AccountPrivacyController::class, 'erase'])->middleware('throttle:5,1');
     Route::get('/profile', [ProfileController::class, 'show']);
     Route::post('/profile', [ProfileController::class, 'save']);
+    Route::post('/profile/new', [ProfileController::class, 'create']);
+    Route::post('/profile/switch', [ProfileController::class, 'switch']);
     Route::post('/profile/load-demo', [ProfileController::class, 'demo']);
     Route::get('/profile/history', [ProfileController::class, 'history']);
     Route::post('/profile/restore', [ProfileController::class, 'restore']);

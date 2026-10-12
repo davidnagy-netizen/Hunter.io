@@ -12,6 +12,14 @@
     "subtitle": "What you told Fundor: used to match and score every call.",
     "edit": "Edit"
   },
+  "companies": {
+    "title": "My companies",
+    "subtitle": "{{count}} of {{limit}} company profiles. Fundor scores calls for the active company.",
+    "active": "Active",
+    "switch": "Switch to this",
+    "add": "Add a company",
+    "limit": "Two company profiles are free; each further one is 3000 Ft, one-time. Call us and we'll unlock it after payment:"
+  },
   "fields": {
     "company": "Company name",
     "taxNumber": "Tax number",

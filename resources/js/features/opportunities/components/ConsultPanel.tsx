@@ -5,8 +5,8 @@ import { ConsultForm } from "./ConsultForm";
 import "../i18n";
 
 /** Our consultation line: `tel:` needs the plain international form, people read the grouped one. */
-const CONSULT_PHONE = "+36305080569";
-const CONSULT_PHONE_DISPLAY = "+36 30 508 0569";
+export const CONSULT_PHONE = "+36305080569";
+export const CONSULT_PHONE_DISPLAY = "+36 30 508 0569";
 
 /**
  * "Need help? Contact us", closing the how-to-apply part of every grant's detail page and the loans page: a

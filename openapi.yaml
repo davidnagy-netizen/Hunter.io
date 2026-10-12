@@ -371,6 +371,62 @@ paths:
               schema: { $ref: '#/components/schemas/SaveProfileResponse' }
         '401': { $ref: '#/components/responses/LoginRequired' }
 
+  /profile/new:
+    post:
+      tags: [Profile]
+      operationId: createCompanyProfile
+      security: [{ cookieAuth: [] }]
+      summary: Add another company profile to the account and switch to it
+      description: |
+        Two company profiles are free (`User.profileLimit`, default 2); an admin raises the limit once a further one
+        (3000 Ft, one-time) is paid. The new company starts its own saved calls, answers and profile history.
+      x-frontend: { used-by: [Profile → Add a company (onboarding wizard)] }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [profile]
+              properties:
+                profile: { $ref: '#/components/schemas/CompanyProfile' }
+      responses:
+        '201':
+          description: Created and now active.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SaveProfileResponse' }
+        '401': { $ref: '#/components/responses/LoginRequired' }
+        '403':
+          description: "`PROFILE_LIMIT_REACHED`."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+
+  /profile/switch:
+    post:
+      tags: [Profile]
+      operationId: switchCompanyProfile
+      security: [{ cookieAuth: [] }]
+      summary: Work on another of the account's company profiles
+      description: Scoring, saved calls, answers and profile history all follow the active company. The subscription stays with the account.
+      x-frontend: { used-by: [Profile → My companies] }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [id]
+              properties:
+                id: { type: string, description: '`User.companies[].id`' }
+      responses:
+        '200':
+          description: Switched.
+          content: { application/json: { schema: { $ref: '#/components/schemas/UserResponse' } } }
+        '401': { $ref: '#/components/responses/LoginRequired' }
+        '404':
+          description: "`NO_SUCH_PROFILE` — not one of this account's company profiles."
+          content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } }
+
   /profile/load-demo:
     post:
       tags: [Profile]
@@ -879,6 +935,11 @@ paths:
                 userId: { type: string }
                 disabled: { type: boolean }
                 role: { type: string, enum: [admin, user] }
+                profileLimit:
+                  type: integer
+                  minimum: 1
+                  maximum: 50
+                  description: How many company profiles the account may keep. Raised by an admin once an extra profile (3000 Ft, one-time) is paid.
       responses:
         '200':
           description: Updated account.
@@ -1314,6 +1375,8 @@ components:
         - WRONG_PASSWORD
         - INVALID_CODE
         - TOO_MANY_ATTEMPTS
+        - PROFILE_LIMIT_REACHED
+        - NO_SUCH_PROFILE
         - NO_SUCH_OPPORTUNITY
         - FIELD_REQUIRED
         - NO_SUCH_VERSION
@@ -1400,6 +1463,17 @@ components:
         subscription: { $ref: '#/components/schemas/Subscription' }
         entitlements: { $ref: '#/components/schemas/Entitlements' }
         hasProfile: { type: boolean }
+        companies:
+          type: array
+          description: The account's company profiles, oldest first; `active` is the one being worked on.
+          items:
+            type: object
+            required: [id, name, active]
+            properties:
+              id: { type: string }
+              name: { type: string }
+              active: { type: boolean }
+        profileLimit: { type: integer, description: 'How many company profiles the account may keep (2 by default).' }
 
     Plan:
       type: object

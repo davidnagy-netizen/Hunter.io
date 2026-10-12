@@ -87,13 +87,18 @@ class AdminController
     public function patchUser(Request $r)
     {
         $admin = $this->accounts->requireUser($r, true);
-        $data = $r->validate(['userId' => 'required|string', 'disabled' => 'sometimes|boolean', 'role' => 'sometimes|in:admin,user']);
+        $data = $r->validate(['userId' => 'required|string', 'disabled' => 'sometimes|boolean', 'role' => 'sometimes|in:admin,user',
+            'profileLimit' => 'sometimes|integer|min:1|max:50']);
         $u = User::find($data['userId']) ?? throw new ApiError('NO_SUCH_USER', 404);
         if ($u->id === $admin->id && (($data['disabled'] ?? false) || ($data['role'] ?? 'admin') !== 'admin')) {
             throw new ApiError('CANNOT_DEMOTE_SELF');
         }
         $this->accounts->mutate($u, function (&$s) use ($u, $data, $admin) {
             $u->update(array_intersect_key($data, array_flip(['disabled', 'role'])));
+            if (isset($data['profileLimit'])) {
+                // Raised by an admin once an extra company profile (3000 Ft, one-time) is paid.
+                $u->forceFill(['profile_limit' => $data['profileLimit']])->save();
+            }
             if ($u->disabled) {
                 DB::table('api_sessions')->where('user_id', $u->id)->delete();
                 DB::table('sessions')->where('user_id', $u->id)->delete();

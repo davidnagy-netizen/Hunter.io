@@ -53,6 +53,8 @@
     "disabledBadge": "letiltva",
     "registered": "Regisztrált",
     "profileVersions": "{{count}} profilverzió",
+    "companies": "Cégprofilok: {{count}} / {{limit}}",
+    "addProfileSlot": "+1 cégprofil (3000 Ft befizetve)",
     "validUntil": "eddig",
     "grantedBy": "kiosztotta",
     "grant": {

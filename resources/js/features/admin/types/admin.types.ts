@@ -118,6 +118,8 @@ export interface GrantPayload {
 export interface UserPatchPayload {
   userId: string;
   disabled?: boolean;
+  /** Raised by one once the account has paid for an extra company profile (3000 Ft, one-time). */
+  profileLimit?: number;
 }
 
 /** Response of `POST /api/refresh`. Only what the console reads; the report is the refresher's own. */

@@ -7,12 +7,14 @@ import type { MeResponse } from "@/features/authentication/types/auth.types";
 import { httpClient } from "@/api/httpClient";
 import { useCompanyProfile } from "@/features/profile/hooks/useCompanyProfile";
 import { DEMO_PROFILE } from "@/features/profile/data/demoProfile";
+import { profileApi } from "@/features/profile/api/profile.api";
 import { OnboardingWizard } from "@/pages/profile/OnboardingWizard";
 
 vi.mock("@/features/authentication/api/auth.api", () => ({ authApi: { me: vi.fn() } }));
 vi.mock("@/features/profile/hooks/useCompanyProfile", () => ({ useCompanyProfile: vi.fn() }));
 vi.mock("@/api/httpClient", () => ({ httpClient: { get: vi.fn() } }));
 vi.mock("@/api/meta.queries", () => ({ useMetaQuery: () => ({ data: { reference: { goals: [] } } }) }));
+vi.mock("@/features/profile/api/profile.api", () => ({ profileApi: { create: vi.fn() } }));
 const saveProfile = vi.fn();
 const profile = { ...DEMO_PROFILE, legal_form: "kft" as const, headcount: 0, revenue_band: 2, exact_revenue: null, county_code: "13", teaor_code: "6210", metrics_complete: true };
 beforeEach(() => {
@@ -46,5 +48,30 @@ describe("company profile completion", () => {
     await user.click(screen.getByRole("button", { name: /^tovább$|continue/i }));
     await user.click(screen.getByRole("button", { name: /profil mentése|save profile/i }));
     await waitFor(() => expect(saveProfile).toHaveBeenCalledWith(expect.objectContaining({ headcount: 12, employees: 12, teaor_code: "6210", exact_revenue: null, goals: profile.goals })));
+  });
+  it("adds another company from an empty form with its own name", async () => {
+    vi.mocked(profileApi.create).mockResolvedValue({ success: true, profile });
+    const user = userEvent.setup();
+    renderWithProviders(<OnboardingWizard />, { route: "/onboarding?new=1" });
+    const name = await screen.findByLabelText(/cégnév|company name/i);
+    expect(name).toHaveValue("");
+    expect(screen.getByLabelText(/létszám|headcount/i)).toHaveValue(null);
+    await user.click(screen.getByRole("button", { name: /^tovább$|continue/i }));
+    expect(await screen.findByRole("alert")).toHaveTextContent(/cég nevét|company name/i);
+
+    await user.type(name, "Béta Kft.");
+    await user.selectOptions(screen.getByLabelText(/jogi forma|legal form/i), "kft");
+    fireEvent.change(screen.getByLabelText(/létszám|headcount/i), { target: { value: "5" } });
+    await user.selectOptions(screen.getByLabelText(/lezárt üzleti évek|closed business years/i), "2");
+    await screen.findByRole("option", { name: /pest/i });
+    await user.selectOptions(screen.getByLabelText(/vármegyéje|county of operation/i), "13");
+    await user.type(screen.getByRole("combobox", { name: /teáor/i }), "6210");
+    await user.click(await screen.findByText(/6210 - Szoftverkiadás/));
+    await user.click(screen.getByRole("button", { name: "< 50M Ft" }));
+    await user.click(screen.getByRole("button", { name: /^tovább$|continue/i }));
+    await user.click(screen.getByRole("button", { name: /profil mentése|save profile/i }));
+
+    await waitFor(() => expect(profileApi.create).toHaveBeenCalledWith(expect.objectContaining({ company: "Béta Kft.", headcount: 5, teaor_code: "6210" })));
+    expect(saveProfile).not.toHaveBeenCalled();
   });
 });

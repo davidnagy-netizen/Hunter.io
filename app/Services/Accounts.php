@@ -36,12 +36,17 @@ class Accounts
         }, config('fundor.plans'));
     }
 
+    /** Saved calls, answers and profile history belong to the company being worked on; activity and subscriptions to the account. */
+    private const COMPANY_KEYS = ['answers', 'saved', 'versions'];
+
     public function state(User $u): array
     {
         $row = DB::table('api_account_states')->where('user_id', $u->id)->first();
+        $company = $u->companyProfile()->first();
         $data = [];
         foreach (['answers', 'saved', 'versions', 'activity', 'subscriptions'] as $key) {
-            $data[$key] = $row ? json_decode($row->$key, true) : [];
+            $json = $company && in_array($key, self::COMPANY_KEYS, true) ? $company->getRawOriginal($key) : $row?->$key;
+            $data[$key] = $json ? json_decode($json, true) : [];
         }
 
         return $data;
@@ -54,7 +59,13 @@ class Accounts
             User::whereKey($u->id)->lockForUpdate()->firstOrFail();
             $state = $this->state($u);
             $result = $change($state);
-            DB::table('api_account_states')->updateOrInsert(['user_id' => $u->id], array_map(fn ($v) => json_encode($v, JSON_THROW_ON_ERROR), $state));
+            $json = array_map(fn ($v) => json_encode($v, JSON_THROW_ON_ERROR), $state);
+            // Asked after the change, which may have just created or chosen the company.
+            if ($company = $u->companyProfile()->first()) {
+                DB::table('company_profiles')->where('id', $company->id)->update(array_intersect_key($json, array_flip(self::COMPANY_KEYS)));
+                $json = array_replace($json, array_fill_keys(self::COMPANY_KEYS, '[]'));
+            }
+            DB::table('api_account_states')->updateOrInsert(['user_id' => $u->id], $json);
 
             return $result;
         });
@@ -95,6 +106,15 @@ class Accounts
             'metricsComplete' => (bool) $u->companyProfile?->metrics_complete,
             'role' => $u->role, 'createdAt' => $u->created_at->toISOString(), 'lastLoginAt' => $u->last_login_at?->toISOString(),
             'disabled' => $u->disabled, 'subscription' => $this->subscription($u), 'entitlements' => $this->entitlements($u),
-            'hasProfile' => $u->companyProfile()->exists()];
+            'hasProfile' => $u->companyProfile()->exists(), 'companies' => $this->companies($u), 'profileLimit' => $u->profile_limit ?? 2];
+    }
+
+    /** The account's company profiles, oldest first, and which one it is working on. */
+    private function companies(User $u): array
+    {
+        $active = $u->companyProfile()->value('id');
+
+        return $u->companyProfiles()->orderBy('id')->get()->map(fn ($p) => ['id' => (string) $p->id,
+            'name' => $p->nav_identity['company_name'] ?? $p->company_name, 'active' => (string) $p->id === (string) $active])->all();
     }
 }

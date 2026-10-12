@@ -12,6 +12,14 @@
     "subtitle": "Amit a Fundornak megadtál: ez alapján párosítunk és pontozunk minden felhívást.",
     "edit": "Szerkesztés"
   },
+  "companies": {
+    "title": "Cégeim",
+    "subtitle": "{{count}} / {{limit}} cégprofil. A Fundor mindig az aktív cégre pontozza a felhívásokat.",
+    "active": "Aktív",
+    "switch": "Váltás erre",
+    "add": "Új cég hozzáadása",
+    "limit": "Két cégprofil ingyenes, minden további egyszeri 3000 Ft. Hívj minket, és a fizetés után feloldjuk:"
+  },
   "fields": {
     "company": "Cégnév",
     "taxNumber": "Adószám",

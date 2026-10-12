@@ -26,6 +26,8 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $subscription_expires_at
  * @property bool $disabled
  * @property Carbon|null $last_login_at
+ * @property int|null $active_profile_id
+ * @property int $profile_limit
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
@@ -76,15 +78,26 @@ class User extends Authenticatable implements MustVerifyEmail
             'last_login_at' => 'datetime',
             'password' => 'hashed',
             'disabled' => 'boolean',
+            'profile_limit' => 'integer',
         ];
     }
 
     /**
-     * Get the structured company profile owned by this user.
+     * The company profile the account is working on now (`active_profile_id`; the oldest one until another is chosen).
+     * Scoring, saved calls, answers and profile history all follow it.
      */
     public function companyProfile(): HasOne
     {
-        return $this->hasOne(CompanyProfile::class);
+        return $this->hasOne(CompanyProfile::class)
+            ->whereKey($this->active_profile_id ?? CompanyProfile::where('user_id', $this->id)->min('id'));
+    }
+
+    /**
+     * Every company profile the account keeps: `profile_limit` of them (2, more after an admin unlocks them).
+     */
+    public function companyProfiles(): HasMany
+    {
+        return $this->hasMany(CompanyProfile::class);
     }
 
     /**

@@ -134,6 +134,21 @@ class ScoringParityTest extends TestCase
         $this->assertSame($notReady, $feas(['consortium_ready' => true, $call['id'].':consortium_ready' => false]), 'the per-call answer wins over the global one');
     }
 
+    public function test_a_score_of_85_or_more_is_labelled_strongest(): void
+    {
+        $profile = app(Profiles::class)->demo();
+        // A call that fits the company on every factor.
+        $call = ['id' => 'x', 'deadline' => now()->addDays(60)->toDateString(), 'intensity' => 0.7, 'highAdmin' => false, 'awardsFunding' => true,
+            'goals' => $profile['goals'], 'hard' => [], 'soft' => [], 'docs' => [], 'consortium' => ['required' => false],
+            'fundingMin' => 1_000_000, 'fundingMax' => 50_000_000, 'partnerShare' => null, 'described' => true];
+
+        foreach (['hu' => 'Legerősebb', 'en' => 'Strongest'] as $lang => $label) {
+            $got = (new Scoring)->score($call, $profile, [], $lang);
+            $this->assertGreaterThanOrEqual(85, $got['score']);
+            $this->assertSame(['key' => 'strong', 'label' => $label], $got['band']);
+        }
+    }
+
     public function test_the_grant_calculator_is_project_value_times_intensity_capped_by_the_ceiling(): void
     {
         $scoring = new Scoring;

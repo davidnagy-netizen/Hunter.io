@@ -7,6 +7,8 @@
   "WRONG_PASSWORD": "The current password is incorrect.",
   "INVALID_CODE": "The code is wrong or has expired. Ask for a new code.",
   "TOO_MANY_ATTEMPTS": "Too many attempts. Wait a minute and try again.",
+  "PROFILE_LIMIT_REACHED": "You've reached your company profile limit. Each further profile is 3000 Ft, one-time.",
+  "NO_SUCH_PROFILE": "No such company profile.",
   "INVALID_USERNAME": "A username is 3–32 characters: letters, digits, dot, hyphen or underscore.",
   "WEAK_PASSWORD": "The password must be at least 4 characters.",
   "NO_SUCH_USER": "No such user.",
