@@ -15,7 +15,7 @@ beforeEach(() => useUiStore.getState().setLang("hu"));
 
 describe("ConsultPanel", () => {
   it.each([
-    ["hu", /Konzultálj velünk/, "Hívás: +36 30 508 0569"],
+    ["hu", /Konzultáljon velünk/, "Hívás: +36 30 508 0569"],
     ["en", /Consult with us/, "Call +36 30 508 0569"],
   ] as const)("offers a tap-to-call consultation in %s", (lang, text, call) => {
     useUiStore.getState().setLang(lang);
@@ -37,7 +37,7 @@ describe("ConsultPanel", () => {
 
     await user.click(screen.getByRole("checkbox"));
     await user.click(screen.getByRole("button", { name: "Küldés" }));
-    expect(await screen.findByRole("status")).toHaveTextContent(/megkaptuk az üzenetedet/);
+    expect(await screen.findByRole("status")).toHaveTextContent(/megkaptuk üzenetét/);
     expect(leadsApi.submit).toHaveBeenCalledWith(
       expect.objectContaining({ email: "anna@ceg.hu", company: "Alfa Kft.", note: "Visszahívást kérek.", consent: true }),
     );

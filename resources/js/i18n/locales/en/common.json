@@ -1,6 +1,7 @@
 {
   "loading": "Loading…",
   "loadFailed": "Could not load this: {{message}}",
+  "standardDisclaimer": "Fundor is an independent private company, not a government body, and is not affiliated with the authorities that publish the calls. The Fundor Score is an estimate, not the funder's decision.",
   "pager": {
     "prev": "Previous",
     "next": "Next",

@@ -19,7 +19,7 @@ export function PlusLockScreen() {
     <>
       <PageHead title={t("title")}>{t("subtitle")}</PageHead>
       <Panel className="py-10 text-center">
-        <span className="mx-auto mb-4 inline-flex items-center gap-1.5 rounded-full bg-gold-bg px-3 py-1 text-xs font-medium text-gold-deep">
+        <span className="mx-auto mb-4 inline-flex items-center gap-1.5 rounded-full bg-gold-bg px-3 py-1 text-xs font-medium text-ink">
           <LockIcon size={14} /> {t("title")}
         </span>
         <h2 className="font-display text-2xl font-semibold text-ink">{t("lock.headline")}</h2>

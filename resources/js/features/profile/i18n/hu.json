@@ -1,15 +1,33 @@
 {
   "steps": {
-    "intro": { "title": "Kezdjük a demóval", "subtitle": "Betöltünk egy kész mintacéget, vagy kitöltöd a sajátoddal." },
-    "company": { "title": "A céged alapadatai", "subtitle": "Ezek határozzák meg a jogosultságot." },
-    "activity": { "title": "Tevékenység", "subtitle": "Iparág és TEÁOR: ez szűri a releváns programokat." },
-    "goals": { "title": "Fejlesztési célok", "subtitle": "Mit szeretnél megvalósítani? Több is lehet." },
-    "investment": { "title": "Tervezett beruházás", "subtitle": "A támogatás mértékét és a méret-illeszkedést ebből számoljuk." },
-    "setup": { "title": "Hogyan pályáznál?", "subtitle": "Az európai felhívások nagy része konzorciumot kíván: ez dönti el, mi elérhető számodra." }
+    "intro": {
+      "title": "Kezdjük a demóval",
+      "subtitle": "Betöltünk egy kész mintacéget, vagy kitölti a sajátjával."
+    },
+    "company": {
+      "title": "A cég alapadatai",
+      "subtitle": "Ezek határozzák meg a jogosultságot."
+    },
+    "activity": {
+      "title": "Tevékenység",
+      "subtitle": "Iparág és TEÁOR: ez szűri a releváns programokat."
+    },
+    "goals": {
+      "title": "Fejlesztési célok",
+      "subtitle": "Mit szeretne megvalósítani? Több is lehet."
+    },
+    "investment": {
+      "title": "Tervezett beruházás",
+      "subtitle": "A támogatás mértékét és a méret-illeszkedést ebből számoljuk."
+    },
+    "setup": {
+      "title": "Hogyan pályázna?",
+      "subtitle": "Az európai felhívások nagy része konzorciumot kíván: ez dönti el, mi érhető el az Ön számára."
+    }
   },
   "page": {
     "title": "Cégprofil",
-    "subtitle": "Amit a Fundornak megadtál: ez alapján párosítunk és pontozunk minden felhívást.",
+    "subtitle": "Amit a Fundornak megadott: ez alapján párosítunk és pontozunk minden felhívást.",
     "edit": "Szerkesztés"
   },
   "companies": {
@@ -18,7 +36,7 @@
     "active": "Aktív",
     "switch": "Váltás erre",
     "add": "Új cég hozzáadása",
-    "limit": "Két cégprofil ingyenes, minden további egyszeri 3000 Ft. Hívj minket, és a fizetés után feloldjuk:"
+    "limit": "Két cégprofil ingyenes, minden további egyszeri 3000 Ft. Hívjon minket, és a fizetés után feloldjuk:"
   },
   "fields": {
     "company": "Cégnév",
@@ -36,10 +54,14 @@
     "investmentValue": "Tervezett projektérték (Ft)",
     "fundingPref": "Támogatási preferencia",
     "orgType": "Szervezeti forma",
-    "consortiumReady": "Tudsz nemzetközi konzorciumban pályázni?",
-    "euExperience": "Pályáztatok már közvetlen EU-s forrásra?"
+    "consortiumReady": "Tud nemzetközi konzorciumban pályázni?",
+    "euExperience": "Pályáztak már közvetlen EU-s forrásra?"
   },
-  "closedYearsOptions": { "none": "Még nincs", "one": "1 év", "twoOrMore": "2 vagy több" },
+  "closedYearsOptions": {
+    "none": "Még nincs",
+    "one": "1 év",
+    "twoOrMore": "2 vagy több"
+  },
   "fundingPrefOptions": {
     "non_refundable": "Vissza nem térítendő",
     "loan_ok": "Támogatott hitel is",
@@ -54,7 +76,7 @@
   "notYet": "Még nem",
   "onlyAlone": "Nem, csak önállóan",
   "haveOrCanBuildPartners": "Igen, van vagy építhető partnerségem",
-  "demoBanner": "A leggyorsabb bemutatóhoz töltsd be a <b>mintacéget</b> (28 fős gyártó KKV, Pest megye, digitalizáció, 30 M Ft). Bármikor átírhatod.",
+  "demoBanner": "A leggyorsabb bemutatóhoz töltse be a <b>mintacéget</b> (28 fős gyártó KKV, Pest megye, digitalizáció, 30 M Ft). Bármikor átírhatja.",
   "actions": {
     "loadDemo": "Mintacég betöltése",
     "fillMyself": "Inkább kitöltöm magam",
@@ -77,17 +99,17 @@
     "subtitle": "Minden mentés új verzió. Bármelyik visszaállítható.",
     "empty": "Még nincs mentett verzió.",
     "firstSave": "Első mentés",
-    "signInRequired": "A profilelőzmények csak bejelentkezve érhetők el: anonim látogatóként a profilod csak ebben a böngészőben létezik."
+    "signInRequired": "A profilelőzmények csak bejelentkezve érhetők el: anonim látogatóként a profilja csak ebben a böngészőben létezik."
   },
   "validation": {
-    "company": "Adj meg egy cégnevet.",
-    "employees": "Adj meg egy pozitív létszámot.",
-    "county": "Válassz megyét.",
-    "closedYears": "Add meg a lezárt üzleti évek számát.",
-    "industry": "Válassz iparágat.",
-    "goals": "Válassz legalább egy fejlesztési célt.",
-    "investment": "Adj meg egy pozitív projektértéket.",
-    "orgType": "Válassz szervezeti formát.",
-    "consortiumReady": "Válaszolj a konzorciumi kérdésre."
+    "company": "Adjon meg egy cégnevet.",
+    "employees": "Adjon meg egy pozitív létszámot.",
+    "county": "Válasszon megyét.",
+    "closedYears": "Adja meg a lezárt üzleti évek számát.",
+    "industry": "Válasszon iparágat.",
+    "goals": "Válasszon legalább egy fejlesztési célt.",
+    "investment": "Adjon meg egy pozitív projektértéket.",
+    "orgType": "Válasszon szervezeti formát.",
+    "consortiumReady": "Válaszoljon a konzorciumi kérdésre."
   }
 }

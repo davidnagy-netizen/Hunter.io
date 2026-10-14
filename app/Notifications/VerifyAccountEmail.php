@@ -33,7 +33,7 @@ class VerifyAccountEmail extends Notification implements ShouldQueue
             ->greeting($en ? 'Hello!' : 'Üdvözöljük!')
             ->line($en ? 'Thank you for registering. To confirm your email address, enter this code on the Fundor site:'
                 : 'Köszönjük a regisztrációt. Az e-mail-címe megerősítéséhez írja be ezt a kódot a Fundor oldalán:')
-            ->line(new HtmlString('<p style="margin:24px 0;text-align:center;font-size:32px;font-weight:700;letter-spacing:8px;color:#273F4F">'.$this->code.'</p>'))
+            ->line(new HtmlString('<p style="margin:24px 0;text-align:center;font-size:32px;font-weight:700;letter-spacing:8px;color:#0B1F3A">'.$this->code.'</p>'))
             ->line($en ? 'The code is valid for '.EmailCodes::MINUTES.' minutes and can be used once.'
                 : 'A kód '.EmailCodes::MINUTES.' percig érvényes, és csak egyszer használható.')
             ->line($en ? "If you didn't register, please ignore this email." : 'Ha nem Ön regisztrált, hagyja figyelmen kívül ezt a levelet.')

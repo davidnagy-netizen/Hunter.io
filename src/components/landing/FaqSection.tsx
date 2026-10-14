@@ -59,7 +59,7 @@ function FaqItem({ item, copy }: { item: FaqQuestion; copy: LandingCopy['faq'] }
         <span>{item.question}</span>
         <ChevronDown
           size={22}
-          className={`shrink-0 text-brand-slate transition-transform duration-200 ${open ? 'rotate-180 text-brand-orange' : ''}`}
+          className={`shrink-0 text-brand-slate transition-transform duration-200 ${open ? 'rotate-180 text-brand-slate-3' : ''}`}
           aria-hidden="true"
         />
       </button>

@@ -43,13 +43,13 @@ export function DashboardPage() {
             <StatTile value={stats.total} label={t("dashboard.tiles.total")} />
             <StatTile value={stats.strong} label={t("dashboard.tiles.strong")} color="var(--color-green)" />
             <StatTile value={stats.closingSoon} label={t("dashboard.tiles.closing")} color="var(--color-amber)" />
-            <StatTile value={stats.needsAttention} label={t("dashboard.tiles.attention")} color="var(--color-gold-deep)" />
+            <StatTile value={stats.needsAttention} label={t("dashboard.tiles.attention")} />
           </div>
 
           <div className="mb-3 flex items-center justify-between">
             <h2 className="font-display text-lg font-semibold">{t("dashboard.recommended")}</h2>
             {!gated ? (
-              <button type="button" className="text-sm font-medium text-gold-deep" onClick={() => setShowAll((v) => !v)}>
+              <button type="button" className="text-sm font-medium text-ink" onClick={() => setShowAll((v) => !v)}>
                 {showAll ? t("dashboard.only70") : t("dashboard.lower")}
               </button>
             ) : null}

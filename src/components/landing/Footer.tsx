@@ -18,22 +18,15 @@ export function Footer({
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-10">
           {/* Brand & Disclaimer Column (5 cols) */}
           <div className="sm:col-span-2 lg:col-span-5">
-            <div className="flex items-center gap-3">
-              <img
-                src={`${import.meta.env.BASE_URL}fundor.svg`}
-                alt=""
-                className="size-10"
-              />
-              <div className="flex flex-col leading-none">
-                <span className="text-xl font-extrabold tracking-tight text-brand-cream">
-                  {copy.brand}
-                </span>
-                <span className="text-xs font-medium text-brand-muted-2 mt-1">
-                  {copy.domain}
-                </span>
-              </div>
-            </div>
+            <img
+              src={`${import.meta.env.BASE_URL}fundor-logo-white.svg`}
+              alt={copy.brand}
+              className="h-9 w-auto"
+            />
             <p className="mt-5 max-w-md text-xs sm:text-[13px] leading-relaxed text-brand-muted-2 font-medium">
+              {copy.independent}
+            </p>
+            <p className="mt-2 max-w-md text-xs sm:text-[13px] leading-relaxed text-brand-muted-2 font-medium">
               {disclaimer}
             </p>
             <p className="mt-2 max-w-md text-xs sm:text-[13px] leading-relaxed text-brand-muted-2 font-medium">

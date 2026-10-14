@@ -80,7 +80,7 @@ export function UseCases({ copy }: { copy: LandingCopy['useCases'] }) {
               </div>
 
               <div className="mt-6 pt-4 border-t border-brand-line text-xs font-semibold text-brand-slate flex items-center gap-1.5">
-                <Check size={14} className="text-brand-orange shrink-0" aria-hidden="true" />
+                <Check size={14} className="text-brand-slate shrink-0" aria-hidden="true" />
                 <span>{profile.confirmed}</span>
               </div>
             </div>
@@ -182,7 +182,7 @@ export function UseCases({ copy }: { copy: LandingCopy['useCases'] }) {
             <div className="landing-card-elevated h-full rounded-3xl border border-brand-line-strong bg-slate-50 text-brand-ink p-5 sm:p-6 flex flex-col justify-between shadow-md">
               <div>
                 <div className="flex items-center justify-between text-xs font-mono font-bold uppercase tracking-wider mb-4 pb-3 border-b border-brand-line">
-                  <div className="flex items-center gap-1.5 text-brand-orange-deep">
+                  <div className="flex items-center gap-1.5 text-brand-slate">
                     <Sparkles size={14} aria-hidden="true" />
                     <span>{result.title}</span>
                   </div>
@@ -194,7 +194,7 @@ export function UseCases({ copy }: { copy: LandingCopy['useCases'] }) {
 
                 {/* Score Showcase */}
                 <div className="mt-4 text-center sm:text-left">
-                  <div className="text-5xl font-black text-brand-orange-deep tracking-tight">
+                  <div className="text-5xl font-black text-brand-slate tracking-tight">
                     87 <span className="text-xl font-bold text-brand-slate">/ 100</span>
                   </div>
                   <div className="mt-1 text-xs font-bold text-brand-slate">

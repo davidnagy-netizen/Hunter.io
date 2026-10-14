@@ -92,7 +92,7 @@ export function SearchPage() {
             }
             className={[
               "rounded-md border px-2.5 py-1 text-xs font-medium",
-              state.filters.eligibleOnly ? "border-gold bg-gold-bg text-gold-deep" : "border-line-strong bg-white text-text",
+              state.filters.eligibleOnly ? "border-gold bg-gold-bg text-ink" : "border-line-strong bg-white text-text",
             ].join(" ")}
           >
             {t("search.onlyEligible")}
@@ -117,7 +117,7 @@ export function SearchPage() {
       {chips.length || state.filters.eligibleOnly ? (
         <div className="mb-4 flex flex-wrap items-center gap-2">
           {chips.map(({ facet, value }) => (
-            <span key={facet + value} className="inline-flex items-center gap-1 rounded-full bg-gold-bg px-2.5 py-1 text-xs font-medium text-gold-deep">
+            <span key={facet + value} className="inline-flex items-center gap-1 rounded-full bg-gold-bg px-2.5 py-1 text-xs font-medium text-ink">
               {facetLabel(facet, value)}
               <button type="button" aria-label={`${t("search.remove")}: ${facetLabel(facet, value)}`} onClick={() => toggle(facet, value)}>
                 ×
@@ -167,7 +167,7 @@ export function SearchPage() {
           <span>
             {t("search.source")}:{" "}
             <a
-              className="text-gold-deep"
+              className="text-ink"
               href="https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home"
               target="_blank"
               rel="noopener noreferrer"

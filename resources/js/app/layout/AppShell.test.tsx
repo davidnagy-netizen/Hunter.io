@@ -62,7 +62,7 @@ function renderWithBadgedItem() {
 describe("AppShell", () => {
   it.each([
     ["en", "Are you sure you want to log out?", "Cancel", 0],
-    ["hu", "Biztosan ki szeretnél jelentkezni?", "Mégse", 1],
+    ["hu", "Biztosan ki szeretne jelentkezni?", "Mégse", 1],
   ] as const)("confirms logout in %s and cancels without ending the session", async (lang, question, cancel, index) => {
     me("user");
     useUiStore.getState().setLang(lang);

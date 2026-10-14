@@ -193,14 +193,14 @@
                 "weight": 0.35,
                 "value": 93,
                 "label": "Jogosultság",
-                "detail": "4 kötelező feltételből 3 teljesül a cégprofilod alapján."
+                "detail": "4 kötelező feltételből 3 teljesül a cégprofilja alapján."
             },
             {
                 "key": "fit",
                 "weight": 0.25,
                 "value": 5,
                 "label": "Projekt-illeszkedés",
-                "detail": "A felhívás témái: defence. A te céljaid: digitalization, it, machinery."
+                "detail": "A felhívás témái: defence. Az Ön céljai: digitalization, it, machinery."
             },
             {
                 "key": "size",

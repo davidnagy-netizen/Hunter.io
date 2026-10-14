@@ -25,7 +25,7 @@ function offenders(files: Record<string, string>): string[] {
 
 describe("brand", () => {
   it("is Fundor, at fundor.hu", () => {
-    expect(BRAND).toEqual({ name: "Fundor", wordmark: "FUNDOR", domain: "fundor.hu" });
+    expect(BRAND).toEqual({ name: "Fundor", domain: "fundor.hu" });
   });
 
   it("the page title is the new name", () => {

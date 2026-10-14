@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { PageHead, Panel, QueryStatus, StepList, type Step } from "@/components";
+import { PageHead, Panel, QueryStatus, StandardDisclaimer, StepList, type Step } from "@/components";
 import { ConsultPanel } from "@/features/opportunities/components/ConsultPanel";
 import { LoanCard } from "@/features/loans/components/LoanCard";
 import { LoansLockedPanel } from "@/features/loans/components/LoansLockedPanel";
@@ -9,8 +9,9 @@ import "@/features/loans/i18n/index";
 /**
  * Subsidised loans, guarantees and combined products (CR-02) on a screen of their own, never mixed into the grant
  * lists: a loan is debt, and its principal is not funding. Information only — the server neither scores nor ranks
- * them while the MNB legal opinion is pending. The regulatory disclaimer is not repeated here: every tier already sees
- * the same sentence in the banner above every page (`RegulatoryDisclaimer`, mounted in `main.tsx`).
+ * them while the MNB legal opinion is pending. The MNB sentence is not repeated here: every tier already sees it in the
+ * banner above every page (`RegulatoryDisclaimer`, mounted in `main.tsx`). The brand guidelines' standard disclaimer
+ * is, as on every page with loan information.
  */
 export function LoansPage() {
   const { t } = useTranslation("loans");
@@ -19,6 +20,7 @@ export function LoansPage() {
   return (
     <>
       <PageHead title={t("title")}>{t("subtitle")}</PageHead>
+      <StandardDisclaimer className="mb-4" />
       <QueryStatus isLoading={isLoading} error={error} />
 
       {data ? (

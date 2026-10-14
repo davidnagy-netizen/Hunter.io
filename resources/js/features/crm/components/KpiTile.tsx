@@ -1,6 +1,6 @@
 export type KpiTone = "default" | "green" | "amber" | "gold";
 
-const TONE: Record<KpiTone, string> = { default: "text-ink", green: "text-green", amber: "text-amber", gold: "text-gold-deep" };
+const TONE: Record<KpiTone, string> = { default: "text-ink", green: "text-green", amber: "text-amber", gold: "text-ink" };
 
 /** A headline number with the sentence that explains where it comes from. `value` may already be formatted (money, a dash). */
 export function KpiTile({ value, label, sub, tone = "default" }: { value: string | number; label: string; sub: string; tone?: KpiTone }) {

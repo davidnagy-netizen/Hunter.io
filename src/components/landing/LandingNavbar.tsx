@@ -64,18 +64,10 @@ export function LandingNavbar({
           className="flex items-center gap-3 py-1 font-semibold text-brand-ink no-underline focus-visible:rounded-lg"
         >
           <img
-            src={`${import.meta.env.BASE_URL}fundor.svg`}
-            alt=""
-            className="size-10"
+            src={`${import.meta.env.BASE_URL}fundor-logo.svg`}
+            alt={copy.brand}
+            className="h-9 w-auto"
           />
-          <span className="flex flex-col leading-none">
-            <span className="text-2xl tracking-tight font-extrabold text-brand-ink">
-              {copy.brand}
-            </span>
-            <span className="text-sm font-medium text-brand-muted mt-0.5">
-              {copy.domain}
-            </span>
-          </span>
         </a>
 
         <div className="hidden lg:flex lg:items-center lg:gap-8">
@@ -84,7 +76,7 @@ export function LandingNavbar({
               key={link.href}
               href={link.href}
               onClick={(e) => handleAnchorClick(e, link.href)}
-              className="landing-nav-link text-[17px] font-semibold text-brand-slate transition-colors hover:text-brand-orange focus-visible:rounded-md"
+              className="landing-nav-link text-[17px] font-semibold text-brand-slate transition-colors hover:text-brand-slate-3 focus-visible:rounded-md"
             >
               {link.label}
             </a>
@@ -144,7 +136,7 @@ export function LandingNavbar({
                   setOpen(false);
                   handleAnchorClick(e, link.href);
                 }}
-                className="flex min-h-11 items-center text-lg font-medium text-brand-slate hover:text-brand-orange"
+                className="flex min-h-11 items-center text-lg font-medium text-brand-slate hover:text-brand-slate-3"
               >
                 {link.label}
               </a>

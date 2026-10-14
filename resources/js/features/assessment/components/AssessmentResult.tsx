@@ -46,7 +46,7 @@ export function AssessmentResult({
           <span className="font-display text-4xl font-semibold">{score}</span>
           <span className="text-xs text-muted">{t("result.outOf")}</span>
         </CircularProgress>
-        <p className="text-sm font-semibold text-gold-deep">
+        <p className="text-sm font-semibold text-ink">
           {t("result.score")} — {t(`result.bands.${band}`)}
         </p>
         {/* If the matches couldn't be loaded we say so, rather than claiming "0 calls". */}

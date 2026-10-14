@@ -169,7 +169,7 @@ export function CaseStudyCarousel({ copy }: { copy: LandingCopy["cases"] }) {
                     <span className="text-brand-slate block text-[11px]">
                       {isHu ? "Támogatási intenzitás" : "Funding intensity"}
                     </span>
-                    <span className="font-bold text-brand-orange-deep mt-0.5 block">
+                    <span className="font-bold text-brand-slate mt-0.5 block">
                       50% – 70%
                     </span>
                   </div>
@@ -240,7 +240,7 @@ export function CaseStudyCarousel({ copy }: { copy: LandingCopy["cases"] }) {
                   </span>
                   <ArrowRight
                     size={15}
-                    className="text-brand-orange group-hover:translate-x-1 transition-transform"
+                    className="text-brand-slate group-hover:translate-x-1 transition-transform"
                     aria-hidden="true"
                   />
                 </div>

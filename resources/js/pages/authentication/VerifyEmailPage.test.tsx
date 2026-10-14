@@ -59,6 +59,6 @@ describe("VerifyEmailPage", () => {
     await user.type(await screen.findByLabelText("Megerősítő kód"), "000000");
     await user.click(screen.getByRole("button", { name: "Megerősítés" }));
 
-    expect(await screen.findByText("A kód hibás vagy lejárt. Kérj új kódot.")).toBeInTheDocument();
+    expect(await screen.findByText("A kód hibás vagy lejárt. Kérjen új kódot.")).toBeInTheDocument();
   });
 });

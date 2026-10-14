@@ -44,7 +44,7 @@ export function FundingCalculator({ opp }: { opp: ScoredOpportunity }) {
         <p className="text-xs text-muted">{hint}</p>
         <p className="text-xs text-muted">
           {t("detail.calculator.fromProfile")}{" "}
-          <Link to="/onboarding" className="font-medium text-gold-deep">
+          <Link to="/onboarding" className="font-medium text-ink">
             {t("detail.calculator.profileLink")}
           </Link>
         </p>

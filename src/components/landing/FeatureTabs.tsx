@@ -245,7 +245,7 @@ export function FeatureTabs({ copy }: { copy: LandingCopy['features'] }) {
                       <button
                         type="button"
                         onClick={handleLoadSample}
-                        className="text-xs font-bold text-brand-slate hover:text-brand-orange hover:underline"
+                        className="text-xs font-bold text-brand-slate hover:text-brand-slate-3 hover:underline"
                       >
                         {copy.nav.sample}
                       </button>

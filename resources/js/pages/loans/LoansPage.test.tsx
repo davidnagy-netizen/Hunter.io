@@ -34,7 +34,7 @@ describe("LoansPage — without Fundor Plus", () => {
     renderWithProviders(<LoansPage />);
 
     expect(await screen.findByRole("heading", { name: "2 ellenőrzött hiteltermék a katalógusban" })).toBeInTheDocument();
-    expect(screen.getByText(/nem a te céged jogosultságára/)).toBeInTheDocument();
+    expect(screen.getByText(/nem az Ön cégének jogosultságára/)).toBeInTheDocument();
     const categories = screen.getAllByRole("listitem").map((item) => item.textContent);
     expect(categories).toEqual(["Garancia / Kezességvállalás · 1", "Támogatott hitelkonstrukció · 1"]);
     expect(screen.getByText(/Fundor Plus előfizetéssel érhető el/)).toBeInTheDocument();
@@ -84,7 +84,8 @@ describe("LoansPage — with Fundor Plus", () => {
     }
     expect(guarantee.getByText("SYNTHETIC FIXTURE — no official document")).toBeInTheDocument();
     expect(within(cards[1]).getByText("Subsidised Loan Facility")).toBeInTheDocument();
-    expect(screen.queryByText(/score/i)).not.toBeInTheDocument();
+    for (const card of cards) expect(within(card).queryByText(/score/i)).not.toBeInTheDocument();
+    expect(screen.getByText(/The Fundor Score is an estimate/)).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "How to apply for a loan" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Call +36 30 508 0569" })).toHaveAttribute("href", "tel:+36305080569");
     expect(loansApi.list).toHaveBeenCalledWith("en");

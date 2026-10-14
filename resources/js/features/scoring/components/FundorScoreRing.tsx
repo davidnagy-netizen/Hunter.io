@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { CircularProgress } from "@/components";
-import { BAND_COLOR } from "../domain/bandStyle";
+import { BAND_COLOR, BAND_TEXT_COLOR } from "../domain/bandStyle";
 import type { ScoreBand } from "../types/scoring.types";
 import "../i18n";
 
@@ -35,6 +35,7 @@ export function FundorScoreRing({ score, band = null, estimated = false, size = 
   }
 
   const color = band ? BAND_COLOR[band.key] : "var(--color-muted)";
+  const textColor = band ? BAND_TEXT_COLOR[band.key] : "var(--color-muted)";
 
   return (
     <div className="flex flex-col items-center gap-2">
@@ -45,13 +46,13 @@ export function FundorScoreRing({ score, band = null, estimated = false, size = 
         color={color}
         aria-label={t(estimated ? "score.ariaEstimated" : "score.aria", { score })}
       >
-        <span className="font-display font-semibold" style={{ color, fontSize: size / 3.2 }}>
+        <span className="font-display font-semibold" style={{ color: textColor, fontSize: size / 3.2 }}>
           {score}
         </span>
         <span className="text-xs text-muted">{t("score.outOf")}</span>
       </CircularProgress>
       {showBandLabel ? (
-        <span className="text-sm font-medium" style={{ color }}>
+        <span className="text-sm font-medium" style={{ color: textColor }}>
           {band?.label}
           {estimated ? ` · ${t("score.estimated")}` : ""}
         </span>

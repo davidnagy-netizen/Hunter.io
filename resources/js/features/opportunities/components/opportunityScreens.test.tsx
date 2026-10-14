@@ -124,7 +124,7 @@ describe("OpportunitiesPage", () => {
     // The Daphne call is ruled out for an SME: the card says why, with the company's own value.
     const blocked = screen.getByRole("link", { name: /preventing gender-based violence/i });
     expect(within(blocked.closest("article")!).getByText(/pályázhat: ngo/i)).toBeInTheDocument();
-    expect(within(blocked.closest("article")!).getByText(/nálad|yours/i)).toBeInTheDocument();
+    expect(within(blocked.closest("article")!).getByText(/Önnél|yours/i)).toBeInTheDocument();
   });
 
   it("shows only teasers for a gated account", async () => {

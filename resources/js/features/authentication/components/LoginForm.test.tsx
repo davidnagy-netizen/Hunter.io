@@ -32,7 +32,7 @@ describe("LoginForm", () => {
 
   it("offers a way back in for a forgotten password", () => {
     renderWithProviders(<LoginForm />);
-    expect(screen.getByRole("link", { name: /elfelejtetted a jelszavad|forgot your password/i })).toHaveAttribute("href", "/forgot-password");
+    expect(screen.getByRole("link", { name: /elfelejtette a jelszavát|forgot your password/i })).toHaveAttribute("href", "/forgot-password");
   });
 
   it("submits the entered credentials and calls onSuccess", async () => {

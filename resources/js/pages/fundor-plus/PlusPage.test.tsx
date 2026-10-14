@@ -42,7 +42,7 @@ function fullCatalog(opportunities: ReturnType<typeof subscriberCatalog>["opport
   vi.mocked(useCatalog).mockReturnValue({ catalog, isLoading: false, error: null } as never);
 }
 
-const picker = () => screen.getByRole("heading", { name: /válassz pályázatot|select grant/i }).closest("div.rounded-lg") as HTMLElement;
+const picker = () => screen.getByRole("heading", { name: /válasszon pályázatot|select grant/i }).closest("div.rounded-lg") as HTMLElement;
 const options = () => within(picker()).getAllByRole("button");
 const generate = () => screen.getByRole("button", { name: /vázlat készítése|generate draft/i });
 
@@ -61,7 +61,7 @@ afterEach(() => vi.restoreAllMocks());
 describe("PlusPage — who may open it", () => {
   it("gives a subscriber the workspace", async () => {
     renderWithProviders(<PlusPage />);
-    expect(await screen.findByRole("heading", { name: /válassz pályázatot|select grant/i })).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: /válasszon pályázatot|select grant/i })).toBeInTheDocument();
     expect(screen.getByText(/előnézet aktív \(demó\)|preview active \(demo\)/i)).toBeInTheDocument();
   });
 
@@ -70,12 +70,12 @@ describe("PlusPage — who may open it", () => {
     vi.mocked(useIsAuthenticated).mockReturnValue(false);
     renderWithProviders(<PlusPage />);
 
-    expect(await screen.findByRole("heading", { name: /indítsd el a pályázatot|start the application/i })).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: /indítsa el a pályázatot|start the application/i })).toBeInTheDocument();
     expect(screen.getAllByRole("listitem")).toHaveLength(4);
     expect(screen.getByText(/nem egyedi ai-szövegírás|not custom ai writing/i)).toBeInTheDocument();
     expect(screen.getByText(/adminisztrátor adja meg|granted by an administrator/i)).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: /aktiv|activat/i })).not.toBeInTheDocument();
-    expect(screen.queryByRole("heading", { name: /válassz pályázatot|select grant/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: /válasszon pályázatot|select grant/i })).not.toBeInTheDocument();
   });
 
   it("offers a visitor with no account the way to make one, and a signed-in one nothing to click", async () => {
@@ -87,7 +87,7 @@ describe("PlusPage — who may open it", () => {
 
     vi.mocked(useIsAuthenticated).mockReturnValue(true);
     renderWithProviders(<PlusPage />);
-    await screen.findByRole("heading", { name: /indítsd el a pályázatot|start the application/i });
+    await screen.findByRole("heading", { name: /indítsa el a pályázatot|start the application/i });
     expect(screen.queryByRole("link")).not.toBeInTheDocument();
   });
 });
@@ -95,7 +95,7 @@ describe("PlusPage — who may open it", () => {
 describe("PlusWorkspace — choosing a call", () => {
   it("lists the calls that fit the company, best first, with the first one selected", async () => {
     renderWithProviders(<PlusPage />);
-    await screen.findByRole("heading", { name: /válassz pályázatot|select grant/i });
+    await screen.findByRole("heading", { name: /válasszon pályázatot|select grant/i });
     const buttons = options();
     expect(buttons.length).toBeGreaterThan(1);
     expect(buttons[0]).toHaveAttribute("aria-pressed", "true");
@@ -106,7 +106,7 @@ describe("PlusWorkspace — choosing a call", () => {
 
   it("shows the selected call's program and title above the draft area", async () => {
     renderWithProviders(<PlusPage />);
-    await screen.findByRole("heading", { name: /válassz pályázatot|select grant/i });
+    await screen.findByRole("heading", { name: /válasszon pályázatot|select grant/i });
     const title = options()[0].textContent!.replace(/\d+$/, "");
     expect(screen.getAllByRole("heading", { level: 2 }).some((h) => h.textContent === title)).toBe(true);
   });

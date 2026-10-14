@@ -55,7 +55,7 @@ export function DraftPanel({ profile, opp }: { profile: CompanyProfile; opp: Sco
           <p className="text-sm text-muted">{notice}</p>
           {chapters.map((chapter) => (
             <section key={chapter.title} className="rounded-lg border border-line bg-paper p-4">
-              <h3 className="mb-2 text-sm font-semibold text-gold-deep">
+              <h3 className="mb-2 text-sm font-semibold text-ink">
                 {chapter.title} {t("workspace.demoTag")}
               </h3>
               <p className="text-sm leading-relaxed">{chapter.body}</p>

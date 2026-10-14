@@ -11,7 +11,7 @@ export function StepList({ steps }: { steps: Step[] }) {
         <li key={step.title} className="flex gap-3">
           <span
             aria-hidden
-            className="flex size-7 shrink-0 items-center justify-center rounded-full bg-gold-bg text-sm font-semibold text-gold-deep"
+            className="flex size-7 shrink-0 items-center justify-center rounded-full bg-gold-bg text-sm font-semibold text-ink"
           >
             {index + 1}
           </span>

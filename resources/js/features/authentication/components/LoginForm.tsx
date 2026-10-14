@@ -42,7 +42,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
         error={errors.password && t(errors.password.message as string)}
         {...register("password")}
       />
-      <Link to="/forgot-password" className="-mt-2 self-end text-sm font-medium text-gold-deep hover:underline">
+      <Link to="/forgot-password" className="-mt-2 self-end text-sm font-medium text-ink hover:underline">
         {t("authentication:login.forgot")}
       </Link>
       {apiErrorMessage ? (

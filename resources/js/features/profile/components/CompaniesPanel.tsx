@@ -45,7 +45,7 @@ export function CompaniesPanel() {
           {t("profile:companies.add")}
         </Link>
       ) : (
-        <p className="mt-4 rounded-md bg-gold-bg p-3 text-sm text-gold-deep">
+        <p className="mt-4 rounded-md bg-gold-bg p-3 text-sm text-ink">
           {t("profile:companies.limit")}{" "}
           <a href={`tel:${CONSULT_PHONE}`} className="font-semibold underline">
             {CONSULT_PHONE_DISPLAY}

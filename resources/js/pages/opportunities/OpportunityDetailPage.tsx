@@ -50,7 +50,7 @@ function SourceNote({ opp }: { opp: Opportunity }) {
     <p className="mt-6 flex flex-wrap items-center gap-1 text-xs text-muted">
       {t("detail.source.label")}: {origin} — <b>{opp.sourceRef || ""}</b>. {t("detail.source.disclaimer")}
       {url ? (
-        <a href={url} target="_blank" rel="noopener noreferrer" className="ml-1 inline-flex items-center gap-1 text-gold-deep">
+        <a href={url} target="_blank" rel="noopener noreferrer" className="ml-1 inline-flex items-center gap-1 text-ink">
           {t("detail.source.officialCall")} <ExternalIcon />
         </a>
       ) : null}

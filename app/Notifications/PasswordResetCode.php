@@ -30,7 +30,7 @@ class PasswordResetCode extends Notification implements ShouldQueue
             ->greeting($en ? 'Hello!' : 'Üdvözöljük!')
             ->line($en ? 'You asked to reset the password of your Fundor account. Enter this code to set a new password:'
                 : 'Jelszó-visszaállítást kért a Fundor fiókjához. Az új jelszó beállításához írja be ezt a kódot:')
-            ->line(new HtmlString('<p style="margin:24px 0;text-align:center;font-size:32px;font-weight:700;letter-spacing:8px;color:#273F4F">'.$this->code.'</p>'))
+            ->line(new HtmlString('<p style="margin:24px 0;text-align:center;font-size:32px;font-weight:700;letter-spacing:8px;color:#0B1F3A">'.$this->code.'</p>'))
             ->line($en ? 'The code is valid for '.EmailCodes::MINUTES.' minutes and can be used once.'
                 : 'A kód '.EmailCodes::MINUTES.' percig érvényes, és csak egyszer használható.')
             ->line($en ? "If you didn't ask for this, ignore this email — your password won't change."

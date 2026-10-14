@@ -1,6 +1,7 @@
 {
   "loading": "Betöltés…",
   "loadFailed": "Ezt nem sikerült betölteni: {{message}}",
+  "standardDisclaimer": "A Fundor független magánvállalkozás, nem állami szerv, és nem áll kapcsolatban a pályázatokat kiíró hatóságokkal. A Fundor Score becslés, nem a támogató döntése.",
   "pager": {
     "prev": "Előző",
     "next": "Következő",

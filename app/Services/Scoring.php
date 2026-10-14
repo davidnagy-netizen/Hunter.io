@@ -143,14 +143,14 @@ class Scoring
         $themes = implode(', ', $o['goals']);
         $yours = implode(', ', $goals);
         $details = [
-            'elig' => $en ? "$passed of $total hard criteria satisfied by your profile." : "$total kötelező feltételből $passed teljesül a cégprofilod alapján.",
+            'elig' => $en ? "$passed of $total hard criteria satisfied by your profile." : "$total kötelező feltételből $passed teljesül a cégprofilja alapján.",
             'fit' => $en ? 'Call themes: '.($themes ?: 'not classified').'. Your goals: '.($yours ?: 'none set').'.'
-                : 'A felhívás témái: '.($themes ?: 'nincs besorolva').'. A te céljaid: '.($yours ?: 'nincs megadva').'.',
+                : 'A felhívás témái: '.($themes ?: 'nincs besorolva').'. Az Ön céljai: '.($yours ?: 'nincs megadva').'.',
             'size' => $this->sizeDetail($o, $mine, $en),
             'timing' => $en ? "$days days remain until the deadline." : "$days nap van a beadási határidőig.",
             'feas' => $en ? "$own% own contribution, ".count($o['docs'])." required annexes$consortium." : "$own% önerő, ".count($o['docs'])." kötelező melléklet$consortium.",
         ];
-        // Same wording, weights and whole-number values as the prototype engine's explanation (the UI shows `detail` as written).
+        // Same wording, weights and whole-number values as the prototype engine's explanation, the Hungarian in the formal "Ön" voice of the brand guidelines (the UI shows `detail` as written).
         $factors = [];
         foreach (['elig' => [$elig, .35, 'Eligibility', 'Jogosultság'], 'fit' => [$fit, .25, 'Project fit', 'Projekt-illeszkedés'], 'size' => [$size, .15, 'Funding size', 'Támogatás mérete'], 'timing' => [$timing, .15, 'Timing', 'Időzítés'], 'feas' => [$feas, .10, 'Feasibility', 'Megvalósíthatóság']] as $key => [$value, $weight, $english, $hu]) {
             $factors[] = ['key' => $key, 'weight' => $weight, 'value' => (int) round($value * 100), 'label' => $en ? $english : $hu, 'detail' => $details[$key]];
@@ -187,7 +187,7 @@ class Scoring
 
             return $en
                 ? "The {$call}M HUF grant covers the whole consortium. One partner's share is typically around {$typical}M HUF ({$min}–{$max}M), against your {$mine}M HUF project."
-                : "A {$call} M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően {$typical} M Ft körül van ({$min}–{$max} M Ft), a te projekted {$mine} M Ft.";
+                : "A {$call} M Ft támogatás a teljes konzorciumra szól. Egy partner részesedése jellemzően {$typical} M Ft körül van ({$min}–{$max} M Ft), az Ön projektje {$mine} M Ft.";
         }
         if ($o['fundingMin'] || $o['fundingMax']) {
             $lo = $this->millions($o['fundingMin']);
@@ -195,7 +195,7 @@ class Scoring
 
             return $en
                 ? "Grant per project {$lo}–{$hi}M HUF against your {$mine}M HUF project."
-                : "A felhívás projektenkénti támogatása {$lo}–{$hi} M Ft, a te projekted {$mine} M Ft.";
+                : "A felhívás projektenkénti támogatása {$lo}–{$hi} M Ft, az Ön projektje {$mine} M Ft.";
         }
 
         return $en

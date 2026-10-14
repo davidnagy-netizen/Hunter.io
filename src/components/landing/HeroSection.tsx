@@ -45,7 +45,7 @@ export function HeroSection({ copy }: { copy: LandingCopy["hero"] }) {
             <span className="landing-eyebrow mb-4 sm:mb-5">{copy.eyebrow}</span>
             <h1 className="text-brand-ink font-bold tracking-tight max-w-[650px]">
               {copy.title}
-              <span className="mt-1 block text-brand-orange-deep">{copy.titleAccent}</span>
+              <span className="mt-1 block text-brand-slate underline decoration-brand-orange decoration-4 underline-offset-8">{copy.titleAccent}</span>
             </h1>
             <p className="mt-5 max-w-xl text-lg sm:text-xl text-brand-slate leading-relaxed">
               {copy.lead}

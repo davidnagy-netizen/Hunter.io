@@ -16,7 +16,7 @@ export function UpcomingDeadlines({ relevant }: { relevant: ScoredOpportunity[] 
     <section className="mt-10">
       <div className="mb-3 flex items-center justify-between">
         <h2 className="font-display text-lg font-semibold">{t("dashboard.upcoming")}</h2>
-        <Link to="/app/calendar" className="inline-flex items-center gap-1 text-sm font-medium text-gold-deep">
+        <Link to="/app/calendar" className="inline-flex items-center gap-1 text-sm font-medium text-ink">
           {t("dashboard.fullCalendar")} <ArrowIcon />
         </Link>
       </div>

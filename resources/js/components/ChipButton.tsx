@@ -18,7 +18,7 @@ export function ChipButton({ selected, className = "", ...rest }: ChipButtonProp
       className={[
         "rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors",
         selected
-          ? "border-gold bg-gold-bg text-gold-deep"
+          ? "border-gold bg-gold-bg text-ink"
           : "border-line-strong bg-white text-text hover:bg-paper",
         className,
       ]

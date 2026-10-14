@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useTranslation } from "react-i18next";
-import { Button, TextField } from "@/components";
+import { Button, StandardDisclaimer, TextField } from "@/components";
 import { CompanyMetricsFields } from "@/features/profile/components/CompanyMetricsFields";
 import { metricsSchema } from "@/features/profile/schemas/metrics.schema";
 import type { CompanyMetrics } from "@/features/profile/types/metrics.types";
@@ -83,6 +83,7 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
         <p className="text-muted">{taxpayer.fullAddress || (en ? "NAV did not provide a headquarters address." : "A NAV nem adott meg székhelycímet.")}</p>
       </section>}
       <Button disabled={!taxpayer} onClick={() => setStep(2)}>{en ? "Confirm and continue" : "Megerősítés és tovább"}</Button>
+      <StandardDisclaimer />
     </>}
     {step === 2 && <>
       <CompanyMetricsFields value={metrics} onChange={value => { setMetrics(value); persist(taxNumber, value); }} />

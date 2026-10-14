@@ -44,7 +44,7 @@ export function EditorialJourney({ copy }: { copy: LandingCopy['journey'] }) {
               {/* Floating Quality Badge */}
               <div className="absolute bottom-6 left-6 right-6 sm:right-auto z-10">
                 <div className="inline-flex items-center gap-2.5 rounded-2xl bg-white/95 border border-brand-line-strong px-4 py-3 shadow-lg backdrop-blur-md">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 text-brand-orange-deep border border-brand-line">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 text-brand-slate border border-brand-line">
                     <ShieldCheck size={16} aria-hidden="true" />
                   </span>
                   <div>
@@ -57,7 +57,7 @@ export function EditorialJourney({ copy }: { copy: LandingCopy['journey'] }) {
 
           {/* Right Column: Editorial Narrative & 3-Step Verification Journey (50% / 6 cols) */}
           <div className="lg:col-span-6 flex flex-col items-start">
-            <span className="text-xs font-mono font-bold tracking-widest text-brand-orange-deep uppercase mb-3 sm:mb-4 inline-block">
+            <span className="text-xs font-mono font-bold tracking-widest text-brand-slate uppercase mb-3 sm:mb-4 inline-block">
               {copy.eyebrow}
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-brand-ink leading-[1.15]">
@@ -74,7 +74,7 @@ export function EditorialJourney({ copy }: { copy: LandingCopy['journey'] }) {
                   key={step.num}
                   className="flex items-start gap-4 rounded-2xl bg-white border border-brand-line-strong p-4 sm:p-5 transition-colors hover:border-brand-orange shadow-2xs"
                 >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-brand-orange-deep font-mono text-xs font-bold border border-brand-line mt-0.5">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-brand-slate font-mono text-xs font-bold border border-brand-line mt-0.5">
                     {step.num}
                   </span>
                   <div>

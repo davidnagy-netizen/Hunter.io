@@ -1,17 +1,17 @@
 {
   "logout": {
-    "question": "Biztosan ki szeretnél jelentkezni?",
+    "question": "Biztosan ki szeretne jelentkezni?",
     "confirm": "Kijelentkezés",
     "cancel": "Mégse"
   },
   "login": {
     "title": "Belépés",
-    "subtitle": "Lépj be a cégfiókoddal, hogy lásd a személyre szabott találataidat.",
-    "forgot": "Elfelejtetted a jelszavad?"
+    "subtitle": "Lépjen be cégfiókjával, hogy lássa a személyre szabott találatait.",
+    "forgot": "Elfelejtette a jelszavát?"
   },
   "forgot": {
     "title": "Elfelejtett jelszó",
-    "subtitle": "Add meg a fiókodhoz tartozó e-mail-címet, és küldünk egy 6 jegyű kódot az új jelszó beállításához.",
+    "subtitle": "Adja meg a fiókjához tartozó e-mail-címet, és küldünk egy 6 jegyű kódot az új jelszó beállításához.",
     "send": "Kód küldése",
     "sent": "Ha ehhez az e-mail-címhez tartozik fiók, elküldtük a kódot. 10 percig érvényes.",
     "code": "6 jegyű kód",
@@ -19,14 +19,14 @@
     "confirmPassword": "Új jelszó még egyszer",
     "submit": "Jelszó módosítása",
     "resend": "Új kód küldése",
-    "doneTitle": "Kész, megváltozott a jelszavad",
-    "doneBody": "Biztonsági okból minden eszközön kijelentkeztettünk. Lépj be az új jelszavaddal.",
+    "doneTitle": "Kész, a jelszava megváltozott",
+    "doneBody": "Biztonsági okból minden eszközön kijelentkeztettük. Lépjen be az új jelszavával.",
     "toLogin": "Tovább a belépéshez",
     "backToLogin": "Vissza a belépéshez"
   },
   "register": {
     "title": "Cégfiók létrehozása",
-    "subtitle": "Három adat elég: e-mail, jelszó és adószám. A cég nevét és székhelyét a NAV nyilvántartásából olvassuk ki, te csak megerősíted."
+    "subtitle": "Három adat elég: e-mail, jelszó és adószám. A cég nevét és székhelyét a NAV nyilvántartásából olvassuk ki, Önnek csak meg kell erősítenie."
   },
   "tabs": {
     "login": "Belépés",
@@ -53,8 +53,8 @@
   },
   "adminHint": "Bemutató hozzáférés: <b>admin</b> / <b>admin</b> — adminisztrátori fiók, előfizetések kiosztásához.",
   "backToHome": "Vissza a főoldalra",
-  "welcome": "Üdv, {{username}}!",
-  "signedOut": "Kijelentkeztél",
+  "welcome": "Üdvözöljük, {{username}}!",
+  "signedOut": "Kijelentkezett",
   "subscription": {
     "trial": "Próbaidő · {{count}} nap",
     "active": "Aktív előfizetés",
@@ -73,9 +73,9 @@
     "marketing": "Kérek hírlevelet és tájékoztatást új pályázati lehetőségekről (bármikor visszavonható)."
   },
   "validation": {
-    "terms": "A regisztrációhoz el kell fogadnod a feltételeket és az adatkezelési tájékoztatót.",
-    "taxNumber": "Adj meg érvényes magyar adószámot (8 vagy 11 jegyű, helyes ellenőrző számjeggyel).",
-    "email": "Adj meg érvényes e-mail-címet.",
+    "terms": "A regisztrációhoz el kell fogadnia a feltételeket és az adatkezelési tájékoztatót.",
+    "taxNumber": "Adjon meg érvényes magyar adószámot (8 vagy 11 jegyű, helyes ellenőrző számjeggyel).",
+    "email": "Adjon meg érvényes e-mail-címet.",
     "code": "A kód 6 számjegyből áll.",
     "password": "A jelszó legalább 12 karakter legyen.",
     "passwordMatch": "A két jelszó nem egyezik."

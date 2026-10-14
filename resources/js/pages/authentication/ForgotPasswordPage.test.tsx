@@ -34,7 +34,7 @@ describe("ForgotPasswordPage", () => {
     expect(authApi.resetPassword).toHaveBeenCalledWith({
       email: "anna@ceg.hu", code: "042317", password: "uj-eros-jelszo-1", password_confirmation: "uj-eros-jelszo-1",
     });
-    expect(await screen.findByRole("heading", { name: "Kész, megváltozott a jelszavad" })).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "Kész, a jelszava megváltozott" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Tovább a belépéshez" })).toHaveAttribute("href", "/login");
   });
 

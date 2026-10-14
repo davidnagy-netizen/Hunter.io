@@ -46,7 +46,7 @@ export function MatchingLoader({ title, steps, onAnimationDone }: MatchingLoader
   return (
     <div role="status" aria-live="polite" aria-label={title} className="fixed inset-0 z-50 flex items-center justify-center bg-ink/80 p-6">
       <div className="w-full max-w-sm rounded-lg bg-surface p-6 text-center shadow-card-lg">
-        <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-full bg-gold-bg text-gold-deep">
+        <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-full bg-gold-bg text-ink">
           <TargetIcon size={30} className={reduced ? "" : "animate-pulse"} />
         </div>
         <h2 className="font-display text-lg font-semibold text-text">{title}</h2>

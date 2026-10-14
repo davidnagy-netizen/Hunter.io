@@ -42,7 +42,7 @@ return Application::configure(basePath: dirname(__DIR__))
             }
             // A rate limit says so, rather than the generic answer. Every throttled route counts per minute.
             if ($e instanceof ThrottleRequestsException) {
-                return response()->json(['error' => 'Túl sok próbálkozás. Várj egy percet, és próbáld újra.', 'code' => 'TOO_MANY_ATTEMPTS'], 429, $e->getHeaders());
+                return response()->json(['error' => 'Túl sok próbálkozás. Várjon egy percet, és próbálja újra.', 'code' => 'TOO_MANY_ATTEMPTS'], 429, $e->getHeaders());
             }
             $status = $e instanceof HttpExceptionInterface ? $e->getStatusCode() : 500;
 

@@ -1,39 +1,23 @@
 import { BRAND } from "../brand";
 
-const LOGO_URL = `${import.meta.env.BASE_URL}fundor.svg`;
+const asset = (name: string) => `${import.meta.env.BASE_URL}${name}.svg`;
 
 interface Logo {
   dark?: boolean;
-  /** Just the coin — for the phone top bar, where the wordmark doesn't fit next to the controls. */
+  /** Just the symbol — for the phone top bar, where the wordmark doesn't fit next to the controls. */
   iconOnly?: boolean;
   onClick?: () => void;
 }
+
+/**
+ * The supplied Fundor lockup, never retyped (brand guidelines v2.0): navy on light surfaces, reversed on navy, and the
+ * two-halves symbol alone where the name is already present or space is tight.
+ */
 export function Logo({ dark = false, iconOnly = false, onClick }: Logo) {
+  const file = iconOnly ? (dark ? "fundor-symbol-white" : "fundor-symbol") : dark ? "fundor-logo-white" : "fundor-logo";
   return (
-    <div
-      onClick={onClick}
-      role="button"
-      className={[
-        "flex items-center gap-2.5 hover:cursor-pointer",
-        dark ? "text-white" : "text-ink",
-      ].join(" ")}
-    >
-      <img src={LOGO_URL} alt={iconOnly ? BRAND.wordmark : ""} className="size-8" />
-      {iconOnly ? null : (
-        <span className="flex flex-col leading-none">
-          <span className="font-display text-base font-semibold tracking-wide">
-            {BRAND.wordmark}
-          </span>
-          <small
-            className={[
-              "text-[10px]",
-              dark ? "text-white/60" : "text-muted",
-            ].join(" ")}
-          >
-            funding intelligence
-          </small>
-        </span>
-      )}
+    <div onClick={onClick} role="button" className="flex items-center hover:cursor-pointer">
+      <img src={asset(file)} alt={BRAND.name} className="h-8 w-auto" />
     </div>
   );
 }

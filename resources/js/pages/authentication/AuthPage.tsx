@@ -66,7 +66,7 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
 
           {!isRegister && data?.adminSeed?.usingDefaultPassword ? (
             <div
-              className="mt-4 rounded-md bg-gold-bg p-3 text-xs text-gold-deep"
+              className="mt-4 rounded-md bg-gold-bg p-3 text-xs text-ink"
               // Safe: a fixed translation string we author, not user input.
               dangerouslySetInnerHTML={{ __html: t("adminHint") }}
             />

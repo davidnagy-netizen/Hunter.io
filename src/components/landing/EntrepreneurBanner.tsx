@@ -42,7 +42,7 @@ export function EntrepreneurBanner({ copy }: { copy: LandingCopy['entrepreneur']
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-14">
             {/* Left Panel: Headline & Strategic Direction (60%) */}
             <div className="lg:col-span-7 flex flex-col items-start">
-              <span className="inline-flex items-center rounded-full bg-white border border-brand-line-strong px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-orange-deep mb-4 sm:mb-5">
+              <span className="inline-flex items-center rounded-full bg-white border border-brand-line-strong px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-slate mb-4 sm:mb-5">
                 {copy.eyebrow}
               </span>
               <h2 className="text-brand-ink text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.08] max-w-xl">

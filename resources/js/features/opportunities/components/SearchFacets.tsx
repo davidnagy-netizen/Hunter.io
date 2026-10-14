@@ -50,7 +50,7 @@ export function SearchFacets({
                     onClick={() => onToggle(key, v.value)}
                     className={[
                       "rounded-full border px-2.5 py-1 text-xs font-medium transition-colors",
-                      on ? "border-gold bg-gold-bg text-gold-deep" : "border-line-strong bg-white text-text hover:bg-paper",
+                      on ? "border-gold bg-gold-bg text-ink" : "border-line-strong bg-white text-text hover:bg-paper",
                     ].join(" ")}
                   >
                     {label(key, v.value)} <span className="text-muted">{v.count}</span>

@@ -12,43 +12,48 @@
  * names, used throughout resources/js, and every landing component under src/ —
  * is a `var()` alias onto one of those. Retinting the product is a one-file edit
  * here; nothing outside this file should ever hardcode a color again.
+ *
+ * Values follow the Fundor brand guidelines v2.0 (October 2026): Navy carries type
+ * and surfaces, Gold is the one accent and is never used for text on white (1.9:1),
+ * only for fills and on navy. The token names predate it: `orange` is the gold
+ * accent, `slate`/`ink` the navy.
  */
 @theme {
   /* ---- Canonical brand palette (the only literals in the whole app) ---- */
-  --color-brand-orange: #FE7743;
-  --color-brand-orange-deep: #E76D3F;
-  --color-brand-orange-active: #D0643A;
-  --color-brand-orange-soft: #FEA07B;
-  --color-brand-orange-bg: #FFF1EC;
+  --color-brand-orange: #F2B233; /* Fundor Gold */
+  --color-brand-orange-deep: #DCA02A; /* gold fill, hover */
+  --color-brand-orange-active: #C68E1F; /* gold fill, pressed */
+  --color-brand-orange-soft: #F7CB72; /* light gold, on navy only */
+  --color-brand-orange-bg: #FCEFD2; /* Gold soft · highlights */
 
-  --color-brand-slate: #273F4F;
-  --color-brand-slate-2: #202F38;
-  --color-brand-slate-3: #1E2A32;
+  --color-brand-slate: #0B1F3A; /* Navy 900 */
+  --color-brand-slate-2: #132B4E; /* Navy 800 */
+  --color-brand-slate-3: #2A4570; /* Navy 600 */
 
-  --color-brand-ink: #161616;
-  --color-brand-cream: #EFEEEA;
-  --color-brand-paper: #FAFAF9;
-  --color-brand-surface-muted: #F7F6F4;
+  --color-brand-ink: #0B1F3A; /* type: Navy */
+  --color-brand-cream: #F5F6F8; /* Paper; also light text on navy */
+  --color-brand-paper: #F5F6F8; /* Paper */
+  --color-brand-surface-muted: #F5F6F8;
 
-  --color-brand-line: #E6E4DF;
-  --color-brand-line-strong: #D9D8D5;
+  --color-brand-line: #E3E6EC; /* Line */
+  --color-brand-line-strong: #CDD2DB;
 
-  --color-brand-muted: #687984;
-  --color-brand-muted-2: #939FA7;
-  --color-brand-muted-3: #BEC5CA;
-  --color-brand-muted-4: #D4D9DC;
+  --color-brand-muted: #5B6578; /* Slate */
+  --color-brand-muted-2: #8A92A1;
+  --color-brand-muted-3: #B3B9C4;
+  --color-brand-muted-4: #CDD2DB;
 
-  /* Status hues warmed to sit next to the orange/slate/cream palette instead of
-     the old cool-toned set — still functionally green/amber/red/blue, just tinted
-     to match. */
-  --color-brand-green: #4F8F5E;
-  --color-brand-green-bg: #EEF5EC;
+  /* Status hues: Success and Error are the guideline's (status only, never side by
+     side with white as a red-white-green group); amber has no guideline value and
+     stays; "blue" (loan types, info) is Navy 600. */
+  --color-brand-green: #1E7F55; /* Success */
+  --color-brand-green-bg: #E3F1EA;
   --color-brand-amber: #C9762E;
   --color-brand-amber-bg: #FBF0E4;
-  --color-brand-red: #C1443D;
-  --color-brand-red-bg: #FBEAE8;
-  --color-brand-blue: #4A6FA0;
-  --color-brand-blue-bg: #EAEFF5;
+  --color-brand-red: #C0352B; /* Error */
+  --color-brand-red-bg: #F9E4E2;
+  --color-brand-blue: #2A4570; /* Navy 600 */
+  --color-brand-blue-bg: #E7ECF4;
 
   /* ---- App-facing semantic names (aliases; landing uses the brand-* names
      directly, the rest of resources/js uses these) ---- */
@@ -92,9 +97,11 @@
   --shadow-card: 0 1px 2px rgba(22, 22, 22, 0.04), 0 8px 24px -12px rgba(22, 22, 22, 0.14);
   --shadow-card-lg: 0 2px 4px rgba(22, 22, 22, 0.05), 0 24px 48px -20px rgba(22, 22, 22, 0.28);
 
-  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
-  --font-mono: "Space Mono", "SF Mono", ui-monospace, monospace;
+  /* Guidelines: Funnel Display for the wordmark, headlines and big numbers; Funnel Sans for
+     everything read at length; JetBrains Mono for labels and code. */
+  --font-sans: "Funnel Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-display: "Funnel Display", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
 }
 
 body {

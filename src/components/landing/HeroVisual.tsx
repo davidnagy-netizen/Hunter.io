@@ -58,7 +58,10 @@ export function HeroVisual({ copy }: { copy: LandingCopy["hero"]["visual"] }) {
                         strokeLinecap="round" strokeDasharray="150.8" strokeDashoffset="19.6"
                       />
                     </svg>
-                    <div className="n">{copy.topScore}</div>
+                    <div className="n">
+                      {copy.topScore}
+                      <small>{copy.topOutOf}</small>
+                    </div>
                   </div>
                 </div>
                 <span className="landing-hero-mc-band">{copy.topBand}</span>
@@ -131,7 +134,7 @@ export function HeroVisual({ copy }: { copy: LandingCopy["hero"]["visual"] }) {
         </div>
         <div className="landing-hero-float hf-2">
           <div className="ic" style={{ background: "var(--color-brand-orange-bg)" }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-brand-orange-deep)" strokeWidth="2" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-brand-slate)" strokeWidth="2" aria-hidden="true">
               <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
             </svg>
           </div>
@@ -139,7 +142,7 @@ export function HeroVisual({ copy }: { copy: LandingCopy["hero"]["visual"] }) {
         </div>
         <div className="landing-hero-float hf-3">
           <div className="ic" style={{ background: "var(--color-brand-orange-bg)" }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-brand-orange-deep)" strokeWidth="2" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-brand-slate)" strokeWidth="2" aria-hidden="true">
               <path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0" />
             </svg>
           </div>

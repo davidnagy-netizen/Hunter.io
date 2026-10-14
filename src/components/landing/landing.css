@@ -14,6 +14,7 @@
 }
 
 .landing-page :is(h1, h2, h3) {
+  font-family: var(--font-display);
   line-height: 1.15;
   letter-spacing: -0.025em;
   font-weight: 700;
@@ -254,8 +255,8 @@
    deliberately not applied to every `.landing-cta` instance, since those also mark in-context
    actions (tab panels, carousel cards) where a pulsing button everywhere would just be noise. */
 @keyframes landing-cta-glow {
-  0%, 100% { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 0 0 0 rgba(254, 119, 67, 0.45); }
-  50% { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 0 0 9px rgba(254, 119, 67, 0); }
+  0%, 100% { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 0 0 0 rgba(242, 178, 51, 0.45); }
+  50% { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 0 0 9px rgba(242, 178, 51, 0); }
 }
 
 .landing-page .landing-cta-highlight {
@@ -337,7 +338,7 @@
 }
 
 .landing-page .landing-link:hover {
-  color: var(--color-brand-orange);
+  color: var(--color-brand-slate-3);
 }
 
 .landing-page :is(a, button, input, summary, [tabindex]):focus-visible {
@@ -410,7 +411,7 @@
   font-weight: 800;
   line-height: 0.95;
   letter-spacing: -0.045em;
-  color: var(--color-brand-orange);
+  color: var(--color-brand-slate);
 }
 
 .landing-page .landing-globe {
@@ -522,7 +523,7 @@
   white-space: nowrap;
   font-size: 11px;
   font-weight: 700;
-  color: var(--color-brand-orange-deep);
+  color: var(--color-brand-slate);
   background: var(--color-brand-orange-bg);
   padding: 4px 10px;
   border-radius: 999px;
@@ -571,7 +572,7 @@
 .landing-hero-mc-amount {
   font-size: 12.5px;
   font-weight: 700;
-  color: var(--color-brand-orange-deep);
+  color: var(--color-brand-slate);
   margin-top: 6px;
 }
 
@@ -586,16 +587,26 @@
   transform: rotate(-90deg);
 }
 
+/* Score over "/ 100", centred in the ring — the same layout as the app's score ring. */
 .landing-hero-mc-ring .n {
   position: absolute;
   inset: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 11px;
+  font-size: 18px;
+  line-height: 1;
   white-space: nowrap;
   color: var(--color-brand-ink);
+}
+
+.landing-hero-mc-ring .n small {
+  margin-top: 2px;
+  font-size: 8px;
+  font-weight: 600;
+  color: var(--color-brand-muted);
 }
 
 .landing-hero-mc-band {
@@ -641,7 +652,7 @@
 .landing-hero-mc-bar i {
   display: block;
   height: 100%;
-  background: linear-gradient(90deg, var(--color-brand-orange-deep), var(--color-brand-orange));
+  background: var(--color-brand-orange);
 }
 
 .landing-hero-more-label {
@@ -672,7 +683,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: var(--color-brand-orange-deep);
+  color: var(--color-brand-slate);
 }
 
 .landing-hero-match-row .mr-ic svg {
@@ -703,7 +714,7 @@
 .landing-hero-match-row .mr-score {
   font-size: 12px;
   font-weight: 800;
-  color: var(--color-brand-orange-deep);
+  color: var(--color-brand-slate);
   background: var(--color-brand-orange-bg);
   width: 30px;
   height: 30px;
@@ -739,7 +750,7 @@
 }
 
 .landing-hero-app-tab.active {
-  color: var(--color-brand-orange-deep);
+  color: var(--color-brand-slate);
 }
 
 .landing-hero-float {

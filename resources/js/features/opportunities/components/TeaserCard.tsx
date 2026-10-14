@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { LockIcon } from "@/components";
 import { useFormat } from "@/composables/useFormat";
-import { BAND_COLOR } from "@/features/scoring/domain/bandStyle";
+import { BAND_TEXT_COLOR } from "@/features/scoring/domain/bandStyle";
 import type { Teaser } from "../types/opportunities.types";
 import "../i18n";
 
@@ -15,7 +15,7 @@ export function TeaserCard({ teaser }: { teaser: Teaser }) {
   const { t } = useTranslation("opportunities");
   const { huf } = useFormat();
   const band = teaser.band;
-  const color = band ? BAND_COLOR[band.key] : "var(--color-muted)";
+  const color = band ? BAND_TEXT_COLOR[band.key] : "var(--color-muted)";
 
   const money = teaser.grantHuf ? (
     <>

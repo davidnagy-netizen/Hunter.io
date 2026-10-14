@@ -43,7 +43,7 @@ export function ApplyPanel({ opp, daysLeft }: { opp: Opportunity; daysLeft: numb
   if (isCuratedReference(links)) {
     return (
       <Panel title={t("detail.apply.title")}>
-        <p className="mb-5 rounded-md bg-gold-bg p-3 text-sm text-gold-deep">{t("detail.apply.curatedNote")}</p>
+        <p className="mb-5 rounded-md bg-gold-bg p-3 text-sm text-ink">{t("detail.apply.curatedNote")}</p>
         <StepList steps={steps} />
         <LinksTitle />
         <LinkRow href={links.portal} title={t("detail.apply.curatedPortal")} sub={t("detail.apply.curatedPortalSub")} />

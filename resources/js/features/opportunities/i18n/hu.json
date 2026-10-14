@@ -12,15 +12,15 @@
   "loading": "Betöltés…",
   "error": "A katalógus nem érhető el: {{message}}",
   "dashboard": {
-    "welcome": "Üdv, {{company}}!",
-    "found": "A Fundor {{n}} lehetőséget talált a cégprofilod alapján. Íme a döntéshez fontos találatok.",
+    "welcome": "Üdvözöljük, {{company}}!",
+    "found": "A Fundor {{n}} lehetőséget talált a cégprofilja alapján. Íme a döntéshez fontos találatok.",
     "tiles": {
-      "total": "releváns pályázat neked",
+      "total": "releváns pályázat Önnek",
       "strong": "nagyon erős (85+)",
       "closing": "hamarosan lejár",
       "attention": "figyelendő / hiányos adat"
     },
-    "recommended": "Neked ajánlott",
+    "recommended": "Önnek ajánlott",
     "only70": "Csak a 70+ találatok",
     "lower": "Alacsonyabb relevancia is",
     "empty": "Ezen a relevanciaszinten még nincs találat.",
@@ -29,8 +29,8 @@
   },
   "list": {
     "title": "Pályázatok",
-    "subtitle": "Minden találat a cégprofilodra rangsorolva. A jogosultsági motor előre kiszűri, amire nem felelsz meg.",
-    "gatedSubtitle": "A cégprofilod alapján {{n}} felhívásra pályázhatsz. Az alábbi pontszámok és összegek valósak.",
+    "subtitle": "Minden találat a cégprofiljára rangsorolva. A jogosultsági motor előre kiszűri, aminek nem felel meg.",
+    "gatedSubtitle": "A cégprofilja alapján {{n}} felhívásra pályázhat. Az alábbi pontszámok és összegek valósak.",
     "relevant": "Releváns",
     "blocked": "Nem jogosult",
     "blockedNote": "Kizárva a szabálymotor által"
@@ -47,19 +47,19 @@
     "excluded": "Kizárva",
     "missingData": "Hiányzó adat",
     "exclusionFallback": "Nem teljesül egy kizáró feltétel",
-    "yours": "nálad: {{value}}",
+    "yours": "Önnél: {{value}}",
     "officialCall": "Hivatalos felhívás megnyitása",
     "notPublished": "Nincs megadva"
   },
   "teaser": {
-    "grant": "Neked járó támogatás",
+    "grant": "Önnek járó támogatás",
     "ceiling": "Támogatási keret",
     "notStated": "Támogatás: a felhívás nem közli",
     "rate": "{{pct}}% támogatási intenzitás",
     "unlock": "Feloldás",
-    "note": "A pontszám és az összeg a te cégprofilodra számolt valós érték. A felhívás neve, határideje és a beadási link az előfizetéssel oldódik fel.",
-    "noteEmpty": "A találataid az előfizetéssel nyílnak meg.",
-    "moreTitle": "Még {{n}} találat vár rád",
+    "note": "A pontszám és az összeg az Ön cégprofiljára számolt valós érték. A felhívás neve, határideje és a beadási link az előfizetéssel oldódik fel.",
+    "noteEmpty": "A találatai az előfizetéssel nyílnak meg.",
+    "moreTitle": "Még {{n}} találat várja",
     "moreBody": "Az előfizetés megnyitja a teljes találati listát, az öt tényezős indoklást, a támogatáskalkulátort és a beadási linkeket. A hozzáférést jelenleg adminisztrátor adja meg — fizetési átjáró még nem kapcsolódik.",
     "cta": "Cégfiók létrehozása"
   },
@@ -86,18 +86,18 @@
     "closingIn": "{{n}} nap a határidőig",
     "breakdown": {
       "title": "Fundor Score bontása",
-      "subtitle": "Öt faktor, a spec szerinti súlyozással. Kattints egy faktorra a részletes indoklásért."
+      "subtitle": "Öt faktor, a spec szerinti súlyozással. Kattintson egy faktorra a részletes indoklásért."
     },
     "why": {
       "title": "Miért ajánljuk?",
-      "subtitle": "Minden állítás a te konkrét adataidból következik, és a hivatalos felhívásra hivatkozik.",
+      "subtitle": "Minden állítás az Ön konkrét adataiból következik, és a hivatalos felhívásra hivatkozik.",
       "pass": "Miért ajánljuk",
-      "watch": "Mire figyelj",
+      "watch": "Mire figyeljen",
       "unknown": "Mit nem tudunk még",
-      "yours": "(nálad: {{value}})"
+      "yours": "(Önnél: {{value}})"
     },
     "blocked": {
-      "title": "Ez a pályázat a cégprofilod alapján nem releváns",
+      "title": "Ez a pályázat a cégprofilja alapján nem releváns",
       "body": "A szabályalapú jogosultsági motor legalább egy kizáró feltételt talált. A pontozás ezt nem írhatja felül.",
       "criteria": "Kizáró feltételek"
     },
@@ -110,7 +110,7 @@
     },
     "calculator": {
       "title": "Támogatáskalkulátor",
-      "subtitle": "Adj meg egy projektértéket, és megmutatjuk a várható támogatást és a szükséges önerőt.",
+      "subtitle": "Adjon meg egy projektértéket, és megmutatjuk a várható támogatást és a szükséges önerőt.",
       "value": "Tervezett projektérték (Ft)",
       "intensity": "Támogatási intenzitás",
       "expected": "Várható támogatás",
@@ -118,20 +118,38 @@
       "hintShare": "A számítás a becsült partneri részesedéshez igazodik (kb. {{max}} felső határ), nem a teljes projektkerethez.",
       "hintCeiling": "A támogatás a keretösszegre ({{max}}) van korlátozva.",
       "hintNone": "A felhívás nem közöl támogatási felső határt.",
-      "fromProfile": "A projektérték a cégprofilodból indul. Itt kipróbálhatsz más összeget is — ez nem mentődik el; véglegesen a profilodban módosíthatod.",
+      "fromProfile": "A projektérték a cégprofiljából indul. Itt kipróbálhat más összeget is — ez nem mentődik el; véglegesen a profiljában módosíthatja.",
       "profileLink": "Profil megnyitása"
     },
     "documents": "Szükséges dokumentumok",
     "apply": {
-      "title": "Hogyan pályázz",
+      "title": "Hogyan pályázzon",
       "body": "A beadás a kiíró hivatalos rendszerében történik — a Fundor ide irányít, a pontos feltételeket mindig a felhívás szövege adja.",
       "steps": [
-        { "title": "Olvasd el a hivatalos felhívást", "body": "Nézd meg, ki pályázhat, mely költségek számolhatók el, mekkora a támogatási intenzitás és mikor a határidő. Mindig a felhívás szövege az irányadó — a hivatalos linkeket lent találod." },
-        { "title": "Tervezd meg a projektet és a költségvetést", "body": "Döntsd el, mit szeretnél beszerezni vagy fejleszteni, mikor és mennyiből. A támogatással nem fedezett rész az önerő, ennek rendelkezésre kell állnia." },
-        { "title": "Készítsd elő a dokumentumokat", "body": "Gyűjtsd össze a felhívásban kért mellékleteket, az utolsó lezárt évi beszámolót, a tervezett beszerzések árajánlatait és a szükséges nyilatkozatokat." },
-        { "title": "Regisztrálj a beadási rendszerben", "body": "A hazai pályázatokat a felhívásban megnevezett online rendszerben kell beadni (jellemzően EPTK, Ügyfélkapu+ belépéssel); az uniós pályázatokhoz EU Login fiók és a szervezet PIC-azonosítója kell. Regisztrálj időben, ez napokig is tarthat." },
-        { "title": "Add be a pályázatot a határidő előtt", "body": "Töltsd ki az online adatlapot, csatold a dokumentumokat, és küldd be. Ne hagyd az utolsó napra: a rendszer lassú lehet, és határidő után nem fogadnak be pályázatot." },
-        { "title": "Értékelés, döntés és szerződés", "body": "A támogató ellenőrzi a pályázatot, és hiánypótlást kérhet — erre a megadott határidőn belül válaszolj. Nyertes pályázat esetén támogatói szerződést kötsz, majd megvalósítod a projektet és beszámolsz róla." }
+        {
+          "title": "Olvassa el a hivatalos felhívást",
+          "body": "Nézze meg, ki pályázhat, mely költségek számolhatók el, mekkora a támogatási intenzitás és mikor a határidő. Mindig a felhívás szövege az irányadó — a hivatalos linkeket lent találja."
+        },
+        {
+          "title": "Tervezze meg a projektet és a költségvetést",
+          "body": "Döntse el, mit szeretne beszerezni vagy fejleszteni, mikor és mennyiből. A támogatással nem fedezett rész az önerő, ennek rendelkezésre kell állnia."
+        },
+        {
+          "title": "Készítse elő a dokumentumokat",
+          "body": "Gyűjtse össze a felhívásban kért mellékleteket, az utolsó lezárt évi beszámolót, a tervezett beszerzések árajánlatait és a szükséges nyilatkozatokat."
+        },
+        {
+          "title": "Regisztráljon a beadási rendszerben",
+          "body": "A hazai pályázatokat a felhívásban megnevezett online rendszerben kell beadni (jellemzően EPTK, Ügyfélkapu+ belépéssel); az uniós pályázatokhoz EU Login fiók és a szervezet PIC-azonosítója kell. Regisztráljon időben, ez napokig is tarthat."
+        },
+        {
+          "title": "Adja be a pályázatot a határidő előtt",
+          "body": "Töltse ki az online adatlapot, csatolja a dokumentumokat, és küldje be. Ne hagyja az utolsó napra: a rendszer lassú lehet, és határidő után nem fogadnak be pályázatot."
+        },
+        {
+          "title": "Értékelés, döntés és szerződés",
+          "body": "A támogató ellenőrzi a pályázatot, és hiánypótlást kérhet — erre a megadott határidőn belül válaszoljon. Nyertes pályázat esetén támogatói szerződést köt, majd megvalósítja a projektet és beszámol róla."
+        }
       ],
       "linksTitle": "Hivatalos linkek",
       "officialPage": "Hivatalos felhívás oldala",
@@ -142,7 +160,7 @@
       "portalSub": "keresés, határidők, helpdesk",
       "daysLeft": "Beadási határidő: {{date}} — {{n}} nap van hátra.",
       "passed": "A beadási határidő lejárt.",
-      "curatedNote": "Ez egy kurált referencia-bejegyzés egy magyar nemzeti programról, nem a portálról letöltött felhívás. A számok és feltételek a program tipikus paramétereit tükrözik — a beadás előtt mindig a hivatalos kiírást nézd meg.",
+      "curatedNote": "Ez egy kurált referencia-bejegyzés egy magyar nemzeti programról, nem a portálról letöltött felhívás. A számok és feltételek a program tipikus paramétereit tükrözik — a beadás előtt mindig nézze meg a hivatalos kiírást.",
       "curatedPortal": "Széchenyi Terv Plusz pályázati portál",
       "curatedPortalSub": "palyazat.gov.hu — itt jelennek meg a hivatalos kiírások",
       "start": "Beadás a portálon",
@@ -150,17 +168,17 @@
       "noLink": "Nincs közvetlen link"
     },
     "consult": {
-      "text": "Segítség kell a pályázathoz? Konzultálj velünk – hívj minket, vagy töltsd ki a kapcsolatfelvételi űrlapot:",
+      "text": "Segítségre van szüksége a pályázathoz? Konzultáljon velünk – hívjon minket, vagy töltse ki a kapcsolatfelvételi űrlapot:",
       "call": "Hívás: {{phone}}",
       "form": "Kapcsolatfelvételi űrlap",
-      "name": "Neved (nem kötelező)",
+      "name": "Az Ön neve (nem kötelező)",
       "email": "E-mail cím",
       "phone": "Telefonszám (nem kötelező)",
       "message": "Üzenet (nem kötelező)",
-      "consent": "Hozzájárulok, hogy a megadott elérhetőségen megkeressetek a pályázatommal kapcsolatban.",
+      "consent": "Hozzájárulok, hogy a megadott elérhetőségen megkeressenek a pályázatommal kapcsolatban.",
       "submit": "Küldés",
       "sending": "Küldés…",
-      "done": "Köszönjük — megkaptuk az üzenetedet, hamarosan jelentkezünk."
+      "done": "Köszönjük — megkaptuk üzenetét, hamarosan jelentkezünk."
     },
     "actions": {
       "save": "Elmentem",
@@ -185,8 +203,8 @@
   },
   "search": {
     "title": "Keresés",
-    "subtitle": "Kereshetsz az összes nyitott és közelgő európai és magyar felhívás között. A találatok a cégprofilodra pontozva jelennek meg.",
-    "placeholder": "Keress témára, programra vagy azonosítóra — pl. hidrogén, digitalizáció, HORIZON-CL4",
+    "subtitle": "Kereshet az összes nyitott és közelgő európai és magyar felhívás között. A találatok a cégprofiljára pontozva jelennek meg.",
+    "placeholder": "Keressen témára, programra vagy azonosítóra — pl. hidrogén, digitalizáció, HORIZON-CL4",
     "go": "Keresés",
     "results_one": "{{count}} találat",
     "results_other": "{{count}} találat",
@@ -195,7 +213,7 @@
     "unavailable": "A keresés nem érhető el",
     "empty": {
       "title": "Nincs találat",
-      "body": "Próbálj tágabb kifejezést, vagy vegyél le egy szűrőt."
+      "body": "Próbáljon tágabb kifejezést, vagy vegyen le egy szűrőt."
     },
     "onlyEligible": "Csak amire jogosult vagyok",
     "sort": {
@@ -222,20 +240,20 @@
   },
   "calendar": {
     "title": "Funding Calendar",
-    "subtitle": "Nem neked kell figyelned a határidőket — a Fundor figyeli helyetted. Csak a 70+ Fundor Score-ú, releváns találatok jelennek meg.",
-    "gatedSubtitle": "A közelgő beadási határidőid. A dátumok az előfizetéssel nyílnak meg — addig annyi látszik, hogy hány határidő vár rád és mekkora összegről van szó.",
+    "subtitle": "Nem Önnek kell figyelnie a határidőket — a Fundor figyeli Ön helyett. Csak a 70+ Fundor Score-ú, releváns találatok jelennek meg.",
+    "gatedSubtitle": "Az Ön közelgő beadási határidői. A dátumok az előfizetéssel nyílnak meg — addig annyi látszik, hogy hány határidő várja, és mekkora összegről van szó.",
     "deadlines_one": "{{count}} beadási határidő",
     "deadlines_other": "{{count}} beadási határidő",
     "urgent": "{{n}} sürgős",
     "days": "{{n}} nap",
-    "empty": "A releváns találataid között nincs közelgő határidő.",
+    "empty": "A releváns találatai között nincs közelgő határidő.",
     "notice": "Az emlékeztetők (30/14/7/3 nap) és az .ics export még nem elérhető. Szakaszos elbírálásnál a keret a határidő előtt kimerülhet."
   },
   "saved": {
     "title": "Kedvencek",
-    "subtitle": "Az elmentett lehetőségeid egy helyen.",
-    "emptyTitle": "Még nincs mentett pályázatod",
-    "emptyBody": "A találatok részletes oldalán az „Elmentem” gombbal teheted ide, amit később megnéznél.",
+    "subtitle": "Az elmentett lehetőségei egy helyen.",
+    "emptyTitle": "Még nincs mentett pályázata",
+    "emptyBody": "A találatok részletes oldalán az „Elmentem” gombbal teheti ide, amit később megnézne.",
     "gated": "Az elmentett felhívások az előfizetéssel nyílnak meg."
   }
 }

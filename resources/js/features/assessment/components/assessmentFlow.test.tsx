@@ -175,7 +175,7 @@ describe("lead capture", () => {
     const user = await reachResult();
     await user.click(screen.getByRole("button", { name: /kérem a megkeresést|ask for a follow-up/i }));
 
-    expect(await screen.findByText(/adj meg egy e-mail|enter an email/i)).toBeInTheDocument();
+    expect(await screen.findByText(/adjon meg egy e-mail|enter an email/i)).toBeInTheDocument();
     expect(screen.getByText(/hozzájárulás szükséges|need your consent/i)).toBeInTheDocument();
     expect(leadsApi.submit).not.toHaveBeenCalled();
   });

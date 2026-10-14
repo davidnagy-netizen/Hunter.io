@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { Badge, ExternalIcon } from "@/components";
 import { useFormat } from "@/composables/useFormat";
 import { EligibilityBadge } from "@/features/scoring/components/EligibilityBadge";
-import { BAND_COLOR } from "@/features/scoring/domain/bandStyle";
+import { BAND_COLOR, BAND_TEXT_COLOR } from "@/features/scoring/domain/bandStyle";
 import type { CardModel } from "../domain/cardModel";
 import "../i18n";
 import { BRAND } from "@/brand";
@@ -52,7 +52,7 @@ export function OpportunityCardView({ model }: { model: CardModel }) {
         </div>
         <div className="flex flex-col items-end gap-2">
           <EligibilityBadge status="NOT_ELIGIBLE" />
-          <span className="text-sm font-medium text-gold-deep">{t("card.whyNot")}</span>
+          <span className="text-sm font-medium text-ink">{t("card.whyNot")}</span>
           {official}
         </div>
       </article>
@@ -61,6 +61,7 @@ export function OpportunityCardView({ model }: { model: CardModel }) {
 
   const score = model.score ?? 0;
   const color = model.band ? BAND_COLOR[model.band.key] : "var(--color-muted)";
+  const textColor = model.band ? BAND_TEXT_COLOR[model.band.key] : "var(--color-muted)";
   const low = model.fundingMin ?? model.fundingMax ?? 0;
   const high = model.fundingMax ?? model.fundingMin ?? 0;
   const range = !(low || high) ? t("card.notPublished") : low === high ? huf(high) : `${huf(low)}–${huf(high)}`;
@@ -68,7 +69,7 @@ export function OpportunityCardView({ model }: { model: CardModel }) {
   return (
     <article className={CARD}>
       <div className="flex w-14 shrink-0 flex-col items-center">
-        <span className="font-display text-3xl font-semibold" style={{ color }}>
+        <span className="font-display text-3xl font-semibold" style={{ color: textColor }}>
           {model.score ?? "—"}
         </span>
         <span className="text-[11px] text-muted">{BRAND.name}</span>
@@ -106,7 +107,7 @@ export function OpportunityCardView({ model }: { model: CardModel }) {
           <Badge tone="slate">{t("card.open")}</Badge>
         )}
         {model.verdict ? <EligibilityBadge status={model.verdict} /> : null}
-        <span className="text-sm font-medium text-gold-deep">{t("card.why")}</span>
+        <span className="text-sm font-medium text-ink">{t("card.why")}</span>
         {official}
       </div>
     </article>

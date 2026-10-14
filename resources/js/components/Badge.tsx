@@ -18,7 +18,7 @@ const TONE_CLASSES: Record<BadgeTone, string> = {
   amber: "bg-amber-bg text-amber",
   red: "bg-red-bg text-red",
   slate: "bg-slate-bg text-slate",
-  gold: "bg-gold-bg text-gold-deep",
+  gold: "bg-gold-bg text-ink",
   blue: "bg-blue-bg text-blue",
 };
 

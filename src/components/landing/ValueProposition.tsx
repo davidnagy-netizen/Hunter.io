@@ -35,7 +35,7 @@ export function ValueProposition({ copy }: { copy: LandingCopy['value'] }) {
               const Icon = STEP_ICONS[i];
               return (
                 <li key={step} className="inline-flex items-center gap-2 rounded-full border border-brand-line-strong bg-surface px-4 py-2 text-sm font-bold text-brand-ink">
-                  <Icon size={16} className="text-brand-orange-deep" aria-hidden="true" />
+                  <Icon size={16} className="text-brand-slate" aria-hidden="true" />
                   {step}
                 </li>
               );
@@ -80,7 +80,7 @@ export function ValueProposition({ copy }: { copy: LandingCopy['value'] }) {
                   </span>
                 </div>
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-slate px-3 py-1 text-xs font-bold text-brand-cream">
-                  <Check size={13} className="text-brand-orange" aria-hidden="true" />
+                  <Check size={13} className="text-brand-slate" aria-hidden="true" />
                   <span>{score.badge}</span>
                 </span>
               </div>
@@ -166,7 +166,7 @@ export function ValueProposition({ copy }: { copy: LandingCopy['value'] }) {
                       </div>
                     </div>
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-ink px-3 py-1 text-xs font-bold text-brand-cream self-start sm:self-center">
-                      <Check size={13} className="text-brand-orange" aria-hidden="true" />
+                      <Check size={13} className="text-brand-slate" aria-hidden="true" />
                       <span>{teaor.row1Badge}</span>
                     </span>
                   </div>
@@ -189,7 +189,7 @@ export function ValueProposition({ copy }: { copy: LandingCopy['value'] }) {
                       </div>
                     </div>
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-cream border border-brand-line-strong px-3 py-1 text-xs font-bold text-brand-slate self-start sm:self-center">
-                      <AlertCircle size={13} className="text-brand-orange" aria-hidden="true" />
+                      <AlertCircle size={13} className="text-brand-slate" aria-hidden="true" />
                       <span>{teaor.row2Badge}</span>
                     </span>
                   </div>
@@ -273,7 +273,7 @@ export function ValueProposition({ copy }: { copy: LandingCopy['value'] }) {
           {/* Prominent Unpaywalled Kavosz Gate Box */}
           <div className="mt-8 rounded-2xl border border-brand-line-strong bg-slate-50 p-5 sm:p-6 text-xs sm:text-sm font-semibold leading-relaxed text-brand-ink">
             <div className="flex items-start gap-3">
-              <AlertCircle size={18} className="text-brand-orange-deep shrink-0 mt-0.5" aria-hidden="true" />
+              <AlertCircle size={18} className="text-brand-slate shrink-0 mt-0.5" aria-hidden="true" />
               <div>
                 <span className="font-bold block mb-1 text-brand-ink">{loan.gateTitle}</span>
                 <span className="text-brand-slate">{copy.gate}</span>

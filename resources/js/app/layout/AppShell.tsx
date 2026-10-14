@@ -199,7 +199,7 @@ export function AppShell({ nav, workspace }: AppShellProps) {
             className={({ isActive }) =>
               [
                 "flex min-w-0 flex-1 flex-col items-center gap-0.5 px-0.5 py-1 text-[11px]",
-                isActive ? "text-gold-deep" : "text-muted",
+                isActive ? "text-ink" : "text-muted",
               ].join(" ")
             }
           >
